@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="并发编程,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="[TOC] （二）在python程序中的进程操作​        之前我们已经了解了很多进程相关的理论知识，了解进程是什么应该不再困难了，刚刚我们已经了解了，运行中的程序就是一个进程。所有的进程都是通过它的父进程来创建的。因此，运行起来的python程序也是一个进程，那么我们也可以在程序中再创建进程。多个进程可以实现并发效果，也就是说，当我们的程序中存在多个进程的时候，在某些时候，就会让程序的执行">
+<meta name="keywords" content="并发编程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="进程（二）">
+<meta property="og:url" content="http://yoursite.com/2019/08/03/python全栈/第02部分：并发编程+数据库+前端/并发编程/进程（二）/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="[TOC] （二）在python程序中的进程操作​        之前我们已经了解了很多进程相关的理论知识，了解进程是什么应该不再困难了，刚刚我们已经了解了，运行中的程序就是一个进程。所有的进程都是通过它的父进程来创建的。因此，运行起来的python程序也是一个进程，那么我们也可以在程序中再创建进程。多个进程可以实现并发效果，也就是说，当我们的程序中存在多个进程的时候，在某些时候，就会让程序的执行">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-08-07T10:27:34.029Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="进程（二）">
+<meta name="twitter:description" content="[TOC] （二）在python程序中的进程操作​        之前我们已经了解了很多进程相关的理论知识，了解进程是什么应该不再困难了，刚刚我们已经了解了，运行中的程序就是一个进程。所有的进程都是通过它的父进程来创建的。因此，运行起来的python程序也是一个进程，那么我们也可以在程序中再创建进程。多个进程可以实现并发效果，也就是说，当我们的程序中存在多个进程的时候，在某些时候，就会让程序的执行">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/08/03/python全栈/第02部分：并发编程+数据库+前端/并发编程/进程（二）/">
+
+
+
+
+
+  <title>进程（二） | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/03/python全栈/第02部分：并发编程+数据库+前端/并发编程/进程（二）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">进程（二）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-03T20:37:27+08:00">
+                2019-08-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python全栈-02部分-并发编程/" itemprop="url" rel="index">
+                    <span itemprop="name">python全栈 -02部分 -并发编程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>[TOC]</p>
+<h2 id="（二）在python程序中的进程操作"><a href="#（二）在python程序中的进程操作" class="headerlink" title="（二）在python程序中的进程操作"></a>（二）在python程序中的进程操作</h2><p>​        之前我们已经了解了很多进程相关的理论知识，了解进程是什么应该不再困难了，刚刚我们已经了解了，运行中的程序就是一个进程。所有的进程都是通过它的父进程来创建的。因此，运行起来的python程序也是一个进程，那么我们也可以在程序中再创建进程。多个进程可以实现并发效果，也就是说，当我们的程序中存在多个进程的时候，在某些时候，就会让程序的执行速度变快。以我们之前所学的知识，并不能实现创建进程这个功能，所以我们就需要借助python中强大的模块。</p>
+<h3 id="一、multiprocess模块"><a href="#一、multiprocess模块" class="headerlink" title="一、multiprocess模块"></a>一、multiprocess模块</h3><p>​        仔细说来，multiprocess不是一个模块而是python中一个操作、管理进程的包。 之所以叫multi是取自multiple的多功能的意思,在这个包中几乎包含了和进程有关的所有子模块。由于提供的子模块非常多，为了方便大家归类记忆，我将这部分大致分为四个部分：创建进程部分，进程同步部分，进程池部分，进程之间数据共享。</p>
+<h3 id="二、multiprocess-process模块"><a href="#二、multiprocess-process模块" class="headerlink" title="二、multiprocess.process模块"></a>二、multiprocess.process模块</h3><h4 id="1、process模块介绍"><a href="#1、process模块介绍" class="headerlink" title="1、process模块介绍"></a>1、process模块介绍</h4><p>process模块是一个创建进程的模块，借助这个模块，就可以完成进程的创建。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Process([group [, target [, name [, args [, kwargs]]]]])，由该类实例化得到的对象，表示一个子进程中的任务（尚未启动）</span><br><span class="line"></span><br><span class="line">强调：</span><br><span class="line">1. 需要使用关键字的方式来指定参数</span><br><span class="line">2. args指定的为传给target函数的位置参数，是一个元组形式，必须有逗号</span><br><span class="line"></span><br><span class="line">参数介绍：</span><br><span class="line">group参数未使用，值始终为None</span><br><span class="line">target表示调用对象，即子进程要执行的任务</span><br><span class="line">args表示调用对象的位置参数元组，args=(1,2,&apos;egon&apos;,)</span><br><span class="line">kwargs表示调用对象的字典,kwargs=&#123;&apos;name&apos;:&apos;egon&apos;,&apos;age&apos;:18&#125;</span><br><span class="line">name为子进程的名称</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">方法介绍:</span><br><span class="line">p.start()：启动进程，并调用该子进程中的p.run() </span><br><span class="line">p.run():进程启动时运行的方法，正是它去调用target指定的函数，我们自定义类的类中一定要实现该方法  </span><br><span class="line">p.terminate():强制终止进程p，不会进行任何清理操作，如果p创建了子进程，该子进程就成了僵尸进程，使用该方法需要特别小心这种情况。如果p还保存了一个锁那么也将不会被释放，进而导致死锁</span><br><span class="line">p.is_alive():如果p仍然运行，返回True</span><br><span class="line">p.join([timeout]):主线程等待p终止（强调：是主线程处于等的状态，而p是处于运行的状态）。timeout是可选的超时时间，需要强调的是，p.join只能join住start开启的进程，而不能join住run开启的进程</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">属性介绍:</span><br><span class="line">p.daemon：默认值为False，如果设为True，代表p为后台运行的守护进程，当p的父进程终止时，p也随之终止，并且设定为True后，p不能创建自己的新进程，必须在p.start()之前设置</span><br><span class="line">p.name:进程的名称</span><br><span class="line">p.pid：进程的pid</span><br><span class="line">p.exitcode:进程在运行时为None、如果为–N，表示被信号N结束(了解即可)</span><br><span class="line">p.authkey:进程的身份验证键,默认是由os.urandom()随机生成的32字符的字符串。这个键的用途是为涉及网络连接的底层进程间通信提供安全性，这类连接只有在具有相同的身份验证键时才能成功（了解即可）</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">在Windows操作系统中由于没有fork(linux操作系统中创建进程的机制)，在创建子进程的时候会自动 import 启动它的这个文件，而在 import 的时候又执行了整个文件。因此如果将process()直接写在文件中就会无限递归创建子进程报错。所以必须把创建子进程的部分使用if __name__ ==‘__main__’ 判断保护起来，import 的时候  ，就不会递归运行了。</span><br></pre></td></tr></table></figure>
+
+<h4 id="2、使用process模块创建进程"><a href="#2、使用process模块创建进程" class="headerlink" title="2、使用process模块创建进程"></a>2、使用process模块创建进程</h4><p>在一个python进程中开启子进程，start方法和并发效果。</p>
+<p>在python中启动的第一个子进程:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Process</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(name)</span>:</span></span><br><span class="line">    print(<span class="string">'hello'</span>, name)</span><br><span class="line">    print(<span class="string">'我是子进程'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    p = Process(target=f, args=(<span class="string">'bob'</span>,))</span><br><span class="line">    p.start()</span><br><span class="line">    time.sleep(<span class="number">1</span>)</span><br><span class="line">    print(<span class="string">'执行主进程的内容了'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>查看主进程和子进程的进程号:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'子进程id ：'</span>,os.getpid(),<span class="string">'父进程id ：'</span>,os.getppid())</span><br></pre></td></tr></table></figure>
+
+<p>一个例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Process</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">(args,args2)</span>:</span></span><br><span class="line">    print(args,args2)</span><br><span class="line">    time.sleep(<span class="number">3</span>)</span><br><span class="line">    print(<span class="string">'子进程 :'</span>, os.getpid())</span><br><span class="line">    print(<span class="string">'子进程的父进程 :'</span>, os.getppid())</span><br><span class="line">    print(<span class="number">12345</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    p = Process(target=func,args=(<span class="string">'参数'</span>,<span class="string">'参数2'</span>))   <span class="comment"># 注册，参数必须为元组类型</span></span><br><span class="line">    <span class="comment"># p是一个进程对象,还没有启动进程</span></span><br><span class="line">    p.start()       <span class="comment"># 开启了一个子进程</span></span><br><span class="line">    print(<span class="string">'*'</span>*<span class="number">10</span>)</span><br><span class="line">    print(<span class="string">'父进程 :'</span>,os.getpid()) <span class="comment"># 查看当前进程的进程号</span></span><br><span class="line">    print(<span class="string">'父进程的父进程 :'</span>,os.getppid()) <span class="comment"># 查看当前进程的父进程，即为pyCharm</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 进程的生命周期</span></span><br><span class="line">    <span class="comment"># 主进程</span></span><br><span class="line">    <span class="comment"># 子进程</span></span><br><span class="line">    <span class="comment"># 开启了子进程的主进程 :</span></span><br><span class="line">        <span class="comment"># 主进程自己的代码如果长,等待自己的代码执行结束,</span></span><br><span class="line">        <span class="comment"># 子进程的执行时间长,主进程会在主进程代码执行完毕之后等待子进程执行完毕之后 主进程才结束</span></span><br></pre></td></tr></table></figure>
+
+<p>join方法:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># join()</span></span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Process</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">(arg1,arg2)</span>:</span></span><br><span class="line">    print(<span class="string">'*'</span>*arg1)</span><br><span class="line">    time.sleep(<span class="number">5</span>)</span><br><span class="line">    print(<span class="string">'*'</span>*arg2)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    p = Process(target=func,args=(<span class="number">10</span>,<span class="number">20</span>))</span><br><span class="line">    p.start()</span><br><span class="line">    print(<span class="string">'hahahaha'</span>)</span><br><span class="line">    p.join()     <span class="comment"># 是感知一个子进程的结束,将异步的程序改为同步</span></span><br><span class="line">    print(<span class="string">'====== : 运行完了'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>进阶，多个进程同时运行（注意，子进程的执行顺序不是根据启动顺序决定的）</p>
+<p>多个进程同时运行:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Process</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(name)</span>:</span></span><br><span class="line">    print(<span class="string">'hello'</span>, name)</span><br><span class="line">    time.sleep(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    p_lst = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">5</span>):</span><br><span class="line">        p = Process(target=f, args=(<span class="string">'bob'</span>,))</span><br><span class="line">        p.start()</span><br><span class="line">        p_lst.append(p)</span><br></pre></td></tr></table></figure>
+
+<p>多个进程同时运行，再谈join方法(1):</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Process</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(name)</span>:</span></span><br><span class="line">    print(<span class="string">'hello'</span>, name)</span><br><span class="line">    time.sleep(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    p_lst = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">5</span>):</span><br><span class="line">        p = Process(target=f, args=(<span class="string">'bob'</span>,))</span><br><span class="line">        p.start()</span><br><span class="line">        p_lst.append(p)</span><br><span class="line">        p.join()</span><br><span class="line">    <span class="comment"># [p.join() for p in p_lst]</span></span><br><span class="line">    print(<span class="string">'父进程在执行'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>多个进程同时运行，再谈join方法(2):</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Process</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(name)</span>:</span></span><br><span class="line">    print(<span class="string">'hello'</span>, name)</span><br><span class="line">    time.sleep(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    p_lst = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">5</span>):</span><br><span class="line">        p = Process(target=f, args=(<span class="string">'bob'</span>,))</span><br><span class="line">        p.start()</span><br><span class="line">        p_lst.append(p)</span><br><span class="line">    <span class="comment"># [p.join() for p in p_lst]</span></span><br><span class="line">    print(<span class="string">'父进程在执行'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>一个实例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Process</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">(filename,content)</span>:</span></span><br><span class="line">    <span class="keyword">with</span> open(filename,<span class="string">'w'</span>) <span class="keyword">as</span> f:</span><br><span class="line">        f.write(content*<span class="number">10</span>*<span class="string">'*'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    p_lst = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">        p = Process(target=func,args=(<span class="string">'info%s'</span>%i,<span class="number">0</span>))</span><br><span class="line">        p_lst.append(p)</span><br><span class="line">        p.start()</span><br><span class="line">    <span class="keyword">for</span> p <span class="keyword">in</span> p_lst:p.join()   <span class="comment"># 之前的所有进程必须在这里都执行完才能执行下面的代码</span></span><br><span class="line">    print([i <span class="keyword">for</span> i <span class="keyword">in</span> os.walk(<span class="string">r'/Users/hhh/Desktop/python/全栈/第02部分：并发编程+数据库+前端/并发编程/day37'</span>)])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 多进程写文件</span></span><br><span class="line"><span class="comment"># 首先往文件夹中写文件</span></span><br><span class="line"><span class="comment"># 向用户展示写入文件之后文件夹中所有的文件名（此步骤应该确保所有写文件操作已经结束）———— 这就是应用场景</span></span><br></pre></td></tr></table></figure>
+
+<p>除了上面这些开启进程的方法，还有一种以继承Process类的形式开启进程的方式:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Process</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyProcess</span><span class="params">(Process)</span>:</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">run</span><span class="params">(self)</span>:</span></span><br><span class="line">    print(os.getpid)</span><br><span class="line">    </span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">  print(<span class="string">'主：'</span>, os.getpid())</span><br><span class="line">  p1 = MyProcess()</span><br><span class="line">  p1.start()</span><br><span class="line">  p2 = MyProcess()</span><br><span class="line">  p2.start()</span><br><span class="line">  </span><br><span class="line"><span class="comment"># 自定义类 继承Process类</span></span><br><span class="line"><span class="comment"># 必须实现一个run方法,run方法中是在子进程中执行的代码</span></span><br><span class="line"><span class="comment"># start()内部会实现run()方法</span></span><br></pre></td></tr></table></figure>
+
+<p>传参数：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Process</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyProcess</span><span class="params">(Process)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,arg1,arg2)</span>:</span></span><br><span class="line">        super().__init__()</span><br><span class="line">        self.arg1 = arg1</span><br><span class="line">        self.arg2 = arg2</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">run</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(self.pid)</span><br><span class="line">        print(self.name)</span><br><span class="line">        print(self.arg1)</span><br><span class="line">        print(self.arg2)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    p1 = MyProcess(<span class="number">1</span>,<span class="number">2</span>)</span><br><span class="line">    p1.start()</span><br><span class="line">    p2 = MyProcess(<span class="number">3</span>,<span class="number">4</span>)</span><br><span class="line">    p2.start()</span><br></pre></td></tr></table></figure>
+
+<p>进程之间的数据隔离问题:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 进程 与 进程之间</span></span><br><span class="line"><span class="comment"># 几个进程之间，若不通过特殊手段，无法共享数据</span></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Process</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">global</span> n   <span class="comment"># 声明了一个全局变量</span></span><br><span class="line">    n = <span class="number">0</span>       <span class="comment"># 重新定义了一个n</span></span><br><span class="line">    print(<span class="string">'pid : %s'</span>%os.getpid(),n)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    n = <span class="number">100</span></span><br><span class="line">    p = Process(target=func)</span><br><span class="line">    p.start()</span><br><span class="line">    p.join()</span><br><span class="line">    print(os.getpid(),n)</span><br></pre></td></tr></table></figure>
+
+<h4 id="3、守护进程"><a href="#3、守护进程" class="headerlink" title="3、守护进程"></a>3、守护进程</h4><p>会随着主进程的结束而结束。</p>
+<p>主进程创建守护进程</p>
+<p>　　其一：守护进程会在主进程代码执行结束后就终止</p>
+<p>　　其二：守护进程内无法再开启子进程,否则抛出异常：AssertionError: daemonic processes are not allowed to have children</p>
+<p>注意：进程之间是互相独立的，主进程代码运行结束，守护进程随即终止</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 子进程 -- &gt; 守护进程</span></span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Process</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        time.sleep(<span class="number">0.2</span>)</span><br><span class="line">        print(<span class="string">'我还活着'</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func2</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">'in func2 start'</span>)</span><br><span class="line">    time.sleep(<span class="number">8</span>)</span><br><span class="line">    print(<span class="string">'in func2 finished'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    p = Process(target=func)</span><br><span class="line">    p.daemon = <span class="literal">True</span>   <span class="comment"># 设置子进程为守护进程</span></span><br><span class="line">    p.start()</span><br><span class="line">    p2 = Process(target=func2)</span><br><span class="line">    p2.start()</span><br><span class="line">    p2.terminate()     <span class="comment"># 结束一个子进程</span></span><br><span class="line">    print(p2.is_alive())  <span class="comment"># 检验一个进程是否还活着</span></span><br><span class="line">    time.sleep(<span class="number">1</span>)</span><br><span class="line">    print(p2.is_alive())  <span class="comment"># 检验一个进程是否还活着</span></span><br><span class="line">    print(p2.name)</span><br><span class="line">    <span class="comment"># i = 0</span></span><br><span class="line">    <span class="comment"># while i&lt;5:</span></span><br><span class="line">    <span class="comment">#     print('我是socket server')</span></span><br><span class="line">    <span class="comment">#     time.sleep(1)</span></span><br><span class="line">    <span class="comment">#     i+=1</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 守护进程 会 随着 主进程的代码（而不是主进程）执行完毕 而 结束</span></span><br><span class="line"><span class="comment"># 在主进程内结束一个子进程 p.terminate()</span></span><br><span class="line">    <span class="comment">#  结束一个进程不是在执行方法之后立即生效,需要一个操作系统响应的过程</span></span><br><span class="line"><span class="comment"># 检验一个进程是否活着的状态 p.is_alive()</span></span><br><span class="line"><span class="comment"># p.name p.pid 这个进程的名字和进程号</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="4、socket聊天开发实例"><a href="#4、socket聊天开发实例" class="headerlink" title="4、socket聊天开发实例"></a>4、socket聊天开发实例</h4><p>server端:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Process</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">serve</span><span class="params">(conn)</span>:</span></span><br><span class="line">    ret = <span class="string">'你好'</span>.encode(<span class="string">'utf-8'</span>)</span><br><span class="line">    conn.send(ret)</span><br><span class="line">    msg = conn.recv(<span class="number">1024</span>).decode(<span class="string">'utf-8'</span>)</span><br><span class="line">    print(msg)</span><br><span class="line">    conn.close()</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span> :</span><br><span class="line">    sk = socket.socket()</span><br><span class="line">    sk.bind((<span class="string">'127.0.0.1'</span>,<span class="number">8080</span>))</span><br><span class="line">    sk.listen()</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">            conn,addr = sk.accept()</span><br><span class="line">            p = Process(target=serve,args=(conn,))</span><br><span class="line">            p.start()</span><br><span class="line">    <span class="keyword">finally</span>:</span><br><span class="line">        sk.close()</span><br></pre></td></tr></table></figure>
+
+<p>client端:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"></span><br><span class="line">sk = socket.socket()</span><br><span class="line">sk.connect((<span class="string">'127.0.0.1'</span>,<span class="number">8080</span>))</span><br><span class="line"></span><br><span class="line">msg = sk.recv(<span class="number">1024</span>).decode(<span class="string">'utf-8'</span>)</span><br><span class="line">print(msg)</span><br><span class="line">msg2 = input(<span class="string">'&gt;&gt;&gt;'</span>).encode(<span class="string">'utf-8'</span>)</span><br><span class="line">sk.send(msg2)</span><br><span class="line">sk.close()</span><br></pre></td></tr></table></figure>
+
+<h4 id="5、多进程中的其他方法"><a href="#5、多进程中的其他方法" class="headerlink" title="5、多进程中的其他方法"></a>5、多进程中的其他方法</h4><p>进程对象的其他方法 :  terminate,  is_alive</p>
+<p>​        在主进程内结束一个子进程 p.terminate()<br>​             结束一个进程不是在执行方法之后立即生效,需要一个操作系统响应的过程<br>​        检验一个进程是否活着的状态 p.is_alive()</p>
+<p>进程对象的其他属性 : pid和name</p>
+<p>​        p.name      p.pid 这个进程的名字和进程号</p>
+<h3 id="三、进程同步（multiprocess-Lock）"><a href="#三、进程同步（multiprocess-Lock）" class="headerlink" title="三、进程同步（multiprocess.Lock）"></a>三、进程同步（multiprocess.Lock）</h3><h4 id="1、锁-——-multiprocess-Lock"><a href="#1、锁-——-multiprocess-Lock" class="headerlink" title="1、锁 —— multiprocess.Lock"></a>1、锁 —— multiprocess.Lock</h4><pre><code>通过刚刚的学习，我们千方百计实现了程序的异步，让多个任务可以同时在几个进程中并发处理，他们之间的运行没有顺序，一旦开启也不受我们控制。尽管并发编程让我们能更加充分的利用IO资源，但是也给我们带来了新的问题。</code></pre><p>　　  当多个进程使用同一份数据资源的时候，就会引发数据安全或顺序混乱问题。</p>
+<p>多进程抢占输出资源:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Process</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">work</span><span class="params">(n)</span>:</span></span><br><span class="line">    print(<span class="string">'%s: %s is running'</span> %(n,os.getpid()))</span><br><span class="line">    time.sleep(random.random())</span><br><span class="line">    print(<span class="string">'%s:%s is done'</span> %(n,os.getpid()))</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">3</span>):</span><br><span class="line">        p=Process(target=work,args=(i,))</span><br><span class="line">        p.start()</span><br></pre></td></tr></table></figure>
+
+<p>使用锁维护执行顺序:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 由并发变成了串行,牺牲了运行效率,但避免了竞争</span></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Process,Lock</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">work</span><span class="params">(lock,n)</span>:</span></span><br><span class="line">    lock.acquire()</span><br><span class="line">    print(<span class="string">'%s: %s is running'</span> % (n, os.getpid()))</span><br><span class="line">    time.sleep(random.random())</span><br><span class="line">    print(<span class="string">'%s: %s is done'</span> % (n, os.getpid()))</span><br><span class="line">    lock.release()</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    lock=Lock()</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">3</span>):</span><br><span class="line">        p=Process(target=work,args=(lock,i))</span><br><span class="line">        p.start()</span><br></pre></td></tr></table></figure>
+
+<p>​        上面这种情况虽然使用加锁的形式实现了顺序的执行，但是程序又重新变成串行了，这样确实会浪费了时间，却保证了数据的安全。</p>
+<p>　　接下来，我们以模拟抢票为例，来看看数据安全的重要性。</p>
+<p>多进程同时抢购余票:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#文件db的内容为：&#123;"count":1&#125;</span></span><br><span class="line"><span class="comment">#注意一定要用双引号，不然json无法识别</span></span><br><span class="line"><span class="comment">#并发运行，效率高，但竞争写同一文件，数据写入错乱</span></span><br><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Process,Lock</span><br><span class="line"><span class="keyword">import</span> time,json,random</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">search</span><span class="params">()</span>:</span></span><br><span class="line">    dic=json.load(open(<span class="string">'db'</span>))</span><br><span class="line">    print(<span class="string">'\033[43m剩余票数%s\033[0m'</span> %dic[<span class="string">'count'</span>])</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get</span><span class="params">()</span>:</span></span><br><span class="line">    dic=json.load(open(<span class="string">'db'</span>))</span><br><span class="line">    time.sleep(<span class="number">0.1</span>) <span class="comment">#模拟读数据的网络延迟</span></span><br><span class="line">    <span class="keyword">if</span> dic[<span class="string">'count'</span>] &gt;<span class="number">0</span>:</span><br><span class="line">        dic[<span class="string">'count'</span>]-=<span class="number">1</span></span><br><span class="line">        time.sleep(<span class="number">0.2</span>) <span class="comment">#模拟写数据的网络延迟</span></span><br><span class="line">        json.dump(dic,open(<span class="string">'db'</span>,<span class="string">'w'</span>))</span><br><span class="line">        print(<span class="string">'\033[43m购票成功\033[0m'</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">task</span><span class="params">()</span>:</span></span><br><span class="line">    search()</span><br><span class="line">    get()</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">100</span>): <span class="comment">#模拟并发100个客户端抢票</span></span><br><span class="line">        p=Process(target=task)</span><br><span class="line">        p.start()</span><br></pre></td></tr></table></figure>
+
+<p>使用锁来保证数据安全:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#文件db的内容为：&#123;"count":5&#125;</span></span><br><span class="line"><span class="comment">#注意一定要用双引号，不然json无法识别</span></span><br><span class="line"><span class="comment">#并发运行，效率高，但竞争写同一文件，数据写入错乱</span></span><br><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Process,Lock</span><br><span class="line"><span class="keyword">import</span> time,json,random</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">search</span><span class="params">()</span>:</span></span><br><span class="line">    dic=json.load(open(<span class="string">'db'</span>))</span><br><span class="line">    print(<span class="string">'\033[43m剩余票数%s\033[0m'</span> %dic[<span class="string">'count'</span>])</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get</span><span class="params">()</span>:</span></span><br><span class="line">    dic=json.load(open(<span class="string">'db'</span>))</span><br><span class="line">    time.sleep(random.random()) <span class="comment">#模拟读数据的网络延迟</span></span><br><span class="line">    <span class="keyword">if</span> dic[<span class="string">'count'</span>] &gt;<span class="number">0</span>:</span><br><span class="line">        dic[<span class="string">'count'</span>]-=<span class="number">1</span></span><br><span class="line">        time.sleep(random.random()) <span class="comment">#模拟写数据的网络延迟</span></span><br><span class="line">        json.dump(dic,open(<span class="string">'db'</span>,<span class="string">'w'</span>))</span><br><span class="line">        print(<span class="string">'\033[32m购票成功\033[0m'</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        print(<span class="string">'\033[31m购票失败\033[0m'</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">task</span><span class="params">(lock)</span>:</span></span><br><span class="line">    search()</span><br><span class="line">    lock.acquire()</span><br><span class="line">    get()</span><br><span class="line">    lock.release()</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    lock = Lock()</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">100</span>): <span class="comment">#模拟并发100个客户端抢票</span></span><br><span class="line">        p=Process(target=task,args=(lock,))</span><br><span class="line">        p.start()</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#加锁可以保证多个进程修改同一块数据时，同一时间只能有一个任务可以进行修改，即串行的修改，没错，速度是慢了，但牺牲了速度却保证了数据安全。</span><br><span class="line">虽然可以用文件共享数据实现进程间通信，但问题是：</span><br><span class="line">1.效率低（共享数据基于文件，而文件是硬盘上的数据）</span><br><span class="line">2.需要自己加锁处理</span><br><span class="line"></span><br><span class="line">#因此我们最好找寻一种解决方案能够兼顾：1、效率高（多个进程共享一块内存的数据）2、帮我们处理好锁问题。这就是mutiprocessing模块为我们提供的基于消息的IPC通信机制：队列和管道。</span><br><span class="line">队列和管道都是将数据存放于内存中</span><br><span class="line">队列又是基于（管道+锁）实现的，可以让我们从复杂的锁问题中解脱出来，</span><br><span class="line">我们应该尽量避免使用共享数据，尽可能使用消息传递和队列，避免处理复杂的同步和锁问题，而且在进程数目增多时，往往可以获得更好的可获展性。</span><br></pre></td></tr></table></figure>
+
+<h4 id="2、信号量——-multiprocess-Semaphore"><a href="#2、信号量——-multiprocess-Semaphore" class="headerlink" title="2、信号量—— multiprocess.Semaphore"></a>2、信号量—— multiprocess.Semaphore</h4><p>一套资源  同一时间 只能被n个人访问<br>某一段代码 同一时间 只能被n个进程执行</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Process</span><br><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Semaphore</span><br><span class="line"></span><br><span class="line"><span class="comment"># sem = Semaphore(4)</span></span><br><span class="line"><span class="comment"># sem.acquire()</span></span><br><span class="line"><span class="comment"># print('拿到第一把钥匙')</span></span><br><span class="line"><span class="comment"># sem.acquire()</span></span><br><span class="line"><span class="comment"># print('拿到第二把钥匙')</span></span><br><span class="line"><span class="comment"># sem.acquire()</span></span><br><span class="line"><span class="comment"># print('拿到第三把钥匙')</span></span><br><span class="line"><span class="comment"># sem.acquire()</span></span><br><span class="line"><span class="comment"># print('拿到第四把钥匙')</span></span><br><span class="line"><span class="comment"># sem.acquire()</span></span><br><span class="line"><span class="comment"># print('拿到第五把钥匙')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">ktv</span><span class="params">(i,sem)</span>:</span></span><br><span class="line">    sem.acquire()    <span class="comment">#获取钥匙</span></span><br><span class="line">    print(<span class="string">'%s走进ktv'</span>%i)</span><br><span class="line">    time.sleep(random.randint(<span class="number">1</span>,<span class="number">5</span>))</span><br><span class="line">    print(<span class="string">'%s走出ktv'</span>%i)</span><br><span class="line">    sem.release()   </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span> :</span><br><span class="line">    sem = Semaphore(<span class="number">4</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">20</span>):</span><br><span class="line">        p = Process(target=ktv,args=(i,sem))</span><br><span class="line">        p.start()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 锁是只有一个进程能进行，而信号量可以允许n个进程同时进行</span></span><br><span class="line"><span class="comment"># 也是引入锁的机制，但加上计数器</span></span><br><span class="line">    <span class="comment"># 每次acquire时+1，release时-1</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="3、事件——-multiprocess-Event"><a href="#3、事件——-multiprocess-Event" class="headerlink" title="3、事件—— multiprocess.Event"></a>3、事件—— multiprocess.Event</h4><p>事件：通过一个信号 来控制 多个进程 同时 执行或者阻塞</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 一个信号可以使所有的进程都进入阻塞状态</span><br><span class="line"># 也可以控制所有的进程解除阻塞</span><br><span class="line"># 一个事件被创建之后,默认是阻塞状态</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Event</span><br><span class="line"></span><br><span class="line">e = Event()  <span class="comment"># 创建了一个事件</span></span><br><span class="line">print(e.is_set())   <span class="comment"># 查看一个事件的状态,默认被设置成阻塞</span></span><br><span class="line">e.set()      <span class="comment"># 将这个事件的状态改为True</span></span><br><span class="line">print(e.is_set())</span><br><span class="line">e.wait()     <span class="comment"># 是依据e.is_set()的值来决定是否阻塞的</span></span><br><span class="line">print(<span class="number">123456</span>)</span><br><span class="line">e.clear()    <span class="comment"># 将这个事件的状态改为False</span></span><br><span class="line">print(e.is_set())</span><br><span class="line">e.wait()     <span class="comment"># 等待 事件的信号被变成True</span></span><br><span class="line">print(<span class="string">'*'</span>*<span class="number">10</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">set 和 clear</span><br><span class="line">     分别用来修改一个事件的状态 True或者False</span><br><span class="line">is_set 用来查看一个事件的状态</span><br><span class="line">wait 是依据事件的状态来决定自己是否在wait处阻塞</span><br><span class="line">     False阻塞 True不阻塞</span><br></pre></td></tr></table></figure>
+
+<p>红绿灯事件：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Event,Process</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">cars</span><span class="params">(e,i)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> e.is_set():</span><br><span class="line">        print(<span class="string">'car%i在等待'</span>%i)</span><br><span class="line">        e.wait()    <span class="comment"># 阻塞 直到得到一个 事件状态变成 True 的信号</span></span><br><span class="line">    print(<span class="string">'\033[0;32;40mcar%i通过\033[0m'</span> % i)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">light</span><span class="params">(e)</span>:</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        <span class="keyword">if</span> e.is_set():</span><br><span class="line">            e.clear()</span><br><span class="line">            print(<span class="string">'\033[31m红灯亮了\033[0m'</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            e.set()</span><br><span class="line">            print(<span class="string">'\033[32m绿灯亮了\033[0m'</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># if not car.is_alive():</span></span><br><span class="line">        <span class="comment">#     break</span></span><br><span class="line"></span><br><span class="line">        time.sleep(<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    e = Event()</span><br><span class="line">    traffic = Process(target=light,args=(e,))</span><br><span class="line">    traffic.start()</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">20</span>):</span><br><span class="line">        car = Process(target=cars, args=(e,i))</span><br><span class="line">        car.start()</span><br><span class="line">        time.sleep(random.random())</span><br></pre></td></tr></table></figure>
+
+<h3 id="四、进程间通信——-队列（multiprocess-Queue）"><a href="#四、进程间通信——-队列（multiprocess-Queue）" class="headerlink" title="四、进程间通信—— 队列（multiprocess.Queue）"></a>四、进程间通信—— 队列（multiprocess.Queue）</h3><h4 id="1、进程间通信"><a href="#1、进程间通信" class="headerlink" title="1、进程间通信"></a>1、进程间通信</h4><p><strong>IPC</strong>(Inter-Process Communication)</p>
+<h4 id="2、队列"><a href="#2、队列" class="headerlink" title="2、队列"></a>2、队列</h4><h5 id="（1）概念介绍"><a href="#（1）概念介绍" class="headerlink" title="（1）概念介绍"></a>（1）概念介绍</h5><p>创建共享的进程队列，Queue是多进程安全的队列，可以使用Queue实现多进程之间的数据传递。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Queue([maxsize]) </span><br><span class="line">创建共享的进程队列。</span><br><span class="line">参数 ：maxsize是队列中允许的最大项数。如果省略此参数，则无大小限制。</span><br><span class="line">底层队列使用管道和锁定实现。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">方法介绍:</span><br><span class="line">Queue([maxsize]) </span><br><span class="line">创建共享的进程队列。maxsize是队列中允许的最大项数。如果省略此参数，则无大小限制。底层队列使用管道和锁定实现。另外，还需要运行支持线程以便队列中的数据传输到底层管道中。 </span><br><span class="line">Queue的实例q具有以下方法：</span><br><span class="line"></span><br><span class="line">q.get( [ block [ ,timeout ] ] ) </span><br><span class="line">返回q中的一个项目。如果q为空，此方法将阻塞，直到队列中有项目可用为止。block用于控制阻塞行为，默认为True. 如果设置为False，将引发Queue.Empty异常（定义在Queue模块中）。timeout是可选超时时间，用在阻塞模式中。如果在制定的时间间隔内没有项目变为可用，将引发Queue.Empty异常。</span><br><span class="line"></span><br><span class="line">q.get_nowait( ) </span><br><span class="line">同q.get(False)方法。</span><br><span class="line"></span><br><span class="line">q.put(item [, block [,timeout ] ] ) </span><br><span class="line">将item放入队列。如果队列已满，此方法将阻塞至有空间可用为止。block控制阻塞行为，默认为True。如果设置为False，将引发Queue.Empty异常（定义在Queue库模块中）。timeout指定在阻塞模式中等待可用空间的时间长短。超时后将引发Queue.Full异常。</span><br><span class="line"></span><br><span class="line">q.qsize() </span><br><span class="line">返回队列中目前项目的正确数量。此函数的结果并不可靠，因为在返回结果和在稍后程序中使用结果之间，队列中可能添加或删除了项目。在某些系统上，此方法可能引发NotImplementedError异常。</span><br><span class="line"></span><br><span class="line">q.empty() </span><br><span class="line">如果调用此方法时 q为空，返回True。如果其他进程或线程正在往队列中添加项目，结果是不可靠的。也就是说，在返回和使用结果之间，队列中可能已经加入新的项目。</span><br><span class="line"></span><br><span class="line">q.full() </span><br><span class="line">如果q已满，返回为True. 由于线程的存在，结果也可能是不可靠的（参考q.empty（）方法）。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">其他方法(了解):</span><br><span class="line">q.close() </span><br><span class="line">关闭队列，防止队列中加入更多数据。调用此方法时，后台线程将继续写入那些已入队列但尚未写入的数据，但将在此方法完成时马上关闭。如果q被垃圾收集，将自动调用此方法。关闭队列不会在队列使用者中生成任何类型的数据结束信号或异常。例如，如果某个使用者正被阻塞在get（）操作上，关闭生产者中的队列不会导致get（）方法返回错误。</span><br><span class="line"></span><br><span class="line">q.cancel_join_thread() </span><br><span class="line">不会再进程退出时自动连接后台线程。这可以防止join_thread()方法阻塞。</span><br><span class="line"></span><br><span class="line">q.join_thread() </span><br><span class="line">连接队列的后台线程。此方法用于在调用q.close()方法后，等待所有队列项被消耗。默认情况下，此方法由不是q的原始创建者的所有进程调用。调用q.cancel_join_thread()方法可以禁止这种行为。</span><br></pre></td></tr></table></figure>
+
+<h5 id="（2）代码实例"><a href="#（2）代码实例" class="headerlink" title="（2）代码实例"></a>（2）代码实例</h5><p>单看队列用法:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">multiprocessing模块支持进程间通信的两种主要形式:管道和队列</span></span><br><span class="line"><span class="string">都是基于消息传递实现的,但是队列接口</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Queue</span><br><span class="line">q=Queue(<span class="number">3</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#put ,get ,put_nowait,get_nowait,full,empty</span></span><br><span class="line">q.put(<span class="number">3</span>)</span><br><span class="line">q.put(<span class="number">3</span>)</span><br><span class="line">q.put(<span class="number">3</span>)</span><br><span class="line"><span class="comment"># q.put(3)   # 如果队列已经满了，程序就会停在这里，等待数据被别人取走，再将数据放入队列。</span></span><br><span class="line">           <span class="comment"># 如果队列中的数据一直不被取走，程序就会永远停在这里。</span></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    q.put_nowait(<span class="number">3</span>) <span class="comment"># 可以使用put_nowait，如果队列满了不会阻塞，但是会因为队列满了而报错。</span></span><br><span class="line"><span class="keyword">except</span>: <span class="comment"># 因此我们可以用一个try语句来处理这个错误。这样程序不会一直阻塞下去，但是会丢掉这个消息。</span></span><br><span class="line">    print(<span class="string">'队列已经满了'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 因此，我们再放入数据之前，可以先看一下队列的状态，如果已经满了，就不继续put了。</span></span><br><span class="line">print(q.full()) <span class="comment">#满了</span></span><br><span class="line"></span><br><span class="line">print(q.get())</span><br><span class="line">print(q.get())</span><br><span class="line">print(q.get())</span><br><span class="line"><span class="comment"># print(q.get()) # 同put方法一样，如果队列已经空了，那么继续取就会出现阻塞。</span></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    q.get_nowait(<span class="number">3</span>) <span class="comment"># 可以使用get_nowait，如果队列满了不会阻塞，但是会因为没取到值而报错。</span></span><br><span class="line"><span class="keyword">except</span>: <span class="comment"># 因此我们可以用一个try语句来处理这个错误。这样程序不会一直阻塞下去。</span></span><br><span class="line">    print(<span class="string">'队列已经空了'</span>)</span><br><span class="line"></span><br><span class="line">print(q.empty()) <span class="comment">#空了</span></span><br></pre></td></tr></table></figure>
+
+<p>上面这个例子还没有加入进程通信，只是先来看看队列为我们提供的方法，以及这些方法的使用和现象。</p>
+<p>子进程发送数据给父进程:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Queue,Process</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">produce</span><span class="params">(q)</span>:</span></span><br><span class="line">    q.put(<span class="string">'hello'</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">consume</span><span class="params">(q)</span>:</span></span><br><span class="line">    print(q.get())</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    q = Queue()</span><br><span class="line">    p = Process(target=produce,args=(q,))</span><br><span class="line">    p.start()</span><br><span class="line">    c = Process(target=consume, args=(q,))</span><br><span class="line">    c.start()</span><br></pre></td></tr></table></figure>
+
+<p>上面是一个queue的简单应用，使用队列q对象调用get函数来取得队列中最先进入的数据。 接下来看一个稍微复杂一些的例子：</p>
+<p>批量生产数据放入队列再批量获取结果 :</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> multiprocessing</span><br><span class="line"></span><br><span class="line"><span class="comment"># 向queue中输入数据的函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">inputQ</span><span class="params">(queue)</span>:</span></span><br><span class="line">    info = str(os.getpid()) + <span class="string">'(put):'</span> + str(time.asctime())</span><br><span class="line">    queue.put(info)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 向queue中输出数据的函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">outputQ</span><span class="params">(queue)</span>:</span></span><br><span class="line">    info = queue.get()</span><br><span class="line">    <span class="keyword">print</span> (<span class="string">'%s%s\033[32m%s\033[0m'</span>%(str(os.getpid()), <span class="string">'(get):'</span>,info))</span><br><span class="line"></span><br><span class="line"><span class="comment"># Main</span></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    multiprocessing.freeze_support()</span><br><span class="line">    record1 = []   <span class="comment"># store input processes</span></span><br><span class="line">    record2 = []   <span class="comment"># store output processes</span></span><br><span class="line">    queue = multiprocessing.Queue(<span class="number">3</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 输入进程</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">        process = multiprocessing.Process(target=inputQ,args=(queue,))</span><br><span class="line">        process.start()</span><br><span class="line">        record1.append(process)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 输出进程</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">        process = multiprocessing.Process(target=outputQ,args=(queue,))</span><br><span class="line">        process.start()</span><br><span class="line">        record2.append(process)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> p <span class="keyword">in</span> record1:</span><br><span class="line">        p.join()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> p <span class="keyword">in</span> record2:</span><br><span class="line">        p.join()</span><br></pre></td></tr></table></figure>
+
+<h5 id="（3）生产者消费者模型"><a href="#（3）生产者消费者模型" class="headerlink" title="（3）生产者消费者模型"></a>（3）生产者消费者模型</h5><p><em>在并发编程中使用生产者和消费者模式能够解决绝大多数并发问题。该模式通过平衡生产线程和消费线程的工作能力来提高程序的整体处理数据的速度</em></p>
+<p><strong>为什么要使用生产者和消费者模式</strong></p>
+<p><em>在线程世界里，生产者就是生产数据的线程，消费者就是消费数据的线程。在多线程开发当中，如果生产者处理速度很快，而消费者处理速度很慢，那么生产者就必须等待消费者处理完，才能继续生产数据。同样的道理，如果消费者的处理能力大于生产者，那么消费者就必须等待生产者。为了解决这个问题于是引入了生产者和消费者模式。</em></p>
+<p><strong>什么是生产者消费者模式</strong></p>
+<p><em>生产者消费者模式是通过一个容器来解决生产者和消费者的强耦合问题。生产者和消费者彼此之间不直接通讯，而通过阻塞队列来进行通讯，所以生产者生产完数据之后不用等待消费者处理，直接扔给阻塞队列，消费者不找生产者要数据，而是直接从阻塞队列里取，阻塞队列就相当于一个缓冲区，平衡了生产者和消费者的处理能力。</em></p>
+<p><strong>基于队列实现生产者消费者模型</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Process,Queue</span><br><span class="line"><span class="keyword">import</span> time,random,os</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">consumer</span><span class="params">(q)</span>:</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        res=q.get()</span><br><span class="line">        time.sleep(random.randint(<span class="number">1</span>,<span class="number">3</span>))</span><br><span class="line">        print(<span class="string">'\033[45m%s 吃 %s\033[0m'</span> %(os.getpid(),res))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">producer</span><span class="params">(q)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">        time.sleep(random.randint(<span class="number">1</span>,<span class="number">3</span>))</span><br><span class="line">        res=<span class="string">'包子%s'</span> %i</span><br><span class="line">        q.put(res)</span><br><span class="line">        print(<span class="string">'\033[44m%s 生产了 %s\033[0m'</span> %(os.getpid(),res))</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    q=Queue()</span><br><span class="line">    <span class="comment">#生产者们:即厨师们</span></span><br><span class="line">    p1=Process(target=producer,args=(q,))</span><br><span class="line"></span><br><span class="line">    <span class="comment">#消费者们:即吃货们</span></span><br><span class="line">    c1=Process(target=consumer,args=(q,))</span><br><span class="line"></span><br><span class="line">    <span class="comment">#开始</span></span><br><span class="line">    p1.start()</span><br><span class="line">    c1.start()</span><br><span class="line">    print(<span class="string">'主'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>此时的问题是主进程永远不会结束，原因是：生产者p在生产完后就结束了，但是消费者c在取空了q之后，则一直处于死循环中且卡在q.get()这一步。</p>
+<p>解决方式无非是让生产者在生产完毕后，往队列中再发一个结束信号，这样消费者在接收到结束信号后就可以break出死循环。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 改良版——生产者消费者模型</span></span><br><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Process,Queue</span><br><span class="line"><span class="keyword">import</span> time,random,os</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">consumer</span><span class="params">(q)</span>:</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        res=q.get()</span><br><span class="line">        <span class="keyword">if</span> res <span class="keyword">is</span> <span class="literal">None</span>:<span class="keyword">break</span> <span class="comment">#收到结束信号则结束</span></span><br><span class="line">        time.sleep(random.randint(<span class="number">1</span>,<span class="number">3</span>))</span><br><span class="line">        print(<span class="string">'\033[45m%s 吃 %s\033[0m'</span> %(os.getpid(),res))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">producer</span><span class="params">(q)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">        time.sleep(random.randint(<span class="number">1</span>,<span class="number">3</span>))</span><br><span class="line">        res=<span class="string">'包子%s'</span> %i</span><br><span class="line">        q.put(res)</span><br><span class="line">        print(<span class="string">'\033[44m%s 生产了 %s\033[0m'</span> %(os.getpid(),res))</span><br><span class="line">    q.put(<span class="literal">None</span>) <span class="comment">#发送结束信号</span></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    q=Queue()</span><br><span class="line">    <span class="comment">#生产者们:即厨师们</span></span><br><span class="line">    p1=Process(target=producer,args=(q,))</span><br><span class="line"></span><br><span class="line">    <span class="comment">#消费者们:即吃货们</span></span><br><span class="line">    c1=Process(target=consumer,args=(q,))</span><br><span class="line"></span><br><span class="line">    <span class="comment">#开始</span></span><br><span class="line">    p1.start()</span><br><span class="line">    c1.start()</span><br><span class="line">    print(<span class="string">'主'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>注意：结束信号None，不一定要由生产者发，主进程里同样可以发，但主进程需要等生产者结束后才应该发送该信号</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 主进程在生产者生产完毕后发送结束信号None</span></span><br><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Process,Queue</span><br><span class="line"><span class="keyword">import</span> time,random,os</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">consumer</span><span class="params">(q)</span>:</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        res=q.get()</span><br><span class="line">        <span class="keyword">if</span> res <span class="keyword">is</span> <span class="literal">None</span>:<span class="keyword">break</span> <span class="comment">#收到结束信号则结束</span></span><br><span class="line">        time.sleep(random.randint(<span class="number">1</span>,<span class="number">3</span>))</span><br><span class="line">        print(<span class="string">'\033[45m%s 吃 %s\033[0m'</span> %(os.getpid(),res))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">producer</span><span class="params">(q)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">2</span>):</span><br><span class="line">        time.sleep(random.randint(<span class="number">1</span>,<span class="number">3</span>))</span><br><span class="line">        res=<span class="string">'包子%s'</span> %i</span><br><span class="line">        q.put(res)</span><br><span class="line">        print(<span class="string">'\033[44m%s 生产了 %s\033[0m'</span> %(os.getpid(),res))</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    q=Queue()</span><br><span class="line">    <span class="comment">#生产者们:即厨师们</span></span><br><span class="line">    p1=Process(target=producer,args=(q,))</span><br><span class="line"></span><br><span class="line">    <span class="comment">#消费者们:即吃货们</span></span><br><span class="line">    c1=Process(target=consumer,args=(q,))</span><br><span class="line"></span><br><span class="line">    <span class="comment">#开始</span></span><br><span class="line">    p1.start()</span><br><span class="line">    c1.start()</span><br><span class="line"></span><br><span class="line">    p1.join()</span><br><span class="line">    q.put(<span class="literal">None</span>) <span class="comment">#发送结束信号</span></span><br><span class="line">    print(<span class="string">'主'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>但上述解决方式，在有多个生产者和多个消费者时，我们则需要用一个很low的方式去解决</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 多个消费者的例子：有几个消费者就需要发送几次结束信号</span></span><br><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Process,Queue</span><br><span class="line"><span class="keyword">import</span> time,random,os</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">consumer</span><span class="params">(q)</span>:</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        res=q.get()</span><br><span class="line">        <span class="keyword">if</span> res <span class="keyword">is</span> <span class="literal">None</span>:<span class="keyword">break</span> <span class="comment">#收到结束信号则结束</span></span><br><span class="line">        time.sleep(random.randint(<span class="number">1</span>,<span class="number">3</span>))</span><br><span class="line">        print(<span class="string">'\033[45m%s 吃 %s\033[0m'</span> %(os.getpid(),res))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">producer</span><span class="params">(name,q)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">2</span>):</span><br><span class="line">        time.sleep(random.randint(<span class="number">1</span>,<span class="number">3</span>))</span><br><span class="line">        res=<span class="string">'%s%s'</span> %(name,i)</span><br><span class="line">        q.put(res)</span><br><span class="line">        print(<span class="string">'\033[44m%s 生产了 %s\033[0m'</span> %(os.getpid(),res))</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    q=Queue()</span><br><span class="line">    <span class="comment">#生产者们:即厨师们</span></span><br><span class="line">    p1=Process(target=producer,args=(<span class="string">'包子'</span>,q))</span><br><span class="line">    p2=Process(target=producer,args=(<span class="string">'骨头'</span>,q))</span><br><span class="line">    p3=Process(target=producer,args=(<span class="string">'泔水'</span>,q))</span><br><span class="line"></span><br><span class="line">    <span class="comment">#消费者们:即吃货们</span></span><br><span class="line">    c1=Process(target=consumer,args=(q,))</span><br><span class="line">    c2=Process(target=consumer,args=(q,))</span><br><span class="line"></span><br><span class="line">    <span class="comment">#开始</span></span><br><span class="line">    p1.start()</span><br><span class="line">    p2.start()</span><br><span class="line">    p3.start()</span><br><span class="line">    c1.start()</span><br><span class="line"></span><br><span class="line">    p1.join() <span class="comment">#必须保证生产者全部生产完毕,才应该发送结束信号</span></span><br><span class="line">    p2.join()</span><br><span class="line">    p3.join()</span><br><span class="line">    q.put(<span class="literal">None</span>) <span class="comment">#有几个消费者就应该发送几次结束信号None</span></span><br><span class="line">    q.put(<span class="literal">None</span>) <span class="comment">#发送结束信号</span></span><br><span class="line">    print(<span class="string">'主'</span>)</span><br></pre></td></tr></table></figure>
+
+<p><strong>JoinableQueue([maxsize])</strong><br>创建可连接的共享进程队列。这就像是一个Queue对象，但队列允许项目的使用者通知生产者项目已经被成功处理。通知进程是使用共享的信号和条件变量来实现的。</p>
+<p>方法介绍:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">JoinableQueue的实例p除了与Queue对象相同的方法之外，还具有以下方法：</span><br><span class="line"></span><br><span class="line">q.task_done() </span><br><span class="line">使用者使用此方法发出信号，表示q.get()返回的项目已经被处理。如果调用此方法的次数大于从队列中删除的项目数量，将引发ValueError异常。</span><br><span class="line"></span><br><span class="line">q.join() </span><br><span class="line">生产者将使用此方法进行阻塞，直到队列中所有项目均被处理。阻塞将持续到为队列中的每个项目均调用q.task_done()方法为止。 </span><br><span class="line">下面的例子说明如何建立永远运行的进程，使用和处理队列上的项目。生产者将项目放入队列，并等待它们被处理。</span><br></pre></td></tr></table></figure>
+
+<p>JoinableQueue队列实现消费之生产者模型:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Process,JoinableQueue</span><br><span class="line"><span class="keyword">import</span> time,random,os</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">consumer</span><span class="params">(q)</span>:</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        res=q.get()</span><br><span class="line">        time.sleep(random.randint(<span class="number">1</span>,<span class="number">3</span>))</span><br><span class="line">        print(<span class="string">'\033[45m%s 吃 %s\033[0m'</span> %(os.getpid(),res))</span><br><span class="line">        q.task_done() <span class="comment">#向q.join()发送一次信号,证明一个数据已经被取走了</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">producer</span><span class="params">(name,q)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">        time.sleep(random.randint(<span class="number">1</span>,<span class="number">3</span>))</span><br><span class="line">        res=<span class="string">'%s%s'</span> %(name,i)</span><br><span class="line">        q.put(res)</span><br><span class="line">        print(<span class="string">'\033[44m%s 生产了 %s\033[0m'</span> %(os.getpid(),res))</span><br><span class="line">    q.join() <span class="comment">#生产完毕，使用此方法进行阻塞，直到队列中所有项目均被处理。</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    q=JoinableQueue()</span><br><span class="line">    <span class="comment">#生产者们:即厨师们</span></span><br><span class="line">    p1=Process(target=producer,args=(<span class="string">'包子'</span>,q))</span><br><span class="line">    p2=Process(target=producer,args=(<span class="string">'骨头'</span>,q))</span><br><span class="line">    p3=Process(target=producer,args=(<span class="string">'泔水'</span>,q))</span><br><span class="line"></span><br><span class="line">    <span class="comment">#消费者们:即吃货们</span></span><br><span class="line">    c1=Process(target=consumer,args=(q,))</span><br><span class="line">    c2=Process(target=consumer,args=(q,))</span><br><span class="line">    c1.daemon=<span class="literal">True</span></span><br><span class="line">    c2.daemon=<span class="literal">True</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">#开始</span></span><br><span class="line">    p_l=[p1,p2,p3,c1,c2]</span><br><span class="line">    <span class="keyword">for</span> p <span class="keyword">in</span> p_l:</span><br><span class="line">        p.start()</span><br><span class="line"></span><br><span class="line">    p1.join()</span><br><span class="line">    p2.join()</span><br><span class="line">    p3.join()</span><br><span class="line">    print(<span class="string">'主'</span>) </span><br><span class="line">    </span><br><span class="line">    <span class="comment">#主进程等---&gt;p1,p2,p3等----&gt;c1,c2</span></span><br><span class="line">    <span class="comment">#p1,p2,p3结束了,证明c1,c2肯定全都收完了p1,p2,p3发到队列的数据</span></span><br><span class="line">    <span class="comment">#因而c1,c2也没有存在的价值了,不需要继续阻塞在进程中影响主进程了。应该随着主进程的结束而结束,所以设置成守护进程就可以了。</span></span><br></pre></td></tr></table></figure>
+
+<p>另一个相似的例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Process,JoinableQueue</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">consumer</span><span class="params">(q,name)</span>:</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        food = q.get()</span><br><span class="line">        print(<span class="string">'\033[31m%s消费了%s\033[0m'</span> % (name,food))</span><br><span class="line">        time.sleep(random.randint(<span class="number">1</span>,<span class="number">3</span>))</span><br><span class="line">        q.task_done()     <span class="comment"># count - 1</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">producer</span><span class="params">(name,food,q)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">4</span>):</span><br><span class="line">        time.sleep(random.randint(<span class="number">1</span>,<span class="number">3</span>))</span><br><span class="line">        f = <span class="string">'%s生产了%s%s'</span>%(name,food,i)</span><br><span class="line">        print(f)</span><br><span class="line">        q.put(f)</span><br><span class="line">    q.join()    <span class="comment"># 阻塞  直到一个队列中的所有数据 全部被处理完毕</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__  == <span class="string">'__main__'</span>:</span><br><span class="line">    q = JoinableQueue(<span class="number">20</span>)</span><br><span class="line">    p1 = Process(target=producer,args=(<span class="string">'Egon'</span>,<span class="string">'包子'</span>,q))</span><br><span class="line">    p2 = Process(target=producer, args=(<span class="string">'wusir'</span>,<span class="string">'泔水'</span>, q))</span><br><span class="line">    c1 = Process(target=consumer, args=(q,<span class="string">'alex'</span>))</span><br><span class="line">    c2 = Process(target=consumer, args=(q,<span class="string">'jinboss'</span>))</span><br><span class="line">    p1.start()</span><br><span class="line">    p2.start()</span><br><span class="line">    c1.daemon = <span class="literal">True</span>   <span class="comment"># 设置为守护进程 主进程中的代码执行完毕之后,子进程自动结束</span></span><br><span class="line">    c2.daemon = <span class="literal">True</span></span><br><span class="line">    c1.start()</span><br><span class="line">    c2.start()</span><br><span class="line">    p1.join()</span><br><span class="line">    p2.join()      <span class="comment"># 感知一个进程的结束</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#  在消费者这一端:</span></span><br><span class="line">    <span class="comment"># 每次获取一个数据</span></span><br><span class="line">    <span class="comment"># 处理一个数据</span></span><br><span class="line">    <span class="comment"># 发送一个记号 : 标志一个数据被处理成功</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 在生产者这一端:</span></span><br><span class="line">    <span class="comment"># 每一次生产一个数据,</span></span><br><span class="line">    <span class="comment"># 且每一次生产的数据都放在队列中</span></span><br><span class="line">    <span class="comment"># 在队列中刻上一个记号</span></span><br><span class="line">    <span class="comment"># 当生产者全部生产完毕之后,</span></span><br><span class="line">    <span class="comment"># join信号 : 已经停止生产数据了</span></span><br><span class="line">                <span class="comment"># 且要等待之前被刻上的记号都被消费完</span></span><br><span class="line">                <span class="comment"># 当数据都被处理完时,join阻塞结束</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># consumer 中把所有的任务消耗完</span></span><br><span class="line"><span class="comment"># producer 端 的 join感知到,停止阻塞</span></span><br><span class="line"><span class="comment"># 所有的producer进程结束</span></span><br><span class="line"><span class="comment"># 主进程中的p.join结束</span></span><br><span class="line"><span class="comment"># 主进程中代码结束</span></span><br><span class="line"><span class="comment"># 守护进程(消费者的进程)结束</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="3、管道"><a href="#3、管道" class="headerlink" title="3、管道"></a>3、管道</h4><p>管道可以实现不同进程间的通信。</p>
+<p>当管道内无数据时，再接收的话会引发阻塞。</p>
+<p>（可通过发送None，通过判断来结束）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Pipe,Process</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">(conn1,conn2)</span>:</span></span><br><span class="line">    conn2.close()</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        <span class="keyword">try</span> :</span><br><span class="line">            msg = conn1.recv()</span><br><span class="line">            print(msg)</span><br><span class="line">        <span class="keyword">except</span> EOFError:</span><br><span class="line">            conn1.close()</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    conn1, conn2 = Pipe()</span><br><span class="line">    Process(target=func,args = (conn1,conn2)).start()</span><br><span class="line">    conn1.close()</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">20</span>):</span><br><span class="line">        conn2.send(<span class="string">'吃了么'</span>)</span><br><span class="line">    conn2.close()</span><br></pre></td></tr></table></figure>
+
+<h3 id="五、继承之间的数据共享"><a href="#五、继承之间的数据共享" class="headerlink" title="五、继承之间的数据共享"></a>五、继承之间的数据共享</h3><p>展望未来，基于消息传递的并发编程是大势所趋</p>
+<p>即便是使用线程，推荐做法也是将程序设计为大量独立的线程集合，通过消息队列交换数据。</p>
+<p>这样极大地减少了对使用锁定和其他同步手段的需求，还可以扩展到分布式系统中。</p>
+<p><strong>但进程间应该尽量避免通信，即便需要通信，也应该选择进程安全的工具来避免加锁带来的问题。</strong></p>
+<p><strong><em>以后我们会尝试使用数据库来解决现在进程之间的数据共享问题。</em></strong></p>
+<p>Manager模块介绍:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">进程间数据是独立的，可以借助于队列或管道实现通信，二者都是基于消息传递的</span><br><span class="line">虽然进程间数据独立，但可以通过Manager实现数据共享，事实上Manager的功能远不止于此</span><br><span class="line"></span><br><span class="line">A manager object returned by Manager() controls a server process which holds Python objects and allows other processes to manipulate them using proxies.</span><br><span class="line"></span><br><span class="line">A manager returned by Manager() will support types list, dict, Namespace, Lock, RLock, Semaphore, BoundedSemaphore, Condition, Event, Barrier, Queue, Value and Array.</span><br></pre></td></tr></table></figure>
+
+<p>Manager例子:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Manager,Process,Lock</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">work</span><span class="params">(d,lock)</span>:</span></span><br><span class="line">    <span class="keyword">with</span> lock: <span class="comment">#不加锁而操作共享的数据,肯定会出现数据错乱</span></span><br><span class="line">        d[<span class="string">'count'</span>]-=<span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    lock=Lock()</span><br><span class="line">    <span class="keyword">with</span> Manager() <span class="keyword">as</span> m:</span><br><span class="line">        dic=m.dict(&#123;<span class="string">'count'</span>:<span class="number">100</span>&#125;)</span><br><span class="line">        p_l=[]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">100</span>):</span><br><span class="line">            p=Process(target=work,args=(dic,lock))</span><br><span class="line">            p_l.append(p)</span><br><span class="line">            p.start()</span><br><span class="line">        <span class="keyword">for</span> p <span class="keyword">in</span> p_l:</span><br><span class="line">            p.join()</span><br><span class="line">        print(dic)</span><br></pre></td></tr></table></figure>
+
+<h3 id="六、进程池和multiprocess-Pool模块"><a href="#六、进程池和multiprocess-Pool模块" class="headerlink" title="六、进程池和multiprocess.Pool模块"></a>六、进程池和multiprocess.Pool模块</h3><h4 id="1、进程池"><a href="#1、进程池" class="headerlink" title="1、进程池"></a>1、进程池</h4><p>为什么要有进程池?进程池的概念。</p>
+<p>​        在程序实际处理问题过程中，忙时会有成千上万的任务需要被执行，闲时可能只有零星任务。那么在成千上万个任务需要被执行的时候，我们就需要去创建成千上万个进程么？首先，创建进程需要消耗时间，销毁进程也需要消耗时间。第二即便开启了成千上万的进程，操作系统也不能让他们同时执行，这样反而会影响程序的效率。因此我们不能无限制的根据任务开启或者结束进程。那么我们要怎么做呢？</p>
+<p>​        在这里，要给大家介绍一个进程池的概念，定义一个池子，在里面放上固定数量的进程，有需求来了，就拿一个池中的进程来处理任务，等到处理完毕，进程并不关闭，而是将进程再放回进程池中继续等待任务。如果有很多任务需要执行，池中的进程数量不够，任务就要等待之前的进程执行任务完毕归来，拿到空闲进程才能继续执行。也就是说，池中进程的数量是固定的，那么同一时间最多有固定数量的进程在运行。这样不会增加操作系统的调度难度，还节省了开闭进程的时间，也一定程度上能够实现并发效果。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">为什么会有进程池的概念</span><br><span class="line">    效率</span><br><span class="line">    每开启进程,开启属于这个进程的内存空间</span><br><span class="line">    寄存器 堆栈 文件</span><br><span class="line">    进程过多 操作系统的调度</span><br><span class="line"></span><br><span class="line">进程池</span><br><span class="line">    python中的 先创建一个属于进程的池子</span><br><span class="line">    这个池子指定能存放n个进程</span><br><span class="line">    先将这些进程创建好</span><br></pre></td></tr></table></figure>
+
+<h4 id="2、multiprocess-Pool模块"><a href="#2、multiprocess-Pool模块" class="headerlink" title="2、multiprocess.Pool模块"></a>2、multiprocess.Pool模块</h4><h5 id="（1）概念介绍-1"><a href="#（1）概念介绍-1" class="headerlink" title="（1）概念介绍"></a>（1）概念介绍</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Pool([numprocess  [,initializer [, initargs]]]):创建进程池</span><br></pre></td></tr></table></figure>
+
+<p>参数介绍：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1 numprocess:要创建的进程数，如果省略，将默认使用cpu_count()的值</span><br><span class="line">2 initializer：是每个工作进程启动时要执行的可调用对象，默认为None</span><br><span class="line">3 initargs：是要传给initializer的参数组</span><br></pre></td></tr></table></figure>
+
+<p>主要方法:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">p.apply(func [, args [, kwargs]]):在一个池工作进程中执行func(*args,**kwargs),然后返回结果。</span><br><span class="line">&apos;&apos;&apos;需要强调的是：此操作并不会在所有池工作进程中并执行func函数。如果要通过不同参数并发地执行func函数，必须从不同线程调用p.apply()函数或者使用p.apply_async()&apos;&apos;&apos;</span><br><span class="line"></span><br><span class="line">p.apply_async(func [, args [, kwargs]]):在一个池工作进程中执行func(*args,**kwargs),然后返回结果。</span><br><span class="line">&apos;&apos;&apos;此方法的结果是AsyncResult类的实例，callback是可调用对象，接收输入参数。当func的结果变为可用时，将理解传递给callback。callback禁止执行任何阻塞操作，否则将接收其他异步操作中的结果。&apos;&apos;&apos;</span><br><span class="line">   </span><br><span class="line">p.close():关闭进程池，防止进一步操作。如果所有操作持续挂起，它们将在工作进程终止前完成</span><br><span class="line"></span><br><span class="line">P.jion():等待所有工作进程退出。此方法只能在close（）或teminate()之后调用</span><br></pre></td></tr></table></figure>
+
+<p>其他方法(了解):</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">方法apply_async()和map_async（）的返回值是AsyncResul的实例obj。实例具有以下方法</span><br><span class="line">obj.get():返回结果，如果有必要则等待结果到达。timeout是可选的。如果在指定时间内还没有到达，将引发一场。如果远程操作中引发了异常，它将在调用此方法时再次被引发。</span><br><span class="line">obj.ready():如果调用完成，返回True</span><br><span class="line">obj.successful():如果调用完成且没有引发异常，返回True，如果在结果就绪之前调用此方法，引发异常</span><br><span class="line">obj.wait([timeout]):等待结果变为可用。</span><br><span class="line">obj.terminate()：立即终止所有工作进程，同时不执行任何清理或结束任何挂起工作。如果p被垃圾回收，将自动调用此函数</span><br></pre></td></tr></table></figure>
+
+<h5 id="（2）代码实例-1"><a href="#（2）代码实例-1" class="headerlink" title="（2）代码实例"></a>（2）代码实例</h5><p><strong>进程池和多进程效率对比</strong></p>
+<p>p.map进程池和进程效率测试</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Pool,Process</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">(n)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">        print(n+<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    start = time.time()</span><br><span class="line">    pool = Pool(<span class="number">5</span>)               <span class="comment"># 5个进程</span></span><br><span class="line">    pool.map(func,range(<span class="number">100</span>))    <span class="comment"># 100个任务，第二个参数必须为可迭代对象</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># pool.map(func,range(100))  相当于：</span></span><br><span class="line">    <span class="comment"># for i in range(100):</span></span><br><span class="line">        <span class="comment"># p = Process(target=func,args=(i,))</span></span><br><span class="line">        <span class="comment"># p.start()</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Pool,Process</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">(n)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">        print(n+<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func2</span><span class="params">(n)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">        print(n+<span class="number">2</span>)</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    start = time.time()</span><br><span class="line">    pool = Pool(<span class="number">5</span>)               <span class="comment"># 5个进程</span></span><br><span class="line">    pool.map(func,range(<span class="number">100</span>))    <span class="comment"># 100个任务</span></span><br><span class="line">    pool.map(func2,[(<span class="string">'alex'</span>,<span class="number">1</span>),<span class="string">'egon'</span>])    <span class="comment"># 100个任务</span></span><br><span class="line">    t1 = time.time() - start</span><br><span class="line"></span><br><span class="line">    start = time.time()</span><br><span class="line">    p_lst = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">100</span>):</span><br><span class="line">        p = Process(target=func,args=(i,))</span><br><span class="line">        p_lst.append(p)</span><br><span class="line">        p.start()</span><br><span class="line">    <span class="keyword">for</span> p <span class="keyword">in</span> p_lst :p.join()</span><br><span class="line">    t2 = time.time() - start</span><br><span class="line">    print(t1,t2)</span><br></pre></td></tr></table></figure>
+
+<p><strong>同步和异步</strong></p>
+<p>进程池的同步调用:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os,time</span><br><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Pool</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">work</span><span class="params">(n)</span>:</span></span><br><span class="line">    print(<span class="string">'%s run'</span> %os.getpid())</span><br><span class="line">    time.sleep(<span class="number">3</span>)</span><br><span class="line">    <span class="keyword">return</span> n**<span class="number">2</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    p=Pool(<span class="number">3</span>) <span class="comment">#进程池中从无到有创建三个进程,以后一直是这三个进程在执行任务</span></span><br><span class="line">    res_l=[]</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">        res=p.apply(work,args=(i,)) <span class="comment"># 同步调用，直到本次任务执行完毕拿到res，等待任务work执行的过程中可能有阻塞也可能没有阻塞</span></span><br><span class="line">                                    <span class="comment"># 但不管该任务是否存在阻塞，同步调用都会在原地等着</span></span><br><span class="line">    print(res_l)</span><br></pre></td></tr></table></figure>
+
+<p>进程池的异步调用:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Pool</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">work</span><span class="params">(n)</span>:</span></span><br><span class="line">    print(<span class="string">'%s run'</span> %os.getpid())</span><br><span class="line">    time.sleep(random.random())</span><br><span class="line">    <span class="keyword">return</span> n**<span class="number">2</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    p=Pool(<span class="number">3</span>) <span class="comment">#进程池中从无到有创建三个进程,以后一直是这三个进程在执行任务</span></span><br><span class="line">    res_l=[]</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">        res=p.apply_async(work,args=(i,)) <span class="comment"># 异步运行，根据进程池中有的进程数，每次最多3个子进程在异步执行</span></span><br><span class="line">                                          <span class="comment"># 返回结果之后，将结果放入列表，归还进程，之后再执行新的任务</span></span><br><span class="line">                                          <span class="comment"># 需要注意的是，进程池中的三个进程不会同时开启或者同时结束</span></span><br><span class="line">                                          <span class="comment"># 而是执行完一个就释放一个进程，这个进程就去接收新的任务。  </span></span><br><span class="line">        res_l.append(res)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 异步apply_async用法：如果使用异步提交的任务，主进程需要使用jion，等待进程池内任务都处理完，然后可以用get收集结果</span></span><br><span class="line">    <span class="comment"># 否则，主进程结束，进程池可能还没来得及执行，也就跟着一起结束了</span></span><br><span class="line">    p.close()		<span class="comment"># 结束进程池接收任务</span></span><br><span class="line">    p.join()</span><br><span class="line">    <span class="keyword">for</span> res <span class="keyword">in</span> res_l:</span><br><span class="line">        print(res.get()) <span class="comment">#使用get来获取apply_aync的结果,如果是apply,则没有get方法,因为apply是同步执行,立刻获取结果,也根本无需get</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>练习</strong></p>
+<p>server：进程池版socket并发聊天</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Pool</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">(conn)</span>:</span></span><br><span class="line">    conn.send(<span class="string">b'hello'</span>)</span><br><span class="line">    print(conn.recv(<span class="number">1024</span>).decode(<span class="string">'utf-8'</span>))</span><br><span class="line">    conn.close()</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    p = Pool(<span class="number">5</span>)</span><br><span class="line">    sk = socket.socket()</span><br><span class="line">    sk.bind((<span class="string">'127.0.0.1'</span>,<span class="number">8080</span>))</span><br><span class="line">    sk.listen()</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        conn, addr = sk.accept()</span><br><span class="line">        p.apply_async(func,args=(conn,))</span><br><span class="line">    sk.close()</span><br></pre></td></tr></table></figure>
+
+<p>client:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"></span><br><span class="line">sk = socket.socket()</span><br><span class="line">sk.connect((<span class="string">'127.0.0.1'</span>,<span class="number">8080</span>))</span><br><span class="line"></span><br><span class="line">ret = sk.recv(<span class="number">1024</span>).decode(<span class="string">'utf-8'</span>)</span><br><span class="line">print(ret)</span><br><span class="line">msg = input(<span class="string">'&gt;&gt;&gt;'</span>).encode(<span class="string">'utf-8'</span>)</span><br><span class="line">sk.send(msg)</span><br><span class="line">sk.close()</span><br></pre></td></tr></table></figure>
+
+<p>发现：并发开启多个客户端，服务端同一时间只有4个不同的pid，只能结束一个客户端，另外一个客户端才会进来.</p>
+<p><strong>进程池的返回值</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Pool</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">(i)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> i*i</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    p = Pool(<span class="number">5</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">        res = p.apply(func,args=(i,))   <span class="comment"># apply的结果就是func的返回值</span></span><br><span class="line">        print(res)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Pool</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">(i)</span>:</span></span><br><span class="line">    time.sleep(<span class="number">0.5</span>)</span><br><span class="line">    <span class="keyword">return</span> i*i</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    p = Pool(<span class="number">5</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">        res = p.apply_async(func,args=(i,))   <span class="comment"># apply的结果就是func的返回值</span></span><br><span class="line">        print(res.get()) <span class="comment">#阻塞 等着 func的计算结果的过程是同步的，即使异步提交</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Pool</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">(i)</span>:</span></span><br><span class="line">    time.sleep(<span class="number">0.5</span>)</span><br><span class="line">    <span class="keyword">return</span> i*i</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    p = Pool(<span class="number">5</span>)</span><br><span class="line">    res_l = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">        res = p.apply_async(func,args=(i,))   <span class="comment"># apply的结果就是func的返回值</span></span><br><span class="line">        res_l.append(res)</span><br><span class="line">    <span class="keyword">for</span> res <span class="keyword">in</span> res_l:</span><br><span class="line">        print(res.get()) <span class="comment">#等着 func的计算结果</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Pool</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">(i)</span>:</span></span><br><span class="line">    time.sleep(<span class="number">0.5</span>)</span><br><span class="line">    <span class="keyword">return</span> i*i</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    p = Pool(<span class="number">5</span>)</span><br><span class="line">    ret = p.map(func,range(<span class="number">100</span>))</span><br><span class="line">    print(ret)</span><br><span class="line">	<span class="comment"># map 自带join和close的</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>回调函数</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">需要回调函数的场景：进程池中任何一个任务一旦处理完了，就立即告知主进程：我好了额，你可以处理我的结果了。主进程则调用一个函数去处理该结果，该函数即回调函数</span><br><span class="line"></span><br><span class="line">我们可以把耗时间（阻塞）的任务放到进程池中，然后指定回调函数（主进程负责执行），这样主进程在执行回调函数时就省去了I/O的过程，直接拿到的是任务的结果。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 回调函数</span></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Pool</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func1</span><span class="params">(n)</span>:</span></span><br><span class="line">    print(<span class="string">'in func1'</span>,os.getpid())</span><br><span class="line">    <span class="keyword">return</span> n*n</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func2</span><span class="params">(nn)</span>:</span></span><br><span class="line">    print(<span class="string">'in func2'</span>,os.getpid())</span><br><span class="line">    print(nn)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    print(<span class="string">'主进程 :'</span>,os.getpid())</span><br><span class="line">    p = Pool(<span class="number">5</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">        p.apply_async(func1,args=(<span class="number">10</span>,),callback=func2)</span><br><span class="line">    p.close()</span><br><span class="line">    p.join()</span><br></pre></td></tr></table></figure>
+
+<p>使用多进程请求多个url来减少网络等待浪费的时间:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Pool</span><br><span class="line"><span class="comment"># 200 网页正常的返回</span></span><br><span class="line"><span class="comment"># 404 网页找不到</span></span><br><span class="line"><span class="comment"># 502 504</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get</span><span class="params">(url)</span>:</span></span><br><span class="line">    response = requests.get(url)</span><br><span class="line">    <span class="keyword">if</span> response.status_code == <span class="number">200</span>:</span><br><span class="line">        <span class="keyword">return</span> url,response.content.decode(<span class="string">'utf-8'</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">call_back</span><span class="params">(args)</span>:</span></span><br><span class="line">    url,content = args</span><br><span class="line">    print(url,len(content))</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    url_lst = [</span><br><span class="line">        <span class="string">'https://www.cnblogs.com/'</span>,</span><br><span class="line">        <span class="string">'http://www.baidu.com'</span>,</span><br><span class="line">        <span class="string">'https://www.sogou.com/'</span>,</span><br><span class="line">        <span class="string">'http://www.sohu.com/'</span>,</span><br><span class="line">    ]</span><br><span class="line">    p = Pool(<span class="number">5</span>)</span><br><span class="line">    <span class="keyword">for</span> url <span class="keyword">in</span> url_lst:</span><br><span class="line">        p.apply_async(get,args=(url,),callback=call_back)</span><br><span class="line">    p.close()</span><br><span class="line">    p.join()</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Pool</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_page</span><span class="params">(url)</span>:</span></span><br><span class="line">    print(<span class="string">'&lt;进程%s&gt; get %s'</span> %(os.getpid(),url))</span><br><span class="line">    respone=requests.get(url)</span><br><span class="line">    <span class="keyword">if</span> respone.status_code == <span class="number">200</span>:</span><br><span class="line">        <span class="keyword">return</span> &#123;<span class="string">'url'</span>:url,<span class="string">'text'</span>:respone.text&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">pasrse_page</span><span class="params">(res)</span>:</span></span><br><span class="line">    print(<span class="string">'&lt;进程%s&gt; parse %s'</span> %(os.getpid(),res[<span class="string">'url'</span>]))</span><br><span class="line">    parse_res=<span class="string">'url:&lt;%s&gt; size:[%s]\n'</span> %(res[<span class="string">'url'</span>],len(res[<span class="string">'text'</span>]))</span><br><span class="line">    <span class="keyword">with</span> open(<span class="string">'db.txt'</span>,<span class="string">'a'</span>) <span class="keyword">as</span> f:</span><br><span class="line">        f.write(parse_res)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    urls=[</span><br><span class="line">        <span class="string">'https://www.baidu.com'</span>,</span><br><span class="line">        <span class="string">'https://www.python.org'</span>,</span><br><span class="line">        <span class="string">'https://www.openstack.org'</span>,</span><br><span class="line">        <span class="string">'https://help.github.com/'</span>,</span><br><span class="line">        <span class="string">'http://www.sina.com.cn/'</span></span><br><span class="line">    ]</span><br><span class="line"></span><br><span class="line">    p=Pool(<span class="number">3</span>)</span><br><span class="line">    res_l=[]</span><br><span class="line">    <span class="keyword">for</span> url <span class="keyword">in</span> urls:</span><br><span class="line">        res=p.apply_async(get_page,args=(url,),callback=pasrse_page)</span><br><span class="line">        res_l.append(res)</span><br><span class="line"></span><br><span class="line">    p.close()</span><br><span class="line">    p.join()</span><br><span class="line">    print([res.get() <span class="keyword">for</span> res <span class="keyword">in</span> res_l]) <span class="comment">#拿到的是get_page的结果,其实完全没必要拿该结果,该结果已经传给回调函数处理了</span></span><br><span class="line"></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">打印结果:</span></span><br><span class="line"><span class="string">&lt;进程3388&gt; get https://www.baidu.com</span></span><br><span class="line"><span class="string">&lt;进程3389&gt; get https://www.python.org</span></span><br><span class="line"><span class="string">&lt;进程3390&gt; get https://www.openstack.org</span></span><br><span class="line"><span class="string">&lt;进程3388&gt; get https://help.github.com/</span></span><br><span class="line"><span class="string">&lt;进程3387&gt; parse https://www.baidu.com</span></span><br><span class="line"><span class="string">&lt;进程3389&gt; get http://www.sina.com.cn/</span></span><br><span class="line"><span class="string">&lt;进程3387&gt; parse https://www.python.org</span></span><br><span class="line"><span class="string">&lt;进程3387&gt; parse https://help.github.com/</span></span><br><span class="line"><span class="string">&lt;进程3387&gt; parse http://www.sina.com.cn/</span></span><br><span class="line"><span class="string">&lt;进程3387&gt; parse https://www.openstack.org</span></span><br><span class="line"><span class="string">[&#123;'url': 'https://www.baidu.com', 'text': '&lt;!DOCTYPE html&gt;\r\n...',...&#125;]</span></span><br><span class="line"><span class="string">'''</span></span><br></pre></td></tr></table></figure>
+
+<p>爬虫实例:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">from</span> urllib.request <span class="keyword">import</span> urlopen</span><br><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Pool</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_page</span><span class="params">(url,pattern)</span>:</span></span><br><span class="line">    <span class="comment"># response=urlopen(url).read().decode('utf-8')</span></span><br><span class="line">    response = requests.get(url).content.decode(<span class="string">'utf-8'</span>)</span><br><span class="line">    <span class="keyword">return</span> pattern,response   <span class="comment"># 正则表达式编译结果 网页内容</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">parse_page</span><span class="params">(info)</span>:</span></span><br><span class="line">    pattern,page_content=info</span><br><span class="line">    res=re.findall(pattern,page_content)</span><br><span class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> res:</span><br><span class="line">        dic=&#123;</span><br><span class="line">            <span class="string">'index'</span>:item[<span class="number">0</span>].strip(),</span><br><span class="line">            <span class="string">'title'</span>:item[<span class="number">1</span>].strip(),</span><br><span class="line">            <span class="string">'actor'</span>:item[<span class="number">2</span>].strip(),</span><br><span class="line">            <span class="string">'time'</span>:item[<span class="number">3</span>].strip(),</span><br><span class="line">        &#125;</span><br><span class="line">        print(dic)</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    regex = <span class="string">r'&lt;dd&gt;.*?&lt;.*?class="board-index.*?&gt;(\d+)&lt;/i&gt;.*?title="(.*?)".*?class="movie-item-info".*?&lt;p class="star"&gt;(.*?)&lt;/p&gt;.*?&lt;p class="releasetime"&gt;(.*?)&lt;/p&gt;'</span></span><br><span class="line">    pattern1=re.compile(regex,re.S)</span><br><span class="line">    url_dic=&#123;<span class="string">'http://maoyan.com/board/7'</span>:pattern1&#125;</span><br><span class="line">    p=Pool()</span><br><span class="line">    res_l=[]</span><br><span class="line">    <span class="keyword">for</span> url,pattern <span class="keyword">in</span> url_dic.items():</span><br><span class="line">        res=p.apply_async(get_page,args=(url,pattern),callback=parse_page)</span><br><span class="line">        res_l.append(res)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> res_l:</span><br><span class="line">        i.get()</span><br></pre></td></tr></table></figure>
+
+<p><strong>如果在主进程中等待进程池中所有任务都执行完毕后，再统一处理结果，则无需回调函数</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 无需回调函数</span></span><br><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Pool</span><br><span class="line"><span class="keyword">import</span> time,random,os</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">work</span><span class="params">(n)</span>:</span></span><br><span class="line">    time.sleep(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">return</span> n**<span class="number">2</span></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    p=Pool()</span><br><span class="line"></span><br><span class="line">    res_l=[]</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">        res=p.apply_async(work,args=(i,))</span><br><span class="line">        res_l.append(res)</span><br><span class="line"></span><br><span class="line">    p.close()</span><br><span class="line">    p.join() <span class="comment">#等待进程池中所有进程执行完毕</span></span><br><span class="line"></span><br><span class="line">    nums=[]</span><br><span class="line">    <span class="keyword">for</span> res <span class="keyword">in</span> res_l:</span><br><span class="line">        nums.append(res.get()) <span class="comment">#拿到所有结果</span></span><br><span class="line">    print(nums) <span class="comment">#主进程拿到所有的处理结果,可以在主进程中进行统一进行处理</span></span><br></pre></td></tr></table></figure>
+
+<p><a href="https://docs.python.org/dev/library/concurrent.futures.html" target="_blank" rel="noopener"><strong>进程池的其他实现方式：https://docs.python.org/dev/library/concurrent.futures.html</strong></a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/并发编程/" rel="tag"># 并发编程</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/03/python全栈/第02部分：并发编程+数据库+前端/并发编程/进程（一）/" rel="next" title="进程（一）">
+                <i class="fa fa-chevron-left"></i> 进程（一）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/04/python全栈/第02部分：并发编程+数据库+前端/并发编程/线程（一）/" rel="prev" title="线程（一）">
+                线程（一） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="John Doe">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://suliangxu.github.io" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:1193135584@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#（二）在python程序中的进程操作"><span class="nav-text">（二）在python程序中的进程操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、multiprocess模块"><span class="nav-text">一、multiprocess模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、multiprocess-process模块"><span class="nav-text">二、multiprocess.process模块</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、process模块介绍"><span class="nav-text">1、process模块介绍</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、使用process模块创建进程"><span class="nav-text">2、使用process模块创建进程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、守护进程"><span class="nav-text">3、守护进程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、socket聊天开发实例"><span class="nav-text">4、socket聊天开发实例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5、多进程中的其他方法"><span class="nav-text">5、多进程中的其他方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、进程同步（multiprocess-Lock）"><span class="nav-text">三、进程同步（multiprocess.Lock）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、锁-——-multiprocess-Lock"><span class="nav-text">1、锁 —— multiprocess.Lock</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、信号量——-multiprocess-Semaphore"><span class="nav-text">2、信号量—— multiprocess.Semaphore</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、事件——-multiprocess-Event"><span class="nav-text">3、事件—— multiprocess.Event</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、进程间通信——-队列（multiprocess-Queue）"><span class="nav-text">四、进程间通信—— 队列（multiprocess.Queue）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、进程间通信"><span class="nav-text">1、进程间通信</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、队列"><span class="nav-text">2、队列</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#（1）概念介绍"><span class="nav-text">（1）概念介绍</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#（2）代码实例"><span class="nav-text">（2）代码实例</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#（3）生产者消费者模型"><span class="nav-text">（3）生产者消费者模型</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、管道"><span class="nav-text">3、管道</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五、继承之间的数据共享"><span class="nav-text">五、继承之间的数据共享</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#六、进程池和multiprocess-Pool模块"><span class="nav-text">六、进程池和multiprocess.Pool模块</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、进程池"><span class="nav-text">1、进程池</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、multiprocess-Pool模块"><span class="nav-text">2、multiprocess.Pool模块</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#（1）概念介绍-1"><span class="nav-text">（1）概念介绍</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#（2）代码实例-1"><span class="nav-text">（2）代码实例</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

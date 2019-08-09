@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="并发编程,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="[TOC] 一、手工操作——穿孔卡片1946年第一台计算机诞生–20世纪50年代中期，计算机工作还在采用手工操作方式。此时还没有操作系统的概念。   ​        程序员将对应于程序和数据的已穿孔的纸带（或卡片）装入输入机，然后启动输入机把程序和数据输入计算机内存，接着通过控制台开关启动程序针对数据运行；计算完毕，打印机输出计算结果；用户取走结果并卸下纸带（或卡片）后，才让下一个用户上机。 手">
+<meta name="keywords" content="并发编程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="操作系统的发展史">
+<meta property="og:url" content="http://yoursite.com/2019/08/02/python全栈/第02部分：并发编程+数据库+前端/并发编程/操作系统的发展史/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="[TOC] 一、手工操作——穿孔卡片1946年第一台计算机诞生–20世纪50年代中期，计算机工作还在采用手工操作方式。此时还没有操作系统的概念。   ​        程序员将对应于程序和数据的已穿孔的纸带（或卡片）装入输入机，然后启动输入机把程序和数据输入计算机内存，接着通过控制台开关启动程序针对数据运行；计算完毕，打印机输出计算结果；用户取走结果并卸下纸带（或卡片）后，才让下一个用户上机。 手">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/python%E5%85%A8%E6%A0%88/%E7%AC%AC02%E9%83%A8%E5%88%86%EF%BC%9A%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2B%E6%95%B0%E6%8D%AE%E5%BA%93%2B%E5%89%8D%E7%AB%AF/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/01.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/python%E5%85%A8%E6%A0%88/%E7%AC%AC02%E9%83%A8%E5%88%86%EF%BC%9A%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2B%E6%95%B0%E6%8D%AE%E5%BA%93%2B%E5%89%8D%E7%AB%AF/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/02.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/python%E5%85%A8%E6%A0%88/%E7%AC%AC02%E9%83%A8%E5%88%86%EF%BC%9A%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2B%E6%95%B0%E6%8D%AE%E5%BA%93%2B%E5%89%8D%E7%AB%AF/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/03.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/python%E5%85%A8%E6%A0%88/%E7%AC%AC02%E9%83%A8%E5%88%86%EF%BC%9A%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2B%E6%95%B0%E6%8D%AE%E5%BA%93%2B%E5%89%8D%E7%AB%AF/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/04.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/python%E5%85%A8%E6%A0%88/%E7%AC%AC02%E9%83%A8%E5%88%86%EF%BC%9A%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2B%E6%95%B0%E6%8D%AE%E5%BA%93%2B%E5%89%8D%E7%AB%AF/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/05.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/python%E5%85%A8%E6%A0%88/%E7%AC%AC02%E9%83%A8%E5%88%86%EF%BC%9A%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2B%E6%95%B0%E6%8D%AE%E5%BA%93%2B%E5%89%8D%E7%AB%AF/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/06.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/python%E5%85%A8%E6%A0%88/%E7%AC%AC02%E9%83%A8%E5%88%86%EF%BC%9A%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2B%E6%95%B0%E6%8D%AE%E5%BA%93%2B%E5%89%8D%E7%AB%AF/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/07.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/python%E5%85%A8%E6%A0%88/%E7%AC%AC02%E9%83%A8%E5%88%86%EF%BC%9A%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2B%E6%95%B0%E6%8D%AE%E5%BA%93%2B%E5%89%8D%E7%AB%AF/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/08.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/python%E5%85%A8%E6%A0%88/%E7%AC%AC02%E9%83%A8%E5%88%86%EF%BC%9A%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2B%E6%95%B0%E6%8D%AE%E5%BA%93%2B%E5%89%8D%E7%AB%AF/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/09.png">
+<meta property="og:updated_time" content="2019-08-02T16:55:15.813Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="操作系统的发展史">
+<meta name="twitter:description" content="[TOC] 一、手工操作——穿孔卡片1946年第一台计算机诞生–20世纪50年代中期，计算机工作还在采用手工操作方式。此时还没有操作系统的概念。   ​        程序员将对应于程序和数据的已穿孔的纸带（或卡片）装入输入机，然后启动输入机把程序和数据输入计算机内存，接着通过控制台开关启动程序针对数据运行；计算完毕，打印机输出计算结果；用户取走结果并卸下纸带（或卡片）后，才让下一个用户上机。 手">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/python%E5%85%A8%E6%A0%88/%E7%AC%AC02%E9%83%A8%E5%88%86%EF%BC%9A%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2B%E6%95%B0%E6%8D%AE%E5%BA%93%2B%E5%89%8D%E7%AB%AF/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/01.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/08/02/python全栈/第02部分：并发编程+数据库+前端/并发编程/操作系统的发展史/">
+
+
+
+
+
+  <title>操作系统的发展史 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/02/python全栈/第02部分：并发编程+数据库+前端/并发编程/操作系统的发展史/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">操作系统的发展史</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-02T22:21:10+08:00">
+                2019-08-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python全栈-02部分-并发编程/" itemprop="url" rel="index">
+                    <span itemprop="name">python全栈 -02部分 -并发编程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>[TOC]</p>
+<h2 id="一、手工操作——穿孔卡片"><a href="#一、手工操作——穿孔卡片" class="headerlink" title="一、手工操作——穿孔卡片"></a>一、手工操作——穿孔卡片</h2><p>1946年第一台计算机诞生–20世纪50年代中期，计算机工作还在采用手工操作方式。此时还没有操作系统的概念。</p>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/python%E5%85%A8%E6%A0%88/%E7%AC%AC02%E9%83%A8%E5%88%86%EF%BC%9A%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2B%E6%95%B0%E6%8D%AE%E5%BA%93%2B%E5%89%8D%E7%AB%AF/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/01.png" alt> <img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/python%E5%85%A8%E6%A0%88/%E7%AC%AC02%E9%83%A8%E5%88%86%EF%BC%9A%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2B%E6%95%B0%E6%8D%AE%E5%BA%93%2B%E5%89%8D%E7%AB%AF/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/02.png" alt></p>
+<p>​        程序员将对应于程序和数据的已穿孔的纸带（或卡片）装入输入机，然后启动输入机把程序和数据输入计算机内存，接着通过控制台开关启动程序针对数据运行；计算完毕，打印机输出计算结果；用户取走结果并卸下纸带（或卡片）后，才让下一个用户上机。</p>
+<p>手工操作方式两个特点：</p>
+<p>　　（1）用户独占全机。不会出现因资源已被其他用户占用而等待的现象，但资源的利用率低。</p>
+<p>　　（2）CPU 等待手工操作。CPU的利用不充分。</p>
+<p>​      20世纪50年代后期，出现<a href="https://baike.baidu.com/item/人机矛盾" target="_blank" rel="noopener">人机矛盾</a>：手工操作的慢速度和计算机的高速度之间形成了尖锐矛盾，手工操作方式已严重损害了系统资源的利用率（使资源利用率降为百分之几，甚至更低），不能容忍。唯一的解决办法：只有摆脱人的手工操作，实现作业的自动过渡。这样就出现了成<a href="https://baike.baidu.com/item/批处理" target="_blank" rel="noopener">批处理</a>。</p>
+<h2 id="二、批处理——磁带存储"><a href="#二、批处理——磁带存储" class="headerlink" title="二、批处理——磁带存储"></a>二、批处理——磁带存储</h2><p>​        批处理系统：加载在计算机上的一个<a href="https://baike.baidu.com/item/系统软件" target="_blank" rel="noopener">系统软件</a>，在它的控制下，计算机能够自动地、成批地处理一个或多个用户的作业（这作业包括程序、数据和命令）。</p>
+<h3 id="1、联机批处理系统"><a href="#1、联机批处理系统" class="headerlink" title="1、联机批处理系统"></a>1、联机批处理系统</h3><p>首先出现的是联机批处理系统，即作业的输入/输出由CPU来处理。</p>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/python%E5%85%A8%E6%A0%88/%E7%AC%AC02%E9%83%A8%E5%88%86%EF%BC%9A%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2B%E6%95%B0%E6%8D%AE%E5%BA%93%2B%E5%89%8D%E7%AB%AF/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/03.png" alt></p>
+<p>​        主机与输入机之间增加一个存储设备——<strong>磁带</strong>，在运行于主机上的监督程序的自动控制下，计算机可自动完成：成批地把输入机上的用户作业读入磁带，依次把磁带上的用户作业读入主机内存并执行并把计算结果向输出机输出。完成了上一批作业后，监督程序又从输入机上输入另一批作业，保存在磁带上，并按上述步骤重复处理。</p>
+<p>​        监督程序不停地处理各个作业，从而实现了作业到作业的自动转接，减少了作业建立时间和手工操作时间，有效克服了人机矛盾，提高了计算机的利用率。</p>
+<p>​        但是，在作业输入和结果输出时，主机的高速CPU仍处于空闲状态，等待慢速的输入/输出设备完成工作： 主机处于“忙等”状态。</p>
+<h3 id="2、脱机批处理系统"><a href="#2、脱机批处理系统" class="headerlink" title="2、脱机批处理系统"></a>2、脱机批处理系统</h3><p>​        为克服与缓解：高速主机与慢速外设的矛盾，提高CPU的利用率，又引入了<a href="https://baike.baidu.com/item/脱机批处理系统" target="_blank" rel="noopener">脱机批处理系统</a>，即输入/输出脱离主机控制。</p>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/python%E5%85%A8%E6%A0%88/%E7%AC%AC02%E9%83%A8%E5%88%86%EF%BC%9A%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2B%E6%95%B0%E6%8D%AE%E5%BA%93%2B%E5%89%8D%E7%AB%AF/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/04.png" alt></p>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/python%E5%85%A8%E6%A0%88/%E7%AC%AC02%E9%83%A8%E5%88%86%EF%BC%9A%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2B%E6%95%B0%E6%8D%AE%E5%BA%93%2B%E5%89%8D%E7%AB%AF/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/05.png" alt></p>
+<p>​        卫星机：一台不与主机直接相连而专门用于与输入/输出设备打交道的。</p>
+<p>　　其功能是：</p>
+<p>　　（1）从输入机上读取用户作业并放到输入磁带上。</p>
+<p>　　（2）从输出磁带上读取执行结果并传给输出机。</p>
+<p>​        这样，主机不是直接与慢速的输入/输出设备打交道，而是与速度相对较快的磁带机发生关系，有效缓解了主机与设备的矛盾。主机与卫星机可并行工作，二者分工明确，可以充分发挥主机的高速计算能力。</p>
+<p>​        脱机批处理系统:20世纪60年代应用十分广泛，它极大缓解了人机矛盾及主机与外设的矛盾。</p>
+<p>　　不足：每次主机内存中仅存放一道作业，每当它运行期间发出输入/输出（I/O）请求后，高速的CPU便处于等待低速的I/O完成状态，致使CPU空闲。</p>
+<p>​        为改善CPU的利用率，又引入了多道程序系统。</p>
+<h2 id="三、多道程序系统"><a href="#三、多道程序系统" class="headerlink" title="三、多道程序系统"></a>三、多道程序系统</h2><h3 id="1、多道程序设计技术"><a href="#1、多道程序设计技术" class="headerlink" title="1、多道程序设计技术"></a>1、多道程序设计技术</h3><p>​        所谓多道程序设计技术，就是指允许多个程序同时进入内存并运行。即同时把多个程序放入内存，并允许它们交替在CPU中运行，它们共享系统中的各种硬、软件资源。当一道程序因I/O请求而暂停运行时，CPU便立即转去运行另一道程序。</p>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/python%E5%85%A8%E6%A0%88/%E7%AC%AC02%E9%83%A8%E5%88%86%EF%BC%9A%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2B%E6%95%B0%E6%8D%AE%E5%BA%93%2B%E5%89%8D%E7%AB%AF/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/06.png" alt></p>
+<p>​        在A程序计算时，I/O空闲， A程序I/O操作时，CPU空闲（B程序也是同样）；必须A工作完成后，B才能进入内存中开始工作，两者是串行的，全部完成共需时间=T1+T2。</p>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/python%E5%85%A8%E6%A0%88/%E7%AC%AC02%E9%83%A8%E5%88%86%EF%BC%9A%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2B%E6%95%B0%E6%8D%AE%E5%BA%93%2B%E5%89%8D%E7%AB%AF/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/07.png" alt></p>
+<p>​        将A、B两道程序同时存放在内存中，它们在系统的控制下，可相互穿插、交替地在CPU上运行：当A程序因请求I/O操作而放弃CPU时，B程序就可占用CPU运行，这样 CPU不再空闲，而正进行A I/O操作的I/O设备也不空闲，显然，CPU和I/O设备都处于“忙”状态，大大提高了资源的利用率，从而也提高了系统的效率，A、B全部完成所需时间&lt;&lt;T1+T2。</p>
+<p>​      多道程序设计技术不仅使CPU得到充分利用，同时改善I/O设备和内存的利用率，从而提高了整个系统的资源利用率和系统吞吐量（单位时间内处理作业（程序）的个数），最终提高了整个系统的效率。</p>
+<p>​        单处理机系统中多道程序运行时的特点：</p>
+<p>　　（1）多道：计算机内存中同时存放几道相互独立的程序；</p>
+<p>　　（2）宏观上并行：同时进入系统的几道程序都处于运行过程中，即它们先后开始了各自的运行，但都未运行完毕；</p>
+<p>　　（3）微观上串行：实际上，各道程序轮流地用CPU，并交替运行。</p>
+<p>​        <strong>多道程序系统的出现，标志着操作系统渐趋成熟的阶段，先后出现了作业调度管理、处理机管理、存储器管理、外部设备管理、文件系统管理等功能。</strong></p>
+<p>​        <strong>由于多个程序同时在计算机中运行，开始有了空间隔离的概念，只有内存空间的隔离，才能让数据更加安全、稳定。</strong></p>
+<p>​        <strong>出了空间隔离之外，多道技术还第一次体现了时空复用的特点，遇到IO操作就切换程序，使得cpu的利用率提高了，计算机的工作效率也随之提高。</strong></p>
+<h3 id="2、多道批处理系统"><a href="#2、多道批处理系统" class="headerlink" title="2、多道批处理系统"></a>2、多道批处理系统</h3><p>​        20世纪60年代中期，在前述的批处理系统中，引入多道程序设计技术后形成多道批处理系统（简称：批处理系统）。</p>
+<p>　　它有两个特点：</p>
+<p>　　（1）多道：系统内可同时容纳多个作业。这些作业放在外存中，组成一个后备队列，系统按一定的调度原则每次从后备作业队列中选取一个或多个作业进入内存运行，运行作业结束、退出运行和后备作业进入运行均由系统自动实现，从而在系统中形成一个自动转接的、连续的作业流。</p>
+<p>　　（2）成批：在系统运行过程中，不允许用户与其作业发生交互作用，即：作业一旦进入系统，用户就不能直接干预其作业的运行。</p>
+<p>　　批处理系统的追求目标：提高系统资源利用率和系统吞吐量，以及作业流程的自动化。</p>
+<p>　　批处理系统的一个重要缺点：不提供人机交互能力，给用户使用计算机带来不便。</p>
+<p>　　虽然用户独占全机资源，并且直接控制程序的运行，可以随时了解程序运行情况。但这种工作方式因独占全机造成资源效率极低。</p>
+<p>　　一种新的追求目标：既能保证计算机效率，又能方便用户使用计算机。 20世纪60年代中期，计算机技术和软件技术的发展使这种追求成为可能。</p>
+<h2 id="四、分时系统"><a href="#四、分时系统" class="headerlink" title="四、分时系统"></a>四、分时系统</h2><p>​        由于CPU速度不断提高和采用分时技术，一台计算机可同时连接多个用户终端，而每个用户可在自己的终端上联机使用计算机，好像自己独占机器一样。</p>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/python%E5%85%A8%E6%A0%88/%E7%AC%AC02%E9%83%A8%E5%88%86%EF%BC%9A%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2B%E6%95%B0%E6%8D%AE%E5%BA%93%2B%E5%89%8D%E7%AB%AF/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/08.png" alt></p>
+<p>​        分时技术：把处理机的运行时间分成很短的时间片，按时间片轮流把处理机分配给各联机作业使用。</p>
+<p>　　若某个作业在分配给它的时间片内不能完成其计算，则该作业暂时中断，把处理机让给另一作业使用，等待下一轮时再继续其运行。由于计算机速度很快，作业运行轮转得很快，给每个用户的印象是，好象他独占了一台计算机。而每个用户可以通过自己的终端向系统发出各种操作控制命令，在充分的人机交互情况下，完成作业的运行。</p>
+<p>​        具有上述特征的计算机系统称为分时系统，它允许多个用户同时联机使用计算机。</p>
+<p>　　特点：</p>
+<p>　　（1）多路性。若干个用户同时使用一台计算机。微观上看是各用户轮流使用计算机；宏观上看是各用户并行工作。</p>
+<p>　　（2）交互性。用户可根据系统对请求的响应结果，进一步向系统提出新的请求。这种能使用户与系统进行人机对话的工作方式，明显地有别于批处理系统，因而，分时系统又被称为交互式系统。</p>
+<p>　　（3）独立性。用户之间可以相互独立操作，互不干扰。系统保证各用户程序运行的完整性，不会发生相互混淆或破坏现象。</p>
+<p>　　（4）及时性。系统可对用户的输入及时作出响应。分时系统性能的主要指标之一是响应时间，它是指：从终端发出命令到系统予以应答所需的时间。</p>
+<p>　　<strong>分时系统的主要目标</strong>：对用户响应的及时性，即不至于用户等待每一个命令的处理时间过长。</p>
+<p>​        分时系统可以同时接纳数十个甚至上百个用户，由于内存空间有限，往往采用对换（又称交换）方式的存储方法。即将未“轮到”的作业放入磁盘，一旦“轮到”，再将其调入内存；而时间片用完后，又将作业存回磁盘（俗称“滚进”、“滚出“法），使同一存储区域轮流为多个用户服务。</p>
+<p>​        多用户分时系统是当今计算机操作系统中最普遍使用的一类操作系统。</p>
+<p>​      <strong>注意：分时系统的分时间片工作，在没有遇到IO操作的时候就用完了自己的时间片被切走了，这样的切换工作其实并没有提高cpu的效率，反而使得计算机的效率降低了。但是我们牺牲了一点效率，却实现了多个程序共同执行的效果，这样你就可以在计算机上一边听音乐一边聊qq了。</strong></p>
+<h2 id="五、实时系统"><a href="#五、实时系统" class="headerlink" title="五、实时系统"></a>五、实时系统</h2><p>​        虽然多道批处理系统和分时系统能获得较令人满意的资源利用率和系统响应时间，但却不能满足实时控制与实时信息处理两个应用领域的需求。于是就产生了实时系统，即系统能够及时响应随机发生的外部事件，并在严格的时间范围内完成对该事件的处理。</p>
+<p>​        实时系统在一个特定的应用中常作为一种控制设备来使用。</p>
+<p>　　  实时系统可分成两类：</p>
+<p>　　  （1）实时控制系统。当用于飞机飞行、导弹发射等的自动控制时，要求计算机能尽快处理测量系统测得的数据，及时地对飞机或导弹进行控制，或将有关信息通过显示终端提供给决策人员。当用于轧钢、石化等工业生产过程控制时，也要求计算机能及时处理由各类传感器送来的数据，然后控制相应的执行机构。</p>
+<p>　　  （2）实时信息处理系统。当用于预定飞机票、查询有关航班、航线、票价等事宜时，或当用于银行系统、情报检索系统时，都要求计算机能对终端设备发来的服务请求及时予以正确的回答。此类对响应及时性的要求稍弱于第一类。</p>
+<p>　　<strong>实时操作系统的主要特点</strong>：</p>
+<p>　　（1）及时响应。每一个信息接收、分析处理和发送的过程必须在严格的时间限制内完成。</p>
+<p>　　（2）高可靠性。需采取冗余措施，双机系统前后台工作，也包括必要的保密措施等。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">分时系统和实时系统的比较：</span><br><span class="line">分时——现在流行的PC，服务器都是采用这种运行模式，即把CPU的运行分成若干时间片分别处理不同的运算请求 linux系统</span><br><span class="line">实时——一般用于单片机上、PLC等，比如电梯的上下控制中，对于按键等动作要求进行实时处理</span><br></pre></td></tr></table></figure>
+
+<h2 id="六、通用操作系统"><a href="#六、通用操作系统" class="headerlink" title="六、通用操作系统"></a>六、通用操作系统</h2><p>​        操作系统的三种基本类型：多道批处理系统、分时系统、实时系统。</p>
+<p>　　<strong>通用操作系统：具有多种类型操作特征的操作系统。可以同时兼有多道批处理、分时、实时处理的功能，或其中两种以上的功能。</strong></p>
+<p>　　例如：实时处理+批处理=实时批处理系统。首先保证优先处理实时任务，插空进行批处理作业。常把实时任务称为前台作业，批作业称为后台作业。</p>
+<p>　　再如：分时处理+批处理=分时批处理系统。即：时间要求不强的作业放入“后台”（批处理）处理，需频繁交互的作业在“前台”（分时）处理，处理机优先运行“前台”作业。</p>
+<p>　　从上世纪60年代中期，国际上开始研制一些大型的通用操作系统。这些系统试图达到功能齐全、可适应各种应用范围和操作方式变化多端的环境的目标。但是，这些系统过于复杂和庞大，不仅付出了巨大的代价，且在解决其可靠性、可维护性和可理解性方面都遇到很大的困难。</p>
+<p>　　相比之下，UNIX操作系统却是一个例外。这是一个通用的多用户分时交互型的操作系统。它首先建立的是一个精干的核心，而其功能却足以与许多大型的操作系统相媲美，在核心层以外，可以支持庞大的软件系统。它很快得到应用和推广，并不断完善，对现代操作系统有着重大的影响。</p>
+<p>　　至此，操作系统的基本概念、功能、基本结构和组成都已形成并渐趋完善。</p>
+<h2 id="七、操作系统的进一步发展"><a href="#七、操作系统的进一步发展" class="headerlink" title="七、操作系统的进一步发展"></a>七、操作系统的进一步发展</h2><p>​        进入20世纪80年代，大规模集成电路工艺技术的飞跃发展，微处理机的出现和发展，掀起了计算机大发展大普及的浪潮。一方面迎来了个人计算机的时代，同时又向计算机网络、分布式处理、巨型计算机和智能化方向发展。于是，操作系统有了进一步的发展，如：个人计算机操作系统、网络操作系统、分布式操作系统等。</p>
+<h3 id="1、个人计算机操作系统"><a href="#1、个人计算机操作系统" class="headerlink" title="1、个人计算机操作系统"></a>1、个人计算机操作系统</h3><p>​        个人计算机上的操作系统是联机交互的单用户操作系统，它提供的联机交互功能与通用分时系统提供的功能很相似。</p>
+<p>　　由于是个人专用，因此一些功能会简单得多。然而，由于个人计算机的应用普及，对于提供更方便友好的用户接口和丰富功能的文件系统的要求会愈来愈迫切。</p>
+<h3 id="2、网络操作系统"><a href="#2、网络操作系统" class="headerlink" title="2、网络操作系统"></a>2、网络操作系统</h3><p>​        计算机网络：通过通信设施，将地理上分散的、具有自治功能的多个计算机系统互连起来，实现信息交换、资源共享、互操作和协作处理的系统。</p>
+<p>　　网络操作系统：在原来各自计算机操作系统上，按照网络体系结构的各个协议标准增加网络管理模块，其中包括：通信、资源共享、系统安全和各种网络应用服务。</p>
+<h3 id="3、分布式操作系统"><a href="#3、分布式操作系统" class="headerlink" title="3、分布式操作系统"></a>3、分布式操作系统</h3><p>​        表面上看，分布式系统与计算机网络系统没有多大区别。分布式操作系统也是通过通信网络，将地理上分散的具有自治功能的数据处理系统或计算机系统互连起来，实现信息交换和资源共享，协作完成任务。——硬件连接相同。</p>
+<p>　　但有如下一些明显的区别：</p>
+<p>　　（1）分布式系统要求一个统一的操作系统，实现系统操作的统一性。</p>
+<p>　　（2）分布式操作系统管理分布式系统中的所有资源，它负责全系统的资源分配和调度、任务划分、信息传输和控制协调工作，并为用户提供一个统一的界面。</p>
+<p>　　（3）用户通过这一界面，实现所需要的操作和使用系统资源，至于操作定在哪一台计算机上执行，或使用哪台计算机的资源，则是操作系统完成的，用户不必知道，此谓：系统的透明性。</p>
+<p>　　（4）分布式系统更强调分布式计算和处理，因此对于多机合作和系统重构、坚强性和容错能力有更高的要求，希望系统有：更短的响应时间、高吞吐量和高可靠性。</p>
+<h2 id="八、操作系统的作用"><a href="#八、操作系统的作用" class="headerlink" title="八、操作系统的作用"></a>八、操作系统的作用</h2><p>​        现代的计算机系统主要是由一个或者多个处理器，主存，硬盘，键盘，鼠标，显示器，打印机，网络接口及其他输入输出设备组成。</p>
+<p>　　一般而言，现代计算机系统是一个复杂的系统。</p>
+<p>　　其一：如果每位应用程序员都必须掌握该系统所有的细节，那就不可能再编写代码了（严重影响了程序员的开发效率：全部掌握这些细节可能需要一万年….）</p>
+<p>　　其二：并且管理这些部件并加以优化使用，是一件极富挑战性的工作，于是，计算安装了一层软件（系统软件），称为操作系统。它的任务就是为用户程序提供一个更好、更简单、更清晰的计算机模型，并管理刚才提到的所有设备。</p>
+<p>　　<strong>总结：</strong></p>
+<p>　　<strong>程序员无法把所有的硬件操作细节都了解到，管理这些硬件并且加以优化使用是非常繁琐的工作，这个繁琐的工作就是操作系统来干的，有了他，程序员就从这些繁琐的工作中解脱了出来，只需要考虑自己的应用软件的编写就可以了，应用软件直接使用操作系统提供的功能来间接使用硬件。</strong></p>
+<p>　　<strong>精简的说的话，操作系统就是一个协调、管理和控制计算机硬件资源和软件资源的控制程序。操作系统所处的位置如图</strong></p>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/python%E5%85%A8%E6%A0%88/%E7%AC%AC02%E9%83%A8%E5%88%86%EF%BC%9A%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2B%E6%95%B0%E6%8D%AE%E5%BA%93%2B%E5%89%8D%E7%AB%AF/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/09.png" alt></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">细说的话，操作系统应该分成两部分功能：</span><br><span class="line">#一：隐藏了丑陋的硬件调用接口，为应用程序员提供调用硬件资源的更好，更简单，更清晰的模型（系统调用接口）。应用程序员有了这些接口后，就不用再考虑操作硬件的细节，专心开发自己的应用程序即可。</span><br><span class="line">例如：操作系统提供了文件这个抽象概念，对文件的操作就是对磁盘的操作，有了文件我们无需再去考虑关于磁盘的读写控制（比如控制磁盘转动，移动磁头读写数据等细节），</span><br><span class="line"></span><br><span class="line">#二：将应用程序对硬件资源的竞态请求变得有序化</span><br><span class="line">例如：很多应用软件其实是共享一套计算机硬件，比方说有可能有三个应用程序同时需要申请打印机来输出内容，那么a程序竞争到了打印机资源就打印，然后可能是b竞争到打印机资源，也可能是c，这就导致了无序，打印机可能打印一段a的内容然后又去打印c...,操作系统的一个功能就是将这种无序变得有序。</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/并发编程/" rel="tag"># 并发编程</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/29/python全栈/第01部分：基础+模块+面向对象+网络编程/网络编程/计算机网络/" rel="next" title="计算机网络">
+                <i class="fa fa-chevron-left"></i> 计算机网络
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/03/python全栈/第02部分：并发编程+数据库+前端/并发编程/进程（一）/" rel="prev" title="进程（一）">
+                进程（一） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="John Doe">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://suliangxu.github.io" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:1193135584@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、手工操作——穿孔卡片"><span class="nav-text">一、手工操作——穿孔卡片</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、批处理——磁带存储"><span class="nav-text">二、批处理——磁带存储</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、联机批处理系统"><span class="nav-text">1、联机批处理系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、脱机批处理系统"><span class="nav-text">2、脱机批处理系统</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、多道程序系统"><span class="nav-text">三、多道程序系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、多道程序设计技术"><span class="nav-text">1、多道程序设计技术</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、多道批处理系统"><span class="nav-text">2、多道批处理系统</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、分时系统"><span class="nav-text">四、分时系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、实时系统"><span class="nav-text">五、实时系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六、通用操作系统"><span class="nav-text">六、通用操作系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#七、操作系统的进一步发展"><span class="nav-text">七、操作系统的进一步发展</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、个人计算机操作系统"><span class="nav-text">1、个人计算机操作系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、网络操作系统"><span class="nav-text">2、网络操作系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、分布式操作系统"><span class="nav-text">3、分布式操作系统</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#八、操作系统的作用"><span class="nav-text">八、操作系统的作用</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

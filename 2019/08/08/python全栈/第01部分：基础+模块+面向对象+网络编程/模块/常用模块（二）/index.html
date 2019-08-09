@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="模块,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="（三）常用模块（二）一、hashlib模块1、算法介绍​        Python的hashlib提供了常见的摘要算法，如MD5，SHA1等等。 ​        什么是摘要算法呢？摘要算法又称哈希算法、散列算法。它通过一个函数，把任意长度的数据转换为一个长度固定的数据串（通常用16进制的字符串表示）。 ​        摘要算法就是通过摘要函数f()对任意长度的数据data计算出固定长度的摘要">
+<meta name="keywords" content="模块">
+<meta property="og:type" content="article">
+<meta property="og:title" content="常用模块（二）">
+<meta property="og:url" content="http://yoursite.com/2019/08/08/python全栈/第01部分：基础+模块+面向对象+网络编程/模块/常用模块（二）/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="（三）常用模块（二）一、hashlib模块1、算法介绍​        Python的hashlib提供了常见的摘要算法，如MD5，SHA1等等。 ​        什么是摘要算法呢？摘要算法又称哈希算法、散列算法。它通过一个函数，把任意长度的数据转换为一个长度固定的数据串（通常用16进制的字符串表示）。 ​        摘要算法就是通过摘要函数f()对任意长度的数据data计算出固定长度的摘要">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-08-09T11:45:36.722Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="常用模块（二）">
+<meta name="twitter:description" content="（三）常用模块（二）一、hashlib模块1、算法介绍​        Python的hashlib提供了常见的摘要算法，如MD5，SHA1等等。 ​        什么是摘要算法呢？摘要算法又称哈希算法、散列算法。它通过一个函数，把任意长度的数据转换为一个长度固定的数据串（通常用16进制的字符串表示）。 ​        摘要算法就是通过摘要函数f()对任意长度的数据data计算出固定长度的摘要">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/08/08/python全栈/第01部分：基础+模块+面向对象+网络编程/模块/常用模块（二）/">
+
+
+
+
+
+  <title>常用模块（二） | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/08/python全栈/第01部分：基础+模块+面向对象+网络编程/模块/常用模块（二）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">常用模块（二）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-08T18:11:31+08:00">
+                2019-08-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python全栈-01部分-模块和包/" itemprop="url" rel="index">
+                    <span itemprop="name">python全栈 -01部分 -模块和包</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="（三）常用模块（二）"><a href="#（三）常用模块（二）" class="headerlink" title="（三）常用模块（二）"></a>（三）常用模块（二）</h2><h3 id="一、hashlib模块"><a href="#一、hashlib模块" class="headerlink" title="一、hashlib模块"></a>一、hashlib模块</h3><h4 id="1、算法介绍"><a href="#1、算法介绍" class="headerlink" title="1、算法介绍"></a>1、算法介绍</h4><p>​        Python的hashlib提供了常见的摘要算法，如MD5，SHA1等等。</p>
+<p>​        什么是摘要算法呢？摘要算法又称哈希算法、散列算法。它通过一个函数，把任意长度的数据转换为一个长度固定的数据串（通常用16进制的字符串表示）。</p>
+<p>​        摘要算法就是通过摘要函数f()对任意长度的数据data计算出固定长度的摘要digest，目的是为了发现原始数据是否被人篡改过。</p>
+<p>​        摘要算法之所以能指出数据是否被篡改过，就是因为摘要函数是一个单向函数，计算f(data)很容易，但通过digest反推data却非常困难。而且，对原始数据做一个bit的修改，都会导致计算出的摘要完全不同。</p>
+<p>我们以常见的摘要算法MD5为例，计算出一个字符串的MD5值：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"> </span><br><span class="line">md5 = hashlib.md5()</span><br><span class="line">md5.update(<span class="string">'how to use md5 in python hashlib?'</span>)</span><br><span class="line"><span class="keyword">print</span> md5.hexdigest()</span><br><span class="line"></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">计算结果如下：</span></span><br><span class="line"><span class="string">d26a53750bc40b38b65a520292f69306</span></span><br><span class="line"><span class="string">'''</span></span><br></pre></td></tr></table></figure>
+
+<p>如果数据量很大，可以分块多次调用update()，最后计算的结果是一样的：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">md5 = hashlib.md5()</span><br><span class="line">md5.update(<span class="string">'how to use md5 in '</span>)</span><br><span class="line">md5.update(<span class="string">'python hashlib?'</span>)</span><br><span class="line"><span class="keyword">print</span> md5.hexdigest()</span><br></pre></td></tr></table></figure>
+
+<p>MD5是最常见的摘要算法，速度很快，生成结果是固定的128 bit字节，通常用一个32位的16进制字符串表示。另一种常见的摘要算法是SHA1，调用SHA1和调用MD5完全类似：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"> </span><br><span class="line">sha1 = hashlib.sha1()</span><br><span class="line">sha1.update(<span class="string">'how to use sha1 in '</span>)</span><br><span class="line">sha1.update(<span class="string">'python hashlib?'</span>)</span><br><span class="line"><span class="keyword">print</span> sha1.hexdigest()</span><br></pre></td></tr></table></figure>
+
+<p>SHA1的结果是160 bit字节，通常用一个40位的16进制字符串表示。比SHA1更安全的算法是SHA256和SHA512，不过越安全的算法越慢，而且摘要长度更长。</p>
+<h4 id="2、摘要算法应用"><a href="#2、摘要算法应用" class="headerlink" title="2、摘要算法应用"></a>2、摘要算法应用</h4><p>任何允许用户登录的网站都会存储用户登录的用户名和口令。如何存储用户名和口令呢？方法是存到数据库表中：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">name    | password</span><br><span class="line">--------+----------</span><br><span class="line">michael | 123456</span><br><span class="line">bob     | abc999</span><br><span class="line">alice   | alice2008</span><br></pre></td></tr></table></figure>
+
+<p>​        如果以明文保存用户口令，如果数据库泄露，所有用户的口令就落入黑客的手里。此外，网站运维人员是可以访问数据库的，也就是能获取到所有用户的口令。正确的保存口令的方式是不存储用户的明文口令，而是存储用户口令的摘要，比如MD5：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">username | password</span><br><span class="line">---------+---------------------------------</span><br><span class="line">michael  | e10adc3949ba59abbe56e057f20f883e</span><br><span class="line">bob      | 878ef96e86145580c38c87f0410ad153</span><br><span class="line">alice    | 99b1c2188db85afee403b1536010c2c9</span><br></pre></td></tr></table></figure>
+
+<p>​        考虑这么个情况，很多用户喜欢用123456，888888，password这些简单的口令，于是，黑客可以事先计算出这些常用口令的MD5值，得到一个反推表：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'e10adc3949ba59abbe56e057f20f883e'</span>: <span class="string">'123456'</span></span><br><span class="line"><span class="string">'21218cca77804d2ba1922c33e0151105'</span>: <span class="string">'888888'</span></span><br><span class="line"><span class="string">'5f4dcc3b5aa765d61d8327deb882cf99'</span>: <span class="string">'password'</span></span><br></pre></td></tr></table></figure>
+
+<p>​        这样，无需破解，只需要对比数据库的MD5，黑客就获得了使用常用口令的用户账号。</p>
+<p>​        对于用户来讲，当然不要使用过于简单的口令。但是，我们能否在程序设计上对简单口令加强保护呢？</p>
+<p>​        由于常用口令的MD5值很容易被计算出来，所以，要确保存储的用户口令不是那些已经被计算出来的常用口令的MD5，这一方法通过对原始口令加一个复杂字符串来实现，俗称“加盐”：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hashlib.md5(<span class="string">"salt"</span>.encode(<span class="string">"utf8"</span>))</span><br></pre></td></tr></table></figure>
+
+<p>​        经过Salt处理的MD5口令，只要Salt不被黑客知道，即使用户输入简单口令，也很难通过MD5反推明文口令。</p>
+<p>​        但是如果有两个用户都使用了相同的简单口令比如123456，在数据库中，将存储两条相同的MD5值，这说明这两个用户的口令是一样的。有没有办法让使用相同口令的用户存储不同的MD5呢？</p>
+<p>​        如果假定用户无法修改登录名，就可以通过把登录名作为Salt的一部分来计算MD5，从而实现相同口令的用户也存储不同的MD5。</p>
+<p>​        摘要算法在很多地方都有广泛的应用。要注意摘要算法不是加密算法，不能用于加密（因为无法通过摘要反推明文），只能用于防篡改，但是它的单向计算特性决定了可以在不存储明文口令的情况下验证用户口令。</p>
+<h3 id="二、configparser模块"><a href="#二、configparser模块" class="headerlink" title="二、configparser模块"></a>二、configparser模块</h3><p>​        该模块适用于配置文件的格式与windows ini文件类似，可以包含一个或多个节（section），每个节可以有多个参数（键=值）。</p>
+<h4 id="1、创建文件"><a href="#1、创建文件" class="headerlink" title="1、创建文件"></a>1、创建文件</h4><p><strong>来看一个好多软件的常见文档格式如下：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[DEFAULT]</span><br><span class="line">ServerAliveInterval = <span class="number">45</span></span><br><span class="line">Compression = yes</span><br><span class="line">CompressionLevel = <span class="number">9</span></span><br><span class="line">ForwardX11 = yes</span><br><span class="line">  </span><br><span class="line">[bitbucket.org]</span><br><span class="line">User = hg</span><br><span class="line">  </span><br><span class="line">[topsecret.server.com]</span><br><span class="line">Port = <span class="number">50022</span></span><br><span class="line">ForwardX11 = no</span><br></pre></td></tr></table></figure>
+
+<p>如果想用python生成一个这样的文档怎么做呢？</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> configparser</span><br><span class="line"></span><br><span class="line">config = configparser.ConfigParser()</span><br><span class="line"></span><br><span class="line">config[<span class="string">"DEFAULT"</span>] = &#123;<span class="string">'ServerAliveInterval'</span>: <span class="string">'45'</span>,</span><br><span class="line">                      <span class="string">'Compression'</span>: <span class="string">'yes'</span>,</span><br><span class="line">                     <span class="string">'CompressionLevel'</span>: <span class="string">'9'</span>,</span><br><span class="line">                     <span class="string">'ForwardX11'</span>:<span class="string">'yes'</span></span><br><span class="line">                     &#125;</span><br><span class="line"></span><br><span class="line">config[<span class="string">'bitbucket.org'</span>] = &#123;<span class="string">'User'</span>:<span class="string">'hg'</span>&#125;</span><br><span class="line"></span><br><span class="line">config[<span class="string">'topsecret.server.com'</span>] = &#123;<span class="string">'Host Port'</span>:<span class="string">'50022'</span>,<span class="string">'ForwardX11'</span>:<span class="string">'no'</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'example.ini'</span>, <span class="string">'w'</span>) <span class="keyword">as</span> configfile:</span><br><span class="line"></span><br><span class="line">   config.write(configfile)</span><br></pre></td></tr></table></figure>
+
+<h4 id="2、查找文件"><a href="#2、查找文件" class="headerlink" title="2、查找文件"></a>2、查找文件</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> configparser</span><br><span class="line"></span><br><span class="line">config = configparser.ConfigParser()</span><br><span class="line"></span><br><span class="line"><span class="comment">#---------------------------查找文件内容,基于字典的形式</span></span><br><span class="line"></span><br><span class="line">print(config.sections())        <span class="comment">#  []</span></span><br><span class="line"></span><br><span class="line">config.read(<span class="string">'example.ini'</span>)</span><br><span class="line"></span><br><span class="line">print(config.sections())        <span class="comment">#   ['bitbucket.org', 'topsecret.server.com']</span></span><br><span class="line"></span><br><span class="line">print(<span class="string">'bytebong.com'</span> <span class="keyword">in</span> config) <span class="comment"># False</span></span><br><span class="line">print(<span class="string">'bitbucket.org'</span> <span class="keyword">in</span> config) <span class="comment"># True</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">print(config[<span class="string">'bitbucket.org'</span>][<span class="string">"user"</span>])  <span class="comment"># hg</span></span><br><span class="line"></span><br><span class="line">print(config[<span class="string">'DEFAULT'</span>][<span class="string">'Compression'</span>]) <span class="comment">#yes</span></span><br><span class="line"></span><br><span class="line">print(config[<span class="string">'topsecret.server.com'</span>][<span class="string">'ForwardX11'</span>])  <span class="comment">#no</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">print(config[<span class="string">'bitbucket.org'</span>])          <span class="comment">#&lt;Section: bitbucket.org&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> key <span class="keyword">in</span> config[<span class="string">'bitbucket.org'</span>]:     <span class="comment"># 注意,有default会默认default的键</span></span><br><span class="line">    print(key)</span><br><span class="line"></span><br><span class="line">print(config.options(<span class="string">'bitbucket.org'</span>))  <span class="comment"># 同for循环,找到'bitbucket.org'下所有键</span></span><br><span class="line"></span><br><span class="line">print(config.items(<span class="string">'bitbucket.org'</span>))    <span class="comment">#找到'bitbucket.org'下所有键值对</span></span><br><span class="line"></span><br><span class="line">print(config.get(<span class="string">'bitbucket.org'</span>,<span class="string">'compression'</span>)) <span class="comment"># yes       get方法Section下的key对应的value</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="3、增删改操作"><a href="#3、增删改操作" class="headerlink" title="3、增删改操作"></a>3、增删改操作</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> configparser</span><br><span class="line"></span><br><span class="line">config = configparser.ConfigParser()</span><br><span class="line"></span><br><span class="line">config.read(<span class="string">'example.ini'</span>)</span><br><span class="line"></span><br><span class="line">config.add_section(<span class="string">'yuan'</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">config.remove_section(<span class="string">'bitbucket.org'</span>)</span><br><span class="line">config.remove_option(<span class="string">'topsecret.server.com'</span>,<span class="string">"forwardx11"</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">config.set(<span class="string">'topsecret.server.com'</span>,<span class="string">'k1'</span>,<span class="string">'11111'</span>)</span><br><span class="line">config.set(<span class="string">'yuan'</span>,<span class="string">'k2'</span>,<span class="string">'22222'</span>)</span><br><span class="line"></span><br><span class="line">config.write(open(<span class="string">'new2.ini'</span>, <span class="string">"w"</span>))</span><br></pre></td></tr></table></figure>
+
+<h3 id="三、logging模块"><a href="#三、logging模块" class="headerlink" title="三、logging模块"></a>三、logging模块</h3><h4 id="1、函数式简单配置"><a href="#1、函数式简单配置" class="headerlink" title="1、函数式简单配置"></a>1、函数式简单配置</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> logging  </span><br><span class="line">logging.debug(<span class="string">'debug message'</span>)  </span><br><span class="line">logging.info(<span class="string">'info message'</span>)  </span><br><span class="line">logging.warning(<span class="string">'warning message'</span>)  </span><br><span class="line">logging.error(<span class="string">'error message'</span>)  </span><br><span class="line">logging.critical(<span class="string">'critical message'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>默认情况下Python的logging模块将日志打印到了标准输出中，且只显示了大于等于WARNING级别的日志，这说明默认的日志级别设置为WARNING（日志级别等级CRITICAL &gt; ERROR &gt; WARNING &gt; INFO &gt; DEBUG），默认的日志格式为日志级别：Logger名称：用户输出消息。</p>
+<p><strong>灵活配置日志级别，日志格式，输出位置:</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> logging</span><br><span class="line"></span><br><span class="line">file_handler = logging.FileHandler(filename=<span class="string">'x1.log'</span>, mode=<span class="string">'a'</span>, encoding=<span class="string">'utf-8'</span>,)</span><br><span class="line">logging.basicConfig(</span><br><span class="line">    format=<span class="string">'%(asctime)s - %(name)s - %(levelname)s -%(module)s:  %(message)s'</span>,</span><br><span class="line">    datefmt=<span class="string">'%Y-%m-%d %H:%M:%S %p'</span>,</span><br><span class="line">    handlers=[file_handler,],</span><br><span class="line">    level=logging.ERROR</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">logging.error(<span class="string">'你好'</span>)</span><br></pre></td></tr></table></figure>
+
+<p><strong>日志切割</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> logging</span><br><span class="line"><span class="keyword">from</span> logging <span class="keyword">import</span> handlers</span><br><span class="line"></span><br><span class="line">sh = logging.StreamHandler()</span><br><span class="line">rh = handlers.RotatingFileHandler(<span class="string">'myapp.log'</span>, maxBytes=<span class="number">1024</span>,backupCount=<span class="number">5</span>)</span><br><span class="line">fh = handlers.TimedRotatingFileHandler(filename=<span class="string">'x2.log'</span>, when=<span class="string">'s'</span>, interval=<span class="number">5</span>, encoding=<span class="string">'utf-8'</span>)</span><br><span class="line">logging.basicConfig(</span><br><span class="line">    format=<span class="string">'%(asctime)s - %(name)s - %(levelname)s -%(module)s:  %(message)s'</span>,</span><br><span class="line">    datefmt=<span class="string">'%Y-%m-%d %H:%M:%S %p'</span>,</span><br><span class="line">    handlers=[fh,sh,rh],</span><br><span class="line">    level=logging.ERROR</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">100000</span>):</span><br><span class="line">    time.sleep(<span class="number">1</span>)</span><br><span class="line">    logging.error(<span class="string">'KeyboardInterrupt error %s'</span>%str(i))</span><br></pre></td></tr></table></figure>
+
+<p><strong>配置参数</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">logging.basicConfig()函数中可通过具体参数来更改logging模块默认行为，可用参数有：</span><br><span class="line"></span><br><span class="line">filename：用指定的文件名创建FiledHandler，这样日志会被存储在指定的文件中。</span><br><span class="line">filemode：文件打开方式，在指定了filename时使用这个参数，默认值为“a”还可指定为“w”。</span><br><span class="line">format：指定handler使用的日志显示格式。</span><br><span class="line">datefmt：指定日期时间格式。</span><br><span class="line">level：设置rootlogger（后边会讲解具体概念）的日志级别</span><br><span class="line">stream：用指定的stream创建StreamHandler。可以指定输出到sys.stderr,sys.stdout或者文件(f=open(‘test.log’,’w’))，默认为sys.stderr。若同时列出了filename和stream两个参数，则stream参数会被忽略。</span><br><span class="line"></span><br><span class="line">format参数中可能用到的格式化串：</span><br><span class="line">%(name)s Logger的名字</span><br><span class="line">%(levelno)s 数字形式的日志级别</span><br><span class="line">%(levelname)s 文本形式的日志级别</span><br><span class="line">%(pathname)s 调用日志输出函数的模块的完整路径名，可能没有</span><br><span class="line">%(filename)s 调用日志输出函数的模块的文件名</span><br><span class="line">%(module)s 调用日志输出函数的模块名</span><br><span class="line">%(funcName)s 调用日志输出函数的函数名</span><br><span class="line">%(lineno)d 调用日志输出函数的语句所在的代码行</span><br><span class="line">%(created)f 当前时间，用UNIX标准的表示时间的浮 点数表示</span><br><span class="line">%(relativeCreated)d 输出日志信息时的，自Logger创建以 来的毫秒数</span><br><span class="line">%(asctime)s 字符串形式的当前时间。默认格式是 “<span class="number">2003</span><span class="number">-07</span><span class="number">-08</span> <span class="number">16</span>:<span class="number">49</span>:<span class="number">45</span>,<span class="number">896</span>”。逗号后面的是毫秒</span><br><span class="line">%(thread)d 线程ID。可能没有</span><br><span class="line">%(threadName)s 线程名。可能没有</span><br><span class="line">%(process)d 进程ID。可能没有</span><br><span class="line">%(message)s用户输出的消息</span><br></pre></td></tr></table></figure>
+
+<h4 id="2、logger对象配置"><a href="#2、logger对象配置" class="headerlink" title="2、logger对象配置"></a>2、logger对象配置</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> logging</span><br><span class="line"></span><br><span class="line">logger = logging.getLogger()</span><br><span class="line"><span class="comment"># 创建一个handler，用于写入日志文件</span></span><br><span class="line">fh = logging.FileHandler(<span class="string">'test.log'</span>,encoding=<span class="string">'utf-8'</span>) </span><br><span class="line"></span><br><span class="line"><span class="comment"># 再创建一个handler，用于输出到控制台 </span></span><br><span class="line">ch = logging.StreamHandler() </span><br><span class="line">formatter = logging.Formatter(<span class="string">'%(asctime)s - %(name)s - %(levelname)s - %(message)s'</span>)</span><br><span class="line"></span><br><span class="line">fh.setLevel(logging.DEBUG)</span><br><span class="line"></span><br><span class="line">fh.setFormatter(formatter) </span><br><span class="line">ch.setFormatter(formatter) </span><br><span class="line">logger.addHandler(fh) <span class="comment">#logger对象可以添加多个fh和ch对象 </span></span><br><span class="line">logger.addHandler(ch) </span><br><span class="line"></span><br><span class="line">logger.debug(<span class="string">'logger debug message'</span>) </span><br><span class="line">logger.info(<span class="string">'logger info message'</span>) </span><br><span class="line">logger.warning(<span class="string">'logger warning message'</span>) </span><br><span class="line">logger.error(<span class="string">'logger error message'</span>) </span><br><span class="line">logger.critical(<span class="string">'logger critical message'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>​        logging库提供了多个组件：Logger、Handler、Filter、Formatter。Logger对象提供应用程序可直接使用的接口，Handler发送日志到适当的目的地，Filter提供了过滤日志信息的方法，Formatter指定日志显示格式。另外，可以通过：</p>
+<p>logger.setLevel(logging.Debug)设置级别,</p>
+<p>当然，也可以通过</p>
+<p>fh.setLevel(logging.Debug)单对文件流设置某个级别。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/模块/" rel="tag"># 模块</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/08/python全栈/第02部分：并发编程+数据库+前端/并发编程/线程（二）/" rel="next" title="线程（二）">
+                <i class="fa fa-chevron-left"></i> 线程（二）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/09/python全栈/第01部分：基础+模块+面向对象+网络编程/模块/模块和包/" rel="prev" title="模块和包">
+                模块和包 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="John Doe">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://suliangxu.github.io" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:1193135584@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#（三）常用模块（二）"><span class="nav-text">（三）常用模块（二）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、hashlib模块"><span class="nav-text">一、hashlib模块</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、算法介绍"><span class="nav-text">1、算法介绍</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、摘要算法应用"><span class="nav-text">2、摘要算法应用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、configparser模块"><span class="nav-text">二、configparser模块</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、创建文件"><span class="nav-text">1、创建文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、查找文件"><span class="nav-text">2、查找文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、增删改操作"><span class="nav-text">3、增删改操作</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、logging模块"><span class="nav-text">三、logging模块</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、函数式简单配置"><span class="nav-text">1、函数式简单配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、logger对象配置"><span class="nav-text">2、logger对象配置</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
