@@ -87,10 +87,15 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="3.1    Numpy 和 Scipy 模块首先研究 Numpy 和 Scipy 的官方文档。 Numpy  英文文档：https://www.numpy.org/devdocs/user/index.html Numpy  中文文档：https://www.numpy.org.cn/article/basics/index.html Scipy  英文文档：https://docs.scipy">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-08-11T07:57:01.386Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/python%20Data%20Analysis/%E7%AC%AC%E4%B8%89%E7%AB%A0%20%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B8%8E%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/python%20Data%20Analysis/%E7%AC%AC%E4%B8%89%E7%AB%A0%20%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B8%8E%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/2.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/python%20Data%20Analysis/%E7%AC%AC%E4%B8%89%E7%AB%A0%20%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B8%8E%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/3.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/python%20Data%20Analysis/%E7%AC%AC%E4%B8%89%E7%AB%A0%20%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B8%8E%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/4.png">
+<meta property="og:updated_time" content="2019-08-11T08:21:37.095Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="第三章：统计学与线性代数">
 <meta name="twitter:description" content="3.1    Numpy 和 Scipy 模块首先研究 Numpy 和 Scipy 的官方文档。 Numpy  英文文档：https://www.numpy.org/devdocs/user/index.html Numpy  中文文档：https://www.numpy.org.cn/article/basics/index.html Scipy  英文文档：https://docs.scipy">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/python%20Data%20Analysis/%E7%AC%AC%E4%B8%89%E7%AB%A0%20%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B8%8E%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/1.png">
 
 
 
@@ -568,7 +573,7 @@
 <li><p>用matplotlib绘出cash数组的图像</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">plot(np.arange(len(cash)), cash)</span><br><span class="line">show()</span><br></pre></td></tr></table></figure>
 
-<p>![1](/Users/hhh/Desktop/python/MyHexoPicture/python Data Analysis/第三章 统计学与线性代数/1.png)</p>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/python%20Data%20Analysis/%E7%AC%AC%E4%B8%89%E7%AB%A0%20%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B8%8E%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/1.png" alt="1"></p>
 </li>
 </ol>
 <h4 id="3-5-2-正态分布采样"><a href="#3-5-2-正态分布采样" class="headerlink" title="3.5.2    正态分布采样"></a>3.5.2    正态分布采样</h4><p>​        连续分布是通过 <strong>概率密度函数</strong>（pdf）进行建模的，在特定区间发生某件事情的可能性，可以通过概率密度函数的积分运算求出。</p>
@@ -598,7 +603,7 @@
 <ol start="3">
 <li>下图展示了钟形曲线</li>
 </ol>
-<p>![2](/Users/hhh/Desktop/python/MyHexoPicture/python Data Analysis/第三章 统计学与线性代数/2.png)</p>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/python%20Data%20Analysis/%E7%AC%AC%E4%B8%89%E7%AB%A0%20%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B8%8E%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/2.png" alt="2"></p>
 <h4 id="3-5-3-用SciPy进行正态检验"><a href="#3-5-3-用SciPy进行正态检验" class="headerlink" title="3.5.3    用SciPy进行正态检验"></a>3.5.3    用SciPy进行正态检验</h4><p>​        正态分布被广泛用于科学和统计学领域，按照中心极限定理，随着独立观测的随机样本数量的增加，他们会趋向呈正态分布，正态分布的特征已经为大家所熟知，并且它还非常便于使用。</p>
 <p>​        不过，它需要满足许多必要条件，如数据点的数量要足够大，并且还要求这些数据点必须是相互独立的。工作中，我们需要养成检查数据是否符合正态分布的好习惯，正态检验的方法有很多，其中一些在 <strong>SciPy.stats</strong> 程序包中实现了。本节将用到的检验方法将用到这些检验方法，这里的样本是取自的流感趋势数据。</p>
 <p>​        <a href="https://github.com/suliangxu/MyHexoPicture/blob/master/python%20Data%20Analysis/第三章%20统计学与线性代数/goog_flutrends.csv" target="_blank" rel="noopener">获取数据文件</a></p>
@@ -627,7 +632,7 @@
 <p>​        因为这里处理的是p值的概率，所以它越大越好，最好接近1。对于这种用零填充的数组，会得到很奇怪的结果。不过，由于我们已经得到提示，所以对于这个特殊数组来说，结果是不可信的。此外，如果p值大于等于0.5，则认为它具有正态性。对于金标准数组。我们会得到一个更小的数值，这说明我们需要进行更多的观察。</p>
 <h3 id="3-6-创建掩码式NumPy数组"><a href="#3-6-创建掩码式NumPy数组" class="headerlink" title="3.6    创建掩码式NumPy数组"></a>3.6    创建掩码式NumPy数组</h3><p>​        数据常常是凌乱的，并且还有空白项或者无法处理的字符，<strong>好在掩码式数组数组可以忽略残缺的或无效的数据点</strong> 。numpy.ma 子程序包提供的掩码式数组隶属于ndarray，带有一个掩码。</p>
 <p>​        本节以Lena相片为数据源，并假设某些数据已被破坏，下面是处理掩码式数组的完整代码：</p>
-<p><a href>Mac处理matplotlib的中文显示问题</a></p>
+<p><a href="https://suliangxu.github.io/2019/08/11/随笔/Mac处理matplotlib的中文显示问题/" target="_blank" rel="noopener">Mac处理matplotlib的中文显示问题</a></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy</span><br><span class="line"><span class="keyword">import</span> scipy.misc</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">plt.rcParams[<span class="string">"font.family"</span>] = <span class="string">'Arial Unicode MS'</span></span><br><span class="line"></span><br><span class="line">lena = scipy.misc.ascent()</span><br><span class="line">random_mask = numpy.random.randint(<span class="number">0</span>, <span class="number">2</span>, size=lena.shape)</span><br><span class="line"></span><br><span class="line">plt.subplot(<span class="number">221</span>)</span><br><span class="line">plt.title(<span class="string">"原图"</span>)</span><br><span class="line">plt.imshow(lena)</span><br><span class="line">plt.axis(<span class="string">'off'</span>)</span><br><span class="line"></span><br><span class="line">masked_array = numpy.ma.array(lena, mask=random_mask)</span><br><span class="line"><span class="keyword">print</span> (masked_array)</span><br><span class="line"></span><br><span class="line">plt.subplot(<span class="number">222</span>)</span><br><span class="line">plt.title(<span class="string">"掩码处理过的原图"</span>)</span><br><span class="line">plt.imshow(masked_array)</span><br><span class="line">plt.axis(<span class="string">'off'</span>)</span><br><span class="line"></span><br><span class="line">plt.subplot(<span class="number">223</span>)</span><br><span class="line">plt.title(<span class="string">"对数图"</span>)</span><br><span class="line">plt.imshow(numpy.log(lena))</span><br><span class="line">plt.axis(<span class="string">'off'</span>)</span><br><span class="line"></span><br><span class="line">plt.subplot(<span class="number">224</span>)</span><br><span class="line">plt.title(<span class="string">"掩码处理过的对数图"</span>)</span><br><span class="line">plt.imshow(numpy.log(masked_array))</span><br><span class="line">plt.axis(<span class="string">'off'</span>)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
 
 <ol>
@@ -650,7 +655,7 @@
 </ol>
 <ol start="3">
 <li><p>得到如图：</p>
-<p>![3](/Users/hhh/Desktop/python/MyHexoPicture/python Data Analysis/第三章 统计学与线性代数/3.png)</p>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/python%20Data%20Analysis/%E7%AC%AC%E4%B8%89%E7%AB%A0%20%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B8%8E%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/3.png" alt="3"></p>
 </li>
 </ol>
 <p>我们给NumPy数组附加了一个随机掩码，这样，与该掩码相对应的数据就会被忽略不计。</p>
@@ -727,7 +732,7 @@
 </ol>
 <ol start="3">
 <li><p>下面分别绘制原始数据，取对数后的数据和取幂复原后的数据，最后，是应用基于标准差的掩码之后的数据。</p>
-<p>![4](/Users/hhh/Desktop/python/MyHexoPicture/python Data Analysis/第三章 统计学与线性代数/4.png)</p>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/python%20Data%20Analysis/%E7%AC%AC%E4%B8%89%E7%AB%A0%20%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B8%8E%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/4.png" alt="4"></p>
 </li>
 </ol>
 <p>​        numpy.ma 子程序包中的函数可以屏蔽数组中被视为无效的元素，如无法运用 log() 和sqrt() 函数的负值元素。被屏蔽的值类似于关系数据库和程序设计中的 NULL 值。对被屏蔽的值进行运算时，给它的都是一个屏蔽后的值。</p>
