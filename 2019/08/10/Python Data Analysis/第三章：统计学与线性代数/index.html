@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="NumPy,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="3.1    Numpy 和 Scipy 模块首先研究 Numpy 和 Scipy 的官方文档。 Numpy  英文文档：https://www.numpy.org/devdocs/user/index.html Numpy  中文文档：https://www.numpy.org.cn/article/basics/index.html Scipy  英文文档：https://docs.scipy">
+<meta name="keywords" content="NumPy">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第三章：统计学与线性代数">
+<meta property="og:url" content="http://yoursite.com/2019/08/10/Python Data Analysis/第三章：统计学与线性代数/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="3.1    Numpy 和 Scipy 模块首先研究 Numpy 和 Scipy 的官方文档。 Numpy  英文文档：https://www.numpy.org/devdocs/user/index.html Numpy  中文文档：https://www.numpy.org.cn/article/basics/index.html Scipy  英文文档：https://docs.scipy">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-08-11T07:57:01.386Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="第三章：统计学与线性代数">
+<meta name="twitter:description" content="3.1    Numpy 和 Scipy 模块首先研究 Numpy 和 Scipy 的官方文档。 Numpy  英文文档：https://www.numpy.org/devdocs/user/index.html Numpy  中文文档：https://www.numpy.org.cn/article/basics/index.html Scipy  英文文档：https://docs.scipy">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/08/10/Python Data Analysis/第三章：统计学与线性代数/">
+
+
+
+
+
+  <title>第三章：统计学与线性代数 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/10/Python Data Analysis/第三章：统计学与线性代数/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">第三章：统计学与线性代数</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-10T22:01:58+08:00">
+                2019-08-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python-Data-Analysis/" itemprop="url" rel="index">
+                    <span itemprop="name">Python Data Analysis</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="3-1-Numpy-和-Scipy-模块"><a href="#3-1-Numpy-和-Scipy-模块" class="headerlink" title="3.1    Numpy 和 Scipy 模块"></a>3.1    Numpy 和 Scipy 模块</h3><p>首先研究 Numpy 和 Scipy 的官方文档。</p>
+<p>Numpy  英文文档：<a href="https://www.numpy.org/devdocs/user/index.html" target="_blank" rel="noopener">https://www.numpy.org/devdocs/user/index.html</a></p>
+<p>Numpy  中文文档：<a href="https://www.numpy.org.cn/article/basics/index.html" target="_blank" rel="noopener">https://www.numpy.org.cn/article/basics/index.html</a></p>
+<p>Scipy  英文文档：<a href="https://docs.scipy.org/doc/scipy/reference/" target="_blank" rel="noopener">https://docs.scipy.org/doc/scipy/reference/</a></p>
+<h3 id="3-2-用NumPy进行简单的描述性统计计算"><a href="#3-2-用NumPy进行简单的描述性统计计算" class="headerlink" title="3.2    用NumPy进行简单的描述性统计计算"></a>3.2    用NumPy进行简单的描述性统计计算</h3><p>在本章中，我们将学习如何将 <strong>逗号分隔值（Comma-Separated Value, CSV ）</strong>文件载入NumPy数组，以进行数据分析。</p>
+<p>若要加载数据，可以借助NumPy库的 <strong>loadtxt()</strong> 函数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> scipy.stats <span class="keyword">import</span> scoreatpercentile</span><br><span class="line"></span><br><span class="line">data = np.loadtxt(<span class="string">'mdrtb_2012.csv'</span>, delimiter=<span class="string">','</span>, usecols=(<span class="number">1</span>, ),</span><br><span class="line">                   skiprows=<span class="number">1</span>, unpack=<span class="literal">True</span>)</span><br><span class="line"><span class="comment"># print(data)</span></span><br><span class="line"></span><br><span class="line">print(<span class="string">"Max method"</span>, data.max())</span><br><span class="line">print(<span class="string">"Max function"</span>, np.max(data))</span><br><span class="line"></span><br><span class="line">print(<span class="string">"Min method"</span>, data.min())</span><br><span class="line">print(<span class="string">"Min function"</span>, np.min(data))</span><br><span class="line"></span><br><span class="line">print(<span class="string">"Mean method"</span>, data.mean())</span><br><span class="line">print(<span class="string">"Mean function"</span>, np.mean(data))</span><br><span class="line"></span><br><span class="line">print(<span class="string">"Std method"</span>, data.std())</span><br><span class="line">print(<span class="string">"Std function"</span>, np.std(data))</span><br><span class="line"></span><br><span class="line">print(<span class="string">"Median"</span>, np.median(data))</span><br><span class="line">print(<span class="string">"Score at percentile 50"</span>, scoreatpercentile(data, <span class="number">50</span>))</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://github.com/suliangxu/MyHexoPicture/blob/master/python%20Data%20Analysis/第三章%20统计学与线性代数/mdrtb_2012.csv" target="_blank" rel="noopener">获取文件</a></p>
+<p>这个文件中存放的是与结核病有关的数据，共有两列：国家栏和新病例百分比栏。</p>
+<p>下面来计算NumPy数组的平均值、中位数、最大值、最小值以及标准差。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">numpy.loadtxt(fname, dtype=, comments=<span class="string">'#'</span>, delimiter=<span class="literal">None</span>, converters=<span class="literal">None</span>, skiprows=<span class="number">0</span>, usecols=<span class="literal">None</span>, unpack=<span class="literal">False</span>, ndmin=<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">fname：文件名</span><br><span class="line">dtype：默认为float</span><br><span class="line">comments=<span class="string">'#'</span>：如果行的开头为<span class="string">'#'</span>就会跳过该行</span><br><span class="line">delimiter：分隔，默认为空格</span><br><span class="line">converters=&#123;<span class="number">0</span>:add_one&#125;：这个是对数据进行预处理的参数, 我们可以先定义一个函数， 这里的converters是一个字典, 表示第零列使用函数add_one来进行预处理</span><br><span class="line">skiprows：指跳过前几行</span><br><span class="line">usecols=(<span class="number">0</span>,<span class="number">2</span>)：是指只使用<span class="number">0</span>,<span class="number">2</span>两列（元组类型）</span><br><span class="line">unpack=<span class="literal">True</span>：指会把每一列当成一个向量输出, 而不是合并在一起</span><br><span class="line">ndmin：数组的维度</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><p>首先调用下面的函数来加载数据</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data = np.loadtxt(<span class="string">'mdrtb_2012.csv'</span>, delimiter=<span class="string">','</span>, usecols=(<span class="number">1</span>, ),skiprows=<span class="number">1</span>, unpack=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+<p>在上面的函数调用中，我们规定：用逗号作为分隔符，从第二列加载数据，并且忽略标题（header）。此外，我们还指定了文件名，并假设该文件位于当前目录下，否则就必须给出相应的路径。</p>
+</li>
+</ol>
+<ol start="2">
+<li><p>数组的最大值可通过 ndarray 的方法或者其他的NumPy函数来获得。另外最小值，平均值和标准差同样如此。面代码将会显示各种统计指标：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">"Max method"</span>, data.max())</span><br><span class="line">print(<span class="string">"Max function"</span>, np.max(data))</span><br><span class="line"></span><br><span class="line">print(<span class="string">"Min method"</span>, data.min())</span><br><span class="line">print(<span class="string">"Min function"</span>, np.min(data))</span><br><span class="line"></span><br><span class="line">print(<span class="string">"Mean method"</span>, data.mean())</span><br><span class="line">print(<span class="string">"Mean function"</span>, np.mean(data))</span><br><span class="line"></span><br><span class="line">print(<span class="string">"Std method"</span>, data.std())</span><br><span class="line">print(<span class="string">"Std function"</span>, np.std(data))</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<p>   输出结果如下所示：</p>
+   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Max method 50.0</span><br><span class="line">Max function 50.0</span><br><span class="line">Min method 0.0</span><br><span class="line">Min function 0.0</span><br><span class="line">Mean method 3.278703703703704</span><br><span class="line">Mean function 3.278703703703704</span><br><span class="line">Std method 5.763320736537964</span><br><span class="line">Std function 5.763320736537964</span><br></pre></td></tr></table></figure>
+
+
+
+<ol start="3">
+<li><p>中位数（median）可以用NumPy或者SciPy的函数得到。下列代码将计算数据第50百分位数：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">"Median"</span>, np.median(data))</span><br><span class="line">print(<span class="string">"Score at percentile 50"</span>, scoreatpercentile(data, <span class="number">50</span>))</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<p>   以下是输出内容：</p>
+   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Median 1.8</span><br><span class="line">Score at percentile 50 1.8</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-3-用NumPy进行线性代数运算"><a href="#3-3-用NumPy进行线性代数运算" class="headerlink" title="3.3    用NumPy进行线性代数运算"></a>3.3    用NumPy进行线性代数运算</h3><p>线性代数是数学的一个重要分支，比如，我们可以使用线性代数来解决线性回归问题。</p>
+<p>子程序包 <strong>numpy.linalg</strong> 提供了许多线性代数例程，我们可以用它来计算矩阵的逆、计算特征值、求解线性方程或计算行列式等。对于NumPy来说，矩阵可以用ndarray的一个子类来表示。</p>
+<h4 id="3-3-1-用NumPy求矩阵的逆"><a href="#3-3-1-用NumPy求矩阵的逆" class="headerlink" title="3.3.1    用NumPy求矩阵的逆"></a>3.3.1    用NumPy求矩阵的逆</h4><p>子程序包 <strong>numpy.linalg</strong> 中的 <strong>inv()</strong> 函数就是用来求矩阵的逆的。</p>
+<ol>
+<li><p>创建一个示例矩阵</p>
+<p>利用 <strong>mat()</strong> 函数创建</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">A = np.mat(<span class="string">"2 4 6;4 2 6;10 -4 18"</span>)</span><br><span class="line">print(<span class="string">"A\n"</span>, A)</span><br><span class="line"></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">A</span></span><br><span class="line"><span class="string"> [[ 2  4  6]</span></span><br><span class="line"><span class="string"> [ 4  2  6]</span></span><br><span class="line"><span class="string"> [10 -4 18]]</span></span><br><span class="line"><span class="string">'''</span></span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<ol start="2">
+<li><p>求矩阵的逆</p>
+<p>利用 <strong>inv()</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">inverse = np.linalg.inv(A)</span><br><span class="line">print(&quot;inverse of A\n&quot;, inverse)</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<p>   逆阵显示如下：</p>
+   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">inverse of A</span><br><span class="line"> [[-0.41666667  0.66666667 -0.08333333]</span><br><span class="line"> [ 0.08333333  0.16666667 -0.08333333]</span><br><span class="line"> [ 0.25       -0.33333333  0.08333333]]</span><br></pre></td></tr></table></figure>
+
+
+
+   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">注：</span><br><span class="line">	如果该矩阵是奇异的，或者非方阵，那么就会得到 LinAlgError 消息。</span><br><span class="line">	NumPy 库中的 pinv() 函数可以用来求伪逆矩阵，它适用于任意矩阵，包括非方阵。</span><br></pre></td></tr></table></figure>
+
+
+
+<ol start="3">
+<li><p>利用乘法进行验算</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">"Check\n"</span>, A * inverse)</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<p>   结果，得到了一个单位矩阵（误差忽略不计）：</p>
+   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Check</span><br><span class="line"> [[ 1.00000000e+00  1.11022302e-16 -2.77555756e-17]</span><br><span class="line"> [-2.22044605e-16  1.00000000e+00 -2.77555756e-17]</span><br><span class="line"> [-8.88178420e-16  1.22124533e-15  1.00000000e+00]]</span><br></pre></td></tr></table></figure>
+
+
+
+<p>   求逆差（减去$3\times 3$ 的单位矩阵）：</p>
+   <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">"Error\n"</span>, A * inverse - np.eye(<span class="number">3</span>))</span><br></pre></td></tr></table></figure>
+
+
+
+<p>   结果：</p>
+   <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Error</span><br><span class="line"> [[<span class="number">-1.11022302e-16</span>  <span class="number">1.11022302e-16</span> <span class="number">-2.77555756e-17</span>]</span><br><span class="line"> [<span class="number">-2.22044605e-16</span>  <span class="number">4.44089210e-16</span> <span class="number">-2.77555756e-17</span>]</span><br><span class="line"> [<span class="number">-8.88178420e-16</span>  <span class="number">1.22124533e-15</span> <span class="number">-2.22044605e-16</span>]]</span><br></pre></td></tr></table></figure>
+
+<p>整个代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">A = np.mat(<span class="string">"2 4 6;4 2 6;10 -4 18"</span>)</span><br><span class="line">print(<span class="string">"A\n"</span>, A)</span><br><span class="line"></span><br><span class="line">inverse = np.linalg.inv(A)</span><br><span class="line">print(<span class="string">"inverse of A\n"</span>, inverse)</span><br><span class="line"></span><br><span class="line">print(<span class="string">"Check\n"</span>, A * inverse)</span><br><span class="line">print(<span class="string">"Error\n"</span>, A * inverse - np.eye(<span class="number">3</span>))</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-3-2-用NumPy解线性方程组"><a href="#3-3-2-用NumPy解线性方程组" class="headerlink" title="3.3.2    用NumPy解线性方程组"></a>3.3.2    用NumPy解线性方程组</h4><p>​        矩阵可以通过线性方式把一个向量变换成另一个向量，因此从数值计算的角度看，这种操作对于一个线性方程组。</p>
+<p>​         <strong>numpy.linalg</strong> 中的 <strong>solve()</strong> 子例程可以求解类似 $Ax = b$ 这种形式的线性方程组。其中 A 是一个矩阵，b 是一维或者二维数组，而 x 是未知量。</p>
+<p>​        下面介绍如何使用 <strong>dot()</strong> 函数来计算两个浮点型数组的点积（dot product）。</p>
+<ol>
+<li><p>创建矩阵 A 和数组 b ：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">A = np.mat(<span class="string">"1 -2 1;0 2 -8;-4 5 9"</span>)</span><br><span class="line">print(<span class="string">"A\n"</span>, A)</span><br><span class="line"></span><br><span class="line">b = np.array([<span class="number">0</span>, <span class="number">8</span>, <span class="number">-9</span>])</span><br><span class="line">print(<span class="string">"b\n"</span>, b)</span><br><span class="line"></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">A</span></span><br><span class="line"><span class="string"> [[ 1 -2  1]</span></span><br><span class="line"><span class="string"> [ 0  2 -8]</span></span><br><span class="line"><span class="string"> [-4  5  9]]</span></span><br><span class="line"><span class="string"> </span></span><br><span class="line"><span class="string">b</span></span><br><span class="line"><span class="string"> [ 0  8 -9]</span></span><br><span class="line"><span class="string">'''</span></span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<ol start="2">
+<li><p>调用 <strong>solve()</strong> 函数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x = np.linalg.solve(A, b)</span><br><span class="line">print(<span class="string">"Solution"</span>, x)</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<p>   线性方程组的解：</p>
+   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Solution [29. 16.  3.]</span><br></pre></td></tr></table></figure>
+
+
+
+<ol start="3">
+<li><p>利用 <strong>dot()</strong> 函数进行验算</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">"Check\n"</span>, np.dot(A , x))</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<p>   结果不出所料：</p>
+   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Check</span><br><span class="line"> [[ 0.  8. -9.]]</span><br></pre></td></tr></table></figure>
+
+<p>代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">A = np.mat(<span class="string">"1 -2 1;0 2 -8;-4 5 9"</span>)</span><br><span class="line">print(<span class="string">"A\n"</span>, A)</span><br><span class="line"></span><br><span class="line">b = np.array([<span class="number">0</span>, <span class="number">8</span>, <span class="number">-9</span>])</span><br><span class="line">print(<span class="string">"b\n"</span>, b)</span><br><span class="line"></span><br><span class="line">x = np.linalg.solve(A, b)</span><br><span class="line">print(<span class="string">"Solution"</span>, x)</span><br><span class="line"></span><br><span class="line">print(<span class="string">"Check\n"</span>, np.dot(A , x))</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-4-用NumPy计算特征值和特征向量"><a href="#3-4-用NumPy计算特征值和特征向量" class="headerlink" title="3.4    用NumPy计算特征值和特征向量"></a>3.4    用NumPy计算特征值和特征向量</h3><p>​        <strong>特征值</strong> 是方程式 $Ax = ax$ 的标量解（scalar solutions），其中 A 是一个二维矩阵，x 是一维向量。<strong>特征向量</strong> 实际上就是表示特征值的向量。</p>
+<p>​        计算特征值时，可以求助于numpy.linalg 程序包提供的 <strong>eigvals()</strong> 子例程。函数 <strong>eig()</strong> 的返回值是一个元组，其元素为特征值和特征向量。</p>
+<p>​        可以用子程序包 numpy.linalg 的 <strong>eigvals()</strong> 和 <strong>eig()</strong> 函数来获得矩阵的特征值和特征向量，并通过 <strong>dot()</strong> 函数来验算结果。</p>
+<ol>
+<li><p>创建矩阵</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">A = np.mat(<span class="string">"3 -2;1 0"</span>)</span><br><span class="line">print(<span class="string">"A\n"</span>, A)</span><br><span class="line"></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">A</span></span><br><span class="line"><span class="string"> [[ 3 -2]</span></span><br><span class="line"><span class="string">  [ 1  0]]</span></span><br><span class="line"><span class="string">'''</span></span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<ol start="2">
+<li><p>利用 <strong>eig()</strong> 函数计算特征值</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">"Eigenvalues"</span>, np.linalg.eigvals(A))</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<p>   结果：</p>
+   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Eigenvalues [2. 1.]</span><br></pre></td></tr></table></figure>
+
+
+
+<ol start="3">
+<li><p>利用 <strong>eig()</strong> 函数取得特征值和特征向量</p>
+<p>​        利用 <strong>eig()</strong> 函数可以得到特征值和特征向量。</p>
+<p>​        注意，该函数返回的是一个元组，其第一个元素是特征值，第二个元素为相应的 eigenvectors，其以面向列的方式排列。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">eigenvalues, eigenvectors = np.linalg.eig(A)</span><br><span class="line">print(<span class="string">"First tuple of eig"</span>, eigenvalues)</span><br><span class="line">print(<span class="string">"Second tuple of eig\n"</span>, eigenvectors)</span><br></pre></td></tr></table></figure>
+
+<p>​        </p>
+<p>​        特征值 eigenvalues 和特征向量 eigenvectors 的值为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">First tuple of eig [2. 1.]</span><br><span class="line">Second tuple of eig</span><br><span class="line"> [[0.89442719 0.70710678]</span><br><span class="line"> [0.4472136  0.70710678]]</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<ol start="4">
+<li><p>验算结果</p>
+<p>通过 <strong>dot()</strong> 函数计算特征值方程式 $Ax = ax $ 两边的值，就可以对结果进行验算：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(eigenvalues)):</span><br><span class="line">      print(<span class="string">"Left"</span>, np.dot(A, eigenvectors[:,i]))</span><br><span class="line">      print(<span class="string">"Right"</span>, eigenvalues[i] * eigenvectors[:,i])</span><br><span class="line">      print(<span class="string">'\n'</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<p>   输出结果：</p>
+   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Left [[1.78885438]</span><br><span class="line"> [0.89442719]]</span><br><span class="line">Right [[1.78885438]</span><br><span class="line"> [0.89442719]]</span><br><span class="line"> </span><br><span class="line">Left [[0.70710678]</span><br><span class="line"> [0.70710678]]</span><br><span class="line">Right [[0.70710678]</span><br><span class="line"> [0.70710678]]</span><br></pre></td></tr></table></figure>
+
+<p>代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">A = np.mat(<span class="string">"3 -2;1 0"</span>)</span><br><span class="line">print(<span class="string">"A\n"</span>, A)</span><br><span class="line"></span><br><span class="line">print(<span class="string">"Eigenvalues"</span>, np.linalg.eigvals(A) )</span><br><span class="line"></span><br><span class="line">eigenvalues, eigenvectors = np.linalg.eig(A)</span><br><span class="line">print(<span class="string">"First tuple of eig"</span>, eigenvalues)</span><br><span class="line">print(<span class="string">"Second tuple of eig\n"</span>, eigenvectors)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(eigenvalues)):</span><br><span class="line">      print(<span class="string">"Left"</span>, np.dot(A, eigenvectors[:,i]))</span><br><span class="line">      print(<span class="string">"Right"</span>, eigenvalues[i] * eigenvectors[:,i])</span><br><span class="line">      print(<span class="string">'\n'</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-5-NumPy随机数"><a href="#3-5-NumPy随机数" class="headerlink" title="3.5    NumPy随机数"></a>3.5    NumPy随机数</h3><p>​        随机数常用于蒙特卡罗法、随机积分等方面。然而，真正的随机数很难获得，实际中使用的都是伪随机数。</p>
+<p>​        大部分情况下，为随机数就足以满足我们的需求，当然某些特殊情况除外，如进行高精度的模拟实验时，对于NumPy与随机数有关的函数都在 ramdom 子程序包中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">提示：</span><br><span class="line">	NumPy核心的随机数发生器是基于梅森旋转算法的，详见 https://en.wikipedia.org/wiki/Mersenne_twister</span><br></pre></td></tr></table></figure>
+
+<p>​        我们既可以生成连续分布的随机数，也可以生成非连续分布的随机数。</p>
+<p>​        分布函数有一个可选的 size 参数，它能通知NumPy要创建多少个数字。我们可以用整型或者元组来给这个参数赋值，这时会得到相应形状的数字，其值由随机数填充。</p>
+<p>​        离散分布包括几何分布、超几何分布和二项式分布，连续分布包括正态分布和对数正态分布。</p>
+<h4 id="3-5-1-用二项式分布进行博弈"><a href="#3-5-1-用二项式分布进行博弈" class="headerlink" title="3.5.1    用二项式分布进行博弈"></a>3.5.1    用二项式分布进行博弈</h4><p>​        二项式分布模拟的是在进行整数次独立实验中成功的次数。其中每次实验的成功机会是一定的。</p>
+<p>​        假如我们身在17世纪的赌场，正在对 8片币 玩法下注，当时流行用9枚硬币来玩，如果人头朝上的硬币少于5枚，那么我们将输掉一个8分币，否则我们就赢一个8分币。</p>
+<p>​        下面，我们开始模拟这个游戏，假设我们手上有1000硬币作为初始赌资，我们将使用random模块提供的 <strong>binomial()</strong> 函数进行模拟:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">numpy.random.binomial(n,p,size=None)</span><br><span class="line"></span><br><span class="line">n表示n次的试验，p表示的试验成功的概率，n可是是一个float但是也会被变成整数来使用。</span><br><span class="line"></span><br><span class="line">参数的介绍：</span><br><span class="line"></span><br><span class="line">n：int型或者一个int型的数组，大于等于0，接受浮点数但是会被变成整数来使用。</span><br><span class="line"></span><br><span class="line">p：float或者一组float的数组，大于等于0且小于等于1.</span><br><span class="line"></span><br><span class="line">size：可选项，int或者int的元祖，表示的输出的大小，如果提供了size，例如(m,n,k)，那么会返回m*n*k个样本。如果size=None，也就是默认没有的情况，当n和p都是一个数字的时候只会返回一个值，否则返回的是np.broadcast(n,p).size个样本.</span><br><span class="line"></span><br><span class="line">其实size可直接理解为执行的次数。None为1次，size=0 返回数组，size=None 返回一个数。</span><br><span class="line"></span><br><span class="line">返回的是：一个数字或者一组数字</span><br></pre></td></tr></table></figure>
+
+<p>代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> matplotlib.pyplot <span class="keyword">import</span> plot, show</span><br><span class="line"></span><br><span class="line">cash = np.zeros(<span class="number">10000</span>)</span><br><span class="line">cash[<span class="number">0</span>] = <span class="number">1000</span></span><br><span class="line">outcome = np.random.binomial(<span class="number">9</span>, <span class="number">0.5</span>, size=len(cash))</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, len(cash)):</span><br><span class="line"></span><br><span class="line">   <span class="keyword">if</span> outcome[i] &lt; <span class="number">5</span>:</span><br><span class="line">      cash[i] = cash[i - <span class="number">1</span>] - <span class="number">1</span></span><br><span class="line">   <span class="keyword">elif</span> outcome[i] &lt; <span class="number">10</span>:</span><br><span class="line">      cash[i] = cash[i - <span class="number">1</span>] + <span class="number">1</span></span><br><span class="line">   <span class="keyword">else</span>:</span><br><span class="line">      <span class="keyword">raise</span> AssertionError(<span class="string">"Unexpected outcome "</span> + outcome)</span><br><span class="line"></span><br><span class="line"><span class="comment"># print(outcome.min(), outcome.max())</span></span><br><span class="line"></span><br><span class="line">plot(np.arange(len(cash)), cash)</span><br><span class="line">show()</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><p>用 <strong>binomial()</strong> 函数</p>
+<p>将数组初始化为0，即现金余额为0.调用 binomial() 函数，将size参数设为10000，这就表示我们要掷10000次硬币。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cash = np.zeros(<span class="number">10000</span>)</span><br><span class="line">cash[<span class="number">0</span>] = <span class="number">1000</span></span><br><span class="line">outcome = np.random.binomial(<span class="number">9</span>, <span class="number">0.5</span>, size=len(cash))</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<ol start="2">
+<li><p>更新现金余额</p>
+<p>利用抛掷硬币的结果来更新cash数组。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, len(cash)):</span><br><span class="line"></span><br><span class="line">   <span class="keyword">if</span> outcome[i] &lt; <span class="number">5</span>:</span><br><span class="line">      cash[i] = cash[i - <span class="number">1</span>] - <span class="number">1</span></span><br><span class="line">   <span class="keyword">elif</span> outcome[i] &lt; <span class="number">10</span>:</span><br><span class="line">      cash[i] = cash[i - <span class="number">1</span>] + <span class="number">1</span></span><br><span class="line">   <span class="keyword">else</span>:</span><br><span class="line">      <span class="keyword">raise</span> AssertionError(<span class="string">"Unexpected outcome "</span> + outcome)</span><br><span class="line"></span><br><span class="line"><span class="comment"># print(outcome.min(), outcome.max())</span></span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<ol start="3">
+<li><p>用matplotlib绘出cash数组的图像</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">plot(np.arange(len(cash)), cash)</span><br><span class="line">show()</span><br></pre></td></tr></table></figure>
+
+<p>![1](/Users/hhh/Desktop/python/MyHexoPicture/python Data Analysis/第三章 统计学与线性代数/1.png)</p>
+</li>
+</ol>
+<h4 id="3-5-2-正态分布采样"><a href="#3-5-2-正态分布采样" class="headerlink" title="3.5.2    正态分布采样"></a>3.5.2    正态分布采样</h4><p>​        连续分布是通过 <strong>概率密度函数</strong>（pdf）进行建模的，在特定区间发生某件事情的可能性，可以通过概率密度函数的积分运算求出。</p>
+<p>​        NumPy的random模块提供了许多表示连续分布的函数。</p>
+<p>​        利用NumPy的random子程序包中的 <strong>normal()</strong> 函数，可以把正态分布以直观的形式图示出来，下面给出随机产生的数值的钟形曲线和条形图。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">N = <span class="number">10000</span></span><br><span class="line"></span><br><span class="line">normal_values = np.random.normal(size=N)</span><br><span class="line"></span><br><span class="line">dummy, bins, dummy = plt.hist(normal_values, int(np.sqrt(N)), density=<span class="literal">True</span>, lw=<span class="number">1.0</span>)</span><br><span class="line"></span><br><span class="line">sigma = <span class="number">1</span></span><br><span class="line">mu = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">plt.plot(bins, <span class="number">1</span>/(sigma * np.sqrt(<span class="number">2</span> * np.pi)) * np.exp(-(bins - mu)**<span class="number">2</span> / (<span class="number">2</span> * sigma**<span class="number">2</span>)), lw=<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p>随机数可以按照正态分布的要求生成。他们的分布情况可以用条形图来显示，若要绘制正态分布，请执行下列步骤。</p>
+<ol>
+<li><p>借助NumPy的 random子程序包提供的 <strong>normal()</strong> 函数，可以创建指定数量的随机数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">N = <span class="number">10000</span></span><br><span class="line">normal_values = np.random.normal(size=N)</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<ol start="2">
+<li><p>画出条形图和理论上的pdf</p>
+<p>下面使用matplotlib来绘制条形图和理论上的pdf，这里中心值为0，标准差为1</p>
+<p>注：正态分布密度函数 $f(x) =  \frac{1}{ \sqrt{2 \pi }  \sigma }  \cdot e ^{ -\frac{(x- \mu ) ^{2} }{2 \sigma ^{2}} } $</p>
+</li>
+</ol>
+   <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">dummy, bins, dummy = plt.hist(normal_values, int(np.sqrt(N)), density=<span class="literal">True</span>, lw=<span class="number">1.0</span>)</span><br><span class="line"></span><br><span class="line">sigma = <span class="number">1</span></span><br><span class="line">mu = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">plt.plot(bins, <span class="number">1</span>/(sigma * np.sqrt(<span class="number">2</span> * np.pi)) * np.exp(-(bins - mu)**<span class="number">2</span> / (<span class="number">2</span> * sigma**<span class="number">2</span>)), lw=<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+
+
+<ol start="3">
+<li>下图展示了钟形曲线</li>
+</ol>
+<p>![2](/Users/hhh/Desktop/python/MyHexoPicture/python Data Analysis/第三章 统计学与线性代数/2.png)</p>
+<h4 id="3-5-3-用SciPy进行正态检验"><a href="#3-5-3-用SciPy进行正态检验" class="headerlink" title="3.5.3    用SciPy进行正态检验"></a>3.5.3    用SciPy进行正态检验</h4><p>​        正态分布被广泛用于科学和统计学领域，按照中心极限定理，随着独立观测的随机样本数量的增加，他们会趋向呈正态分布，正态分布的特征已经为大家所熟知，并且它还非常便于使用。</p>
+<p>​        不过，它需要满足许多必要条件，如数据点的数量要足够大，并且还要求这些数据点必须是相互独立的。工作中，我们需要养成检查数据是否符合正态分布的好习惯，正态检验的方法有很多，其中一些在 <strong>SciPy.stats</strong> 程序包中实现了。本节将用到的检验方法将用到这些检验方法，这里的样本是取自的流感趋势数据。</p>
+<p>​        <a href="https://github.com/suliangxu/MyHexoPicture/blob/master/python%20Data%20Analysis/第三章%20统计学与线性代数/goog_flutrends.csv" target="_blank" rel="noopener">获取数据文件</a></p>
+<p>​        和前面一样，这里也按照正态分布对这些数据进行抽样，得到的数组的大小与流感趋势数组相同，如果顺利通过正态检验，就以它为金标准（the golden standard）。</p>
+<p>​        </p>
+<p>代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> scipy.stats <span class="keyword">import</span> shapiro, anderson, normaltest</span><br><span class="line"><span class="keyword">import</span> warnings</span><br><span class="line"></span><br><span class="line">flutrends = np.loadtxt(<span class="string">"goog_flutrends.csv"</span>, delimiter=<span class="string">','</span>, usecols=(<span class="number">1</span>,),</span><br><span class="line">                       skiprows=<span class="number">1</span>, converters=&#123;<span class="number">1</span>: <span class="keyword">lambda</span> s: float(s <span class="keyword">or</span> <span class="number">0</span>)&#125;, unpack=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">N = len(flutrends)</span><br><span class="line"></span><br><span class="line">normal_values = np.random.normal(size=N)</span><br><span class="line">zero_values = np.zeros(N)</span><br><span class="line"></span><br><span class="line">warnings.filterwarnings(<span class="string">"ignore"</span>)</span><br><span class="line">print(<span class="string">"\nNormal Values Shapiro\n"</span>, shapiro(normal_values))</span><br><span class="line">print(<span class="string">"\nZeroes Shapiro\n"</span>, shapiro(zero_values))</span><br><span class="line">print(<span class="string">"\nFlu Shapiro\n"</span>, shapiro(flutrends))</span><br><span class="line">print(<span class="string">'\n'</span>)</span><br><span class="line"></span><br><span class="line">print(<span class="string">"\nNormal Values Anderson\n"</span>, anderson(normal_values))</span><br><span class="line">print(<span class="string">"\nZeroes Anderson\n"</span>, anderson(zero_values))</span><br><span class="line">print(<span class="string">"\nFlu Anderson\n"</span>, anderson(flutrends))</span><br><span class="line">print(<span class="string">'\n'</span>)</span><br><span class="line"></span><br><span class="line">print(<span class="string">"\nNormal Values normaltest\n"</span>, normaltest(normal_values))</span><br><span class="line">print(<span class="string">"\nZeroes normaltest\n"</span>, normaltest(zero_values))</span><br><span class="line">print(<span class="string">"\nFlu normaltest\n"</span>, normaltest(flutrends))</span><br></pre></td></tr></table></figure>
+
+<p>​        作为一个反面例子，下面使用的这个数字跟前面提到的填满零的数组具有相同的大小。实际上当处理一些小概率事件时（如世界性疫情的爆发），就可能遇到这种数据。</p>
+<p>​        在这个数据文件中，一些单元是空的。当然这种问题经常会碰到。所以必须习惯于首先清洗数据。我们假定正确的数字是0，下面使用一个转换器来填上这些0值：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">flutrends = np.loadtxt(<span class="string">"goog_flutrends.csv"</span>, delimiter=<span class="string">','</span>, usecols=(<span class="number">1</span>,),</span><br><span class="line">                       skiprows=<span class="number">1</span>, converters=&#123;<span class="number">1</span>: <span class="keyword">lambda</span> s: float(s <span class="keyword">or</span> <span class="number">0</span>)&#125;, unpack=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+<p>​        夏皮罗·威尔克检验法可以对正态性进行检验。</p>
+<p>​        相应的SciPy函数将返回一个元组。其中第一个元素是一个检验统计量，第二个数字是p值。需要注意的是，这种填满了零的数组会引发警告，事实上，本例中用到的3个函数在处理这个数组方面确实有困难，同时还会引发警告，下面是得到的结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Normal Values Shapiro</span><br><span class="line"> (0.9961788058280945, 0.16325736045837402)</span><br><span class="line"> </span><br><span class="line">Zeroes Shapiro</span><br><span class="line"> (1.0, 1.0)</span><br><span class="line"> </span><br><span class="line">Flu Shapiro</span><br><span class="line"> (0.9351990818977356, 2.2945883254311397e-15)</span><br></pre></td></tr></table></figure>
+
+<p>​        这种用零填充的数字看起来有点怪，虽然会收到相关的警告，但是大可忽略不计，这里得到的p值类似于本例中后面的第三个检验的结果，分析结果基本上是一样的。</p>
+<p>​        Anderson-darling检验可以用来检验正态分布以及其他分布，如指数分布、对数分布和冈贝尓（Gumbel）分布的。相关的SciPy函数涉及一个检验统计量和一个数组。该数组存放了百分之15、10、5、2.5和1等显著性水平所对应的临界值。如果该统计量大于显著性水平的临界值，就可以断定它不具有正态性，我们将得到下列数值：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Normal Values Anderson</span><br><span class="line"> AndersonResult(statistic=<span class="number">0.3476038369287835</span>, critical_values=array([<span class="number">0.572</span>, <span class="number">0.652</span>, <span class="number">0.782</span>, <span class="number">0.912</span>, <span class="number">1.085</span>]), significance_level=array([<span class="number">15.</span> , <span class="number">10.</span> ,  <span class="number">5.</span> ,  <span class="number">2.5</span>,  <span class="number">1.</span> ]))</span><br><span class="line"> </span><br><span class="line">Zeroes Anderson</span><br><span class="line"> AndersonResult(statistic=nan, critical_values=array([<span class="number">0.572</span>, <span class="number">0.652</span>, <span class="number">0.782</span>, <span class="number">0.912</span>, <span class="number">1.085</span>]), significance_level=array([<span class="number">15.</span> , <span class="number">10.</span> ,  <span class="number">5.</span> ,  <span class="number">2.5</span>,  <span class="number">1.</span> ]))</span><br><span class="line"> </span><br><span class="line">Flu Anderson</span><br><span class="line"> AndersonResult(statistic=<span class="number">8.258614154768793</span>, critical_values=array([<span class="number">0.572</span>, <span class="number">0.652</span>, <span class="number">0.782</span>, <span class="number">0.912</span>, <span class="number">1.085</span>]), significance_level=array([<span class="number">15.</span> , <span class="number">10.</span> ,  <span class="number">5.</span> ,  <span class="number">2.5</span>,  <span class="number">1.</span> ]))</span><br></pre></td></tr></table></figure>
+
+<p>​        对于这种用零填充的数组，我们没有什么好说的，因为返回的统计量根本就不是一个数值。就像我们期望的那样，这个金标准数组是符合正态分布的。</p>
+<p>​        然而，流感趋势数据返回的这个统计量大于所有的有关临界值。因此我们可以肯定他不符合正态分布，这3个测试函数中，这个看起来是最容易使用的一个。</p>
+<p>​        SciPy的 <strong>normaltest()</strong> 函数还实现了 <strong>D’Agostino</strong>检验和 <strong>Person</strong> 检验功能。该函数返回的元组和 <strong>shpiro()</strong> 函数一样，也包括一个统计量和p值。这里p的值是双边卡方概率（two-sided Chi-squared probability）。卡方分布是另一种著名的分布。这种检验本身是基于偏度和峰度检验的 z 分数的。偏度系数用来表示分布的对称程度的。这样，由于正态分布是对称的，所以偏度系数为零。峰度系数描述的是分布的形状（尖峰，肥尾）。这种正态分布的峰度系数为3，超额峰度的系数为0，以下是本次检验获得的数值：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Normal Values normaltest</span><br><span class="line"> NormaltestResult(statistic=<span class="number">5.654264837959543</span>, pvalue=<span class="number">0.059182320672633286</span>)</span><br><span class="line"> </span><br><span class="line">Zeroes normaltest</span><br><span class="line"> NormaltestResult(statistic=<span class="number">1698.434182313083</span>, pvalue=<span class="number">0.0</span>)</span><br><span class="line"> </span><br><span class="line">Flu normaltest</span><br><span class="line"> NormaltestResult(statistic=<span class="number">99.64373336356954</span>, pvalue=<span class="number">2.304826411536872e-22</span>)</span><br></pre></td></tr></table></figure>
+
+<p>​        因为这里处理的是p值的概率，所以它越大越好，最好接近1。对于这种用零填充的数组，会得到很奇怪的结果。不过，由于我们已经得到提示，所以对于这个特殊数组来说，结果是不可信的。此外，如果p值大于等于0.5，则认为它具有正态性。对于金标准数组。我们会得到一个更小的数值，这说明我们需要进行更多的观察。</p>
+<h3 id="3-6-创建掩码式NumPy数组"><a href="#3-6-创建掩码式NumPy数组" class="headerlink" title="3.6    创建掩码式NumPy数组"></a>3.6    创建掩码式NumPy数组</h3><p>​        数据常常是凌乱的，并且还有空白项或者无法处理的字符，<strong>好在掩码式数组数组可以忽略残缺的或无效的数据点</strong> 。numpy.ma 子程序包提供的掩码式数组隶属于ndarray，带有一个掩码。</p>
+<p>​        本节以Lena相片为数据源，并假设某些数据已被破坏，下面是处理掩码式数组的完整代码：</p>
+<p><a href>Mac处理matplotlib的中文显示问题</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy</span><br><span class="line"><span class="keyword">import</span> scipy.misc</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">plt.rcParams[<span class="string">"font.family"</span>] = <span class="string">'Arial Unicode MS'</span></span><br><span class="line"></span><br><span class="line">lena = scipy.misc.ascent()</span><br><span class="line">random_mask = numpy.random.randint(<span class="number">0</span>, <span class="number">2</span>, size=lena.shape)</span><br><span class="line"></span><br><span class="line">plt.subplot(<span class="number">221</span>)</span><br><span class="line">plt.title(<span class="string">"原图"</span>)</span><br><span class="line">plt.imshow(lena)</span><br><span class="line">plt.axis(<span class="string">'off'</span>)</span><br><span class="line"></span><br><span class="line">masked_array = numpy.ma.array(lena, mask=random_mask)</span><br><span class="line"><span class="keyword">print</span> (masked_array)</span><br><span class="line"></span><br><span class="line">plt.subplot(<span class="number">222</span>)</span><br><span class="line">plt.title(<span class="string">"掩码处理过的原图"</span>)</span><br><span class="line">plt.imshow(masked_array)</span><br><span class="line">plt.axis(<span class="string">'off'</span>)</span><br><span class="line"></span><br><span class="line">plt.subplot(<span class="number">223</span>)</span><br><span class="line">plt.title(<span class="string">"对数图"</span>)</span><br><span class="line">plt.imshow(numpy.log(lena))</span><br><span class="line">plt.axis(<span class="string">'off'</span>)</span><br><span class="line"></span><br><span class="line">plt.subplot(<span class="number">224</span>)</span><br><span class="line">plt.title(<span class="string">"掩码处理过的对数图"</span>)</span><br><span class="line">plt.imshow(numpy.log(masked_array))</span><br><span class="line">plt.axis(<span class="string">'off'</span>)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><p>创建一个掩码</p>
+<p>为了得到一个掩码式数组，必须规定一个掩码。下面将生成一个随机掩码，这个掩码的取值非0即1.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">random_mask = numpy.random.randint(<span class="number">0</span>, <span class="number">2</span>, size=lena.shape)</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<ol start="2">
+<li><p>创建一个掩码式数组</p>
+<p>下面应用该掩码来创建一个掩码式数组：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">masked_array = numpy.ma.array(lena, mask=random_mask)</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<ol start="3">
+<li><p>得到如图：</p>
+<p>![3](/Users/hhh/Desktop/python/MyHexoPicture/python Data Analysis/第三章 统计学与线性代数/3.png)</p>
+</li>
+</ol>
+<p>我们给NumPy数组附加了一个随机掩码，这样，与该掩码相对应的数据就会被忽略不计。</p>
+<h4 id="忽略负值和极值"><a href="#忽略负值和极值" class="headerlink" title="忽略负值和极值"></a>忽略负值和极值</h4><p>​        当希望忽略负值，如对数组的值取对数时，掩码式数组将会非常有用。此外，剔除异常值时，也会用到掩码式数组。这项工作是以极值的上下限为基础的。</p>
+<p>​        下面举一个例子，美国职业棒球大联盟选手的薪资数据为例，来说明这些技术的应用方法。</p>
+<p>​        <a href="https://github.com/suliangxu/MyHexoPicture/blob/master/python%20Data%20Analysis/第三章%20统计学与线性代数/MLB2008.csv" target="_blank" rel="noopener">获取数据文件</a></p>
+<p>完整代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> date</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">plt.rcParams[<span class="string">"font.family"</span>] = <span class="string">'Arial Unicode MS'</span></span><br><span class="line"></span><br><span class="line">salary = np.loadtxt(<span class="string">"MLB2008.csv"</span>, delimiter=<span class="string">','</span>, usecols=(<span class="number">1</span>,), skiprows=<span class="number">1</span>, unpack=<span class="literal">True</span>)</span><br><span class="line">triples = np.arange(<span class="number">0</span>, len(salary), <span class="number">3</span>)</span><br><span class="line"><span class="keyword">print</span> (<span class="string">"Triples"</span>, triples[:<span class="number">10</span>], <span class="string">"..."</span>)</span><br><span class="line"></span><br><span class="line">signs = np.ones(len(salary))</span><br><span class="line"><span class="keyword">print</span> (<span class="string">"Signs"</span>, signs[:<span class="number">10</span>], <span class="string">"..."</span>)</span><br><span class="line"></span><br><span class="line">signs[triples] = <span class="number">-1</span></span><br><span class="line"><span class="keyword">print</span> (<span class="string">"Signs"</span>, signs[:<span class="number">10</span>], <span class="string">"..."</span>)</span><br><span class="line"></span><br><span class="line">ma_log = np.ma.log(salary * signs)</span><br><span class="line"><span class="keyword">print</span> (<span class="string">"Masked logs"</span>, ma_log[:<span class="number">10</span>], <span class="string">"..."</span>)</span><br><span class="line"></span><br><span class="line">dev = salary.std()</span><br><span class="line">avg = salary.mean()</span><br><span class="line">inside = np.ma.masked_outside(salary, avg - dev, avg + dev)</span><br><span class="line"><span class="keyword">print</span> (<span class="string">"Inside"</span>, inside[:<span class="number">10</span>], <span class="string">"..."</span>)</span><br><span class="line"></span><br><span class="line">plt.subplot(<span class="number">311</span>)</span><br><span class="line"><span class="comment"># plt.title("Original")</span></span><br><span class="line">plt.title(<span class="string">"原始薪资数据"</span>)</span><br><span class="line">plt.plot(salary)</span><br><span class="line"></span><br><span class="line">plt.subplot(<span class="number">312</span>)</span><br><span class="line"><span class="comment"># plt.title("Log Masked")</span></span><br><span class="line">plt.title(<span class="string">"取对数后的数据"</span>)</span><br><span class="line">plt.plot(np.exp(ma_log))</span><br><span class="line"></span><br><span class="line">plt.subplot(<span class="number">313</span>)</span><br><span class="line"><span class="comment"># plt.title("Not Extreme")</span></span><br><span class="line">plt.title(<span class="string">"取幂复原后的数据"</span>)</span><br><span class="line">plt.plot(inside)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><p>对负数取对数</p>
+<ol>
+<li><p>可以对含有负数的数组取对数。首先创建一个数组，存放可以被3整除的数字。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">triples = np.arange(<span class="number">0</span>, len(salary), <span class="number">3</span>)</span><br><span class="line"><span class="keyword">print</span> (<span class="string">"Triples"</span>, triples[:<span class="number">10</span>], <span class="string">"..."</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+</li>
+</ol>
+<ol start="2">
+<li><p>然后生成一个元素值全为1且大小与薪金数据数组相等的数组：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">signs = np.ones(len(salary))</span><br><span class="line"><span class="keyword">print</span> (<span class="string">"Signs"</span>, signs[:<span class="number">10</span>], <span class="string">"..."</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<ol start="3">
+<li><p>将下标是3的倍数的数组元素的值取反：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">signs[triples] = <span class="number">-1</span></span><br><span class="line"><span class="keyword">print</span> (<span class="string">"Signs"</span>, signs[:<span class="number">10</span>], <span class="string">"..."</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<ol start="4">
+<li><p>对该数组取对数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ma_log = np.ma.log(salary * signs)</span><br><span class="line"><span class="keyword">print</span> (<span class="string">"Masked logs"</span>, ma_log[:<span class="number">10</span>], <span class="string">"..."</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<ol start="5">
+<li><p>得到的数据</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Triples [ 0  3  6  9 12 15 18 21 24 27] ...</span><br><span class="line">Signs [1. 1. 1. 1. 1. 1. 1. 1. 1. 1.] ...</span><br><span class="line">Signs [-1.  1.  1. -1.  1.  1. -1.  1.  1. -1.] ...</span><br><span class="line">Masked logs [-- 14.970818190308929 15.830413578506539 -- 13.458835614025542</span><br><span class="line"> 15.319587954740548 -- 15.648092021712584 13.864300722133706 --] ...</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<ol start="2">
+<li><p>忽略极值</p>
+<ol>
+<li><p>此处规定：所谓异常值，就是在平均值一个标准差以下，或者在平均值一个标准差以上的那些数值（这个定义未必恰当，只是为了便于计算）。</p>
+<p>根据上面的定义，可以利用下面的代码来屏蔽极值点：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dev = salary.std()</span><br><span class="line">avg = salary.mean()</span><br><span class="line">inside = np.ma.masked_outside(salary, avg - dev, avg + dev)</span><br><span class="line"><span class="keyword">print</span> (<span class="string">"Inside"</span>, inside[:<span class="number">10</span>], <span class="string">"..."</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+</li>
+</ol>
+<ol start="2">
+<li><p>下面代码将显示前十个元素：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Inside [3750000.0 3175000.0 7500000.0 3000000.0 700000.0 4500000.0 3000000.0</span><br><span class="line"> 6250000.0 1050000.0 4600000.0] ...</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<ol start="3">
+<li><p>下面分别绘制原始数据，取对数后的数据和取幂复原后的数据，最后，是应用基于标准差的掩码之后的数据。</p>
+<p>![4](/Users/hhh/Desktop/python/MyHexoPicture/python Data Analysis/第三章 统计学与线性代数/4.png)</p>
+</li>
+</ol>
+<p>​        numpy.ma 子程序包中的函数可以屏蔽数组中被视为无效的元素，如无法运用 log() 和sqrt() 函数的负值元素。被屏蔽的值类似于关系数据库和程序设计中的 NULL 值。对被屏蔽的值进行运算时，给它的都是一个屏蔽后的值。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/NumPy/" rel="tag"># NumPy</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/10/随笔/python-字典、列表、字符串之间的转换/" rel="next" title="python 字典、列表、字符串之间的转换">
+                <i class="fa fa-chevron-left"></i> python 字典、列表、字符串之间的转换
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/11/随笔/Mac处理matplotlib的中文显示问题/" rel="prev" title="Mac处理matplotlib的中文显示问题">
+                Mac处理matplotlib的中文显示问题 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="John Doe">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://suliangxu.github.io" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:1193135584@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-Numpy-和-Scipy-模块"><span class="nav-text">3.1    Numpy 和 Scipy 模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-用NumPy进行简单的描述性统计计算"><span class="nav-text">3.2    用NumPy进行简单的描述性统计计算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-用NumPy进行线性代数运算"><span class="nav-text">3.3    用NumPy进行线性代数运算</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-1-用NumPy求矩阵的逆"><span class="nav-text">3.3.1    用NumPy求矩阵的逆</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-2-用NumPy解线性方程组"><span class="nav-text">3.3.2    用NumPy解线性方程组</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-用NumPy计算特征值和特征向量"><span class="nav-text">3.4    用NumPy计算特征值和特征向量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-NumPy随机数"><span class="nav-text">3.5    NumPy随机数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-5-1-用二项式分布进行博弈"><span class="nav-text">3.5.1    用二项式分布进行博弈</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-5-2-正态分布采样"><span class="nav-text">3.5.2    正态分布采样</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-5-3-用SciPy进行正态检验"><span class="nav-text">3.5.3    用SciPy进行正态检验</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-6-创建掩码式NumPy数组"><span class="nav-text">3.6    创建掩码式NumPy数组</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#忽略负值和极值"><span class="nav-text">忽略负值和极值</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
