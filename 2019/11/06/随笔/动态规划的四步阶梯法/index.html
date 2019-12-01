@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="算法,动态规划,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="一、什么是动态规划如果你还没有听说过动态规划，或者仅仅只有耳闻，或许你可以看看 Quora 上面的这个 回答。  用一句话解释动态规划就是 ==“记住你之前做过的事”==，如果更准确些，其实是 ==“记住你之前得到的答案”==。 我举个大家工作中经常遇到的例子。 在软件开发中，大家经常会遇到一些系统配置的问题，配置不对，系统就会报错，这个时候一般都会去 Google 或者是查阅相关的文档，花了一定">
+<meta name="keywords" content="算法,动态规划">
+<meta property="og:type" content="article">
+<meta property="og:title" content="动态规划的四步阶梯法">
+<meta property="og:url" content="http://yoursite.com/2019/11/06/随笔/动态规划的四步阶梯法/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="一、什么是动态规划如果你还没有听说过动态规划，或者仅仅只有耳闻，或许你可以看看 Quora 上面的这个 回答。  用一句话解释动态规划就是 ==“记住你之前做过的事”==，如果更准确些，其实是 ==“记住你之前得到的答案”==。 我举个大家工作中经常遇到的例子。 在软件开发中，大家经常会遇到一些系统配置的问题，配置不对，系统就会报错，这个时候一般都会去 Google 或者是查阅相关的文档，花了一定">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_png/D67peceibeIT85Ko9IG4Wfk4fNLFQLUru54PZlj8kiaMziaXGRXbEfDApPTTcyibfsB2MgopKnLFricPXdiaxxkjtQOQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:updated_time" content="2019-12-01T01:59:25.467Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="动态规划的四步阶梯法">
+<meta name="twitter:description" content="一、什么是动态规划如果你还没有听说过动态规划，或者仅仅只有耳闻，或许你可以看看 Quora 上面的这个 回答。  用一句话解释动态规划就是 ==“记住你之前做过的事”==，如果更准确些，其实是 ==“记住你之前得到的答案”==。 我举个大家工作中经常遇到的例子。 在软件开发中，大家经常会遇到一些系统配置的问题，配置不对，系统就会报错，这个时候一般都会去 Google 或者是查阅相关的文档，花了一定">
+<meta name="twitter:image" content="https://mmbiz.qpic.cn/mmbiz_png/D67peceibeIT85Ko9IG4Wfk4fNLFQLUru54PZlj8kiaMziaXGRXbEfDApPTTcyibfsB2MgopKnLFricPXdiaxxkjtQOQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/11/06/随笔/动态规划的四步阶梯法/">
+
+
+
+
+
+  <title>动态规划的四步阶梯法 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/06/随笔/动态规划的四步阶梯法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">动态规划的四步阶梯法</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-11-06T16:00:23+08:00">
+                2019-11-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/随笔/" itemprop="url" rel="index">
+                    <span itemprop="name">随笔</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="一、什么是动态规划"><a href="#一、什么是动态规划" class="headerlink" title="一、什么是动态规划"></a>一、什么是动态规划</h3><p>如果你还没有听说过动态规划，或者仅仅只有耳闻，或许你可以看看 Quora 上面的这个 <em>回答</em>。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/D67peceibeIT85Ko9IG4Wfk4fNLFQLUru54PZlj8kiaMziaXGRXbEfDApPTTcyibfsB2MgopKnLFricPXdiaxxkjtQOQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="How to explain dynamic"></p>
+<p>用一句话解释动态规划就是 ==“<strong>记住你之前做过的事</strong>”==，如果更准确些，其实是 ==“<strong>记住你之前得到的答案</strong>”==。</p>
+<p>我举个大家工作中经常遇到的例子。</p>
+<p>在软件开发中，大家经常会遇到一些系统配置的问题，配置不对，系统就会报错，这个时候一般都会去 Google 或者是查阅相关的文档，花了一定的时间将配置修改好。</p>
+<p>过了一段时间，去到另一个系统，遇到类似的问题，这个时候已经记不清之前修改过的配置文件长什么样，这个时候有两种方案，一种方案还是去 Google 或者查阅文档，另一种方案是借鉴之前修改过的配置，第一种做法其实是万金油，因为你遇到的任何问题其实都可以去 Google，去查阅相关文件找答案，但是这会花费一定的时间，相比之下，第二种方案肯定会更加地节约时间，但是这个方案是有条件的，条件如下：</p>
+<ul>
+<li>之前的问题和当前的问题有着关联性，换句话说，之前问题得到的答案可以帮助解决当前问题</li>
+<li>需要记录之前问题的答案</li>
+</ul>
+<p>当然在这个例子中，可以看到的是，上面这两个条件均满足，大可去到之前配置过的文件中，将配置拷贝过来，然后做些细微的调整即可解决当前问题，节约了大量的时间。</p>
+<p>不知道你是否从这些描述中发现，对于一个动态规划问题，我们只需要从两个方面考虑，那就是 ==<strong>找出问题之间的联系</strong>==，以及 ==<strong>记录答案</strong>==，这里的难点其实是找出问题之间的联系，记录答案只是顺带的事情，利用一些简单的数据结构就可以做到。</p>
+<h3 id="二、思考动态规划问题的四个步骤"><a href="#二、思考动态规划问题的四个步骤" class="headerlink" title="二、思考动态规划问题的四个步骤"></a>二、思考动态规划问题的四个步骤</h3><p>一般解决动态规划问题，分为四个步骤，分别是</p>
+<ul>
+<li>问题拆解，找到问题之间的具体联系</li>
+<li>状态定义</li>
+<li>递推方程推导</li>
+<li>实现</li>
+</ul>
+<p>这里面的重点其实是前两个，如果前两个步骤顺利完成，后面的递推方程推导和代码实现会变得非常简单。</p>
+<p>这里还是拿 Quora 上面的例子来讲解，“$1+1+1+1+1+1+1+1$” 得出答案是 8，那么如何快速计算 “$1+ 1+1+1+1+1+1+1+1$”，我们首先可以对这个大的问题进行拆解，这里我说的大问题是 9 个 1 相加，这个问题可以拆解成 1 + “8 个 1 相加的答案”，8 个 1 相加继续拆，可以拆解成 1 + “7 个 1 相加的答案”，… 1 + “0 个 1 相加的答案”，到这里，==<strong>第一个步骤</strong>== 已经完成。</p>
+<p><strong>==状态定义</strong>== 其实是需要思考在解决一个问题的时候我们做了什么事情，然后得出了什么样的答案，对于这个问题，当前问题的答案就是当前的状态，基于上面的问题拆解，你可以发现两个相邻的问题的联系其实是 ==$后一个问题的答案 = 前一个问题的答案 + 1$==，这里，状态的每次变化就是 +1。</p>
+<p>定义好了状态，递推方程就变得非常简单，就是 ==$dp[i] = dp[i - 1] + 1$==，这里的 ==dp[i]== 记录的是当前问题的答案，也就是当前的状态，==dp[i - 1]== 记录的是之前相邻的问题的答案，也就是之前的状态，它们之间通过 +1 来实现状态的变更。</p>
+<p>最后一步就是实现了，有了状态表示和递推方程，实现这一步上需要重点考虑的其实是初始化，就是用什么样的数据结构，根据问题的要求需要做那些初始值的设定。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">dpExample</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> dp[n + <span class="number">1</span>];  <span class="comment">// 多开一位用来存放 0 个 1 相加的结果</span></span><br><span class="line"></span><br><span class="line">    dp[<span class="number">0</span>] = <span class="number">0</span>;      <span class="comment">// 0 个 1 相加等于 0</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">        dp[i] = dp[i - <span class="number">1</span>] + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> dp[n];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>你可以看到，动态规划这四个步骤其实是相互递进的，状态的定义离不开问题的拆解，递推方程的推导离不开状态的定义，最后的实现代码的核心其实就是递推方程，这中间如果有一个步骤卡壳了则会导致问题无法解决，当问题的复杂程度增加的时候，这里面的思维复杂程度会上升。</p>
+<p>接下来我们再来看看 LeetCode 上面的几道题目，通过题目再来走一下这些个分析步骤。</p>
+<h3 id="三、题目实战"><a href="#三、题目实战" class="headerlink" title="三、题目实战"></a>三、题目实战</h3><h4 id="1、爬楼梯"><a href="#1、爬楼梯" class="headerlink" title="1、爬楼梯"></a>1、爬楼梯</h4><p>但凡涉及到动态规划的题目都离不开一道例题：爬楼梯（LeetCode 第 70 号问题）。</p>
+<h5 id="（1）题目描述"><a href="#（1）题目描述" class="headerlink" title="（1）题目描述"></a>（1）题目描述</h5><p>假设你正在爬楼梯。需要 <strong><em>n</em></strong> 阶你才能到达楼顶。</p>
+<p>每次你可以爬 1 或 2 个台阶。你有多少种不同的方法可以爬到楼顶呢？</p>
+<p>注意：给定 <strong><em>n</em></strong> 是一个正整数。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">输入：2</span><br><span class="line">输出：2</span><br><span class="line">解释： 有两种方法可以爬到楼顶。</span><br><span class="line"></span><br><span class="line">1. 1 阶 + 1 阶</span><br><span class="line">2. 2 阶</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">输入：3</span><br><span class="line">输出：3</span><br><span class="line">解释： 有三种方法可以爬到楼顶。</span><br><span class="line"></span><br><span class="line">1. 1 阶 + 1 阶 + 1 阶</span><br><span class="line">2. 1 阶 + 2 阶</span><br><span class="line">3. 2 阶 + 1 阶</span><br></pre></td></tr></table></figure>
+
+<h5 id="（2）题目解析"><a href="#（2）题目解析" class="headerlink" title="（2）题目解析"></a>（2）题目解析</h5><p>爬楼梯，可以爬一步也可以爬两步，问有多少种不同的方式到达终点，我们按照上面提到的四个步骤进行分析：</p>
+<ul>
+<li><p><strong>问题拆解</strong>：</p>
+<p>我们到达第 $n$ 个楼梯可以从第 $n - 1$ 个楼梯和第 $n - 2$ 个楼梯到达，因此第 $n$ 个问题可以拆解成第 $n - 1$ 个问题和第 $n - 2$ 个问题，第 $n - 1$ 个问题和第 $n - 2$ 个问题又可以继续往下拆，直到第 $0$ 个问题，也就是第 $0$ 个楼梯 (起点)</p>
+</li>
+<li><p><strong>状态定义</strong></p>
+<p>“问题拆解” 中已经提到了，第 $n$ 个楼梯会和第 $n - 1$ 和第 $n - 2$ 个楼梯有关联，那么具体的联系是什么呢？你可以这样思考，第 $n - 1$ 个问题里面的答案其实是从起点到达第 $n - 1$ 个楼梯的路径总数，$n - 2$ 同理，从第 $n - 1$ 个楼梯可以到达第 $n$ 个楼梯，从第 $n - 2$ 也可以，并且路径没有重复，因此我们可以把第 i 个状态定义为 ==“<strong>从起点到达第 i 个楼梯的路径总数</strong>”==，状态之间的联系其实是相加的关系。</p>
+</li>
+<li><p><strong>递推方程</strong></p>
+<p>“状态定义” 中我们已经定义好了状态，也知道第 i 个状态可以由第 $i - 1$ 个状态和第 $i - 2$ 个状态通过相加得到，因此递推方程就出来了 ==$dp[i] = dp[i - 1] + dp[i - 2]$==</p>
+</li>
+<li><p><strong>实现</strong></p>
+<p>你其实可以从递推方程看到，我们需要有一个初始值来方便我们计算，起始位置不需要移动 ==$dp[0] = 0$==，第 1 层楼梯只能从起始位置到达，因此 ==$dp[1] = 1$==，第 2 层楼梯可以从起始位置和第 1 层楼梯到达，因此 ==$dp[2] = 2$==，有了这些初始值，后面就可以通过这几个初始值进行递推得到。</p>
+</li>
+</ul>
+<h5 id="（3）参考代码"><a href="#（3）参考代码" class="headerlink" title="（3）参考代码"></a>（3）参考代码</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">climbStairs</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n == <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span>[] dp = <span class="keyword">new</span> <span class="keyword">int</span>[n + <span class="number">1</span>];  <span class="comment">// 多开一位，考虑起始位置</span></span><br><span class="line"></span><br><span class="line">    dp[<span class="number">0</span>] = <span class="number">0</span>; dp[<span class="number">1</span>] = <span class="number">1</span>; dp[<span class="number">2</span>] = <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">3</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">        dp[i] = dp[i - <span class="number">1</span>] + dp[i - <span class="number">2</span>];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> dp[n];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2、三角形最小路径和"><a href="#2、三角形最小路径和" class="headerlink" title="2、三角形最小路径和"></a>2、三角形最小路径和</h4><p>LeetCode 第 120 号问题：三角形最小路径和。</p>
+<h5 id="（1）题目描述-1"><a href="#（1）题目描述-1" class="headerlink" title="（1）题目描述"></a>（1）题目描述</h5><p>给定一个三角形，找出自顶向下的最小路径和。每一步只能移动到下一行中相邻的结点上。</p>
+<p>例如，给定三角形：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">     [2],</span><br><span class="line">    [3,4],</span><br><span class="line">   [6,5,7],</span><br><span class="line">  [4,1,8,3]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<p>自顶向下的最小路径和为 11（即，2 + 3 + 5 + 1 = 11）。</p>
+<p><strong>说明：</strong></p>
+<p>如果你可以只使用 O(n) 的额外空间（n 为三角形的总行数）来解决这个问题，那么你的算法会很加分。</p>
+<h5 id="（2）题目解析-1"><a href="#（2）题目解析-1" class="headerlink" title="（2）题目解析"></a>（2）题目解析</h5><p>给定一个三角形数组，需要求出从上到下的最小路径和，也和之前一样，按照四个步骤来分析：</p>
+<ul>
+<li><p>问题拆解：</p>
+<p>这里的总问题是求出最小的路径和，路径是这里的分析重点，路径是由一个个元素组成的，和之前爬楼梯那道题目类似，==$[i][j]$== 位置的元素，经过这个元素的路径肯定也会经过 ==$[ i - 1 ][ j ]$== 或者 ==$[i - 1][j - 1]$==，因此经过一个元素的路径和可以通过这个元素上面的一个或者两个元素的路径和得到。</p>
+</li>
+<li><p>状态定义</p>
+<p>状态的定义一般会和问题需要求解的答案联系在一起，这里其实有两种方式，一种是考虑路径从上到下，另外一种是考虑路径从下到上，因为元素的值是不变的，所以路径的方向不同也不会影响最后求得的路径和，如果是从上到下，你会发现，在考虑下面元素的时候，起始元素的路径只会从==$[i - 1][j]$== 获得，每行当中的最后一个元素的路径只会从 ==$[i - 1][j - 1]$== 获得，中间二者都可，这样不太好实现，因此这里考虑从下到上的方式，状态的定义就变成了 ==“<strong>最后一行元素到当前元素的最小路径和</strong>”==，对于 ==$[0][0]$== 这个元素来说，最后状态表示的就是我们的最终答案。</p>
+</li>
+<li><p>递推方程</p>
+<p>“状态定义” 中我们已经定义好了状态，递推方程就出来了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dp[i][j] = Math.min(dp[i + 1][j], dp[i + 1][j + 1]) + triangle[i][j]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>实现</p>
+<p>这里初始化时，我们需要将最后一行的元素填入状态数组中，然后就是按照前面分析的策略，从下到上计算即可</p>
+</li>
+</ul>
+<h5 id="（3）参考代码-1"><a href="#（3）参考代码-1" class="headerlink" title="（3）参考代码"></a>（3）参考代码</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">minimumTotal</span><span class="params">(List&lt;List&lt;Integer&gt;&gt; triangle)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n = triangle.size();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span>[][] dp = <span class="keyword">new</span> <span class="keyword">int</span>[n][n];</span><br><span class="line"></span><br><span class="line">    List&lt;Integer&gt; lastRow = triangle.get(n - <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">        dp[n - <span class="number">1</span>][i] = lastRow.get(i);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = n - <span class="number">2</span>; i &gt;= <span class="number">0</span>; --i) &#123;</span><br><span class="line">        List&lt;Integer&gt; row = triangle.get(i);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; i + <span class="number">1</span>; ++j) &#123;</span><br><span class="line">            dp[i][j] = Math.min(dp[i + <span class="number">1</span>][j], dp[i + <span class="number">1</span>][j + <span class="number">1</span>]) + row.get(j);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> dp[<span class="number">0</span>][<span class="number">0</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="3、最大子序和"><a href="#3、最大子序和" class="headerlink" title="3、最大子序和"></a>3、最大子序和</h4><p>LeetCode 第 53 号问题：最大子序和。</p>
+<h5 id="（1）题目描述-2"><a href="#（1）题目描述-2" class="headerlink" title="（1）题目描述"></a>（1）题目描述</h5><p>给定一个整数数组 <strong><em>nums</em></strong> ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。</p>
+<p><strong>示例:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: [-2,1,-3,4,-1,2,1,-5,4],</span><br><span class="line">输出: 6</span><br><span class="line">解释: 连续子数组 [4,-1,2,1] 的和最大，为 6。</span><br></pre></td></tr></table></figure>
+
+<p><strong>进阶:</strong></p>
+<p>如果你已经实现复杂度为 O(n) 的解法，尝试使用更为精妙的分治法求解。</p>
+<h5 id="（2）题目解析-2"><a href="#（2）题目解析-2" class="headerlink" title="（2）题目解析"></a>（2）题目解析</h5><p>求最大子数组和，非常经典的一道题目，这道题目有很多种不同的做法，而且很多算法思想都可以在这道题目上面体现出来，比如动态规划、贪心、分治，还有一些技巧性的东西，比如前缀和数组，这里还是使用动态规划的思想来解题，套路还是之前的四步骤：</p>
+<ul>
+<li><p>问题拆解：</p>
+<p>问题的核心是子数组，子数组可以看作是一段区间，因此可以由起始点和终止点确定一个子数组，两个点中，我们先确定一个点，然后去找另一个点，比如说，如果我们确定一个子数组的截止元素在 i 这个位置，这个时候我们需要思考的问题是 “==<strong>以 i 结尾的所有子数组中，和最大的是多少？</strong>==”，然后我们去试着拆解，这里其实只有两种情况：</p>
+<p>  i 这个位置的元素自成一个子数组;</p>
+<p>  i 位置的元素的值 + <strong>==以 i - 1 结尾的所有子数组中的子数组和最大的值==</strong></p>
+<p>你可以看到，我们把第 i 个问题拆成了第 i - 1 个问题，之间的联系也变得清晰</p>
+</li>
+<li><p>状态定义</p>
+<p>通过上面的分析，其实状态已经有了，==$dp[i]$== 就是 “<strong>==以 i 结尾的所有子数组的最大值==</strong>”</p>
+</li>
+<li><p>递推方程</p>
+<p>拆解问题的时候也提到了，有两种情况，即当前元素自成一个子数组，另外可以考虑前一个状态的答案，于是就有了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dp[i] = Math.max(dp[i - 1] + array[i], array[i])</span><br></pre></td></tr></table></figure>
+
+<p>化简一下就成了：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dp[i] = Math.max(dp[i - 1], 0) + array[i]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>实现</p>
+<p>题目要求子数组不能为空，因此一开始需要初始化，也就是 ==$dp[0] = array[0]$==，保证最后答案的可靠性，另外我们需要用一个变量记录最后的答案，因为子数组有可能以数组中任意一个元素结尾</p>
+</li>
+</ul>
+<h5 id="（3）参考代码-2"><a href="#（3）参考代码-2" class="headerlink" title="（3）参考代码"></a>（3）参考代码</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxSubArray</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (nums == <span class="keyword">null</span> || nums.length == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> n = nums.length;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span>[] dp = <span class="keyword">new</span> <span class="keyword">int</span>[n];</span><br><span class="line"></span><br><span class="line">    dp[<span class="number">0</span>] = nums[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> result = dp[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; ++i) &#123;</span><br><span class="line">        dp[i] = Math.max(dp[i - <span class="number">1</span>], <span class="number">0</span>) + nums[i];</span><br><span class="line">        result = Math.max(result, dp[i]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="四、总结"><a href="#四、总结" class="headerlink" title="四、总结"></a>四、总结</h3><p>通过这几个简单的例子，相信你不难发现，解动态规划题目其实就是拆解问题，定义状态的过程，严格说来，动态规划并不是一个具体的算法，而是凌驾于算法之上的一种 ==<strong>思想</strong>==。</p>
+<p>这种思想强调的是从局部最优解通过一定的策略推得全局最优解，从子问题的答案一步步推出整个问题的答案，并且利用空间换取时间。从很多算法之中你都可以看到动态规划的影子，所以，还是那句话 <strong>==技术都是相通的，找到背后的本质思想是关键==</strong>。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/算法/" rel="tag"># 算法</a>
+          
+            <a href="/tags/动态规划/" rel="tag"># 动态规划</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/11/随笔/Mac处理matplotlib的中文显示问题/" rel="next" title="Mac处理matplotlib的中文显示问题">
+                <i class="fa fa-chevron-left"></i> Mac处理matplotlib的中文显示问题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/11/06/人工智能/决策树/辨析ML中的熵有关的概念/" rel="prev" title="辨析ML中的熵有关的概念">
+                辨析ML中的熵有关的概念 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="John Doe">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://suliangxu.github.io" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:1193135584@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、什么是动态规划"><span class="nav-text">一、什么是动态规划</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、思考动态规划问题的四个步骤"><span class="nav-text">二、思考动态规划问题的四个步骤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、题目实战"><span class="nav-text">三、题目实战</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、爬楼梯"><span class="nav-text">1、爬楼梯</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#（1）题目描述"><span class="nav-text">（1）题目描述</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#（2）题目解析"><span class="nav-text">（2）题目解析</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#（3）参考代码"><span class="nav-text">（3）参考代码</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、三角形最小路径和"><span class="nav-text">2、三角形最小路径和</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#（1）题目描述-1"><span class="nav-text">（1）题目描述</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#（2）题目解析-1"><span class="nav-text">（2）题目解析</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#（3）参考代码-1"><span class="nav-text">（3）参考代码</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、最大子序和"><span class="nav-text">3、最大子序和</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#（1）题目描述-2"><span class="nav-text">（1）题目描述</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#（2）题目解析-2"><span class="nav-text">（2）题目解析</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#（3）参考代码-2"><span class="nav-text">（3）参考代码</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、总结"><span class="nav-text">四、总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
