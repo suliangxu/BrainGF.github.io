@@ -518,7 +518,7 @@
         
           
             <h3 id="一、什么是动态规划"><a href="#一、什么是动态规划" class="headerlink" title="一、什么是动态规划"></a>一、什么是动态规划</h3><p>如果你还没有听说过动态规划，或者仅仅只有耳闻，或许你可以看看 Quora 上面的这个 <em>回答</em>。</p>
-<p><img src="https://mmbiz.qpic.cn/mmbiz_png/D67peceibeIT85Ko9IG4Wfk4fNLFQLUru54PZlj8kiaMziaXGRXbEfDApPTTcyibfsB2MgopKnLFricPXdiaxxkjtQOQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="How to explain dynamic"></p>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/%E9%9A%8F%E7%AC%94/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%9A%84%E5%9B%9B%E6%AD%A5%E8%A7%A3%E9%A2%98%E6%B3%95/1.png" alt="How to explain dynamic"></p>
 <p>用一句话解释动态规划就是 ==“<strong>记住你之前做过的事</strong>”==，如果更准确些，其实是 ==“<strong>记住你之前得到的答案</strong>”==。</p>
 <p>我举个大家工作中经常遇到的例子。</p>
 <p>在软件开发中，大家经常会遇到一些系统配置的问题，配置不对，系统就会报错，这个时候一般都会去 Google 或者是查阅相关的文档，花了一定的时间将配置修改好。</p>
@@ -777,52 +777,52 @@
 <p>一条信息的信息量大小和它的<strong>不确定性</strong>有直接的关系。我们需要搞清楚一件非常非常不确定的事，或者是我们一无所知的事，就需要了解大量的信息。相反，如果我们对某件事已经有了较多的了解，我们就不需要太多的信息就能把它搞清楚。所以，从这个角度，我们可以认为，<strong>信息的度量就等于不确定性的多少</strong>。比如，有人说广东下雪了。对于这句话，我们是十分不确定的。因为广东几十年来下雪的次数寥寥无几。为了搞清楚，我们就要去看天气预报，新闻，询问在广东的朋友，而这就需要大量的信息，信息熵很高。再比如，中国男足进军2022年卡塔尔世界杯决赛圈。对于这句话，因为确定性很高，几乎不需要引入信息，信息熵很低。</p>
 <p>考虑一个<strong>离散的随机变量x</strong>，由上面的例子可知，信息的量度应该依赖于概率分布p(x)，因此我们想要找一个函数 l(x)，它是概率p(x)的单调函数，表达了信息的内容。怎么寻找呢？如果我们有两个不相关的事件x和y，那么观察两个事件同时发生时获得的信息量应该等于观察到事件各自发生时获得的信息之和，即 $l(x, y) = l(x) + l(y)$。</p>
 <p>因为两个事件是独立不相关的，因此 $p(x, y) = p(x)p(y)$ 。根据这两个关系，很容易看出 l(x) 一定与 p(x) 的对数有关（因为对数的运算法则是 $log_{a}(mn) = log_{a}m + log_{a}n$ ）因此，我们有 $l(x) = -logp(x)$。<strong>其中负号是用来保证信息量为正数或零</strong>（因为p(x)总是在0到1之间）。<strong>而 log函数的基的选择是任意的</strong>（信息论中常选择为2，因此信息的单位为比特bits，而机器学习中常选自然对数，因此单位被称为奈特nats）。<strong>l(x) 也被称为随机变量 x 的自信息（self-information），描述的是随机变量的某个事件发生所带来的信息量。</strong>图像如图：</p>
-<p><img src="https://mmbiz.qpic.cn/mmbiz_png/7PuqRWWU6zMk1pr6orwHtpQ6iboYWSWFNfqGalDFVlaNDG1gAhLibPdq1P2k7QO54aKsf5aibARWIAcnVOJWWc0ag/640?wxfrom=5&wx_lazy=1&wx_co=1" alt="img"></p>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/ML/%E5%86%B3%E7%AD%96%E6%A0%91/%E8%BE%A8%E6%9E%90ML%E4%B8%AD%E7%9A%84%E7%86%B5%E6%9C%89%E5%85%B3%E7%9A%84%E6%A6%82%E5%BF%B5/1.png" alt="img"></p>
 <p>最后，我们正式引出<strong>信息熵</strong>。现在假设一个发送者想传送一个随机变量的值给接收者。那么在这个过程中，他们传输的<strong>平均信息量</strong>可以通过求 $l(x) = -logp(x)$ 关于概率分布 p(x) 的期望得到，即：</p>
-<p><img src="https://mmbiz.qpic.cn/mmbiz_png/7PuqRWWU6zOYBmeb2hk064IuLIiclGJRyqQcDEEvZrx4RJAuMvzZw0klSoVSsl9EgPsUELXC7co49B5ZMdR5PuA/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="img"></p>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/ML/%E5%86%B3%E7%AD%96%E6%A0%91/%E8%BE%A8%E6%9E%90ML%E4%B8%AD%E7%9A%84%E7%86%B5%E6%9C%89%E5%85%B3%E7%9A%84%E6%A6%82%E5%BF%B5/2.png" alt="img"></p>
 <p>H(X) 就被称为随机变量 x的<strong>熵</strong>,<strong>它是表示随机变量不确定的度量，是对所有可能发生的事件产生的信息量的期望</strong>。从公式可得，<strong>随机变量的取值个数越多，状态数也就越多，信息熵就越大，混乱程度就越大。当随机分布为均匀分布时，熵最大</strong>，且 0≤H(X)≤logn。稍后证明。将一维随机变量分布推广到多维随机变量分布，则其<strong>联合熵</strong> (<strong>Joint entropy</strong>) 为：</p>
-<p><img src="https://mmbiz.qpic.cn/mmbiz_png/7PuqRWWU6zOYBmeb2hk064IuLIiclGJRy8BnibmzRGicWBrQB1vP9bxzUZiak4nbiad7ibicIGcoaIAuV9cdj3j8jEdKg/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="img"></p>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/ML/%E5%86%B3%E7%AD%96%E6%A0%91/%E8%BE%A8%E6%9E%90ML%E4%B8%AD%E7%9A%84%E7%86%B5%E6%9C%89%E5%85%B3%E7%9A%84%E6%A6%82%E5%BF%B5/3.png" alt="img"></p>
 <p><em>（注意：熵只依赖于随机变量的分布,与随机变量取值无关，所以也可以将X的熵记作H(p)；令0log0=0(因为某个取值概率可能为0)）</em></p>
 <p>那么这些定义有着什么样的性质呢？考虑一个随机变量 x。这个随机变量有4种可能的状态，每个状态都是等可能的。为了把 x 的值传给接收者，我们需要传输2比特的消息。H(X)=−4×(1/4)log2(1/4)=2 bits。现在考虑一个具有4种可能的状态 {a,b,c,d} 的随机变量，每个状态各自的概率为 (1/2,1/4,1/8,1/8)。这种情形下的熵为：</p>
-<p><img src="https://mmbiz.qpic.cn/mmbiz_png/7PuqRWWU6zOYBmeb2hk064IuLIiclGJRygExWl21z0Le2uziciaJvxaN3jWBshXFicd5P9EVxpvYsibdibApAlzExeoA/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="img"></p>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/ML/%E5%86%B3%E7%AD%96%E6%A0%91/%E8%BE%A8%E6%9E%90ML%E4%B8%AD%E7%9A%84%E7%86%B5%E6%9C%89%E5%85%B3%E7%9A%84%E6%A6%82%E5%BF%B5/4.png" alt="img"></p>
 <p>我们可以看到，<strong>非均匀分布比均匀分布的熵要小</strong>。现在让我们考虑如何把变量状态的类别传递给接收者。与之前一样，我们可以使用一个2比特的数字来完成这件事情。然而，我们可以利用非均匀分布这个特点，<strong>使用更短的编码来描述更可能的事件，使用更长的编码来描述不太可能的事件</strong>。我们希望这样做能够得到一个更短的平均编码长度。我们可以使用下面的编码串（哈夫曼编码）：0、10、110、111来表示状态 {a,b,c,d}。传输的编码的平均长度就是：</p>
-<p><img src="https://mmbiz.qpic.cn/mmbiz_png/7PuqRWWU6zOYBmeb2hk064IuLIiclGJRyLZC8Yc4cz5f4T8yy0ZnfPV2tRY6rCc6TU6JyDgpAPnbKTzyZnXgoFA/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="img"></p>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/ML/%E5%86%B3%E7%AD%96%E6%A0%91/%E8%BE%A8%E6%9E%90ML%E4%B8%AD%E7%9A%84%E7%86%B5%E6%9C%89%E5%85%B3%E7%9A%84%E6%A6%82%E5%BF%B5/5.png" alt="img"></p>
 <p>这个值与上方的随机变量的熵相等。熵和最短编码长度的这种关系是一种普遍的情形。Shannon 编码定理表明<strong>熵是传输一个随机变量状态值所需的比特位下界（最短平均编码长度）</strong>。因此，信息熵可以应用在数据压缩方面。可参考这篇文章讲的很详细了，我就不赘述了。<em>（<a href="http://www.ruanyifeng.com/blog/2014/09/information-entropy.html）" target="_blank" rel="noopener">http://www.ruanyifeng.com/blog/2014/09/information-entropy.html）</a></em></p>
 <h2 id="二、条件熵（Conditional-entropy）"><a href="#二、条件熵（Conditional-entropy）" class="headerlink" title="二、条件熵（Conditional entropy）"></a>二、条件熵（Conditional entropy）</h2><p>条件熵 H(Y|X)表示在已知随机变量 X 的条件下随机变量 Y 的不确定性。条件熵 H(Y|X)定义为 X 给定条件下 Y 的条件概率分布的熵对 X 的数学期望：</p>
-<p><img src="https://mmbiz.qpic.cn/mmbiz_png/7PuqRWWU6zOYBmeb2hk064IuLIiclGJRyjryBIgOicSks2Pic9lazLohe3DjBabO9U4hpZW3oOqjVCc0QVich2V4PA/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="img"></p>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/ML/%E5%86%B3%E7%AD%96%E6%A0%91/%E8%BE%A8%E6%9E%90ML%E4%B8%AD%E7%9A%84%E7%86%B5%E6%9C%89%E5%85%B3%E7%9A%84%E6%A6%82%E5%BF%B5/6.png" alt="img"></p>
 <p>条件熵 H(Y|X)相当于联合熵 H(X,Y)减去单独的熵 H(X)，即H(Y|X)=H(X,Y)−H(X)，证明如下：</p>
-<p><img src="https://mmbiz.qpic.cn/mmbiz_png/7PuqRWWU6zOYBmeb2hk064IuLIiclGJRyjPRrOGJGVFv8ZwEJUXtJRyAfH7nbXX51DqJU8uuWcQx11BvoEZUgxw/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="img"></p>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/ML/%E5%86%B3%E7%AD%96%E6%A0%91/%E8%BE%A8%E6%9E%90ML%E4%B8%AD%E7%9A%84%E7%86%B5%E6%9C%89%E5%85%B3%E7%9A%84%E6%A6%82%E5%BF%B5/7.jpg" alt="img"></p>
 <p>举个例子，比如环境温度是低还是高，和我穿短袖还是外套这两个事件可以组成联合概率分布 H(X,Y)，因为两个事件加起来的信息量肯定是大于单一事件的信息量的。假设 H(X)对应着今天环境温度的信息量，由于今天环境温度和今天我穿什么衣服这两个事件并不是独立分布的，所以在已知今天环境温度的情况下，我穿什么衣服的信息量或者说不确定性是被减少了。当已知 H(X) 这个信息量的时候，H(X,Y) 剩下的信息量就是条件熵：H(Y|X)=H(X,Y)−H(X)</p>
 <p>因此，可以这样理解，描述 X 和 Y 所需的信息是描述 X 自己所需的信息,加上给定 X的条件下具体化 Y 所需的额外信息。关于条件熵的例子可以看这篇文章，讲得很详细。<em>（<a href="https://zhuanlan.zhihu.com/p/26551798）" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/26551798）</a></em></p>
 <h2 id="三、相对熵（Relative-entropy）"><a href="#三、相对熵（Relative-entropy）" class="headerlink" title="三、相对熵（Relative entropy）"></a>三、相对熵（Relative entropy）</h2><p>相对熵，也称<strong>KL散度（Kullback-Leibler divergence）</strong></p>
 <p>设 p(x)、q(x) 是 离散随机变量 X 中取值的两个概率分布，则 p 对 q 的相对熵是：</p>
-<p><img src="https://mmbiz.qpic.cn/mmbiz_png/7PuqRWWU6zOYBmeb2hk064IuLIiclGJRydhiagnHXm2ge3ZLciaCmU32smbzl67fN8sn4YMJODZqHSiclZOhEIUvaQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="img"></p>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/ML/%E5%86%B3%E7%AD%96%E6%A0%91/%E8%BE%A8%E6%9E%90ML%E4%B8%AD%E7%9A%84%E7%86%B5%E6%9C%89%E5%85%B3%E7%9A%84%E6%A6%82%E5%BF%B5/8.png" alt="img"></p>
 <p>性质：</p>
 <ul>
 <li>如果 p(x) 和 q(x) 两个分布相同，那么相对熵等于0</li>
 <li>DKL(p||q)≠DKL(q||p)，相对熵具有不对称性。大家可以举个简单例子算一下。</li>
 <li>DKL(p||q)≥0证明如下：<em>(用Jensen不等式<a href="https://en.wikipedia.org/wiki/Jensen%27s_inequality" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Jensen%27s_inequality</a>)</em></li>
 </ul>
-<p><img src="https://mmbiz.qpic.cn/mmbiz_png/7PuqRWWU6zOYBmeb2hk064IuLIiclGJRywTeaGulxkUHR70KrLpp10anOKeiceoj0UzGzn0u1x0Wq7vkXP3MJ4xg/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="img"></p>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/ML/%E5%86%B3%E7%AD%96%E6%A0%91/%E8%BE%A8%E6%9E%90ML%E4%B8%AD%E7%9A%84%E7%86%B5%E6%9C%89%E5%85%B3%E7%9A%84%E6%A6%82%E5%BF%B5/9.png" alt="img"></p>
 <p>因为：</p>
-<p><img src="https://mmbiz.qpic.cn/mmbiz_png/7PuqRWWU6zOYBmeb2hk064IuLIiclGJRyib7NicQt3JltqSfAWxl6R1qOicCJQGYUx8tYyJiavJqAvnvckF5yjJkYvQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="img"></p>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/ML/%E5%86%B3%E7%AD%96%E6%A0%91/%E8%BE%A8%E6%9E%90ML%E4%B8%AD%E7%9A%84%E7%86%B5%E6%9C%89%E5%85%B3%E7%9A%84%E6%A6%82%E5%BF%B5/10.png" alt="img"></p>
 <p>所以：</p>
 <p>​                                                DKL(p||q)≥0</p>
 <p><strong>总结</strong>：相对熵可以用来衡量两个概率分布之间的差异，上面公式的意义就是求 p 与 q 之间的对数差在 p 上的期望值。</p>
 <h2 id="四、交叉熵（Cross-entropy）"><a href="#四、交叉熵（Cross-entropy）" class="headerlink" title="四、交叉熵（Cross entropy）"></a>四、交叉熵（Cross entropy）</h2><p>现在有关于样本集的两个概率分布 p(x) 和 q(x)，其中 p(x) 为真实分布， q(x)非真实分布。如果用真实分布 p(x) 来衡量识别一个样本所需要编码长度的期望（平均编码长度）为:</p>
-<p><img src="https://mmbiz.qpic.cn/mmbiz_png/7PuqRWWU6zOYBmeb2hk064IuLIiclGJRy7jX3ODlPqrQuKL3wQIobqSgP4QfdcBmO2MUEmPUiaebaNAB748NEtRA/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="img"></p>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/ML/%E5%86%B3%E7%AD%96%E6%A0%91/%E8%BE%A8%E6%9E%90ML%E4%B8%AD%E7%9A%84%E7%86%B5%E6%9C%89%E5%85%B3%E7%9A%84%E6%A6%82%E5%BF%B5/11.png" alt="img"></p>
 <p>如果使用非真实分布 q(x) 来表示来自真实分布 p(x) 的平均编码长度，则是：</p>
-<p><img src="https://mmbiz.qpic.cn/mmbiz_png/7PuqRWWU6zOYBmeb2hk064IuLIiclGJRyQCBoVkBJ2dXcLuVMMzOSiaWRdCsyhR8GSEDOviaSxeiaY2S32gx7ULuCQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="img"></p>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/ML/%E5%86%B3%E7%AD%96%E6%A0%91/%E8%BE%A8%E6%9E%90ML%E4%B8%AD%E7%9A%84%E7%86%B5%E6%9C%89%E5%85%B3%E7%9A%84%E6%A6%82%E5%BF%B5/12.png" alt="img"></p>
 <p>（因为用 q(x) 来编码的样本来自于分布 q(x) ，所以 H(p,q) 中的概率是 p(x)）。此时就将 H(p,q) 称之为交叉熵。举个例子。考虑一个随机变量 x，真实分布p(x)=(1/2,1/4,1/8,1/8)，非真实分布 q(x)=(1/4,1/4,1/4,1/4)， 则H(p)=1.75 bits（最短平均码长），交叉熵:</p>
-<p><img src="https://mmbiz.qpic.cn/mmbiz_png/7PuqRWWU6zOYBmeb2hk064IuLIiclGJRyXOcPa0tT1eFEfPMqiavIia7ZY6r37vVcKyTEXlibic4GfLZ2TG1kF4vpFA/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="img"></p>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/ML/%E5%86%B3%E7%AD%96%E6%A0%91/%E8%BE%A8%E6%9E%90ML%E4%B8%AD%E7%9A%84%E7%86%B5%E6%9C%89%E5%85%B3%E7%9A%84%E6%A6%82%E5%BF%B5/16.png" alt="img"></p>
 <p>由此可以看出根据非真实分布 q(x) 得到的平均码长大于根据真实分布 p(x) 得到的平均码长。</p>
 <p>我们再化简一下相对熵的公式。</p>
-<p><img src="https://mmbiz.qpic.cn/mmbiz_png/7PuqRWWU6zOYBmeb2hk064IuLIiclGJRynXd8nXp5ppuhPODrKmmBP5iaWaxBJGmKdVfBnVyD8COAvE1BVib6LCLg/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="img"></p>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/ML/%E5%86%B3%E7%AD%96%E6%A0%91/%E8%BE%A8%E6%9E%90ML%E4%B8%AD%E7%9A%84%E7%86%B5%E6%9C%89%E5%85%B3%E7%9A%84%E6%A6%82%E5%BF%B5/13.png" alt="img"></p>
 <p>有没有发现什么？</p>
 <p>熵的公式：</p>
-<p> <img src="https://mmbiz.qpic.cn/mmbiz_png/7PuqRWWU6zOYBmeb2hk064IuLIiclGJRyRhfmxRz5ELa8VyhzAFkOBx3HzSZLPEHeBQzjcEPJ0xHw0HWE3vJXmw/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="img"></p>
+<p> <img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/ML/%E5%86%B3%E7%AD%96%E6%A0%91/%E8%BE%A8%E6%9E%90ML%E4%B8%AD%E7%9A%84%E7%86%B5%E6%9C%89%E5%85%B3%E7%9A%84%E6%A6%82%E5%BF%B5/14.png" alt="img">)</p>
 <p>交叉熵的公式：</p>
-<p><img src="https://mmbiz.qpic.cn/mmbiz_png/7PuqRWWU6zOYBmeb2hk064IuLIiclGJRyjuX1DBbfiaX6Hszftjn4bqUpzczYnMISo5kU9fLJQiaWic6kbO7BhOZOQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="img"></p>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/ML/%E5%86%B3%E7%AD%96%E6%A0%91/%E8%BE%A8%E6%9E%90ML%E4%B8%AD%E7%9A%84%E7%86%B5%E6%9C%89%E5%85%B3%E7%9A%84%E6%A6%82%E5%BF%B5/15.png" alt="img"></p>
 <p>所以有：DKL(p||q)=H(p,q)−H(p)（当用非真实分布 q(x) 得到的平均码长比真实分布 p(x) 得到的平均码长多出的比特数就是相对熵）</p>
 <p>又因为 DKL(p||q)≥0所以 H(p,q)≥H(p)（当 p(x)=q(x) 时取等号，此时交叉熵等于信息熵）并且当 H(p) 为<strong>常量</strong>时（<strong>注：在机器学习中，训练数据分布是固定的</strong>）<strong>最小化相对熵</strong> DKL(p||q) 等价于<strong>最小化交叉熵</strong> H(p,q) 也等价于<strong>最大化似然估计</strong>（具体参考<strong>Deep Learning 5.5</strong>）。在机器学习中，我们希望<strong>训练数据上模型学到的分布</strong> P(model) 和<strong>真实数据的分布</strong> <strong>P(real)</strong> <strong>越接近越好</strong>，<strong>所以我们可以使其相对熵最小</strong>。但是我们没有真实数据的分布，所以只能希望模型学到的分布 P(model) 和训练数据的分布 P(train) 尽量相同。假设训练数据是从总体中独立同分布采样的，那么我们可以通过最小化训练数据的经验误差来降低模型的泛化误差。即：</p>
 <ul>
