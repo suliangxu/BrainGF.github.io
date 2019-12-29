@@ -249,6 +249,327 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/29/人工智能/机器学习算法比较/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/12/29/人工智能/机器学习算法比较/" itemprop="url">机器学习算法比较</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-12-29T17:08:43+08:00">
+                2019-12-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Machine Learning</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>本文主要回顾下几个常用算法的适应场景及其优缺点！（提示：部分内容摘自网络）。</p>
+<p>主要来自博客：<a href="http://www.csuldw.com/2016/02/26/2016-02-26-choosing-a-machine-learning-classifier/" target="_blank" rel="noopener">http://www.csuldw.com/2016/02/26/2016-02-26-choosing-a-machine-learning-classifier/</a></p>
+<p>机器学习算法太多了，分类、回归、聚类、推荐、图像识别领域等等，要想找到一个合适算法真的不容易，所以在实际应用中，我们一般都是采用启发式学习方式来实验。通常最开始我们都会选择大家普遍认同的算法，诸如SVM，GBDT，Adaboost，现在深度学习很火热，神经网络也是一个不错的选择。假如你在乎精度（accuracy）的话，最好的方法就是通过<strong><em>交叉验证（cross-validation）</em></strong>对各个算法一个个地进行测试，进行比较，然后调整参数确保每个算法达到最优解，最后选择最好的一个。</p>
+<p>但是如果你只是在寻找一个“足够好”的算法来解决你的问题，或者这里有些技巧可以参考，下面来分析下各个算法的优缺点，基于算法的优缺点，更易于我们去选择它。</p>
+<h3 id="一、偏差与方差"><a href="#一、偏差与方差" class="headerlink" title="一、偏差与方差"></a>一、偏差与方差</h3><p>在统计学中，一个模型好坏，是根据偏差和方差来衡量的，所以我们先来普及一下偏差(bias)和方差(variance)：</p>
+<ul>
+<li>偏差：描述的是预测值（估计值）的期望E’与真实值Y之间的差距。偏差越大，越偏离真实数据。</li>
+</ul>
+<p>​        $Bias[\hat{f(x)}]=E[\hat{f(x)}]−f(x)$</p>
+<ul>
+<li>方差：描述的是预测值P的变化范围，离散程度，是预测值的方差，也就是离其期望值E的距离。方差越大，数据的分布越分散。</li>
+</ul>
+<p>$Var[\hat{f(x)}] = E[(\hat{f(x)} - E[{\hat{f(x)])}}^2]$</p>
+<p>模型的真实误差是两者之和，如公式<a href="http://www.csuldw.com/2016/02/26/2016-02-26-choosing-a-machine-learning-classifier/#mjx-eqn-3" target="_blank" rel="noopener">(3)</a>：</p>
+<p>$E[(y−\hat{f(x)})^2]=Bias[\hat{f(x)}]^2+Var[\hat{f(x)}]+σ^2$</p>
+<p>通常情况下，如果是小训练集，高偏差/低方差的分类器（例如，朴素贝叶斯NB）要比低偏差/高方差大分类的优势大（例如，KNN），因为后者会发生过拟合（overfiting）。然而，随着你训练集的增长，模型对于原数据的预测能力就越好，偏差就会降低，此时低偏差/高方差的分类器就会渐渐的表现其优势（因为它们有较低的渐近误差），而高偏差分类器这时已经不足以提供准确的模型了。</p>
+<p>当然，你也可以认为这是生成模型（如NB）与判别模型（如KNN）的一个区别。</p>
+<p><strong><em>为什么说朴素贝叶斯是高偏差低方差?</em></strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">以下内容引自知乎：</span><br><span class="line"></span><br><span class="line">首先，假设你知道训练集和测试集的关系。简单来讲是我们要在训练集上学习一个模型，然后拿到测试集去用，效果好不好要根据测试集的错误率来衡量。但很多时候，我们只能假设测试集和训练集的是符合同一个数据分布的，但却拿不到真正的测试数据。这时候怎么在只看到训练错误率的情况下，去衡量测试错误率呢？</span><br><span class="line"></span><br><span class="line">由于训练样本很少（至少不足够多），所以通过训练集得到的模型，总不是真正正确的。（就算在训练集上正确率100%，也不能说明它刻画了真实的数据分布，要知道刻画真实的数据分布才是我们的目的，而不是只刻画训练集的有限的数据点）。而且，实际中，训练样本往往还有一定的噪音误差，所以如果太追求在训练集上的完美而采用一个很复杂的模型，会使得模型把训练集里面的误差都当成了真实的数据分布特征，从而得到错误的数据分布估计。这样的话，到了真正的测试集上就错的一塌糊涂了（这种现象叫过拟合）。但是也不能用太简单的模型，否则在数据分布比较复杂的时候，模型就不足以刻画数据分布了（体现为连在训练集上的错误率都很高，这种现象较欠拟合）。过拟合表明采用的模型比真实的数据分布更复杂，而欠拟合表示采用的模型比真实的数据分布要简单。</span><br><span class="line"></span><br><span class="line">在统计学习框架下，大家刻画模型复杂度的时候，有这么个观点，认为Error = Bias + Variance。这里的Error大概可以理解为模型的预测错误率，是有两部分组成的，一部分是由于模型太简单而带来的估计不准确的部分（Bias），另一部分是由于模型太复杂而带来的更大的变化空间和不确定性（Variance）。</span><br><span class="line"></span><br><span class="line">所以，这样就容易分析朴素贝叶斯了。它简单的假设了各个数据之间是无关的，是一个被严重简化了的模型。所以，对于这样一个简单模型，大部分场合都会Bias部分大于Variance部分，也就是说高偏差而低方差。</span><br><span class="line"></span><br><span class="line">在实际中，为了让Error尽量小，我们在选择模型的时候需要平衡Bias和Variance所占的比例，也就是平衡over-fitting和under-fitting。</span><br></pre></td></tr></table></figure>
+
+<p>偏差、方差、模型复杂度三者之间的关系使用下图表示会更容易理解：</p>
+<p><img src="http://www.csuldw.com/assets/articleImg/bias_variance.png" alt="img"></p>
+<p>当模型复杂度上升的时候，偏差会逐渐变小，而方差会逐渐变大。</p>
+<h3 id="二、常见算法的优缺点"><a href="#二、常见算法的优缺点" class="headerlink" title="二、常见算法的优缺点"></a>二、常见算法的优缺点</h3><h4 id="1、朴素贝叶斯"><a href="#1、朴素贝叶斯" class="headerlink" title="1、朴素贝叶斯"></a>1、朴素贝叶斯</h4><p>朴素贝叶斯属于<strong>生成式模型</strong>（关于生成模型和判别式模型，主要还是在于是否需要求联合分布），比较简单，你只需做一堆计数即可。如果注有条件独立性假设（一个比较严格的条件），朴素贝叶斯分类器的收敛速度将快于判别模型，比如逻辑回归，所以你只需要较少的训练数据即可。</p>
+<p>即使NB条件独立假设不成立，NB分类器在实践中仍然表现的很出色。它的主要缺点是它不能学习特征间的相互作用，用mRMR中R来讲，就是特征冗余。引用一个比较经典的例子，比如，虽然你喜欢Brad Pitt和Tom Cruise的电影，但是它不能学习出你不喜欢他们在一起演的电影。</p>
+<p><strong>优点</strong>：</p>
+<ul>
+<li>朴素贝叶斯模型发源于古典数学理论，有着坚实的数学基础，以及稳定的分类效率。</li>
+<li>对小规模的数据表现很好，能个处理多分类任务，适合增量式训练；</li>
+<li>对缺失数据不太敏感，算法也比较简单，常用于文本分类。</li>
+</ul>
+<p><strong>缺点</strong>：</p>
+<ul>
+<li>需要计算先验概率；</li>
+<li>分类决策存在错误率；</li>
+<li>对输入数据的表达形式很敏感。</li>
+</ul>
+<hr>
+<h4 id="2-Logistic-Regression"><a href="#2-Logistic-Regression" class="headerlink" title="2.Logistic Regression"></a>2.Logistic Regression</h4><p>逻辑回归属于<strong><em>判别式模型</em></strong>，同时伴有很多模型正则化的方法（L0， L1，L2，etc），而且你不必像在用朴素贝叶斯那样担心你的特征是否相关。与决策树、SVM相比，你还会得到一个不错的概率解释，你甚至可以轻松地利用新数据来更新模型（使用在线梯度下降算法-online gradient descent）。</p>
+<p>如果你需要一个概率架构（比如，简单地调节分类阈值，指明不确定性，或者是要获得置信区间），或者你希望以后将更多的训练数据快速整合到模型中去，那么使用它吧。</p>
+<p><strong>Sigmoid函数</strong>：表达式为公式</p>
+<p>​            $f(x) = \frac{1}{1+e^{-x}}$</p>
+<p><strong>优点：</strong></p>
+<ul>
+<li>实现简单，广泛的应用于工业问题上；</li>
+<li>分类时计算量非常小，速度很快，存储资源低；</li>
+<li>便利的观测样本概率分数；</li>
+<li>对逻辑回归而言，多重共线性并不是问题，它可以结合L2正则化来解决该问题；</li>
+</ul>
+<p><strong>缺点</strong>：</p>
+<ul>
+<li>当特征空间很大时，逻辑回归的性能不是很好；</li>
+<li>容易<strong>欠拟合</strong>，一般准确度不太高</li>
+<li>不能很好地处理大量多类特征或变量；</li>
+<li>只能处理两分类问题（在此基础上衍生出来的softmax可以用于多分类），且必须<strong>线性可分</strong>；</li>
+<li>对于非线性特征，需要进行转换；</li>
+</ul>
+<hr>
+<h4 id="3、线性回归"><a href="#3、线性回归" class="headerlink" title="3、线性回归"></a>3、线性回归</h4><p>线性回归是用于回归的，它不像Logistic回归那样用于分类，其基本思想是用<strong>梯度下降法</strong>对最小二乘法形式的误差函数进行优化，当然也可以用normal equation直接求得参数的解，结果为：</p>
+<p>$\hat{w} = (X^TX)^{-1}X^Ty$</p>
+<p>而在LWLR（局部加权线性回归）中，参数的计算表达式为：</p>
+<p>$\hat{w} = (X^TWX)^{-1}X^TWy$</p>
+<p>由此可见LWLR与LR不同，LWLR是一个非参数模型，因为每次进行回归计算都要遍历训练样本至少一次。</p>
+<p><strong>优点</strong>： 实现简单，计算简单；</p>
+<p><strong>缺点</strong>： 不能拟合非线性数据.</p>
+<hr>
+<h4 id="4、KNN"><a href="#4、KNN" class="headerlink" title="4、KNN"></a>4、KNN</h4><p>KNN即最近邻算法，其主要过程为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1. 计算训练样本和测试样本中每个样本点的距离（常见的距离度量有欧式距离，马氏距离等）；</span><br><span class="line">2. 对上面所有的距离值进行排序(升序)；</span><br><span class="line">3. 选前k个最小距离的样本；</span><br><span class="line">4. 根据这k个样本的标签进行投票，得到最后的分类类别；</span><br></pre></td></tr></table></figure>
+
+<p>如何选择一个最佳的K值，这取决于数据。一般情况下，在分类时较大的K值能够减小噪声的影响，但会使类别之间的界限变得模糊。一个较好的K值可通过各种启发式技术来获取，比如，交叉验证。另外噪声和非相关性特征向量的存在会使K近邻算法的准确性减小。近邻算法具有较强的一致性结果，随着数据趋于无限，算法保证错误率不会超过贝叶斯算法错误率的两倍。对于一些好的K值，K近邻保证错误率不会超过贝叶斯理论误差率。</p>
+<p><strong>优点</strong></p>
+<ul>
+<li>理论成熟，思想简单，既可以用来做分类也可以用来做回归；</li>
+<li>可用于非线性分类；</li>
+<li>训练时间复杂度为O(n)；</li>
+<li>对数据没有假设，准确度高，对outlier不敏感；</li>
+</ul>
+<p><strong>缺点</strong></p>
+<ul>
+<li>计算量大（体现在距离计算上）；</li>
+<li>样本不平衡问题（即有些类别的样本数量很多，而其它样本的数量很少）效果差；</li>
+<li>需要大量内存；</li>
+</ul>
+<hr>
+<h4 id="5、决策树"><a href="#5、决策树" class="headerlink" title="5、决策树"></a>5、决策树</h4><p>决策树的一大优势就是易于解释。它可以毫无压力地处理特征间的交互关系并且是非参数化的，因此你不必担心异常值或者数据是否线性可分（举个例子，决策树能轻松处理好类别A在某个特征维度x的末端，类别B在中间，然后类别A又出现在特征维度x前端的情况）。它的缺点之一就是不支持在线学习，于是在新样本到来后，决策树需要全部重建。另一个缺点就是容易出现过拟合，但这也就是诸如随机森林RF（或提升树boosted tree）之类的集成方法的切入点。</p>
+<p>另外，随机森林经常是很多分类问题的赢家（通常比支持向量机好上那么一丁点），它训练快速并且可调，同时你无须担心要像支持向量机那样调一大堆参数，所以在以前都一直很受欢迎。</p>
+<p>决策树中很重要的一点就是选择一个属性进行分枝，因此要注意一下信息增益的计算公式，并深入理解它。</p>
+<p>信息熵的计算公式如下:</p>
+<p>$H=-\sum_{i=1}^n p(xi)log_{2}{p(xi)}$</p>
+<p>其中的n代表有n个分类类别（比如假设是二类问题，那么n=2）。分别计算这2类样本在总样本中出现的概率p1和p2，这样就可以计算出未选中属性分枝前的信息熵。</p>
+<p>现在选中一个属性 $xi$ 用来进行分枝，此时分枝规则是：如果       $xi=v$  的话，将样本分到树的一个分支；如果不相等则进入另一个分支。很显然，分支中的样本很有可能包括2个类别，分别计算这2个分支的熵H1和H2,计算出分枝后的总信息熵 $H’ =p1 * H1+p2 * H2$ ,则此时的信息增益 $ΔH = H - H’$ 。以信息增益为原则，把所有的属性都测试一边，选择一个使增益最大的属性作为本次分枝属性。</p>
+<p><strong>决策树自身的优点</strong></p>
+<ul>
+<li>计算简单，易于理解，可解释性强；</li>
+<li>比较适合处理有缺失属性的样本；</li>
+<li>能够处理不相关的特征；</li>
+<li>在相对短的时间内能够对大型数据源做出可行且效果良好的结果。</li>
+</ul>
+<p><strong>缺点</strong></p>
+<ul>
+<li>容易发生过拟合（随机森林可以很大程度上减少过拟合）；</li>
+<li>忽略了数据之间的相关性；</li>
+<li>对于那些各类别样本数量不一致的数据，在决策树当中,信息增益的结果偏向于那些具有更多数值的特征（只要是使用了信息增益，都有这个缺点，如RF）。</li>
+</ul>
+<h5 id="1-Adaboosting"><a href="#1-Adaboosting" class="headerlink" title="(1) Adaboosting"></a>(1) Adaboosting</h5><p>Adaboost是一种加和模型，每个模型都是基于上一次模型的错误率来建立的，过分关注分错的样本，而对正确分类的样本减少关注度，逐次迭代之后，可以得到一个相对较好的模型。该算法是一种典型的boosting算法，其加和理论的优势可以使用Hoeffding不等式得以解释。有兴趣的同学可以阅读下笔者后面写的这篇文章<a href="http://www.csuldw.com/2016/08/28/2016-08-28-adaboost-algorithm-theory/" target="_blank" rel="noopener">Adaboost - 新的角度理解权值更新策略</a>.下面总结下它的优缺点。</p>
+<p><strong>优点</strong></p>
+<ul>
+<li>Adaboost是一种有很高精度的分类器。</li>
+<li>可以使用各种方法构建子分类器，Adaboost算法提供的是框架。</li>
+<li>当使用简单分类器时，计算出的结果是可以理解的，并且弱分类器的构造极其简单。</li>
+<li>简单，不用做特征筛选。</li>
+<li>不易发生overfitting。</li>
+</ul>
+<p>关于随机森林和GBDT等组合算法，参考这篇文章：[机器学习-组合算法总结](<a href="http://www.csuldw.com/2015/07/22/2015-07-22" target="_blank" rel="noopener">http://www.csuldw.com/2015/07/22/2015-07-22</a>  ensemble/)</p>
+<p><strong>缺点：</strong></p>
+<p>​    对outlier比较敏感</p>
+<hr>
+<h4 id="6、SVM"><a href="#6、SVM" class="headerlink" title="6、SVM"></a>6、SVM</h4><p>支持向量机，一个经久不衰的算法，高准确率，为避免过拟合提供了很好的理论保证，而且就算数据在原特征空间线性不可分，只要给个合适的核函数，它就能运行得很好。在动辄超高维的文本分类问题中特别受欢迎。可惜内存消耗大，难以解释，运行和调参也有些烦人，而随机森林却刚好避开了这些缺点，比较实用。</p>
+<p><strong>优点</strong></p>
+<ul>
+<li>可以解决高维问题，即大型特征空间；</li>
+<li>能够处理非线性特征的相互作用；</li>
+<li>无需依赖整个数据；</li>
+<li>可以提高泛化能力；</li>
+</ul>
+<p><strong>缺点</strong></p>
+<ul>
+<li>当观测样本很多时，效率并不是很高；</li>
+<li>对非线性问题没有通用解决方案，有时候很难找到一个合适的核函数；</li>
+<li>对缺失数据敏感；</li>
+</ul>
+<p>对于核的选择也是有技巧的（libsvm中自带了四种核函数：线性核、多项式核、RBF以及sigmoid核）：</p>
+<ul>
+<li>第一，如果样本数量小于特征数，那么就没必要选择非线性核，简单的使用线性核就可以了；</li>
+<li>第二，如果样本数量大于特征数目，这时可以使用非线性核，将样本映射到更高维度，一般可以得到更好的结果；</li>
+<li>第三，如果样本数目和特征数目相等，该情况可以使用非线性核，原理和第二种一样。</li>
+</ul>
+<p>对于第一种情况，也可以先对数据进行降维，然后使用非线性核，这也是一种方法。</p>
+<hr>
+<h4 id="7、人工神经网络"><a href="#7、人工神经网络" class="headerlink" title="7、人工神经网络"></a>7、人工神经网络</h4><p><strong>优点：</strong></p>
+<ul>
+<li>分类的准确度高；</li>
+<li>并行分布处理能力强,分布存储及学习能力强，</li>
+<li>对噪声神经有较强的鲁棒性和容错能力，能充分逼近复杂的非线性关系；</li>
+<li>具备联想记忆的功能。</li>
+</ul>
+<p><strong>缺点：</strong></p>
+<ul>
+<li>神经网络需要大量的参数，如网络拓扑结构、权值和阈值的初始值；</li>
+<li>不能观察之间的学习过程，输出结果难以解释，会影响到结果的可信度和可接受程度；</li>
+<li>学习时间过长,甚至可能达不到学习的目的。</li>
+</ul>
+<hr>
+<h4 id="8、K-Means-聚类"><a href="#8、K-Means-聚类" class="headerlink" title="8、K - Means 聚类"></a>8、K - Means 聚类</h4><p>之前笔者写过一篇关于K-Means聚类的文章，参见<a href="http://www.csuldw.com/2015/06/03/2015-06-03-ml-algorithm-K-means/" target="_blank" rel="noopener">机器学习算法-K-means聚类</a>。关于K-Means的推导，里面可是有大学问的，蕴含着强大的EM思想。</p>
+<p><strong>优点</strong></p>
+<ul>
+<li>算法简单，容易实现 ；</li>
+<li>对处理大数据集，该算法是相对可伸缩的和高效率的，因为它的复杂度大约是O(nkt)，其中n是所有对象的数目，k是簇的数目,t是迭代的次数。通常k&lt;&lt;nk&lt;&lt;n。这个算法通常局部收敛。</li>
+<li>算法尝试找出使平方误差函数值最小的k个划分。当簇是密集的、球状或团状的，且簇与簇之间区别明显时，聚类效果较好。</li>
+</ul>
+<p><strong>缺点</strong></p>
+<ul>
+<li>对数据类型要求较高，适合数值型数据；</li>
+<li>可能收敛到局部最小值，在大规模数据上收敛较慢 </li>
+<li>K值比较难以选取；</li>
+<li>对初值的簇心值敏感，对于不同的初始值，可能会导致不同的聚类结果；</li>
+<li>不适合于发现非凸面形状的簇，或者大小差别很大的簇。</li>
+<li>对于”噪声”和孤立点数据敏感，少量的该类数据能够对平均值产生极大影响。</li>
+</ul>
+<h3 id="三、算法选择参考"><a href="#三、算法选择参考" class="headerlink" title="三、算法选择参考"></a>三、算法选择参考</h3><p>之前笔者翻译过一些国外的文章，其中有一篇文章中给出了一个简单的算法选择技巧：</p>
+<ol>
+<li>首次应该选择的就是逻辑回归，如果它的效果不怎么样，那么可以将它的结果作为基准来参考，在基础上与其他算法进行比较；</li>
+<li>然后试试决策树（随机森林）看看是否可以大幅度提升你的模型性能。即便最后你并没有把它当做为最终模型，你也可以使用随机森林来移除噪声变量，做特征选择；</li>
+<li>如果特征的数量和观测样本特别多，那么当资源和时间充足时（这个前提很重要），使用SVM不失为一种选择。</li>
+</ol>
+<p>通常情况下：【GBDT&gt;=SVM&gt;=RF&gt;=Adaboost&gt;=Other…】，现在深度学习很热门，很多领域都用到，它是以神经网络为基础的，目前笔者自己也在学习，只是理论知识不扎实，理解的不够深入，这里就不做介绍了，希望以后可以写一片抛砖引玉的文章。</p>
+<p>算法固然重要，<strong>但好的数据却要优于好的算法</strong>，设计优良特征是大有裨益的。假如你有一个超大数据集，那么无论你使用哪种算法可能对分类性能都没太大影响（此时就可以根据速度和易用性来进行抉择）。</p>
+<h3 id="四、参考文献"><a href="#四、参考文献" class="headerlink" title="四、参考文献"></a>四、参考文献</h3><p>[1] <a href="https://en.wikipedia.org/wiki/Bias–variance_tradeoff" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Bias%E2%80%93variance_tradeoff</a></p>
+<p>[2] <a href="http://blog.echen.me/2011/04/27/choosing-a-machine-learning-classifier/" target="_blank" rel="noopener">http://blog.echen.me/2011/04/27/choosing-a-machine-learning-classifier/</a></p>
+<p>[3]<a href="http://www.csuldw.com/2016/02/26/2016-02-26-choosing-a-machine-learning-classifier/" target="_blank" rel="noopener">http://www.csuldw.com/2016/02/26/2016-02-26-choosing-a-machine-learning-classifier/</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/15/随笔/最大间距(LeetCode164)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -376,6 +697,217 @@
 
 <h3 id="三、代码（-C-）"><a href="#三、代码（-C-）" class="headerlink" title="三、代码（  C  ）"></a>三、代码（  C  ）</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;math.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MIN_VALUE 0</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX_VALUE (pow(2, 31)-1)</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">maximumGap</span><span class="params">(<span class="keyword">int</span>* num, <span class="keyword">int</span> numsSize)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (numsSize == <span class="number">0</span> || numsSize&lt;<span class="number">2</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> maxval = MIN_VALUE;</span><br><span class="line">	<span class="keyword">int</span> minval = MAX_VALUE;</span><br><span class="line">  </span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; numsSize ; i++)&#123;</span><br><span class="line">		maxval = num[i]&gt;maxval?num[i]:maxval;</span><br><span class="line">		minval = num[i]&gt;minval?minval:num[i];</span><br><span class="line">	&#125; </span><br><span class="line">  </span><br><span class="line">	<span class="keyword">if</span> (minval == maxval) </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">if</span> (numsSize == <span class="number">2</span>) </span><br><span class="line">    <span class="keyword">return</span> maxval - minval;</span><br><span class="line">  </span><br><span class="line">	<span class="keyword">int</span> box_len = (<span class="keyword">int</span>)<span class="built_in">ceil</span>((<span class="keyword">double</span>)(maxval-minval)/(numsSize<span class="number">-1</span>));</span><br><span class="line">	<span class="keyword">int</span> n = (maxval - minval)/box_len;</span><br><span class="line">	<span class="keyword">int</span> maxBuk[n+<span class="number">1</span>],minBuk[n+<span class="number">1</span>];</span><br><span class="line">  </span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; n+<span class="number">1</span>;i++)&#123;</span><br><span class="line">		maxBuk[i] = MIN_VALUE;</span><br><span class="line">		minBuk[i] = MAX_VALUE;</span><br><span class="line">	&#125;</span><br><span class="line">  </span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span> ; j &lt; numsSize ; j ++)&#123;</span><br><span class="line">		<span class="keyword">int</span> temp = (num[j]-minval)/box_len;</span><br><span class="line">		maxBuk[temp] = num[j]&gt;maxBuk[temp]?num[j]:maxBuk[temp];</span><br><span class="line">		minBuk[temp] = num[j]&gt;minBuk[temp]?minBuk[temp]:num[j]; </span><br><span class="line">	&#125;</span><br><span class="line">  </span><br><span class="line">	<span class="keyword">int</span> gap = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> pre = maxBuk[<span class="number">0</span>];</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n ; i++)&#123;</span><br><span class="line">		<span class="keyword">if</span> (maxBuk[i]==MIN_VALUE &amp;&amp; minBuk[i]==MAX_VALUE)&#123;</span><br><span class="line">        	<span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">		gap = gap&gt;minBuk[i]-pre?gap:minBuk[i]-pre;</span><br><span class="line">    pre = maxBuk[i];</span><br><span class="line">	&#125;</span><br><span class="line">  </span><br><span class="line">	<span class="keyword">return</span> gap;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/06/人工智能/决策树/辨析ML中的熵有关的概念/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/11/06/人工智能/决策树/辨析ML中的熵有关的概念/" itemprop="url">辨析ML中的熵有关的概念</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-11-06T16:00:23+08:00">
+                2019-11-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Machine-Learning-Decision-Tree/" itemprop="url" rel="index">
+                    <span itemprop="name">Machine Learning - Decision Tree</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="一、信息熵（information-entropy）"><a href="#一、信息熵（information-entropy）" class="headerlink" title="一、信息熵（information entropy）"></a>一、信息熵（information entropy）</h2><p><strong>熵</strong>（entropy）这一词最初来源于热力学。1948年，<strong>香农</strong>将热力学中的熵引入信息论，所以也称<strong>香农熵</strong>（Shannon entropy），<strong>信息熵</strong>（information entropy）。</p>
+<p>信息是一个很抽象的概念，百度百科将它定义为：指音讯、消息、通讯系统传输和处理的对象，泛指人类社会传播的一切内容。那么信息可以被量化么？可以的，香农提出的“信息熵”概念解决了这一问题。</p>
+<p>一条信息的信息量大小和它的<strong>不确定性</strong>有直接的关系。我们需要搞清楚一件非常非常不确定的事，或者是我们一无所知的事，就需要了解大量的信息。相反，如果我们对某件事已经有了较多的了解，我们就不需要太多的信息就能把它搞清楚。所以，从这个角度，我们可以认为，<strong>信息的度量就等于不确定性的多少</strong>。比如，有人说广东下雪了。对于这句话，我们是十分不确定的。因为广东几十年来下雪的次数寥寥无几。为了搞清楚，我们就要去看天气预报，新闻，询问在广东的朋友，而这就需要大量的信息，信息熵很高。再比如，中国男足进军2022年卡塔尔世界杯决赛圈。对于这句话，因为确定性很高，几乎不需要引入信息，信息熵很低。</p>
+<p>考虑一个<strong>离散的随机变量x</strong>，由上面的例子可知，信息的量度应该依赖于概率分布p(x)，因此我们想要找一个函数 l(x)，它是概率p(x)的单调函数，表达了信息的内容。怎么寻找呢？如果我们有两个不相关的事件x和y，那么观察两个事件同时发生时获得的信息量应该等于观察到事件各自发生时获得的信息之和，即 $l(x, y) = l(x) + l(y)$。</p>
+<p>因为两个事件是独立不相关的，因此 $p(x, y) = p(x)p(y)$ 。根据这两个关系，很容易看出 l(x) 一定与 p(x) 的对数有关（因为对数的运算法则是 $log_{a}(mn) = log_{a}m + log_{a}n$ ）因此，我们有 $l(x) = -logp(x)$。<strong>其中负号是用来保证信息量为正数或零</strong>（因为p(x)总是在0到1之间）。<strong>而 log函数的基的选择是任意的</strong>（信息论中常选择为2，因此信息的单位为比特bits，而机器学习中常选自然对数，因此单位被称为奈特nats）。<strong>l(x) 也被称为随机变量 x 的自信息（self-information），描述的是随机变量的某个事件发生所带来的信息量。</strong>图像如图：</p>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/ML/%E5%86%B3%E7%AD%96%E6%A0%91/%E8%BE%A8%E6%9E%90ML%E4%B8%AD%E7%9A%84%E7%86%B5%E6%9C%89%E5%85%B3%E7%9A%84%E6%A6%82%E5%BF%B5/1.png" alt="img"></p>
+<p>最后，我们正式引出<strong>信息熵</strong>。现在假设一个发送者想传送一个随机变量的值给接收者。那么在这个过程中，他们传输的<strong>平均信息量</strong>可以通过求 $l(x) = -logp(x)$ 关于概率分布 p(x) 的期望得到，即：</p>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/ML/%E5%86%B3%E7%AD%96%E6%A0%91/%E8%BE%A8%E6%9E%90ML%E4%B8%AD%E7%9A%84%E7%86%B5%E6%9C%89%E5%85%B3%E7%9A%84%E6%A6%82%E5%BF%B5/2.png" alt="img"></p>
+<p>H(X) 就被称为随机变量 x的<strong>熵</strong>,<strong>它是表示随机变量不确定的度量，是对所有可能发生的事件产生的信息量的期望</strong>。从公式可得，<strong>随机变量的取值个数越多，状态数也就越多，信息熵就越大，混乱程度就越大。当随机分布为均匀分布时，熵最大</strong>，且 0≤H(X)≤logn。稍后证明。将一维随机变量分布推广到多维随机变量分布，则其<strong>联合熵</strong> (<strong>Joint entropy</strong>) 为：</p>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/ML/%E5%86%B3%E7%AD%96%E6%A0%91/%E8%BE%A8%E6%9E%90ML%E4%B8%AD%E7%9A%84%E7%86%B5%E6%9C%89%E5%85%B3%E7%9A%84%E6%A6%82%E5%BF%B5/3.png" alt="img"></p>
+<p><em>（注意：熵只依赖于随机变量的分布,与随机变量取值无关，所以也可以将X的熵记作H(p)；令0log0=0(因为某个取值概率可能为0)）</em></p>
+<p>那么这些定义有着什么样的性质呢？考虑一个随机变量 x。这个随机变量有4种可能的状态，每个状态都是等可能的。为了把 x 的值传给接收者，我们需要传输2比特的消息。H(X)=−4×(1/4)log2(1/4)=2 bits。现在考虑一个具有4种可能的状态 {a,b,c,d} 的随机变量，每个状态各自的概率为 (1/2,1/4,1/8,1/8)。这种情形下的熵为：</p>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/ML/%E5%86%B3%E7%AD%96%E6%A0%91/%E8%BE%A8%E6%9E%90ML%E4%B8%AD%E7%9A%84%E7%86%B5%E6%9C%89%E5%85%B3%E7%9A%84%E6%A6%82%E5%BF%B5/4.png" alt="img"></p>
+<p>我们可以看到，<strong>非均匀分布比均匀分布的熵要小</strong>。现在让我们考虑如何把变量状态的类别传递给接收者。与之前一样，我们可以使用一个2比特的数字来完成这件事情。然而，我们可以利用非均匀分布这个特点，<strong>使用更短的编码来描述更可能的事件，使用更长的编码来描述不太可能的事件</strong>。我们希望这样做能够得到一个更短的平均编码长度。我们可以使用下面的编码串（哈夫曼编码）：0、10、110、111来表示状态 {a,b,c,d}。传输的编码的平均长度就是：</p>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/ML/%E5%86%B3%E7%AD%96%E6%A0%91/%E8%BE%A8%E6%9E%90ML%E4%B8%AD%E7%9A%84%E7%86%B5%E6%9C%89%E5%85%B3%E7%9A%84%E6%A6%82%E5%BF%B5/5.png" alt="img"></p>
+<p>这个值与上方的随机变量的熵相等。熵和最短编码长度的这种关系是一种普遍的情形。Shannon 编码定理表明<strong>熵是传输一个随机变量状态值所需的比特位下界（最短平均编码长度）</strong>。因此，信息熵可以应用在数据压缩方面。可参考这篇文章讲的很详细了，我就不赘述了。<em>（<a href="http://www.ruanyifeng.com/blog/2014/09/information-entropy.html）" target="_blank" rel="noopener">http://www.ruanyifeng.com/blog/2014/09/information-entropy.html）</a></em></p>
+<h2 id="二、条件熵（Conditional-entropy）"><a href="#二、条件熵（Conditional-entropy）" class="headerlink" title="二、条件熵（Conditional entropy）"></a>二、条件熵（Conditional entropy）</h2><p>条件熵 H(Y|X)表示在已知随机变量 X 的条件下随机变量 Y 的不确定性。条件熵 H(Y|X)定义为 X 给定条件下 Y 的条件概率分布的熵对 X 的数学期望：</p>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/ML/%E5%86%B3%E7%AD%96%E6%A0%91/%E8%BE%A8%E6%9E%90ML%E4%B8%AD%E7%9A%84%E7%86%B5%E6%9C%89%E5%85%B3%E7%9A%84%E6%A6%82%E5%BF%B5/6.png" alt="img"></p>
+<p>条件熵 H(Y|X)相当于联合熵 H(X,Y)减去单独的熵 H(X)，即H(Y|X)=H(X,Y)−H(X)，证明如下：</p>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/ML/%E5%86%B3%E7%AD%96%E6%A0%91/%E8%BE%A8%E6%9E%90ML%E4%B8%AD%E7%9A%84%E7%86%B5%E6%9C%89%E5%85%B3%E7%9A%84%E6%A6%82%E5%BF%B5/7.jpg" alt="img"></p>
+<p>举个例子，比如环境温度是低还是高，和我穿短袖还是外套这两个事件可以组成联合概率分布 H(X,Y)，因为两个事件加起来的信息量肯定是大于单一事件的信息量的。假设 H(X)对应着今天环境温度的信息量，由于今天环境温度和今天我穿什么衣服这两个事件并不是独立分布的，所以在已知今天环境温度的情况下，我穿什么衣服的信息量或者说不确定性是被减少了。当已知 H(X) 这个信息量的时候，H(X,Y) 剩下的信息量就是条件熵：H(Y|X)=H(X,Y)−H(X)</p>
+<p>因此，可以这样理解，描述 X 和 Y 所需的信息是描述 X 自己所需的信息,加上给定 X的条件下具体化 Y 所需的额外信息。关于条件熵的例子可以看这篇文章，讲得很详细。<em>（<a href="https://zhuanlan.zhihu.com/p/26551798）" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/26551798）</a></em></p>
+<h2 id="三、相对熵（Relative-entropy）"><a href="#三、相对熵（Relative-entropy）" class="headerlink" title="三、相对熵（Relative entropy）"></a>三、相对熵（Relative entropy）</h2><p>相对熵，也称<strong>KL散度（Kullback-Leibler divergence）</strong></p>
+<p>设 p(x)、q(x) 是 离散随机变量 X 中取值的两个概率分布，则 p 对 q 的相对熵是：</p>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/ML/%E5%86%B3%E7%AD%96%E6%A0%91/%E8%BE%A8%E6%9E%90ML%E4%B8%AD%E7%9A%84%E7%86%B5%E6%9C%89%E5%85%B3%E7%9A%84%E6%A6%82%E5%BF%B5/8.png" alt="img"></p>
+<p>性质：</p>
+<ul>
+<li>如果 p(x) 和 q(x) 两个分布相同，那么相对熵等于0</li>
+<li>DKL(p||q)≠DKL(q||p)，相对熵具有不对称性。大家可以举个简单例子算一下。</li>
+<li>DKL(p||q)≥0证明如下：<em>(用Jensen不等式<a href="https://en.wikipedia.org/wiki/Jensen%27s_inequality" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Jensen%27s_inequality</a>)</em></li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/ML/%E5%86%B3%E7%AD%96%E6%A0%91/%E8%BE%A8%E6%9E%90ML%E4%B8%AD%E7%9A%84%E7%86%B5%E6%9C%89%E5%85%B3%E7%9A%84%E6%A6%82%E5%BF%B5/9.png" alt="img"></p>
+<p>因为：</p>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/ML/%E5%86%B3%E7%AD%96%E6%A0%91/%E8%BE%A8%E6%9E%90ML%E4%B8%AD%E7%9A%84%E7%86%B5%E6%9C%89%E5%85%B3%E7%9A%84%E6%A6%82%E5%BF%B5/10.png" alt="img"></p>
+<p>所以：</p>
+<p>​                                                DKL(p||q)≥0</p>
+<p><strong>总结</strong>：相对熵可以用来衡量两个概率分布之间的差异，上面公式的意义就是求 p 与 q 之间的对数差在 p 上的期望值。</p>
+<h2 id="四、交叉熵（Cross-entropy）"><a href="#四、交叉熵（Cross-entropy）" class="headerlink" title="四、交叉熵（Cross entropy）"></a>四、交叉熵（Cross entropy）</h2><p>现在有关于样本集的两个概率分布 p(x) 和 q(x)，其中 p(x) 为真实分布， q(x)非真实分布。如果用真实分布 p(x) 来衡量识别一个样本所需要编码长度的期望（平均编码长度）为:</p>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/ML/%E5%86%B3%E7%AD%96%E6%A0%91/%E8%BE%A8%E6%9E%90ML%E4%B8%AD%E7%9A%84%E7%86%B5%E6%9C%89%E5%85%B3%E7%9A%84%E6%A6%82%E5%BF%B5/11.png" alt="img"></p>
+<p>如果使用非真实分布 q(x) 来表示来自真实分布 p(x) 的平均编码长度，则是：</p>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/ML/%E5%86%B3%E7%AD%96%E6%A0%91/%E8%BE%A8%E6%9E%90ML%E4%B8%AD%E7%9A%84%E7%86%B5%E6%9C%89%E5%85%B3%E7%9A%84%E6%A6%82%E5%BF%B5/12.png" alt="img"></p>
+<p>（因为用 q(x) 来编码的样本来自于分布 q(x) ，所以 H(p,q) 中的概率是 p(x)）。此时就将 H(p,q) 称之为交叉熵。举个例子。考虑一个随机变量 x，真实分布p(x)=(1/2,1/4,1/8,1/8)，非真实分布 q(x)=(1/4,1/4,1/4,1/4)， 则H(p)=1.75 bits（最短平均码长），交叉熵:</p>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/ML/%E5%86%B3%E7%AD%96%E6%A0%91/%E8%BE%A8%E6%9E%90ML%E4%B8%AD%E7%9A%84%E7%86%B5%E6%9C%89%E5%85%B3%E7%9A%84%E6%A6%82%E5%BF%B5/16.png" alt="img"></p>
+<p>由此可以看出根据非真实分布 q(x) 得到的平均码长大于根据真实分布 p(x) 得到的平均码长。</p>
+<p>我们再化简一下相对熵的公式。</p>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/ML/%E5%86%B3%E7%AD%96%E6%A0%91/%E8%BE%A8%E6%9E%90ML%E4%B8%AD%E7%9A%84%E7%86%B5%E6%9C%89%E5%85%B3%E7%9A%84%E6%A6%82%E5%BF%B5/13.png" alt="img"></p>
+<p>有没有发现什么？</p>
+<p>熵的公式：</p>
+<p> <img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/ML/%E5%86%B3%E7%AD%96%E6%A0%91/%E8%BE%A8%E6%9E%90ML%E4%B8%AD%E7%9A%84%E7%86%B5%E6%9C%89%E5%85%B3%E7%9A%84%E6%A6%82%E5%BF%B5/14.png" alt="img">)</p>
+<p>交叉熵的公式：</p>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/ML/%E5%86%B3%E7%AD%96%E6%A0%91/%E8%BE%A8%E6%9E%90ML%E4%B8%AD%E7%9A%84%E7%86%B5%E6%9C%89%E5%85%B3%E7%9A%84%E6%A6%82%E5%BF%B5/15.png" alt="img"></p>
+<p>所以有：DKL(p||q)=H(p,q)−H(p)（当用非真实分布 q(x) 得到的平均码长比真实分布 p(x) 得到的平均码长多出的比特数就是相对熵）</p>
+<p>又因为 DKL(p||q)≥0所以 H(p,q)≥H(p)（当 p(x)=q(x) 时取等号，此时交叉熵等于信息熵）并且当 H(p) 为<strong>常量</strong>时（<strong>注：在机器学习中，训练数据分布是固定的</strong>）<strong>最小化相对熵</strong> DKL(p||q) 等价于<strong>最小化交叉熵</strong> H(p,q) 也等价于<strong>最大化似然估计</strong>（具体参考<strong>Deep Learning 5.5</strong>）。在机器学习中，我们希望<strong>训练数据上模型学到的分布</strong> P(model) 和<strong>真实数据的分布</strong> <strong>P(real)</strong> <strong>越接近越好</strong>，<strong>所以我们可以使其相对熵最小</strong>。但是我们没有真实数据的分布，所以只能希望模型学到的分布 P(model) 和训练数据的分布 P(train) 尽量相同。假设训练数据是从总体中独立同分布采样的，那么我们可以通过最小化训练数据的经验误差来降低模型的泛化误差。即：</p>
+<ul>
+<li>希望学到的模型的分布和真实分布一致，P(model)≃P(real)</li>
+<li>但是真实分布不可知，假设训练数据是从真实数据中独立同分布采样的P(train)≃P(real)</li>
+<li>因此，我们希望学到的模型分布至少和训练数据的分布一致，P(train)≃P(model)</li>
+</ul>
+<p>根据之前的描述，最小化训练数据上的分布 P(train)与最小化模型分布 P(model) 的差异等价于最小化相对熵，即 DKL(P(train)||P(model))。此时， P(train)就是DKL(p||q) 中的 p，即真实分布，P(model)就是 q。又因训练数据的分布 p 是给定的，所以求 DKL(p||q) 等价求 H(p,q)。<strong>得证，交叉熵可以用来计算学习模型分布与训练分布之间的差异</strong>。交叉熵广泛用于逻辑回归的Sigmoid和Softmax函数中作为损失函数使用。这篇文章先不说了。</p>
+<h2 id="五、总结"><a href="#五、总结" class="headerlink" title="五、总结"></a>五、总结</h2><ul>
+<li>信息熵是衡量随机变量分布的混乱程度，是随机分布各事件发生的信息量的期望值，随机变量的取值个数越多，状态数也就越多，信息熵就越大，混乱程度就越大。当随机分布为均匀分布时，熵最大；信息熵推广到多维领域，则可得到联合信息熵；条件熵表示的是在 X 给定条件下，Y 的条件概率分布的熵对 X的期望。</li>
+<li>相对熵可以用来衡量两个概率分布之间的差异。</li>
+<li>交叉熵可以来衡量在给定的真实分布下，使用非真实分布所指定的策略消除系统的不确定性所需要付出的努力的大小。</li>
+</ul>
+<p>或者：</p>
+<ul>
+<li>信息熵是传输一个随机变量状态值所需的比特位下界（最短平均编码长度）。</li>
+<li>相对熵是指用 q 来表示分布 p  额外需要的编码长度。</li>
+<li>交叉熵是指用分布 q 来表示本来表示分布 p 的平均编码长度。</li>
+</ul>
 
           
         
@@ -631,217 +1163,6 @@
 
 <h3 id="四、总结"><a href="#四、总结" class="headerlink" title="四、总结"></a>四、总结</h3><p>通过这几个简单的例子，相信你不难发现，解动态规划题目其实就是拆解问题，定义状态的过程，严格说来，动态规划并不是一个具体的算法，而是凌驾于算法之上的一种 ==<strong>思想</strong>==。</p>
 <p>这种思想强调的是从局部最优解通过一定的策略推得全局最优解，从子问题的答案一步步推出整个问题的答案，并且利用空间换取时间。从很多算法之中你都可以看到动态规划的影子，所以，还是那句话 <strong>==技术都是相通的，找到背后的本质思想是关键==</strong>。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/06/人工智能/决策树/辨析ML中的熵有关的概念/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/11/06/人工智能/决策树/辨析ML中的熵有关的概念/" itemprop="url">辨析ML中的熵有关的概念</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-11-06T16:00:23+08:00">
-                2019-11-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Machine-Learning-Decision-Tree/" itemprop="url" rel="index">
-                    <span itemprop="name">Machine Learning - Decision Tree</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="一、信息熵（information-entropy）"><a href="#一、信息熵（information-entropy）" class="headerlink" title="一、信息熵（information entropy）"></a>一、信息熵（information entropy）</h2><p><strong>熵</strong>（entropy）这一词最初来源于热力学。1948年，<strong>香农</strong>将热力学中的熵引入信息论，所以也称<strong>香农熵</strong>（Shannon entropy），<strong>信息熵</strong>（information entropy）。</p>
-<p>信息是一个很抽象的概念，百度百科将它定义为：指音讯、消息、通讯系统传输和处理的对象，泛指人类社会传播的一切内容。那么信息可以被量化么？可以的，香农提出的“信息熵”概念解决了这一问题。</p>
-<p>一条信息的信息量大小和它的<strong>不确定性</strong>有直接的关系。我们需要搞清楚一件非常非常不确定的事，或者是我们一无所知的事，就需要了解大量的信息。相反，如果我们对某件事已经有了较多的了解，我们就不需要太多的信息就能把它搞清楚。所以，从这个角度，我们可以认为，<strong>信息的度量就等于不确定性的多少</strong>。比如，有人说广东下雪了。对于这句话，我们是十分不确定的。因为广东几十年来下雪的次数寥寥无几。为了搞清楚，我们就要去看天气预报，新闻，询问在广东的朋友，而这就需要大量的信息，信息熵很高。再比如，中国男足进军2022年卡塔尔世界杯决赛圈。对于这句话，因为确定性很高，几乎不需要引入信息，信息熵很低。</p>
-<p>考虑一个<strong>离散的随机变量x</strong>，由上面的例子可知，信息的量度应该依赖于概率分布p(x)，因此我们想要找一个函数 l(x)，它是概率p(x)的单调函数，表达了信息的内容。怎么寻找呢？如果我们有两个不相关的事件x和y，那么观察两个事件同时发生时获得的信息量应该等于观察到事件各自发生时获得的信息之和，即 $l(x, y) = l(x) + l(y)$。</p>
-<p>因为两个事件是独立不相关的，因此 $p(x, y) = p(x)p(y)$ 。根据这两个关系，很容易看出 l(x) 一定与 p(x) 的对数有关（因为对数的运算法则是 $log_{a}(mn) = log_{a}m + log_{a}n$ ）因此，我们有 $l(x) = -logp(x)$。<strong>其中负号是用来保证信息量为正数或零</strong>（因为p(x)总是在0到1之间）。<strong>而 log函数的基的选择是任意的</strong>（信息论中常选择为2，因此信息的单位为比特bits，而机器学习中常选自然对数，因此单位被称为奈特nats）。<strong>l(x) 也被称为随机变量 x 的自信息（self-information），描述的是随机变量的某个事件发生所带来的信息量。</strong>图像如图：</p>
-<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/ML/%E5%86%B3%E7%AD%96%E6%A0%91/%E8%BE%A8%E6%9E%90ML%E4%B8%AD%E7%9A%84%E7%86%B5%E6%9C%89%E5%85%B3%E7%9A%84%E6%A6%82%E5%BF%B5/1.png" alt="img"></p>
-<p>最后，我们正式引出<strong>信息熵</strong>。现在假设一个发送者想传送一个随机变量的值给接收者。那么在这个过程中，他们传输的<strong>平均信息量</strong>可以通过求 $l(x) = -logp(x)$ 关于概率分布 p(x) 的期望得到，即：</p>
-<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/ML/%E5%86%B3%E7%AD%96%E6%A0%91/%E8%BE%A8%E6%9E%90ML%E4%B8%AD%E7%9A%84%E7%86%B5%E6%9C%89%E5%85%B3%E7%9A%84%E6%A6%82%E5%BF%B5/2.png" alt="img"></p>
-<p>H(X) 就被称为随机变量 x的<strong>熵</strong>,<strong>它是表示随机变量不确定的度量，是对所有可能发生的事件产生的信息量的期望</strong>。从公式可得，<strong>随机变量的取值个数越多，状态数也就越多，信息熵就越大，混乱程度就越大。当随机分布为均匀分布时，熵最大</strong>，且 0≤H(X)≤logn。稍后证明。将一维随机变量分布推广到多维随机变量分布，则其<strong>联合熵</strong> (<strong>Joint entropy</strong>) 为：</p>
-<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/ML/%E5%86%B3%E7%AD%96%E6%A0%91/%E8%BE%A8%E6%9E%90ML%E4%B8%AD%E7%9A%84%E7%86%B5%E6%9C%89%E5%85%B3%E7%9A%84%E6%A6%82%E5%BF%B5/3.png" alt="img"></p>
-<p><em>（注意：熵只依赖于随机变量的分布,与随机变量取值无关，所以也可以将X的熵记作H(p)；令0log0=0(因为某个取值概率可能为0)）</em></p>
-<p>那么这些定义有着什么样的性质呢？考虑一个随机变量 x。这个随机变量有4种可能的状态，每个状态都是等可能的。为了把 x 的值传给接收者，我们需要传输2比特的消息。H(X)=−4×(1/4)log2(1/4)=2 bits。现在考虑一个具有4种可能的状态 {a,b,c,d} 的随机变量，每个状态各自的概率为 (1/2,1/4,1/8,1/8)。这种情形下的熵为：</p>
-<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/ML/%E5%86%B3%E7%AD%96%E6%A0%91/%E8%BE%A8%E6%9E%90ML%E4%B8%AD%E7%9A%84%E7%86%B5%E6%9C%89%E5%85%B3%E7%9A%84%E6%A6%82%E5%BF%B5/4.png" alt="img"></p>
-<p>我们可以看到，<strong>非均匀分布比均匀分布的熵要小</strong>。现在让我们考虑如何把变量状态的类别传递给接收者。与之前一样，我们可以使用一个2比特的数字来完成这件事情。然而，我们可以利用非均匀分布这个特点，<strong>使用更短的编码来描述更可能的事件，使用更长的编码来描述不太可能的事件</strong>。我们希望这样做能够得到一个更短的平均编码长度。我们可以使用下面的编码串（哈夫曼编码）：0、10、110、111来表示状态 {a,b,c,d}。传输的编码的平均长度就是：</p>
-<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/ML/%E5%86%B3%E7%AD%96%E6%A0%91/%E8%BE%A8%E6%9E%90ML%E4%B8%AD%E7%9A%84%E7%86%B5%E6%9C%89%E5%85%B3%E7%9A%84%E6%A6%82%E5%BF%B5/5.png" alt="img"></p>
-<p>这个值与上方的随机变量的熵相等。熵和最短编码长度的这种关系是一种普遍的情形。Shannon 编码定理表明<strong>熵是传输一个随机变量状态值所需的比特位下界（最短平均编码长度）</strong>。因此，信息熵可以应用在数据压缩方面。可参考这篇文章讲的很详细了，我就不赘述了。<em>（<a href="http://www.ruanyifeng.com/blog/2014/09/information-entropy.html）" target="_blank" rel="noopener">http://www.ruanyifeng.com/blog/2014/09/information-entropy.html）</a></em></p>
-<h2 id="二、条件熵（Conditional-entropy）"><a href="#二、条件熵（Conditional-entropy）" class="headerlink" title="二、条件熵（Conditional entropy）"></a>二、条件熵（Conditional entropy）</h2><p>条件熵 H(Y|X)表示在已知随机变量 X 的条件下随机变量 Y 的不确定性。条件熵 H(Y|X)定义为 X 给定条件下 Y 的条件概率分布的熵对 X 的数学期望：</p>
-<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/ML/%E5%86%B3%E7%AD%96%E6%A0%91/%E8%BE%A8%E6%9E%90ML%E4%B8%AD%E7%9A%84%E7%86%B5%E6%9C%89%E5%85%B3%E7%9A%84%E6%A6%82%E5%BF%B5/6.png" alt="img"></p>
-<p>条件熵 H(Y|X)相当于联合熵 H(X,Y)减去单独的熵 H(X)，即H(Y|X)=H(X,Y)−H(X)，证明如下：</p>
-<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/ML/%E5%86%B3%E7%AD%96%E6%A0%91/%E8%BE%A8%E6%9E%90ML%E4%B8%AD%E7%9A%84%E7%86%B5%E6%9C%89%E5%85%B3%E7%9A%84%E6%A6%82%E5%BF%B5/7.jpg" alt="img"></p>
-<p>举个例子，比如环境温度是低还是高，和我穿短袖还是外套这两个事件可以组成联合概率分布 H(X,Y)，因为两个事件加起来的信息量肯定是大于单一事件的信息量的。假设 H(X)对应着今天环境温度的信息量，由于今天环境温度和今天我穿什么衣服这两个事件并不是独立分布的，所以在已知今天环境温度的情况下，我穿什么衣服的信息量或者说不确定性是被减少了。当已知 H(X) 这个信息量的时候，H(X,Y) 剩下的信息量就是条件熵：H(Y|X)=H(X,Y)−H(X)</p>
-<p>因此，可以这样理解，描述 X 和 Y 所需的信息是描述 X 自己所需的信息,加上给定 X的条件下具体化 Y 所需的额外信息。关于条件熵的例子可以看这篇文章，讲得很详细。<em>（<a href="https://zhuanlan.zhihu.com/p/26551798）" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/26551798）</a></em></p>
-<h2 id="三、相对熵（Relative-entropy）"><a href="#三、相对熵（Relative-entropy）" class="headerlink" title="三、相对熵（Relative entropy）"></a>三、相对熵（Relative entropy）</h2><p>相对熵，也称<strong>KL散度（Kullback-Leibler divergence）</strong></p>
-<p>设 p(x)、q(x) 是 离散随机变量 X 中取值的两个概率分布，则 p 对 q 的相对熵是：</p>
-<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/ML/%E5%86%B3%E7%AD%96%E6%A0%91/%E8%BE%A8%E6%9E%90ML%E4%B8%AD%E7%9A%84%E7%86%B5%E6%9C%89%E5%85%B3%E7%9A%84%E6%A6%82%E5%BF%B5/8.png" alt="img"></p>
-<p>性质：</p>
-<ul>
-<li>如果 p(x) 和 q(x) 两个分布相同，那么相对熵等于0</li>
-<li>DKL(p||q)≠DKL(q||p)，相对熵具有不对称性。大家可以举个简单例子算一下。</li>
-<li>DKL(p||q)≥0证明如下：<em>(用Jensen不等式<a href="https://en.wikipedia.org/wiki/Jensen%27s_inequality" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Jensen%27s_inequality</a>)</em></li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/ML/%E5%86%B3%E7%AD%96%E6%A0%91/%E8%BE%A8%E6%9E%90ML%E4%B8%AD%E7%9A%84%E7%86%B5%E6%9C%89%E5%85%B3%E7%9A%84%E6%A6%82%E5%BF%B5/9.png" alt="img"></p>
-<p>因为：</p>
-<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/ML/%E5%86%B3%E7%AD%96%E6%A0%91/%E8%BE%A8%E6%9E%90ML%E4%B8%AD%E7%9A%84%E7%86%B5%E6%9C%89%E5%85%B3%E7%9A%84%E6%A6%82%E5%BF%B5/10.png" alt="img"></p>
-<p>所以：</p>
-<p>​                                                DKL(p||q)≥0</p>
-<p><strong>总结</strong>：相对熵可以用来衡量两个概率分布之间的差异，上面公式的意义就是求 p 与 q 之间的对数差在 p 上的期望值。</p>
-<h2 id="四、交叉熵（Cross-entropy）"><a href="#四、交叉熵（Cross-entropy）" class="headerlink" title="四、交叉熵（Cross entropy）"></a>四、交叉熵（Cross entropy）</h2><p>现在有关于样本集的两个概率分布 p(x) 和 q(x)，其中 p(x) 为真实分布， q(x)非真实分布。如果用真实分布 p(x) 来衡量识别一个样本所需要编码长度的期望（平均编码长度）为:</p>
-<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/ML/%E5%86%B3%E7%AD%96%E6%A0%91/%E8%BE%A8%E6%9E%90ML%E4%B8%AD%E7%9A%84%E7%86%B5%E6%9C%89%E5%85%B3%E7%9A%84%E6%A6%82%E5%BF%B5/11.png" alt="img"></p>
-<p>如果使用非真实分布 q(x) 来表示来自真实分布 p(x) 的平均编码长度，则是：</p>
-<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/ML/%E5%86%B3%E7%AD%96%E6%A0%91/%E8%BE%A8%E6%9E%90ML%E4%B8%AD%E7%9A%84%E7%86%B5%E6%9C%89%E5%85%B3%E7%9A%84%E6%A6%82%E5%BF%B5/12.png" alt="img"></p>
-<p>（因为用 q(x) 来编码的样本来自于分布 q(x) ，所以 H(p,q) 中的概率是 p(x)）。此时就将 H(p,q) 称之为交叉熵。举个例子。考虑一个随机变量 x，真实分布p(x)=(1/2,1/4,1/8,1/8)，非真实分布 q(x)=(1/4,1/4,1/4,1/4)， 则H(p)=1.75 bits（最短平均码长），交叉熵:</p>
-<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/ML/%E5%86%B3%E7%AD%96%E6%A0%91/%E8%BE%A8%E6%9E%90ML%E4%B8%AD%E7%9A%84%E7%86%B5%E6%9C%89%E5%85%B3%E7%9A%84%E6%A6%82%E5%BF%B5/16.png" alt="img"></p>
-<p>由此可以看出根据非真实分布 q(x) 得到的平均码长大于根据真实分布 p(x) 得到的平均码长。</p>
-<p>我们再化简一下相对熵的公式。</p>
-<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/ML/%E5%86%B3%E7%AD%96%E6%A0%91/%E8%BE%A8%E6%9E%90ML%E4%B8%AD%E7%9A%84%E7%86%B5%E6%9C%89%E5%85%B3%E7%9A%84%E6%A6%82%E5%BF%B5/13.png" alt="img"></p>
-<p>有没有发现什么？</p>
-<p>熵的公式：</p>
-<p> <img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/ML/%E5%86%B3%E7%AD%96%E6%A0%91/%E8%BE%A8%E6%9E%90ML%E4%B8%AD%E7%9A%84%E7%86%B5%E6%9C%89%E5%85%B3%E7%9A%84%E6%A6%82%E5%BF%B5/14.png" alt="img">)</p>
-<p>交叉熵的公式：</p>
-<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/ML/%E5%86%B3%E7%AD%96%E6%A0%91/%E8%BE%A8%E6%9E%90ML%E4%B8%AD%E7%9A%84%E7%86%B5%E6%9C%89%E5%85%B3%E7%9A%84%E6%A6%82%E5%BF%B5/15.png" alt="img"></p>
-<p>所以有：DKL(p||q)=H(p,q)−H(p)（当用非真实分布 q(x) 得到的平均码长比真实分布 p(x) 得到的平均码长多出的比特数就是相对熵）</p>
-<p>又因为 DKL(p||q)≥0所以 H(p,q)≥H(p)（当 p(x)=q(x) 时取等号，此时交叉熵等于信息熵）并且当 H(p) 为<strong>常量</strong>时（<strong>注：在机器学习中，训练数据分布是固定的</strong>）<strong>最小化相对熵</strong> DKL(p||q) 等价于<strong>最小化交叉熵</strong> H(p,q) 也等价于<strong>最大化似然估计</strong>（具体参考<strong>Deep Learning 5.5</strong>）。在机器学习中，我们希望<strong>训练数据上模型学到的分布</strong> P(model) 和<strong>真实数据的分布</strong> <strong>P(real)</strong> <strong>越接近越好</strong>，<strong>所以我们可以使其相对熵最小</strong>。但是我们没有真实数据的分布，所以只能希望模型学到的分布 P(model) 和训练数据的分布 P(train) 尽量相同。假设训练数据是从总体中独立同分布采样的，那么我们可以通过最小化训练数据的经验误差来降低模型的泛化误差。即：</p>
-<ul>
-<li>希望学到的模型的分布和真实分布一致，P(model)≃P(real)</li>
-<li>但是真实分布不可知，假设训练数据是从真实数据中独立同分布采样的P(train)≃P(real)</li>
-<li>因此，我们希望学到的模型分布至少和训练数据的分布一致，P(train)≃P(model)</li>
-</ul>
-<p>根据之前的描述，最小化训练数据上的分布 P(train)与最小化模型分布 P(model) 的差异等价于最小化相对熵，即 DKL(P(train)||P(model))。此时， P(train)就是DKL(p||q) 中的 p，即真实分布，P(model)就是 q。又因训练数据的分布 p 是给定的，所以求 DKL(p||q) 等价求 H(p,q)。<strong>得证，交叉熵可以用来计算学习模型分布与训练分布之间的差异</strong>。交叉熵广泛用于逻辑回归的Sigmoid和Softmax函数中作为损失函数使用。这篇文章先不说了。</p>
-<h2 id="五、总结"><a href="#五、总结" class="headerlink" title="五、总结"></a>五、总结</h2><ul>
-<li>信息熵是衡量随机变量分布的混乱程度，是随机分布各事件发生的信息量的期望值，随机变量的取值个数越多，状态数也就越多，信息熵就越大，混乱程度就越大。当随机分布为均匀分布时，熵最大；信息熵推广到多维领域，则可得到联合信息熵；条件熵表示的是在 X 给定条件下，Y 的条件概率分布的熵对 X的期望。</li>
-<li>相对熵可以用来衡量两个概率分布之间的差异。</li>
-<li>交叉熵可以来衡量在给定的真实分布下，使用非真实分布所指定的策略消除系统的不确定性所需要付出的努力的大小。</li>
-</ul>
-<p>或者：</p>
-<ul>
-<li>信息熵是传输一个随机变量状态值所需的比特位下界（最短平均编码长度）。</li>
-<li>相对熵是指用 q 来表示分布 p  额外需要的编码长度。</li>
-<li>交叉熵是指用分布 q 来表示本来表示分布 p 的平均编码长度。</li>
-</ul>
 
           
         
@@ -2506,269 +2827,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/08/python全栈/第02部分：并发编程+数据库+前端/并发编程/线程（二）/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/08/08/python全栈/第02部分：并发编程+数据库+前端/并发编程/线程（二）/" itemprop="url">线程（二）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-08T07:39:55+08:00">
-                2019-08-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python全栈-02部分-并发编程/" itemprop="url" rel="index">
-                    <span itemprop="name">python全栈 -02部分 -并发编程</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>[TOC]</p>
-<h2 id="（二）线程和python"><a href="#（二）线程和python" class="headerlink" title="（二）线程和python"></a>（二）线程和python</h2><h3 id="一、理论知识"><a href="#一、理论知识" class="headerlink" title="一、理论知识"></a>一、理论知识</h3><h4 id="1、全局解释器锁GIL（Cpython解释器下）"><a href="#1、全局解释器锁GIL（Cpython解释器下）" class="headerlink" title="1、全局解释器锁GIL（Cpython解释器下）"></a>1、全局解释器锁GIL（Cpython解释器下）</h4><p>​        Python代码的执行由Python虚拟机(也叫解释器主循环)来控制。Python在设计之初就考虑到要在主循环中，同时只有一个线程在执行。虽然 Python 解释器中可以“运行”多个线程，但在任意时刻只有一个线程在解释器中运行。<br>　　对Python虚拟机的访问由全局解释器锁(GIL)来控制，正是这个锁能保证同一时刻只有一个线程在运行。</p>
-<p>　　在多线程环境中，Python 虚拟机按以下方式执行：</p>
-<p>　　a、设置 GIL；</p>
-<p>　　b、切换到一个线程去运行；</p>
-<p>　　c、运行指定数量的字节码指令或者线程主动让出控制(可以调用 time.sleep(0))；</p>
-<p>　　d、把线程设置为睡眠状态；</p>
-<p>　　e、解锁 GIL；</p>
-<p>　　d、再次重复以上所有步骤。<br>　　在调用外部代码(如 C/C++扩展函数)的时候，GIL将会被锁定，直到这个函数结束为止(由于在这期间没有Python的字节码被运行，所以不会做线程切换)编写扩展的程序员可以主动解锁GIL。</p>
-<h4 id="2、python线程模块的选择"><a href="#2、python线程模块的选择" class="headerlink" title="2、python线程模块的选择"></a>2、python线程模块的选择</h4><p>​        Python提供了几个用于多线程编程的模块，包括thread、threading和Queue等。thread和threading模块允许程序员创建和管理线程。thread模块提供了基本的线程和锁的支持，threading提供了更高级别、功能更强的线程管理的功能。Queue模块允许用户创建一个可以用于多个线程之间共享数据的队列数据结构。<br>　　避免使用thread模块，因为更高级别的threading模块更为先进，对线程的支持更为完善，而且使用thread模块里的属性有可能会与threading出现冲突；其次低级别的thread模块的同步原语很少(实际上只有一个)，而threading模块则有很多；再者，thread模块中当主线程结束时，所有的线程都会被强制结束掉，没有警告也不会有正常的清除工作，至少threading模块能确保重要的子线程退出后进程才退出。 </p>
-<p>　　thread模块不支持守护线程，当主线程退出时，所有的子线程不论它们是否还在工作，都会被强行退出。而threading模块支持守护线程，守护线程一般是一个等待客户请求的服务器，如果没有客户提出请求它就在那等着，如果设定一个线程为守护线程，就表示这个线程是不重要的，在进程退出的时候，不用等待这个线程退出。</p>
-<h3 id="二、threading模块"><a href="#二、threading模块" class="headerlink" title="二、threading模块"></a>二、threading模块</h3><p>multiprocess模块的完全模仿了threading模块的接口，二者在使用层面，有很大的相似性，因而不再详细介绍（<a href="https://docs.python.org/3/library/threading.html?highlight=threading#" target="_blank" rel="noopener">官方链接</a>）</p>
-<h4 id="1、线程的创建-Threading-Thread类"><a href="#1、线程的创建-Threading-Thread类" class="headerlink" title="1、线程的创建 Threading.Thread类"></a>1、线程的创建 Threading.Thread类</h4><h5 id="（1）线程的创建"><a href="#（1）线程的创建" class="headerlink" title="（1）线程的创建"></a>（1）线程的创建</h5><p>创建线程的方式1</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">from</span> threading <span class="keyword">import</span> Thread</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">(n)</span>:</span></span><br><span class="line">    time.sleep(<span class="number">1</span>)</span><br><span class="line">    print(n)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">    t = Thread(target=func, args=(i,))</span><br><span class="line">    t.start()</span><br></pre></td></tr></table></figure>
-
-<p>创建线程的方式2</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">from</span> threading <span class="keyword">import</span> Thread</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyTread</span><span class="params">(Thread)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, arg)</span>:</span></span><br><span class="line">        super().__init__()</span><br><span class="line">        self.arg = arg</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">run</span><span class="params">(self)</span>:</span></span><br><span class="line">        time.sleep(<span class="number">1</span>)</span><br><span class="line">        print(self.arg)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">    t = MyTread(i)</span><br><span class="line">    t.start()</span><br></pre></td></tr></table></figure>
-
-<h5 id="（2）多线程与多进程"><a href="#（2）多线程与多进程" class="headerlink" title="（2）多线程与多进程"></a>（2）多线程与多进程</h5><p>pid的比较</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> threading <span class="keyword">import</span> Thread</span><br><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Process</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">work</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">'hello'</span>,os.getpid())</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    <span class="comment">#part1:在主进程下开启多个线程,每个线程都跟主进程的pid一样</span></span><br><span class="line">    t1=Thread(target=work)</span><br><span class="line">    t2=Thread(target=work)</span><br><span class="line">    t1.start()</span><br><span class="line">    t2.start()</span><br><span class="line">    print(<span class="string">'主线程/主进程pid'</span>,os.getpid())</span><br><span class="line"></span><br><span class="line">    <span class="comment">#part2:开多个进程,每个进程都有不同的pid</span></span><br><span class="line">    p1=Process(target=work)</span><br><span class="line">    p2=Process(target=work)</span><br><span class="line">    p1.start()</span><br><span class="line">    p2.start()</span><br><span class="line">    print(<span class="string">'主线程/主进程pid'</span>,os.getpid())</span><br></pre></td></tr></table></figure>
-
-<p>开启效率的较量</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">from</span> threading <span class="keyword">import</span> Thread</span><br><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Process</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">(n)</span>:</span></span><br><span class="line">    n + <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    start = time.time()</span><br><span class="line">    t_lst = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">100</span>):</span><br><span class="line">        t = Thread(target=func,args=(i,))</span><br><span class="line">        t.start()</span><br><span class="line">        t_lst.append(t)</span><br><span class="line">    <span class="keyword">for</span> t <span class="keyword">in</span> t_lst:t.join()</span><br><span class="line">    t1 = time.time() - start</span><br><span class="line"></span><br><span class="line">    start = time.time()</span><br><span class="line">    t_lst = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">100</span>):</span><br><span class="line">        t = Process(target=func, args=(i,))</span><br><span class="line">        t.start()</span><br><span class="line">        t_lst.append(t)</span><br><span class="line">    <span class="keyword">for</span> t <span class="keyword">in</span> t_lst: t.join()</span><br><span class="line">    t2 = time.time() - start</span><br><span class="line">    print(t1,t2)</span><br></pre></td></tr></table></figure>
-
-<p>内存数据的共享问题</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">from</span> threading <span class="keyword">import</span> Thread</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">(a,b)</span>:</span></span><br><span class="line">    <span class="keyword">global</span> g</span><br><span class="line">    g = <span class="number">0</span></span><br><span class="line">    print(g,os.getpid())</span><br><span class="line"></span><br><span class="line">g = <span class="number">100</span></span><br><span class="line">t_lst = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">    t = Thread(target=func,args=(i,<span class="number">5</span>))</span><br><span class="line">    t.start()</span><br><span class="line">    t_lst.append(t)</span><br><span class="line"><span class="keyword">for</span> t <span class="keyword">in</span>  t_lst : t.join()</span><br><span class="line">print(g)</span><br></pre></td></tr></table></figure>
-
-<h5 id="（3）练习：多线程实现socket"><a href="#（3）练习：多线程实现socket" class="headerlink" title="（3）练习：多线程实现socket"></a>（3）练习：多线程实现socket</h5><p>server</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#_*_coding:utf-8_*_</span></span><br><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="keyword">import</span> multiprocessing</span><br><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> socket</span><br><span class="line">s=socket.socket(socket.AF_INET,socket.SOCK_STREAM)</span><br><span class="line">s.bind((<span class="string">'127.0.0.1'</span>,<span class="number">8080</span>))</span><br><span class="line">s.listen(<span class="number">5</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">action</span><span class="params">(conn)</span>:</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        data=conn.recv(<span class="number">1024</span>)</span><br><span class="line">        print(data)</span><br><span class="line">        conn.send(data.upper())</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        conn,addr=s.accept()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        p=threading.Thread(target=action,args=(conn,))</span><br><span class="line">        p.start()</span><br></pre></td></tr></table></figure>
-
-<p>client</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#_*_coding:utf-8_*_</span></span><br><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"></span><br><span class="line">s=socket.socket(socket.AF_INET,socket.SOCK_STREAM)</span><br><span class="line">s.connect((<span class="string">'127.0.0.1'</span>,<span class="number">8080</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    msg=input(<span class="string">'&gt;&gt;: '</span>).strip()</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> msg:<span class="keyword">continue</span></span><br><span class="line"></span><br><span class="line">    s.send(msg.encode(<span class="string">'utf-8'</span>))</span><br><span class="line">    data=s.recv(<span class="number">1024</span>)</span><br><span class="line">    print(data)</span><br></pre></td></tr></table></figure>
-
-<h5 id="（4）Thread类的其他方法"><a href="#（4）Thread类的其他方法" class="headerlink" title="（4）Thread类的其他方法"></a>（4）Thread类的其他方法</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Thread实例对象的方法</span><br><span class="line">  <span class="comment"># isAlive(): 返回线程是否活动的。</span></span><br><span class="line">  <span class="comment"># getName(): 返回线程名。</span></span><br><span class="line">  <span class="comment"># setName(): 设置线程名。</span></span><br><span class="line"></span><br><span class="line">threading模块提供的一些方法：</span><br><span class="line">  <span class="comment"># threading.currentThread(): 返回当前的线程变量。</span></span><br><span class="line">  <span class="comment"># threading.enumerate(): 返回一个包含正在运行的线程的list。正在运行指线程启动后、结束前，不包括启动前和终止后的线程。</span></span><br><span class="line">  <span class="comment"># threading.activeCount(): 返回正在运行的线程数量，与len(threading.enumerate())有相同的结果。</span></span><br></pre></td></tr></table></figure>
-
-<p>代码示例</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">wahaha</span><span class="params">(n)</span>:</span></span><br><span class="line">    time.sleep(<span class="number">0.5</span>)</span><br><span class="line">    print(n,threading.current_thread(),threading.get_ident())</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span>  range(<span class="number">10</span>):</span><br><span class="line">    threading.Thread(target=wahaha,args=(i,)).start()</span><br><span class="line">print(threading.active_count())    <span class="comment"># 10</span></span><br><span class="line">print(threading.current_thread())</span><br><span class="line">print(threading.enumerate())</span><br></pre></td></tr></table></figure>
-
-<p>join方法</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> threading <span class="keyword">import</span> Thread</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sayhi</span><span class="params">(name)</span>:</span></span><br><span class="line">    time.sleep(<span class="number">2</span>)</span><br><span class="line">    print(<span class="string">'%s say hello'</span> %name)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    t=Thread(target=sayhi,args=(<span class="string">'egon'</span>,))</span><br><span class="line">    t.start()</span><br><span class="line">    t.join()</span><br><span class="line">    print(<span class="string">'主线程'</span>)</span><br><span class="line">    print(t.is_alive())</span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string">    egon say hello</span></span><br><span class="line"><span class="string">    主线程</span></span><br><span class="line"><span class="string">    False</span></span><br><span class="line"><span class="string">    '''</span></span><br></pre></td></tr></table></figure>
-
-<h5 id="（5）守护线程"><a href="#（5）守护线程" class="headerlink" title="（5）守护线程"></a>（5）守护线程</h5><p><strong>无论是进程还是线程，都遵循：守护xx会等待主xx运行完毕后被销毁。</strong></p>
-<p><strong>需要强调的是：运行完毕并非终止运行</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#1.对主进程来说，运行完毕指的是主进程代码运行完毕</span></span><br><span class="line"><span class="comment">#2.对主线程来说，运行完毕指的是主线程所在的进程内所有非守护线程统统运行完毕，主线程才算运行完毕（其实 主线程会等待子线程的结束）</span></span><br></pre></td></tr></table></figure>
-
-<p>详细解释：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#1 主进程在其代码结束后就已经算运行完毕了（守护进程在此时就被回收）,然后主进程会一直等非守护的子进程都运行完毕后回收子进程的资源(否则会产生僵尸进程)，才会结束，</span></span><br><span class="line"><span class="comment">#2 主线程在其他非守护线程运行完毕后才算运行完毕（守护线程在此时就被回收）。因为主线程的结束意味着进程的结束，进程整体的资源都将被回收，而进程必须保证非守护线程都运行完毕后才能结束。</span></span><br></pre></td></tr></table></figure>
-
-<p>守护线程例</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time                 </span><br><span class="line"><span class="keyword">from</span> threading <span class="keyword">import</span> Thread</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func1</span><span class="params">()</span>:</span>                </span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:             </span><br><span class="line">        print(<span class="string">'*'</span>*<span class="number">10</span>)       </span><br><span class="line">        time.sleep(<span class="number">1</span>)       </span><br><span class="line">                            </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func2</span><span class="params">()</span>:</span>                </span><br><span class="line">    print(<span class="string">'in func2'</span>)       </span><br><span class="line">    time.sleep(<span class="number">5</span>)           </span><br><span class="line">                            </span><br><span class="line">t = Thread(target=func1,)   </span><br><span class="line">t.daemon = <span class="literal">True</span>             </span><br><span class="line">t.start()                   </span><br><span class="line">t2 = Thread(target=func2,)  </span><br><span class="line">t2.start()                  </span><br><span class="line"><span class="comment"># t2.join()                 </span></span><br><span class="line">print(<span class="string">'主线程'</span>)                </span><br><span class="line">                            </span><br><span class="line"><span class="comment"># 守护进程随着主进程代码的执行结束而结束       </span></span><br><span class="line"><span class="comment"># 守护线程会在主线程结束之后等待其他子线程的结束才结束</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="2、锁"><a href="#2、锁" class="headerlink" title="2、锁"></a>2、锁</h4><h5 id="（1）、锁与GIL"><a href="#（1）、锁与GIL" class="headerlink" title="（1）、锁与GIL"></a>（1）、锁与GIL</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">线程</span><br><span class="line">    线程是进程中的执行单位</span><br><span class="line">    线程是cpu执行的最小单位</span><br><span class="line">    线城之间资源共享</span><br><span class="line">    线程的开启和关闭以及切换的时间开销远远小于进程</span><br><span class="line">    线程本身可以在同一时间使用多个cpu</span><br><span class="line">python 与 线程</span><br><span class="line">    Cpython解释器在解释代码过程中容易产生数据不安全的问题</span><br><span class="line">    GIL 全局解释器锁 锁的是线程</span><br></pre></td></tr></table></figure>
-
-<h5 id="（2）、同步锁"><a href="#（2）、同步锁" class="headerlink" title="（2）、同步锁"></a>（2）、同步锁</h5><p>多个线程抢占资源的情况</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> threading <span class="keyword">import</span> Thread</span><br><span class="line"><span class="keyword">import</span> os,time</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">work</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">global</span> n</span><br><span class="line">    temp=n</span><br><span class="line">    time.sleep(<span class="number">0.1</span>)	<span class="comment"># 此处通过sleep阻断了GIL锁（模拟时间片的切换）</span></span><br><span class="line">    <span class="comment"># 虽然此处注释该语句，结果为0，但不能否认的是，有可能时间片的切换强制该线程还钥匙，计算的结果还没来得及放回</span></span><br><span class="line">    <span class="comment"># 这就是为什么有了GIL锁，数据还是不能保证彻底安全</span></span><br><span class="line">    n=temp<span class="number">-1</span></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    n=<span class="number">100</span></span><br><span class="line">    l=[]</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">100</span>):</span><br><span class="line">        p=Thread(target=work)</span><br><span class="line">        l.append(p)</span><br><span class="line">        p.start()</span><br><span class="line">    <span class="keyword">for</span> p <span class="keyword">in</span> l:</span><br><span class="line">        p.join()</span><br><span class="line"></span><br><span class="line">    print(n) <span class="comment">#结果可能为99</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> threading</span><br><span class="line">R=threading.Lock()</span><br><span class="line">R.acquire()</span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">对公共数据的操作</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line">R.release()</span><br></pre></td></tr></table></figure>
-
-<p>同步锁的引用</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> threading <span class="keyword">import</span> Thread,Lock</span><br><span class="line"><span class="keyword">import</span> os,time</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">work</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">global</span> n</span><br><span class="line">    lock.acquire()</span><br><span class="line">    temp=n</span><br><span class="line">    time.sleep(<span class="number">0.1</span>)</span><br><span class="line">    n=temp<span class="number">-1</span></span><br><span class="line">    lock.release()</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    lock=Lock()</span><br><span class="line">    n=<span class="number">100</span></span><br><span class="line">    l=[]</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">100</span>):</span><br><span class="line">        p=Thread(target=work)</span><br><span class="line">        l.append(p)</span><br><span class="line">        p.start()</span><br><span class="line">    <span class="keyword">for</span> p <span class="keyword">in</span> l:</span><br><span class="line">        p.join()</span><br><span class="line"></span><br><span class="line">    print(n) <span class="comment">#结果肯定为0，由原来的并发执行变成串行，牺牲了执行效率保证了数据安全</span></span><br></pre></td></tr></table></figure>
-
-<p>互斥锁与join的区别</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#不加锁:并发执行,速度快,数据不安全</span></span><br><span class="line"><span class="keyword">from</span> threading <span class="keyword">import</span> current_thread,Thread,Lock</span><br><span class="line"><span class="keyword">import</span> os,time</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">task</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">global</span> n</span><br><span class="line">    print(<span class="string">'%s is running'</span> %current_thread().getName())</span><br><span class="line">    temp=n</span><br><span class="line">    time.sleep(<span class="number">0.5</span>)</span><br><span class="line">    n=temp<span class="number">-1</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    n=<span class="number">100</span></span><br><span class="line">    lock=Lock()</span><br><span class="line">    threads=[]</span><br><span class="line">    start_time=time.time()</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">100</span>):</span><br><span class="line">        t=Thread(target=task)</span><br><span class="line">        threads.append(t)</span><br><span class="line">        t.start()</span><br><span class="line">    <span class="keyword">for</span> t <span class="keyword">in</span> threads:</span><br><span class="line">        t.join()</span><br><span class="line"></span><br><span class="line">    stop_time=time.time()</span><br><span class="line">    print(<span class="string">'主:%s n:%s'</span> %(stop_time-start_time,n))</span><br><span class="line"></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">Thread-1 is running</span></span><br><span class="line"><span class="string">Thread-2 is running</span></span><br><span class="line"><span class="string">......</span></span><br><span class="line"><span class="string">Thread-100 is running</span></span><br><span class="line"><span class="string">主:0.5216062068939209 n:99</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#不加锁:未加锁部分并发执行,加锁部分串行执行,速度慢,数据安全</span></span><br><span class="line"><span class="keyword">from</span> threading <span class="keyword">import</span> current_thread,Thread,Lock</span><br><span class="line"><span class="keyword">import</span> os,time</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">task</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="comment">#未加锁的代码并发运行</span></span><br><span class="line">    time.sleep(<span class="number">3</span>)</span><br><span class="line">    print(<span class="string">'%s start to run'</span> %current_thread().getName())</span><br><span class="line">    <span class="keyword">global</span> n</span><br><span class="line">    <span class="comment">#加锁的代码串行运行</span></span><br><span class="line">    lock.acquire()</span><br><span class="line">    temp=n</span><br><span class="line">    time.sleep(<span class="number">0.5</span>)</span><br><span class="line">    n=temp<span class="number">-1</span></span><br><span class="line">    lock.release()</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    n=<span class="number">100</span></span><br><span class="line">    lock=Lock()</span><br><span class="line">    threads=[]</span><br><span class="line">    start_time=time.time()</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">100</span>):</span><br><span class="line">        t=Thread(target=task)</span><br><span class="line">        threads.append(t)</span><br><span class="line">        t.start()</span><br><span class="line">    <span class="keyword">for</span> t <span class="keyword">in</span> threads:</span><br><span class="line">        t.join()</span><br><span class="line">    stop_time=time.time()</span><br><span class="line">    print(<span class="string">'主:%s n:%s'</span> %(stop_time-start_time,n))</span><br><span class="line"></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">Thread-1 is running</span></span><br><span class="line"><span class="string">Thread-2 is running</span></span><br><span class="line"><span class="string">......</span></span><br><span class="line"><span class="string">Thread-100 is running</span></span><br><span class="line"><span class="string">主:53.294203758239746 n:0</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#有的同学可能有疑问:既然加锁会让运行变成串行,那么我在start之后立即使用join,就不用加锁了啊,也是串行的效果啊</span></span><br><span class="line"><span class="comment">#没错:在start之后立刻使用jion,肯定会将100个任务的执行变成串行,毫无疑问,最终n的结果也肯定是0,是安全的,但问题是</span></span><br><span class="line"><span class="comment">#start后立即join:任务内的所有代码都是串行执行的,而加锁,只是加锁的部分即修改共享数据的部分是串行的</span></span><br><span class="line"><span class="comment">#单从保证数据安全方面,二者都可以实现,但很明显是加锁的效率更高.</span></span><br><span class="line"><span class="keyword">from</span> threading <span class="keyword">import</span> current_thread,Thread,Lock</span><br><span class="line"><span class="keyword">import</span> os,time</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">task</span><span class="params">()</span>:</span></span><br><span class="line">    time.sleep(<span class="number">3</span>)</span><br><span class="line">    print(<span class="string">'%s start to run'</span> %current_thread().getName())</span><br><span class="line">    <span class="keyword">global</span> n</span><br><span class="line">    temp=n</span><br><span class="line">    time.sleep(<span class="number">0.5</span>)</span><br><span class="line">    n=temp<span class="number">-1</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    n=<span class="number">100</span></span><br><span class="line">    lock=Lock()</span><br><span class="line">    start_time=time.time()</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">100</span>):</span><br><span class="line">        t=Thread(target=task)</span><br><span class="line">        t.start()</span><br><span class="line">        t.join()</span><br><span class="line">    stop_time=time.time()</span><br><span class="line">    print(<span class="string">'主:%s n:%s'</span> %(stop_time-start_time,n))</span><br><span class="line"></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">Thread-1 start to run</span></span><br><span class="line"><span class="string">Thread-2 start to run</span></span><br><span class="line"><span class="string">......</span></span><br><span class="line"><span class="string">Thread-100 start to run</span></span><br><span class="line"><span class="string">主:350.6937336921692 n:0 #耗时是多么的恐怖</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"></span><br><span class="line">）</span><br></pre></td></tr></table></figure>
-
-<h5 id="（3）死锁与递归锁"><a href="#（3）死锁与递归锁" class="headerlink" title="（3）死锁与递归锁"></a>（3）死锁与递归锁</h5><p>进程也有死锁与递归锁，在进程那里忘记说了，放到这里一切说了额</p>
-<p>所谓死锁： 是指两个或两个以上的进程或线程在执行过程中，因争夺资源而造成的一种互相等待的现象，若无外力作用，它们都将无法推进下去。此时称系统处于死锁状态或系统产生了死锁，这些永远在互相等待的进程称为死锁进程，如下就是死锁</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> threading <span class="keyword">import</span> Lock <span class="keyword">as</span> Lock</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line">mutexA=Lock()</span><br><span class="line">mutexA.acquire()</span><br><span class="line">mutexA.acquire()</span><br><span class="line">print(<span class="number">123</span>)</span><br><span class="line">mutexA.release()</span><br><span class="line">mutexA.release()</span><br></pre></td></tr></table></figure>
-
-<p>解决方法，递归锁，在Python中为了支持在同一线程中多次请求同一资源，python提供了可重入锁RLock。</p>
-<p>这个RLock内部维护着一个Lock和一个counter变量，counter记录了acquire的次数，从而使得资源可以被多次require。直到一个线程所有的acquire都被release，其他的线程才能获得资源。上面的例子如果使用RLock代替Lock，则不会发生死锁:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> threading <span class="keyword">import</span> RLock <span class="keyword">as</span> Lock</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line">mutexA=Lock()</span><br><span class="line">mutexA.acquire()</span><br><span class="line">mutexA.acquire()</span><br><span class="line">print(<span class="number">123</span>)</span><br><span class="line">mutexA.release()</span><br><span class="line">mutexA.release()</span><br></pre></td></tr></table></figure>
-
-<p>典型问题：科学家吃面</p>
-<p>死锁问题</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">from</span> threading <span class="keyword">import</span> Lock,Thread</span><br><span class="line">noodle_lock  = Lock()		<span class="comment"># 互斥锁</span></span><br><span class="line">fork_lock = Lock()</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">eat1</span><span class="params">(name)</span>:</span></span><br><span class="line">    noodle_lock.acquire()</span><br><span class="line">    print(<span class="string">'%s拿到面条啦'</span>%name)</span><br><span class="line">    fork_lock.acquire()</span><br><span class="line">    print(<span class="string">'%s拿到叉子了'</span>%name)</span><br><span class="line">    print(<span class="string">'%s吃面'</span>%name)</span><br><span class="line">    fork_lock.release()</span><br><span class="line">    noodle_lock.release()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">eat2</span><span class="params">(name)</span>:</span></span><br><span class="line">    fork_lock.acquire()</span><br><span class="line">    print(<span class="string">'%s拿到叉子了'</span>%name)</span><br><span class="line">    time.sleep(<span class="number">1</span>)   <span class="comment"># 产生死锁</span></span><br><span class="line">    noodle_lock.acquire()</span><br><span class="line">    print(<span class="string">'%s拿到面条啦'</span>%name)</span><br><span class="line">    print(<span class="string">'%s吃面'</span>%name)</span><br><span class="line">    noodle_lock.release()</span><br><span class="line">    fork_lock.release()</span><br><span class="line"></span><br><span class="line">Thread(target=eat1,args=(<span class="string">'alex'</span>,)).start()</span><br><span class="line">Thread(target=eat2,args=(<span class="string">'Egon'</span>,)).start()</span><br><span class="line">Thread(target=eat1,args=(<span class="string">'bossjin'</span>,)).start()</span><br><span class="line">Thread(target=eat2,args=(<span class="string">'nezha'</span>,)).start()</span><br></pre></td></tr></table></figure>
-
-<p>递归锁解决死锁问题</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">from</span> threading <span class="keyword">import</span> Thread,RLock   <span class="comment"># 递归锁</span></span><br><span class="line">fork_lock = noodle_lock  = RLock()   <span class="comment"># 一个钥匙串上的两把钥匙，拿到一个钥匙即意味着拿到了一串钥匙</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">eat1</span><span class="params">(name)</span>:</span></span><br><span class="line">    noodle_lock.acquire()            <span class="comment"># 一把钥匙</span></span><br><span class="line">    print(<span class="string">'%s拿到面条啦'</span>%name)</span><br><span class="line">    fork_lock.acquire()</span><br><span class="line">    print(<span class="string">'%s拿到叉子了'</span>%name)</span><br><span class="line">    print(<span class="string">'%s吃面'</span>%name)</span><br><span class="line">    fork_lock.release()</span><br><span class="line">    noodle_lock.release()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">eat2</span><span class="params">(name)</span>:</span></span><br><span class="line">    fork_lock.acquire()</span><br><span class="line">    print(<span class="string">'%s拿到叉子了'</span>%name)</span><br><span class="line">    time.sleep(<span class="number">1</span>)</span><br><span class="line">    noodle_lock.acquire()</span><br><span class="line">    print(<span class="string">'%s拿到面条啦'</span>%name)</span><br><span class="line">    print(<span class="string">'%s吃面'</span>%name)</span><br><span class="line">    noodle_lock.release()</span><br><span class="line">    fork_lock.release()</span><br><span class="line"></span><br><span class="line">Thread(target=eat1,args=(<span class="string">'alex'</span>,)).start()</span><br><span class="line">Thread(target=eat2,args=(<span class="string">'Egon'</span>,)).start()</span><br><span class="line">Thread(target=eat1,args=(<span class="string">'bossjin'</span>,)).start()</span><br><span class="line">Thread(target=eat2,args=(<span class="string">'nezha'</span>,)).start()</span><br></pre></td></tr></table></figure>
-
-<h4 id="3、信号量"><a href="#3、信号量" class="headerlink" title="3、信号量"></a>3、信号量</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">from</span> threading <span class="keyword">import</span> Semaphore,Thread</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">(sem,a,b)</span>:</span></span><br><span class="line">    sem.acquire()</span><br><span class="line">    time.sleep(<span class="number">1</span>)</span><br><span class="line">    print(a+b)</span><br><span class="line">    sem.release()</span><br><span class="line"></span><br><span class="line">sem = Semaphore(<span class="number">4</span>)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">    t = Thread(target=func,args=(sem,i,i+<span class="number">5</span>))</span><br><span class="line">    t.start()</span><br></pre></td></tr></table></figure>
-
-<h4 id="4、事件"><a href="#4、事件" class="headerlink" title="4、事件"></a>4、事件</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">from</span> threading <span class="keyword">import</span> Thread,Event</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">connect_db</span><span class="params">(e)</span>:</span></span><br><span class="line">    count = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> count &lt; <span class="number">3</span>:</span><br><span class="line">        e.wait(<span class="number">0.5</span>)   <span class="comment"># 状态为False的时候,我只等待1s就结束</span></span><br><span class="line">        <span class="keyword">if</span> e.is_set() == <span class="literal">True</span>:</span><br><span class="line">            print(<span class="string">'连接数据库'</span>)</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            count += <span class="number">1</span></span><br><span class="line">            print(<span class="string">'第%s次连接失败'</span>%count)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">raise</span> TimeoutError(<span class="string">'数据库连接超时'</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">check_web</span><span class="params">(e)</span>:</span></span><br><span class="line">    time.sleep(random.randint(<span class="number">0</span>,<span class="number">3</span>))</span><br><span class="line">    e.set()</span><br><span class="line"></span><br><span class="line">e = Event()</span><br><span class="line">t1 = Thread(target=connect_db,args=(e,))</span><br><span class="line">t2 = Thread(target=check_web,args=(e,))</span><br><span class="line">t1.start()</span><br><span class="line">t2.start()</span><br></pre></td></tr></table></figure>
-
-<h4 id="5、条件"><a href="#5、条件" class="headerlink" title="5、条件"></a>5、条件</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> threading <span class="keyword">import</span> Thread,Condition</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">(con,i)</span>:</span></span><br><span class="line">    con.acquire()</span><br><span class="line">    con.wait() <span class="comment"># 等钥匙</span></span><br><span class="line">    print(<span class="string">'在第%s个循环里'</span>%i)</span><br><span class="line">    con.release()</span><br><span class="line">con = Condition()</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">    Thread(target=func,args = (con,i)).start()</span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    num = int(input(<span class="string">'&gt;&gt;&gt;'</span>))</span><br><span class="line">    con.acquire()</span><br><span class="line">    con.notify(num)  <span class="comment"># 造钥匙</span></span><br><span class="line">    con.release()</span><br></pre></td></tr></table></figure>
-
-<h4 id="6、定时器"><a href="#6、定时器" class="headerlink" title="6、定时器"></a>6、定时器</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">from</span> threading <span class="keyword">import</span> Timer</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">'时间同步'</span>)   <span class="comment">#1-3</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    t = Timer(<span class="number">5</span>,func).start()   <span class="comment"># 非阻塞的</span></span><br><span class="line">    time.sleep(<span class="number">5</span>)</span><br></pre></td></tr></table></figure>
-
-<h4 id="7、线程队列"><a href="#7、线程队列" class="headerlink" title="7、线程队列"></a>7、线程队列</h4><p>queue队列 ：使用import queue，用法与进程Queue一样</p>
-<p>queue is especially useful in threaded programming when information must be exchanged safely between multiple threads.</p>
-<ul>
-<li><p><strong>class queue.Queue(maxsize=0) #先进先出</strong></p>
-<p>先进先出:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> queue</span><br><span class="line"></span><br><span class="line">q=queue.Queue()</span><br><span class="line">q.put(<span class="string">'first'</span>)</span><br><span class="line">q.put(<span class="string">'second'</span>)</span><br><span class="line">q.put(<span class="string">'third'</span>)</span><br><span class="line"></span><br><span class="line">print(q.get())</span><br><span class="line">print(q.get())</span><br><span class="line">print(q.get())</span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">结果(先进先出):</span></span><br><span class="line"><span class="string">first</span></span><br><span class="line"><span class="string">second</span></span><br><span class="line"><span class="string">third</span></span><br><span class="line"><span class="string">'''</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>class queue.LifoQueue(maxsize=0) #last in fisrt out</strong></p>
-<p>后进先出</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> queue</span><br><span class="line"></span><br><span class="line">q=queue.LifoQueue()</span><br><span class="line">q.put(<span class="string">'first'</span>)</span><br><span class="line">q.put(<span class="string">'second'</span>)</span><br><span class="line">q.put(<span class="string">'third'</span>)</span><br><span class="line"></span><br><span class="line">print(q.get())</span><br><span class="line">print(q.get())</span><br><span class="line">print(q.get())</span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">结果(后进先出):</span></span><br><span class="line"><span class="string">third</span></span><br><span class="line"><span class="string">second</span></span><br><span class="line"><span class="string">first</span></span><br><span class="line"><span class="string">'''</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>class queue.PriorityQueue(maxsize=0) #存储数据时可设置优先级的队列</strong></p>
-<p>优先级队列</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> queue</span><br><span class="line"></span><br><span class="line">q=queue.PriorityQueue()</span><br><span class="line"><span class="comment">#put进入一个元组,元组的第一个元素是优先级(通常是数字,也可以是非数字之间的比较),数字越小优先级越高。第一个元素一致时，按第二个排</span></span><br><span class="line">q.put((<span class="number">20</span>,<span class="string">'a'</span>))</span><br><span class="line">q.put((<span class="number">10</span>,<span class="string">'b'</span>))</span><br><span class="line">q.put((<span class="number">30</span>,<span class="string">'c'</span>))</span><br><span class="line"></span><br><span class="line">print(q.get())</span><br><span class="line">print(q.get())</span><br><span class="line">print(q.get())</span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">结果(数字越小优先级越高,优先级高的优先出队):</span></span><br><span class="line"><span class="string">(10, 'b')</span></span><br><span class="line"><span class="string">(20, 'a')</span></span><br><span class="line"><span class="string">(30, 'c')</span></span><br><span class="line"><span class="string">'''</span></span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<p>更多方法说明</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">Constructor for a priority queue. maxsize is an integer that sets the upperbound limit on the number of items that can be placed in the queue. Insertion will block once this size has been reached, until queue items are consumed. If maxsize is less than or equal to zero, the queue size is infinite.</span><br><span class="line"></span><br><span class="line">The lowest valued entries are retrieved first (the lowest valued entry is the one returned by sorted(list(entries))[0]). A typical pattern for entries is a tuple in the form: (priority_number, data).</span><br><span class="line"></span><br><span class="line">exception queue.Empty</span><br><span class="line">Exception raised when non-blocking get() (or get_nowait()) is called on a Queue object which is empty.</span><br><span class="line"></span><br><span class="line">exception queue.Full</span><br><span class="line">Exception raised when non-blocking put() (or put_nowait()) is called on a Queue object which is full.</span><br><span class="line"></span><br><span class="line">Queue.qsize()</span><br><span class="line">Queue.empty() #return True if empty  </span><br><span class="line">Queue.full() # return True if full </span><br><span class="line">Queue.put(item, block=True, timeout=None)</span><br><span class="line">Put item into the queue. If optional args block is true and timeout is None (the default), block if necessary until a free slot is available. If timeout is a positive number, it blocks at most timeout seconds and raises the Full exception if no free slot was available within that time. Otherwise (block is false), put an item on the queue if a free slot is immediately available, else raise the Full exception (timeout is ignored in that case).</span><br><span class="line"></span><br><span class="line">Queue.put_nowait(item)</span><br><span class="line">Equivalent to put(item, False).</span><br><span class="line"></span><br><span class="line">Queue.get(block=True, timeout=None)</span><br><span class="line">Remove and return an item from the queue. If optional args block is true and timeout is None (the default), block if necessary until an item is available. If timeout is a positive number, it blocks at most timeout seconds and raises the Empty exception if no item was available within that time. Otherwise (block is false), return an item if one is immediately available, else raise the Empty exception (timeout is ignored in that case).</span><br><span class="line"></span><br><span class="line">Queue.get_nowait()</span><br><span class="line">Equivalent to get(False).</span><br><span class="line"></span><br><span class="line">Two methods are offered to support tracking whether enqueued tasks have been fully processed by daemon consumer threads.</span><br><span class="line"></span><br><span class="line">Queue.task_done()</span><br><span class="line">Indicate that a formerly enqueued task is complete. Used by queue consumer threads. For each get() used to fetch a task, a subsequent call to task_done() tells the queue that the processing on the task is complete.</span><br><span class="line"></span><br><span class="line">If a join() is currently blocking, it will resume when all items have been processed (meaning that a task_done() call was received for every item that had been put() into the queue).</span><br><span class="line"></span><br><span class="line">Raises a ValueError if called more times than there were items placed in the queue.</span><br><span class="line"></span><br><span class="line">Queue.join() block直到queue被消费完毕</span><br></pre></td></tr></table></figure>
-
-<h4 id="8、Python标准模块——concurrent-futures"><a href="#8、Python标准模块——concurrent-futures" class="headerlink" title="8、Python标准模块——concurrent.futures"></a>8、Python标准模块——concurrent.futures</h4><p><strong><a href="https://docs.python.org/dev/library/concurrent.futures.html" target="_blank" rel="noopener">https://docs.python.org/dev/library/concurrent.futures.html</a></strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#1 介绍</span></span><br><span class="line">concurrent.futures模块提供了高度封装的异步调用接口</span><br><span class="line">ThreadPoolExecutor：线程池，提供异步调用</span><br><span class="line">ProcessPoolExecutor: 进程池，提供异步调用</span><br><span class="line">Both implement the same interface, which <span class="keyword">is</span> defined by the abstract Executor <span class="class"><span class="keyword">class</span>.</span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class">#2 基本方法</span></span><br><span class="line"><span class="class">#<span class="title">submit</span><span class="params">(fn, *args, **kwargs)</span></span></span><br><span class="line"><span class="class">异步提交任务</span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class">#<span class="title">map</span><span class="params">(func, *iterables, timeout=None, chunksize=<span class="number">1</span>)</span> </span></span><br><span class="line"><span class="class">取代<span class="title">for</span>循环<span class="title">submit</span>的操作</span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class">#<span class="title">shutdown</span><span class="params">(wait=True)</span> </span></span><br><span class="line"><span class="class">相当于进程池的<span class="title">pool</span>.<span class="title">close</span><span class="params">()</span>+<span class="title">pool</span>.<span class="title">join</span><span class="params">()</span>操作</span></span><br><span class="line">wait=True，等待池内所有任务执行完毕回收完资源后才继续</span><br><span class="line">wait=<span class="literal">False</span>，立即返回，并不会等待池内的任务执行完毕</span><br><span class="line">但不管wait参数为何值，整个程序都会等到所有任务执行完毕</span><br><span class="line">submit和map必须在shutdown之前</span><br><span class="line"></span><br><span class="line"><span class="comment">#result(timeout=None)</span></span><br><span class="line">取得结果</span><br><span class="line"></span><br><span class="line"><span class="comment">#add_done_callback(fn)</span></span><br><span class="line">回调函数</span><br><span class="line"></span><br><span class="line"><span class="comment"># done()</span></span><br><span class="line">判断某一个线程是否完成</span><br><span class="line"></span><br><span class="line"><span class="comment"># cancle()</span></span><br><span class="line">取消某个任务</span><br></pre></td></tr></table></figure>
-
-<p>ProcessPoolExecutor</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#介绍</span></span><br><span class="line">The ProcessPoolExecutor class is an Executor subclass that uses a pool of processes to execute calls asynchronously. ProcessPoolExecutor uses the multiprocessing module, which allows it to side-step the Global Interpreter Lock but also means that only picklable objects can be executed and returned.</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">concurrent</span>.<span class="title">futures</span>.<span class="title">ProcessPoolExecutor</span><span class="params">(max_workers=None, mp_context=None)</span></span></span><br><span class="line">An Executor subclass that executes calls asynchronously using a pool of at most max_workers processes. If max_workers is None or not given, it will default to the number of processors on the machine. If max_workers is lower or equal to 0, then a ValueError will be raised.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#用法</span></span><br><span class="line"><span class="keyword">from</span> concurrent.futures <span class="keyword">import</span> ThreadPoolExecutor,ProcessPoolExecutor</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> os,time,random</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">task</span><span class="params">(n)</span>:</span></span><br><span class="line">    print(<span class="string">'%s is runing'</span> %os.getpid())</span><br><span class="line">    time.sleep(random.randint(<span class="number">1</span>,<span class="number">3</span>))</span><br><span class="line">    <span class="keyword">return</span> n**<span class="number">2</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line"></span><br><span class="line">    executor=ProcessPoolExecutor(max_workers=<span class="number">3</span>)</span><br><span class="line"></span><br><span class="line">    futures=[]</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">11</span>):</span><br><span class="line">        future=executor.submit(task,i)</span><br><span class="line">        futures.append(future)</span><br><span class="line">    executor.shutdown(<span class="literal">True</span>)</span><br><span class="line">    print(<span class="string">'+++&gt;'</span>)</span><br><span class="line">    <span class="keyword">for</span> future <span class="keyword">in</span> futures:</span><br><span class="line">        print(future.result())</span><br></pre></td></tr></table></figure>
-
-<p>ThreadPoolExecutor</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#介绍</span></span><br><span class="line">ThreadPoolExecutor <span class="keyword">is</span> an Executor subclass that uses a pool of threads to execute calls asynchronously.</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">concurrent</span>.<span class="title">futures</span>.<span class="title">ThreadPoolExecutor</span><span class="params">(max_workers=None, thread_name_prefix=<span class="string">''</span>)</span></span></span><br><span class="line"><span class="class"><span class="title">An</span> <span class="title">Executor</span> <span class="title">subclass</span> <span class="title">that</span> <span class="title">uses</span> <span class="title">a</span> <span class="title">pool</span> <span class="title">of</span> <span class="title">at</span> <span class="title">most</span> <span class="title">max_workers</span> <span class="title">threads</span> <span class="title">to</span> <span class="title">execute</span> <span class="title">calls</span> <span class="title">asynchronously</span>.</span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class"><span class="title">Changed</span> <span class="title">in</span> <span class="title">version</span> 3.5:</span> If max_workers <span class="keyword">is</span> <span class="literal">None</span> <span class="keyword">or</span> <span class="keyword">not</span> given, it will default to the number of processors on the machine, multiplied by <span class="number">5</span>, assuming that ThreadPoolExecutor <span class="keyword">is</span> often used to overlap I/O instead of CPU work <span class="keyword">and</span> the number of workers should be higher than the number of workers <span class="keyword">for</span> ProcessPoolExecutor.</span><br><span class="line"></span><br><span class="line">New <span class="keyword">in</span> version <span class="number">3.6</span>: The thread_name_prefix argument was added to allow users to control the threading.Thread names <span class="keyword">for</span> worker threads created by the pool <span class="keyword">for</span> easier debugging.</span><br><span class="line"></span><br><span class="line"><span class="comment">#用法</span></span><br><span class="line">与ProcessPoolExecutor相同</span><br></pre></td></tr></table></figure>
-
-<p>map的用法</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> concurrent.futures <span class="keyword">import</span> ThreadPoolExecutor,ProcessPoolExecutor</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> os,time,random</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">task</span><span class="params">(n)</span>:</span></span><br><span class="line">    print(<span class="string">'%s is runing'</span> %os.getpid())</span><br><span class="line">    time.sleep(random.randint(<span class="number">1</span>,<span class="number">3</span>))</span><br><span class="line">    <span class="keyword">return</span> n**<span class="number">2</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line"></span><br><span class="line">    executor=ThreadPoolExecutor(max_workers=<span class="number">3</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># for i in range(11):</span></span><br><span class="line">    <span class="comment">#     future=executor.submit(task,i)</span></span><br><span class="line"></span><br><span class="line">    executor.map(task,range(<span class="number">1</span>,<span class="number">12</span>)) <span class="comment">#map取代了for+submit</span></span><br></pre></td></tr></table></figure>
-
-<p>回调函数</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> concurrent.futures <span class="keyword">import</span> ThreadPoolExecutor,ProcessPoolExecutor</span><br><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Pool</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_page</span><span class="params">(url)</span>:</span></span><br><span class="line">    print(<span class="string">'&lt;进程%s&gt; get %s'</span> %(os.getpid(),url))</span><br><span class="line">    respone=requests.get(url)</span><br><span class="line">    <span class="keyword">if</span> respone.status_code == <span class="number">200</span>:</span><br><span class="line">        <span class="keyword">return</span> &#123;<span class="string">'url'</span>:url,<span class="string">'text'</span>:respone.text&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">parse_page</span><span class="params">(res)</span>:</span></span><br><span class="line">    res=res.result()</span><br><span class="line">    print(<span class="string">'&lt;进程%s&gt; parse %s'</span> %(os.getpid(),res[<span class="string">'url'</span>]))</span><br><span class="line">    parse_res=<span class="string">'url:&lt;%s&gt; size:[%s]\n'</span> %(res[<span class="string">'url'</span>],len(res[<span class="string">'text'</span>]))</span><br><span class="line">    <span class="keyword">with</span> open(<span class="string">'db.txt'</span>,<span class="string">'a'</span>) <span class="keyword">as</span> f:</span><br><span class="line">        f.write(parse_res)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    urls=[</span><br><span class="line">        <span class="string">'https://www.baidu.com'</span>,</span><br><span class="line">        <span class="string">'https://www.python.org'</span>,</span><br><span class="line">        <span class="string">'https://www.openstack.org'</span>,</span><br><span class="line">        <span class="string">'https://help.github.com/'</span>,</span><br><span class="line">        <span class="string">'http://www.sina.com.cn/'</span></span><br><span class="line">    ]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># p=Pool(3)</span></span><br><span class="line">    <span class="comment"># for url in urls:</span></span><br><span class="line">    <span class="comment">#     p.apply_async(get_page,args=(url,),callback=pasrse_page)</span></span><br><span class="line">    <span class="comment"># p.close()</span></span><br><span class="line">    <span class="comment"># p.join()</span></span><br><span class="line"></span><br><span class="line">    p=ProcessPoolExecutor(<span class="number">3</span>)</span><br><span class="line">    <span class="keyword">for</span> url <span class="keyword">in</span> urls:</span><br><span class="line">        p.submit(get_page,url).add_done_callback(parse_page) <span class="comment">#parse_page拿到的是一个future对象obj，需要用obj.result()拿到结果</span></span><br></pre></td></tr></table></figure>
-
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2821,7 +2879,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-count">26</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -2832,7 +2890,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
