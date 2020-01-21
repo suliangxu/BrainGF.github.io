@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Linux的目录结构为树状结构，最顶级的目录为根目录/。 其他目录通过挂载可以将它们添加到树中，通过解除挂载可以移除它们。 绝对路径与相对路径：  绝对路径 绝对路径的写法，由根目录 / 写起，例如： /usr/share/doc 这个目录。  相对路径 相对路径的写法，不是由 / 写起，例如由 /usr/share/doc 要到 /usr/share/man 底下时，可以写成 cd ../man">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux教程（5）Linux文件与目录管理">
+<meta property="og:url" content="http://yoursite.com/2020/01/20/Linux/Linux基础/Linux教程（5）Linux文件与目录管理/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Linux的目录结构为树状结构，最顶级的目录为根目录/。 其他目录通过挂载可以将它们添加到树中，通过解除挂载可以移除它们。 绝对路径与相对路径：  绝对路径 绝对路径的写法，由根目录 / 写起，例如： /usr/share/doc 这个目录。  相对路径 相对路径的写法，不是由 / 写起，例如由 /usr/share/doc 要到 /usr/share/man 底下时，可以写成 cd ../man">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-01-20T08:12:05.497Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux教程（5）Linux文件与目录管理">
+<meta name="twitter:description" content="Linux的目录结构为树状结构，最顶级的目录为根目录/。 其他目录通过挂载可以将它们添加到树中，通过解除挂载可以移除它们。 绝对路径与相对路径：  绝对路径 绝对路径的写法，由根目录 / 写起，例如： /usr/share/doc 这个目录。  相对路径 相对路径的写法，不是由 / 写起，例如由 /usr/share/doc 要到 /usr/share/man 底下时，可以写成 cd ../man">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/01/20/Linux/Linux基础/Linux教程（5）Linux文件与目录管理/">
+
+
+
+
+
+  <title>Linux教程（5）Linux文件与目录管理 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/20/Linux/Linux基础/Linux教程（5）Linux文件与目录管理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Linux教程（5）Linux文件与目录管理</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-01-20T16:12:05+08:00">
+                2020-01-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux-Linux基础/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux - Linux基础</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Linux的目录结构为树状结构，最顶级的目录为根目录/。</p>
+<p>其他目录通过挂载可以将它们添加到树中，通过解除挂载可以移除它们。</p>
+<p><strong>绝对路径与相对路径：</strong></p>
+<ul>
+<li><p><strong>绝对路径</strong></p>
+<p>绝对路径的写法，由根目录 / 写起，例如： /usr/share/doc 这个目录。</p>
+</li>
+<li><p><strong>相对路径</strong></p>
+<p>相对路径的写法，不是由 / 写起，例如由 /usr/share/doc 要到 /usr/share/man 底下时，可以写成 cd ../man ，这就是相对路径的写法。</p>
+</li>
+</ul>
+<h3 id="一、处理目录的常用命令"><a href="#一、处理目录的常用命令" class="headerlink" title="一、处理目录的常用命令"></a>一、处理目录的常用命令</h3><ul>
+<li><strong>ls：</strong> 列出命令</li>
+<li><strong>cd：</strong> 切换目录</li>
+<li><strong>pwd：</strong> 显示当前目录</li>
+<li><strong>rmdir：</strong> 删除一个空的目录</li>
+<li><strong>cp：</strong> 复制文件或目录</li>
+<li><strong>rm：</strong> 移除文件或目录</li>
+<li><strong>mv：</strong> 移动文件与目录，或修改文件与目录的名称</li>
+</ul>
+<p>你可以使用 <strong>man [命令]</strong> 来查看各个命令的使用文档，如： man cp。</p>
+<h4 id="1、ls（列出目录）"><a href="#1、ls（列出目录）" class="headerlink" title="1、ls（列出目录）"></a>1、ls（列出目录）</h4><p>在Linux系统当中，ls命令可能是最常被运行的。</p>
+<p>语法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~] ls [-aAdfFhilnrRSt] 目录名称</span><br><span class="line">[root@www ~] ls [--color=&#123;never,auto,always&#125;] 目录名称</span><br><span class="line">[root@www ~] ls [--full-time] 目录名称</span><br></pre></td></tr></table></figure>
+
+<p>选项与参数：</p>
+<ul>
+<li><p><strong>- a</strong></p>
+<p>全部的文件，连同隐藏文件（开头为 . 的文件）一起列出来（常用）</p>
+</li>
+<li><p><strong>- d</strong></p>
+<p>仅列出目录本身，而不是列出目录内的文件数据（常用）</p>
+</li>
+<li><p><strong>- l</strong></p>
+<p>常数据串列出，包含文件的属性与权限等等数据（常用）</p>
+</li>
+</ul>
+<p>将家目录下的所有文件列出来（含属性与隐藏档）</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~]<span class="comment"># ls -al ~</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="2、cd（切换目录）"><a href="#2、cd（切换目录）" class="headerlink" title="2、cd（切换目录）"></a>2、cd（切换目录）</h4><p>cd 是 Change Directory 的缩写，这是用来变换工作目录的命令。</p>
+<p>语法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd [相对路径或绝对路径]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">使用 mkdir 命令创建 runoob 目录</span></span><br><span class="line">[root@www ~] mkdir runoob</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">使用绝对路径切换到 runoob 目录</span></span><br><span class="line">[root@www ~] cd /root/runoob/</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">使用相对路径切换到 runoob 目录</span></span><br><span class="line">[root@www ~] cd ./runoob/</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 表示回到自己的家目录，亦即是 /root 这个目录</span></span><br><span class="line">[root@www runoob] cd ~</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 表示去到目前的上一级目录，亦即是 /root 的上一级目录的意思；</span></span><br><span class="line">[root@www ~] cd ..</span><br></pre></td></tr></table></figure>
+
+<h4 id="3、pwd（显示目前所在的目录）"><a href="#3、pwd（显示目前所在的目录）" class="headerlink" title="3、pwd（显示目前所在的目录）"></a>3、pwd（显示目前所在的目录）</h4><p>pwd 是 Print Working Directory 的缩写，也就是显示目前所在目录的命令。</p>
+<p>语法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~] pwd [-P]</span><br></pre></td></tr></table></figure>
+
+<p>选项与参数：</p>
+<ul>
+<li><p><strong>- P</strong> </p>
+<p>显示出确实的路径，而非使用连结（link）路径</p>
+</li>
+</ul>
+<p>示例：单纯显示出目前的工作目录：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~] pwd</span><br><span class="line">/root   &lt;== 显示出目录啦～</span><br></pre></td></tr></table></figure>
+
+<p>示例：显示出实际的工作目录，而非连结档本身的目录名而已：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~] cd /var/mail   &lt;==注意，/var/mail是一个连结档</span><br><span class="line">[root@www mail] pwd</span><br><span class="line">/var/mail         &lt;==列出目前的工作目录</span><br><span class="line">[root@www mail] pwd -P</span><br><span class="line">/var/spool/mail   &lt;==怎么回事？有没有加 -P 差很多～</span><br><span class="line">[root@www mail] ls -ld /var/mail</span><br><span class="line">lrwxrwxrwx 1 root root 10 Sep  4 17:54 /var/mail -&gt; spool/mail</span><br><span class="line"><span class="meta">#</span><span class="bash"> 看到这里应该知道为啥了吧？因为 /var/mail 是连结档，连结到 /var/spool/mail </span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 所以，加上 <span class="built_in">pwd</span> -P 的选项后，会不以连结档的数据显示，而是显示正确的完整路径啊！</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="4、mkdir（创建新目录）"><a href="#4、mkdir（创建新目录）" class="headerlink" title="4、mkdir（创建新目录）"></a>4、mkdir（创建新目录）</h4><p>如果想要创建新目录的话，应使用 mkdir（make directory）。</p>
+<p>语法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir [-mp] 目录名称</span><br></pre></td></tr></table></figure>
+
+<p>选项与参数：</p>
+<ul>
+<li><p><strong>- m</strong> </p>
+<p>配置文件的权限</p>
+</li>
+<li><p><strong>- p</strong> </p>
+<p>将所需要的目录（包含上一级目录）递归创建</p>
+</li>
+</ul>
+<p>示例：在 /tmp 下创建多个新目录：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~] cd /tmp</span><br><span class="line">[root@www tmp] mkdir test    &lt;==创建一名为 test 的新目录</span><br><span class="line">[root@www tmp] mkdir test1/test2/test3/test4</span><br><span class="line">mkdir: cannot create directory `test1/test2/test3/test4': </span><br><span class="line">No such file or directory       &lt;== 没办法直接创建此目录啊！</span><br><span class="line">[root@www tmp] mkdir -p test1/test2/test3/test4       &lt;== 加了这个 -p 的选项，可以自行帮你创建多层目录！</span><br></pre></td></tr></table></figure>
+
+<p>示例：创建权限为 rwx–x–x 的目录：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@www tmp] mkdir -m 711 test2</span><br><span class="line">[root@www tmp] ls -l</span><br><span class="line">drwxr-xr-x  3 root  root 4096 Jul 18 12:50 test</span><br><span class="line">drwxr-xr-x  3 root  root 4096 Jul 18 12:53 test1</span><br><span class="line">drwx--x--x  2 root  root 4096 Jul 18 12:54 test2</span><br></pre></td></tr></table></figure>
+
+<h4 id="5、rmdir（删除空的目录）"><a href="#5、rmdir（删除空的目录）" class="headerlink" title="5、rmdir（删除空的目录）"></a>5、rmdir（删除空的目录）</h4><p>语法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rmdir [-p] 目录名称</span><br></pre></td></tr></table></figure>
+
+<p>选项与参数：</p>
+<ul>
+<li><p><strong>- p</strong></p>
+<p>连同上一级【空的】目录也一起删除</p>
+</li>
+</ul>
+<p>示例：删除 runoob 目录：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@www tmp] rmdir runoob/</span><br></pre></td></tr></table></figure>
+
+<p>示例：将 mkdir 示例中创建的目录删除：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@www tmp] ls -l   &lt;==看看有多少目录存在？</span><br><span class="line">drwxr-xr-x  3 root  root 4096 Jul 18 12:50 test</span><br><span class="line">drwxr-xr-x  3 root  root 4096 Jul 18 12:53 test1</span><br><span class="line">drwx--x--x  2 root  root 4096 Jul 18 12:54 test2</span><br><span class="line">[root@www tmp] rmdir test   &lt;==可直接删除掉，没问题</span><br><span class="line">[root@www tmp] rmdir test1  &lt;==因为尚有内容，所以无法删除！</span><br><span class="line">rmdir: `test1': Directory not empty</span><br><span class="line">[root@www tmp] rmdir -p test1/test2/test3/test4</span><br><span class="line">[root@www tmp] ls -l        &lt;==您看看，底下的输出中test与test1不见了！</span><br><span class="line">drwx--x--x  2 root  root 4096 Jul 18 12:54 test2</span><br></pre></td></tr></table></figure>
+
+<p>注：rmdir 仅能删除空的目录，你可以使用 rm 命令来删除非空目录。</p>
+<h4 id="6、cp（复制文件或目录）"><a href="#6、cp（复制文件或目录）" class="headerlink" title="6、cp（复制文件或目录）"></a>6、cp（复制文件或目录）</h4><p>语法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~]# cp [-adfilprsu] 来源档(source) 目标档(destination)</span><br><span class="line">[root@www ~]# cp [options] source1 source2 source3 .... directory</span><br></pre></td></tr></table></figure>
+
+<p>选项与参数：</p>
+<ul>
+<li><p><strong>- a</strong></p>
+<p>相当于 -pdr 的意思，至于 pdr 请参考下列说明；(常用)</p>
+</li>
+<li><p><strong>- d</strong></p>
+<p>若来源档为连结档的属性(link file)，则复制连结档属性而非文件本身；</p>
+</li>
+<li><p><strong>- f</strong></p>
+<p>为强制(force)的意思，若目标文件已经存在且无法开启，则移除后再尝试一次；</p>
+</li>
+<li><p><strong>- i</strong></p>
+<p>若目标档(destination)已经存在时，在覆盖时会先询问动作的进行(常用)</p>
+</li>
+<li><p><strong>- l</strong></p>
+<p>进行硬式连结(hard link)的连结档创建，而非复制文件本身；</p>
+</li>
+<li><p><strong>- p</strong></p>
+<p>连同文件的属性一起复制过去，而非使用默认属性(备份常用)；</p>
+</li>
+<li><p><strong>- r</strong></p>
+<p>递归持续复制，用於目录的复制行为；(常用)</p>
+</li>
+<li><p><strong>- s</strong></p>
+<p>复制成为符号连结档 (symbolic link)，亦即『捷径』文件；</p>
+</li>
+<li><p><strong>- u</strong></p>
+<p>若 destination 比 source 旧才升级 destination ！</p>
+</li>
+</ul>
+<p>用 root 身份，将 root 目录下的 .bashrc 复制到 /tmp 下，并命名为 bashrc</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~] cp ~/.bashrc /tmp/bashrc</span><br><span class="line">[root@www ~] cp -i ~/.bashrc /tmp/bashrc</span><br><span class="line">cp: overwrite `/tmp/bashrc'? n  &lt;==n不覆盖，y为覆盖</span><br></pre></td></tr></table></figure>
+
+<h4 id="7、rm（移除文件或目录）"><a href="#7、rm（移除文件或目录）" class="headerlink" title="7、rm（移除文件或目录）"></a>7、rm（移除文件或目录）</h4><p>语法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm [-fir] 文件或目录</span><br></pre></td></tr></table></figure>
+
+<p>选项与参数：</p>
+<ul>
+<li><p><strong>- f</strong></p>
+<p>就是 force 的意思，忽略不存在的文件，不会出现警告信息</p>
+</li>
+<li><p><strong>- i</strong></p>
+<p>互动模式，在删除前会询问使用者是否动作</p>
+</li>
+<li><p><strong>- r</strong></p>
+<p>递归删除</p>
+</li>
+</ul>
+<p>示例：删除 bashrc：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@www tmp] rm -i bashrc</span><br><span class="line">rm: remove regular file `bashrc'? y</span><br></pre></td></tr></table></figure>
+
+<p>若加上 - i 的选项就会主动询问，避免你删除到错误的档名！</p>
+<h4 id="8、mv（移动文件与目录，或修改名称）"><a href="#8、mv（移动文件与目录，或修改名称）" class="headerlink" title="8、mv（移动文件与目录，或修改名称）"></a>8、mv（移动文件与目录，或修改名称）</h4><p>语法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~] mv [-fiu] source destination</span><br><span class="line">[root@www ~] mv [options] source1 source2 source3 .... directory</span><br></pre></td></tr></table></figure>
+
+<p>选项与参数：</p>
+<ul>
+<li><p><strong>- f</strong></p>
+<p>force 强制的意思，如果目标文件已经存在，不会询问而直接覆盖</p>
+</li>
+<li><p><strong>- i</strong></p>
+<p>若目标文件（destination）已经存在时，就会询问是否覆盖</p>
+</li>
+<li><p><strong>- u</strong></p>
+<p>若目标文件已经存在，且 source 比较新，才会升级（update）</p>
+</li>
+</ul>
+<p>示例：复制一文件，创建一目录，将文件移动到目录中：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~] cd /tmp</span><br><span class="line">[root@www tmp] cp ~/.bashrc bashrc</span><br><span class="line">[root@www tmp] mkdir mvtest</span><br><span class="line">[root@www tmp] mv bashrc mvtest</span><br></pre></td></tr></table></figure>
+
+<p>示例：将刚刚的目录名称更名为 mvtest2</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@www tmp] mv mvtest mvtest2</span><br></pre></td></tr></table></figure>
+
+<h3 id="二、文件内容查看"><a href="#二、文件内容查看" class="headerlink" title="二、文件内容查看"></a>二、文件内容查看</h3><p>Linux系统中使用以下命令来查看文件的内容：</p>
+<ul>
+<li><p><strong>cat</strong></p>
+<p>由第一行开始显示文件内容</p>
+</li>
+<li><p><strong>tac</strong></p>
+<p>从最后一行开始显示，可以看出 tac 是cat 的倒着写</p>
+</li>
+<li><p><strong>nl</strong></p>
+<p>显示的时候，顺道输出行号</p>
+</li>
+<li><p><strong>more</strong></p>
+<p>一页一页的显示文件内容</p>
+</li>
+<li><p><strong>less</strong></p>
+<p>与more类似，但它可以往前翻页</p>
+</li>
+<li><p>head</p>
+<p>只看头几行</p>
+</li>
+<li><p>tail</p>
+<p>只看后几行</p>
+</li>
+</ul>
+<p>你可以使用 man [命令] 来查看各个命令的使用文档，如：man cp</p>
+<h4 id="1、cat"><a href="#1、cat" class="headerlink" title="1、cat"></a>1、cat</h4><p>由第一行开始显示文件内容</p>
+<p>语法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat [-AbEnTv]</span><br></pre></td></tr></table></figure>
+
+<p>选项与参数：</p>
+<ul>
+<li><p><strong>- A</strong></p>
+<p>相当于 -vET 的整合选项，可列出一些特殊字符而不是空白</p>
+</li>
+<li><p><strong>- b</strong></p>
+<p>列出行号，仅针对非空白行作出行号显示，空白行不标行号</p>
+</li>
+<li><p><strong>- E</strong></p>
+<p>将结尾的断行字节 $ 显示出来</p>
+</li>
+<li><p><strong>- n</strong></p>
+<p>列印出行号，连同空白行也会有行号，与 - b 选项不同</p>
+</li>
+<li><p><strong>- T</strong></p>
+<p>将 [tab] 键以 ^l 显示出来</p>
+</li>
+<li><p><strong>- v</strong></p>
+<p>列出一些看不出来的特殊字符</p>
+</li>
+</ul>
+<p>示例：检看 /etc/issue 这个文件的内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~]# cat /etc/issue</span><br><span class="line">CentOS release 6.4 (Final)</span><br><span class="line">Kernel \r on an \m</span><br></pre></td></tr></table></figure>
+
+<h4 id="2、tac"><a href="#2、tac" class="headerlink" title="2、tac"></a>2、tac</h4><p>tac 与 cat 命令刚好相反，文件内容从最后一行开始显示，可以看出 tac 是 cat 的倒着写。</p>
+<p>如：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~] tac /etc/issue</span><br><span class="line"></span><br><span class="line">Kernel \r on an \m</span><br><span class="line">CentOS release 6.4 (Final)</span><br></pre></td></tr></table></figure>
+
+<h4 id="3、nl"><a href="#3、nl" class="headerlink" title="3、nl"></a>3、nl</h4><p><strong>显示行号</strong></p>
+<p>语法：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nl [-bnw] 文件</span><br></pre></td></tr></table></figure>
+
+<p>选项与参数：</p>
+<ul>
+<li><p><strong>- b</strong>      </p>
+<p>指定行号指定的方式，主要有两种：</p>
+<ul>
+<li><strong>- b a：</strong> 表示不论是否为空行，也同样列出行号（类似 cat -n）</li>
+<li><strong>- b t：</strong> 如果有空行，空的那一行不要列出行号（默认值）</li>
+</ul>
+</li>
+<li><p><strong>- n</strong></p>
+<p>列出行号表示的方法，主要有三种：</p>
+<ul>
+<li><strong>- n ln：</strong> 行号在荧幕的左方显示</li>
+<li><strong>- n rn：</strong> 行号在自己栏位的最右方显示，且不加0</li>
+<li><strong>- n rz：</strong> 行号在自己栏位的最右方显示，且加0</li>
+</ul>
+</li>
+</ul>
+<p>示例：用 nl 列出 /etc/issue 的内容 </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~] nl /etc/issue</span><br><span class="line">     1  CentOS release 6.4 (Final)</span><br><span class="line">     2  Kernel \r on an \m</span><br></pre></td></tr></table></figure>
+
+<h4 id="4、more"><a href="#4、more" class="headerlink" title="4、more"></a>4、more</h4><p><strong>一页一页翻动</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~]more /etc/man_db.config </span><br><span class="line"><span class="meta">#</span><span class="bash"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Generated automatically from man.conf.in by the</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> configure script.</span></span><br><span class="line"><span class="meta">#</span><span class="bash"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> man.conf from man-1.6d</span></span><br><span class="line">....(中间省略)....</span><br><span class="line"><span class="meta">--More--(28%</span><span class="bash">)  &lt;== 重点在这一行喔！你的光标也会在这里等待你的命令</span></span><br></pre></td></tr></table></figure>
+
+<p>在 more 这个程序的运行过程中，可以按以下几个按键：</p>
+<ul>
+<li><p><strong>空白键（space）</strong></p>
+<p>代表向下翻一页</p>
+</li>
+<li><p><strong>Enter</strong></p>
+<p>代表向下翻一行</p>
+</li>
+<li><p><strong>/ 字串</strong></p>
+<p>代表在这个显示的内容当中，向下搜寻 字串 这个关键词</p>
+</li>
+<li><p><strong>: f</strong></p>
+<p>立刻显示出档名以及目前显示的行数</p>
+</li>
+<li><p><strong>q</strong></p>
+<p>代表立刻离开 more， 不再显示该文件内容</p>
+</li>
+<li><p><strong>b</strong> 或 <strong>[ctrl]-b</strong> </p>
+<p>代表往回翻页，不过该动作只对文件有用，对管线无用</p>
+</li>
+</ul>
+<h4 id="5、less"><a href="#5、less" class="headerlink" title="5、less"></a>5、less</h4><p><strong>一页一页翻动</strong></p>
+<p>示例：输出/etc/man.config文件的内容：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~] less /etc/man.config</span><br><span class="line"><span class="meta">#</span><span class="bash"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Generated automatically from man.conf.in by the</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> configure script.</span></span><br><span class="line"><span class="meta">#</span><span class="bash"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> man.conf from man-1.6d</span></span><br><span class="line">....(中间省略)....</span><br><span class="line">:   &lt;== 这里可以等待你输入命令！</span><br></pre></td></tr></table></figure>
+
+<p>less运行时，可以输入的命令有：</p>
+<ul>
+<li><p><strong>空白键</strong>  </p>
+<p>向下翻动一页；</p>
+</li>
+<li><p><strong>[pagedown]</strong></p>
+<p>向下翻动一页；</p>
+</li>
+<li><p><strong>[pageup]</strong></p>
+<p>向上翻动一页；</p>
+</li>
+<li><p><strong>/ 字串</strong>   </p>
+<p>向下搜寻『字串』的功能；</p>
+</li>
+<li><p><strong>? 字串</strong>  </p>
+<p>向上搜寻『字串』的功能；</p>
+</li>
+<li><p><strong>n</strong>     </p>
+<p>重复前一个搜寻 (与 / 或 ? 有关！)</p>
+</li>
+<li><p><strong>N</strong>    </p>
+<p>反向的重复前一个搜寻 (与 / 或 ? 有关！)</p>
+</li>
+<li><p><strong>q</strong>     </p>
+<p>离开 less 这个程序；</p>
+</li>
+</ul>
+<h4 id="6、head"><a href="#6、head" class="headerlink" title="6、head"></a>6、head</h4><p><strong>取出文件前面几行</strong></p>
+<p>语法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">head [-n number] 文件</span><br></pre></td></tr></table></figure>
+
+<p>选项与参数：</p>
+<ul>
+<li><p><strong>- n</strong></p>
+<p>后面接数字，代表显示几行的意思</p>
+</li>
+</ul>
+<p>默认的情况中，显示前面 10 行。</p>
+<p>示例：显示前20行：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~] head -n 20 /etc/man.config</span><br></pre></td></tr></table></figure>
+
+<h4 id="7、tail"><a href="#7、tail" class="headerlink" title="7、tail"></a>7、tail</h4><p><strong>取出文件后面几行</strong></p>
+<p>语法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tail [-n number] 文件</span><br></pre></td></tr></table></figure>
+
+<p>选项与参数：</p>
+<ul>
+<li><p><strong>- n</strong></p>
+<p>后面接数字，代表显示几行的意思</p>
+</li>
+<li><p><strong>- f</strong> </p>
+<p>表示持续侦测后面所接的档名，要等到按下[ctrl]-c才会结束tail的侦测</p>
+</li>
+</ul>
+<p>默认的情况中，显示最后 10 行。</p>
+<p>示例：显示后20行：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~] tail -n 20 /etc/man.config</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/01/19/Linux/Linux基础/Linux教程（4）Linux文件基本属性/" rel="next" title="Linux教程（4）Linux文件基本属性">
+                <i class="fa fa-chevron-left"></i> Linux教程（4）Linux文件基本属性
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="John Doe">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://suliangxu.github.io" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:1193135584@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、处理目录的常用命令"><span class="nav-text">一、处理目录的常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、ls（列出目录）"><span class="nav-text">1、ls（列出目录）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、cd（切换目录）"><span class="nav-text">2、cd（切换目录）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、pwd（显示目前所在的目录）"><span class="nav-text">3、pwd（显示目前所在的目录）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、mkdir（创建新目录）"><span class="nav-text">4、mkdir（创建新目录）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5、rmdir（删除空的目录）"><span class="nav-text">5、rmdir（删除空的目录）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6、cp（复制文件或目录）"><span class="nav-text">6、cp（复制文件或目录）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7、rm（移除文件或目录）"><span class="nav-text">7、rm（移除文件或目录）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8、mv（移动文件与目录，或修改名称）"><span class="nav-text">8、mv（移动文件与目录，或修改名称）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、文件内容查看"><span class="nav-text">二、文件内容查看</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、cat"><span class="nav-text">1、cat</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、tac"><span class="nav-text">2、tac</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、nl"><span class="nav-text">3、nl</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、more"><span class="nav-text">4、more</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5、less"><span class="nav-text">5、less</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6、head"><span class="nav-text">6、head</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7、tail"><span class="nav-text">7、tail</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

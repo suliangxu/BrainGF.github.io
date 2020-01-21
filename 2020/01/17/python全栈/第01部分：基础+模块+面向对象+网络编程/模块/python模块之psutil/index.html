@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="一、psutil模块的介绍在Python中，我们可以使用psutil这个第三方模块去获取信息的信息。 psutil模块可以跨平台使用，支持Linux／UNIX／OSX／Windows等，它主要用来做系统监控，性能分析，进程管理等。 安装psutil模块也非常简单，在cmd命令行下输入：pip  install  psutil 二、psutil模块的使用1、获取CPU信息psutil.cpu_tim">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-01-17T03:46:39.731Z">
+<meta property="og:updated_time" content="2020-01-19T07:31:59.069Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python模块之psutil">
 <meta name="twitter:description" content="一、psutil模块的介绍在Python中，我们可以使用psutil这个第三方模块去获取信息的信息。 psutil模块可以跨平台使用，支持Linux／UNIX／OSX／Windows等，它主要用来做系统监控，性能分析，进程管理等。 安装psutil模块也非常简单，在cmd命令行下输入：pip  install  psutil 二、psutil模块的使用1、获取CPU信息psutil.cpu_tim">
@@ -388,7 +388,7 @@
 
 <p><strong><em>psutil.net_if_addrs( )</em></strong></p>
 <p> 获取网络接口信息</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>psutil.net_if_addrs()</span><br><span class="line">&#123;<span class="string">'Npcap Loopback Adapter'</span>: [snicaddr(family=&lt;AddressFamily.AF_LINK: <span class="number">-1</span>&gt;, address=<span class="string">'02-00-4C-4F-4F-50'</span>, netmask=<span class="literal">None</span>, broadcast=<span class="literal">None</span>, ptp=<span class="literal">None</span>), snicadd</span><br><span class="line">r(family=&lt;AddressFamily.AF_INET: <span class="number">2</span>&gt;, address=<span class="string">'127.0.0.1'</span>, netmask=<span class="string">'255.0.0.0'</span>, broadcast=<span class="literal">None</span>, ptp=<span class="literal">None</span>), snicaddr(family=&lt;AddressFamily.AF_INET6: <span class="number">23</span>&gt;</span><br><span class="line">, address=<span class="string">'::1'</span>, netmask=<span class="literal">None</span>, broadcast=<span class="literal">None</span>, ptp=<span class="literal">None</span>)], <span class="string">'本地连接'</span>: [snicaddr(family=&lt;AddressFamily.AF_LINK: <span class="number">-1</span>&gt;, address=<span class="string">'FC-45-96-7F-7E-9E'</span>, netm</span><br><span class="line">ask=<span class="literal">None</span>, broadcast=<span class="literal">None</span>, ptp=<span class="literal">None</span>), snicaddr(family=&lt;AddressFamily.AF_INET: <span class="number">2</span>&gt;, address=<span class="string">'169.254.64.227'</span>, netmask=<span class="string">'255.255.0.0'</span>, broadcast=<span class="literal">None</span>, ptp=</span><br><span class="line"><span class="literal">None</span>), snicaddr(family=&lt;AddressFamily.AF_INET6: <span class="number">23</span>&gt;, address=<span class="string">'fe80::9594:8742:c758:40e3'</span>, netmask=<span class="literal">None</span>, broadcast=<span class="literal">None</span>, ptp=<span class="literal">None</span>)]&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>psutil.net_if_addrs()</span><br><span class="line">&#123;<span class="string">'Npcap Loopback Adapter'</span>: [snicaddr(family=&lt;AddressFamily.AF_LINK: <span class="number">-1</span>&gt;, address=<span class="string">'02-00-4C-4F-4F-50'</span>, netmask=<span class="literal">None</span>, broadcast=<span class="literal">None</span>, ptp=<span class="literal">None</span>), snicadd</span><br><span class="line">r(family=&lt;AddressFamily.AF_INET: <span class="number">2</span>&gt;, address=<span class="string">'127.0.0.1'</span>, netmask=<span class="string">'255.0.0.0'</span>, broadcast=<span class="literal">None</span>, ptp=<span class="literal">None</span>), snicaddr(family=&lt;AddressFamily.AF_INET6: <span class="number">23</span>&gt;</span><br><span class="line">, address=<span class="string">'::1'</span>, netmask=<span class="literal">None</span>, broadcast=<span class="literal">None</span>, ptp=<span class="literal">None</span>)], <span class="string">'本地连接'</span>: [snicaddr(family=&lt;AddressFamilyn.AF_LINK: <span class="number">-1</span>&gt;, address=<span class="string">'FC-45-96-7F-7E-9E'</span>, netm</span><br><span class="line">ask=<span class="literal">None</span>, broadcast=<span class="literal">None</span>, ptp=<span class="literal">None</span>), snicaddr(family=&lt;AddressFamily.AF_INET: <span class="number">2</span>&gt;, address=<span class="string">'169.254.64.227'</span>, netmask=<span class="string">'255.255.0.0'</span>, broadcast=<span class="literal">None</span>, ptp=</span><br><span class="line"><span class="literal">None</span>), snicaddr(family=&lt;AddressFamily.AF_INET6: <span class="number">23</span>&gt;, address=<span class="string">'fe80::9594:8742:c758:40e3'</span>, netmask=<span class="literal">None</span>, broadcast=<span class="literal">None</span>, ptp=<span class="literal">None</span>)]&#125;</span><br></pre></td></tr></table></figure>
 
 <p><strong><em>psutil.net_if_stats( )</em></strong></p>
 <p>获取网络接口状态信息</p>
@@ -447,6 +447,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/01/17/Linux/Linux基础/Linux教程（1）Linux简介/" rel="prev" title="Linux教程（1）Linux简介">
+                Linux教程（1）Linux简介 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -525,7 +529,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-count">38</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -536,7 +540,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
