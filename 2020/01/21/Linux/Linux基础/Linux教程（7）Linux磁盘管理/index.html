@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="一、常用命令Linux磁盘管理好坏直接关系到整个系统的性能问题。 Linux磁盘管理常用三个命令为df、du和fdisk。  df 列出文件系统的整体磁盘使用量  du 检查磁盘空间使用量  fdisk 用于磁盘分区   1、dfdf命令参数功能：检查文件系统的磁盘空间占用情况。可以利用该命令来获取硬盘被占用了多少空间，目前还剩下多少空间等信息。 语法： 1df [-ahikHTm] [目录或文件">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux教程（7）Linux磁盘管理">
+<meta property="og:url" content="http://yoursite.com/2020/01/21/Linux/Linux基础/Linux教程（7）Linux磁盘管理/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="一、常用命令Linux磁盘管理好坏直接关系到整个系统的性能问题。 Linux磁盘管理常用三个命令为df、du和fdisk。  df 列出文件系统的整体磁盘使用量  du 检查磁盘空间使用量  fdisk 用于磁盘分区   1、dfdf命令参数功能：检查文件系统的磁盘空间占用情况。可以利用该命令来获取硬盘被占用了多少空间，目前还剩下多少空间等信息。 语法： 1df [-ahikHTm] [目录或文件">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-01-21T07:40:55.025Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux教程（7）Linux磁盘管理">
+<meta name="twitter:description" content="一、常用命令Linux磁盘管理好坏直接关系到整个系统的性能问题。 Linux磁盘管理常用三个命令为df、du和fdisk。  df 列出文件系统的整体磁盘使用量  du 检查磁盘空间使用量  fdisk 用于磁盘分区   1、dfdf命令参数功能：检查文件系统的磁盘空间占用情况。可以利用该命令来获取硬盘被占用了多少空间，目前还剩下多少空间等信息。 语法： 1df [-ahikHTm] [目录或文件">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/01/21/Linux/Linux基础/Linux教程（7）Linux磁盘管理/">
+
+
+
+
+
+  <title>Linux教程（7）Linux磁盘管理 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/21/Linux/Linux基础/Linux教程（7）Linux磁盘管理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Linux教程（7）Linux磁盘管理</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-01-21T15:40:55+08:00">
+                2020-01-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux-Linux基础/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux - Linux基础</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="一、常用命令"><a href="#一、常用命令" class="headerlink" title="一、常用命令"></a>一、常用命令</h3><p>Linux磁盘管理好坏直接关系到整个系统的性能问题。</p>
+<p>Linux磁盘管理常用三个命令为df、du和fdisk。</p>
+<ul>
+<li><p><strong>df</strong></p>
+<p>列出文件系统的整体磁盘使用量</p>
+</li>
+<li><p><strong>du</strong></p>
+<p>检查磁盘空间使用量</p>
+</li>
+<li><p><strong>fdisk</strong></p>
+<p>用于磁盘分区</p>
+</li>
+</ul>
+<h4 id="1、df"><a href="#1、df" class="headerlink" title="1、df"></a>1、df</h4><p>df命令参数功能：<strong>检查文件系统的磁盘空间占用情况</strong>。可以利用该命令来获取硬盘被占用了多少空间，目前还剩下多少空间等信息。</p>
+<p>语法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df [-ahikHTm] [目录或文件名]</span><br></pre></td></tr></table></figure>
+
+<p>选项与参数：</p>
+<ul>
+<li><p><strong>- a</strong></p>
+<p>列出所有的文件系统，包括系统特有的 /proc 等文件系统；</p>
+</li>
+<li><p><strong>- k</strong> </p>
+<p>以 KBytes 的容量显示各文件系统；</p>
+</li>
+<li><p><strong>- m</strong> </p>
+<p>以 MBytes 的容量显示各文件系统；</p>
+</li>
+<li><p><strong>- h</strong> </p>
+<p>以人们较易阅读的 GBytes, MBytes, KBytes 等格式自行显示；</p>
+</li>
+<li><p><strong>- H</strong> </p>
+<p>以 M=1000K 取代 M=1024K 的进位方式；</p>
+</li>
+<li><p><strong>- T</strong> </p>
+<p>显示文件系统类型, 连同该 partition 的 filesystem 名称 (例如 ext3) 也列出；</p>
+</li>
+<li><p><strong>- i</strong> </p>
+<p>不用硬盘容量，而以 inode 的数量来显示</p>
+</li>
+</ul>
+<p>示例：</p>
+<p>将系统内所有的文件系统列出来！</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~]df</span><br><span class="line">Filesystem      <span class="number">1</span>K-blocks      Used Available Use% Mounted on</span><br><span class="line">/dev/hdc2         <span class="number">9920624</span>   <span class="number">3823112</span>   <span class="number">5585444</span>  <span class="number">41</span>% /</span><br><span class="line">/dev/hdc3         <span class="number">4956316</span>    <span class="number">141376</span>   <span class="number">4559108</span>   <span class="number">4</span>% /home</span><br><span class="line">/dev/hdc1          <span class="number">101086</span>     <span class="number">11126</span>     <span class="number">84741</span>  <span class="number">12</span>% /boot</span><br><span class="line">tmpfs              <span class="number">371332</span>         <span class="number">0</span>    <span class="number">371332</span>   <span class="number">0</span>% /dev/shm</span><br></pre></td></tr></table></figure>
+
+<p>在 Linux 底下如果 df 没有加任何选项，那么默认会将系统内所有的 (不含特殊内存内的文件系统与 swap) 都以 1 Kbytes 的容量来列出来！</p>
+<p>示例：</p>
+<p>将容量结果以易读的容量格式显示出来</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~]df -h</span><br><span class="line">Filesystem            Size  Used Avail Use% Mounted on</span><br><span class="line">/dev/hdc2             <span class="number">9</span>.<span class="number">5</span>G  <span class="number">3</span>.<span class="number">7</span>G  <span class="number">5</span>.<span class="number">4</span>G  <span class="number">41</span>% /</span><br><span class="line">/dev/hdc3             <span class="number">4</span>.<span class="number">8</span>G  <span class="number">139</span>M  <span class="number">4</span>.<span class="number">4</span>G   <span class="number">4</span>% /home</span><br><span class="line">/dev/hdc1              <span class="number">99</span>M   <span class="number">11</span>M   <span class="number">83</span>M  <span class="number">12</span>% /boot</span><br><span class="line">tmpfs                 <span class="number">363</span>M     <span class="number">0</span>  <span class="number">363</span>M   <span class="number">0</span>% /dev/shm</span><br></pre></td></tr></table></figure>
+
+<p>示例：</p>
+<p>将系统内的所有特殊文件格式及名称都列出来</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~]df -<span class="built_in">aT</span></span><br><span class="line">Filesystem    <span class="built_in">Type</span> <span class="number">1</span>K-blocks    Used Available Use% Mounted on</span><br><span class="line">/dev/hdc2     ext3   <span class="number">9920624</span> <span class="number">3823112</span>   <span class="number">5585444</span>  <span class="number">41</span>% /</span><br><span class="line">proc          proc         <span class="number">0</span>       <span class="number">0</span>         <span class="number">0</span>   -  /proc</span><br><span class="line">sysfs        sysfs         <span class="number">0</span>       <span class="number">0</span>         <span class="number">0</span>   -  /sys</span><br><span class="line">devpts      devpts         <span class="number">0</span>       <span class="number">0</span>         <span class="number">0</span>   -  /dev/pts</span><br><span class="line">/dev/hdc3     ext3   <span class="number">4956316</span>  <span class="number">141376</span>   <span class="number">4559108</span>   <span class="number">4</span>% /home</span><br><span class="line">/dev/hdc1     ext3    <span class="number">101086</span>   <span class="number">11126</span>     <span class="number">84741</span>  <span class="number">12</span>% /boot</span><br><span class="line">tmpfs        tmpfs    <span class="number">371332</span>       <span class="number">0</span>    <span class="number">371332</span>   <span class="number">0</span>% /dev/shm</span><br><span class="line">none   binfmt_misc         <span class="number">0</span>       <span class="number">0</span>         <span class="number">0</span>   -  /proc/sys/<span class="built_in">fs</span>/binfmt_misc</span><br><span class="line">sunrpc  rpc_pipefs         <span class="number">0</span>       <span class="number">0</span>         <span class="number">0</span>   -  /var/lib/nfs/rpc_pipefs</span><br></pre></td></tr></table></figure>
+
+<p>示例：</p>
+<p>将 /etc 底下的可用的磁盘容量以易读的容量格式显示</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~] df -h /etc</span><br><span class="line">Filesystem            Size  Used Avail Use% Mounted on</span><br><span class="line">/dev/hdc2             <span class="number">9</span>.<span class="number">5</span>G  <span class="number">3</span>.<span class="number">7</span>G  <span class="number">5</span>.<span class="number">4</span>G  <span class="number">41</span>% /</span><br></pre></td></tr></table></figure>
+
+<h4 id="2、du"><a href="#2、du" class="headerlink" title="2、du"></a>2、du</h4><p>Linux du命令也是查看使用空间的，但是与df命令不同的是Linux du命令是<strong>对文件和目录磁盘使用的空间的查看</strong>，还是和df命令有一些区别的，这里介绍Linux du命令。</p>
+<p>语法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">du [-ahskm] 文件或目录名称</span><br></pre></td></tr></table></figure>
+
+<p>选项与参数：</p>
+<ul>
+<li><p><strong>- a</strong> </p>
+<p>列出所有的文件与目录容量，因为默认仅统计目录底下的文件量而已。</p>
+</li>
+<li><p><strong>- h</strong> </p>
+<p>以人们较易读的容量格式 (G/M) 显示；</p>
+</li>
+<li><p><strong>- s</strong> </p>
+<p>列出总量而已，而不列出每个各别的目录占用容量；</p>
+</li>
+<li><p><strong>- S</strong> </p>
+<p>不包括子目录下的总计，与 -s 有点差别。</p>
+</li>
+<li><p><strong>- k</strong> </p>
+<p>以 KBytes 列出容量显示；</p>
+</li>
+<li><p><strong>- m</strong> </p>
+<p>以 MBytes 列出容量显示；</p>
+</li>
+</ul>
+<p>示例：</p>
+<p>只列出当前目录下的所有文件夹容量（包括隐藏文件夹）:</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~] du</span><br><span class="line"><span class="number">8</span>       ./test4     &lt;==每个目录都会列出来</span><br><span class="line"><span class="number">8</span>       ./test2</span><br><span class="line">....中间省略....</span><br><span class="line"><span class="number">12</span>      ./.gconfd   &lt;==包括隐藏文件的目录</span><br><span class="line"><span class="number">220</span>     .           &lt;==这个目录(.)所占用的总量</span><br></pre></td></tr></table></figure>
+
+<p>直接输入 du 没有加任何选项时，则 du 会分析当前所在目录的文件与目录所占用的硬盘空间。</p>
+<p>示例：</p>
+<p>将文件的容量也列出来</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~] du -a</span><br><span class="line"><span class="number">12</span>      ./install.log.syslog   &lt;==有文件的列表了</span><br><span class="line"><span class="number">8</span>       ./.bash_logout</span><br><span class="line"><span class="number">8</span>       ./test4</span><br><span class="line"><span class="number">8</span>       ./test2</span><br><span class="line">....中间省略....</span><br><span class="line"><span class="number">12</span>      ./.gconfd</span><br><span class="line"><span class="number">220</span>     .</span><br></pre></td></tr></table></figure>
+
+<p>### </p>
+<p>示例：</p>
+<p>检查根目录底下每个目录所占用的容量</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~] du -sm /*</span><br><span class="line"><span class="number">7</span>       /bin</span><br><span class="line"><span class="number">6</span>       /boot</span><br><span class="line">.....中间省略....</span><br><span class="line"><span class="number">0</span>       /proc</span><br><span class="line">.....中间省略....</span><br><span class="line"><span class="number">1</span>       /tmp</span><br><span class="line"><span class="number">3859</span>    /usr     &lt;==系统初期最大就是他了啦！</span><br><span class="line"><span class="number">77</span>      /var</span><br></pre></td></tr></table></figure>
+
+<p>通配符 * 来代表每个目录。</p>
+<p>与 df 不一样的是，du 这个命令其实会直接到文件系统内去搜寻所有的文件数据。</p>
+<h4 id="3、fdisk"><a href="#3、fdisk" class="headerlink" title="3、fdisk"></a>3、fdisk</h4><p>fdisk 是 Linux 的磁盘分区表操作工具。</p>
+<p>语法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fdisk [-l] 装置名称</span><br></pre></td></tr></table></figure>
+
+<p>选项与参数：</p>
+<ul>
+<li><p><strong>- l</strong></p>
+<p> 输出后面接的装置所有的分区内容。若仅有 fdisk -l 时， 则系统将会把整个系统内能够搜寻到的装置的分区均列出来。</p>
+</li>
+</ul>
+<p>示例：</p>
+<p>列出所有分区信息</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">[root@AY120919111755c246621 tmp]fdisk -l</span><br><span class="line"></span><br><span class="line">Disk /dev/xvda: <span class="number">21</span>.<span class="number">5</span> GB, <span class="number">21474836480</span> bytes</span><br><span class="line"><span class="number">255</span> heads, <span class="number">63</span> sectors/track, <span class="number">2610</span> cylinders</span><br><span class="line">Units = cylinders of <span class="number">16065</span> * <span class="number">512</span> = <span class="number">8225280</span> bytes</span><br><span class="line">Sector size (logical/physical): <span class="number">512</span> bytes / <span class="number">512</span> bytes</span><br><span class="line">I/O size (minimum/optimal): <span class="number">512</span> bytes / <span class="number">512</span> bytes</span><br><span class="line">Disk identifier: <span class="number">0</span>x00000000</span><br><span class="line"></span><br><span class="line">    Device Boot      <span class="built_in">Start</span>         End      Blocks   Id  System</span><br><span class="line">/dev/xvda1   *           <span class="number">1</span>        <span class="number">2550</span>    <span class="number">20480000</span>   <span class="number">83</span>  Linux</span><br><span class="line">/dev/xvda2            <span class="number">2550</span>        <span class="number">2611</span>      <span class="number">490496</span>   <span class="number">82</span>  Linux swap / Solaris</span><br><span class="line"></span><br><span class="line">Disk /dev/xvdb: <span class="number">21</span>.<span class="number">5</span> GB, <span class="number">21474836480</span> bytes</span><br><span class="line"><span class="number">255</span> heads, <span class="number">63</span> sectors/track, <span class="number">2610</span> cylinders</span><br><span class="line">Units = cylinders of <span class="number">16065</span> * <span class="number">512</span> = <span class="number">8225280</span> bytes</span><br><span class="line">Sector size (logical/physical): <span class="number">512</span> bytes / <span class="number">512</span> bytes</span><br><span class="line">I/O size (minimum/optimal): <span class="number">512</span> bytes / <span class="number">512</span> bytes</span><br><span class="line">Disk identifier: <span class="number">0</span>x56f40944</span><br><span class="line"></span><br><span class="line">    Device Boot      <span class="built_in">Start</span>         End      Blocks   Id  System</span><br><span class="line">/dev/xvdb2               <span class="number">1</span>        <span class="number">2610</span>    <span class="number">20964793</span>+  <span class="number">83</span>  Linux</span><br></pre></td></tr></table></figure>
+
+<p>示例：</p>
+<p>找出你系统中的根目录所在磁盘，并查阅该硬盘内的相关信息</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~] df /            &lt;==注意：重点在找出磁盘文件名而已</span><br><span class="line">Filesystem           <span class="number">1</span>K-blocks      Used Available Use% Mounted on</span><br><span class="line">/dev/hdc2              <span class="number">9920624</span>   <span class="number">3823168</span>   <span class="number">5585388</span>  <span class="number">41</span>% /</span><br><span class="line"></span><br><span class="line">[root@www ~]# fdisk /dev/hdc  &lt;==仔细看，不要加上数字喔！</span><br><span class="line">The number of cylinders <span class="keyword">for</span> this disk is <span class="built_in">set</span> to <span class="number">5005</span>.</span><br><span class="line">There is nothing wrong with that, but this is larger than <span class="number">1024</span>,</span><br><span class="line">and could <span class="keyword">in</span> certain setups cause problems with:</span><br><span class="line"><span class="number">1</span>) software that runs <span class="built_in">at</span> boot <span class="built_in">time</span> (e.g., old versions of LILO)</span><br><span class="line"><span class="number">2</span>) booting and partitioning software from other OSs</span><br><span class="line">   (e.g., DOS FDISK, OS/<span class="number">2</span> FDISK)</span><br><span class="line"></span><br><span class="line">Command (m <span class="keyword">for</span> <span class="built_in">help</span>):     &lt;==等待你的输入！</span><br></pre></td></tr></table></figure>
+
+<p>输入 m 后，就会看到底下这些命令介绍</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Command (m <span class="keyword">for</span> <span class="built_in">help</span>): m   &lt;== 输入 m 后，就会看到底下这些命令介绍</span><br><span class="line">Command action</span><br><span class="line">   a   toggle a bootable flag</span><br><span class="line">   b   edit bsd disklabel</span><br><span class="line">   c   toggle the dos compatibility flag</span><br><span class="line">   d   delete a partition            &lt;==删除一个partition</span><br><span class="line">   l   list known partition types</span><br><span class="line">   m   <span class="built_in">print</span> this menu</span><br><span class="line">   n   add a new partition           &lt;==新增一个partition</span><br><span class="line">   o   create a new empty DOS partition table</span><br><span class="line">   p   <span class="built_in">print</span> the partition table     &lt;==在屏幕上显示分割表</span><br><span class="line">   q   quit without saving changes   &lt;==不储存离开fdisk程序</span><br><span class="line">   s   create a new empty Sun disklabel</span><br><span class="line">   t   change a partition's system id</span><br><span class="line">   u   change display/entry units</span><br><span class="line">   v   <span class="built_in">verify</span> the partition table</span><br><span class="line">   w   write table to disk and <span class="keyword">exit</span>  &lt;==将刚刚的动作写入分割表</span><br><span class="line">   x   extra functionality (experts only)</span><br></pre></td></tr></table></figure>
+
+<p>离开 fdisk 时按下 <code>q</code>，那么所有的动作都不会生效！相反的， 按下<code>w</code>就是动作生效的意思。</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Command (m <span class="keyword">for</span> <span class="built_in">help</span>): p  &lt;== 这里可以输出目前磁盘的状态</span><br><span class="line"></span><br><span class="line">Disk /dev/hdc: <span class="number">41</span>.<span class="number">1</span> GB, <span class="number">41174138880</span> bytes        &lt;==这个磁盘的文件名与容量</span><br><span class="line"><span class="number">255</span> heads, <span class="number">63</span> sectors/track, <span class="number">5005</span> cylinders      &lt;==磁头、扇区与磁柱大小</span><br><span class="line">Units = cylinders of <span class="number">16065</span> * <span class="number">512</span> = <span class="number">8225280</span> bytes &lt;==每个磁柱的大小</span><br><span class="line"></span><br><span class="line">   Device Boot      <span class="built_in">Start</span>         End      Blocks   Id  System</span><br><span class="line">/dev/hdc1   *           <span class="number">1</span>          <span class="number">13</span>      <span class="number">104391</span>   <span class="number">83</span>  Linux</span><br><span class="line">/dev/hdc2              <span class="number">14</span>        <span class="number">1288</span>    <span class="number">10241437</span>+  <span class="number">83</span>  Linux</span><br><span class="line">/dev/hdc3            <span class="number">1289</span>        <span class="number">1925</span>     <span class="number">5116702</span>+  <span class="number">83</span>  Linux</span><br><span class="line">/dev/hdc4            <span class="number">1926</span>        <span class="number">5005</span>    <span class="number">24740100</span>    <span class="number">5</span>  Extended</span><br><span class="line">/dev/hdc5            <span class="number">1926</span>        <span class="number">2052</span>     <span class="number">1020096</span>   <span class="number">82</span>  Linux swap / Solaris</span><br><span class="line"># 装置文件名 启动区否 开始磁柱    结束磁柱  <span class="number">1</span>K大小容量 磁盘分区槽内的系统</span><br><span class="line"></span><br><span class="line">Command (m <span class="keyword">for</span> <span class="built_in">help</span>): q</span><br></pre></td></tr></table></figure>
+
+<p>想要不储存离开吗？按下 q 就对了！不要随便按 w 啊！</p>
+<p>使用 <code>p</code> 可以列出目前这颗磁盘的分割表信息，这个信息的上半部在显示整体磁盘的状态。</p>
+<h3 id="二、磁盘格式化"><a href="#二、磁盘格式化" class="headerlink" title="二、磁盘格式化"></a>二、磁盘格式化</h3><p>磁盘分割完毕后，要对文件系统进行格式化。格式化命令为</p>
+<p><strong>mkfs</strong> （make filesystem）</p>
+<p>语法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkfs [-t 文件系统格式] 装置文件名</span><br></pre></td></tr></table></figure>
+
+<p>选项与参数：</p>
+<ul>
+<li><p><strong>- t</strong></p>
+<p>可以接文件系统格式，例如 ext3, ext2, vfat 等(系统有支持才会生效)</p>
+</li>
+</ul>
+<p>示例：</p>
+<p>查看 mkfs 支持的文件格式</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~] mkfs[tab][tab]</span><br><span class="line">mkfs         mkfs.cramfs  mkfs.ext2    mkfs.ext3    mkfs.msdos   mkfs.vfat</span><br></pre></td></tr></table></figure>
+
+<p>按下两个[tab]，会发现 mkfs 支持的文件格式如上所示。</p>
+<p>示例：</p>
+<p>将分区 /dev/hdc6（可指定你自己的分区） 格式化为 ext3 文件系统：</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~] mkfs -t ext3 /dev/hdc6</span><br><span class="line">mke2fs <span class="number">1</span>.<span class="number">39</span> (<span class="number">29</span>-May-<span class="number">2006</span>)</span><br><span class="line"><span class="function">Filesystem label=                &lt;==这里指的是分割槽的名称(<span class="title">label</span>)</span></span><br><span class="line"><span class="function"><span class="title">OS</span> <span class="title">type</span>: <span class="title">Linux</span></span></span><br><span class="line"><span class="function"><span class="title">Block</span> <span class="title">size</span>=4096 (<span class="title">log</span>=2)          &lt;==<span class="title">block</span> 的大小配置为 4<span class="title">K</span> </span></span><br><span class="line"><span class="function"><span class="title">Fragment</span> <span class="title">size</span>=4096 (<span class="title">log</span>=2)</span></span><br><span class="line"><span class="function">251392 <span class="title">inodes</span>, 502023 <span class="title">blocks</span>     &lt;==由此配置决定的<span class="title">inode</span>/<span class="title">block</span>数量</span></span><br><span class="line"><span class="function">25101 <span class="title">blocks</span> (5.00%) <span class="title">reserved</span> <span class="title">for</span> <span class="title">the</span> <span class="title">super</span> <span class="title">user</span></span></span><br><span class="line"><span class="function"><span class="title">First</span> <span class="title">data</span> <span class="title">block</span>=0</span></span><br><span class="line"><span class="function"><span class="title">Maximum</span> <span class="title">filesystem</span> <span class="title">blocks</span>=515899392</span></span><br><span class="line"><span class="function">16 <span class="title">block</span> <span class="title">groups</span></span></span><br><span class="line"><span class="function">32768 <span class="title">blocks</span> <span class="title">per</span> <span class="title">group</span>, 32768 <span class="title">fragments</span> <span class="title">per</span> <span class="title">group</span></span></span><br><span class="line"><span class="function">15712 <span class="title">inodes</span> <span class="title">per</span> <span class="title">group</span></span></span><br><span class="line"><span class="function"><span class="title">Superblock</span> <span class="title">backups</span> <span class="title">stored</span> <span class="title">on</span> <span class="title">blocks</span>:</span></span><br><span class="line"><span class="function">        32768, 98304, 163840, 229376, 294912</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="title">Writing</span> <span class="title">inode</span> <span class="title">tables</span>: <span class="title">done</span></span></span><br><span class="line"><span class="function"><span class="title">Creating</span> <span class="title">journal</span> (8192 <span class="title">blocks</span>): <span class="title">done</span> &lt;==有日志记录</span></span><br><span class="line"><span class="function"><span class="title">Writing</span> <span class="title">superblocks</span> <span class="title">and</span> <span class="title">filesystem</span> <span class="title">accounting</span> <span class="title">information</span>: <span class="title">done</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="title">This</span> <span class="title">filesystem</span> <span class="title">will</span> <span class="title">be</span> <span class="title">automatically</span> <span class="title">checked</span> <span class="title">every</span> 34 <span class="title">mounts</span> <span class="title">or</span></span></span><br><span class="line"><span class="function">180 <span class="title">days</span>, <span class="title">whichever</span> <span class="title">comes</span> <span class="title">first</span>.  <span class="title">Use</span> <span class="title">tune2fs</span> -<span class="title">c</span> <span class="title">or</span> -<span class="title">i</span> <span class="title">to</span> <span class="title">override</span>.</span></span><br><span class="line"><span class="function"># 这样就创建起来我们所需要的 <span class="title">Ext3</span> 文件系统了！简单明了！</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="三、磁盘检验"><a href="#三、磁盘检验" class="headerlink" title="三、磁盘检验"></a>三、磁盘检验</h3><p><strong>fsck</strong>（file system check）</p>
+<p>用来检查和维护不一致的文件系统。</p>
+<p>若系统掉电或磁盘发生问题，可利用fsck命令对文件系统进行检查。</p>
+<p>语法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fsck [-t 文件系统] [-ACay] 装置名称</span><br></pre></td></tr></table></figure>
+
+<p>选项与参数：</p>
+<ul>
+<li><p><strong>- t</strong> </p>
+<p>给定档案系统的型式，若在 /etc/fstab 中已有定义或 kernel 本身已支援的则不需加上此参数</p>
+</li>
+<li><p><strong>- s</strong> </p>
+<p>依序一个一个地执行 fsck 的指令来检查</p>
+</li>
+<li><p><strong>- A</strong></p>
+<p>对/etc/fstab 中所有列出来的 分区（partition）做检查</p>
+</li>
+<li><p><strong>- C</strong></p>
+<p>显示完整的检查进度</p>
+</li>
+<li><p><strong>- d</strong></p>
+<p>打印出 e2fsck 的 debug 结果</p>
+</li>
+<li><p><strong>- p</strong></p>
+<p>同时有 -A 条件时，同时有多个 fsck 的检查一起执行</p>
+</li>
+<li><p><strong>- R</strong></p>
+<p>同时有 -A 条件时，省略 / 不检查</p>
+</li>
+<li><p><strong>- V</strong></p>
+<p>详细显示模式</p>
+</li>
+<li><p><strong>- a</strong></p>
+<p>如果检查有错则自动修复</p>
+</li>
+<li><p><strong>- r</strong></p>
+<p> 如果检查有错则由使用者回答是否修复</p>
+</li>
+<li><p><strong>- y</strong></p>
+<p> 选项指定检测每个文件是自动输入yes，在不确定那些是不正常的时候，可以执行 # fsck -y 全部检查修复。</p>
+</li>
+</ul>
+<p>示例：</p>
+<p>查看系统有多少文件系统支持的 fsck 命令：</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~] fsck[tab][tab]</span><br><span class="line">fsck         fsck.cramfs  fsck.ext2    fsck.ext3    fsck.msdos   fsck.vfat</span><br></pre></td></tr></table></figure>
+
+<p>示例：</p>
+<p>强制检测 /dev/hdc6 分区:</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~] fsck -C -f -t ext3 /dev/hdc6 </span><br><span class="line">fsck <span class="number">1</span>.<span class="number">39</span> (<span class="number">29</span>-May-<span class="number">2006</span>)</span><br><span class="line">e2fsck <span class="number">1</span>.<span class="number">39</span> (<span class="number">29</span>-May-<span class="number">2006</span>)</span><br><span class="line">Pass <span class="number">1</span>: Checking inodes, blocks, and sizes</span><br><span class="line">Pass <span class="number">2</span>: Checking directory structure</span><br><span class="line">Pass <span class="number">3</span>: Checking directory connectivity</span><br><span class="line">Pass <span class="number">4</span>: Checking reference counts</span><br><span class="line">Pass <span class="number">5</span>: Checking group summary information</span><br><span class="line"><span class="function">vbird_logical: 11/251968 <span class="title">files</span> (9.1% <span class="title">non</span>-<span class="title">contiguous</span>), 36926/1004046 <span class="title">blocks</span></span></span><br></pre></td></tr></table></figure>
+
+<p>如果没有加上 -f 的选项，则由于这个文件系统不曾出现问题，检查的经过非常快速！若加上 -f 强制检查，才会一项一项的显示过程。</p>
+<h3 id="四、磁盘挂载与卸除"><a href="#四、磁盘挂载与卸除" class="headerlink" title="四、磁盘挂载与卸除"></a>四、磁盘挂载与卸除</h3><h4 id="1、挂载：mount"><a href="#1、挂载：mount" class="headerlink" title="1、挂载：mount"></a>1、挂载：mount</h4><p>语法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mount [-t 文件系统] [-L Label名] [-o 额外选项] [-n]  装置文件名  挂载点</span><br></pre></td></tr></table></figure>
+
+<p>示例：</p>
+<p>用默认的方式，将刚刚创建的 /dev/hdc6 挂载到 /mnt/hdc6 上面！</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~] <span class="built_in">mkdir</span> /mnt/hdc6</span><br><span class="line">[root@www ~] mount /dev/hdc6 /mnt/hdc6</span><br><span class="line">[root@www ~] df</span><br><span class="line">Filesystem           <span class="number">1</span>K-blocks      Used Available Use% Mounted on</span><br><span class="line">.....中间省略.....</span><br><span class="line">/dev/hdc6              <span class="number">1976312</span>     <span class="number">42072</span>   <span class="number">1833836</span>   <span class="number">3</span>% /mnt/hdc6</span><br></pre></td></tr></table></figure>
+
+<h4 id="2、卸除：umount"><a href="#2、卸除：umount" class="headerlink" title="2、卸除：umount"></a>2、卸除：umount</h4><p>语法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">umount [-fn] 装置文件名或挂载点</span><br></pre></td></tr></table></figure>
+
+<p>选项与参数：</p>
+<ul>
+<li><p><strong>- f</strong> </p>
+<p>强制卸除！可用在类似网络文件系统 (NFS) 无法读取到的情况下；</p>
+</li>
+<li><p>*<em>- n *</em></p>
+<p>不升级 /etc/mtab 情况下卸除。</p>
+</li>
+</ul>
+<p>示例：</p>
+<p>卸载/dev/hdc6 </p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~] umount /dev/hdc6</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/01/21/Linux/Linux基础/Linux教程（6）Linux用户和用户组管理/" rel="next" title="Linux教程（6）Linux用户和用户组管理">
+                <i class="fa fa-chevron-left"></i> Linux教程（6）Linux用户和用户组管理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/01/21/Linux/Linux基础/Linux教程（8）Linux-vivim命令/" rel="prev" title="Linux教程（8）Linux vi/vim命令">
+                Linux教程（8）Linux vi/vim命令 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="John Doe">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://suliangxu.github.io" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:1193135584@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、常用命令"><span class="nav-text">一、常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、df"><span class="nav-text">1、df</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、du"><span class="nav-text">2、du</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、fdisk"><span class="nav-text">3、fdisk</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、磁盘格式化"><span class="nav-text">二、磁盘格式化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、磁盘检验"><span class="nav-text">三、磁盘检验</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、磁盘挂载与卸除"><span class="nav-text">四、磁盘挂载与卸除</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、挂载：mount"><span class="nav-text">1、挂载：mount</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、卸除：umount"><span class="nav-text">2、卸除：umount</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
