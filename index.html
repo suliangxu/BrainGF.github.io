@@ -249,7 +249,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/31/人工智能/Tensorflow/Tensorflow简介/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/01/人工智能/Tensorflow/CH_2Tensorflow-keras实战/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -268,7 +268,401 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/01/31/人工智能/Tensorflow/Tensorflow简介/" itemprop="url">Tensorflow简介</a></h1>
+                <a class="post-title-link" href="/2020/02/01/人工智能/Tensorflow/CH_2Tensorflow-keras实战/" itemprop="url">CH_2Tensorflow-keras实战</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-02-01T15:08:28+08:00">
+                2020-02-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/人工智能-Tensorflow/" itemprop="url" rel="index">
+                    <span itemprop="name">人工智能 - Tensorflow</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="（一）理论部分"><a href="#（一）理论部分" class="headerlink" title="（一）理论部分"></a>（一）理论部分</h2><h3 id="一、Tensorflow-keras简介"><a href="#一、Tensorflow-keras简介" class="headerlink" title="一、Tensorflow-keras简介"></a>一、Tensorflow-keras简介</h3><h4 id="1、keras是什么"><a href="#1、keras是什么" class="headerlink" title="1、keras是什么"></a>1、keras是什么</h4><ul>
+<li>基于python的高级神经网络API</li>
+<li>Francois Chollet 于 2014 - 2015 年编写Keras</li>
+<li>以Tensorflow、CNTK或者Theano为后端运行，keras必须有后端才可以运行<ul>
+<li>后端可以切换，现在多用tensorflow</li>
+</ul>
+</li>
+<li>极方便于快速实验，帮助用户以最少的时间验证自己的想法</li>
+</ul>
+<h4 id="2、Tensorflow-kears是什么"><a href="#2、Tensorflow-kears是什么" class="headerlink" title="2、Tensorflow-kears是什么"></a>2、Tensorflow-kears是什么</h4><ul>
+<li>Tensorflow对Kears API规范的实现</li>
+<li>相对于以tensorflow为后端的keras，Tensorflow-keras与Tensorflow结合更加紧密</li>
+<li>实现在tf.keras空间下</li>
+</ul>
+<h4 id="3、Tf-keras-和-Keras-联系"><a href="#3、Tf-keras-和-Keras-联系" class="headerlink" title="3、Tf.keras 和 Keras 联系"></a>3、Tf.keras 和 Keras 联系</h4><ul>
+<li>基于同一套API<ul>
+<li>keras程序可以通过改导入方式轻松转为tf.keras程序</li>
+<li>反之不可能成立，因为tf.keras有其他特性</li>
+</ul>
+</li>
+<li>相同的JSON和HDF5模型序列化格式和语义</li>
+</ul>
+<h4 id="4、Tf-keras-和-Keras-区别"><a href="#4、Tf-keras-和-Keras-区别" class="headerlink" title="4、Tf.keras 和 Keras 区别"></a>4、Tf.keras 和 Keras 区别</h4><ul>
+<li>Tf.keras全面支持eager mode<ul>
+<li>只是用keras.Sequential 和 keras.Model时没有影响</li>
+<li>自定义Model内部运算逻辑的时候会有影响<ul>
+<li>Tf低层API可以使用keras的model.fit等抽象</li>
+<li>适用于研究人员</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Tf.keras支持基于tf.data模型训练</li>
+<li>Tf.keras支持TPU训练</li>
+<li>Tf.keras支持tf.distribution中的分布式策略</li>
+<li>其他特性<ul>
+<li>Tf.keras可以与Tensorflow中的estimator集成</li>
+<li>Tf.keras可以保存为SavedModel</li>
+</ul>
+</li>
+</ul>
+<h4 id="5、如何选择"><a href="#5、如何选择" class="headerlink" title="5、如何选择"></a>5、如何选择</h4><ul>
+<li>如果想用到Tf.keras的任何一个特性，那么选Tf.keras</li>
+<li>如果后端互换性很重要，那么选kreas</li>
+<li>如果都不重要，那随便</li>
+</ul>
+<h3 id="二、分类问题、回归问题、损失函数"><a href="#二、分类问题、回归问题、损失函数" class="headerlink" title="二、分类问题、回归问题、损失函数"></a>二、分类问题、回归问题、损失函数</h3><h4 id="1、分类问题与回归问题"><a href="#1、分类问题与回归问题" class="headerlink" title="1、分类问题与回归问题"></a>1、分类问题与回归问题</h4><ul>
+<li>分类问题预测的是类别，模型的输出是概率分布<ul>
+<li>三分类问题输出例子：[0.2, 0.7, 0.1]</li>
+</ul>
+</li>
+<li>回归问题预测的是值，模型的输出是一个实数值</li>
+</ul>
+<p>分类问题：</p>
+<ul>
+<li>需要衡量目标类别与当前预测的差距<ul>
+<li>三分类问题输出例子：[0.2, 0.7, 0.1]</li>
+<li>三分类真实类别：2 -&gt; one_hot -&gt; [0, 0, 1]</li>
+</ul>
+</li>
+<li>One-hot 编码，把正整数变为向量表达<ul>
+<li>生成一个长度不小于正整数的向量，只有正整数的位置处为1，其余位置都为0</li>
+</ul>
+</li>
+</ul>
+<h4 id="2、目标函数"><a href="#2、目标函数" class="headerlink" title="2、目标函数"></a>2、目标函数</h4><p>为什么需要目标函数？</p>
+<ul>
+<li>参数是逐步调整的</li>
+<li>目标函数可以帮助衡量模型的好坏<ul>
+<li>Model A: [0.1, 0.4, 0.5]</li>
+<li>Model B: [0.1, 0.2, 0.7]</li>
+</ul>
+</li>
+</ul>
+<h5 id="（1）分类问题目标函数"><a href="#（1）分类问题目标函数" class="headerlink" title="（1）分类问题目标函数"></a>（1）分类问题目标函数</h5><ul>
+<li><p>平方差损失</p>
+<p>$\frac{1}{n}\sum_{x,y}\frac{1}{2}(y-Model(x))^2$</p>
+<ul>
+<li>举例：<ul>
+<li>预测值：[0.2, 0.7, 0.1]</li>
+<li>真是值：[0, 0, 1]</li>
+<li>损失函数值：[(0.2-0)^2 + (0.7-0)^2 + (0.1-1)^2]*0.2 = 0.65</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>交叉熵损失</p>
+<p>$\frac{1}{n}\sum_{x,y}yln(Model(x))$</p>
+</li>
+</ul>
+<h5 id="（2）回归问题目标函数"><a href="#（2）回归问题目标函数" class="headerlink" title="（2）回归问题目标函数"></a>（2）回归问题目标函数</h5><ul>
+<li>预测值与真实值的差距</li>
+<li>平方差损失</li>
+<li>绝对值损失</li>
+</ul>
+<p><strong>模型就是调整参数，使得目标函数逐渐变小的过程。</strong></p>
+<h3 id="三、神经网络、激活函数、批归一化、Dropout"><a href="#三、神经网络、激活函数、批归一化、Dropout" class="headerlink" title="三、神经网络、激活函数、批归一化、Dropout"></a>三、神经网络、激活函数、批归一化、Dropout</h3><h4 id="1、神经网络"><a href="#1、神经网络" class="headerlink" title="1、神经网络"></a>1、神经网络</h4><p>神经网络训练：</p>
+<ul>
+<li>下山算法<ul>
+<li>找到方向</li>
+<li>走一步</li>
+</ul>
+</li>
+<li>梯度下降<ul>
+<li>求导</li>
+<li>更新参数</li>
+</ul>
+</li>
+</ul>
+<p>![image-20200201162733682](/Users/hhh/Library/Application Support/typora-user-images/image-20200201162733682.png)</p>
+<p>深度神经网络：</p>
+<ul>
+<li>层次非常深的神经网络</li>
+</ul>
+<h4 id="2、激活函数"><a href="#2、激活函数" class="headerlink" title="2、激活函数"></a>2、激活函数</h4><p>![image-20200201162851693](/Users/hhh/Library/Application Support/typora-user-images/image-20200201162851693.png)</p>
+<p>为什么要用激活函数？</p>
+<p>selu 激活函数？</p>
+<h4 id="3、归一化与批归一化"><a href="#3、归一化与批归一化" class="headerlink" title="3、归一化与批归一化"></a>3、归一化与批归一化</h4><p>归一化：</p>
+<ul>
+<li>Min-max归一化：x *= (x-min)/(max-min)</li>
+<li>Z-score 归一化： x *= (x-u) / sigma</li>
+</ul>
+<p>批归一化：</p>
+<ul>
+<li>每一层的激活值都做归一化（每一层的输入上都做归一化）</li>
+</ul>
+<p>为什么归一化会有效？</p>
+<p>![image-20200201163200091](/Users/hhh/Library/Application Support/typora-user-images/image-20200201163200091.png)</p>
+<p>左图未归一化</p>
+<p>椭圆求导不一定指向圆心，求导过程比较曲折，最终走到圆心</p>
+<p>归一化后每次指向圆心，使训练速度增快</p>
+<h4 id="4、Dropout"><a href="#4、Dropout" class="headerlink" title="4、Dropout"></a>4、Dropout</h4><p>什么是Dropout？</p>
+<p>![image-20200201163420794](/Users/hhh/Library/Application Support/typora-user-images/image-20200201163420794.png)</p>
+<p>随机地丢弃神经元</p>
+<p>Dropout的作用：</p>
+<ul>
+<li>防止过拟合<ul>
+<li>训练集上很好，测试集上不好</li>
+<li>参数太多，记住样本，不能泛化</li>
+</ul>
+</li>
+</ul>
+<p>为什么有效？</p>
+<h3 id="四、Wide-amp-deep-模型"><a href="#四、Wide-amp-deep-模型" class="headerlink" title="四、Wide &amp; deep 模型"></a>四、Wide &amp; deep 模型</h3><ul>
+<li><p>Google 16 年发布，用于分类和回归</p>
+</li>
+<li><p>应用到了Google Play中的应用推荐</p>
+</li>
+<li><p>原始论文：<a href="https://arxiv.org/pdf/1606.07792v1.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1606.07792v1.pdf</a></p>
+</li>
+</ul>
+<h4 id="1、稀疏特征与密集特征"><a href="#1、稀疏特征与密集特征" class="headerlink" title="1、稀疏特征与密集特征"></a>1、稀疏特征与密集特征</h4><h5 id="（1）稀疏特征"><a href="#（1）稀疏特征" class="headerlink" title="（1）稀疏特征"></a>（1）稀疏特征</h5><ul>
+<li>离散值特征</li>
+<li>One-hot表示</li>
+<li>Eg：专业 = {计算机，人文，其他}， 人文 = [0, 1, 0]</li>
+<li>叉乘之后<ul>
+<li>稀疏特征做叉乘获取共现信息</li>
+<li>实现记忆的效果</li>
+</ul>
+</li>
+</ul>
+<p>稀疏特征——优缺点</p>
+<ul>
+<li>优点<ul>
+<li>有效，广泛用于工业界</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>需要人工设计（选择某几个做叉乘，减少计算量）</li>
+<li>可能过拟合，所有特征都叉乘，相当于记住每一个样本</li>
+</ul>
+</li>
+</ul>
+<h5 id="（2）密集特征"><a href="#（2）密集特征" class="headerlink" title="（2）密集特征"></a>（2）密集特征</h5><ul>
+<li>向量表达<ul>
+<li>Eg：词表 = {人工智能， 你， 他， 慕课网}</li>
+<li>他 = [0.3, 0.2, 0.6, （n维向量）]</li>
+</ul>
+</li>
+<li>Word2vec工具<ul>
+<li>男 - 女 = 国王 - 王后</li>
+</ul>
+</li>
+</ul>
+<p>密集特征的优缺点：</p>
+<ul>
+<li>优点<ul>
+<li>带有语义信息，不同向量之间有相关性</li>
+<li>兼容没有出现过的特征组合</li>
+<li>更少人工参与</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>过度泛化，推荐不怎么相关的产品</li>
+</ul>
+</li>
+</ul>
+<h4 id="2、Wide-amp-deep-vs-Wide-or-deep"><a href="#2、Wide-amp-deep-vs-Wide-or-deep" class="headerlink" title="2、Wide &amp; deep vs (Wide or deep)"></a>2、Wide &amp; deep vs (Wide or deep)</h4><p>![image-20200202144141139](/Users/hhh/Library/Application Support/typora-user-images/image-20200202144141139.png)</p>
+<p>![image-20200202144320195](/Users/hhh/Library/Application Support/typora-user-images/image-20200202144320195.png)</p>
+<p>![image-20200202144335754](/Users/hhh/Library/Application Support/typora-user-images/image-20200202144335754.png)</p>
+<p>推荐算法的模型图（典型的Wide &amp; deep模型）</p>
+<h3 id="五、超参数搜索"><a href="#五、超参数搜索" class="headerlink" title="五、超参数搜索"></a>五、超参数搜索</h3><h4 id="1、为什么要超参数搜索"><a href="#1、为什么要超参数搜索" class="headerlink" title="1、为什么要超参数搜索"></a>1、为什么要超参数搜索</h4><ul>
+<li>神经网络有很多训练过程中不变的参数<ul>
+<li>网络结构参数：几层，每层宽度，每层激活函数等</li>
+<li>训练参数：batch_size，学习率，学习率衰减算法等</li>
+</ul>
+</li>
+<li>手工去试耗费人力</li>
+</ul>
+<h4 id="2、搜索策略"><a href="#2、搜索策略" class="headerlink" title="2、搜索策略"></a>2、搜索策略</h4><ul>
+<li>网格搜索</li>
+<li>随机搜索</li>
+<li>遗传算法搜索</li>
+<li>启发式搜索</li>
+</ul>
+<h5 id="（1）网格搜索"><a href="#（1）网格搜索" class="headerlink" title="（1）网格搜索"></a>（1）网格搜索</h5><p>将各种超参数离散化成几个值，然后把这几个值一一组合起来，然后一一尝试</p>
+<ul>
+<li>定义n维方格</li>
+<li>每个方格对应一组超参数</li>
+<li>一组一组参数尝试（找到最好的组合方式）</li>
+</ul>
+<p>![image-20200202175757456](/Users/hhh/Library/Application Support/typora-user-images/image-20200202175757456.png)</p>
+<h5 id="（2）随机搜索"><a href="#（2）随机搜索" class="headerlink" title="（2）随机搜索"></a>（2）随机搜索</h5><p>随机生成参数组合，保证最优解有可能被搜索到（空间中的其他位置）</p>
+<ul>
+<li>参数的生成方式为随机</li>
+<li>可探索的空间更大</li>
+</ul>
+<p>![image-20200202175937147](/Users/hhh/Library/Application Support/typora-user-images/image-20200202175937147.png)</p>
+<h5 id="（3）遗传搜索"><a href="#（3）遗传搜索" class="headerlink" title="（3）遗传搜索"></a>（3）遗传搜索</h5><ul>
+<li>对自然界的模拟</li>
+<li>A、初始化一组参数集合 –&gt; 训练 –&gt; 得到模型指标作为生存概率（适者生存）</li>
+<li>B、选择 –&gt; 交叉  –&gt;  变异  –&gt; 产生下一代集合<ul>
+<li>交叉：在两个参数集合中各取一部分，组合起来形成一组新的参数集合</li>
+<li>变异：某一个或者某几个参数进行微调</li>
+</ul>
+</li>
+<li>C、重新得到A，重复进行</li>
+<li>找到表现最好的参数集合</li>
+</ul>
+<h5 id="（4）启发式搜索"><a href="#（4）启发式搜索" class="headerlink" title="（4）启发式搜索"></a>（4）启发式搜索</h5><ul>
+<li>研究热点 -AutoML</li>
+<li>使用循环神经网络生成参数</li>
+<li>使用强化学习来进行反馈，使用模型来训练生成参数</li>
+</ul>
+<h2 id="（二）实战部分"><a href="#（二）实战部分" class="headerlink" title="（二）实战部分"></a>（二）实战部分</h2><h3 id="一、Keras-搭建分类模型"><a href="#一、Keras-搭建分类模型" class="headerlink" title="一、Keras 搭建分类模型"></a>一、Keras 搭建分类模型</h3><h3 id="二、Keras回调函数"><a href="#二、Keras回调函数" class="headerlink" title="二、Keras回调函数"></a>二、Keras回调函数</h3><p>回调函数是一个函数的合集，会在训练的阶段中所使用。你可以使用回调函数来查看训练模型的内在状态和统计。</p>
+<h3 id="三、Keras搭建回归模型"><a href="#三、Keras搭建回归模型" class="headerlink" title="三、Keras搭建回归模型"></a>三、Keras搭建回归模型</h3><h3 id="四、Keras搭建深度神经网络"><a href="#四、Keras搭建深度神经网络" class="headerlink" title="四、Keras搭建深度神经网络"></a>四、Keras搭建深度神经网络</h3><h3 id="五、Keras实现-wide-amp-deep-模型"><a href="#五、Keras实现-wide-amp-deep-模型" class="headerlink" title="五、Keras实现 wide &amp; deep 模型"></a>五、Keras实现 wide &amp; deep 模型</h3><ul>
+<li>子类API</li>
+<li>功能API（函数式API）</li>
+<li>多输入与多输出</li>
+</ul>
+<h3 id="六、Keras-与-scikit-learn-实现超参数搜索"><a href="#六、Keras-与-scikit-learn-实现超参数搜索" class="headerlink" title="六、Keras 与 scikit-learn 实现超参数搜索"></a>六、Keras 与 scikit-learn 实现超参数搜索</h3><ul>
+<li>使用scikit实现超参数搜索</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/31/人工智能/Tensorflow/CH1_Tensorflow简介/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/01/31/人工智能/Tensorflow/CH1_Tensorflow简介/" itemprop="url">CH1_Tensorflow简介</a></h1>
         
 
         <div class="post-meta">
@@ -348,16 +742,14 @@
 <li>支持多种平台——GPU、CPU、移动设备</li>
 <li>最初用于深度学习，变得越来越通用（只要是能够表达成数据流图的问题，都能使用tf解决）</li>
 </ul>
-<p>数据流图：</p>
-<ul>
+<h4 id="1、数据流图"><a href="#1、数据流图" class="headerlink" title="1、数据流图"></a>1、数据流图</h4><ul>
 <li>节点——处理数据</li>
 <li>线——节点间的输入输出关系（数据依赖关系）</li>
 <li>线上运输张量（数据，所有的n维数据：tensor）</li>
 <li>节点被分配到各种计算设备上运行</li>
 </ul>
 <p>![image-20200131115222448](/Users/hhh/Library/Application Support/typora-user-images/image-20200131115222448.png)</p>
-<p>Tensorflow的特性：</p>
-<ul>
+<h4 id="2、Tensorflow的特性"><a href="#2、Tensorflow的特性" class="headerlink" title="2、Tensorflow的特性"></a>2、Tensorflow的特性</h4><ul>
 <li>高度的灵活性</li>
 <li>真正的可移植性（可在多个设备上运行）</li>
 <li>产品和科研结合（做研究的代码可以无缝地使用在产品上）</li>
@@ -370,7 +762,7 @@
 <p>![image-20200131120042021](/Users/hhh/Library/Application Support/typora-user-images/image-20200131120042021.png)</p>
 <p>![image-20200131120257760](/Users/hhh/Library/Application Support/typora-user-images/image-20200131120257760.png)</p>
 <p>![image-20200131120407010](/Users/hhh/Library/Application Support/typora-user-images/image-20200131120407010.png)</p>
-<p>Tensorflow1.0——主要特性：</p>
+<p><strong>Tensorflow1.0——主要特性：</strong></p>
 <ul>
 <li>XLA——Accelerate Linear Algebra（专门针对线性运算的编译器，使得训练速度加快）<ul>
 <li>提升训练速度58倍</li>
@@ -381,7 +773,7 @@
 <li>Tensorflow调试器</li>
 <li>支持docker镜像，引入tensorflow serving 服务</li>
 </ul>
-<p>Tensorflow1.0——架构：</p>
+<p><strong>Tensorflow1.0——架构：</strong></p>
 <ul>
 <li>Keras</li>
 <li>Estimator</li>
@@ -390,16 +782,16 @@
 <li>Distribution engine</li>
 </ul>
 <p>![image-20200131120820583](/Users/hhh/Library/Application Support/typora-user-images/image-20200131120820583.png)</p>
-<p>Tensorflow2.0——主要特性：</p>
+<p><strong>Tensorflow2.0——主要特性：</strong></p>
 <ul>
 <li>使用 tf.keras 和 eager mode 进行更加简单的模型构建</li>
 <li>鲁棒的跨平台模型部署</li>
 <li>强大的研究实验</li>
 <li>清楚不推荐使用的API和减少重复来简化API</li>
 </ul>
-<p>Tensorflow2.0——架构：</p>
+<p><strong>Tensorflow2.0——架构：</strong></p>
 <p>![image-20200131121612375](/Users/hhh/Library/Application Support/typora-user-images/image-20200131121612375.png)</p>
-<p>Tensorflow2.0——简化的模型开发流程：</p>
+<p><strong>Tensorflow2.0——简化的模型开发流程：</strong></p>
 <ul>
 <li>使用 tf.data 加载数据</li>
 <li>使用 tf.keras 构建模型，也可以使用 premade estimator 来验证模型<ul>
@@ -411,7 +803,7 @@
 <li>导出到 SavedModel</li>
 <li>使用Tensorflow Serve、Tensorflow Lite、Tensorflow.js 部署模型</li>
 </ul>
-<p>Tensorflow2.0——强大的跨平台能力：</p>
+<p><strong>Tensorflow2.0——强大的跨平台能力：</strong></p>
 <ul>
 <li>Tensorflow 服务<ul>
 <li>直接通过 HTTP/REST 或 GRPC/协议缓冲区</li>
@@ -424,7 +816,7 @@
 </ul>
 </li>
 </ul>
-<p>Tensorflow2.0——强大的研究实验：</p>
+<p><strong>Tensorflow2.0——强大的研究实验：</strong></p>
 <ul>
 <li>Keras 功能 API 和子类API，允许创建复杂的拓扑结构</li>
 <li>自定义训练逻辑，使用 tf.GradientTape 和 tf.custom_gradient 进行更细粒度的控制</li>
@@ -452,7 +844,7 @@
 </ul>
 </li>
 </ul>
-<p>图结构：</p>
+<p><strong>图结构：</strong></p>
 <ul>
 <li>静态图<ul>
 <li>效率高</li>
@@ -465,6 +857,8 @@
 </ul>
 <p>![image-20200131123226233](/Users/hhh/Library/Application Support/typora-user-images/image-20200131123226233.png)</p>
 <p>图结构——代码示例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1 + 1/2 + 1/2^2 + 1/2^3 + ... + 1/2^50</span></span><br><span class="line"><span class="comment">### tensorflow 1.*</span></span><br><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line">print(tf.__version__)</span><br><span class="line"></span><br><span class="line">x = tf.Variable(<span class="number">0.</span>)</span><br><span class="line">y = tf.Variable(<span class="number">1.</span>)</span><br><span class="line"> </span><br><span class="line">print(x)</span><br><span class="line">print(y)</span><br><span class="line"><span class="comment"># x = x + y</span></span><br><span class="line">add_op = x.assign(x + y)</span><br><span class="line"><span class="comment"># y = y / 2</span></span><br><span class="line">div_op = x.assign(y / <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</span><br><span class="line">	   sess.run(tf.global_variables_initializer())</span><br><span class="line">	    <span class="keyword">for</span> iteration <span class="keyword">in</span> range(<span class="number">50</span>):</span><br><span class="line">	        sess.run(add_op)</span><br><span class="line">	        sess.run(div_op)</span><br><span class="line">	    </span><br><span class="line">	    print(x.eval()) <span class="comment"># 2.0</span></span><br><span class="line"></span><br><span class="line"><span class="comment">### pytorch</span></span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line">print(torch.__version__)</span><br><span class="line"></span><br><span class="line">x = torch.Tensor([<span class="number">0.</span>])</span><br><span class="line">y = torch.Tensor([<span class="number">1.</span>])</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> iteration <span class="keyword">in</span> range(<span class="number">50</span>):</span><br><span class="line">		x = x + y</span><br><span class="line">	  y = y / <span class="number">2</span></span><br><span class="line">  </span><br><span class="line">print(x)</span><br><span class="line"></span><br><span class="line"><span class="comment">### tensorflow 2.*</span></span><br><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"><span class="comment"># tf.enable_eager_execution()</span></span><br><span class="line"></span><br><span class="line">print(tf.__version__)</span><br><span class="line"></span><br><span class="line">x = tf.Variable(<span class="number">0.</span>)</span><br><span class="line">y = tf.Variable(<span class="number">1.</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> iteration <span class="keyword">in</span> range(<span class="number">50</span>):</span><br><span class="line">    x = x + y</span><br><span class="line">    y = y / <span class="number">2</span></span><br><span class="line"></span><br><span class="line">print(x.numpy())</span><br><span class="line"></span><br><span class="line"><span class="comment">### python</span></span><br><span class="line">x = <span class="number">0</span></span><br><span class="line">y = <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> iteration <span class="keyword">in</span> range(<span class="number">50</span>):</span><br><span class="line">    x = x + y</span><br><span class="line">    y = y / <span class="number">2</span></span><br><span class="line">    </span><br><span class="line">print(x)</span><br></pre></td></tr></table></figure>
+
 <h4 id="2、图创建和调试"><a href="#2、图创建和调试" class="headerlink" title="2、图创建和调试"></a>2、图创建和调试</h4><ul>
 <li>TensorFlow 1.*<ul>
 <li>静态图，难以调试，学习tfdbg调试</li>
@@ -1008,7 +1402,7 @@
 <p><img src="https://www.runoob.com/wp-content/uploads/2014/07/vim-vi-workmodel.png" alt="img"></p>
 <p>附：</p>
 <p>如果你想要使用 vi 来建立一个名为 runoob.txt 的文件时，你可以这样做：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> vim runoob.txt</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> vim runoob.txt</span></span><br></pre></td></tr></table></figure>
 
 <p>直接输入 <strong>vi 文件名</strong> 就能够进入 vi 的一般模式了。请注意，记得 vi 后面一定要加文件名，不管该文件存在与否！</p>
 <h3 id="三、vi-vim-按键说明"><a href="#三、vi-vim-按键说明" class="headerlink" title="三、vi/vim 按键说明"></a>三、vi/vim 按键说明</h3><p>除了上面简易范例的 i, Esc, :wq 之外，其实 vim 还有非常多的按键可以使用。</p>
@@ -3144,228 +3538,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/17/Linux/Linux基础/Linux教程（2）Linux系统启动过程/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/01/17/Linux/Linux基础/Linux教程（2）Linux系统启动过程/" itemprop="url">Linux教程（2）Linux系统启动过程</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-01-17T17:44:05+08:00">
-                2020-01-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux-Linux基础/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux - Linux基础</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="一、Linux启动"><a href="#一、Linux启动" class="headerlink" title="一、Linux启动"></a>一、Linux启动</h3><p>Linux启动时我们会看到很多启动信息。</p>
-<p>Linux系统的启动过程并不是大家想象中的那么复杂，其过程可以分为5个阶段：</p>
-<ul>
-<li>内核的引导</li>
-<li>运行init</li>
-<li>系统初始化</li>
-<li>建立终端</li>
-<li>用户登录系统</li>
-</ul>
-<p>init程序的类型：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1 --&gt; SysV : init, CentOS 5之前，配置文件：/etc/inittab</span><br><span class="line">2 --&gt; Upstart: init, CentOS 6, 配置文件：/etc/inittab, /etc/init/*.conf</span><br><span class="line">3 --&gt; Systemd: systemd, CentOS 7, 配置文件：/usr/lib/system、/etc/systemd/system</span><br></pre></td></tr></table></figure>
-
-<h4 id="1、内核引导"><a href="#1、内核引导" class="headerlink" title="1、内核引导"></a>1、内核引导</h4><p>当计算机打开电源后，首先是BIOS开机自检，按照BIOS中设置的启动设备（通常是硬盘）来启动。</p>
-<p>操作系统接管硬件以后，首先读入 /boot 目录下的内核文件。</p>
-<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/Linux/Linux%E5%9F%BA%E7%A1%80/Linux%E6%95%99%E7%A8%8B%EF%BC%882%EF%BC%89/1.png" alt="img"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">附：BIOS</span><br><span class="line">    BIOS 是英文&quot;Basic Input Output System&quot;的缩略语，直译过来后中文名称就是&quot;基本输入输出系统&quot;。其实，它是一组固化到计算机内主板上一个ROM芯片上的程序，它保存着计算机最重要的基本输入输出的程序、系统设置信息、开机后自检程序和系统自启动程序。 其主要功能是为计算机提供最底层的、最直接的硬件设置和控制。</span><br><span class="line">    计算机在运行时，首先会进入BIOS，它在计算机系统中起着非常重要的作用。一块主板性能优越与否，很大程度上取决于主板上的BIOS管理功能是否先进。</span><br></pre></td></tr></table></figure>
-
-<h4 id="2、运行init"><a href="#2、运行init" class="headerlink" title="2、运行init"></a>2、运行init</h4><p>init进程是系统所有进程的<strong>起点</strong>，你可以把它比拟成系统所有进程的老祖宗，没有这个进程，系统中任何进程都不会启动。</p>
-<p>init程序首先是<strong>需要读取配置文件</strong> /etc/inittab</p>
-<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/Linux/Linux%E5%9F%BA%E7%A1%80/Linux%E6%95%99%E7%A8%8B%EF%BC%882%EF%BC%89/2.png" alt="img"></p>
-<p><strong>运行级别：</strong></p>
-<p>许多程序需要开机启动。它们在Windows叫做“服务”（service），在Linux叫做<strong>“守护进程”</strong>（daemon）。</p>
-<p><strong>init进程的一大任务，就是去运行这些开机启动的程序。</strong></p>
-<p>但是，不同的场合需要启动不同的程序，比如用作服务器时，需要启动Apache，用作桌面就不需要。</p>
-<p>Linux允许为不同场合，分配不同的开机启动程序，这就叫做<strong>”运行级别“</strong>（runlevel）。也就是说，启动时根据”运行级别“，确定要运行哪些程序。</p>
-<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/Linux/Linux%E5%9F%BA%E7%A1%80/Linux%E6%95%99%E7%A8%8B%EF%BC%882%EF%BC%89/3.png" alt="img"></p>
-<p>Linux系统有7个运行级别（runlevel）：</p>
-<ul>
-<li>级别0：系统停机状态，系统默认运行级别不能设为0，否则不能正常启动</li>
-<li>级别1：单用户工作状态，root权限；用于系统维护；禁止远程登录</li>
-<li>级别2：多用户状态（没有NFS）</li>
-<li>级别3：完全的多用户状态（有NFS），登录后进入控制台命令行模式</li>
-<li>级别4：系统未使用，保留</li>
-<li>级别5：X11控制台，登录后进入图形GUI模式</li>
-<li>级别6：系统正常关闭并重启，默认运行级别不能设为6，否则不能正常启动</li>
-</ul>
-<h4 id="3、系统初始化"><a href="#3、系统初始化" class="headerlink" title="3、系统初始化"></a>3、系统初始化</h4><p>在init配置文件中有这么一行：<code>si::sysinit:/etc/rc.d/rc.sysinit</code></p>
-<p>它调用执行了 /etc/rc.d/rc.sysinit，而rc.sysinit 是一个bash shell的脚本，它主要是完成一些系统初始化的工作，<strong>rc.sysinit是每一个运行级别都要首先运行的重要脚本</strong>。</p>
-<p>它主要完成的工作有：激活交换分区检查磁盘，加载硬件模块以及其他一些需要优先执行的任务。</p>
-<p><code>l5:5:wait:/etc/rc.d/rc 5</code></p>
-<p>这一行表示以5为参数运行 /etc/rc.d/rc，/etc/rc.d/rc 是一个Shell脚本，它接受5作为参数，去执行 /etc/rc.d/rc5.d/ 目录下的所有的 rc 启动脚本，/etc/rc.d/rc5.d/ 目录中的这些启动脚本实际上都是一些连接文件，而不是真正的rc启动脚本，真正的rc启动脚本实际上都是放在 /etc/rc.d/init.d/ 目录下。</p>
-<p>而这些rc启动脚本有着类似的用法，它们一般能接受 start、restart、status等参数。</p>
-<p>/etc/rc.d/rd5.d/ 中的rc启动脚本通常是K或S开头的连接文件，对于以S开头的启动副本，将以start参数来运行。</p>
-<p>而如果发现存在相应的脚本也存在K打头的连接，而且已经处于运行状态了（以 /var/lock/subsys/ 下的文件作为标志，则首先将以stop为参数停止这些已经启动了的守护进程，然后再重新运行。</p>
-<p><strong>这样做是为了保证是当init改变运行级别时，所有相关的守护进程都将重启。</strong></p>
-<p>至于在每个运行级别中将运行哪些守护进程，用户可以通过 chkconfig 或 setup 中的“System Services” 来自行设定。</p>
-<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/Linux/Linux%E5%9F%BA%E7%A1%80/Linux%E6%95%99%E7%A8%8B%EF%BC%882%EF%BC%89/4.png" alt="img"></p>
-<h4 id="4、建立终端"><a href="#4、建立终端" class="headerlink" title="4、建立终端"></a>4、建立终端</h4><p>rc执行完毕后，返回init。这时基本系统环境已经设置好了，各种守护进程也已经启动了。</p>
-<p><strong>init接下来会打开6个终端，以便用户登录系统</strong>。在initial中的以下6行就是定义了6个终端：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1:2345:respawn:/sbin/mingetty tty1</span><br><span class="line">2:2345:respawn:/sbin/mingetty tty2</span><br><span class="line">3:2345:respawn:/sbin/mingetty tty3</span><br><span class="line">4:2345:respawn:/sbin/mingetty tty4</span><br><span class="line">5:2345:respawn:/sbin/mingetty tty5</span><br><span class="line">6:2345:respawn:/sbin/mingetty tty6</span><br></pre></td></tr></table></figure>
-
-<p>从上面可以看出在2、3、4、5的运行级别中都将以 respawn 方式运行 mingetty 程序，mingetty 程序能打开终端、设置模式。同时它会显示一个文本登录界面，这个界面就是我们经常看到的登录界面，在这个登录界面中会提示用户输入用户名，而用户输入的用户将作为参数传给login程序来验证用户的身份。</p>
-<h4 id="5、用户登录系统"><a href="#5、用户登录系统" class="headerlink" title="5、用户登录系统"></a>5、用户登录系统</h4><p>一般来说，用户的登录方式有三种：</p>
-<ul>
-<li>命令行登录</li>
-<li>ssh登录</li>
-<li>图形界面登录</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/Linux/Linux%E5%9F%BA%E7%A1%80/Linux%E6%95%99%E7%A8%8B%EF%BC%882%EF%BC%89/5.png" alt="img"></p>
-<p>对于运行级别为5的图形方式用户来说，他们的登录是通过一个图形化的登录界面。登录成功后可以进入 KDE、Gnome 等窗口管理器。</p>
-<p>而本文主要讲的还是文本方式登录的情况：当我们看到mingetty的登录界面时，我们就可以输入用户名和密码来登录系统了。</p>
-<p><strong>Linux 的账号验证程序是 login，login 会接收 mingetty 传来的用户名作为用户名参数。</strong></p>
-<p>然后 login 会对用户名进行分析：如果用户名不是 root ，且存在 /etc/nologin/ 文件，login将输出 nologin 文件的内容，然后退出。</p>
-<p>这通常用来系统维护时防止非 root 用户登录。只有 /etc/securetty 中登记了的终端才允许 root 用户登录，如果不存在这个文件，则root用户可以在任何终端上登录。</p>
-<p>/etc/usertty文件用于对用户作出附加访问限制，如果不存在这个文件，则没有其他限制。</p>
-<h3 id="二、图形模式与文字模式的切换方式"><a href="#二、图形模式与文字模式的切换方式" class="headerlink" title="二、图形模式与文字模式的切换方式"></a>二、图形模式与文字模式的切换方式</h3><p>Linux预设提供了六个命令窗口终端机让我们来登录。</p>
-<p>默认我们登录的就是第一个窗口，也就是 tty1，这6个窗口分别为 tty1，tty2，…，tty6，<strong>你可以按下 Ctrl + Alt + F1～F6来切换他们</strong>。</p>
-<p>如果你安装了图形界面，默认情况下是进入图形界面的，此时你就可以按 Ctrl + Alt + F1～F6 来进入其中一个命令窗口界面。</p>
-<p>当你进入命令窗口界面后再返回图形界面只要按下 Ctrl + Alt + F7 就回来了。</p>
-<p>如果你用的vmware虚拟机，命令窗口切换的快捷键为 Alt + Space + F1～F6.如果你在图形界面下，请按 Alt + Shift + Ctrl + F1~F6 切换至命令窗口。</p>
-<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/Linux/Linux%E5%9F%BA%E7%A1%80/Linux%E6%95%99%E7%A8%8B%EF%BC%882%EF%BC%89/6.png" alt="img"></p>
-<h3 id="三、Linux关机"><a href="#三、Linux关机" class="headerlink" title="三、Linux关机"></a>三、Linux关机</h3><p>Linux领域内大多用在服务器上，很少遇到关机的操作。毕竟服务器上跑一个服务是永无止境的，除非特殊情况下，不得已才会关机。</p>
-<p>正确的关机流程为：</p>
-<p><strong><em>sync –&gt;  shutdown –&gt; reboot –&gt; halt</em></strong></p>
-<p>关机指令为：shutdown，你可以 man shutdown 来看一下帮助文档。</p>
-<p>例如，你可以运行如下命令关机：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">sync 将数据由内存同步到硬盘中。</span><br><span class="line"></span><br><span class="line">shutdown 关机指令，你可以man shutdown 来看一下帮助文档。例如你可以运行如下命令关机：</span><br><span class="line"></span><br><span class="line">shutdown –h 10 ‘This server will shutdown after 10 mins’ 这个命令告诉大家，计算机将在10分钟后关机，并且会显示在登陆用户的当前屏幕中。</span><br><span class="line"></span><br><span class="line">shutdown –h now 立马关机</span><br><span class="line"></span><br><span class="line">shutdown –h 20:25 系统会在今天20:25关机</span><br><span class="line"></span><br><span class="line">shutdown –h +10 十分钟后关机</span><br><span class="line"></span><br><span class="line">shutdown –r now 系统立马重启</span><br><span class="line"></span><br><span class="line">shutdown –r +10 系统十分钟后重启</span><br><span class="line"></span><br><span class="line">reboot 就是重启，等同于 shutdown –r now</span><br><span class="line"></span><br><span class="line">halt 关闭系统，等同于shutdown –h now 和 poweroff</span><br></pre></td></tr></table></figure>
-
-<p>不管是重启系统还是关闭系统，首先要运行 sync 命令，把内存中的数据写到磁盘中。</p>
-<p>关机的命令有： <strong>shutdown -h now halt poweroff</strong> 和 <strong>init 0</strong>，</p>
-<p>重启系统的命令有： <strong>shutdown -r now reboot init 6</strong>。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -3418,7 +3590,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-count">45</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

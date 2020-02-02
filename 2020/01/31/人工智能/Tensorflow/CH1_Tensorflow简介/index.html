@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="一、Tensorflow是什么Google的开源软件库  采取数据流图，用于数值计算 支持多种平台——GPU、CPU、移动设备 最初用于深度学习，变得越来越通用（只要是能够表达成数据流图的问题，都能使用tf解决）  数据流图：  节点——处理数据 线——节点间的输入输出关系（数据依赖关系） 线上运输张量（数据，所有的n维数据：tensor） 节点被分配到各种计算设备上运行  ![image-202">
+<meta name="description" content="一、Tensorflow是什么Google的开源软件库  采取数据流图，用于数值计算 支持多种平台——GPU、CPU、移动设备 最初用于深度学习，变得越来越通用（只要是能够表达成数据流图的问题，都能使用tf解决）  1、数据流图 节点——处理数据 线——节点间的输入输出关系（数据依赖关系） 线上运输张量（数据，所有的n维数据：tensor） 节点被分配到各种计算设备上运行  ![image-202">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Tensorflow简介">
-<meta property="og:url" content="http://yoursite.com/2020/01/31/人工智能/Tensorflow/Tensorflow简介/index.html">
+<meta property="og:title" content="CH1_Tensorflow简介">
+<meta property="og:url" content="http://yoursite.com/2020/01/31/人工智能/Tensorflow/CH1_Tensorflow简介/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="一、Tensorflow是什么Google的开源软件库  采取数据流图，用于数值计算 支持多种平台——GPU、CPU、移动设备 最初用于深度学习，变得越来越通用（只要是能够表达成数据流图的问题，都能使用tf解决）  数据流图：  节点——处理数据 线——节点间的输入输出关系（数据依赖关系） 线上运输张量（数据，所有的n维数据：tensor） 节点被分配到各种计算设备上运行  ![image-202">
+<meta property="og:description" content="一、Tensorflow是什么Google的开源软件库  采取数据流图，用于数值计算 支持多种平台——GPU、CPU、移动设备 最初用于深度学习，变得越来越通用（只要是能够表达成数据流图的问题，都能使用tf解决）  1、数据流图 节点——处理数据 线——节点间的输入输出关系（数据依赖关系） 线上运输张量（数据，所有的n维数据：tensor） 节点被分配到各种计算设备上运行  ![image-202">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-01-31T15:59:02.313Z">
+<meta property="og:updated_time" content="2020-02-01T07:08:30.386Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Tensorflow简介">
-<meta name="twitter:description" content="一、Tensorflow是什么Google的开源软件库  采取数据流图，用于数值计算 支持多种平台——GPU、CPU、移动设备 最初用于深度学习，变得越来越通用（只要是能够表达成数据流图的问题，都能使用tf解决）  数据流图：  节点——处理数据 线——节点间的输入输出关系（数据依赖关系） 线上运输张量（数据，所有的n维数据：tensor） 节点被分配到各种计算设备上运行  ![image-202">
+<meta name="twitter:title" content="CH1_Tensorflow简介">
+<meta name="twitter:description" content="一、Tensorflow是什么Google的开源软件库  采取数据流图，用于数值计算 支持多种平台——GPU、CPU、移动设备 最初用于深度学习，变得越来越通用（只要是能够表达成数据流图的问题，都能使用tf解决）  1、数据流图 节点——处理数据 线——节点间的输入输出关系（数据依赖关系） 线上运输张量（数据，所有的n维数据：tensor） 节点被分配到各种计算设备上运行  ![image-202">
 
 
 
@@ -119,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2020/01/31/人工智能/Tensorflow/Tensorflow简介/">
+  <link rel="canonical" href="http://yoursite.com/2020/01/31/人工智能/Tensorflow/CH1_Tensorflow简介/">
 
 
 
 
 
-  <title>Tensorflow简介 | Hexo</title>
+  <title>CH1_Tensorflow简介 | Hexo</title>
   
 
 
@@ -252,7 +252,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/31/人工智能/Tensorflow/Tensorflow简介/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/31/人工智能/Tensorflow/CH1_Tensorflow简介/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -269,7 +269,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Tensorflow简介</h1>
+          <h1 class="post-title" itemprop="name headline">CH1_Tensorflow简介</h1>
         
 
         <div class="post-meta">
@@ -347,16 +347,14 @@
 <li>支持多种平台——GPU、CPU、移动设备</li>
 <li>最初用于深度学习，变得越来越通用（只要是能够表达成数据流图的问题，都能使用tf解决）</li>
 </ul>
-<p>数据流图：</p>
-<ul>
+<h4 id="1、数据流图"><a href="#1、数据流图" class="headerlink" title="1、数据流图"></a>1、数据流图</h4><ul>
 <li>节点——处理数据</li>
 <li>线——节点间的输入输出关系（数据依赖关系）</li>
 <li>线上运输张量（数据，所有的n维数据：tensor）</li>
 <li>节点被分配到各种计算设备上运行</li>
 </ul>
 <p>![image-20200131115222448](/Users/hhh/Library/Application Support/typora-user-images/image-20200131115222448.png)</p>
-<p>Tensorflow的特性：</p>
-<ul>
+<h4 id="2、Tensorflow的特性"><a href="#2、Tensorflow的特性" class="headerlink" title="2、Tensorflow的特性"></a>2、Tensorflow的特性</h4><ul>
 <li>高度的灵活性</li>
 <li>真正的可移植性（可在多个设备上运行）</li>
 <li>产品和科研结合（做研究的代码可以无缝地使用在产品上）</li>
@@ -369,7 +367,7 @@
 <p>![image-20200131120042021](/Users/hhh/Library/Application Support/typora-user-images/image-20200131120042021.png)</p>
 <p>![image-20200131120257760](/Users/hhh/Library/Application Support/typora-user-images/image-20200131120257760.png)</p>
 <p>![image-20200131120407010](/Users/hhh/Library/Application Support/typora-user-images/image-20200131120407010.png)</p>
-<p>Tensorflow1.0——主要特性：</p>
+<p><strong>Tensorflow1.0——主要特性：</strong></p>
 <ul>
 <li>XLA——Accelerate Linear Algebra（专门针对线性运算的编译器，使得训练速度加快）<ul>
 <li>提升训练速度58倍</li>
@@ -380,7 +378,7 @@
 <li>Tensorflow调试器</li>
 <li>支持docker镜像，引入tensorflow serving 服务</li>
 </ul>
-<p>Tensorflow1.0——架构：</p>
+<p><strong>Tensorflow1.0——架构：</strong></p>
 <ul>
 <li>Keras</li>
 <li>Estimator</li>
@@ -389,16 +387,16 @@
 <li>Distribution engine</li>
 </ul>
 <p>![image-20200131120820583](/Users/hhh/Library/Application Support/typora-user-images/image-20200131120820583.png)</p>
-<p>Tensorflow2.0——主要特性：</p>
+<p><strong>Tensorflow2.0——主要特性：</strong></p>
 <ul>
 <li>使用 tf.keras 和 eager mode 进行更加简单的模型构建</li>
 <li>鲁棒的跨平台模型部署</li>
 <li>强大的研究实验</li>
 <li>清楚不推荐使用的API和减少重复来简化API</li>
 </ul>
-<p>Tensorflow2.0——架构：</p>
+<p><strong>Tensorflow2.0——架构：</strong></p>
 <p>![image-20200131121612375](/Users/hhh/Library/Application Support/typora-user-images/image-20200131121612375.png)</p>
-<p>Tensorflow2.0——简化的模型开发流程：</p>
+<p><strong>Tensorflow2.0——简化的模型开发流程：</strong></p>
 <ul>
 <li>使用 tf.data 加载数据</li>
 <li>使用 tf.keras 构建模型，也可以使用 premade estimator 来验证模型<ul>
@@ -410,7 +408,7 @@
 <li>导出到 SavedModel</li>
 <li>使用Tensorflow Serve、Tensorflow Lite、Tensorflow.js 部署模型</li>
 </ul>
-<p>Tensorflow2.0——强大的跨平台能力：</p>
+<p><strong>Tensorflow2.0——强大的跨平台能力：</strong></p>
 <ul>
 <li>Tensorflow 服务<ul>
 <li>直接通过 HTTP/REST 或 GRPC/协议缓冲区</li>
@@ -423,7 +421,7 @@
 </ul>
 </li>
 </ul>
-<p>Tensorflow2.0——强大的研究实验：</p>
+<p><strong>Tensorflow2.0——强大的研究实验：</strong></p>
 <ul>
 <li>Keras 功能 API 和子类API，允许创建复杂的拓扑结构</li>
 <li>自定义训练逻辑，使用 tf.GradientTape 和 tf.custom_gradient 进行更细粒度的控制</li>
@@ -451,7 +449,7 @@
 </ul>
 </li>
 </ul>
-<p>图结构：</p>
+<p><strong>图结构：</strong></p>
 <ul>
 <li>静态图<ul>
 <li>效率高</li>
@@ -464,6 +462,8 @@
 </ul>
 <p>![image-20200131123226233](/Users/hhh/Library/Application Support/typora-user-images/image-20200131123226233.png)</p>
 <p>图结构——代码示例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1 + 1/2 + 1/2^2 + 1/2^3 + ... + 1/2^50</span></span><br><span class="line"><span class="comment">### tensorflow 1.*</span></span><br><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line">print(tf.__version__)</span><br><span class="line"></span><br><span class="line">x = tf.Variable(<span class="number">0.</span>)</span><br><span class="line">y = tf.Variable(<span class="number">1.</span>)</span><br><span class="line"> </span><br><span class="line">print(x)</span><br><span class="line">print(y)</span><br><span class="line"><span class="comment"># x = x + y</span></span><br><span class="line">add_op = x.assign(x + y)</span><br><span class="line"><span class="comment"># y = y / 2</span></span><br><span class="line">div_op = x.assign(y / <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</span><br><span class="line">	   sess.run(tf.global_variables_initializer())</span><br><span class="line">	    <span class="keyword">for</span> iteration <span class="keyword">in</span> range(<span class="number">50</span>):</span><br><span class="line">	        sess.run(add_op)</span><br><span class="line">	        sess.run(div_op)</span><br><span class="line">	    </span><br><span class="line">	    print(x.eval()) <span class="comment"># 2.0</span></span><br><span class="line"></span><br><span class="line"><span class="comment">### pytorch</span></span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line">print(torch.__version__)</span><br><span class="line"></span><br><span class="line">x = torch.Tensor([<span class="number">0.</span>])</span><br><span class="line">y = torch.Tensor([<span class="number">1.</span>])</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> iteration <span class="keyword">in</span> range(<span class="number">50</span>):</span><br><span class="line">		x = x + y</span><br><span class="line">	  y = y / <span class="number">2</span></span><br><span class="line">  </span><br><span class="line">print(x)</span><br><span class="line"></span><br><span class="line"><span class="comment">### tensorflow 2.*</span></span><br><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"><span class="comment"># tf.enable_eager_execution()</span></span><br><span class="line"></span><br><span class="line">print(tf.__version__)</span><br><span class="line"></span><br><span class="line">x = tf.Variable(<span class="number">0.</span>)</span><br><span class="line">y = tf.Variable(<span class="number">1.</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> iteration <span class="keyword">in</span> range(<span class="number">50</span>):</span><br><span class="line">    x = x + y</span><br><span class="line">    y = y / <span class="number">2</span></span><br><span class="line"></span><br><span class="line">print(x.numpy())</span><br><span class="line"></span><br><span class="line"><span class="comment">### python</span></span><br><span class="line">x = <span class="number">0</span></span><br><span class="line">y = <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> iteration <span class="keyword">in</span> range(<span class="number">50</span>):</span><br><span class="line">    x = x + y</span><br><span class="line">    y = y / <span class="number">2</span></span><br><span class="line">    </span><br><span class="line">print(x)</span><br></pre></td></tr></table></figure>
+
 <h4 id="2、图创建和调试"><a href="#2、图创建和调试" class="headerlink" title="2、图创建和调试"></a>2、图创建和调试</h4><ul>
 <li>TensorFlow 1.*<ul>
 <li>静态图，难以调试，学习tfdbg调试</li>
@@ -525,6 +525,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/02/01/人工智能/Tensorflow/CH_2Tensorflow-keras实战/" rel="prev" title="CH_2Tensorflow-keras实战">
+                CH_2Tensorflow-keras实战 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -603,7 +607,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-count">45</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -674,7 +678,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、Tensorflow是什么"><span class="nav-text">一、Tensorflow是什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、Tensorflow版本变迁"><span class="nav-text">二、Tensorflow版本变迁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、Tensorflow-VS-Pytorch"><span class="nav-text">三、Tensorflow VS Pytorch</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、入门时间"><span class="nav-text">1、入门时间</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、图创建和调试"><span class="nav-text">2、图创建和调试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、全面性"><span class="nav-text">3、全面性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、序列化与部署"><span class="nav-text">4、序列化与部署</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、Tensorflow环境配置"><span class="nav-text">四、Tensorflow环境配置</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、Tensorflow是什么"><span class="nav-text">一、Tensorflow是什么</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、数据流图"><span class="nav-text">1、数据流图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、Tensorflow的特性"><span class="nav-text">2、Tensorflow的特性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、Tensorflow版本变迁"><span class="nav-text">二、Tensorflow版本变迁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、Tensorflow-VS-Pytorch"><span class="nav-text">三、Tensorflow VS Pytorch</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、入门时间"><span class="nav-text">1、入门时间</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、图创建和调试"><span class="nav-text">2、图创建和调试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、全面性"><span class="nav-text">3、全面性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、序列化与部署"><span class="nav-text">4、序列化与部署</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、Tensorflow环境配置"><span class="nav-text">四、Tensorflow环境配置</span></a></li></ol></div>
             
 
           </div>

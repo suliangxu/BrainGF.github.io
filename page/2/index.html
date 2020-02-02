@@ -249,6 +249,228 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/17/Linux/Linux基础/Linux教程（2）Linux系统启动过程/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/01/17/Linux/Linux基础/Linux教程（2）Linux系统启动过程/" itemprop="url">Linux教程（2）Linux系统启动过程</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-01-17T17:44:05+08:00">
+                2020-01-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux-Linux基础/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux - Linux基础</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="一、Linux启动"><a href="#一、Linux启动" class="headerlink" title="一、Linux启动"></a>一、Linux启动</h3><p>Linux启动时我们会看到很多启动信息。</p>
+<p>Linux系统的启动过程并不是大家想象中的那么复杂，其过程可以分为5个阶段：</p>
+<ul>
+<li>内核的引导</li>
+<li>运行init</li>
+<li>系统初始化</li>
+<li>建立终端</li>
+<li>用户登录系统</li>
+</ul>
+<p>init程序的类型：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1 --&gt; SysV : init, CentOS 5之前，配置文件：/etc/inittab</span><br><span class="line">2 --&gt; Upstart: init, CentOS 6, 配置文件：/etc/inittab, /etc/init/*.conf</span><br><span class="line">3 --&gt; Systemd: systemd, CentOS 7, 配置文件：/usr/lib/system、/etc/systemd/system</span><br></pre></td></tr></table></figure>
+
+<h4 id="1、内核引导"><a href="#1、内核引导" class="headerlink" title="1、内核引导"></a>1、内核引导</h4><p>当计算机打开电源后，首先是BIOS开机自检，按照BIOS中设置的启动设备（通常是硬盘）来启动。</p>
+<p>操作系统接管硬件以后，首先读入 /boot 目录下的内核文件。</p>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/Linux/Linux%E5%9F%BA%E7%A1%80/Linux%E6%95%99%E7%A8%8B%EF%BC%882%EF%BC%89/1.png" alt="img"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">附：BIOS</span><br><span class="line">    BIOS 是英文&quot;Basic Input Output System&quot;的缩略语，直译过来后中文名称就是&quot;基本输入输出系统&quot;。其实，它是一组固化到计算机内主板上一个ROM芯片上的程序，它保存着计算机最重要的基本输入输出的程序、系统设置信息、开机后自检程序和系统自启动程序。 其主要功能是为计算机提供最底层的、最直接的硬件设置和控制。</span><br><span class="line">    计算机在运行时，首先会进入BIOS，它在计算机系统中起着非常重要的作用。一块主板性能优越与否，很大程度上取决于主板上的BIOS管理功能是否先进。</span><br></pre></td></tr></table></figure>
+
+<h4 id="2、运行init"><a href="#2、运行init" class="headerlink" title="2、运行init"></a>2、运行init</h4><p>init进程是系统所有进程的<strong>起点</strong>，你可以把它比拟成系统所有进程的老祖宗，没有这个进程，系统中任何进程都不会启动。</p>
+<p>init程序首先是<strong>需要读取配置文件</strong> /etc/inittab</p>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/Linux/Linux%E5%9F%BA%E7%A1%80/Linux%E6%95%99%E7%A8%8B%EF%BC%882%EF%BC%89/2.png" alt="img"></p>
+<p><strong>运行级别：</strong></p>
+<p>许多程序需要开机启动。它们在Windows叫做“服务”（service），在Linux叫做<strong>“守护进程”</strong>（daemon）。</p>
+<p><strong>init进程的一大任务，就是去运行这些开机启动的程序。</strong></p>
+<p>但是，不同的场合需要启动不同的程序，比如用作服务器时，需要启动Apache，用作桌面就不需要。</p>
+<p>Linux允许为不同场合，分配不同的开机启动程序，这就叫做<strong>”运行级别“</strong>（runlevel）。也就是说，启动时根据”运行级别“，确定要运行哪些程序。</p>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/Linux/Linux%E5%9F%BA%E7%A1%80/Linux%E6%95%99%E7%A8%8B%EF%BC%882%EF%BC%89/3.png" alt="img"></p>
+<p>Linux系统有7个运行级别（runlevel）：</p>
+<ul>
+<li>级别0：系统停机状态，系统默认运行级别不能设为0，否则不能正常启动</li>
+<li>级别1：单用户工作状态，root权限；用于系统维护；禁止远程登录</li>
+<li>级别2：多用户状态（没有NFS）</li>
+<li>级别3：完全的多用户状态（有NFS），登录后进入控制台命令行模式</li>
+<li>级别4：系统未使用，保留</li>
+<li>级别5：X11控制台，登录后进入图形GUI模式</li>
+<li>级别6：系统正常关闭并重启，默认运行级别不能设为6，否则不能正常启动</li>
+</ul>
+<h4 id="3、系统初始化"><a href="#3、系统初始化" class="headerlink" title="3、系统初始化"></a>3、系统初始化</h4><p>在init配置文件中有这么一行：<code>si::sysinit:/etc/rc.d/rc.sysinit</code></p>
+<p>它调用执行了 /etc/rc.d/rc.sysinit，而rc.sysinit 是一个bash shell的脚本，它主要是完成一些系统初始化的工作，<strong>rc.sysinit是每一个运行级别都要首先运行的重要脚本</strong>。</p>
+<p>它主要完成的工作有：激活交换分区检查磁盘，加载硬件模块以及其他一些需要优先执行的任务。</p>
+<p><code>l5:5:wait:/etc/rc.d/rc 5</code></p>
+<p>这一行表示以5为参数运行 /etc/rc.d/rc，/etc/rc.d/rc 是一个Shell脚本，它接受5作为参数，去执行 /etc/rc.d/rc5.d/ 目录下的所有的 rc 启动脚本，/etc/rc.d/rc5.d/ 目录中的这些启动脚本实际上都是一些连接文件，而不是真正的rc启动脚本，真正的rc启动脚本实际上都是放在 /etc/rc.d/init.d/ 目录下。</p>
+<p>而这些rc启动脚本有着类似的用法，它们一般能接受 start、restart、status等参数。</p>
+<p>/etc/rc.d/rd5.d/ 中的rc启动脚本通常是K或S开头的连接文件，对于以S开头的启动副本，将以start参数来运行。</p>
+<p>而如果发现存在相应的脚本也存在K打头的连接，而且已经处于运行状态了（以 /var/lock/subsys/ 下的文件作为标志，则首先将以stop为参数停止这些已经启动了的守护进程，然后再重新运行。</p>
+<p><strong>这样做是为了保证是当init改变运行级别时，所有相关的守护进程都将重启。</strong></p>
+<p>至于在每个运行级别中将运行哪些守护进程，用户可以通过 chkconfig 或 setup 中的“System Services” 来自行设定。</p>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/Linux/Linux%E5%9F%BA%E7%A1%80/Linux%E6%95%99%E7%A8%8B%EF%BC%882%EF%BC%89/4.png" alt="img"></p>
+<h4 id="4、建立终端"><a href="#4、建立终端" class="headerlink" title="4、建立终端"></a>4、建立终端</h4><p>rc执行完毕后，返回init。这时基本系统环境已经设置好了，各种守护进程也已经启动了。</p>
+<p><strong>init接下来会打开6个终端，以便用户登录系统</strong>。在initial中的以下6行就是定义了6个终端：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1:2345:respawn:/sbin/mingetty tty1</span><br><span class="line">2:2345:respawn:/sbin/mingetty tty2</span><br><span class="line">3:2345:respawn:/sbin/mingetty tty3</span><br><span class="line">4:2345:respawn:/sbin/mingetty tty4</span><br><span class="line">5:2345:respawn:/sbin/mingetty tty5</span><br><span class="line">6:2345:respawn:/sbin/mingetty tty6</span><br></pre></td></tr></table></figure>
+
+<p>从上面可以看出在2、3、4、5的运行级别中都将以 respawn 方式运行 mingetty 程序，mingetty 程序能打开终端、设置模式。同时它会显示一个文本登录界面，这个界面就是我们经常看到的登录界面，在这个登录界面中会提示用户输入用户名，而用户输入的用户将作为参数传给login程序来验证用户的身份。</p>
+<h4 id="5、用户登录系统"><a href="#5、用户登录系统" class="headerlink" title="5、用户登录系统"></a>5、用户登录系统</h4><p>一般来说，用户的登录方式有三种：</p>
+<ul>
+<li>命令行登录</li>
+<li>ssh登录</li>
+<li>图形界面登录</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/Linux/Linux%E5%9F%BA%E7%A1%80/Linux%E6%95%99%E7%A8%8B%EF%BC%882%EF%BC%89/5.png" alt="img"></p>
+<p>对于运行级别为5的图形方式用户来说，他们的登录是通过一个图形化的登录界面。登录成功后可以进入 KDE、Gnome 等窗口管理器。</p>
+<p>而本文主要讲的还是文本方式登录的情况：当我们看到mingetty的登录界面时，我们就可以输入用户名和密码来登录系统了。</p>
+<p><strong>Linux 的账号验证程序是 login，login 会接收 mingetty 传来的用户名作为用户名参数。</strong></p>
+<p>然后 login 会对用户名进行分析：如果用户名不是 root ，且存在 /etc/nologin/ 文件，login将输出 nologin 文件的内容，然后退出。</p>
+<p>这通常用来系统维护时防止非 root 用户登录。只有 /etc/securetty 中登记了的终端才允许 root 用户登录，如果不存在这个文件，则root用户可以在任何终端上登录。</p>
+<p>/etc/usertty文件用于对用户作出附加访问限制，如果不存在这个文件，则没有其他限制。</p>
+<h3 id="二、图形模式与文字模式的切换方式"><a href="#二、图形模式与文字模式的切换方式" class="headerlink" title="二、图形模式与文字模式的切换方式"></a>二、图形模式与文字模式的切换方式</h3><p>Linux预设提供了六个命令窗口终端机让我们来登录。</p>
+<p>默认我们登录的就是第一个窗口，也就是 tty1，这6个窗口分别为 tty1，tty2，…，tty6，<strong>你可以按下 Ctrl + Alt + F1～F6来切换他们</strong>。</p>
+<p>如果你安装了图形界面，默认情况下是进入图形界面的，此时你就可以按 Ctrl + Alt + F1～F6 来进入其中一个命令窗口界面。</p>
+<p>当你进入命令窗口界面后再返回图形界面只要按下 Ctrl + Alt + F7 就回来了。</p>
+<p>如果你用的vmware虚拟机，命令窗口切换的快捷键为 Alt + Space + F1～F6.如果你在图形界面下，请按 Alt + Shift + Ctrl + F1~F6 切换至命令窗口。</p>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/Linux/Linux%E5%9F%BA%E7%A1%80/Linux%E6%95%99%E7%A8%8B%EF%BC%882%EF%BC%89/6.png" alt="img"></p>
+<h3 id="三、Linux关机"><a href="#三、Linux关机" class="headerlink" title="三、Linux关机"></a>三、Linux关机</h3><p>Linux领域内大多用在服务器上，很少遇到关机的操作。毕竟服务器上跑一个服务是永无止境的，除非特殊情况下，不得已才会关机。</p>
+<p>正确的关机流程为：</p>
+<p><strong><em>sync –&gt;  shutdown –&gt; reboot –&gt; halt</em></strong></p>
+<p>关机指令为：shutdown，你可以 man shutdown 来看一下帮助文档。</p>
+<p>例如，你可以运行如下命令关机：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">sync 将数据由内存同步到硬盘中。</span><br><span class="line"></span><br><span class="line">shutdown 关机指令，你可以man shutdown 来看一下帮助文档。例如你可以运行如下命令关机：</span><br><span class="line"></span><br><span class="line">shutdown –h 10 ‘This server will shutdown after 10 mins’ 这个命令告诉大家，计算机将在10分钟后关机，并且会显示在登陆用户的当前屏幕中。</span><br><span class="line"></span><br><span class="line">shutdown –h now 立马关机</span><br><span class="line"></span><br><span class="line">shutdown –h 20:25 系统会在今天20:25关机</span><br><span class="line"></span><br><span class="line">shutdown –h +10 十分钟后关机</span><br><span class="line"></span><br><span class="line">shutdown –r now 系统立马重启</span><br><span class="line"></span><br><span class="line">shutdown –r +10 系统十分钟后重启</span><br><span class="line"></span><br><span class="line">reboot 就是重启，等同于 shutdown –r now</span><br><span class="line"></span><br><span class="line">halt 关闭系统，等同于shutdown –h now 和 poweroff</span><br></pre></td></tr></table></figure>
+
+<p>不管是重启系统还是关闭系统，首先要运行 sync 命令，把内存中的数据写到磁盘中。</p>
+<p>关机的命令有： <strong>shutdown -h now halt poweroff</strong> 和 <strong>init 0</strong>，</p>
+<p>重启系统的命令有： <strong>shutdown -r now reboot init 6</strong>。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/17/Linux/Linux基础/Linux教程（1）Linux简介/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1935,181 +2157,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/15/随笔/最大间距(LeetCode164)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/12/15/随笔/最大间距(LeetCode164)/" itemprop="url">最大间距(LeeCode164)</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-12-15T20:08:03+08:00">
-                2019-12-15
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/随笔/" itemprop="url" rel="index">
-                    <span itemprop="name">随笔</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="一、题目描述"><a href="#一、题目描述" class="headerlink" title="一、题目描述"></a>一、题目描述</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">给定一个无序的数组，找出数组在排序之后，相邻元素之间最大的差值。</span><br><span class="line"></span><br><span class="line">如果数组元素个数小于 2，则返回 0。</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例1:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: [3,6,9,1]</span><br><span class="line">输出: 3</span><br><span class="line">解释: 排序后的数组是 [1,3,6,9], 其中相邻元素 (3,6) 和 (6,9) 之间都存在最大差值 3。</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例2:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: [10]</span><br><span class="line">输出: 0</span><br><span class="line">解释: 数组元素个数小于 2，因此返回 0。</span><br></pre></td></tr></table></figure>
-
-<p><strong>说明：</strong></p>
-<ul>
-<li>你可以假设数组中所有元素都是非负整数，且数值在 32 位有符号整数范围内。</li>
-<li>请尝试在线性时间复杂度和空间复杂度的条件下解决此问题。</li>
-</ul>
-<h3 id="二、思路分析"><a href="#二、思路分析" class="headerlink" title="二、思路分析"></a>二、思路分析</h3><ol>
-<li><p>先求出无序数组中的最大值和最小值。</p>
-</li>
-<li><p>当每个数，都等距离分布时，此时将取得max gap的下限值。</p>
-<p>$ span = ceiling[(B - A) / (N - 1)] $    </p>
-<p>其中，B为最小值，A为最大值，N为元素个数， ceiling 为向上取整。</p>
-</li>
-<li><p>如果以此span作为一个桶的取值范围。 并将数分配进这些桶内。那么在同一个桶内的数，之间的有序gap，将不会超过span。</p>
-</li>
-<li><p>则桶内的数的，彼此之间就不用再求gap。只需要计算桶与桶之间的gap，并保留最大值。</p>
-</li>
-<li><p>而桶与桶之间的gap，则是后一桶的最小值，与 前一桶的最大值之间的差值。</p>
-</li>
-<li><p>故在分配时，只需要记住该桶内的最小值，和最大值。</p>
-</li>
-</ol>
-<p><strong><em>注：</em></strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">向上取整的原因：</span><br><span class="line">1、当所有数都等距分布时，</span><br><span class="line">    如[1, 4, 7, 10]；</span><br><span class="line">    span = (10-1)/(4-1) = 3			</span><br><span class="line">    这就是当前每个数的距离</span><br><span class="line">2、当数值不是等距分布时，且原始span除不尽时，</span><br><span class="line">    如：[1, 2, 4, 9]</span><br><span class="line">		span = (9-1)/(4-1) = 8/3</span><br><span class="line">		此时，若不做调整，C语言除法运算默认最终结果为 2 ，</span><br><span class="line">		这将导致  计算得到的间距小于 &lt;  实际间距</span><br><span class="line">		使得部分情况下多用了一个桶。</span><br><span class="line">		一般我们计算使用 n - 1 个桶，若不想上取整将会使用 n 个桶。</span><br></pre></td></tr></table></figure>
-
-<h3 id="三、代码（-C-）"><a href="#三、代码（-C-）" class="headerlink" title="三、代码（  C  ）"></a>三、代码（  C  ）</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;math.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MIN_VALUE 0</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX_VALUE (pow(2, 31)-1)</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">maximumGap</span><span class="params">(<span class="keyword">int</span>* num, <span class="keyword">int</span> numsSize)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (numsSize == <span class="number">0</span> || numsSize&lt;<span class="number">2</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> maxval = MIN_VALUE;</span><br><span class="line">	<span class="keyword">int</span> minval = MAX_VALUE;</span><br><span class="line">  </span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; numsSize ; i++)&#123;</span><br><span class="line">		maxval = num[i]&gt;maxval?num[i]:maxval;</span><br><span class="line">		minval = num[i]&gt;minval?minval:num[i];</span><br><span class="line">	&#125; </span><br><span class="line">  </span><br><span class="line">	<span class="keyword">if</span> (minval == maxval) </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">if</span> (numsSize == <span class="number">2</span>) </span><br><span class="line">    <span class="keyword">return</span> maxval - minval;</span><br><span class="line">  </span><br><span class="line">	<span class="keyword">int</span> box_len = (<span class="keyword">int</span>)<span class="built_in">ceil</span>((<span class="keyword">double</span>)(maxval-minval)/(numsSize<span class="number">-1</span>));</span><br><span class="line">	<span class="keyword">int</span> n = (maxval - minval)/box_len;</span><br><span class="line">	<span class="keyword">int</span> maxBuk[n+<span class="number">1</span>],minBuk[n+<span class="number">1</span>];</span><br><span class="line">  </span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; n+<span class="number">1</span>;i++)&#123;</span><br><span class="line">		maxBuk[i] = MIN_VALUE;</span><br><span class="line">		minBuk[i] = MAX_VALUE;</span><br><span class="line">	&#125;</span><br><span class="line">  </span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span> ; j &lt; numsSize ; j ++)&#123;</span><br><span class="line">		<span class="keyword">int</span> temp = (num[j]-minval)/box_len;</span><br><span class="line">		maxBuk[temp] = num[j]&gt;maxBuk[temp]?num[j]:maxBuk[temp];</span><br><span class="line">		minBuk[temp] = num[j]&gt;minBuk[temp]?minBuk[temp]:num[j]; </span><br><span class="line">	&#125;</span><br><span class="line">  </span><br><span class="line">	<span class="keyword">int</span> gap = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> pre = maxBuk[<span class="number">0</span>];</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n ; i++)&#123;</span><br><span class="line">		<span class="keyword">if</span> (maxBuk[i]==MIN_VALUE &amp;&amp; minBuk[i]==MAX_VALUE)&#123;</span><br><span class="line">        	<span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">		gap = gap&gt;minBuk[i]-pre?gap:minBuk[i]-pre;</span><br><span class="line">    pre = maxBuk[i];</span><br><span class="line">	&#125;</span><br><span class="line">  </span><br><span class="line">	<span class="keyword">return</span> gap;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2162,7 +2209,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-count">45</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
