@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="go 文件读写主要有os、io/ioutil、bufio这几个包。 io/ioutilio/ioutil包中主要有这几个函数： 1func ReadAll(r io.Reader) ([]byte, error)  ReadAll()主要是用来是从一个打开的io.Reader中读取直到遇到error或EOF并返回读取的数据；成功的读取返回的err为nil，而不是EOF。因为ReadAll定义为从资">
+<meta property="og:type" content="article">
+<meta property="og:title" content="go文件读写实例">
+<meta property="og:url" content="http://yoursite.com/2020/02/05/go/go文件读写实例/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="go 文件读写主要有os、io/ioutil、bufio这几个包。 io/ioutilio/ioutil包中主要有这几个函数： 1func ReadAll(r io.Reader) ([]byte, error)  ReadAll()主要是用来是从一个打开的io.Reader中读取直到遇到error或EOF并返回读取的数据；成功的读取返回的err为nil，而不是EOF。因为ReadAll定义为从资">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-02-05T03:33:37.818Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="go文件读写实例">
+<meta name="twitter:description" content="go 文件读写主要有os、io/ioutil、bufio这几个包。 io/ioutilio/ioutil包中主要有这几个函数： 1func ReadAll(r io.Reader) ([]byte, error)  ReadAll()主要是用来是从一个打开的io.Reader中读取直到遇到error或EOF并返回读取的数据；成功的读取返回的err为nil，而不是EOF。因为ReadAll定义为从资">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/02/05/go/go文件读写实例/">
+
+
+
+
+
+  <title>go文件读写实例 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/05/go/go文件读写实例/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">go文件读写实例</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-02-05T11:33:37+08:00">
+                2020-02-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/随笔/" itemprop="url" rel="index">
+                    <span itemprop="name">随笔</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>go 文件读写主要有os、io/ioutil、bufio这几个包。</p>
+<h4 id="io-ioutil"><a href="#io-ioutil" class="headerlink" title="io/ioutil"></a>io/ioutil</h4><p>io/ioutil包中主要有这几个函数：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">ReadAll</span><span class="params">(r io.Reader)</span> <span class="params">([]<span class="keyword">byte</span>, error)</span></span></span><br></pre></td></tr></table></figure>
+
+<p>ReadAll()主要是用来是从一个打开的io.Reader中读取直到遇到error或EOF并返回读取的数据；成功的读取返回的err为nil，而不是EOF。因为ReadAll定义为从资源读取数据直到EOF，它不会将从r读取的EOF视为应该报告的错误。</p>
+<p>io.Reader一般由os.Open()或者os.OpenFile()等进行打开。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">ReadFile</span><span class="params">(filename <span class="keyword">string</span>)</span> <span class="params">([]<span class="keyword">byte</span>, error)</span></span></span><br></pre></td></tr></table></figure>
+
+<p>ReadFile()函数主要是用来从指定的filename文件中读取数据并返回文件的内容；成功的调用返回的err为nil，而不是EOF。因为ReadFile定义为从资源读取数据直到EOF，它不会将从r读取的EOF视为应该报告的错误。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">WriteFile</span><span class="params">(filename <span class="keyword">string</span>, data []<span class="keyword">byte</span>, perm os.FileMode)</span> <span class="title">error</span></span></span><br></pre></td></tr></table></figure>
+
+<p>WriteFile()函数将[]byte内容写入文件,如果content字符串中没有换行符的话，默认就不会有换行符。</p>
+<p>如果文件不存在，则会按照perm的权限创建新文件；如果文件存在，原文件会被覆盖。</p>
+<p>代码示例：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"io/ioutil"</span></span><br><span class="line">	<span class="string">"os"</span></span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//ReadAll</span></span><br><span class="line">	file, err := os.OpenFile(<span class="string">"filetest.txt"</span>, os.O_RDONLY, <span class="number">0644</span>)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">"Open file error!"</span>)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">defer</span> file.Close()</span><br><span class="line"></span><br><span class="line">	output, err := ioutil.ReadAll(file)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">"Read file error!"</span>)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(<span class="keyword">string</span>(output))</span><br><span class="line"></span><br><span class="line">	<span class="comment">//ReadFile</span></span><br><span class="line">	output, err = ioutil.ReadFile(<span class="string">"filetest.txt"</span>)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">"Read file error!"</span>)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(<span class="keyword">string</span>(output))</span><br><span class="line"></span><br><span class="line">	<span class="comment">//WriteFile</span></span><br><span class="line">	context := <span class="string">"Write Test Successfully!"</span></span><br><span class="line">	<span class="keyword">if</span> ioutil.WriteFile(<span class="string">"filetest.txt"</span>, []<span class="keyword">byte</span>(context), <span class="number">0644</span>) != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">"Write file error!"</span>)</span><br><span class="line">	&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">"Write file successfully!"</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="os"><a href="#os" class="headerlink" title="os"></a>os</h4><p>os包中主要有以下函数：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Create</span><span class="params">(name <span class="keyword">string</span>)</span> <span class="params">(*File, error)</span></span></span><br><span class="line"><span class="function"><span class="title">func</span> <span class="title">Open</span><span class="params">(name <span class="keyword">string</span>)</span> <span class="params">(*File, error)</span></span></span><br><span class="line"><span class="function"><span class="title">func</span> <span class="title">OpenFile</span><span class="params">(name <span class="keyword">string</span>, flag <span class="keyword">int</span>, perm FileMode)</span> <span class="params">(*File, error)</span></span></span><br><span class="line"><span class="function"><span class="title">func</span> <span class="params">(f *File)</span> <span class="title">Close</span><span class="params">()</span> <span class="title">error</span></span></span><br><span class="line"><span class="function"><span class="title">func</span> <span class="params">(f *File)</span> <span class="title">Read</span><span class="params">(b []<span class="keyword">byte</span>)</span> <span class="params">(n <span class="keyword">int</span>, err error)</span></span></span><br><span class="line"><span class="function"><span class="title">func</span> <span class="params">(f *File)</span> <span class="title">ReadAt</span><span class="params">(b []<span class="keyword">byte</span>, off <span class="keyword">int64</span>)</span> <span class="params">(n <span class="keyword">int</span>, err error)</span></span></span><br><span class="line"><span class="function"><span class="title">func</span> <span class="params">(f *File)</span> <span class="title">Write</span><span class="params">(b []<span class="keyword">byte</span>)</span> <span class="params">(n <span class="keyword">int</span>, err error)</span></span></span><br><span class="line"><span class="function"><span class="title">func</span> <span class="params">(f *File)</span> <span class="title">WriteAt</span><span class="params">(b []<span class="keyword">byte</span>, off <span class="keyword">int64</span>)</span> <span class="params">(n <span class="keyword">int</span>, err error)</span></span></span><br><span class="line"><span class="function"><span class="title">func</span> <span class="params">(f *File)</span> <span class="title">WriteString</span><span class="params">(s <span class="keyword">string</span>)</span> <span class="params">(n <span class="keyword">int</span>, err error)</span></span></span><br></pre></td></tr></table></figure>
+
+<p>os包中还有很多文件重命名、删除、软连接、目录等的操作函数，具体见官方文档。</p>
+<p>上面列出的读写函数具体内容直接见代码以及代码注释：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"os"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">//Open</span></span><br><span class="line">	<span class="comment">//以只读方式打开文件，若文件不存在则报错</span></span><br><span class="line">	file1, err := os.Open(<span class="string">"filetest.txt"</span>)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">"Open file error!"</span>)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(<span class="string">"Open file successfully!"</span>)</span><br><span class="line">	<span class="keyword">defer</span> file1.Close()</span><br><span class="line"></span><br><span class="line">	<span class="comment">//Create</span></span><br><span class="line">	<span class="comment">//创建一个新文件，若存在则覆盖</span></span><br><span class="line">	file2, err := os.Create(<span class="string">"hello.txt"</span>)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">"Create file error!"</span>)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(<span class="string">"Create file successfully!"</span>)</span><br><span class="line">	<span class="keyword">defer</span> file2.Close()</span><br><span class="line"></span><br><span class="line">	<span class="comment">//OpenFile</span></span><br><span class="line">	<span class="comment">//打开一个文件，打开方式以及文件权限由参数控制</span></span><br><span class="line">	<span class="comment">/* 打开方式可以由一下一种或多种组合，具体见下面注释</span></span><br><span class="line"><span class="comment">	  //Exactly one of O_RDONLY, O_WRONLY, or O_RDWR must be specified.</span></span><br><span class="line"><span class="comment">        O_RDONLY int = syscall.O_RDONLY // open the file read-only.</span></span><br><span class="line"><span class="comment">        O_WRONLY int = syscall.O_WRONLY // open the file write-only.</span></span><br><span class="line"><span class="comment">        O_RDWR   int = syscall.O_RDWR   // open the file read-write.</span></span><br><span class="line"><span class="comment">      // The remaining values may be or'ed in to control behavior.</span></span><br><span class="line"><span class="comment">        O_APPEND int = syscall.O_APPEND // append data to the file when writing.</span></span><br><span class="line"><span class="comment">        O_CREATE int = syscall.O_CREAT  // create a new file if none exists.</span></span><br><span class="line"><span class="comment">        O_EXCL   int = syscall.O_EXCL   // used with O_CREATE, file must not exist.</span></span><br><span class="line"><span class="comment">        O_SYNC   int = syscall.O_SYNC   // open for synchronous I/O.</span></span><br><span class="line"><span class="comment">        O_TRUNC  int = syscall.O_TRUNC  // if possible, truncate file when opened.</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    file3, err := os.OpenFile(<span class="string">"filetest.txt"</span>, os.O_RDWR | os.O_APPEND | os.O_APPEND, <span class="number">0777</span>)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">    	fmt.Println(<span class="string">"Open file error!"</span>)</span><br><span class="line">    	<span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    fmt.Println(<span class="string">"Open file successfully!"</span>)</span><br><span class="line">    <span class="keyword">defer</span> file3.Close()</span><br><span class="line"></span><br><span class="line">    <span class="comment">//Read</span></span><br><span class="line">    <span class="comment">//如果out容量小于文件内容，则只读取out容量部分内容</span></span><br><span class="line">    <span class="comment">//如果out容量大于文件内容，则读取全部文件内容</span></span><br><span class="line">    <span class="comment">//如果文件为空，则出错</span></span><br><span class="line">    out1 := <span class="built_in">make</span>([]<span class="keyword">byte</span>, <span class="number">20</span>)</span><br><span class="line">    _, err = file1.Read(out1)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">    	fmt.Println(<span class="string">"Read file error!"</span>, err)</span><br><span class="line">    	<span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    fmt.Println(<span class="keyword">string</span>(out1))</span><br><span class="line"></span><br><span class="line">    <span class="comment">//ReadAt</span></span><br><span class="line">    <span class="comment">//如果out容量小于文件开始读取位置后的内容，则截取out容量部分内容</span></span><br><span class="line">    <span class="comment">//如果out容量大于文件开始读取位置后的内容或者文件为空或者开始读取位置超过了文件内容，则出错</span></span><br><span class="line">    out2 := <span class="built_in">make</span>([]<span class="keyword">byte</span>, <span class="number">9</span>)</span><br><span class="line">    _, err = file3.ReadAt(out2, <span class="number">2</span>)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">    	fmt.Println(<span class="string">"ReadAt file error!"</span>, err)</span><br><span class="line">    	<span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    fmt.Println(<span class="keyword">string</span>(out2))</span><br><span class="line"></span><br><span class="line">    <span class="comment">//Write</span></span><br><span class="line">    <span class="comment">//将[]byte中内容写入文件</span></span><br><span class="line">    <span class="comment">//是覆盖文件内容还是在后面添加内容取决于打开文件的方式</span></span><br><span class="line">    in := []<span class="keyword">byte</span>(<span class="string">"haha beijing\n"</span>)</span><br><span class="line">    _, err = file2.Write(in)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">    	fmt.Println(<span class="string">"Write file error!"</span>)</span><br><span class="line">    	<span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    fmt.Println(<span class="string">"Write file successfully!"</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">//WriteAt</span></span><br><span class="line">    <span class="comment">//将[]byte写入文件的指定位置</span></span><br><span class="line">    <span class="comment">//会覆盖掉写入位置以后的内容（只覆盖要写入的数量的内容）</span></span><br><span class="line">    in2 := []<span class="keyword">byte</span>(<span class="string">"hello "</span>)</span><br><span class="line">    _, err = file2.WriteAt(in2, <span class="number">5</span>)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">    	fmt.Println(<span class="string">"WriteAt file error!"</span>)</span><br><span class="line">    	<span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    fmt.Println(<span class="string">"WriteAt file successfully!"</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">//WriteString</span></span><br><span class="line">    <span class="comment">//将string内容写入到文件</span></span><br><span class="line">    <span class="comment">//是覆盖文件内容还是在后面添加内容取决于打开文件的方式</span></span><br><span class="line">    _, err = file3.WriteString(<span class="string">"nihao beijing\n"</span>)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">    	fmt.Println(<span class="string">"WriteString file error!"</span>)</span><br><span class="line">    	<span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    fmt.Println(<span class="string">"WriteString file successfully!"</span>)</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="bufio"><a href="#bufio" class="headerlink" title="bufio"></a>bufio</h4><p>bufio包主要是包装了io.Reader以及io.Writer然后生成两个类型：Reader以及Writer，并且衍生出了一系列读写的函数，主要如下：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Reader</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">NewReader</span><span class="params">(rd io.Reader)</span> *<span class="title">Reader</span></span></span><br><span class="line"><span class="function"><span class="title">func</span> <span class="title">NewReaderSize</span><span class="params">(rd io.Reader, size <span class="keyword">int</span>)</span> *<span class="title">Reader</span></span></span><br><span class="line"><span class="function"><span class="title">func</span> <span class="params">(b *Reader)</span> <span class="title">Read</span><span class="params">(p []<span class="keyword">byte</span>)</span> <span class="params">(n <span class="keyword">int</span>, err error)</span></span></span><br><span class="line"><span class="function"><span class="title">func</span> <span class="params">(b *Reader)</span> <span class="title">ReadByte</span><span class="params">()</span> <span class="params">(c <span class="keyword">byte</span>, err error)</span></span></span><br><span class="line"><span class="function"><span class="title">func</span> <span class="params">(b *Reader)</span> <span class="title">ReadBytes</span><span class="params">(delim <span class="keyword">byte</span>)</span> <span class="params">(line []<span class="keyword">byte</span>, err error)</span></span></span><br><span class="line"><span class="function"><span class="title">func</span> <span class="params">(b *Reader)</span> <span class="title">ReadLine</span><span class="params">()</span> <span class="params">(line []<span class="keyword">byte</span>, isPrefix <span class="keyword">bool</span>, err error)</span></span></span><br><span class="line"><span class="function"><span class="title">func</span> <span class="params">(b *Reader)</span> <span class="title">ReadRune</span><span class="params">()</span> <span class="params">(r <span class="keyword">rune</span>, size <span class="keyword">int</span>, err error)</span></span></span><br><span class="line"><span class="function"><span class="title">func</span> <span class="params">(b *Reader)</span> <span class="title">ReadSlice</span><span class="params">(delim <span class="keyword">byte</span>)</span> <span class="params">(line []<span class="keyword">byte</span>, err error)</span></span></span><br><span class="line"><span class="function"><span class="title">func</span> <span class="params">(b *Reader)</span> <span class="title">ReadString</span><span class="params">(delim <span class="keyword">byte</span>)</span> <span class="params">(line <span class="keyword">string</span>, err error)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="title">type</span> <span class="title">Writer</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="title">func</span> <span class="title">NewWriter</span><span class="params">(wr io.Writer)</span> *<span class="title">Writer</span></span></span><br><span class="line"><span class="function"><span class="title">func</span> <span class="title">NewWriterSize</span><span class="params">(wr io.Writer, size <span class="keyword">int</span>)</span> *<span class="title">Writer</span></span></span><br><span class="line"><span class="function"><span class="title">func</span> <span class="params">(b *Writer)</span> <span class="title">Flush</span><span class="params">()</span> <span class="title">error</span></span></span><br><span class="line"><span class="function"><span class="title">func</span> <span class="params">(b *Writer)</span> <span class="title">Write</span><span class="params">(p []<span class="keyword">byte</span>)</span> <span class="params">(nn <span class="keyword">int</span>, err error)</span></span></span><br><span class="line"><span class="function"><span class="title">func</span> <span class="params">(b *Writer)</span> <span class="title">WriteByte</span><span class="params">(c <span class="keyword">byte</span>)</span> <span class="title">error</span></span></span><br><span class="line"><span class="function"><span class="title">func</span> <span class="params">(b *Writer)</span> <span class="title">WriteRune</span><span class="params">(r <span class="keyword">rune</span>)</span> <span class="params">(size <span class="keyword">int</span>, err error)</span></span></span><br><span class="line"><span class="function"><span class="title">func</span> <span class="params">(b *Writer)</span> <span class="title">WriteString</span><span class="params">(s <span class="keyword">string</span>)</span> <span class="params">(<span class="keyword">int</span>, error)</span></span></span><br></pre></td></tr></table></figure>
+
+<p>具体内容见下面代码以及注释：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"bufio"</span></span><br><span class="line">	<span class="string">"bytes"</span></span><br><span class="line">	<span class="string">"os"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	</span><br><span class="line">	rb := bytes.NewBuffer([]<span class="keyword">byte</span>(<span class="string">"hello beijing!"</span>))</span><br><span class="line">	rb1, err := os.OpenFile(<span class="string">"filetest.txt"</span>, os.O_RDWR | os.O_APPEND | os.O_APPEND, <span class="number">0777</span>)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">    	fmt.Println(<span class="string">"Open file error!"</span>)</span><br><span class="line">    	<span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    fmt.Println(<span class="string">"Open file successfully!"</span>)</span><br><span class="line">    <span class="keyword">defer</span> rb1.Close()</span><br><span class="line"></span><br><span class="line">	<span class="comment">//NewReader</span></span><br><span class="line">	<span class="comment">//创建支持缓存读取的具有缺省长度缓冲区的Reader对象，</span></span><br><span class="line">	<span class="comment">//Reader对象会从底层的io.Reader接口读取尽量多的数据进行缓存。</span></span><br><span class="line">	<span class="comment">//参数是io.Reader，通常是打开的file句柄.</span></span><br><span class="line">	r1 := bufio.NewReader(rb)</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//NewReaderSize</span></span><br><span class="line">	<span class="comment">//创建的支持缓存读取的具有指定长度缓冲区的Reader对象，</span></span><br><span class="line">	<span class="comment">//Reader对象会从底层的io.Reader接口读取尽量多的数据进行缓存。</span></span><br><span class="line">	<span class="comment">//参数是io.Reader，通常是打开的file句柄.</span></span><br><span class="line">	r2 := bufio.NewReaderSize(rb1, <span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">	<span class="comment">//Read</span></span><br><span class="line">	<span class="comment">//读取数据存放到p中，返回已读取的字节数。</span></span><br><span class="line">	<span class="comment">//因为最多只调用底层的io.Reader一次，所以返回的n可能小于len(p)。</span></span><br><span class="line">	<span class="comment">//在字节流结束时，n会为0并且err为io.EOF。</span></span><br><span class="line">	<span class="comment">//如果len(out)&lt;文件内容，则读取len(out)数量</span></span><br><span class="line">	<span class="comment">//如果len(out)&gt;文件内容, 则读取文件全部内容</span></span><br><span class="line">	<span class="comment">//如果文件空，则出错</span></span><br><span class="line">	out1 := <span class="built_in">make</span>([]<span class="keyword">byte</span>, <span class="number">100</span>)</span><br><span class="line">	_, err = r1.Read(out1)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">"Read file error!"</span>)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(<span class="keyword">string</span>(out1))</span><br><span class="line"></span><br><span class="line">	<span class="comment">//ReadByte</span></span><br><span class="line">	<span class="comment">//读取并返回一个字节。如果没有字节可读，则返回错误。</span></span><br><span class="line">	bout, err := r2.ReadByte()</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">"ReadByte file error!"</span>, err)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(<span class="keyword">string</span>(bout))</span><br><span class="line"></span><br><span class="line">	<span class="comment">//ReadBytes</span></span><br><span class="line">	<span class="comment">//ReadBytes读取数据直到delim第一次出现，返回读取的字节序列（包括delim）。</span></span><br><span class="line">	<span class="comment">//如果ReadBytes在读到第一个delim之前出错，它返回已读取的数据和那个错误（通常是io.EOF）。</span></span><br><span class="line">	<span class="comment">//只有当返回的数据以delim结尾时，返回的err才为空值。</span></span><br><span class="line">	<span class="comment">//返回的是数据的拷贝</span></span><br><span class="line">	rb3 := bytes.NewBuffer([]<span class="keyword">byte</span>(<span class="string">"hello beijing!"</span>))</span><br><span class="line">	r3 := bufio.NewReader(rb3)</span><br><span class="line">	bouts, err := r3.ReadBytes(<span class="string">'!'</span>)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">"ReadBytes file error!"</span>)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(<span class="keyword">string</span>(bouts))</span><br><span class="line"></span><br><span class="line">	<span class="comment">//ReadLine</span></span><br><span class="line">	<span class="comment">//ReadLine试图返回一行，不包括结尾的回车字符。</span></span><br><span class="line">	<span class="comment">//如果一行太长了（超过缓冲区长度），isPrefix会设置为true并且只返回前面的数据，剩余的数据会在以后的调用中返回。</span></span><br><span class="line">	<span class="comment">//当返回最后一行数据时，isPrefix会设置为false。返回的字节切片只在下一次调用ReadLine前有效。</span></span><br><span class="line">	<span class="comment">//ReadLine或者返回一个非空的字节切片或者返回一个错误，但它们不会同时返回。</span></span><br><span class="line">	rb4 := bytes.NewBuffer([]<span class="keyword">byte</span>(<span class="string">"hello beijing\nnihao beijing\n"</span>))</span><br><span class="line">	r4 := bufio.NewReader(rb4)</span><br><span class="line">	line, prefix, err := r4.ReadLine()</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">"ReadLine file error!"</span>)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(<span class="keyword">string</span>(line), prefix, err)</span><br><span class="line"></span><br><span class="line">	<span class="comment">//ReadRune</span></span><br><span class="line">	<span class="comment">//ReadRune读取一个UTF-8编码的字符，并将其对应的Unicode编码和所占字节数返回。</span></span><br><span class="line">	<span class="comment">//如果编码错误，ReadRune只读取一个字节并返回unicode.ReplacementChar(U+FFFD)和长度1。</span></span><br><span class="line">	rb5 := bytes.NewBuffer([]<span class="keyword">byte</span>(<span class="string">"你好世界"</span>))</span><br><span class="line">	r5 := bufio.NewReader(rb5)</span><br><span class="line">	r, size, err := r5.ReadRune()</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">"ReadRune file error!"</span>)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(<span class="keyword">string</span>(r), size, err)</span><br><span class="line"></span><br><span class="line">	<span class="comment">//ReadSlice</span></span><br><span class="line">	<span class="comment">//ReadSlice读取数据直到delim出现，并返回读取数据的字节切片。</span></span><br><span class="line">	<span class="comment">//下次读取数据时返回的切片会失效。</span></span><br><span class="line">	<span class="comment">//如果ReadSlice在查找到delim之前遇到错误，它返回读取的所有数据和那个错误（通常是io.EOF）。</span></span><br><span class="line">	<span class="comment">//如果缓冲区满时也没有查找到delim，则返回ErrBufferFull错误。</span></span><br><span class="line">	<span class="comment">//因为ReadSlice返回的数据会在下次I/O操作时被覆盖，大多数调用者应该使用ReadBytes或者ReadString。</span></span><br><span class="line">	<span class="comment">//只有当line不以delim结尾时，ReadSlice才会返回非空err。</span></span><br><span class="line">	rb6 := bytes.NewBuffer([]<span class="keyword">byte</span>(<span class="string">"1234$5678"</span>))</span><br><span class="line">	r6 := bufio.NewReader(rb6)</span><br><span class="line">	slice, err := r6.ReadSlice(<span class="string">'$'</span>)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">"ReadSlice file error!"</span>)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(<span class="keyword">string</span>(slice), err)</span><br><span class="line"></span><br><span class="line">	<span class="comment">//ReadString</span></span><br><span class="line">	<span class="comment">//ReadString读取数据直到delim第一次出现，返回一个包含delim的字符串。</span></span><br><span class="line">	<span class="comment">//如果ReadString在读取到delim前遇到错误，它返回已读字符串和那个错误（通常是io.EOF）。</span></span><br><span class="line">	<span class="comment">//只有当返回的字符串以delim结尾时，ReadString才返回空err。</span></span><br><span class="line">	<span class="comment">//基本等同于ReadBytes，只不过返回的是string而不是[]byte。</span></span><br><span class="line">	rb7 := bytes.NewBuffer([]<span class="keyword">byte</span>(<span class="string">"hello, world"</span>))</span><br><span class="line">	r7 := bufio.NewReader(rb7)</span><br><span class="line">	str, err := r7.ReadString(<span class="string">','</span>)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">"ReadString file error!"</span>)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(str, err)</span><br><span class="line"></span><br><span class="line">	<span class="comment">//NewWriter + Flush + Write</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">//NewWrite</span></span><br><span class="line">	<span class="comment">//创建支持缓存写的具有缺省长度缓冲区的Writer对象，</span></span><br><span class="line">	<span class="comment">//Writer对象会将缓存的数据批量写入底层的io.Writer接口</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">//Flush把缓冲区中的数据写入底层的io.Writer</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">//Write把p写入缓冲区，返回已写入的字节数。</span></span><br><span class="line">	<span class="comment">//如果nn小于len(p)，则同时返回一个错误说明原因。</span></span><br><span class="line"></span><br><span class="line">	wb1 := bytes.NewBuffer(<span class="literal">nil</span>)</span><br><span class="line">	w1 := bufio.NewWriter(wb1)</span><br><span class="line">	w1.Write([]<span class="keyword">byte</span>(<span class="string">"hello, world"</span>))</span><br><span class="line">	fmt.Println(<span class="built_in">len</span>(wb1.Bytes()), <span class="keyword">string</span>(wb1.Bytes()))</span><br><span class="line">	w1.Flush()</span><br><span class="line">	fmt.Println(<span class="built_in">len</span>(wb1.Bytes()), <span class="keyword">string</span>(wb1.Bytes()))</span><br><span class="line"></span><br><span class="line">	<span class="comment">//NewWriterSize + WriteByte</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">//NewWriterSize</span></span><br><span class="line">	<span class="comment">//创建支持缓存写的具有指定长度缓冲区的Writer对象，</span></span><br><span class="line">	<span class="comment">//Writer对象会将缓存的数据批量写入底层的io.Writer接口</span></span><br><span class="line">	<span class="comment">//如果缓冲区很小，缓冲区满后会自动Flush。</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">//WriteByte</span></span><br><span class="line">	<span class="comment">//写入一个字节</span></span><br><span class="line"></span><br><span class="line">	wb2 := bytes.NewBuffer(<span class="literal">nil</span>)</span><br><span class="line">	w2 := bufio.NewWriterSize(wb2, <span class="number">1024</span>)</span><br><span class="line">	w2.WriteByte(<span class="string">'a'</span>)</span><br><span class="line">	fmt.Println(<span class="built_in">len</span>(wb2.Bytes()), <span class="keyword">string</span>(wb2.Bytes()))</span><br><span class="line">	w2.Flush()</span><br><span class="line">	fmt.Println(<span class="built_in">len</span>(wb2.Bytes()), <span class="keyword">string</span>(wb2.Bytes()))</span><br><span class="line"></span><br><span class="line">	<span class="comment">//WriteRune</span></span><br><span class="line">	<span class="comment">//WriteRune以UTF-8编码写入一个Unicode字符，返回写入的字节数和错误。</span></span><br><span class="line">	wb3 := bytes.NewBuffer(<span class="literal">nil</span>)</span><br><span class="line">	w3 := bufio.NewWriter(wb3)</span><br><span class="line">	w3.WriteRune(<span class="string">'好'</span>)</span><br><span class="line">	w3.Flush()</span><br><span class="line">	fmt.Println(<span class="keyword">string</span>(wb3.Bytes()))</span><br><span class="line"></span><br><span class="line">	<span class="comment">//WriteString</span></span><br><span class="line">	<span class="comment">//WriteString写入一个字符串，返回写入的字节数。</span></span><br><span class="line">	<span class="comment">//如果返回的字节数小于len(s)，则同时返回一个错误说明原因。</span></span><br><span class="line">	wb4 := bytes.NewBuffer(<span class="literal">nil</span>)</span><br><span class="line">	w4 := bufio.NewWriter(wb4)</span><br><span class="line">	w4.WriteString(<span class="string">"hello, shandong!"</span>)</span><br><span class="line">	w4.Flush()</span><br><span class="line">	fmt.Println(<span class="keyword">string</span>(wb4.Bytes()))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/02/05/go/go获取当前时间/" rel="next" title="go获取当前时间">
+                <i class="fa fa-chevron-left"></i> go获取当前时间
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/02/05/人工智能/Tensorflow/CH5-Tf_estimator使用与tf_1/" rel="prev" title="CH5-Tf_estimator使用与tf_1">
+                CH5-Tf_estimator使用与tf_1 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="John Doe">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://suliangxu.github.io" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:1193135584@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#io-ioutil"><span class="nav-text">io/ioutil</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#os"><span class="nav-text">os</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bufio"><span class="nav-text">bufio</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="ML,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="![image-20200213123854013](/Users/hhh/Library/Application Support/typora-user-images/image-20200213123854013.png) 从数据出发，机器学习数据，从所有的可能性H中，选出最适合的一个g，使得g无限接近f。 ![image-20200213124228686](/Users/hhh/Libra">
+<meta name="keywords" content="ML">
+<meta property="og:type" content="article">
+<meta property="og:title" content="02_Learning to Answer Yes_No">
+<meta property="og:url" content="http://yoursite.com/2020/02/13/人工智能/机器学习基石/02_Learning-to-Answer-Yes_No/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="![image-20200213123854013](/Users/hhh/Library/Application Support/typora-user-images/image-20200213123854013.png) 从数据出发，机器学习数据，从所有的可能性H中，选出最适合的一个g，使得g无限接近f。 ![image-20200213124228686](/Users/hhh/Libra">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-02-13T08:21:27.364Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="02_Learning to Answer Yes_No">
+<meta name="twitter:description" content="![image-20200213123854013](/Users/hhh/Library/Application Support/typora-user-images/image-20200213123854013.png) 从数据出发，机器学习数据，从所有的可能性H中，选出最适合的一个g，使得g无限接近f。 ![image-20200213124228686](/Users/hhh/Libra">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/02/13/人工智能/机器学习基石/02_Learning-to-Answer-Yes_No/">
+
+
+
+
+
+  <title>02_Learning to Answer Yes_No | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/13/人工智能/机器学习基石/02_Learning-to-Answer-Yes_No/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">02_Learning to Answer Yes_No</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-02-13T16:21:27+08:00">
+                2020-02-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/人工智能-机器学习基石/" itemprop="url" rel="index">
+                    <span itemprop="name">人工智能 - 机器学习基石</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>![image-20200213123854013](/Users/hhh/Library/Application Support/typora-user-images/image-20200213123854013.png)</p>
+<p>从数据出发，机器学习数据，从所有的可能性H中，选出最适合的一个g，使得g无限接近f。</p>
+<p>![image-20200213124228686](/Users/hhh/Library/Application Support/typora-user-images/image-20200213124228686.png)</p>
+<p>perceptron：感知器</p>
+<p>w：权重</p>
+<p>threshold：阈值</p>
+<p>![image-20200213124822364](/Users/hhh/Library/Application Support/typora-user-images/image-20200213124822364.png)</p>
+<p>感知器在二位空间下：</p>
+<p>![image-20200213125141703](/Users/hhh/Library/Application Support/typora-user-images/image-20200213125141703.png)</p>
+<p>此时的感知器，就是线性的二分类模型。</p>
+<p>如何设计一个算法，从这么多的线中选出一条最适合的线？</p>
+<p>1、要求g和f在我们所看过的资料上，很接近：g ～ f on D</p>
+<p>2、难点：存在大量的线</p>
+<p>3、设计：已经存在一条线，然后对其进行修正，从而最终达到效果。（训练）</p>
+<p>用W0来代表一开始的线。</p>
+<p>![image-20200213125832963](/Users/hhh/Library/Application Support/typora-user-images/image-20200213125832963.png)</p>
+<p>找到这条线犯的错误的某一点，就是说这条线在这个点犯错，然后对其进行修正。</p>
+<p>1、每次只考虑一个点的更新</p>
+<p>2、从w和x的夹角来判断：</p>
+<p>若要正的，使得w和x接近一点，相反，若要负的，使得w和x离远一点。</p>
+<p>3、知道所有的输入都能够被正确分类，则得到最终的g。</p>
+<p><strong>知错能改算法</strong></p>
+<p>![image-20200213130238560](/Users/hhh/Library/Application Support/typora-user-images/image-20200213130238560.png)</p>
+<p>Cyclic PLA（循转的PLA，循环找到所有人，直到转完一圈）</p>
+<p>当然也可以选择随机跳转，但只要保证能够走完所有人。</p>
+<p>![image-20200213130340089](/Users/hhh/Library/Application Support/typora-user-images/image-20200213130340089.png)</p>
+<p>这个算法当所有的点都正确时，则会停止，那么，这个算法一定会停止吗？</p>
+<p>还有感知器算法的其他问题：</p>
+<p>![image-20200213131245432](/Users/hhh/Library/Application Support/typora-user-images/image-20200213131245432.png)</p>
+<p>PLA的停止：</p>
+<p>1、要求输入的数据要<strong>线性可分</strong>。</p>
+<p>若不满足线性可分，永远无法找到一条线，使得二者分开。</p>
+<p>![image-20200213132016693](/Users/hhh/Library/Application Support/typora-user-images/image-20200213132016693.png)</p>
+<p>使得 min（ynWTXn）——&gt; 离线最近的点都要大于0.</p>
+<p>假设得到最优的wf，那么wf和我们真正在找的wt的关系：</p>
+<p>可以认为判断wt和wf接不接近。</p>
+<p>可通过求内积的方法判断两个向量接不接近。</p>
+<p>若内积的值越大，某种角度来说，两个向量越接近。</p>
+<p>![image-20200213132748469](/Users/hhh/Library/Application Support/typora-user-images/image-20200213132748469.png)</p>
+<p>处理向量长度的问题：</p>
+<p>两个向量内积越大，不一定是角度的影响，也可能是向量长度的问题，长度越大，内积越大。</p>
+<p>原则：犯错才更新。</p>
+<p>可以得出：w(t+1) 每次最多涨最长的xn的平方。</p>
+<p>前面说到，wt和wf每次都会越来越靠近，每次都会靠近一定的份量。</p>
+<p>现在有表明，wt慢慢地涨。</p>
+<p>可以得出：两个向量的内积，真的就代表二者的角度。</p>
+<p>证明：李航统计学习方法P31，Novikoff定理。</p>
+<p>![image-20200213133835545](/Users/hhh/Library/Application Support/typora-user-images/image-20200213133835545.png)</p>
+<p>所以证明了这个PLA算法在线性可分时，一定会停下来。</p>
+<p>算法的好处：简单，快速</p>
+<p>坏处：数据要求线性可分。但我们并不知道数据是否真正线性可分。另外，就算认为线性可分，但是何时会停止？</p>
+<p>所以我们并不知道PLA是否会停，就算假设它会停，也不知道多久会停。</p>
+<p>所以PLA在实际应用的时候，还是会遇到一些问题的。</p>
+<p>![image-20200213134232636](/Users/hhh/Library/Application Support/typora-user-images/image-20200213134232636.png)</p>
+<p>如果非线性可分时。</p>
+<p>样本可能存在噪声（总体线性可分），所以如何在存在噪声的情况下找到那个最适合的分隔线。</p>
+<p>假设噪声是很小的。————&gt; 无法找到一条完美的线，那么我们就找到一条最好的线（就是找到犯错误最小的线在给定的输入下）</p>
+<p>现在在CS下，还是NP-hard问题，就是找不到一个算法来找到犯错最小的线。即：</p>
+<p>![image-20200213134828502](/Users/hhh/Library/Application Support/typora-user-images/image-20200213134828502.png)</p>
+<p>![image-20200213134906500](/Users/hhh/Library/Application Support/typora-user-images/image-20200213134906500.png)</p>
+<p>另一种算法，找到差不多的线，不见得是最完美的线。</p>
+<p>有一点贪心的做法。</p>
+<p>把我们认为最好的线总是抓在手上。</p>
+<p>Pocket Algorithm。</p>
+<p>每次找到一条新的线（随机的找）时，判断当前哪个好，然后选择。</p>
+<p>但是循环结束的条件要自己设置。（遍历次数自己设置）</p>
+<p>![image-20200213135150590](/Users/hhh/Library/Application Support/typora-user-images/image-20200213135150590.png)</p>
+<p>但是在线性可分的情况下，修正算法不如PLA来的快：</p>
+<p>1、修正算法需要对比，存储</p>
+<p>对比两条线，实际上是将所有的点进行两次计算。而PLA只是找到某一个错误的点，对其进行修正。所以修正算法来的比PLA慢，在线性可分的情况下。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ML/" rel="tag"># ML</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/02/13/人工智能/机器学习基石/01_The-Learning-Problem/" rel="next" title="01_The Learning Problem">
+                <i class="fa fa-chevron-left"></i> 01_The Learning Problem
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/02/13/人工智能/机器学习基石/03_Type-of-Learning/" rel="prev" title="03_Type of Learning">
+                03_Type of Learning <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="John Doe">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://suliangxu.github.io" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:1193135584@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

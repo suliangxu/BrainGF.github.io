@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="理论部分 一、卷积神经网络结构：  卷积神经网络 （卷积层 + （可选）池化层） * N + 全连接层 * M 分类任务   全卷积神经网络 （卷积层 + （可选）池化层） * N + 反卷积层 * K 物体分割    卷积神经网络： ![image-20200206131348542](/Users/hhh/Library/Application Support/typora-user-imag">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CH6-卷积神经网络">
+<meta property="og:url" content="http://yoursite.com/2020/02/06/人工智能/Tensorflow/CH6-卷积神经网络/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="理论部分 一、卷积神经网络结构：  卷积神经网络 （卷积层 + （可选）池化层） * N + 全连接层 * M 分类任务   全卷积神经网络 （卷积层 + （可选）池化层） * N + 反卷积层 * K 物体分割    卷积神经网络： ![image-20200206131348542](/Users/hhh/Library/Application Support/typora-user-imag">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-02-06T08:26:04.276Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CH6-卷积神经网络">
+<meta name="twitter:description" content="理论部分 一、卷积神经网络结构：  卷积神经网络 （卷积层 + （可选）池化层） * N + 全连接层 * M 分类任务   全卷积神经网络 （卷积层 + （可选）池化层） * N + 反卷积层 * K 物体分割    卷积神经网络： ![image-20200206131348542](/Users/hhh/Library/Application Support/typora-user-imag">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/02/06/人工智能/Tensorflow/CH6-卷积神经网络/">
+
+
+
+
+
+  <title>CH6-卷积神经网络 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/06/人工智能/Tensorflow/CH6-卷积神经网络/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">CH6-卷积神经网络</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-02-06T16:26:04+08:00">
+                2020-02-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/人工智能-Tensorflow/" itemprop="url" rel="index">
+                    <span itemprop="name">人工智能 - Tensorflow</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>理论部分</p>
+<h4 id="一、卷积神经网络"><a href="#一、卷积神经网络" class="headerlink" title="一、卷积神经网络"></a>一、卷积神经网络</h4><p>结构：</p>
+<ul>
+<li>卷积神经网络<ul>
+<li>（卷积层 + （可选）池化层） * N + 全连接层 * M</li>
+<li>分类任务</li>
+</ul>
+</li>
+<li>全卷积神经网络<ul>
+<li>（卷积层 + （可选）池化层） * N + 反卷积层 * K</li>
+<li>物体分割</li>
+</ul>
+</li>
+</ul>
+<p>卷积神经网络：</p>
+<p>![image-20200206131348542](/Users/hhh/Library/Application Support/typora-user-images/image-20200206131348542.png)</p>
+<p>全卷积神经网络：</p>
+<p>![image-20200206131420985](/Users/hhh/Library/Application Support/typora-user-images/image-20200206131420985.png)</p>
+<h4 id="卷积操作"><a href="#卷积操作" class="headerlink" title="卷积操作"></a>卷积操作</h4><p>神经网络遇到的问题：</p>
+<ul>
+<li>参数过多<ul>
+<li>举例：<ul>
+<li>图像大小： 1000 * 1000</li>
+<li>下一层神经元为 10^6</li>
+<li>全连接参数为 1000*1000*10^6 = 10^12</li>
+</ul>
+</li>
+<li>计算资源不足</li>
+<li>容易过拟合，需要更多训练数据</li>
+</ul>
+</li>
+</ul>
+<p>卷积 —— 解决参数过多的问题：</p>
+<p>![image-20200206131837249](/Users/hhh/Library/Application Support/typora-user-images/image-20200206131837249.png)</p>
+<ul>
+<li>局部连接<ul>
+<li>图像的区域性</li>
+<li>举例：<ul>
+<li>图像大小： 1000 * 1000</li>
+<li>下一层神经元为 10^6</li>
+<li>局部连接范围为 10 * 10</li>
+<li>全连接参数为 10*10*10^6 = 10^8</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>参数共享（不同局部连接的参数是一样的）<ul>
+<li>图像特征与位置无关</li>
+<li>参数与下一层神经元个数无关了，都使用同一组参数</li>
+<li>举例：<ul>
+<li>图像大小： 1000 * 1000</li>
+<li>下一层神经元为 10^6</li>
+<li>局部连接范围为 10 * 10</li>
+<li>全连接参数为 10*10 = 10^2</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>卷积——每个位置进行计算：</p>
+<p>![image-20200206132518880](/Users/hhh/Library/Application Support/typora-user-images/image-20200206132518880.png)</p>
+<p>步长可变</p>
+<p>![image-20200206133047444](/Users/hhh/Library/Application Support/typora-user-images/image-20200206133047444.png)</p>
+<p>使得输入和输出一致：</p>
+<p>![image-20200206133132327](/Users/hhh/Library/Application Support/typora-user-images/image-20200206133132327.png)</p>
+<p>卷积——处理多通道：</p>
+<p>![image-20200206133222661](/Users/hhh/Library/Application Support/typora-user-images/image-20200206133222661.png)</p>
+<p>卷积——多个卷积核：</p>
+<p>![image-20200206133325910](/Users/hhh/Library/Application Support/typora-user-images/image-20200206133325910.png)</p>
+<p>![image-20200206133344229](/Users/hhh/Library/Application Support/typora-user-images/image-20200206133344229.png)</p>
+<p>思考题：</p>
+<p>卷积层，输入三通道，输出192通道，卷积核大小是 3*3， 问该卷积层有多少参数？</p>
+<h4 id="池化操作"><a href="#池化操作" class="headerlink" title="池化操作"></a>池化操作</h4><p>最大值池化：</p>
+<p>（将窗口中的最大值当作最终值）</p>
+<p>![image-20200206133540511](/Users/hhh/Library/Application Support/typora-user-images/image-20200206133540511.png)</p>
+<p>平均值池化：</p>
+<p>（将窗口中的平均值当作最终值）</p>
+<p>![image-20200206133716575](/Users/hhh/Library/Application Support/typora-user-images/image-20200206133716575.png)</p>
+<p>池化操作特点：</p>
+<ul>
+<li>常使用不重叠、不补零</li>
+<li>没有用于求导的参数</li>
+<li>池化层参数为步长和池化核大小</li>
+<li>用于减少图像尺寸，从而减少计算量</li>
+<li>一定程度平移鲁棒</li>
+<li>损失空间位置精度（丢失很多细节的信息）</li>
+</ul>
+<h3 id="二、深度可分离卷积"><a href="#二、深度可分离卷积" class="headerlink" title="二、深度可分离卷积"></a>二、深度可分离卷积</h3><p>深度可分离卷积（以较小的进度损失，极大减少计算量）</p>
+<p>模型结构：</p>
+<ul>
+<li>引入深度可分离卷积</li>
+</ul>
+<p>![image-20200206153020855](/Users/hhh/Library/Application Support/typora-user-images/image-20200206153020855.png)</p>
+<ul>
+<li><p>Inception V3</p>
+<ul>
+<li>不同尺寸的视野域</li>
+<li>提升效率</li>
+</ul>
+<p>![image-20200206153159075](/Users/hhh/Library/Application Support/typora-user-images/image-20200206153159075.png)</p>
+</li>
+</ul>
+<p>视野域：</p>
+<ul>
+<li>不同的视野域提取的图像特征尺度不同</li>
+</ul>
+<p>![image-20200206153334821](/Users/hhh/Library/Application Support/typora-user-images/image-20200206153334821.png)</p>
+<ul>
+<li>引入深度可分离卷积</li>
+</ul>
+<p>![image-20200206153621119](/Users/hhh/Library/Application Support/typora-user-images/image-20200206153621119.png)</p>
+<p>分到极致：</p>
+<p>![image-20200206153717980](/Users/hhh/Library/Application Support/typora-user-images/image-20200206153717980.png)</p>
+<p>![image-20200206153731858](/Users/hhh/Library/Application Support/typora-user-images/image-20200206153731858.png)</p>
+<ul>
+<li><p>普通卷积计算量</p>
+<p>![image-20200206153831770](/Users/hhh/Library/Application Support/typora-user-images/image-20200206153831770.png)</p>
+</li>
+<li><p>深度可分离卷积计算量</p>
+<ul>
+<li><p>深度可分离卷积</p>
+<p>![image-20200206154053484](/Users/hhh/Library/Application Support/typora-user-images/image-20200206154053484.png)</p>
+</li>
+<li><p>1 * 1卷积</p>
+<p>![image-20200206154149215](/Users/hhh/Library/Application Support/typora-user-images/image-20200206154149215.png)</p>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>优化比例</p>
+<p>![image-20200206154217081](/Users/hhh/Library/Application Support/typora-user-images/image-20200206154217081.png)</p>
+</li>
+</ul>
+<ul>
+<li>数据增强</li>
+<li>迁移学习</li>
+</ul>
+<p>实战部分：</p>
+<ul>
+<li>keras实现卷积神经网络</li>
+<li>keras实现深度可分离卷积</li>
+<li>keras实战Kaggle<ul>
+<li>10 monkeys和cifar 10</li>
+<li>数据增强与迁移学习</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/02/05/人工智能/Tensorflow/CH5-Tf_estimator使用与tf_1/" rel="next" title="CH5-Tf_estimator使用与tf_1">
+                <i class="fa fa-chevron-left"></i> CH5-Tf_estimator使用与tf_1
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/02/11/python全栈/爬虫/02_常用的爬虫模块及使用方法/" rel="prev" title="02_常用的爬虫模块及使用方法">
+                02_常用的爬虫模块及使用方法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="John Doe">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://suliangxu.github.io" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:1193135584@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#一、卷积神经网络"><span class="nav-text">一、卷积神经网络</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#卷积操作"><span class="nav-text">卷积操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#池化操作"><span class="nav-text">池化操作</span></a></li></ol><li class="nav-item nav-level-3"><a class="nav-link" href="#二、深度可分离卷积"><span class="nav-text">二、深度可分离卷积</span></a></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
