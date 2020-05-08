@@ -249,7 +249,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/06/人工智能/Tensorflow/CH6-卷积神经网络/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/20/人工智能/机器学习基石/09_Linear-Regression/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -268,7 +268,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/02/06/人工智能/Tensorflow/CH6-卷积神经网络/" itemprop="url">CH6-卷积神经网络</a></h1>
+                <a class="post-title-link" href="/2020/02/20/人工智能/机器学习基石/09_Linear-Regression/" itemprop="url">09_Linear Regression</a></h1>
         
 
         <div class="post-meta">
@@ -280,8 +280,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-02-06T16:26:04+08:00">
-                2020-02-06
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-02-20T14:43:25+08:00">
+                2020-02-20
               </time>
             
 
@@ -303,8 +303,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/人工智能-Tensorflow/" itemprop="url" rel="index">
-                    <span itemprop="name">人工智能 - Tensorflow</span>
+                  <a href="/categories/人工智能-机器学习基石/" itemprop="url" rel="index">
+                    <span itemprop="name">人工智能 - 机器学习基石</span>
                   </a>
                 </span>
 
@@ -342,154 +342,21 @@
       
         
           
-            <p>理论部分</p>
-<h4 id="一、卷积神经网络"><a href="#一、卷积神经网络" class="headerlink" title="一、卷积神经网络"></a>一、卷积神经网络</h4><p>结构：</p>
-<ul>
-<li>卷积神经网络<ul>
-<li>（卷积层 + （可选）池化层） * N + 全连接层 * M</li>
-<li>分类任务</li>
-</ul>
-</li>
-<li>全卷积神经网络<ul>
-<li>（卷积层 + （可选）池化层） * N + 反卷积层 * K</li>
-<li>物体分割</li>
-</ul>
-</li>
-</ul>
-<p>卷积神经网络：</p>
-<p>![image-20200206131348542](/Users/hhh/Library/Application Support/typora-user-images/image-20200206131348542.png)</p>
-<p>全卷积神经网络：</p>
-<p>![image-20200206131420985](/Users/hhh/Library/Application Support/typora-user-images/image-20200206131420985.png)</p>
-<h4 id="卷积操作"><a href="#卷积操作" class="headerlink" title="卷积操作"></a>卷积操作</h4><p>神经网络遇到的问题：</p>
-<ul>
-<li>参数过多<ul>
-<li>举例：<ul>
-<li>图像大小： 1000 * 1000</li>
-<li>下一层神经元为 10^6</li>
-<li>全连接参数为 1000*1000*10^6 = 10^12</li>
-</ul>
-</li>
-<li>计算资源不足</li>
-<li>容易过拟合，需要更多训练数据</li>
-</ul>
-</li>
-</ul>
-<p>卷积 —— 解决参数过多的问题：</p>
-<p>![image-20200206131837249](/Users/hhh/Library/Application Support/typora-user-images/image-20200206131837249.png)</p>
-<ul>
-<li>局部连接<ul>
-<li>图像的区域性</li>
-<li>举例：<ul>
-<li>图像大小： 1000 * 1000</li>
-<li>下一层神经元为 10^6</li>
-<li>局部连接范围为 10 * 10</li>
-<li>全连接参数为 10*10*10^6 = 10^8</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>参数共享（不同局部连接的参数是一样的）<ul>
-<li>图像特征与位置无关</li>
-<li>参数与下一层神经元个数无关了，都使用同一组参数</li>
-<li>举例：<ul>
-<li>图像大小： 1000 * 1000</li>
-<li>下一层神经元为 10^6</li>
-<li>局部连接范围为 10 * 10</li>
-<li>全连接参数为 10*10 = 10^2</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p>卷积——每个位置进行计算：</p>
-<p>![image-20200206132518880](/Users/hhh/Library/Application Support/typora-user-images/image-20200206132518880.png)</p>
-<p>步长可变</p>
-<p>![image-20200206133047444](/Users/hhh/Library/Application Support/typora-user-images/image-20200206133047444.png)</p>
-<p>使得输入和输出一致：</p>
-<p>![image-20200206133132327](/Users/hhh/Library/Application Support/typora-user-images/image-20200206133132327.png)</p>
-<p>卷积——处理多通道：</p>
-<p>![image-20200206133222661](/Users/hhh/Library/Application Support/typora-user-images/image-20200206133222661.png)</p>
-<p>卷积——多个卷积核：</p>
-<p>![image-20200206133325910](/Users/hhh/Library/Application Support/typora-user-images/image-20200206133325910.png)</p>
-<p>![image-20200206133344229](/Users/hhh/Library/Application Support/typora-user-images/image-20200206133344229.png)</p>
-<p>思考题：</p>
-<p>卷积层，输入三通道，输出192通道，卷积核大小是 3*3， 问该卷积层有多少参数？</p>
-<h4 id="池化操作"><a href="#池化操作" class="headerlink" title="池化操作"></a>池化操作</h4><p>最大值池化：</p>
-<p>（将窗口中的最大值当作最终值）</p>
-<p>![image-20200206133540511](/Users/hhh/Library/Application Support/typora-user-images/image-20200206133540511.png)</p>
-<p>平均值池化：</p>
-<p>（将窗口中的平均值当作最终值）</p>
-<p>![image-20200206133716575](/Users/hhh/Library/Application Support/typora-user-images/image-20200206133716575.png)</p>
-<p>池化操作特点：</p>
-<ul>
-<li>常使用不重叠、不补零</li>
-<li>没有用于求导的参数</li>
-<li>池化层参数为步长和池化核大小</li>
-<li>用于减少图像尺寸，从而减少计算量</li>
-<li>一定程度平移鲁棒</li>
-<li>损失空间位置精度（丢失很多细节的信息）</li>
-</ul>
-<h3 id="二、深度可分离卷积"><a href="#二、深度可分离卷积" class="headerlink" title="二、深度可分离卷积"></a>二、深度可分离卷积</h3><p>深度可分离卷积（以较小的进度损失，极大减少计算量）</p>
-<p>模型结构：</p>
-<ul>
-<li>引入深度可分离卷积</li>
-</ul>
-<p>![image-20200206153020855](/Users/hhh/Library/Application Support/typora-user-images/image-20200206153020855.png)</p>
-<ul>
-<li><p>Inception V3</p>
-<ul>
-<li>不同尺寸的视野域</li>
-<li>提升效率</li>
-</ul>
-<p>![image-20200206153159075](/Users/hhh/Library/Application Support/typora-user-images/image-20200206153159075.png)</p>
-</li>
-</ul>
-<p>视野域：</p>
-<ul>
-<li>不同的视野域提取的图像特征尺度不同</li>
-</ul>
-<p>![image-20200206153334821](/Users/hhh/Library/Application Support/typora-user-images/image-20200206153334821.png)</p>
-<ul>
-<li>引入深度可分离卷积</li>
-</ul>
-<p>![image-20200206153621119](/Users/hhh/Library/Application Support/typora-user-images/image-20200206153621119.png)</p>
-<p>分到极致：</p>
-<p>![image-20200206153717980](/Users/hhh/Library/Application Support/typora-user-images/image-20200206153717980.png)</p>
-<p>![image-20200206153731858](/Users/hhh/Library/Application Support/typora-user-images/image-20200206153731858.png)</p>
-<ul>
-<li><p>普通卷积计算量</p>
-<p>![image-20200206153831770](/Users/hhh/Library/Application Support/typora-user-images/image-20200206153831770.png)</p>
-</li>
-<li><p>深度可分离卷积计算量</p>
-<ul>
-<li><p>深度可分离卷积</p>
-<p>![image-20200206154053484](/Users/hhh/Library/Application Support/typora-user-images/image-20200206154053484.png)</p>
-</li>
-<li><p>1 * 1卷积</p>
-<p>![image-20200206154149215](/Users/hhh/Library/Application Support/typora-user-images/image-20200206154149215.png)</p>
-</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li><p>优化比例</p>
-<p>![image-20200206154217081](/Users/hhh/Library/Application Support/typora-user-images/image-20200206154217081.png)</p>
-</li>
-</ul>
-<ul>
-<li>数据增强</li>
-<li>迁移学习</li>
-</ul>
-<p>实战部分：</p>
-<ul>
-<li>keras实现卷积神经网络</li>
-<li>keras实现深度可分离卷积</li>
-<li>keras实战Kaggle<ul>
-<li>10 monkeys和cifar 10</li>
-<li>数据增强与迁移学习</li>
-</ul>
-</li>
-</ul>
+            <p>![image-20200310162319969](/Users/hhh/Library/Application Support/typora-user-images/image-20200310162319969.png)</p>
+<p>要求输出一个实数。</p>
+<p>信用卡的例子，判断某一人的信用额度。</p>
+<p>![image-20200310162355549](/Users/hhh/Library/Application Support/typora-user-images/image-20200310162355549.png)</p>
+<p>写出hypothesis：</p>
+<p>![image-20200310162547596](/Users/hhh/Library/Application Support/typora-user-images/image-20200310162547596.png)</p>
+<p>线性回归的描述：</p>
+<p>一维和三维：</p>
+<p>找出一个最好的线或平面。</p>
+<p>residuals为残差，即差的余数，要求却小越好。</p>
+<p>![image-20200310162830691](/Users/hhh/Library/Application Support/typora-user-images/image-20200310162830691.png)</p>
+<p>均方差：</p>
+<p>使Ein越小越好。</p>
+<p>![image-20200310163107843](/Users/hhh/Library/Application Support/typora-user-images/image-20200310163107843.png)</p>
+<p>![image-20200310164054874](/Users/hhh/Library/Application Support/typora-user-images/image-20200310164054874.png)</p>
 
           
         
@@ -538,7 +405,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/05/人工智能/Tensorflow/CH5-Tf_estimator使用与tf_1/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/19/人工智能/机器学习基石/08_Noise-and-Error/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -557,7 +424,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/02/05/人工智能/Tensorflow/CH5-Tf_estimator使用与tf_1/" itemprop="url">CH5-Tf_estimator使用与tf_1</a></h1>
+                <a class="post-title-link" href="/2020/02/19/人工智能/机器学习基石/08_Noise-and-Error/" itemprop="url">08_Noise and Error</a></h1>
         
 
         <div class="post-meta">
@@ -569,8 +436,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-02-05T13:42:07+08:00">
-                2020-02-05
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-02-19T21:12:48+08:00">
+                2020-02-19
               </time>
             
 
@@ -592,8 +459,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/人工智能-Tensorflow/" itemprop="url" rel="index">
-                    <span itemprop="name">人工智能 - Tensorflow</span>
+                  <a href="/categories/人工智能-机器学习基石/" itemprop="url" rel="index">
+                    <span itemprop="name">人工智能 - 机器学习基石</span>
                   </a>
                 </span>
 
@@ -631,66 +498,60 @@
       
         
           
-            <p>Tf.estimator使用</p>
-<ul>
-<li>Keras 转 estimator</li>
-<li>使用预定义的estimator<ul>
-<li>BaseLineClassifier</li>
-<li>LinearClassifier</li>
-<li>DNNClassifier</li>
-</ul>
-</li>
-<li>Tf.feature_column做特征工程</li>
-</ul>
-<p>API列表：</p>
-<ul>
-<li>Tf.keras.estimator.to_estimator<ul>
-<li>Train, evaluate</li>
-</ul>
-</li>
-<li>Tf.keras.estimator.BaselineClassifier</li>
-<li>Tf.keras.estimator.LinearClassifier</li>
-<li>Tf.keras.estimator.DNNClassifier</li>
-<li>Tf.feature_column<ul>
-<li>categorical_column_with_vocabulary_list</li>
-<li>numeric_column</li>
-<li>indicator_column</li>
-<li>cross_column</li>
-</ul>
-</li>
-<li>keras.layers.DenseFeatures</li>
-</ul>
-<p>Tf1.0</p>
-<ul>
-<li>Tf1.0实现全连接<ul>
-<li>placeholder，sess，feed_dict</li>
-</ul>
-</li>
-<li>Dataset使用</li>
-<li>自定义estimator</li>
-<li>实战</li>
-<li>Tf2.0与Tf1.0区别</li>
-</ul>
-<p>API列表：</p>
-<ul>
-<li>Tf1.0实现全连接网络<ul>
-<li>placeholder, tf.layers.dense, tf.trian.AdamOptimizer</li>
-<li>tf.losses.sparse_softmax_cross_entropy</li>
-<li>Tf.global_variables_initializer, feed_dict</li>
-</ul>
-</li>
-<li>Dataset<ul>
-<li>Dataset.make_one_shot_iterator</li>
-<li>Dataset.make_initializable_iterator</li>
-</ul>
-</li>
-<li>自定义estimator<ul>
-<li>Tf.feature_column.input_layer</li>
-<li>Tf.estiator.EstimatorSpec</li>
-<li>Tf.metrics.accuracy</li>
-</ul>
-</li>
-</ul>
+            <p>![image-20200217215312983](/Users/hhh/Library/Application Support/typora-user-images/image-20200217215312983.png)</p>
+<p>讨论有噪声存在的情况：</p>
+<p>![image-20200217215413976](/Users/hhh/Library/Application Support/typora-user-images/image-20200217215413976.png)</p>
+<p>噪声可能存在于x或y中，讨论VC-bound在噪声存在的情况下，是否成立：</p>
+<p>![image-20200217215627387](/Users/hhh/Library/Application Support/typora-user-images/image-20200217215627387.png)</p>
+<p>想象：弹珠的颜色是不固定的。</p>
+<p>但是仍然可以预测，统计拿出弹珠的那一刻的颜色。</p>
+<p>![image-20200217220208708](/Users/hhh/Library/Application Support/typora-user-images/image-20200217220208708.png)</p>
+<p>讨论目标函数的分布：</p>
+<p>![image-20200219201644011](/Users/hhh/Library/Application Support/typora-user-images/image-20200219201644011.png)</p>
+<p>更新学习图：</p>
+<p>![image-20200219201818846](/Users/hhh/Library/Application Support/typora-user-images/image-20200219201818846.png)</p>
+<p>Error Measure</p>
+<p>![image-20200219202240436](/Users/hhh/Library/Application Support/typora-user-images/image-20200219202240436.png)</p>
+<p>错误衡量：</p>
+<p>每个点上的错误。</p>
+<p>![image-20200219202521214](/Users/hhh/Library/Application Support/typora-user-images/image-20200219202521214.png)</p>
+<p>每个点上的错误衡量：</p>
+<p>1、对或错（01）  分类</p>
+<p>2、平方错误（判断y‘ 和y的接近程度）  回归</p>
+<p>![image-20200219202739776](/Users/hhh/Library/Application Support/typora-user-images/image-20200219202739776.png)</p>
+<p>具体例子：</p>
+<p>![image-20200219203305081](/Users/hhh/Library/Application Support/typora-user-images/image-20200219203305081.png)</p>
+<p>更新学习图：</p>
+<p>![image-20200219203420517](/Users/hhh/Library/Application Support/typora-user-images/image-20200219203420517.png)</p>
+<p>例子：做二维指纹的判别。</p>
+<p>存在两种错误：存伪和弃真。</p>
+<p>![image-20200219204024820](/Users/hhh/Library/Application Support/typora-user-images/image-20200219204024820.png)</p>
+<p>假设在超级市场：为了给常客打折扣。</p>
+<p>得到成本表：</p>
+<p>![image-20200219204237854](/Users/hhh/Library/Application Support/typora-user-images/image-20200219204237854.png)</p>
+<p>另一个假设：CIA（中情局）判断某个员工是否可以进入获得机密资料。</p>
+<p>![image-20200219204501646](/Users/hhh/Library/Application Support/typora-user-images/image-20200219204501646.png)</p>
+<p>所以错误的衡量方式是很重要的。</p>
+<p>![image-20200219205629816](/Users/hhh/Library/Application Support/typora-user-images/image-20200219205629816.png)</p>
+<p>err：真正的错误</p>
+<p>err～：在算法试图模拟的错误</p>
+<p>![image-20200219205651703](/Users/hhh/Library/Application Support/typora-user-images/image-20200219205651703.png)</p>
+<p>错误的权重：</p>
+<p>代价矩阵。</p>
+<p>![image-20200219210158533](/Users/hhh/Library/Application Support/typora-user-images/image-20200219210158533.png)</p>
+<p>使Ein越小，就可以说Eout越小。</p>
+<p>Einw表示带入了权重。</p>
+<p>![image-20200219210529931](/Users/hhh/Library/Application Support/typora-user-images/image-20200219210529931.png)</p>
+<p>加权的pocket算法：</p>
+<p>将对的留下，将错的复制1000倍。</p>
+<p>就可以在新的数据上，就可说犯了1000次错误，就可以把有权重的和无权重的联系起来。</p>
+<p>pocket算法在0/1错误之间是有效的。</p>
+<p>![image-20200219210843410](/Users/hhh/Library/Application Support/typora-user-images/image-20200219210843410.png)</p>
+<p>复制 + 原来的pocket算法：</p>
+<p>复制 –&gt; 多频繁地访问某个点（复制1000次的点，应该要有更高的几率被访问）</p>
+<p>reduction。</p>
+<p>![image-20200219211152244](/Users/hhh/Library/Application Support/typora-user-images/image-20200219211152244.png)</p>
+<p>![image-20200219211536936](/Users/hhh/Library/Application Support/typora-user-images/image-20200219211536936.png)</p>
 
           
         
@@ -739,7 +600,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/05/go/go文件读写实例/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/16/人工智能/机器学习基石/07_VC-Dimension/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -758,7 +619,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/02/05/go/go文件读写实例/" itemprop="url">go文件读写实例</a></h1>
+                <a class="post-title-link" href="/2020/02/16/人工智能/机器学习基石/07_VC-Dimension/" itemprop="url">07_VC Dimension</a></h1>
         
 
         <div class="post-meta">
@@ -770,8 +631,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-02-05T11:33:37+08:00">
-                2020-02-05
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-02-16T18:24:55+08:00">
+                2020-02-16
               </time>
             
 
@@ -793,8 +654,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/随笔/" itemprop="url" rel="index">
-                    <span itemprop="name">随笔</span>
+                  <a href="/categories/人工智能-机器学习基石/" itemprop="url" rel="index">
+                    <span itemprop="name">人工智能 - 机器学习基石</span>
                   </a>
                 </span>
 
@@ -832,176 +693,76 @@
       
         
           
-            <p>go 文件读写主要有os、io/ioutil、bufio这几个包。</p>
-<h4 id="io-ioutil"><a href="#io-ioutil" class="headerlink" title="io/ioutil"></a>io/ioutil</h4><p>io/ioutil包中主要有这几个函数：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">ReadAll</span><span class="params">(r io.Reader)</span> <span class="params">([]<span class="keyword">byte</span>, error)</span></span></span><br></pre></td></tr></table></figure>
-
-<p>ReadAll()主要是用来是从一个打开的io.Reader中读取直到遇到error或EOF并返回读取的数据；成功的读取返回的err为nil，而不是EOF。因为ReadAll定义为从资源读取数据直到EOF，它不会将从r读取的EOF视为应该报告的错误。</p>
-<p>io.Reader一般由os.Open()或者os.OpenFile()等进行打开。</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">ReadFile</span><span class="params">(filename <span class="keyword">string</span>)</span> <span class="params">([]<span class="keyword">byte</span>, error)</span></span></span><br></pre></td></tr></table></figure>
-
-<p>ReadFile()函数主要是用来从指定的filename文件中读取数据并返回文件的内容；成功的调用返回的err为nil，而不是EOF。因为ReadFile定义为从资源读取数据直到EOF，它不会将从r读取的EOF视为应该报告的错误。</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">WriteFile</span><span class="params">(filename <span class="keyword">string</span>, data []<span class="keyword">byte</span>, perm os.FileMode)</span> <span class="title">error</span></span></span><br></pre></td></tr></table></figure>
-
-<p>WriteFile()函数将[]byte内容写入文件,如果content字符串中没有换行符的话，默认就不会有换行符。</p>
-<p>如果文件不存在，则会按照perm的权限创建新文件；如果文件存在，原文件会被覆盖。</p>
-<p>代码示例：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"io/ioutil"</span></span><br><span class="line">	<span class="string">"os"</span></span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//ReadAll</span></span><br><span class="line">	file, err := os.OpenFile(<span class="string">"filetest.txt"</span>, os.O_RDONLY, <span class="number">0644</span>)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">"Open file error!"</span>)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">defer</span> file.Close()</span><br><span class="line"></span><br><span class="line">	output, err := ioutil.ReadAll(file)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">"Read file error!"</span>)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(<span class="keyword">string</span>(output))</span><br><span class="line"></span><br><span class="line">	<span class="comment">//ReadFile</span></span><br><span class="line">	output, err = ioutil.ReadFile(<span class="string">"filetest.txt"</span>)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">"Read file error!"</span>)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(<span class="keyword">string</span>(output))</span><br><span class="line"></span><br><span class="line">	<span class="comment">//WriteFile</span></span><br><span class="line">	context := <span class="string">"Write Test Successfully!"</span></span><br><span class="line">	<span class="keyword">if</span> ioutil.WriteFile(<span class="string">"filetest.txt"</span>, []<span class="keyword">byte</span>(context), <span class="number">0644</span>) != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">"Write file error!"</span>)</span><br><span class="line">	&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">"Write file successfully!"</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="os"><a href="#os" class="headerlink" title="os"></a>os</h4><p>os包中主要有以下函数：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Create</span><span class="params">(name <span class="keyword">string</span>)</span> <span class="params">(*File, error)</span></span></span><br><span class="line"><span class="function"><span class="title">func</span> <span class="title">Open</span><span class="params">(name <span class="keyword">string</span>)</span> <span class="params">(*File, error)</span></span></span><br><span class="line"><span class="function"><span class="title">func</span> <span class="title">OpenFile</span><span class="params">(name <span class="keyword">string</span>, flag <span class="keyword">int</span>, perm FileMode)</span> <span class="params">(*File, error)</span></span></span><br><span class="line"><span class="function"><span class="title">func</span> <span class="params">(f *File)</span> <span class="title">Close</span><span class="params">()</span> <span class="title">error</span></span></span><br><span class="line"><span class="function"><span class="title">func</span> <span class="params">(f *File)</span> <span class="title">Read</span><span class="params">(b []<span class="keyword">byte</span>)</span> <span class="params">(n <span class="keyword">int</span>, err error)</span></span></span><br><span class="line"><span class="function"><span class="title">func</span> <span class="params">(f *File)</span> <span class="title">ReadAt</span><span class="params">(b []<span class="keyword">byte</span>, off <span class="keyword">int64</span>)</span> <span class="params">(n <span class="keyword">int</span>, err error)</span></span></span><br><span class="line"><span class="function"><span class="title">func</span> <span class="params">(f *File)</span> <span class="title">Write</span><span class="params">(b []<span class="keyword">byte</span>)</span> <span class="params">(n <span class="keyword">int</span>, err error)</span></span></span><br><span class="line"><span class="function"><span class="title">func</span> <span class="params">(f *File)</span> <span class="title">WriteAt</span><span class="params">(b []<span class="keyword">byte</span>, off <span class="keyword">int64</span>)</span> <span class="params">(n <span class="keyword">int</span>, err error)</span></span></span><br><span class="line"><span class="function"><span class="title">func</span> <span class="params">(f *File)</span> <span class="title">WriteString</span><span class="params">(s <span class="keyword">string</span>)</span> <span class="params">(n <span class="keyword">int</span>, err error)</span></span></span><br></pre></td></tr></table></figure>
-
-<p>os包中还有很多文件重命名、删除、软连接、目录等的操作函数，具体见官方文档。</p>
-<p>上面列出的读写函数具体内容直接见代码以及代码注释：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"os"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">//Open</span></span><br><span class="line">	<span class="comment">//以只读方式打开文件，若文件不存在则报错</span></span><br><span class="line">	file1, err := os.Open(<span class="string">"filetest.txt"</span>)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">"Open file error!"</span>)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(<span class="string">"Open file successfully!"</span>)</span><br><span class="line">	<span class="keyword">defer</span> file1.Close()</span><br><span class="line"></span><br><span class="line">	<span class="comment">//Create</span></span><br><span class="line">	<span class="comment">//创建一个新文件，若存在则覆盖</span></span><br><span class="line">	file2, err := os.Create(<span class="string">"hello.txt"</span>)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">"Create file error!"</span>)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(<span class="string">"Create file successfully!"</span>)</span><br><span class="line">	<span class="keyword">defer</span> file2.Close()</span><br><span class="line"></span><br><span class="line">	<span class="comment">//OpenFile</span></span><br><span class="line">	<span class="comment">//打开一个文件，打开方式以及文件权限由参数控制</span></span><br><span class="line">	<span class="comment">/* 打开方式可以由一下一种或多种组合，具体见下面注释</span></span><br><span class="line"><span class="comment">	  //Exactly one of O_RDONLY, O_WRONLY, or O_RDWR must be specified.</span></span><br><span class="line"><span class="comment">        O_RDONLY int = syscall.O_RDONLY // open the file read-only.</span></span><br><span class="line"><span class="comment">        O_WRONLY int = syscall.O_WRONLY // open the file write-only.</span></span><br><span class="line"><span class="comment">        O_RDWR   int = syscall.O_RDWR   // open the file read-write.</span></span><br><span class="line"><span class="comment">      // The remaining values may be or'ed in to control behavior.</span></span><br><span class="line"><span class="comment">        O_APPEND int = syscall.O_APPEND // append data to the file when writing.</span></span><br><span class="line"><span class="comment">        O_CREATE int = syscall.O_CREAT  // create a new file if none exists.</span></span><br><span class="line"><span class="comment">        O_EXCL   int = syscall.O_EXCL   // used with O_CREATE, file must not exist.</span></span><br><span class="line"><span class="comment">        O_SYNC   int = syscall.O_SYNC   // open for synchronous I/O.</span></span><br><span class="line"><span class="comment">        O_TRUNC  int = syscall.O_TRUNC  // if possible, truncate file when opened.</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    file3, err := os.OpenFile(<span class="string">"filetest.txt"</span>, os.O_RDWR | os.O_APPEND | os.O_APPEND, <span class="number">0777</span>)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">    	fmt.Println(<span class="string">"Open file error!"</span>)</span><br><span class="line">    	<span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    fmt.Println(<span class="string">"Open file successfully!"</span>)</span><br><span class="line">    <span class="keyword">defer</span> file3.Close()</span><br><span class="line"></span><br><span class="line">    <span class="comment">//Read</span></span><br><span class="line">    <span class="comment">//如果out容量小于文件内容，则只读取out容量部分内容</span></span><br><span class="line">    <span class="comment">//如果out容量大于文件内容，则读取全部文件内容</span></span><br><span class="line">    <span class="comment">//如果文件为空，则出错</span></span><br><span class="line">    out1 := <span class="built_in">make</span>([]<span class="keyword">byte</span>, <span class="number">20</span>)</span><br><span class="line">    _, err = file1.Read(out1)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">    	fmt.Println(<span class="string">"Read file error!"</span>, err)</span><br><span class="line">    	<span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    fmt.Println(<span class="keyword">string</span>(out1))</span><br><span class="line"></span><br><span class="line">    <span class="comment">//ReadAt</span></span><br><span class="line">    <span class="comment">//如果out容量小于文件开始读取位置后的内容，则截取out容量部分内容</span></span><br><span class="line">    <span class="comment">//如果out容量大于文件开始读取位置后的内容或者文件为空或者开始读取位置超过了文件内容，则出错</span></span><br><span class="line">    out2 := <span class="built_in">make</span>([]<span class="keyword">byte</span>, <span class="number">9</span>)</span><br><span class="line">    _, err = file3.ReadAt(out2, <span class="number">2</span>)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">    	fmt.Println(<span class="string">"ReadAt file error!"</span>, err)</span><br><span class="line">    	<span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    fmt.Println(<span class="keyword">string</span>(out2))</span><br><span class="line"></span><br><span class="line">    <span class="comment">//Write</span></span><br><span class="line">    <span class="comment">//将[]byte中内容写入文件</span></span><br><span class="line">    <span class="comment">//是覆盖文件内容还是在后面添加内容取决于打开文件的方式</span></span><br><span class="line">    in := []<span class="keyword">byte</span>(<span class="string">"haha beijing\n"</span>)</span><br><span class="line">    _, err = file2.Write(in)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">    	fmt.Println(<span class="string">"Write file error!"</span>)</span><br><span class="line">    	<span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    fmt.Println(<span class="string">"Write file successfully!"</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">//WriteAt</span></span><br><span class="line">    <span class="comment">//将[]byte写入文件的指定位置</span></span><br><span class="line">    <span class="comment">//会覆盖掉写入位置以后的内容（只覆盖要写入的数量的内容）</span></span><br><span class="line">    in2 := []<span class="keyword">byte</span>(<span class="string">"hello "</span>)</span><br><span class="line">    _, err = file2.WriteAt(in2, <span class="number">5</span>)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">    	fmt.Println(<span class="string">"WriteAt file error!"</span>)</span><br><span class="line">    	<span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    fmt.Println(<span class="string">"WriteAt file successfully!"</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">//WriteString</span></span><br><span class="line">    <span class="comment">//将string内容写入到文件</span></span><br><span class="line">    <span class="comment">//是覆盖文件内容还是在后面添加内容取决于打开文件的方式</span></span><br><span class="line">    _, err = file3.WriteString(<span class="string">"nihao beijing\n"</span>)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">    	fmt.Println(<span class="string">"WriteString file error!"</span>)</span><br><span class="line">    	<span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    fmt.Println(<span class="string">"WriteString file successfully!"</span>)</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="bufio"><a href="#bufio" class="headerlink" title="bufio"></a>bufio</h4><p>bufio包主要是包装了io.Reader以及io.Writer然后生成两个类型：Reader以及Writer，并且衍生出了一系列读写的函数，主要如下：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Reader</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">NewReader</span><span class="params">(rd io.Reader)</span> *<span class="title">Reader</span></span></span><br><span class="line"><span class="function"><span class="title">func</span> <span class="title">NewReaderSize</span><span class="params">(rd io.Reader, size <span class="keyword">int</span>)</span> *<span class="title">Reader</span></span></span><br><span class="line"><span class="function"><span class="title">func</span> <span class="params">(b *Reader)</span> <span class="title">Read</span><span class="params">(p []<span class="keyword">byte</span>)</span> <span class="params">(n <span class="keyword">int</span>, err error)</span></span></span><br><span class="line"><span class="function"><span class="title">func</span> <span class="params">(b *Reader)</span> <span class="title">ReadByte</span><span class="params">()</span> <span class="params">(c <span class="keyword">byte</span>, err error)</span></span></span><br><span class="line"><span class="function"><span class="title">func</span> <span class="params">(b *Reader)</span> <span class="title">ReadBytes</span><span class="params">(delim <span class="keyword">byte</span>)</span> <span class="params">(line []<span class="keyword">byte</span>, err error)</span></span></span><br><span class="line"><span class="function"><span class="title">func</span> <span class="params">(b *Reader)</span> <span class="title">ReadLine</span><span class="params">()</span> <span class="params">(line []<span class="keyword">byte</span>, isPrefix <span class="keyword">bool</span>, err error)</span></span></span><br><span class="line"><span class="function"><span class="title">func</span> <span class="params">(b *Reader)</span> <span class="title">ReadRune</span><span class="params">()</span> <span class="params">(r <span class="keyword">rune</span>, size <span class="keyword">int</span>, err error)</span></span></span><br><span class="line"><span class="function"><span class="title">func</span> <span class="params">(b *Reader)</span> <span class="title">ReadSlice</span><span class="params">(delim <span class="keyword">byte</span>)</span> <span class="params">(line []<span class="keyword">byte</span>, err error)</span></span></span><br><span class="line"><span class="function"><span class="title">func</span> <span class="params">(b *Reader)</span> <span class="title">ReadString</span><span class="params">(delim <span class="keyword">byte</span>)</span> <span class="params">(line <span class="keyword">string</span>, err error)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="title">type</span> <span class="title">Writer</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="title">func</span> <span class="title">NewWriter</span><span class="params">(wr io.Writer)</span> *<span class="title">Writer</span></span></span><br><span class="line"><span class="function"><span class="title">func</span> <span class="title">NewWriterSize</span><span class="params">(wr io.Writer, size <span class="keyword">int</span>)</span> *<span class="title">Writer</span></span></span><br><span class="line"><span class="function"><span class="title">func</span> <span class="params">(b *Writer)</span> <span class="title">Flush</span><span class="params">()</span> <span class="title">error</span></span></span><br><span class="line"><span class="function"><span class="title">func</span> <span class="params">(b *Writer)</span> <span class="title">Write</span><span class="params">(p []<span class="keyword">byte</span>)</span> <span class="params">(nn <span class="keyword">int</span>, err error)</span></span></span><br><span class="line"><span class="function"><span class="title">func</span> <span class="params">(b *Writer)</span> <span class="title">WriteByte</span><span class="params">(c <span class="keyword">byte</span>)</span> <span class="title">error</span></span></span><br><span class="line"><span class="function"><span class="title">func</span> <span class="params">(b *Writer)</span> <span class="title">WriteRune</span><span class="params">(r <span class="keyword">rune</span>)</span> <span class="params">(size <span class="keyword">int</span>, err error)</span></span></span><br><span class="line"><span class="function"><span class="title">func</span> <span class="params">(b *Writer)</span> <span class="title">WriteString</span><span class="params">(s <span class="keyword">string</span>)</span> <span class="params">(<span class="keyword">int</span>, error)</span></span></span><br></pre></td></tr></table></figure>
-
-<p>具体内容见下面代码以及注释：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"bufio"</span></span><br><span class="line">	<span class="string">"bytes"</span></span><br><span class="line">	<span class="string">"os"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	</span><br><span class="line">	rb := bytes.NewBuffer([]<span class="keyword">byte</span>(<span class="string">"hello beijing!"</span>))</span><br><span class="line">	rb1, err := os.OpenFile(<span class="string">"filetest.txt"</span>, os.O_RDWR | os.O_APPEND | os.O_APPEND, <span class="number">0777</span>)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">    	fmt.Println(<span class="string">"Open file error!"</span>)</span><br><span class="line">    	<span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    fmt.Println(<span class="string">"Open file successfully!"</span>)</span><br><span class="line">    <span class="keyword">defer</span> rb1.Close()</span><br><span class="line"></span><br><span class="line">	<span class="comment">//NewReader</span></span><br><span class="line">	<span class="comment">//创建支持缓存读取的具有缺省长度缓冲区的Reader对象，</span></span><br><span class="line">	<span class="comment">//Reader对象会从底层的io.Reader接口读取尽量多的数据进行缓存。</span></span><br><span class="line">	<span class="comment">//参数是io.Reader，通常是打开的file句柄.</span></span><br><span class="line">	r1 := bufio.NewReader(rb)</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//NewReaderSize</span></span><br><span class="line">	<span class="comment">//创建的支持缓存读取的具有指定长度缓冲区的Reader对象，</span></span><br><span class="line">	<span class="comment">//Reader对象会从底层的io.Reader接口读取尽量多的数据进行缓存。</span></span><br><span class="line">	<span class="comment">//参数是io.Reader，通常是打开的file句柄.</span></span><br><span class="line">	r2 := bufio.NewReaderSize(rb1, <span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">	<span class="comment">//Read</span></span><br><span class="line">	<span class="comment">//读取数据存放到p中，返回已读取的字节数。</span></span><br><span class="line">	<span class="comment">//因为最多只调用底层的io.Reader一次，所以返回的n可能小于len(p)。</span></span><br><span class="line">	<span class="comment">//在字节流结束时，n会为0并且err为io.EOF。</span></span><br><span class="line">	<span class="comment">//如果len(out)&lt;文件内容，则读取len(out)数量</span></span><br><span class="line">	<span class="comment">//如果len(out)&gt;文件内容, 则读取文件全部内容</span></span><br><span class="line">	<span class="comment">//如果文件空，则出错</span></span><br><span class="line">	out1 := <span class="built_in">make</span>([]<span class="keyword">byte</span>, <span class="number">100</span>)</span><br><span class="line">	_, err = r1.Read(out1)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">"Read file error!"</span>)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(<span class="keyword">string</span>(out1))</span><br><span class="line"></span><br><span class="line">	<span class="comment">//ReadByte</span></span><br><span class="line">	<span class="comment">//读取并返回一个字节。如果没有字节可读，则返回错误。</span></span><br><span class="line">	bout, err := r2.ReadByte()</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">"ReadByte file error!"</span>, err)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(<span class="keyword">string</span>(bout))</span><br><span class="line"></span><br><span class="line">	<span class="comment">//ReadBytes</span></span><br><span class="line">	<span class="comment">//ReadBytes读取数据直到delim第一次出现，返回读取的字节序列（包括delim）。</span></span><br><span class="line">	<span class="comment">//如果ReadBytes在读到第一个delim之前出错，它返回已读取的数据和那个错误（通常是io.EOF）。</span></span><br><span class="line">	<span class="comment">//只有当返回的数据以delim结尾时，返回的err才为空值。</span></span><br><span class="line">	<span class="comment">//返回的是数据的拷贝</span></span><br><span class="line">	rb3 := bytes.NewBuffer([]<span class="keyword">byte</span>(<span class="string">"hello beijing!"</span>))</span><br><span class="line">	r3 := bufio.NewReader(rb3)</span><br><span class="line">	bouts, err := r3.ReadBytes(<span class="string">'!'</span>)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">"ReadBytes file error!"</span>)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(<span class="keyword">string</span>(bouts))</span><br><span class="line"></span><br><span class="line">	<span class="comment">//ReadLine</span></span><br><span class="line">	<span class="comment">//ReadLine试图返回一行，不包括结尾的回车字符。</span></span><br><span class="line">	<span class="comment">//如果一行太长了（超过缓冲区长度），isPrefix会设置为true并且只返回前面的数据，剩余的数据会在以后的调用中返回。</span></span><br><span class="line">	<span class="comment">//当返回最后一行数据时，isPrefix会设置为false。返回的字节切片只在下一次调用ReadLine前有效。</span></span><br><span class="line">	<span class="comment">//ReadLine或者返回一个非空的字节切片或者返回一个错误，但它们不会同时返回。</span></span><br><span class="line">	rb4 := bytes.NewBuffer([]<span class="keyword">byte</span>(<span class="string">"hello beijing\nnihao beijing\n"</span>))</span><br><span class="line">	r4 := bufio.NewReader(rb4)</span><br><span class="line">	line, prefix, err := r4.ReadLine()</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">"ReadLine file error!"</span>)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(<span class="keyword">string</span>(line), prefix, err)</span><br><span class="line"></span><br><span class="line">	<span class="comment">//ReadRune</span></span><br><span class="line">	<span class="comment">//ReadRune读取一个UTF-8编码的字符，并将其对应的Unicode编码和所占字节数返回。</span></span><br><span class="line">	<span class="comment">//如果编码错误，ReadRune只读取一个字节并返回unicode.ReplacementChar(U+FFFD)和长度1。</span></span><br><span class="line">	rb5 := bytes.NewBuffer([]<span class="keyword">byte</span>(<span class="string">"你好世界"</span>))</span><br><span class="line">	r5 := bufio.NewReader(rb5)</span><br><span class="line">	r, size, err := r5.ReadRune()</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">"ReadRune file error!"</span>)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(<span class="keyword">string</span>(r), size, err)</span><br><span class="line"></span><br><span class="line">	<span class="comment">//ReadSlice</span></span><br><span class="line">	<span class="comment">//ReadSlice读取数据直到delim出现，并返回读取数据的字节切片。</span></span><br><span class="line">	<span class="comment">//下次读取数据时返回的切片会失效。</span></span><br><span class="line">	<span class="comment">//如果ReadSlice在查找到delim之前遇到错误，它返回读取的所有数据和那个错误（通常是io.EOF）。</span></span><br><span class="line">	<span class="comment">//如果缓冲区满时也没有查找到delim，则返回ErrBufferFull错误。</span></span><br><span class="line">	<span class="comment">//因为ReadSlice返回的数据会在下次I/O操作时被覆盖，大多数调用者应该使用ReadBytes或者ReadString。</span></span><br><span class="line">	<span class="comment">//只有当line不以delim结尾时，ReadSlice才会返回非空err。</span></span><br><span class="line">	rb6 := bytes.NewBuffer([]<span class="keyword">byte</span>(<span class="string">"1234$5678"</span>))</span><br><span class="line">	r6 := bufio.NewReader(rb6)</span><br><span class="line">	slice, err := r6.ReadSlice(<span class="string">'$'</span>)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">"ReadSlice file error!"</span>)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(<span class="keyword">string</span>(slice), err)</span><br><span class="line"></span><br><span class="line">	<span class="comment">//ReadString</span></span><br><span class="line">	<span class="comment">//ReadString读取数据直到delim第一次出现，返回一个包含delim的字符串。</span></span><br><span class="line">	<span class="comment">//如果ReadString在读取到delim前遇到错误，它返回已读字符串和那个错误（通常是io.EOF）。</span></span><br><span class="line">	<span class="comment">//只有当返回的字符串以delim结尾时，ReadString才返回空err。</span></span><br><span class="line">	<span class="comment">//基本等同于ReadBytes，只不过返回的是string而不是[]byte。</span></span><br><span class="line">	rb7 := bytes.NewBuffer([]<span class="keyword">byte</span>(<span class="string">"hello, world"</span>))</span><br><span class="line">	r7 := bufio.NewReader(rb7)</span><br><span class="line">	str, err := r7.ReadString(<span class="string">','</span>)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">"ReadString file error!"</span>)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(str, err)</span><br><span class="line"></span><br><span class="line">	<span class="comment">//NewWriter + Flush + Write</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">//NewWrite</span></span><br><span class="line">	<span class="comment">//创建支持缓存写的具有缺省长度缓冲区的Writer对象，</span></span><br><span class="line">	<span class="comment">//Writer对象会将缓存的数据批量写入底层的io.Writer接口</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">//Flush把缓冲区中的数据写入底层的io.Writer</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">//Write把p写入缓冲区，返回已写入的字节数。</span></span><br><span class="line">	<span class="comment">//如果nn小于len(p)，则同时返回一个错误说明原因。</span></span><br><span class="line"></span><br><span class="line">	wb1 := bytes.NewBuffer(<span class="literal">nil</span>)</span><br><span class="line">	w1 := bufio.NewWriter(wb1)</span><br><span class="line">	w1.Write([]<span class="keyword">byte</span>(<span class="string">"hello, world"</span>))</span><br><span class="line">	fmt.Println(<span class="built_in">len</span>(wb1.Bytes()), <span class="keyword">string</span>(wb1.Bytes()))</span><br><span class="line">	w1.Flush()</span><br><span class="line">	fmt.Println(<span class="built_in">len</span>(wb1.Bytes()), <span class="keyword">string</span>(wb1.Bytes()))</span><br><span class="line"></span><br><span class="line">	<span class="comment">//NewWriterSize + WriteByte</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">//NewWriterSize</span></span><br><span class="line">	<span class="comment">//创建支持缓存写的具有指定长度缓冲区的Writer对象，</span></span><br><span class="line">	<span class="comment">//Writer对象会将缓存的数据批量写入底层的io.Writer接口</span></span><br><span class="line">	<span class="comment">//如果缓冲区很小，缓冲区满后会自动Flush。</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">//WriteByte</span></span><br><span class="line">	<span class="comment">//写入一个字节</span></span><br><span class="line"></span><br><span class="line">	wb2 := bytes.NewBuffer(<span class="literal">nil</span>)</span><br><span class="line">	w2 := bufio.NewWriterSize(wb2, <span class="number">1024</span>)</span><br><span class="line">	w2.WriteByte(<span class="string">'a'</span>)</span><br><span class="line">	fmt.Println(<span class="built_in">len</span>(wb2.Bytes()), <span class="keyword">string</span>(wb2.Bytes()))</span><br><span class="line">	w2.Flush()</span><br><span class="line">	fmt.Println(<span class="built_in">len</span>(wb2.Bytes()), <span class="keyword">string</span>(wb2.Bytes()))</span><br><span class="line"></span><br><span class="line">	<span class="comment">//WriteRune</span></span><br><span class="line">	<span class="comment">//WriteRune以UTF-8编码写入一个Unicode字符，返回写入的字节数和错误。</span></span><br><span class="line">	wb3 := bytes.NewBuffer(<span class="literal">nil</span>)</span><br><span class="line">	w3 := bufio.NewWriter(wb3)</span><br><span class="line">	w3.WriteRune(<span class="string">'好'</span>)</span><br><span class="line">	w3.Flush()</span><br><span class="line">	fmt.Println(<span class="keyword">string</span>(wb3.Bytes()))</span><br><span class="line"></span><br><span class="line">	<span class="comment">//WriteString</span></span><br><span class="line">	<span class="comment">//WriteString写入一个字符串，返回写入的字节数。</span></span><br><span class="line">	<span class="comment">//如果返回的字节数小于len(s)，则同时返回一个错误说明原因。</span></span><br><span class="line">	wb4 := bytes.NewBuffer(<span class="literal">nil</span>)</span><br><span class="line">	w4 := bufio.NewWriter(wb4)</span><br><span class="line">	w4.WriteString(<span class="string">"hello, shandong!"</span>)</span><br><span class="line">	w4.Flush()</span><br><span class="line">	fmt.Println(<span class="keyword">string</span>(wb4.Bytes()))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/05/go/go获取当前时间/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/02/05/go/go获取当前时间/" itemprop="url">go获取当前时间</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-02-05T11:26:23+08:00">
-                2020-02-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/随笔/" itemprop="url" rel="index">
-                    <span itemprop="name">随笔</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    <span class="string">"time"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"></span><br><span class="line">    t := time.Now()   <span class="comment">//2019-07-31 13:55:21.3410012 +0800 CST m=+0.006015601</span></span><br><span class="line">    fmt.Println(t.Format(<span class="string">"20060102150405"</span>))</span><br><span class="line"></span><br><span class="line">    <span class="comment">//当前时间戳</span></span><br><span class="line">    t1 := time.Now().Unix()  <span class="comment">//1564552562</span></span><br><span class="line">    fmt.Println(t1)</span><br><span class="line">    <span class="comment">//时间戳转化为具体时间</span></span><br><span class="line">    fmt.Println(time.Unix(t1, <span class="number">0</span>).String())</span><br><span class="line"></span><br><span class="line">    <span class="comment">//基本格式化的时间表示</span></span><br><span class="line">    fmt.Println(time.Now().String()) <span class="comment">//2019-07-31 13:56:35.7766729 +0800 CST m=+0.005042501</span></span><br><span class="line"></span><br><span class="line">    fmt.Println(time.Now().Format(<span class="string">"2006-01-02"</span>))  <span class="comment">//2019-07-31</span></span><br><span class="line">    fmt.Println(time.Now().Format(<span class="string">"2006-01-02 15:04:05"</span>))  <span class="comment">//2019-07-31 13:57:52</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+            <p>![image-20200216170659547](/Users/hhh/Library/Application Support/typora-user-images/image-20200216170659547.png)</p>
+<p>上一讲：</p>
+<p>![image-20200216170812969](/Users/hhh/Library/Application Support/typora-user-images/image-20200216170812969.png)</p>
+<p>VC-bound：</p>
+<p>坏事发生的几率很小。</p>
+<p>对式子进行改写。</p>
+<p>两个条件，使得Ein 接近 Eout：</p>
+<p>1、好的的假设集（有break point）</p>
+<p>2、够大的数据集（才能确保坏事发生的几率很低）</p>
+<p>才能说能够学习。</p>
+<p>3、加上一个好的算法，那么就可以说学到东西了。</p>
+<p>4、再加上一点好的运气</p>
+<p>![image-20200216171230043](/Users/hhh/Library/Application Support/typora-user-images/image-20200216171230043.png)</p>
+<p>VC维：给max non-break point 一个正式的定义。</p>
+<p>如break point为k，dvc = k-1</p>
+<p>如果不存在k，那么就说dvc无限大。</p>
+<p>若N够大，且dvc&gt;2，就可以认为增长函数小于N^dvc。</p>
+<p>![image-20200216171529548](/Users/hhh/Library/Application Support/typora-user-images/image-20200216171529548.png)</p>
+<p>四种增长函数的VC维。</p>
+<p>好的hypothesis set：存在确切的dvc。</p>
+<p>![image-20200216171655891](/Users/hhh/Library/Application Support/typora-user-images/image-20200216171655891.png)</p>
+<p>如果有确切的dvc，就可以说Eout接近Ein。</p>
+<p>与算法如何选择g无关，就是说就算该算法是糟糕的，也能说Ein与Eout接近。</p>
+<p>与数据的分布无关，与目标长什么样也无关。</p>
+<p>![image-20200216172004604](/Users/hhh/Library/Application Support/typora-user-images/image-20200216172004604.png)</p>
+<p>所以在最坏的情况下，Ein和Eout都是很接近的。</p>
+<p>对于二维感知器：</p>
+<p>dvc = 3.</p>
+<p>对于多维的情况，可以实现吗？</p>
+<p>![image-20200216172324698](/Users/hhh/Library/Application Support/typora-user-images/image-20200216172324698.png)</p>
+<p>猜想：</p>
+<p>对于D个维度，dvc = D + 1.</p>
+<p>反证法证明。</p>
+<p>![image-20200216172514030](/Users/hhh/Library/Application Support/typora-user-images/image-20200216172514030.png)</p>
+<p>对于一组特别的数据：</p>
+<p>共有N+1个数据：</p>
+<p>第一组是第一列，全为1，其余各组在各个维度为1，其余为0.</p>
+<p>![image-20200216172848658](/Users/hhh/Library/Application Support/typora-user-images/image-20200216172848658.png)</p>
+<p>该矩阵存在逆阵，</p>
+<p>并且可以把shatter理解为 sign(Xw) = y。（每个二分都能够正确分类）</p>
+<p>可以得出w的等式。</p>
+<p>所以通过这个w，就可以做到预测正确，就可以shatter这一组y。</p>
+<p>也就是说，我们能够通过感知器成功把N+1维的数据完全分开，所以dvc会大于等于 d+1</p>
+<p>![image-20200216173223833](/Users/hhh/Library/Application Support/typora-user-images/image-20200216173223833.png)</p>
+<p>证明 dvc 小于等于 d+1.</p>
+<p>对于一组特殊的点，感知器无法将其分开，可以得到一个数学等式。</p>
+<p>得出结论：如果把x4表示成其他三个向量的线性组合的话，就会限制感知器作出二分的数量。</p>
+<p>![image-20200216174044598](/Users/hhh/Library/Application Support/typora-user-images/image-20200216174044598.png)</p>
+<p>推广到一半的情形：</p>
+<p>矩阵中：行比列多的时候，总有一个向量能够被其他向量线性表示。</p>
+<p>因为第d+2个向量可以用前d+1个向量表示，所以前d+1个向量确定了，那么所有的d+2个向量也就确定了，这样所有的d+2个向量永远也不能遍历所有情况。</p>
+<p>![image-20200216174823830](/Users/hhh/Library/Application Support/typora-user-images/image-20200216174823830.png)</p>
+<p>现在，便证明了dvc会大于等于d+1，也会小于等于d+1，所以得出结论，dvc = d + 1.</p>
+<p>![image-20200216175929960](/Users/hhh/Library/Application Support/typora-user-images/image-20200216175929960.png)</p>
+<p>dvc 约为 有多少个可自由调整的参数（自由度）。</p>
+<p>![image-20200216180027565](/Users/hhh/Library/Application Support/typora-user-images/image-20200216180027565.png)</p>
+<p>有了dvc之后，就可以取代M了。</p>
+<p>![image-20200216180248546](/Users/hhh/Library/Application Support/typora-user-images/image-20200216180248546.png)</p>
+<p>VC-bound：</p>
+<p>坏事发生的概率很小。推出好事情发生的概率较大。</p>
+<p>![image-20200216181040400](/Users/hhh/Library/Application Support/typora-user-images/image-20200216181040400.png)</p>
+<p>得出：有多大的几率Ein和Eout很接近。</p>
+<p>得出Eout的置信区间。</p>
+<p>![image-20200216181242207](/Users/hhh/Library/Application Support/typora-user-images/image-20200216181242207.png)</p>
+<p>所以VC维告诉我们的是：有很高的几率Ein和Eout会很接近。</p>
+<p>![image-20200216181624024](/Users/hhh/Library/Application Support/typora-user-images/image-20200216181624024.png)</p>
+<p>VC维还可以和数据量的关系。</p>
+<p>![image-20200216181927089](/Users/hhh/Library/Application Support/typora-user-images/image-20200216181927089.png)</p>
+<p>![image-20200216182328517](/Users/hhh/Library/Application Support/typora-user-images/image-20200216182328517.png)</p>
+<p>![image-20200216182446968](/Users/hhh/Library/Application Support/typora-user-images/image-20200216182446968.png)</p>
 
           
         
@@ -1050,7 +811,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/05/go/go实现定期运行任务/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/15/人工智能/机器学习基石/06_Theroy-of-Generalization/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -1069,7 +830,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/02/05/go/go实现定期运行任务/" itemprop="url">go实现定期运行任务</a></h1>
+                <a class="post-title-link" href="/2020/02/15/人工智能/机器学习基石/06_Theroy-of-Generalization/" itemprop="url">06_Theroy of Generalization</a></h1>
         
 
         <div class="post-meta">
@@ -1081,8 +842,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-02-05T11:24:36+08:00">
-                2020-02-05
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-02-15T16:30:02+08:00">
+                2020-02-15
               </time>
             
 
@@ -1104,8 +865,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/随笔/" itemprop="url" rel="index">
-                    <span itemprop="name">随笔</span>
+                  <a href="/categories/人工智能-机器学习基石/" itemprop="url" rel="index">
+                    <span itemprop="name">人工智能 - 机器学习基石</span>
                   </a>
                 </span>
 
@@ -1143,8 +904,95 @@
       
         
           
-            <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    GlobalLimit := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">string</span>, <span class="number">1</span>) </span><br><span class="line">    <span class="keyword">for</span> &#123;</span><br><span class="line">        GlobalLimit &lt;- <span class="string">"s"</span></span><br><span class="line">        time.AfterFunc(<span class="number">3</span>*time.Second, <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">            fmt.Println(<span class="string">"1"</span>)</span><br><span class="line">            <span class="comment">//写你的业务逻辑</span></span><br><span class="line">            &lt;-GlobalLimit</span><br><span class="line">        &#125;)</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+            <p>![image-20200215141046764](/Users/hhh/Library/Application Support/typora-user-images/image-20200215141046764.png)</p>
+<p>增长函数：</p>
+<p>![image-20200215141454170](/Users/hhh/Library/Application Support/typora-user-images/image-20200215141454170.png)</p>
+<p>假设：一个增长函数的最小的break point 是当 k = 2的时候：</p>
+<p>break point = 2， 即说明没有一条线能够把某两个点完全分开。</p>
+<p>当一个点时，有两种，两个点时最多有3种（因为break point为2），</p>
+<p>所以三个点时，最多可以产生几种线呢？ </p>
+<p>1、只有一个二分的时候：</p>
+<p>满足情况。没有线能够把某两个点完全分开。因为点的分布只有一种情况。</p>
+<p>若想找到能将某两个点完全分开的线，最少需要4种二分。</p>
+<p>![image-20200215144641407](/Users/hhh/Library/Application Support/typora-user-images/image-20200215144641407.png)</p>
+<p>2、有4种二分的时候：</p>
+<p>有可能存在：</p>
+<p>![image-20200215144837400](/Users/hhh/Library/Application Support/typora-user-images/image-20200215144837400.png)</p>
+<p>所以这4种划分，不能存在于假设集合当中。</p>
+<p>所以找到4种二分时的另一种情形：</p>
+<p>![image-20200215145028846](/Users/hhh/Library/Application Support/typora-user-images/image-20200215145028846.png)</p>
+<p>3、但是当二分的数目大于等于5个时，会发现无论哪种划分，都会出现某两个点完全分开的情况，所以4种二分是极限。</p>
+<p>![image-20200215145216699](/Users/hhh/Library/Application Support/typora-user-images/image-20200215145216699.png)</p>
+<p>所以当存在break point时，似乎对于后来增长函数的趋势有一些限制，</p>
+<p>能否找到一个多项式来表达假设集合里的最多的可能性，那么就可以认为这个感知器是可以学的到东西的。</p>
+<p>上限函数：</p>
+<p>已知一个增长函数在k的地方是break point，则请说出这个增长函数最多有多少种二分。</p>
+<p>用向量表示。</p>
+<p>如果可以找到这个上限函数，就可以不用考虑假说集中的细节问题。</p>
+<p>比如：有两个增长函数，他们的break point都发生在3的地方，那么只要分析B(N, 3)的地方，就是上限函数在N个点的情况下，break point是3的情形。而不用对两个增长函数进行讨论。</p>
+<p>![image-20200215150613492](/Users/hhh/Library/Application Support/typora-user-images/image-20200215150613492.png)</p>
+<p>证明：上限函数是按多项式的形式的。</p>
+<p>先对下表简单部分进行填写。</p>
+<p>![image-20200215150937091](/Users/hhh/Library/Application Support/typora-user-images/image-20200215150937091.png)</p>
+<p>接下来填B(4, 3)</p>
+<p>![image-20200215151204390](/Users/hhh/Library/Application Support/typora-user-images/image-20200215151204390.png)</p>
+<p>猜想可能B（4，3）和 B（3，？）有一定的关系。</p>
+<p>B（4，3）找到11种解。</p>
+<p>![image-20200215151407652](/Users/hhh/Library/Application Support/typora-user-images/image-20200215151407652.png)</p>
+<p>将B（4，3）这个解做一个整理（排列组合）找出特性。</p>
+<p>01和05、02和08、03和10、04和11 可以认为是成双成对的。</p>
+<p>![image-20200215151638033](/Users/hhh/Library/Application Support/typora-user-images/image-20200215151638033.png)</p>
+<p>对于3个点来说（我们可以看作把第四个去掉）</p>
+<p>在有四个点的情况下，任意的三个点都不能做二分，就会得出：</p>
+<p>$\alpha + \beta$ 会小于等于 B（3，3），就是会小于有三个点的情况下，任意的三个点都能做二分。</p>
+<p>![image-20200215152751256](/Users/hhh/Library/Application Support/typora-user-images/image-20200215152751256.png)</p>
+<p>还可以得出 在$\alpha$ 中，x1、x2、x3任意两个点都不够组成所有二分。</p>
+<p>如果任意两个可以组成所有二分，那么加上x4之后，就会变成3个点可以组成所有二分。</p>
+<p>![image-20200215153413901](/Users/hhh/Library/Application Support/typora-user-images/image-20200215153413901.png)</p>
+<p>所以合起来：</p>
+<p>![image-20200215153446859](/Users/hhh/Library/Application Support/typora-user-images/image-20200215153446859.png)</p>
+<p>然后把4换成N，3换成k，结论还是一样的。</p>
+<p>所以我们就可以得到表中某些表的上限。</p>
+<p>所以我们就得到了上限函数的上限。</p>
+<p>![image-20200215153516597](/Users/hhh/Library/Application Support/typora-user-images/image-20200215153516597.png)</p>
+<p>可以使用数学归纳法证明下列不等式。</p>
+<p>那么就可以得到：</p>
+<p>增长函数会被上限函数限制，上限函数会被上限的上限限制住，并且这个上限的上限会被一个多项式限制，这个多项式与break point有关。</p>
+<p>![image-20200215154144965](/Users/hhh/Library/Application Support/typora-user-images/image-20200215154144965.png)</p>
+<p>对于二位感知器的模型，虽然我们找不到它的增长函数，但是我们知道break point是4，所以我们可以求出上限的上限，是一个3次方的多项式。</p>
+<p>![image-20200215154518290](/Users/hhh/Library/Application Support/typora-user-images/image-20200215154518290.png)</p>
+<p>我们可以将原本的不等式进行一个小的变形：</p>
+<p>![image-20200215154826299](/Users/hhh/Library/Application Support/typora-user-images/image-20200215154826299.png)</p>
+<p>证明：</p>
+<p>第一步：</p>
+<p>Ein是有限个（输入为N个），Eout是无限多个的。</p>
+<p>思考：能否把无限多个点Eout替换成一个有限多个的数。</p>
+<p>再另外找N个点，设为D‘，得出的估计为Ein’，</p>
+<p>把各种不同的数据集拿列出来，那么中点会是在Eout的地方。</p>
+<p>若现在有一个坏事发生（即Ein和Eout离得很远），那么会有大于0.5的几率Ein‘和Ein离得很远，</p>
+<p>所以我们的坏事的概率可以从 Ein - Eout 转化成 Ein - Ein‘。</p>
+<p>所以就可以把Eout换掉。</p>
+<p>（用验证集来代替生产环境的数据）</p>
+<p>![image-20200215161426857](/Users/hhh/Library/Application Support/typora-user-images/image-20200215161426857.png)</p>
+<p>第二步：</p>
+<p>当我们的假说在D和D‘上作出一样的二分的话， 那么，二者的Ein和Ein‘也会一样。</p>
+<p>所以把所有的二分分成2N种。就是说在这2N个点上，看作出多少种二分。</p>
+<p>那么就最多会有 mH(2N) 那么多种二分，每一种抓一种代表出来，就可以做union bound了。</p>
+<p>![image-20200215162136353](/Users/hhh/Library/Application Support/typora-user-images/image-20200215162136353.png)</p>
+<p>第三步：</p>
+<p>观察Ein和Ein‘的差别。</p>
+<p>![image-20200215162340694](/Users/hhh/Library/Application Support/typora-user-images/image-20200215162340694.png)</p>
+<p>总结：</p>
+<p>机器学习中的定理：Vapnik-Chervonenkis(VC)bound</p>
+<p>![image-20200215162454459](/Users/hhh/Library/Application Support/typora-user-images/image-20200215162454459.png)</p>
+<p>所以可以得出：</p>
+<p>对于二位感知器：</p>
+<p>break point是4，他的增长函数最多对多不会跑得比n^3快。</p>
+<p>当N够大的时候，坏事发生的几率就会很小。</p>
+<p>所以算法选最小Ein就可以看成，那个g大概就会接近f。</p>
+<p>也就是说，点够多的时候，PLA的算法，真的可以达到机器学习的效果。</p>
+<p>但是任意维度的还未得到证明，只证明了2D维度的。</p>
+<p>![image-20200215163157335](/Users/hhh/Library/Application Support/typora-user-images/image-20200215163157335.png)</p>
 
           
         
@@ -1193,7 +1041,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/05/go/go_build-不同系统下的可执行文件/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/14/人工智能/机器学习基石/05_Training-versus-Testing/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -1212,7 +1060,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/02/05/go/go_build-不同系统下的可执行文件/" itemprop="url">go_build-不同系统下的可执行文件</a></h1>
+                <a class="post-title-link" href="/2020/02/14/人工智能/机器学习基石/05_Training-versus-Testing/" itemprop="url">05_Training versus Testing</a></h1>
         
 
         <div class="post-meta">
@@ -1224,8 +1072,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-02-05T11:22:27+08:00">
-                2020-02-05
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-02-14T16:17:29+08:00">
+                2020-02-14
               </time>
             
 
@@ -1247,8 +1095,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/随笔/" itemprop="url" rel="index">
-                    <span itemprop="name">随笔</span>
+                  <a href="/categories/人工智能-机器学习基石/" itemprop="url" rel="index">
+                    <span itemprop="name">人工智能 - 机器学习基石</span>
                   </a>
                 </span>
 
@@ -1286,18 +1134,96 @@
       
         
           
-            <p>Golang 支持在一个平台下生成另一个平台可执行程序的交叉编译功能。</p>
-<p><strong>1、Mac下编译Linux, Windows平台的64位可执行程序：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build test.go</span><br><span class="line">$ CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build test.go</span><br></pre></td></tr></table></figure>
-
-<p><strong>2、Linux下编译Mac, Windows平台的64位可执行程序：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ CGO_ENABLED=0 GOOS=darwin GOARCH=amd64 go build test.go</span><br><span class="line">$ CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build test.go</span><br></pre></td></tr></table></figure>
-
-<p><strong>3、Windows下编译Mac, Linux平台的64位可执行程序：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ SET CGO_ENABLED=0SET GOOS=darwin3 SET GOARCH=amd64 go build test.go</span><br><span class="line">$ SET CGO_ENABLED=0 SET GOOS=linux SET GOARCH=amd64 go build  test.go</span><br></pre></td></tr></table></figure>
-
-<p>注：如果编译web等工程项目，直接cd到工程目录下直接执行以上命令</p>
-<p>GOOS：目标可执行程序运行操作系统，支持 darwin，freebsd，linux，windows<br>GOARCH：目标可执行程序操作系统构架，包括 386，amd64，arm</p>
+            <p>![image-20200214161650400](/Users/hhh/Library/Application Support/typora-user-images/image-20200214161650400.png)</p>
+<p>假如假设：</p>
+<p>训练的数据和测试假设（hypothesis）的数据，都来自同一个分布。</p>
+<p>Ein()：在训练数据中假设的表现</p>
+<p>Eout()：在测试集上假设的表现</p>
+<p>二者来自于同分布。</p>
+<p>若假设的集合不太大，并且数据量足够多的话，就能够确保对于每一个假设，Ein和Eout都会长得很像（近似相等），不论算法实际上是如何选择假设。</p>
+<p>那么算法只要选择Ein最低的假设，若Ein很接近0的话，那么Eout也会很接近0，就达到了学习的效果。</p>
+<p>![image-20200214162841322](/Users/hhh/Library/Application Support/typora-user-images/image-20200214162841322.png)</p>
+<p>第一次课：</p>
+<p>学习，就是又一个未知的f，我们希望通过算法能够找出一个g，使得g和未知的f非常的接近。</p>
+<p>即 Eout(g) 要很接近0，就是对于测试集错误率越小越好。</p>
+<p>第二次课：</p>
+<p>在我们的测试集上做的很好就好了。就是可以找一些方法使得 Ein 很接近0.</p>
+<p>第三次课：</p>
+<p>我们其实在一个很特定的范围下面做学习。如批次的数据，监督式的学习，二元的分类等等</p>
+<p>第四次课：</p>
+<p>Ein 很接近 Eout：</p>
+<p>如果假设的数量不是太多的话，有可能 Ein 和 Eout 可以很接近。</p>
+<p>所以第二次课的事情，真的就可以使得 g和f很接近。</p>
+<p>两个关键点：</p>
+<p>1、到底 Ein 和 Eout 是不是会很接近</p>
+<p>2、若二者可以有连接，那么如何使得 Ein 越来越小。</p>
+<p>![image-20200214163705841](/Users/hhh/Library/Application Support/typora-user-images/image-20200214163705841.png)</p>
+<p>M：假设集的大小（假设它是有限大的）</p>
+<p>M较小时：上次证明，有不等式，M越小，坏事发生的概率就很小</p>
+<p>M较大时：确实可能选到较好的假设，但是M较大，坏事发生的概率就增加了。</p>
+<p>所以M其实是很重要的，应慎重选择。</p>
+<p>所以无限多个M是不好的。</p>
+<p>![image-20200214164056822](/Users/hhh/Library/Application Support/typora-user-images/image-20200214164056822.png)</p>
+<p>假设可以使用有限大的 mH 来替换原来的 M。</p>
+<p>所以从 mH 中学到一个较好的假设。</p>
+<p>![image-20200214164232905](/Users/hhh/Library/Application Support/typora-user-images/image-20200214164232905.png)</p>
+<p>使用 union bound 的方式，来计算坏事发生的概率。</p>
+<p>但是，当 M 为很大的数字时，所以这个 union bound 就失效了。（加和的概率会很大）</p>
+<p>union bound 的可行是假设坏事发生的概率不会太大，并且重叠的概率不太高。（可以通过切比雪夫不等式推到）</p>
+<p>![image-20200214164825519](/Users/hhh/Library/Application Support/typora-user-images/image-20200214164825519.png)</p>
+<p>因为不同的假设（若这两个假设都不太差的话）之间的误差是较为接近的，所以 他们发生坏事的部分就会比较接近，所以当他们进行 union bound 的时候，就会发生over-estimating （过分估计，过分大的上限），才会造成没有办法处理M无限大的情况。</p>
+<p>所以我们必须找出这个（错误）重叠的部分，是否我们可以把这个无限多的M分成有限多个类别，每一类都差不多大，这样的话，我们也许能够找出哪些部分有重叠。</p>
+<p>![image-20200214165625782](/Users/hhh/Library/Application Support/typora-user-images/image-20200214165625782.png)</p>
+<p>所以如何将这些M个假设进行分类？</p>
+<p>1、对于一个点来说，其实线只有两类：一类认为这个点为+1， 另一个认为是 -1</p>
+<p>![image-20200214165908661](/Users/hhh/Library/Application Support/typora-user-images/image-20200214165908661.png)</p>
+<p>2、对于两个点，那么则有四类：</p>
+<p>![image-20200214170455766](/Users/hhh/Library/Application Support/typora-user-images/image-20200214170455766.png)</p>
+<p>3、若有三个输入，则有8类：</p>
+<p>![image-20200214170612497](/Users/hhh/Library/Application Support/typora-user-images/image-20200214170612497.png)</p>
+<p>若将三个点排在一条直线上：则只有6个类别</p>
+<p>![image-20200214170737920](/Users/hhh/Library/Application Support/typora-user-images/image-20200214170737920.png)</p>
+<p>4、对于四个点，最多有 16 种（错）。</p>
+<p>对于两两共线，只有14种，</p>
+<p>然后四个点在平面上，都会出现两两共线，所以对于四个点只有14种。</p>
+<p>![image-20200214170920946](/Users/hhh/Library/Application Support/typora-user-images/image-20200214170920946.png)</p>
+<p>所以对于每个数字，都要比2的n次方来的小。</p>
+<p>所以就算有无限多条线，那么“有效的线”总是有限的。计为effective(N)，然后用这个有限的数字，将M取代。</p>
+<p>那么当 effective(N)来的比 2^N 小很多的话，$exp^{-2\epsilon^2N}$ 又是随着N增大递减的，所以坏事发生的概率会接近0（当N足够大的时候），所以 Ein 和 Eout 会很接近，所以只要 Ein 很小的时候，Eout 也会很小，所以机器就学到了一条很好的线。</p>
+<p>所以就算有无限多条线，如果我们把无限多条线，换成 effective(N) 这个有限的数字，并且这个数字来的比2 ^ N 小得多的话，那么我们就可以保证可能可以学得到一个较好的东西。</p>
+<p>当然，这还是我们这阶段的假说。</p>
+<p>![image-20200214172108397](/Users/hhh/Library/Application Support/typora-user-images/image-20200214172108397.png)</p>
+<p>所以，到底有几种假说（hypothesis）呢？</p>
+<p>dichotomy：二分</p>
+<p>把点分成两类，圈和叉。我们考虑一个假设集合能够作出多少种二分。</p>
+<p>查看一共有几个dichotomy，来看是否能够将M换掉。</p>
+<p>![image-20200214190809418](/Users/hhh/Library/Application Support/typora-user-images/image-20200214190809418.png)</p>
+<p>其实，dichotomy是取决于输入的X，所以想要移除对X的依赖，所以我们只看最多有几种二分。（记录为mH）</p>
+<p>称为增长函数。</p>
+<p>我们会知道，增长函数的值是小于 2^N 的。</p>
+<p>![image-20200214191207269](/Users/hhh/Library/Application Support/typora-user-images/image-20200214191207269.png)</p>
+<p>通过如下的方法，可以使得函数变为 N+ 1</p>
+<p>全部点映射到一维（Positive Rays）（或者说对于一维输入），设置一个阈值来做分隔，然后就可以得到 N + 1 种假设（N+1条线）。</p>
+<p>![image-20200214191531811](/Users/hhh/Library/Application Support/typora-user-images/image-20200214191531811.png)</p>
+<p>下面是Positive Interval：</p>
+<p>得到新的成长函数。</p>
+<p>![image-20200214191916472](/Users/hhh/Library/Application Support/typora-user-images/image-20200214191916472.png)</p>
+<p>在凸集合之内，为+1，在凸集合之外为-1.</p>
+<p>![image-20200214192033246](/Users/hhh/Library/Application Support/typora-user-images/image-20200214192033246.png)</p>
+<p>使用凸多边形来画出边界。</p>
+<p>若找到N个点，我们可以找到一个集合，把他们包括进来，那么这个凸集合为 2 ^ N。</p>
+<p>![image-20200214192301616](/Users/hhh/Library/Application Support/typora-user-images/image-20200214192301616.png)</p>
+<p>所以有四个增长函数。</p>
+<p>![image-20200214192635051](/Users/hhh/Library/Application Support/typora-user-images/image-20200214192635051.png)</p>
+<p>考虑2D perceptrons 是多项式的还是指数的。</p>
+<p>在2D perceptrons 情况下，当4个点时，只有14种而不是16种。称为break point</p>
+<p>break point的意思其实也可以看为，在点数为break point时，无法找到一条线（或者说某一类的线），将这么多个点完全分开。</p>
+<p>![image-20200214192852371](/Users/hhh/Library/Application Support/typora-user-images/image-20200214192852371.png)</p>
+<p>一下，列出所有情况的break point</p>
+<p>猜想：break point可能与增长函数的增长速度有关。</p>
+<p>![image-20200214192936989](/Users/hhh/Library/Application Support/typora-user-images/image-20200214192936989.png)</p>
+<p>总结：</p>
+<p>![image-20200214193204846](/Users/hhh/Library/Application Support/typora-user-images/image-20200214193204846.png)</p>
 
           
         
@@ -1346,7 +1272,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/05/随笔/linux下编译、后台运行、开机启动golang程序/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/14/人工智能/机器学习基石/04_Feasibility-of-Learning/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -1365,7 +1291,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/02/05/随笔/linux下编译、后台运行、开机启动golang程序/" itemprop="url">linux下编译、后台运行、开机启动golang程序</a></h1>
+                <a class="post-title-link" href="/2020/02/14/人工智能/机器学习基石/04_Feasibility-of-Learning/" itemprop="url">04_Feasibility of Learning</a></h1>
         
 
         <div class="post-meta">
@@ -1377,8 +1303,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-02-05T11:18:46+08:00">
-                2020-02-05
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-02-14T15:36:04+08:00">
+                2020-02-14
               </time>
             
 
@@ -1400,8 +1326,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/随笔/" itemprop="url" rel="index">
-                    <span itemprop="name">随笔</span>
+                  <a href="/categories/人工智能-机器学习基石/" itemprop="url" rel="index">
+                    <span itemprop="name">人工智能 - 机器学习基石</span>
                   </a>
                 </span>
 
@@ -1439,198 +1365,7 @@
       
         
           
-            <p>编译</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go build test.go</span><br></pre></td></tr></table></figure>
-
-<p>指定输出文件</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go build -o mygameserver</span><br></pre></td></tr></table></figure>
-
-<p>修改权限命令</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod 777 程序名称</span><br></pre></td></tr></table></figure>
-
-<p>后台运行的命令</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup ./程序名 &amp;</span><br></pre></td></tr></table></figure>
-
-<p>不输出错误信息</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup ./程序名 &gt;/dev/null 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure>
-
-<p>如果要关闭程序，可以使用命令”ps” 查看后台程序的pid，然后使用“kill 程序pid”命令，关闭程序比如程序名为test，可以用如下命令查询</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps aux|grep test</span><br></pre></td></tr></table></figure>
-
-<p>关掉进程</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kill 进程编号</span><br></pre></td></tr></table></figure>
-
-<p> 开机启动glang</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/rc.local` `添加``cd gopath``nohup ./main &amp;</span><br></pre></td></tr></table></figure>
-
-<p>golang编译程序从后台运行，不出现dos窗口</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go build -ldflags <span class="string">"-H windowsgui"</span></span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/04/人工智能/Tensorflow/CH4-Tf.data_API的使用/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/02/04/人工智能/Tensorflow/CH4-Tf.data_API的使用/" itemprop="url">CH4-Tf.data_API的使用</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-02-04T23:03:36+08:00">
-                2020-02-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/人工智能-Tensorflow/" itemprop="url" rel="index">
-                    <span itemprop="name">人工智能 - Tensorflow</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ul>
-<li>Dataset 基础API的使用</li>
-<li>Dataset 读取CSV文件</li>
-<li>Dataset 读取tfrecode 文件</li>
-</ul>
-<p>API列表：</p>
-<ul>
-<li>Dataset 基础使用<ul>
-<li>tf.data.Dataset.from_tensor_slices</li>
-<li>repeat, batch, interleave, map, shuffle, list_files</li>
-</ul>
-</li>
-<li>csv<ul>
-<li>tf.data.TextLineDataset</li>
-<li>tf.io.decode_csv</li>
-</ul>
-</li>
-<li>Tfrecord<ul>
-<li>tf.train.FloatList, tf.train.Int64List, tf.train.BytesList</li>
-<li>tf.train.Feature, tf.train.Features, tf.train.Example</li>
-<li>example.SerializeToString</li>
-<li>tf.io.ParseSingleExample</li>
-<li>tf.io.VarLenFeature, tf.io.TFRecordOptions</li>
-</ul>
-</li>
-</ul>
+            <p>![image-20200214153521296](/Users/hhh/Library/Application Support/typora-user-images/image-20200214153521296.png)</p>
 
           
         
@@ -1679,7 +1414,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/03/人工智能/Tensorflow/CH3-Tensorflow基础API/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/13/人工智能/机器学习基石/03_Type-of-Learning/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -1698,7 +1433,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/02/03/人工智能/Tensorflow/CH3-Tensorflow基础API/" itemprop="url">CH3-Tensorflow基础API</a></h1>
+                <a class="post-title-link" href="/2020/02/13/人工智能/机器学习基石/03_Type-of-Learning/" itemprop="url">03_Type of Learning</a></h1>
         
 
         <div class="post-meta">
@@ -1710,8 +1445,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-02-03T16:33:37+08:00">
-                2020-02-03
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-02-13T16:25:07+08:00">
+                2020-02-13
               </time>
             
 
@@ -1733,8 +1468,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/人工智能-Tensorflow/" itemprop="url" rel="index">
-                    <span itemprop="name">人工智能 - Tensorflow</span>
+                  <a href="/categories/人工智能-机器学习基石/" itemprop="url" rel="index">
+                    <span itemprop="name">人工智能 - 机器学习基石</span>
                   </a>
                 </span>
 
@@ -1772,41 +1507,46 @@
       
         
           
-            <h3 id="一、基础API"><a href="#一、基础API" class="headerlink" title="一、基础API"></a>一、基础API</h3><p>API 列表</p>
-<ul>
-<li>基础数据类型<ul>
-<li>tf.constant, tf.string</li>
-<li>tf.ragged.constant, tf.SparseTensor, tf.Variable</li>
-</ul>
-</li>
-<li>自定义损失函数——tf.reduce_mean</li>
-<li>自定义层次—— Keras.layers.Lambda 和继承法</li>
-<li>tf.function<ul>
-<li>tf.function, tf.autograph.to_code, get_concrete_function</li>
-</ul>
-</li>
-<li>GraphDef<ul>
-<li>get_operations, get_operation_by_name</li>
-<li>get_tensor_by_name, as_graph_def</li>
-</ul>
-</li>
-<li>自动求导<ul>
-<li>tf.GradientTape</li>
-<li>Optimzier.apply_gradients</li>
-</ul>
-</li>
-</ul>
-<h3 id="二、基础API与keras的集成"><a href="#二、基础API与keras的集成" class="headerlink" title="二、基础API与keras的集成"></a>二、基础API与keras的集成</h3><h4 id="1、自定义损失函数"><a href="#1、自定义损失函数" class="headerlink" title="1、自定义损失函数"></a>1、自定义损失函数</h4><h4 id="2、自定义层次"><a href="#2、自定义层次" class="headerlink" title="2、自定义层次"></a>2、自定义层次</h4><h3 id="三、-tf-function的使用"><a href="#三、-tf-function的使用" class="headerlink" title="三、@tf.function的使用"></a>三、@tf.function的使用</h3><p>@tf.function </p>
-<ul>
-<li>将python函数编译成图</li>
-<li>易于将模型导出成为 GraphDef + checkpoint 或者 SavedModel</li>
-<li>使得 eager execution 可以默认打开</li>
-<li>1.0 的代码可以通过tf.function 来继续在2.0 里使用<ul>
-<li>替代 session</li>
-</ul>
-</li>
-</ul>
-<h4 id="1、图结构"><a href="#1、图结构" class="headerlink" title="1、图结构"></a>1、图结构</h4><h3 id="四、自定义求导"><a href="#四、自定义求导" class="headerlink" title="四、自定义求导"></a>四、自定义求导</h3>
+            <p>![image-20200213152630337](/Users/hhh/Library/Application Support/typora-user-images/image-20200213152630337.png)</p>
+<p>二分类问题是机器学习中的一种非常基础和常见的问题，由二分类问题可以进而引出多分类问题。</p>
+<p>对美元（硬币）进行分类。</p>
+<p>![image-20200213153514482](/Users/hhh/Library/Application Support/typora-user-images/image-20200213153514482.png)</p>
+<p>回归分析（输出是一个实数）：</p>
+<p>![image-20200213153746590](/Users/hhh/Library/Application Support/typora-user-images/image-20200213153746590.png)</p>
+<p>结构化的学习（输出中含有某些特定结构，要求机器学习到该结构）（端对端，结构化机器学习）：</p>
+<p>![image-20200213154245908](/Users/hhh/Library/Application Support/typora-user-images/image-20200213154245908.png)</p>
+<p>![image-20200213154331554](/Users/hhh/Library/Application Support/typora-user-images/image-20200213154331554.png)</p>
+<p>监督学习：</p>
+<p>给出标签</p>
+<p>![image-20200213154902380](/Users/hhh/Library/Application Support/typora-user-images/image-20200213154902380.png)</p>
+<p>无监督学习：</p>
+<p>没有给出标签值。</p>
+<p>![image-20200213155210483](/Users/hhh/Library/Application Support/typora-user-images/image-20200213155210483.png)</p>
+<p>![image-20200213155531445](/Users/hhh/Library/Application Support/typora-user-images/image-20200213155531445.png)</p>
+<p>半监督学习：</p>
+<p>![image-20200213155813797](/Users/hhh/Library/Application Support/typora-user-images/image-20200213155813797.png)</p>
+<p>增强学习：</p>
+<p>有输入也有输出，但输出要求给出不直接的选择，给出好还是不好。</p>
+<p>一步一步使得机器越来越好。</p>
+<p>![image-20200213160404612](/Users/hhh/Library/Application Support/typora-user-images/image-20200213160404612.png)</p>
+<p>四种不同的学习的方式，取决于想要的输出y</p>
+<p>![image-20200213160438242](/Users/hhh/Library/Application Support/typora-user-images/image-20200213160438242.png)</p>
+<p>batch learning：</p>
+<p>![image-20200213160727266](/Users/hhh/Library/Application Support/typora-user-images/image-20200213160727266.png)</p>
+<p>![image-20200213160744336](/Users/hhh/Library/Application Support/typora-user-images/image-20200213160744336.png)</p>
+<p>在线学习：</p>
+<p>![image-20200213161154829](/Users/hhh/Library/Application Support/typora-user-images/image-20200213161154829.png)</p>
+<p>主动学习：</p>
+<p>类似于机器可以问问题。</p>
+<p>通常用于取得标记很贵的时候。</p>
+<p>![image-20200213161450568](/Users/hhh/Library/Application Support/typora-user-images/image-20200213161450568.png)</p>
+<p>![image-20200213161555522](/Users/hhh/Library/Application Support/typora-user-images/image-20200213161555522.png)</p>
+<p>具体的特征：</p>
+<p>通常有人类的认知体现在里面</p>
+<p>![image-20200213161958500](/Users/hhh/Library/Application Support/typora-user-images/image-20200213161958500.png)</p>
+<p>![image-20200213162711417](/Users/hhh/Library/Application Support/typora-user-images/image-20200213162711417.png)</p>
+<p>![image-20200213162745234](/Users/hhh/Library/Application Support/typora-user-images/image-20200213162745234.png)</p>
+
           
         
       
@@ -1854,7 +1594,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/01/人工智能/Tensorflow/CH2-Tensorflow-keras实战/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/13/人工智能/机器学习基石/02_Learning-to-Answer-Yes_No/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -1873,7 +1613,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/02/01/人工智能/Tensorflow/CH2-Tensorflow-keras实战/" itemprop="url">CH2-Tensorflow-keras实战</a></h1>
+                <a class="post-title-link" href="/2020/02/13/人工智能/机器学习基石/02_Learning-to-Answer-Yes_No/" itemprop="url">02_Learning to Answer Yes_No</a></h1>
         
 
         <div class="post-meta">
@@ -1885,8 +1625,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-02-01T15:08:28+08:00">
-                2020-02-01
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-02-13T16:21:27+08:00">
+                2020-02-13
               </time>
             
 
@@ -1908,8 +1648,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/人工智能-Tensorflow/" itemprop="url" rel="index">
-                    <span itemprop="name">人工智能 - Tensorflow</span>
+                  <a href="/categories/人工智能-机器学习基石/" itemprop="url" rel="index">
+                    <span itemprop="name">人工智能 - 机器学习基石</span>
                   </a>
                 </span>
 
@@ -1947,258 +1687,460 @@
       
         
           
-            <h2 id="（一）理论部分"><a href="#（一）理论部分" class="headerlink" title="（一）理论部分"></a>（一）理论部分</h2><h3 id="一、Tensorflow-keras简介"><a href="#一、Tensorflow-keras简介" class="headerlink" title="一、Tensorflow-keras简介"></a>一、Tensorflow-keras简介</h3><h4 id="1、keras是什么"><a href="#1、keras是什么" class="headerlink" title="1、keras是什么"></a>1、keras是什么</h4><ul>
-<li>基于python的高级神经网络API</li>
-<li>Francois Chollet 于 2014 - 2015 年编写Keras</li>
-<li>以Tensorflow、CNTK或者Theano为后端运行，keras必须有后端才可以运行<ul>
-<li>后端可以切换，现在多用tensorflow</li>
-</ul>
-</li>
-<li>极方便于快速实验，帮助用户以最少的时间验证自己的想法</li>
-</ul>
-<h4 id="2、Tensorflow-kears是什么"><a href="#2、Tensorflow-kears是什么" class="headerlink" title="2、Tensorflow-kears是什么"></a>2、Tensorflow-kears是什么</h4><ul>
-<li>Tensorflow对Kears API规范的实现</li>
-<li>相对于以tensorflow为后端的keras，Tensorflow-keras与Tensorflow结合更加紧密</li>
-<li>实现在tf.keras空间下</li>
-</ul>
-<h4 id="3、Tf-keras-和-Keras-联系"><a href="#3、Tf-keras-和-Keras-联系" class="headerlink" title="3、Tf.keras 和 Keras 联系"></a>3、Tf.keras 和 Keras 联系</h4><ul>
-<li>基于同一套API<ul>
-<li>keras程序可以通过改导入方式轻松转为tf.keras程序</li>
-<li>反之不可能成立，因为tf.keras有其他特性</li>
-</ul>
-</li>
-<li>相同的JSON和HDF5模型序列化格式和语义</li>
-</ul>
-<h4 id="4、Tf-keras-和-Keras-区别"><a href="#4、Tf-keras-和-Keras-区别" class="headerlink" title="4、Tf.keras 和 Keras 区别"></a>4、Tf.keras 和 Keras 区别</h4><ul>
-<li>Tf.keras全面支持eager mode<ul>
-<li>只是用keras.Sequential 和 keras.Model时没有影响</li>
-<li>自定义Model内部运算逻辑的时候会有影响<ul>
-<li>Tf低层API可以使用keras的model.fit等抽象</li>
-<li>适用于研究人员</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Tf.keras支持基于tf.data模型训练</li>
-<li>Tf.keras支持TPU训练</li>
-<li>Tf.keras支持tf.distribution中的分布式策略</li>
-<li>其他特性<ul>
-<li>Tf.keras可以与Tensorflow中的estimator集成</li>
-<li>Tf.keras可以保存为SavedModel</li>
-</ul>
-</li>
-</ul>
-<h4 id="5、如何选择"><a href="#5、如何选择" class="headerlink" title="5、如何选择"></a>5、如何选择</h4><ul>
-<li>如果想用到Tf.keras的任何一个特性，那么选Tf.keras</li>
-<li>如果后端互换性很重要，那么选kreas</li>
-<li>如果都不重要，那随便</li>
-</ul>
-<h3 id="二、分类问题、回归问题、损失函数"><a href="#二、分类问题、回归问题、损失函数" class="headerlink" title="二、分类问题、回归问题、损失函数"></a>二、分类问题、回归问题、损失函数</h3><h4 id="1、分类问题与回归问题"><a href="#1、分类问题与回归问题" class="headerlink" title="1、分类问题与回归问题"></a>1、分类问题与回归问题</h4><ul>
-<li>分类问题预测的是类别，模型的输出是概率分布<ul>
-<li>三分类问题输出例子：[0.2, 0.7, 0.1]</li>
-</ul>
-</li>
-<li>回归问题预测的是值，模型的输出是一个实数值</li>
-</ul>
-<p>分类问题：</p>
+            <p>![image-20200213123854013](/Users/hhh/Library/Application Support/typora-user-images/image-20200213123854013.png)</p>
+<p>从数据出发，机器学习数据，从所有的可能性H中，选出最适合的一个g，使得g无限接近f。</p>
+<p>![image-20200213124228686](/Users/hhh/Library/Application Support/typora-user-images/image-20200213124228686.png)</p>
+<p>perceptron：感知器</p>
+<p>w：权重</p>
+<p>threshold：阈值</p>
+<p>![image-20200213124822364](/Users/hhh/Library/Application Support/typora-user-images/image-20200213124822364.png)</p>
+<p>感知器在二位空间下：</p>
+<p>![image-20200213125141703](/Users/hhh/Library/Application Support/typora-user-images/image-20200213125141703.png)</p>
+<p>此时的感知器，就是线性的二分类模型。</p>
+<p>如何设计一个算法，从这么多的线中选出一条最适合的线？</p>
+<p>1、要求g和f在我们所看过的资料上，很接近：g ～ f on D</p>
+<p>2、难点：存在大量的线</p>
+<p>3、设计：已经存在一条线，然后对其进行修正，从而最终达到效果。（训练）</p>
+<p>用W0来代表一开始的线。</p>
+<p>![image-20200213125832963](/Users/hhh/Library/Application Support/typora-user-images/image-20200213125832963.png)</p>
+<p>找到这条线犯的错误的某一点，就是说这条线在这个点犯错，然后对其进行修正。</p>
+<p>1、每次只考虑一个点的更新</p>
+<p>2、从w和x的夹角来判断：</p>
+<p>若要正的，使得w和x接近一点，相反，若要负的，使得w和x离远一点。</p>
+<p>3、知道所有的输入都能够被正确分类，则得到最终的g。</p>
+<p><strong>知错能改算法</strong></p>
+<p>![image-20200213130238560](/Users/hhh/Library/Application Support/typora-user-images/image-20200213130238560.png)</p>
+<p>Cyclic PLA（循转的PLA，循环找到所有人，直到转完一圈）</p>
+<p>当然也可以选择随机跳转，但只要保证能够走完所有人。</p>
+<p>![image-20200213130340089](/Users/hhh/Library/Application Support/typora-user-images/image-20200213130340089.png)</p>
+<p>这个算法当所有的点都正确时，则会停止，那么，这个算法一定会停止吗？</p>
+<p>还有感知器算法的其他问题：</p>
+<p>![image-20200213131245432](/Users/hhh/Library/Application Support/typora-user-images/image-20200213131245432.png)</p>
+<p>PLA的停止：</p>
+<p>1、要求输入的数据要<strong>线性可分</strong>。</p>
+<p>若不满足线性可分，永远无法找到一条线，使得二者分开。</p>
+<p>![image-20200213132016693](/Users/hhh/Library/Application Support/typora-user-images/image-20200213132016693.png)</p>
+<p>使得 min（ynWTXn）——&gt; 离线最近的点都要大于0.</p>
+<p>假设得到最优的wf，那么wf和我们真正在找的wt的关系：</p>
+<p>可以认为判断wt和wf接不接近。</p>
+<p>可通过求内积的方法判断两个向量接不接近。</p>
+<p>若内积的值越大，某种角度来说，两个向量越接近。</p>
+<p>![image-20200213132748469](/Users/hhh/Library/Application Support/typora-user-images/image-20200213132748469.png)</p>
+<p>处理向量长度的问题：</p>
+<p>两个向量内积越大，不一定是角度的影响，也可能是向量长度的问题，长度越大，内积越大。</p>
+<p>原则：犯错才更新。</p>
+<p>可以得出：w(t+1) 每次最多涨最长的xn的平方。</p>
+<p>前面说到，wt和wf每次都会越来越靠近，每次都会靠近一定的份量。</p>
+<p>现在有表明，wt慢慢地涨。</p>
+<p>可以得出：两个向量的内积，真的就代表二者的角度。</p>
+<p>证明：李航统计学习方法P31，Novikoff定理。</p>
+<p>![image-20200213133835545](/Users/hhh/Library/Application Support/typora-user-images/image-20200213133835545.png)</p>
+<p>所以证明了这个PLA算法在线性可分时，一定会停下来。</p>
+<p>算法的好处：简单，快速</p>
+<p>坏处：数据要求线性可分。但我们并不知道数据是否真正线性可分。另外，就算认为线性可分，但是何时会停止？</p>
+<p>所以我们并不知道PLA是否会停，就算假设它会停，也不知道多久会停。</p>
+<p>所以PLA在实际应用的时候，还是会遇到一些问题的。</p>
+<p>![image-20200213134232636](/Users/hhh/Library/Application Support/typora-user-images/image-20200213134232636.png)</p>
+<p>如果非线性可分时。</p>
+<p>样本可能存在噪声（总体线性可分），所以如何在存在噪声的情况下找到那个最适合的分隔线。</p>
+<p>假设噪声是很小的。————&gt; 无法找到一条完美的线，那么我们就找到一条最好的线（就是找到犯错误最小的线在给定的输入下）</p>
+<p>现在在CS下，还是NP-hard问题，就是找不到一个算法来找到犯错最小的线。即：</p>
+<p>![image-20200213134828502](/Users/hhh/Library/Application Support/typora-user-images/image-20200213134828502.png)</p>
+<p>![image-20200213134906500](/Users/hhh/Library/Application Support/typora-user-images/image-20200213134906500.png)</p>
+<p>另一种算法，找到差不多的线，不见得是最完美的线。</p>
+<p>有一点贪心的做法。</p>
+<p>把我们认为最好的线总是抓在手上。</p>
+<p>Pocket Algorithm。</p>
+<p>每次找到一条新的线（随机的找）时，判断当前哪个好，然后选择。</p>
+<p>但是循环结束的条件要自己设置。（遍历次数自己设置）</p>
+<p>![image-20200213135150590](/Users/hhh/Library/Application Support/typora-user-images/image-20200213135150590.png)</p>
+<p>但是在线性可分的情况下，修正算法不如PLA来的快：</p>
+<p>1、修正算法需要对比，存储</p>
+<p>对比两条线，实际上是将所有的点进行两次计算。而PLA只是找到某一个错误的点，对其进行修正。所以修正算法来的比PLA慢，在线性可分的情况下。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/13/人工智能/机器学习基石/01_The-Learning-Problem/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/02/13/人工智能/机器学习基石/01_The-Learning-Problem/" itemprop="url">01_The Learning Problem</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-02-13T16:19:35+08:00">
+                2020-02-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/人工智能-机器学习基石/" itemprop="url" rel="index">
+                    <span itemprop="name">人工智能 - 机器学习基石</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p> 什么是机器学习</p>
+<p>学习（获得技巧）：从观察出发，经过脑子的转化，变成一个技巧。</p>
+<p>![image-20200212223353499](/Users/hhh/Library/Application Support/typora-user-images/image-20200212223353499.png)</p>
+<p>机器学习：从数据的积累来获得技巧</p>
+<p>![image-20200212223544399](/Users/hhh/Library/Application Support/typora-user-images/image-20200212223544399.png)</p>
+<p>什么是技巧？</p>
+<p> 某种表现的增进。（如预测的准确性）</p>
+<p>机器学习：</p>
+<p>从数据出发，经过电脑的计算之后，最终得到某一种表现的增进。</p>
+<p>Machin Learning:</p>
+<p>improving some preformace measure with experience computed from data.</p>
+<p>![image-20200212223753894](/Users/hhh/Library/Application Support/typora-user-images/image-20200212223753894.png)</p>
+<p>为什么使用机器学习？</p>
+<p>机器学习的应用：</p>
 <ul>
-<li>需要衡量目标类别与当前预测的差距<ul>
-<li>三分类问题输出例子：[0.2, 0.7, 0.1]</li>
-<li>三分类真实类别：2 -&gt; one_hot -&gt; [0, 0, 1]</li>
+<li>图像识别</li>
 </ul>
-</li>
-<li>One-hot 编码，把正整数变为向量表达<ul>
-<li>生成一个长度不小于正整数的向量，只有正整数的位置处为1，其余位置都为0</li>
-</ul>
-</li>
-</ul>
-<h4 id="2、目标函数"><a href="#2、目标函数" class="headerlink" title="2、目标函数"></a>2、目标函数</h4><p>为什么需要目标函数？</p>
+<p>树的识别：</p>
+<p>1、树的定义使用程序很难实现</p>
+<p>2、从数据（观察）学习，然后进行识别</p>
+<p>3、让机器来学习，可能会比写出若干行的程序来说明如何识别一个树，来的更简单一些</p>
+<p>机器学习：让机器自己来学会、分析数据，来获得某种能力。</p>
+<p>（ML: an alternative route to build complicated systems）</p>
+<p>当人们在程序无法表达或形象的实现某个功能或无法无法制定规则时，机器学习不失为一种较好的选择。</p>
+<ol>
+<li>操纵机器人在火星的运行</li>
+<li>图像识别</li>
+<li>做预测</li>
+<li>个人化服务</li>
+</ol>
+<p>Give a computer a fish, you feed it for a day; teach it how to fish, you need it for a lifetime.</p>
+<p>机器学习的三个关键：（判断是否适合使用机器学习）</p>
+<p>1、存在潜藏的模式（有某些目标）</p>
+<p>如股市的目标：更准确。可能有某一种可以学的规则，机器可以从中学到。</p>
+<p>2、不知道如何将这个规则写下来</p>
+<p>3、有数据</p>
+<p>![image-20200212225350907](/Users/hhh/Library/Application Support/typora-user-images/image-20200212225350907.png)</p>
+<p>![image-20200212225402229](/Users/hhh/Library/Application Support/typora-user-images/image-20200212225402229.png)</p>
+<p>例子：</p>
+<p>银行是否给某个人信用卡？</p>
+<p>假如有以下几个信息：</p>
+<p>![image-20200212231550852](/Users/hhh/Library/Application Support/typora-user-images/image-20200212231550852.png)</p>
+<p>将该问题数学语言表达：</p>
+<p>![image-20200212231847914](/Users/hhh/Library/Application Support/typora-user-images/image-20200212231847914.png)</p>
+<p>![image-20200212231901828](/Users/hhh/Library/Application Support/typora-user-images/image-20200212231901828.png)</p>
+<p>![image-20200212232017940](/Users/hhh/Library/Application Support/typora-user-images/image-20200212232017940.png)</p>
+<p>g代表一种效能的增进（使得g和f越接近越好）</p>
+<p>f是未知的（若已知，可直接用程序写出算法）</p>
+<p>![image-20200212232355640](/Users/hhh/Library/Application Support/typora-user-images/image-20200212232355640.png)</p>
+<p>hypothesis set 假说的集合</p>
+<p>![image-20200212232410450](/Users/hhh/Library/Application Support/typora-user-images/image-20200212232410450.png)</p>
+<p>![image-20200212232506243](/Users/hhh/Library/Application Support/typora-user-images/image-20200212232506243.png)</p>
+<p>机器学习：从资料出发，算出一个假说g，要求g和f无限接近。</p>
+<p>机器学习和数据挖掘：</p>
+<p>机器学习，通过数据找出一个假说g，和目标f很接近</p>
+<p>数据挖掘，通过（大量的）数据来找到一些有趣的信息（暗含的有用信息）</p>
+<p>![image-20200212233051692](/Users/hhh/Library/Application Support/typora-user-images/image-20200212233051692.png)</p>
+<p>机器学习和数据挖掘：很像，但还是有区别的</p>
+<p>机器学习和人工智能：</p>
+<p>![image-20200212233315804](/Users/hhh/Library/Application Support/typora-user-images/image-20200212233315804.png)</p>
+<p>机器学习和统计学：</p>
+<p>![image-20200212233530402](/Users/hhh/Library/Application Support/typora-user-images/image-20200212233530402.png)</p>
+<p>总结：</p>
+<p>![image-20200212233733607](/Users/hhh/Library/Application Support/typora-user-images/image-20200212233733607.png)</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/11/python全栈/爬虫/01_爬虫入门之爬虫基础了解/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/02/11/python全栈/爬虫/01_爬虫入门之爬虫基础了解/" itemprop="url">02_爬虫入门之爬虫基础了解</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-02-11T13:16:31+08:00">
+                2020-02-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python全栈-爬虫/" itemprop="url" rel="index">
+                    <span itemprop="name">python全栈 - 爬虫</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="一、什么是爬虫"><a href="#一、什么是爬虫" class="headerlink" title="一、什么是爬虫"></a>一、什么是爬虫</h3><p>爬虫，即网络爬虫，大家可以理解为在网络上爬行的一只蜘蛛，互联网就比作一张大网，而爬虫便是在这张网上爬来爬去的蜘蛛，如果它遇到资源，那么他就会抓取下来。具体想抓取什么内容，这个由自己控制。</p>
+<h3 id="二、浏览网页的过程"><a href="#二、浏览网页的过程" class="headerlink" title="二、浏览网页的过程"></a>二、浏览网页的过程</h3><p>在用户浏览网页的过程中，我们可能会看到很多好看的图片，比如【<a href="http://novel.tanzhuovip.com/】，我们会看到几张的图片以及百度搜索框，这个过程其实就是用户输入网址之后，经过DNS服务器，找到服务器主机，向服务器发送一个请求，服务器经过解析之后，发送给用户的浏览器HTML、JS、CSS等文件，浏览器解析出来，用户便可以看到形形色色的图片了。" target="_blank" rel="noopener">http://novel.tanzhuovip.com/】，我们会看到几张的图片以及百度搜索框，这个过程其实就是用户输入网址之后，经过DNS服务器，找到服务器主机，向服务器发送一个请求，服务器经过解析之后，发送给用户的浏览器HTML、JS、CSS等文件，浏览器解析出来，用户便可以看到形形色色的图片了。</a></p>
+<p>因此，用户看到的网页实质是由HTML代码构成，爬虫便是这些内容，通过分析和过滤这些HTML代码，实现图片、文字等资源的获取。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">www.baidu.com</span><br><span class="line">1、本地host文件做解析</span><br><span class="line">2、本地路由</span><br><span class="line">3、DNS（域名解析服务器）</span><br><span class="line">4、百度服务器（服务器将源代码html发送至客户端，然后形成网页）</span><br><span class="line">5、到达请求的页面</span><br><span class="line"></span><br><span class="line">301  资源永久重定向</span><br><span class="line">302  资源临时重定向</span><br><span class="line">定向：跳转</span><br><span class="line">权重 SEO（搜索引擎优化）</span><br></pre></td></tr></table></figure>
+
+<h3 id="三、URL的含义"><a href="#三、URL的含义" class="headerlink" title="三、URL的含义"></a>三、URL的含义</h3><p>URL，即统一资源定位符，也就是我们说的网址，统一资源定位符是对可以从互联网上得到的资源的位置和访问方法的一种简洁的表示，是互联网上标准资源的地址。互联网上的每个文件都有一个唯一的URL，它包含的信息指出文件的位置以及浏览器该怎么处理它。</p>
+<p>URL的格式由三部分组成：</p>
 <ul>
-<li>参数是逐步调整的</li>
-<li>目标函数可以帮助衡量模型的好坏<ul>
-<li>Model A: [0.1, 0.4, 0.5]</li>
-<li>Model B: [0.1, 0.2, 0.7]</li>
-</ul>
+<li><p>第一部分是协议（或称为服务方式）</p>
+<p>http://   https://    ftp://    file://</p>
 </li>
-</ul>
-<h5 id="（1）分类问题目标函数"><a href="#（1）分类问题目标函数" class="headerlink" title="（1）分类问题目标函数"></a>（1）分类问题目标函数</h5><ul>
-<li><p>平方差损失</p>
-<p>$\frac{1}{n}\sum_{x,y}\frac{1}{2}(y-Model(x))^2$</p>
+<li><p>第二部分是存有该资源的主机IP地址（有时也包括端口号）</p>
+<p>127.0.0.1    <a href="http://www.tanzhouedu.com" target="_blank" rel="noopener">www.tanzhouedu.com</a></p>
 <ul>
-<li>举例：<ul>
-<li>预测值：[0.2, 0.7, 0.1]</li>
-<li>真是值：[0, 0, 1]</li>
-<li>损失函数值：[(0.2-0)^2 + (0.7-0)^2 + (0.1-1)^2]*0.2 = 0.65</li>
+<li>顶级域名和二级域名的区别：<ul>
+<li>顶级域名：一级域名、根域名<ul>
+<li>除了后缀（com、cn、com.cn、org.cn）以外只有一个点号</li>
+<li>baidu.com     baidu.com.cn     shangfeng.club</li>
+</ul>
+</li>
+<li>二级域名    <a href="http://www.baidu.com" target="_blank" rel="noopener">www.baidu.com</a> </li>
+<li>三级域名    a.<a href="http://www.baidu.com" target="_blank" rel="noopener">www.baidu.com</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><p>交叉熵损失</p>
-<p>$\frac{1}{n}\sum_{x,y}yln(Model(x))$</p>
+<li><p>第三部分是主机资源的具体地址，如目录和文件名等。</p>
 </li>
 </ul>
-<h5 id="（2）回归问题目标函数"><a href="#（2）回归问题目标函数" class="headerlink" title="（2）回归问题目标函数"></a>（2）回归问题目标函数</h5><ul>
-<li>预测值与真实值的差距</li>
-<li>平方差损失</li>
-<li>绝对值损失</li>
-</ul>
-<p><strong>模型就是调整参数，使得目标函数逐渐变小的过程。</strong></p>
-<h3 id="三、神经网络、激活函数、批归一化、Dropout"><a href="#三、神经网络、激活函数、批归一化、Dropout" class="headerlink" title="三、神经网络、激活函数、批归一化、Dropout"></a>三、神经网络、激活函数、批归一化、Dropout</h3><h4 id="1、神经网络"><a href="#1、神经网络" class="headerlink" title="1、神经网络"></a>1、神经网络</h4><p>神经网络训练：</p>
+<p>爬虫爬取数据时必须要有一个目标的URL才可以获得数据，因此，它是爬虫获取数据的基本依据，准确理解它的含义对爬虫学习有很大帮助。</p>
+<h3 id="四、环境的配置"><a href="#四、环境的配置" class="headerlink" title="四、环境的配置"></a>四、环境的配置</h3><p>学习python，当然少不了环境的配置，该课程使用的版本为python2.7.9， 开发工具为pycharm</p>
+<h3 id="五、爬虫的重要思想"><a href="#五、爬虫的重要思想" class="headerlink" title="五、爬虫的重要思想"></a>五、爬虫的重要思想</h3><p>1、理论上来讲只要是网页上面能够看到的数据都是可以爬取的（因为所有看到的网页上的数据都是由服务器发送到我们电脑上的，只是有的数据加密过，很难解密）</p>
+<p>2、在网页上无法看到或者无法获取的数据，爬虫同样不可能拿到，比如一些付费资料</p>
+<p>3、分析网页数据的原则是从简到繁，从易到难</p>
 <ul>
-<li>下山算法<ul>
-<li>找到方向</li>
-<li>走一步</li>
-</ul>
-</li>
-<li>梯度下降<ul>
-<li>求导</li>
-<li>更新参数</li>
-</ul>
-</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/Tensorflow/Tensorflow%E5%85%A5%E9%97%A8%E5%88%B0%E8%BF%9B%E9%98%B6/CH_2/1.png" alt="image-20200201162733682"></p>
-<p>深度神经网络：</p>
-<ul>
-<li>层次非常深的神经网络</li>
-</ul>
-<h4 id="2、激活函数"><a href="#2、激活函数" class="headerlink" title="2、激活函数"></a>2、激活函数</h4><p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/Tensorflow/Tensorflow%E5%85%A5%E9%97%A8%E5%88%B0%E8%BF%9B%E9%98%B6/CH_2/2.png" alt="image-20200201162851693"></p>
-<p>为什么要用激活函数？</p>
-<p>selu 激活函数？</p>
-<h4 id="3、归一化与批归一化"><a href="#3、归一化与批归一化" class="headerlink" title="3、归一化与批归一化"></a>3、归一化与批归一化</h4><p>归一化：</p>
-<ul>
-<li>Min-max归一化：x *= (x-min)/(max-min)</li>
-<li>Z-score 归一化： x *= (x-u) / sigma</li>
-</ul>
-<p>批归一化：</p>
-<ul>
-<li>每一层的激活值都做归一化（每一层的输入上都做归一化）</li>
-</ul>
-<p>为什么归一化会有效？</p>
-<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/Tensorflow/Tensorflow%E5%85%A5%E9%97%A8%E5%88%B0%E8%BF%9B%E9%98%B6/CH_2/3.png" alt="image-20200201163200091"></p>
-<p>左图未归一化</p>
-<p>椭圆求导不一定指向圆心，求导过程比较曲折，最终走到圆心</p>
-<p>归一化后每次指向圆心，使训练速度增快</p>
-<h4 id="4、Dropout"><a href="#4、Dropout" class="headerlink" title="4、Dropout"></a>4、Dropout</h4><p>什么是Dropout？</p>
-<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/Tensorflow/Tensorflow%E5%85%A5%E9%97%A8%E5%88%B0%E8%BF%9B%E9%98%B6/CH_2/4.png" alt="image-20200201163420794"></p>
-<p>随机地丢弃神经元</p>
-<p>Dropout的作用：</p>
-<ul>
-<li>防止过拟合<ul>
-<li>训练集上很好，测试集上不好</li>
-<li>参数太多，记住样本，不能泛化</li>
-</ul>
-</li>
-</ul>
-<p>为什么有效？</p>
-<h3 id="四、Wide-amp-deep-模型"><a href="#四、Wide-amp-deep-模型" class="headerlink" title="四、Wide &amp; deep 模型"></a>四、Wide &amp; deep 模型</h3><ul>
-<li><p>Google 16 年发布，用于分类和回归</p>
-</li>
-<li><p>应用到了Google Play中的应用推荐</p>
-</li>
-<li><p>原始论文：<a href="https://arxiv.org/pdf/1606.07792v1.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1606.07792v1.pdf</a></p>
-</li>
-</ul>
-<h4 id="1、稀疏特征与密集特征"><a href="#1、稀疏特征与密集特征" class="headerlink" title="1、稀疏特征与密集特征"></a>1、稀疏特征与密集特征</h4><h5 id="（1）稀疏特征"><a href="#（1）稀疏特征" class="headerlink" title="（1）稀疏特征"></a>（1）稀疏特征</h5><ul>
-<li>离散值特征</li>
-<li>One-hot表示</li>
-<li>Eg：专业 = {计算机，人文，其他}， 人文 = [0, 1, 0]</li>
-<li>叉乘之后<ul>
-<li>稀疏特征做叉乘获取共现信息</li>
-<li>实现记忆的效果</li>
-</ul>
-</li>
-</ul>
-<p>稀疏特征——优缺点</p>
-<ul>
-<li>优点<ul>
-<li>有效，广泛用于工业界</li>
-</ul>
-</li>
-<li>缺点<ul>
-<li>需要人工设计（选择某几个做叉乘，减少计算量）</li>
-<li>可能过拟合，所有特征都叉乘，相当于记住每一个样本</li>
-</ul>
-</li>
-</ul>
-<h5 id="（2）密集特征"><a href="#（2）密集特征" class="headerlink" title="（2）密集特征"></a>（2）密集特征</h5><ul>
-<li>向量表达<ul>
-<li>Eg：词表 = {人工智能， 你， 他， 慕课网}</li>
-<li>他 = [0.3, 0.2, 0.6, （n维向量）]</li>
-</ul>
-</li>
-<li>Word2vec工具<ul>
-<li>男 - 女 = 国王 - 王后</li>
-</ul>
-</li>
-</ul>
-<p>密集特征的优缺点：</p>
-<ul>
-<li>优点<ul>
-<li>带有语义信息，不同向量之间有相关性</li>
-<li>兼容没有出现过的特征组合</li>
-<li>更少人工参与</li>
-</ul>
-</li>
-<li>缺点<ul>
-<li>过度泛化，推荐不怎么相关的产品</li>
-</ul>
-</li>
-</ul>
-<h4 id="2、Wide-amp-deep-vs-Wide-or-deep"><a href="#2、Wide-amp-deep-vs-Wide-or-deep" class="headerlink" title="2、Wide &amp; deep vs (Wide or deep)"></a>2、Wide &amp; deep vs (Wide or deep)</h4><p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/Tensorflow/Tensorflow%E5%85%A5%E9%97%A8%E5%88%B0%E8%BF%9B%E9%98%B6/CH_2/5.png" alt="image-20200202144141139"></p>
-<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/Tensorflow/Tensorflow%E5%85%A5%E9%97%A8%E5%88%B0%E8%BF%9B%E9%98%B6/CH_2/6.png" alt="image-20200202144320195"></p>
-<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/Tensorflow/Tensorflow%E5%85%A5%E9%97%A8%E5%88%B0%E8%BF%9B%E9%98%B6/CH_2/7.png" alt="image-20200202144335754"></p>
-<p>推荐算法的模型图（典型的Wide &amp; deep模型）</p>
-<h3 id="五、超参数搜索"><a href="#五、超参数搜索" class="headerlink" title="五、超参数搜索"></a>五、超参数搜索</h3><h4 id="1、为什么要超参数搜索"><a href="#1、为什么要超参数搜索" class="headerlink" title="1、为什么要超参数搜索"></a>1、为什么要超参数搜索</h4><ul>
-<li>神经网络有很多训练过程中不变的参数<ul>
-<li>网络结构参数：几层，每层宽度，每层激活函数等</li>
-<li>训练参数：batch_size，学习率，学习率衰减算法等</li>
-</ul>
-</li>
-<li>手工去试耗费人力</li>
-</ul>
-<h4 id="2、搜索策略"><a href="#2、搜索策略" class="headerlink" title="2、搜索策略"></a>2、搜索策略</h4><ul>
-<li>网格搜索</li>
-<li>随机搜索</li>
-<li>遗传算法搜索</li>
-<li>启发式搜索</li>
-</ul>
-<h5 id="（1）网格搜索"><a href="#（1）网格搜索" class="headerlink" title="（1）网格搜索"></a>（1）网格搜索</h5><p>将各种超参数离散化成几个值，然后把这几个值一一组合起来，然后一一尝试</p>
-<ul>
-<li>定义n维方格</li>
-<li>每个方格对应一组超参数</li>
-<li>一组一组参数尝试（找到最好的组合方式）</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/Tensorflow/Tensorflow%E5%85%A5%E9%97%A8%E5%88%B0%E8%BF%9B%E9%98%B6/CH_2/8.png" alt="image-20200202175757456"></p>
-<h5 id="（2）随机搜索"><a href="#（2）随机搜索" class="headerlink" title="（2）随机搜索"></a>（2）随机搜索</h5><p>随机生成参数组合，保证最优解有可能被搜索到（空间中的其他位置）</p>
-<ul>
-<li>参数的生成方式为随机</li>
-<li>可探索的空间更大</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/Tensorflow/Tensorflow%E5%85%A5%E9%97%A8%E5%88%B0%E8%BF%9B%E9%98%B6/CH_2/9.png" alt="image-20200202175937147"></p>
-<h5 id="（3）遗传搜索"><a href="#（3）遗传搜索" class="headerlink" title="（3）遗传搜索"></a>（3）遗传搜索</h5><ul>
-<li>对自然界的模拟</li>
-<li>A、初始化一组参数集合 –&gt; 训练 –&gt; 得到模型指标作为生存概率（适者生存）</li>
-<li>B、选择 –&gt; 交叉  –&gt;  变异  –&gt; 产生下一代集合<ul>
-<li>交叉：在两个参数集合中各取一部分，组合起来形成一组新的参数集合</li>
-<li>变异：某一个或者某几个参数进行微调</li>
-</ul>
-</li>
-<li>C、重新得到A，重复进行</li>
-<li>找到表现最好的参数集合</li>
-</ul>
-<h5 id="（4）启发式搜索"><a href="#（4）启发式搜索" class="headerlink" title="（4）启发式搜索"></a>（4）启发式搜索</h5><ul>
-<li>研究热点 -AutoML</li>
-<li>使用循环神经网络生成参数</li>
-<li>使用强化学习来进行反馈，使用模型来训练生成参数</li>
-</ul>
-<h2 id="（二）实战部分"><a href="#（二）实战部分" class="headerlink" title="（二）实战部分"></a>（二）实战部分</h2><h3 id="一、Keras-搭建分类模型"><a href="#一、Keras-搭建分类模型" class="headerlink" title="一、Keras 搭建分类模型"></a>一、Keras 搭建分类模型</h3><h3 id="二、Keras回调函数"><a href="#二、Keras回调函数" class="headerlink" title="二、Keras回调函数"></a>二、Keras回调函数</h3><p>回调函数是一个函数的合集，会在训练的阶段中所使用。你可以使用回调函数来查看训练模型的内在状态和统计。</p>
-<h3 id="三、Keras搭建回归模型"><a href="#三、Keras搭建回归模型" class="headerlink" title="三、Keras搭建回归模型"></a>三、Keras搭建回归模型</h3><h3 id="四、Keras搭建深度神经网络"><a href="#四、Keras搭建深度神经网络" class="headerlink" title="四、Keras搭建深度神经网络"></a>四、Keras搭建深度神经网络</h3><h3 id="五、Keras实现-wide-amp-deep-模型"><a href="#五、Keras实现-wide-amp-deep-模型" class="headerlink" title="五、Keras实现 wide &amp; deep 模型"></a>五、Keras实现 wide &amp; deep 模型</h3><ul>
-<li>子类API</li>
-<li>功能API（函数式API）</li>
-<li>多输入与多输出</li>
-</ul>
-<h3 id="六、Keras-与-scikit-learn-实现超参数搜索"><a href="#六、Keras-与-scikit-learn-实现超参数搜索" class="headerlink" title="六、Keras 与 scikit-learn 实现超参数搜索"></a>六、Keras 与 scikit-learn 实现超参数搜索</h3><ul>
-<li>使用scikit实现超参数搜索</li>
+<li>直接通过网页源代码获取</li>
+<li>分析是否为ajax异步加载</li>
+<li>数据是否被加密</li>
 </ul>
 
           
@@ -2239,7 +2181,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2287,7 +2229,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">74</span>
+                  <span class="site-state-item-count">85</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -2298,7 +2240,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>

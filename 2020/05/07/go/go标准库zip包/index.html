@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="一、Struct1、Filezip.File[struct] 123type File struct &amp;#123;  FileHeader&amp;#125;  function:  DataOffset Open  DataOffset 1func (f *File) DataOffset() (offset int64, err error)  DataOffset返回文件的可能存在的压缩数据相对于">
+<meta property="og:type" content="article">
+<meta property="og:title" content="go标准库zip包">
+<meta property="og:url" content="http://yoursite.com/2020/05/07/go/go标准库zip包/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="一、Struct1、Filezip.File[struct] 123type File struct &amp;#123;  FileHeader&amp;#125;  function:  DataOffset Open  DataOffset 1func (f *File) DataOffset() (offset int64, err error)  DataOffset返回文件的可能存在的压缩数据相对于">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-05-07T03:09:18.305Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="go标准库zip包">
+<meta name="twitter:description" content="一、Struct1、Filezip.File[struct] 123type File struct &amp;#123;  FileHeader&amp;#125;  function:  DataOffset Open  DataOffset 1func (f *File) DataOffset() (offset int64, err error)  DataOffset返回文件的可能存在的压缩数据相对于">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/05/07/go/go标准库zip包/">
+
+
+
+
+
+  <title>go标准库zip包 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/07/go/go标准库zip包/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">go标准库zip包</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-05-07T11:09:18+08:00">
+                2020-05-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/go/" itemprop="url" rel="index">
+                    <span itemprop="name">go</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="一、Struct"><a href="#一、Struct" class="headerlink" title="一、Struct"></a>一、Struct</h3><h4 id="1、File"><a href="#1、File" class="headerlink" title="1、File"></a>1、File</h4><p><strong>zip.File[struct]</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> File <span class="keyword">struct</span> &#123;</span><br><span class="line">  FileHeader</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>function:</strong></p>
+<ul>
+<li>DataOffset</li>
+<li>Open</li>
+</ul>
+<p><strong>DataOffset</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(f *File)</span> <span class="title">DataOffset</span><span class="params">()</span> <span class="params">(offset <span class="keyword">int64</span>, err error)</span></span></span><br></pre></td></tr></table></figure>
+
+<p>DataOffset返回文件的可能存在的压缩数据相对于 zip 文件起始的偏移量。大多数调用者应使用 Open 代替，该方法会主动解压缩数据并验证校验和。</p>
+<p><strong>Open</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(f *File)</span> <span class="title">Open</span><span class="params">()</span> <span class="params">(rc io.ReadCloser, err error)</span></span></span><br></pre></td></tr></table></figure>
+
+<p>Open方法返回一个 io.ReadCloser 接口，提供读取文件内容的方法。可以同时读取多个文件。</p>
+<h4 id="2、FileHeader"><a href="#2、FileHeader" class="headerlink" title="2、FileHeader"></a>2、FileHeader</h4><p><strong>zip.FileHeader[struct]</strong></p>
+<p>FileHeader描述 zip 文件中的一个文件。参见 zip 的定义获取细节。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> FileHeader <span class="keyword">struct</span> &#123;</span><br><span class="line">  Name <span class="keyword">string</span></span><br><span class="line">  CreatorVersion     <span class="keyword">uint16</span></span><br><span class="line">  ReaderVersion      <span class="keyword">uint16</span></span><br><span class="line">  Flags              <span class="keyword">uint16</span></span><br><span class="line">  Method             <span class="keyword">uint16</span></span><br><span class="line">  ModifiedTime       <span class="keyword">uint16</span> <span class="comment">// MS-DOS时间</span></span><br><span class="line">  ModifiedDate       <span class="keyword">uint16</span> <span class="comment">// MS-DOS日期</span></span><br><span class="line">  CRC32              <span class="keyword">uint32</span></span><br><span class="line">  CompressedSize     <span class="keyword">uint32</span> <span class="comment">// 已弃用；请使用CompressedSize64</span></span><br><span class="line">  UncompressedSize   <span class="keyword">uint32</span> <span class="comment">// 已弃用；请使用UncompressedSize64</span></span><br><span class="line">  CompressedSize64   <span class="keyword">uint64</span></span><br><span class="line">  UncompressedSize64 <span class="keyword">uint64</span></span><br><span class="line">  Extra              []<span class="keyword">byte</span></span><br><span class="line">  ExternalAttrs      <span class="keyword">uint32</span> <span class="comment">// 其含义依赖于CreatorVersion</span></span><br><span class="line">  Comment            <span class="keyword">string</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>Function：</strong></p>
+<ul>
+<li>FileInfo</li>
+<li>ModTime</li>
+<li>Mode</li>
+<li>SetModTime</li>
+<li>SetMode</li>
+</ul>
+<p><strong>FileInfo</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(h *FileHeader)</span> <span class="title">FileInfo</span><span class="params">()</span> <span class="title">os</span>.<span class="title">FileInfo</span></span></span><br></pre></td></tr></table></figure>
+
+<p>FileInfo返回一个根据h的信息生成的 os.FileInfo</p>
+<p><strong>ModTime</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(h *FileHeader)</span> <span class="title">ModTime</span><span class="params">()</span> <span class="title">time</span>.<span class="title">Time</span></span></span><br></pre></td></tr></table></figure>
+
+<p>返回最近一次修改的UTC时间。（精度2s）</p>
+<p><strong>Mode</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(h *FileHeader)</span> <span class="title">Mode</span><span class="params">()</span> <span class="params">(mode os.FileMode)</span></span></span><br></pre></td></tr></table></figure>
+
+<p>Mode返回h的权限和模式位</p>
+<p><strong>SetModTime</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(h *FileHeader)</span> <span class="title">SetModTime</span><span class="params">(t time.Time)</span></span></span><br></pre></td></tr></table></figure>
+
+<p>将ModifiedTime和ModifiedDate字段设置为给定的UTC时间。（精度2s）</p>
+<p><strong>SetMode</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(h *FileHeader)</span> <span class="title">SetMode</span><span class="params">(mode os.FileMode)</span></span></span><br></pre></td></tr></table></figure>
+
+<p>SetMode修改h的权限和模式位。</p>
+<h4 id="3、ReadCloser"><a href="#3、ReadCloser" class="headerlink" title="3、ReadCloser"></a>3、ReadCloser</h4><p><strong>zip.ReadCloser[struct]</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> ReadCloser <span class="keyword">struct</span> &#123;</span><br><span class="line">  Reader</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>Function:</strong></p>
+<ul>
+<li>Close</li>
+</ul>
+<p><strong>Close</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(rc *ReadCloser)</span> <span class="title">Close</span><span class="params">()</span> <span class="title">error</span></span></span><br></pre></td></tr></table></figure>
+
+<p>Close关闭 zip 文件，使它不能用于I/O。</p>
+<h4 id="4、Reader"><a href="#4、Reader" class="headerlink" title="4、Reader"></a>4、Reader</h4><p><strong>zip.Reader[struct]</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Reader <span class="keyword">struct</span> &#123;</span><br><span class="line">	r             io.ReaderAt</span><br><span class="line">	File          []*File</span><br><span class="line">	Comment       <span class="keyword">string</span></span><br><span class="line">	decompressors <span class="keyword">map</span>[<span class="keyword">uint16</span>]Decompressor</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="5、Writer"><a href="#5、Writer" class="headerlink" title="5、Writer"></a>5、Writer</h4><p><strong>zip.Writer[struct]</strong></p>
+<p>Writer类型实现了 zip 文件的写入器。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Writer implements a zip file writer.</span></span><br><span class="line"><span class="keyword">type</span> Writer <span class="keyword">struct</span> &#123;</span><br><span class="line">	cw          *countWriter</span><br><span class="line">	dir         []*header</span><br><span class="line">	last        *fileWriter</span><br><span class="line">	closed      <span class="keyword">bool</span></span><br><span class="line">	compressors <span class="keyword">map</span>[<span class="keyword">uint16</span>]Compressor</span><br><span class="line">	comment     <span class="keyword">string</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// testHookCloseSizeOffset if non-nil is called with the size</span></span><br><span class="line">	<span class="comment">// of offset of the central directory at Close.</span></span><br><span class="line">	testHookCloseSizeOffset <span class="function"><span class="keyword">func</span><span class="params">(size, offset <span class="keyword">uint64</span>)</span></span></span><br><span class="line"><span class="function">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>Function:</strong></p>
+<ul>
+<li>Close</li>
+<li>Create</li>
+<li>CreateHeader</li>
+</ul>
+<p><strong>Close</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(w *Writer)</span> <span class="title">Close</span><span class="params">()</span> <span class="title">error</span></span></span><br></pre></td></tr></table></figure>
+
+<p>Close方法通过写入中央目录关闭该* Writer 。本方法不会也没办法关闭下层的 io.Writer 接口。</p>
+<p><strong>Create</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(w *Writer)</span> <span class="title">Create</span><span class="params">(name <span class="keyword">string</span>)</span> <span class="params">(io.Writer, error)</span></span></span><br></pre></td></tr></table></figure>
+
+<p>使用给出的文件名添加一个文件进 zip 文件。本方法返回一个 io.Writer 接口（用于写入新添加文件的内容）。文件名必须是相对路径，不能以设备或斜杠开始，只接受’/‘作为路径分隔。新增文件的内容必须在下一次调用 CreateHeader 、Create或 Close 方法之前全部写入。</p>
+<p><strong>CreateHeader</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(w *Writer)</span> <span class="title">CreateHeader</span><span class="params">(fh *FileHeader)</span> <span class="params">(io.Writer, error)</span></span></span><br></pre></td></tr></table></figure>
+
+<p>使用给出的*FileHeader来作为文件的元数据添加一个文件进 zip 文件。本方法返回一个 io.Writer 接口（用于写入新添加文件的内容）。新增文件的内容必须在下一次调用CreateHeader、 Create 或 Close 方法之前全部写入。</p>
+<h4 id="6、Type"><a href="#6、Type" class="headerlink" title="6、Type"></a>6、Type</h4><p><strong>Compressor函数类型</strong></p>
+<p>会返回一个 io.WriteCloser ，该接口会将数据压缩后写入提供的接口。关闭时，应将缓冲中的数据刷新到下层接口中。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Compressor <span class="function"><span class="keyword">func</span><span class="params">(io.Writer)</span> <span class="params">(io.WriteCloser, error)</span></span></span><br></pre></td></tr></table></figure>
+
+<p><strong>Decompressor函数类型</strong></p>
+<p>会返回一个 io.ReadCloser ，该接口的Read方法会将读取自提供的接口的数据提前解压缩。程序员有责任在读取结束时关闭该 io.ReadCloser 。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Decompressor <span class="function"><span class="keyword">func</span><span class="params">(io.Reader)</span> <span class="title">io</span>.<span class="title">ReadCloser</span></span></span><br></pre></td></tr></table></figure>
+
+<h3 id="二、Function"><a href="#二、Function" class="headerlink" title="二、Function"></a>二、Function</h3><p><strong>FileInfoHeader</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">FileInfoHeader</span><span class="params">(fi os.FileInfo)</span> <span class="params">(*FileHeader, error)</span></span></span><br></pre></td></tr></table></figure>
+
+<p>FileInfoHeader返回一个根据fi填写了部分字段的Header。因为 os.FileInfo 接口的Name方法只返回它描述的文件的无路径名，有可能需要将返回值的Name字段修改为文件的完整路径名。</p>
+<p><strong>NewReader</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">NewReader</span><span class="params">(r io.ReaderAt, size <span class="keyword">int64</span>)</span> <span class="params">(*Reader, error)</span></span></span><br></pre></td></tr></table></figure>
+
+<p>NewReader返回一个从r读取数据的*Reader，r被假设其大小为size字节。</p>
+<p><strong>NewWriter</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">NewWriter</span><span class="params">(w io.Writer)</span> *<span class="title">Writer</span></span></span><br></pre></td></tr></table></figure>
+
+<p>NewWriter创建并返回一个将 zip 文件写入w的*Writer</p>
+<p><strong>OpenReader</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">OpenReader</span><span class="params">(name <span class="keyword">string</span>)</span> <span class="params">(*ReadCloser, error)</span></span></span><br></pre></td></tr></table></figure>
+
+<p>OpenReader会打开name指定的 zip 文件并返回一个*ReadCloser</p>
+<p><strong>RegisterCompressor</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">RegisterCompressor</span><span class="params">(method <span class="keyword">uint16</span>, comp Compressor)</span></span></span><br></pre></td></tr></table></figure>
+
+<p>RegisterCompressor使用指定的方法ID注册一个Compressor类型函数。常用的方法Store和Deflate是内建的</p>
+<p><strong>RegisterDecompressor</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">RegisterDecompressor</span><span class="params">(method <span class="keyword">uint16</span>, d Decompressor)</span></span></span><br></pre></td></tr></table></figure>
+
+<p>RegisterDecompressor使用指定的方法ID注册一个Decompressor类型函数。</p>
+<h3 id="三、Demo"><a href="#三、Demo" class="headerlink" title="三、Demo"></a>三、Demo</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"archive/zip"</span></span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"io"</span></span><br><span class="line">	<span class="string">"os"</span></span><br><span class="line">	<span class="string">"path"</span></span><br><span class="line">	<span class="string">"path/filepath"</span></span><br><span class="line">	<span class="string">"strings"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	zipFunc()</span><br><span class="line">	uzipFunc()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="1、压缩函数使用"><a href="#1、压缩函数使用" class="headerlink" title="1、压缩函数使用"></a>1、压缩函数使用</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//压缩Demo</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">zipFunc</span><span class="params">()</span></span> &#123;</span><br><span class="line">	zipTarget := <span class="string">"./zipFile.zip"</span></span><br><span class="line">	fileFolder := <span class="string">"./fileFolder"</span></span><br><span class="line">	zipfile, err := os.Create(zipTarget)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="comment">// if file is exist then delete file</span></span><br><span class="line">		<span class="keyword">if</span> err == os.ErrExist &#123;</span><br><span class="line">			<span class="keyword">if</span> err := os.Remove(zipTarget); err != <span class="literal">nil</span> &#123;</span><br><span class="line">				fmt.Println(err)</span><br><span class="line">			&#125;</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			fmt.Println(err)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">defer</span> zipfile.Close()</span><br><span class="line">	zipwriter := zip.NewWriter(zipfile)</span><br><span class="line">	<span class="keyword">defer</span> zipwriter.Close()</span><br><span class="line">	sfileInfo, err := os.Stat(fileFolder)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(err)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> !sfileInfo.IsDir() &#123;</span><br><span class="line">		zipFile(fileFolder, zipwriter)</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		zipFolder(fileFolder, zipwriter)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">zipFile</span><span class="params">(sourceFile <span class="keyword">string</span>, zw *zip.Writer)</span> <span class="title">error</span></span> &#123;</span><br><span class="line">	sfile, err := os.Open(sourceFile)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(err)</span><br><span class="line">		<span class="keyword">return</span> err</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">defer</span> sfile.Close()</span><br><span class="line"></span><br><span class="line">	info, err := sfile.Stat()</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(err)</span><br><span class="line">		<span class="keyword">return</span> err</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// 获取压缩头信息</span></span><br><span class="line">	header, err := zip.FileInfoHeader(info)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(err)</span><br><span class="line">		<span class="keyword">return</span> err</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// 指定文件压缩方式 默认为 Store 方式 该方式不压缩文件 只是转换为zip保存</span></span><br><span class="line">	header.Method = zip.Deflate</span><br><span class="line">	header.Name = sourceFile</span><br><span class="line">	fw, err := zw.CreateHeader(header)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(err)</span><br><span class="line">		<span class="keyword">return</span> err</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// 写入文件到压缩包中</span></span><br><span class="line">	_, err = io.Copy(fw, sfile)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(err)</span><br><span class="line">		<span class="keyword">return</span> err</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">功能：压缩文件</span></span><br><span class="line"><span class="comment">@directory:压缩目录</span></span><br><span class="line"><span class="comment">@zw：写入压缩文件的流</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">zipFolder</span><span class="params">(directory <span class="keyword">string</span>, zw *zip.Writer)</span> <span class="title">error</span></span> &#123;</span><br><span class="line">	<span class="keyword">return</span> filepath.Walk(directory, <span class="function"><span class="keyword">func</span><span class="params">(zipPath <span class="keyword">string</span>, file os.FileInfo, err error)</span> <span class="title">error</span></span> &#123;</span><br><span class="line">		<span class="comment">//read the file failure</span></span><br><span class="line">		<span class="keyword">if</span> file == <span class="literal">nil</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> err</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> file.IsDir() &#123;</span><br><span class="line">			<span class="keyword">if</span> directory == zipPath &#123;</span><br><span class="line">				<span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">			&#125;</span><br><span class="line">			fileFolder := filepath.Join(directory, strings.TrimPrefix(zipPath, directory))</span><br><span class="line">			os.Mkdir(strings.TrimPrefix(directory, file.Name()), os.ModeDir)</span><br><span class="line">			<span class="comment">//如果是目录，递归目录</span></span><br><span class="line">			<span class="keyword">return</span> zipFolder(fileFolder, zw)</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> zipFile(zipPath, zw)</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2、解压函数使用"><a href="#2、解压函数使用" class="headerlink" title="2、解压函数使用"></a>2、解压函数使用</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//解压缩Demo</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">uzipFunc</span><span class="params">()</span></span> &#123;</span><br><span class="line">	zipFile := <span class="string">"./zipFile.zip"</span></span><br><span class="line">	unzipFolder := <span class="string">"./unzipFolder"</span></span><br><span class="line">	unZipFile(zipFile, unzipFolder)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//untarFile 解压</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">unZipFile</span><span class="params">(zipFile <span class="keyword">string</span>, unzipPath <span class="keyword">string</span>)</span> <span class="title">error</span></span> &#123;</span><br><span class="line">	<span class="comment">//打开要解包的文件，tarFile是要解包的 .tar 文件的路径</span></span><br><span class="line">	reader, err := zip.OpenReader(zipFile)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(err)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//用 tr.Next() 来遍历包中的文件，然后将文件的数据保存到磁盘中</span></span><br><span class="line">	<span class="keyword">for</span> _, file := <span class="keyword">range</span> reader.File &#123;</span><br><span class="line">		rc, err := file.Open()</span><br><span class="line">		<span class="comment">//先创建目录</span></span><br><span class="line">		fileName := unzipPath + <span class="string">"/"</span> + file.Name</span><br><span class="line">		dir := path.Dir(fileName)</span><br><span class="line">		_, err = os.Stat(dir)</span><br><span class="line">		<span class="comment">//如果err 为空说明文件夹已经存在，就不用创建</span></span><br><span class="line">		<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">			err = os.MkdirAll(dir, os.ModePerm)</span><br><span class="line">			<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">				fmt.Println(err)</span><br><span class="line">				<span class="keyword">return</span> err</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//创建空文件，准备写入解压后的数据</span></span><br><span class="line">		fw, er := os.Create(fileName)</span><br><span class="line">		<span class="keyword">if</span> er != <span class="literal">nil</span> &#123;</span><br><span class="line">			fmt.Println(err)</span><br><span class="line">			<span class="keyword">return</span> er</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">defer</span> fw.Close()</span><br><span class="line">		<span class="comment">// 写入解压后的数据</span></span><br><span class="line">		_, er = io.CopyN(fw, rc, <span class="keyword">int64</span>(file.UncompressedSize64))</span><br><span class="line">		<span class="keyword">if</span> er != <span class="literal">nil</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> er</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/05/01/随笔/将本地项目上传gitlab/" rel="next" title="将本地项目上传gitlab">
+                <i class="fa fa-chevron-left"></i> 将本地项目上传gitlab
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/05/08/Linux/Shell/Shell查看python版本并比较/" rel="prev" title="Shell查看python版本并比较">
+                Shell查看python版本并比较 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="John Doe">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">85</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://suliangxu.github.io" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:1193135584@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、Struct"><span class="nav-text">一、Struct</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、File"><span class="nav-text">1、File</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、FileHeader"><span class="nav-text">2、FileHeader</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、ReadCloser"><span class="nav-text">3、ReadCloser</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、Reader"><span class="nav-text">4、Reader</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5、Writer"><span class="nav-text">5、Writer</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6、Type"><span class="nav-text">6、Type</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、Function"><span class="nav-text">二、Function</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、Demo"><span class="nav-text">三、Demo</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、压缩函数使用"><span class="nav-text">1、压缩函数使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、解压函数使用"><span class="nav-text">2、解压函数使用</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

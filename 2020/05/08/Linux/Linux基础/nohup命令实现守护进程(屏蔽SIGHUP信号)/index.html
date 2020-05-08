@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="一、SIGHUP信号1、终端关闭时，该信号被发送到 session 首进程以及作为 job 提交的进程（即用 &amp;amp; 符号提交的进程） 2、session首进程退出时，该信号被发送到该 session 中的前台进程组中的每一个进程，但不会发送给 job  提交的进程。 3、若父进程退出导致进程组成为孤儿进程组，且该进程组中有进程处于停止状态（收到SIGSTOP或SIGTSTP信号），该信号会被">
+<meta property="og:type" content="article">
+<meta property="og:title" content="nohup命令实现守护进程(屏蔽SIGHUP信号)">
+<meta property="og:url" content="http://yoursite.com/2020/05/08/Linux/Linux基础/nohup命令实现守护进程(屏蔽SIGHUP信号)/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="一、SIGHUP信号1、终端关闭时，该信号被发送到 session 首进程以及作为 job 提交的进程（即用 &amp;amp; 符号提交的进程） 2、session首进程退出时，该信号被发送到该 session 中的前台进程组中的每一个进程，但不会发送给 job  提交的进程。 3、若父进程退出导致进程组成为孤儿进程组，且该进程组中有进程处于停止状态（收到SIGSTOP或SIGTSTP信号），该信号会被">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/Linux/Linux%E5%9F%BA%E7%A1%80/nohup%E5%91%BD%E4%BB%A4%E5%AE%9E%E7%8E%B0%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B(%E5%B1%8F%E8%94%BDSIGHUP%E4%BF%A1%E5%8F%B7)/1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/Linux/Linux%E5%9F%BA%E7%A1%80/nohup%E5%91%BD%E4%BB%A4%E5%AE%9E%E7%8E%B0%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B(%E5%B1%8F%E8%94%BDSIGHUP%E4%BF%A1%E5%8F%B7)/2.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/Linux/Linux%E5%9F%BA%E7%A1%80/nohup%E5%91%BD%E4%BB%A4%E5%AE%9E%E7%8E%B0%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B(%E5%B1%8F%E8%94%BDSIGHUP%E4%BF%A1%E5%8F%B7)/3.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/Linux/Linux%E5%9F%BA%E7%A1%80/nohup%E5%91%BD%E4%BB%A4%E5%AE%9E%E7%8E%B0%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B(%E5%B1%8F%E8%94%BDSIGHUP%E4%BF%A1%E5%8F%B7)/4.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/Linux/Linux%E5%9F%BA%E7%A1%80/nohup%E5%91%BD%E4%BB%A4%E5%AE%9E%E7%8E%B0%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B(%E5%B1%8F%E8%94%BDSIGHUP%E4%BF%A1%E5%8F%B7)/5.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/Linux/Linux%E5%9F%BA%E7%A1%80/nohup%E5%91%BD%E4%BB%A4%E5%AE%9E%E7%8E%B0%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B(%E5%B1%8F%E8%94%BDSIGHUP%E4%BF%A1%E5%8F%B7)/6.png">
+<meta property="og:updated_time" content="2020-05-08T00:59:03.514Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="nohup命令实现守护进程(屏蔽SIGHUP信号)">
+<meta name="twitter:description" content="一、SIGHUP信号1、终端关闭时，该信号被发送到 session 首进程以及作为 job 提交的进程（即用 &amp;amp; 符号提交的进程） 2、session首进程退出时，该信号被发送到该 session 中的前台进程组中的每一个进程，但不会发送给 job  提交的进程。 3、若父进程退出导致进程组成为孤儿进程组，且该进程组中有进程处于停止状态（收到SIGSTOP或SIGTSTP信号），该信号会被">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/Linux/Linux%E5%9F%BA%E7%A1%80/nohup%E5%91%BD%E4%BB%A4%E5%AE%9E%E7%8E%B0%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B(%E5%B1%8F%E8%94%BDSIGHUP%E4%BF%A1%E5%8F%B7)/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/05/08/Linux/Linux基础/nohup命令实现守护进程(屏蔽SIGHUP信号)/">
+
+
+
+
+
+  <title>nohup命令实现守护进程(屏蔽SIGHUP信号) | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/08/Linux/Linux基础/nohup命令实现守护进程(屏蔽SIGHUP信号)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">nohup命令实现守护进程(屏蔽SIGHUP信号)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-05-08T08:59:03+08:00">
+                2020-05-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux-Linux基础/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux - Linux基础</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="一、SIGHUP信号"><a href="#一、SIGHUP信号" class="headerlink" title="一、SIGHUP信号"></a>一、SIGHUP信号</h3><p>1、终端关闭时，该信号被发送到 session 首进程以及作为 job 提交的进程（即用 &amp; 符号提交的进程）</p>
+<p>2、session首进程退出时，该信号被发送到该 session 中的前台进程组中的每一个进程，但不会发送给 job  提交的进程。</p>
+<p>3、若父进程退出导致进程组成为孤儿进程组，且该进程组中有进程处于停止状态（收到SIGSTOP或SIGTSTP信号），该信号会被发送到该进程组中的每一个进程。</p>
+<p>终端关闭的情景如断网或者手动关闭了会话窗口，这时即便你的命令 &amp; 了，仍然会被 SIGHUP 信号中断。</p>
+<h3 id="二、Exit、Logout命令"><a href="#二、Exit、Logout命令" class="headerlink" title="二、Exit、Logout命令"></a>二、Exit、Logout命令</h3><p>session 首进程退出则是你使用 exit 或者 logout 命令正常，这种退出并不会向 &amp; 的任务发送 SIGHUP 信号</p>
+<h3 id="三、nohup命令"><a href="#三、nohup命令" class="headerlink" title="三、nohup命令"></a>三、nohup命令</h3><p>而 nohup 命令则是应对终端异常断掉时的场景，当我们使用 nohup command &amp; 将任务切换到后台执行时，即便此时终端突然断掉，SINHUP 信号也会被 nohup 屏蔽掉而不会终止你的后台任务。</p>
+<h4 id="1、bg-fg-jobs-和-ctrl-z-amp-的联用"><a href="#1、bg-fg-jobs-和-ctrl-z-amp-的联用" class="headerlink" title="1、bg / fg / jobs 和 ctrl-z / &amp; 的联用"></a>1、bg / fg / jobs 和 ctrl-z / &amp; 的联用</h4><p>注意：当任务被 &amp; 到后执行时，你使用 exit 或者 logout 正常登出只会结束前台命令，并不会终止你后台任务。但如果你直接关闭会话窗口或者意外断网，系统都会向当前会话下的进程发送 SIGHUP 信号。而进程对此信号的默认处理方式是退出执行。</p>
+<p>当想要将程序后台运行时，你可以在运行命令时使用：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用 &amp; 将其挂到后台任务队列 会返回任务编号</span></span><br><span class="line"><span class="built_in">command</span> &amp;</span><br><span class="line"><span class="comment"># 使用 fg 则可以将任务队列中的任务切换到前台来 可以根据任务编号选取 默认是最新的任务</span></span><br><span class="line"><span class="built_in">fg</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#或者运行命令后 ctrl-z bg 将其挂载到后台任务队列</span></span><br><span class="line"><span class="built_in">command</span></span><br><span class="line"><span class="comment">#会获取任务编号 将任务暂停</span></span><br><span class="line">ctrl-z</span><br><span class="line"><span class="comment">#bg 后面可以加任务编号 默认是将最新的任务挂载到后台任务队列</span></span><br><span class="line"><span class="built_in">bg</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用 jobs 可以查看任务队列的状态</span></span><br><span class="line"><span class="built_in">jobs</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 将第二个任务切换到前台</span></span><br><span class="line"><span class="built_in">fg</span> 2</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将其重新挂载到后台</span></span><br><span class="line">ctrl-z</span><br><span class="line"><span class="built_in">bg</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/Linux/Linux%E5%9F%BA%E7%A1%80/nohup%E5%91%BD%E4%BB%A4%E5%AE%9E%E7%8E%B0%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B(%E5%B1%8F%E8%94%BDSIGHUP%E4%BF%A1%E5%8F%B7)/1.png" alt></p>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/Linux/Linux%E5%9F%BA%E7%A1%80/nohup%E5%91%BD%E4%BB%A4%E5%AE%9E%E7%8E%B0%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B(%E5%B1%8F%E8%94%BDSIGHUP%E4%BF%A1%E5%8F%B7)/2.png" alt></p>
+<p><strong>exit 或者 logout 后 &amp; 进程并不会被中断：</strong></p>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/Linux/Linux%E5%9F%BA%E7%A1%80/nohup%E5%91%BD%E4%BB%A4%E5%AE%9E%E7%8E%B0%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B(%E5%B1%8F%E8%94%BDSIGHUP%E4%BF%A1%E5%8F%B7)/3.png" alt></p>
+<p><strong>断网或者关闭窗口 &amp; 进程也会被中断：</strong></p>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/Linux/Linux%E5%9F%BA%E7%A1%80/nohup%E5%91%BD%E4%BB%A4%E5%AE%9E%E7%8E%B0%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B(%E5%B1%8F%E8%94%BDSIGHUP%E4%BF%A1%E5%8F%B7)/4.png" alt></p>
+<p>可以看到这个会话里两个后任务没了，那是因为我强关了开启这两任务的窗口，SIGHUP 信号会发给后台任务</p>
+<h4 id="2、nohup-则是可以将任务以不挂断的方式运行（不挂断是说任务不接收-SIGHUP-信号）"><a href="#2、nohup-则是可以将任务以不挂断的方式运行（不挂断是说任务不接收-SIGHUP-信号）" class="headerlink" title="2、nohup 则是可以将任务以不挂断的方式运行（不挂断是说任务不接收 SIGHUP 信号）"></a>2、nohup 则是可以将任务以不挂断的方式运行（不挂断是说任务不接收 SIGHUP 信号）</h4><p>这里说的不挂断是说当我们用 &amp; ctrl-z + bg 等命令将任务挂在后台执行时，如果网络中断或窗口被关闭的话，系统会发送 SIGHUP 信号到你的所有任务，即便他们是以后台 &amp; 方式运行</p>
+<p>如果我们使用了 nohup 命令，则会将 SIGHUP 命令屏蔽掉，不会被终端</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#后台运行</span></span><br><span class="line">nohup ./test.sh &amp;</span><br><span class="line"></span><br><span class="line"><span class="comment">#挂载到后台</span></span><br><span class="line">nohup ./test.sh</span><br><span class="line">ctrl-z</span><br><span class="line"><span class="built_in">bg</span></span><br></pre></td></tr></table></figure>
+
+<p>看着其实和上面讲的没什么区别，此时别说你正常的使用 exit 或 logout 正常登出，就算突然断网或者关闭窗口任务也不会被终止。</p>
+<p>在3会话开启的 nohup 后台任务，然后关掉窗口</p>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/Linux/Linux%E5%9F%BA%E7%A1%80/nohup%E5%91%BD%E4%BB%A4%E5%AE%9E%E7%8E%B0%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B(%E5%B1%8F%E8%94%BDSIGHUP%E4%BF%A1%E5%8F%B7)/5.png" alt></p>
+<p>可以看到我关闭了3会话（呃，他编号就跟进了一位，4变成3了…），但任务仍然在运行，如果我不使用 nohup，这两任务就中断了…</p>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/Linux/Linux%E5%9F%BA%E7%A1%80/nohup%E5%91%BD%E4%BB%A4%E5%AE%9E%E7%8E%B0%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B(%E5%B1%8F%E8%94%BDSIGHUP%E4%BF%A1%E5%8F%B7)/6.png" alt></p>
+<h4 id="3、总结"><a href="#3、总结" class="headerlink" title="3、总结"></a>3、总结</h4><p>1、exit 或 logout 正常登出并不会终止 &amp; 的后台任务，此时的 SIGHUP 信号只会发给前台任务</p>
+<p>2、关闭窗口或断网，前后台任务都会收到 SIGHUP 信号，但如果我们试用了 nohup 则可以屏蔽此信号，让任务仍不被中断。</p>
+<p>3、进程收到 SIGHUP 信号时默认的操作是退出执行。但我们可以在代码里使用信号捕捉的方法，捕捉或忽略 SIGHUP 信号的处理，这样进程就不会退出了。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/05/08/Linux/Shell/Shell查看python版本并比较/" rel="next" title="Shell查看python版本并比较">
+                <i class="fa fa-chevron-left"></i> Shell查看python版本并比较
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/05/08/Linux/Linux基础/kill掉父进程,子进程不同的运行方式/" rel="prev" title="kill掉父进程,子进程不同的运行方式">
+                kill掉父进程,子进程不同的运行方式 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="John Doe">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">85</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://suliangxu.github.io" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:1193135584@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、SIGHUP信号"><span class="nav-text">一、SIGHUP信号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、Exit、Logout命令"><span class="nav-text">二、Exit、Logout命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、nohup命令"><span class="nav-text">三、nohup命令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、bg-fg-jobs-和-ctrl-z-amp-的联用"><span class="nav-text">1、bg / fg / jobs 和 ctrl-z / &amp; 的联用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、nohup-则是可以将任务以不挂断的方式运行（不挂断是说任务不接收-SIGHUP-信号）"><span class="nav-text">2、nohup 则是可以将任务以不挂断的方式运行（不挂断是说任务不接收 SIGHUP 信号）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、总结"><span class="nav-text">3、总结</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

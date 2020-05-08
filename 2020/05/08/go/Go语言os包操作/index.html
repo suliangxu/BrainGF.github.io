@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="一、介绍Go 在 os 中提供了文件的基本操作，包括通常意义的打开、创建、读写等操作，除此以外为了追求便捷以及性能上，Go 还在 io/ioutil 以及 bufio 提供一些其他函数供开发者使用 二、环境变量1、获取所有环境变量。返回变量列表1func Environ() []string  1234567891011121314151617package main import (    &quot;f">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Go语言os包操作">
+<meta property="og:url" content="http://yoursite.com/2020/05/08/go/Go语言os包操作/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="一、介绍Go 在 os 中提供了文件的基本操作，包括通常意义的打开、创建、读写等操作，除此以外为了追求便捷以及性能上，Go 还在 io/ioutil 以及 bufio 提供一些其他函数供开发者使用 二、环境变量1、获取所有环境变量。返回变量列表1func Environ() []string  1234567891011121314151617package main import (    &quot;f">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-05-08T08:42:13.490Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Go语言os包操作">
+<meta name="twitter:description" content="一、介绍Go 在 os 中提供了文件的基本操作，包括通常意义的打开、创建、读写等操作，除此以外为了追求便捷以及性能上，Go 还在 io/ioutil 以及 bufio 提供一些其他函数供开发者使用 二、环境变量1、获取所有环境变量。返回变量列表1func Environ() []string  1234567891011121314151617package main import (    &quot;f">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/05/08/go/Go语言os包操作/">
+
+
+
+
+
+  <title>Go语言os包操作 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/08/go/Go语言os包操作/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Go语言os包操作</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-05-08T16:42:13+08:00">
+                2020-05-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/go/" itemprop="url" rel="index">
+                    <span itemprop="name">go</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="一、介绍"><a href="#一、介绍" class="headerlink" title="一、介绍"></a>一、介绍</h3><p>Go 在 os 中提供了文件的基本操作，包括通常意义的打开、创建、读写等操作，除此以外为了追求便捷以及性能上，Go 还在 io/ioutil 以及 bufio 提供一些其他函数供开发者使用</p>
+<h3 id="二、环境变量"><a href="#二、环境变量" class="headerlink" title="二、环境变量"></a>二、环境变量</h3><h4 id="1、获取所有环境变量。返回变量列表"><a href="#1、获取所有环境变量。返回变量列表" class="headerlink" title="1、获取所有环境变量。返回变量列表"></a>1、获取所有环境变量。返回变量列表</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Environ</span><span class="params">()</span> []<span class="title">string</span></span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    <span class="string">"os"</span></span><br><span class="line">    <span class="string">"strings"</span></span><br><span class="line">)</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    envs := os.Environ()</span><br><span class="line">    <span class="keyword">for</span> _, env := <span class="keyword">range</span> envs &#123;</span><br><span class="line">        cache := strings.Split(env, <span class="string">"="</span>)</span><br><span class="line">        fmt.Printf(<span class="string">`</span></span><br><span class="line"><span class="string">        key: %s value: %s</span></span><br><span class="line"><span class="string">        `</span>, cache[<span class="number">0</span>], cache[<span class="number">1</span>])</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2、获取指定环境变量"><a href="#2、获取指定环境变量" class="headerlink" title="2、获取指定环境变量"></a>2、获取指定环境变量</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Getenv</span><span class="params">(key <span class="keyword">string</span>)</span> <span class="title">string</span></span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    <span class="string">"os"</span></span><br><span class="line">)</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    fmt.Println(os.Getenv(<span class="string">"GOPATH"</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="3、设置环境变量"><a href="#3、设置环境变量" class="headerlink" title="3、设置环境变量"></a>3、设置环境变量</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Setenv</span><span class="params">(key, value <span class="keyword">string</span>)</span> <span class="title">error</span></span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    <span class="string">"os"</span></span><br><span class="line">)</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    fmt.Println(os.Getenv(<span class="string">"GOPATH"</span>))</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">if</span> err := os.Setenv(<span class="string">"GOPATH"</span>, <span class="string">"./GO/bin"</span>); err != <span class="literal">nil</span> &#123;</span><br><span class="line">        fmt.Println(err)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        fmt.Println(<span class="string">"success"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="4、清除所有环境变量"><a href="#4、清除所有环境变量" class="headerlink" title="4、清除所有环境变量"></a>4、清除所有环境变量</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">os</span>.<span class="title">Clearenv</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"> data := os.Environ() </span><br><span class="line"> fmt.Println(data)</span><br><span class="line"> os.Clearenv() </span><br><span class="line"> data = os.Environ()</span><br><span class="line"> fmt.Println(data) </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="三、文件打开（OpenFile函数）"><a href="#三、文件打开（OpenFile函数）" class="headerlink" title="三、文件打开（OpenFile函数）"></a>三、文件打开（OpenFile函数）</h3><h4 id="1、打开方式"><a href="#1、打开方式" class="headerlink" title="1、打开方式"></a>1、打开方式</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> (</span><br><span class="line"><span class="comment">//只读模式</span></span><br><span class="line">O_RDONLY <span class="keyword">int</span> = syscall.O_RDONLY <span class="comment">// open the file read-only.</span></span><br><span class="line"><span class="comment">//只写模式</span></span><br><span class="line">O_WRONLY <span class="keyword">int</span> = syscall.O_WRONLY <span class="comment">// open the file write-only.</span></span><br><span class="line"><span class="comment">//可读可写</span></span><br><span class="line">O_RDWR <span class="keyword">int</span> = syscall.O_RDWR <span class="comment">// open the file read-write.</span></span><br><span class="line"><span class="comment">//追加内容</span></span><br><span class="line">O_APPEND <span class="keyword">int</span> = syscall.O_APPEND <span class="comment">// append data to the file when writing.</span></span><br><span class="line"><span class="comment">//创建文件,如果文件不存在</span></span><br><span class="line">O_CREATE <span class="keyword">int</span> = syscall.O_CREAT <span class="comment">// create a new file if none exists.</span></span><br><span class="line"><span class="comment">//与创建文件一同使用,文件必须存在</span></span><br><span class="line">O_EXCL <span class="keyword">int</span> = syscall.O_EXCL <span class="comment">// used with O_CREATE, file must not exist</span></span><br><span class="line"><span class="comment">//打开一个同步的文件流</span></span><br><span class="line">O_SYNC <span class="keyword">int</span> = syscall.O_SYNC <span class="comment">// open for synchronous I/O.</span></span><br><span class="line"><span class="comment">//如果可能,打开时缩短文件</span></span><br><span class="line">O_TRUNC <span class="keyword">int</span> = syscall.O_TRUNC <span class="comment">// if possible, truncate file when opened.</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<h4 id="2、打开模式"><a href="#2、打开模式" class="headerlink" title="2、打开模式"></a>2、打开模式</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> (</span><br><span class="line">    <span class="comment">// 单字符是被String方法用于格式化的属性缩写。</span></span><br><span class="line">    ModeDir        FileMode = <span class="number">1</span> &lt;&lt; (<span class="number">32</span> - <span class="number">1</span> - <span class="literal">iota</span>) <span class="comment">// d: 目录</span></span><br><span class="line">    ModeAppend                                     <span class="comment">// a: 只能写入，且只能写入到末尾</span></span><br><span class="line">    ModeExclusive                                  <span class="comment">// l: 用于执行</span></span><br><span class="line">    ModeTemporary                                  <span class="comment">// T: 临时文件（非备份文件）</span></span><br><span class="line">    ModeSymlink                                    <span class="comment">// L: 符号链接（不是快捷方式文件）</span></span><br><span class="line">    ModeDevice                                     <span class="comment">// D: 设备</span></span><br><span class="line">    ModeNamedPipe                                  <span class="comment">// p: 命名管道（FIFO）</span></span><br><span class="line">    ModeSocket                                     <span class="comment">// S: Unix域socket</span></span><br><span class="line">    ModeSetuid                                     <span class="comment">// u: 表示文件具有其创建者用户id权限</span></span><br><span class="line">    ModeSetgid                                     <span class="comment">// g: 表示文件具有其创建者组id的权限</span></span><br><span class="line">    ModeCharDevice                                 <span class="comment">// c: 字符设备，需已设置ModeDevice</span></span><br><span class="line">    ModeSticky                                     <span class="comment">// t: 只有root/创建者能删除/移动文件</span></span><br><span class="line">    <span class="comment">// 覆盖所有类型位（用于通过&amp;获取类型位），对普通文件，所有这些位都不应被设置</span></span><br><span class="line">    ModeType = ModeDir | ModeSymlink | ModeNamedPipe | ModeSocket | ModeDevice</span><br><span class="line">    ModePerm FileMode = <span class="number">0777</span> <span class="comment">// 覆盖所有Unix权限位（用于通过&amp;获取类型位）</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<h3 id="三、文件信息"><a href="#三、文件信息" class="headerlink" title="三、文件信息"></a>三、文件信息</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> FileInfo <span class="keyword">interface</span> &#123;</span><br><span class="line">    Name() <span class="keyword">string</span>       <span class="comment">// 文件的名字（不含扩展名）</span></span><br><span class="line">    Size() <span class="keyword">int64</span>        <span class="comment">// 普通文件返回值表示其大小；其他文件的返回值含义各系统不同</span></span><br><span class="line">    Mode() FileMode     <span class="comment">// 文件的模式位</span></span><br><span class="line">    ModTime() time.Time <span class="comment">// 文件的修改时间</span></span><br><span class="line">    IsDir() <span class="keyword">bool</span>        <span class="comment">// 等价于Mode().IsDir()</span></span><br><span class="line">    Sys() <span class="keyword">interface</span>&#123;&#125;   <span class="comment">// 底层数据来源（可以返回nil）</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="1、获取文件信息对象，符号链接将跳转"><a href="#1、获取文件信息对象，符号链接将跳转" class="headerlink" title="1、获取文件信息对象，符号链接将跳转"></a>1、获取文件信息对象，符号链接将跳转</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Stat</span><span class="params">(name <span class="keyword">string</span>)</span> <span class="params">(fi FileInfo, err error)</span></span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    <span class="string">"os"</span></span><br><span class="line">)</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">     fi, _ := os.Stat(<span class="string">"./1.txt"</span>)</span><br><span class="line"> </span><br><span class="line">     fmt.Println(fi.Size())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2、获取文件信息对象，符号链接不跳转"><a href="#2、获取文件信息对象，符号链接不跳转" class="headerlink" title="2、获取文件信息对象，符号链接不跳转"></a>2、获取文件信息对象，符号链接不跳转</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Lstat</span><span class="params">(name <span class="keyword">string</span>)</span> <span class="params">(fi FileInfo, err error)</span></span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    “fmt”</span><br><span class="line">		“os”</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">		fi, _ := os.Lstat(<span class="string">"./1.txt"</span>)</span><br><span class="line"></span><br><span class="line">		fmt.Println(fi.Size())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="3、判断文件或目录是否存在"><a href="#3、判断文件或目录是否存在" class="headerlink" title="3、判断文件或目录是否存在"></a>3、判断文件或目录是否存在</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    <span class="string">"os"</span></span><br><span class="line">)</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">if</span> _, err := os.Open(<span class="string">"./empty.js"</span>); err != <span class="literal">nil</span> &#123;</span><br><span class="line">        <span class="comment">// false 不存在   true 存在</span></span><br><span class="line">        emptyErr := os.IsExist(err)</span><br><span class="line">        fmt.Println(emptyErr, <span class="string">"\n"</span>, err)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="4、IsExist-反义方法"><a href="#4、IsExist-反义方法" class="headerlink" title="4、IsExist 反义方法"></a>4、IsExist 反义方法</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    <span class="string">"os"</span></span><br><span class="line">)</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">if</span> _, err := os.Open(<span class="string">"./empty.js"</span>); err != <span class="literal">nil</span> &#123;</span><br><span class="line">        <span class="comment">// false 不存在   true 存在</span></span><br><span class="line">        emptyErr := os.IsNotExist(err)</span><br><span class="line">        fmt.Println(emptyErr, <span class="string">"\n"</span>, err)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="5、判断是否为权限错误"><a href="#5、判断是否为权限错误" class="headerlink" title="5、判断是否为权限错误"></a>5、判断是否为权限错误</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    <span class="string">"os"</span></span><br><span class="line">)</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    file, _ := os.Open(<span class="string">"./cache.js"</span>)</span><br><span class="line">    _, err := file.WriteString(<span class="string">"// new info"</span>)</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        fmt.Println(os.IsPermission(err))</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">defer</span> file.Close()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="四、文件-目录操作"><a href="#四、文件-目录操作" class="headerlink" title="四、文件/目录操作"></a>四、文件/目录操作</h3><h4 id="1、获取当前工作目录"><a href="#1、获取当前工作目录" class="headerlink" title="1、获取当前工作目录"></a>1、获取当前工作目录</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Getwd</span><span class="params">()</span> <span class="params">(dir <span class="keyword">string</span>, err error)</span></span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    <span class="string">"os"</span></span><br><span class="line">)</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    path, _ := os.Getwd()</span><br><span class="line">    fmt.Println(path)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2、修改当前工作目录"><a href="#2、修改当前工作目录" class="headerlink" title="2、修改当前工作目录"></a>2、修改当前工作目录</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Chdir</span><span class="params">(dir <span class="keyword">string</span>)</span> <span class="title">error</span></span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    <span class="string">"os"</span></span><br><span class="line">)</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    path1, _ := os.Getwd()</span><br><span class="line">    fmt.Println(path1)</span><br><span class="line">    os.Chdir(<span class="string">"./../"</span>)</span><br><span class="line">    path, _ := os.Getwd()</span><br><span class="line">    fmt.Println(path)</span><br><span class="line"> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="3、修改文件FileMode"><a href="#3、修改文件FileMode" class="headerlink" title="3、修改文件FileMode"></a>3、修改文件FileMode</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Chmod</span><span class="params">(name <span class="keyword">string</span>, mode FileMode)</span> <span class="title">error</span></span></span><br></pre></td></tr></table></figure>
+
+<h4 id="4、修改文件的访问时间和修改时间"><a href="#4、修改文件的访问时间和修改时间" class="headerlink" title="4、修改文件的访问时间和修改时间"></a>4、修改文件的访问时间和修改时间</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Chtimes</span><span class="params">(name <span class="keyword">string</span>, atime time.Time, mtime time.Time)</span> <span class="title">error</span></span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    <span class="string">"os"</span></span><br><span class="line">    <span class="string">"time"</span></span><br><span class="line">)</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    fmt.Println(os.Getwd())</span><br><span class="line"> </span><br><span class="line">    path := <span class="string">"test.txt"</span></span><br><span class="line">    os.Chtimes(path, time.Now(), time.Now())</span><br><span class="line"> </span><br><span class="line">    fi, _ := os.Stat(path)</span><br><span class="line">    fmt.Println(fi.ModTime())</span><br><span class="line"> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="5、创建目录"><a href="#5、创建目录" class="headerlink" title="5、创建目录"></a>5、创建目录</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Mkdir</span><span class="params">(name <span class="keyword">string</span>, perm FileMode)</span> <span class="title">error</span></span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    <span class="string">"os"</span></span><br><span class="line">)</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">if</span> err := os.Mkdir(<span class="string">"test"</span>, os.ModeDir); err != <span class="literal">nil</span> &#123;</span><br><span class="line">        fmt.Println(err)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        fmt.Println(<span class="string">"success"</span>)</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="6、递归创建目录"><a href="#6、递归创建目录" class="headerlink" title="6、递归创建目录"></a>6、递归创建目录</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">MkdirAll</span><span class="params">(path <span class="keyword">string</span>, perm FileMode)</span> <span class="title">error</span></span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    <span class="string">"os"</span></span><br><span class="line">)</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">if</span> err := os.MkdirAll(<span class="string">"test01/test"</span>, os.ModeDir); err != <span class="literal">nil</span> &#123;</span><br><span class="line">        fmt.Println(err)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        fmt.Println(<span class="string">"success"</span>)</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="7、移除-单一-文件-目录"><a href="#7、移除-单一-文件-目录" class="headerlink" title="7、移除(单一)文件/目录"></a>7、移除(单一)文件/目录</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Remove</span><span class="params">(name <span class="keyword">string</span>)</span> <span class="title">error</span></span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    <span class="string">"os"</span></span><br><span class="line">)</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">if</span> err := os.Remove(<span class="string">"test"</span>); err != <span class="literal">nil</span> &#123;</span><br><span class="line">        fmt.Println(err)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        fmt.Println(<span class="string">"success"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="8、递归删除文件-目录"><a href="#8、递归删除文件-目录" class="headerlink" title="8、递归删除文件/目录"></a>8、递归删除文件/目录</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">RemoveAll</span><span class="params">(path <span class="keyword">string</span>)</span> <span class="title">error</span></span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    <span class="string">"os"</span></span><br><span class="line">)</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">if</span> err := os.RemoveAll(<span class="string">"test01"</span>); err != <span class="literal">nil</span> &#123;</span><br><span class="line">        fmt.Println(err)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        fmt.Println(<span class="string">"success"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="9、文件重命名或移动"><a href="#9、文件重命名或移动" class="headerlink" title="9、文件重命名或移动"></a>9、文件重命名或移动</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Rename</span><span class="params">(oldpath, newpath <span class="keyword">string</span>)</span> <span class="title">error</span></span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    <span class="string">"os"</span></span><br><span class="line">)</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"> </span><br><span class="line">    <span class="comment">// 重命名</span></span><br><span class="line">    err := os.Rename(<span class="string">"test.txt"</span>, <span class="string">"test01.js"</span>)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        fmt.Println(err)</span><br><span class="line">    &#125;</span><br><span class="line">    err = os.Mkdir(<span class="string">"test"</span>, os.ModeDir)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        fmt.Println(err)</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="comment">// 移动</span></span><br><span class="line">    err = os.Rename(<span class="string">"test01.js"</span>, <span class="string">"test/text01.txt"</span>)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        fmt.Println(err)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="10、修改文件大小"><a href="#10、修改文件大小" class="headerlink" title="10、修改文件大小"></a>10、修改文件大小</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Truncate</span><span class="params">(name <span class="keyword">string</span>, size <span class="keyword">int64</span>)</span> <span class="title">error</span></span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    <span class="string">"os"</span></span><br><span class="line">)</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"> </span><br><span class="line">    path := <span class="string">"test/text01.txt"</span></span><br><span class="line">    fi, err := os.Stat(path)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        fmt.Println(err)</span><br><span class="line">        os.Exit(<span class="number">1</span>)</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    size := fi.Size()</span><br><span class="line">    fmt.Println(size)</span><br><span class="line"> </span><br><span class="line">    <span class="comment">// 截取长度</span></span><br><span class="line">    size = <span class="keyword">int64</span>(<span class="keyword">float64</span>(size) * <span class="number">0.5</span>)</span><br><span class="line"> </span><br><span class="line">    os.Truncate(path, size)</span><br><span class="line"> </span><br><span class="line">    fi, _ = os.Stat(path)</span><br><span class="line"> </span><br><span class="line">    fmt.Println(fi.Size())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="11、查看两个文件信息是否指向同一文件"><a href="#11、查看两个文件信息是否指向同一文件" class="headerlink" title="11、查看两个文件信息是否指向同一文件"></a>11、查看两个文件信息是否指向同一文件</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">SameFile</span><span class="params">(fi1, fi2 FileInfo)</span> <span class="title">bool</span></span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    <span class="string">"os"</span></span><br><span class="line">)</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"> </span><br><span class="line">    path := <span class="string">"test/text01.txt"</span></span><br><span class="line"> </span><br><span class="line">    fi_1, _ := os.Stat(path)</span><br><span class="line">    fi_2, _ := os.Stat(path)</span><br><span class="line"> </span><br><span class="line">    fmt.Println(os.SameFile(fi_1, fi_2))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="五、文件-目录对象"><a href="#五、文件-目录对象" class="headerlink" title="五、文件/目录对象"></a>五、文件/目录对象</h3><h4 id="1、创建文件，若存在则清空"><a href="#1、创建文件，若存在则清空" class="headerlink" title="1、创建文件，若存在则清空"></a>1、创建文件，若存在则清空</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Create</span><span class="params">(name <span class="keyword">string</span>)</span> <span class="params">(file *File, err error)</span></span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    <span class="string">"os"</span></span><br><span class="line">)</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"> </span><br><span class="line">    file, _ := os.Create(<span class="string">"./new_file.js"</span>)</span><br><span class="line">    fmt.Println(file.Name())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2、读模式打开文件"><a href="#2、读模式打开文件" class="headerlink" title="2、读模式打开文件"></a>2、读模式打开文件</h4><p>Open打开一个文件用于读取。如果操作成功，返回的文件对象的方法可用于读取数据；对应的文件描述符具有O_RDONLY模式。如果出错，错误底层类型是*PathError。</p>
+<p>所以，Open()只能用于读取文件。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Open</span><span class="params">(name <span class="keyword">string</span>)</span> <span class="params">(file *File, err error)</span></span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    <span class="string">"os"</span></span><br><span class="line">)</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"> </span><br><span class="line">    file, _ := os.Open(<span class="string">"./new_file.js"</span>)</span><br><span class="line">    fmt.Println(file.Name())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="3、以指定模式打开文件"><a href="#3、以指定模式打开文件" class="headerlink" title="3、以指定模式打开文件"></a>3、以指定模式打开文件</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">OpenFile</span><span class="params">(name <span class="keyword">string</span>, flag <span class="keyword">int</span>, perm FileMode)</span> <span class="params">(file *File, err error)</span></span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    <span class="string">"os"</span></span><br><span class="line">)</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"> </span><br><span class="line">    file, _ := os.OpenFile(<span class="string">"./new_file.js"</span>, os.O_RDONLY, os.ModeAppend)</span><br><span class="line">    fmt.Println(file.Name())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="六、文件对象属性操作"><a href="#六、文件对象属性操作" class="headerlink" title="六、文件对象属性操作"></a>六、文件对象属性操作</h3><h4 id="1、获取文件路径"><a href="#1、获取文件路径" class="headerlink" title="1、获取文件路径"></a>1、获取文件路径</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(f *File)</span> <span class="title">Name</span><span class="params">()</span> <span class="title">string</span></span></span><br></pre></td></tr></table></figure>
+
+<h4 id="2、获取文件信息对象"><a href="#2、获取文件信息对象" class="headerlink" title="2、获取文件信息对象"></a>2、获取文件信息对象</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(f *File)</span> <span class="title">Stat</span><span class="params">()</span> <span class="params">(fi FileInfo, err error)</span></span></span><br></pre></td></tr></table></figure>
+
+<h4 id="3、将当前工作路径修改为文件对象目录"><a href="#3、将当前工作路径修改为文件对象目录" class="headerlink" title="3、将当前工作路径修改为文件对象目录"></a>3、将当前工作路径修改为文件对象目录</h4><p><strong>文件对象必须为目录, 该接口不支持window</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(f *File)</span> <span class="title">Chdir</span><span class="params">()</span> <span class="title">error</span></span></span><br></pre></td></tr></table></figure>
+
+<h4 id="4、修改文件模式"><a href="#4、修改文件模式" class="headerlink" title="4、修改文件模式"></a>4、修改文件模式</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(f *File)</span> <span class="title">Chmod</span><span class="params">(mode FileMode)</span> <span class="title">error</span></span></span><br></pre></td></tr></table></figure>
+
+<h4 id="5、修改文件对象size"><a href="#5、修改文件对象size" class="headerlink" title="5、修改文件对象size"></a>5、修改文件对象size</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(f *File)</span> <span class="title">Truncate</span><span class="params">(size <span class="keyword">int64</span>)</span> <span class="title">error</span></span></span><br></pre></td></tr></table></figure>
+
+<h3 id="七、文件对象读写操作"><a href="#七、文件对象读写操作" class="headerlink" title="七、文件对象读写操作"></a>七、文件对象读写操作</h3><h4 id="1、读取文件内容"><a href="#1、读取文件内容" class="headerlink" title="1、读取文件内容"></a>1、读取文件内容</h4><p><strong>读入长度取决 容器切片长度</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(f *File)</span> <span class="title">Read</span><span class="params">(b []<span class="keyword">byte</span>)</span> <span class="params">(n <span class="keyword">int</span>, err error)</span></span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    <span class="string">"os"</span></span><br><span class="line">)</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"> </span><br><span class="line">    bt := <span class="built_in">make</span>([]<span class="keyword">byte</span>, <span class="number">10</span>)</span><br><span class="line">    file, _ := os.Open(<span class="string">"./new_file.js"</span>)</span><br><span class="line"> </span><br><span class="line">    file.Read(bt)</span><br><span class="line">    <span class="keyword">defer</span> file.Close()</span><br><span class="line"> </span><br><span class="line">    fmt.Println(<span class="keyword">string</span>(bt))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2、从某位置读取文件"><a href="#2、从某位置读取文件" class="headerlink" title="2、从某位置读取文件"></a>2、从某位置读取文件</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(f *File)</span> <span class="title">ReadAt</span><span class="params">(b []<span class="keyword">byte</span>, off <span class="keyword">int64</span>)</span> <span class="params">(n <span class="keyword">int</span>, err error)</span></span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    <span class="string">"os"</span></span><br><span class="line">)</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"> </span><br><span class="line">    bt := <span class="built_in">make</span>([]<span class="keyword">byte</span>, <span class="number">100</span>)</span><br><span class="line">    file, _ := os.Open(<span class="string">"test/text01.txt"</span>)</span><br><span class="line"> </span><br><span class="line">    file.ReadAt(bt, <span class="number">2</span>)</span><br><span class="line"> </span><br><span class="line">    fmt.Println(<span class="keyword">string</span>(bt))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="3、写入内容"><a href="#3、写入内容" class="headerlink" title="3、写入内容"></a>3、写入内容</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(f *File)</span> <span class="title">Write</span><span class="params">(b []<span class="keyword">byte</span>)</span> <span class="params">(n <span class="keyword">int</span>, err error)</span></span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    <span class="string">"os"</span></span><br><span class="line">)</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"> </span><br><span class="line">    file, err := os.OpenFile(<span class="string">"test/text01.txt"</span>, os.O_RDWR, os.ModeAppend)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        fmt.Println(<span class="string">"err: "</span>, err)</span><br><span class="line">        os.Exit(<span class="number">1</span>)</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">defer</span> file.Close()</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">if</span> n, err := file.Write([]<span class="keyword">byte</span>(<span class="string">"// new info"</span>)); err != <span class="literal">nil</span> &#123;</span><br><span class="line">        fmt.Println(err)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        fmt.Println(n)</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="4、写入字符"><a href="#4、写入字符" class="headerlink" title="4、写入字符"></a>4、写入字符</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(f *File)</span> <span class="title">WriteString</span><span class="params">(s <span class="keyword">string</span>)</span> <span class="params">(ret <span class="keyword">int</span>, err error)</span></span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    <span class="string">"os"</span></span><br><span class="line">)</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"> </span><br><span class="line">    file, err := os.OpenFile(<span class="string">"test/text01.txt"</span>, os.O_RDWR, os.ModeAppend)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        fmt.Println(<span class="string">"err: "</span>, err)</span><br><span class="line">        os.Exit(<span class="number">1</span>)</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">defer</span> file.Close()</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">if</span> n, err := file.Write([]<span class="keyword">byte</span>(<span class="string">"// new info"</span>)); err != <span class="literal">nil</span> &#123;</span><br><span class="line">        fmt.Println(err)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        fmt.Println(n)</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="5、从指定位置写入"><a href="#5、从指定位置写入" class="headerlink" title="5、从指定位置写入"></a>5、从指定位置写入</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(f *File)</span> <span class="title">WriteAt</span><span class="params">(b []<span class="keyword">byte</span>, off <span class="keyword">int64</span>)</span> <span class="params">(n <span class="keyword">int</span>, err error)</span></span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    <span class="string">"os"</span></span><br><span class="line">)</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"> </span><br><span class="line">    file, err := os.OpenFile(<span class="string">"test/text01.txt"</span>, os.O_RDWR, os.ModeAppend)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        fmt.Println(<span class="string">"err: "</span>, err)</span><br><span class="line">        os.Exit(<span class="number">1</span>)</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">defer</span> file.Close()</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">if</span> n, err := file.WriteAt([]<span class="keyword">byte</span>(<span class="string">" append "</span>), <span class="number">5</span>); err != <span class="literal">nil</span> &#123;</span><br><span class="line">        fmt.Println(err)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        fmt.Println(n)</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="6、设置下次读写位置"><a href="#6、设置下次读写位置" class="headerlink" title="6、设置下次读写位置"></a>6、设置下次读写位置</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(f *File)</span> <span class="title">Seek</span><span class="params">(offset <span class="keyword">int64</span>, whence <span class="keyword">int</span>)</span> <span class="params">(ret <span class="keyword">int64</span>, err error)</span></span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    <span class="string">"os"</span></span><br><span class="line">)</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"> </span><br><span class="line">    f, err := os.OpenFile(<span class="string">"test/text01.txt"</span>, os.O_RDWR, os.ModeAppend)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        fmt.Println(<span class="string">"err: "</span>, err)</span><br><span class="line">        os.Exit(<span class="number">1</span>)</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">defer</span> f.Close()</span><br><span class="line"> </span><br><span class="line">    f.Seek(<span class="number">2</span>, <span class="number">0</span>)</span><br><span class="line">    buffer := <span class="built_in">make</span>([]<span class="keyword">byte</span>, <span class="number">5</span>)</span><br><span class="line">    <span class="comment">// Read 后文件指针也会偏移</span></span><br><span class="line"> </span><br><span class="line">    n, err := f.Read(buffer)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        fmt.Println(<span class="literal">nil</span>)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    fmt.Printf(<span class="string">"n is %d, buffer content is : %s\n"</span>, n, buffer)</span><br><span class="line">    <span class="comment">// 获取文件指针当前位置</span></span><br><span class="line">    cur_offset, _ := f.Seek(<span class="number">0</span>, os.SEEK_CUR)</span><br><span class="line">    fmt.Printf(<span class="string">"current offset is %d\n"</span>, cur_offset)</span><br><span class="line"> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/05/08/go/设置GOPATH/" rel="next" title="设置GOPATH">
+                <i class="fa fa-chevron-left"></i> 设置GOPATH
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/05/08/go/Go语言复制文件/" rel="prev" title="Go语言复制文件">
+                Go语言复制文件 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="John Doe">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">85</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://suliangxu.github.io" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:1193135584@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、介绍"><span class="nav-text">一、介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、环境变量"><span class="nav-text">二、环境变量</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、获取所有环境变量。返回变量列表"><span class="nav-text">1、获取所有环境变量。返回变量列表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、获取指定环境变量"><span class="nav-text">2、获取指定环境变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、设置环境变量"><span class="nav-text">3、设置环境变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、清除所有环境变量"><span class="nav-text">4、清除所有环境变量</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、文件打开（OpenFile函数）"><span class="nav-text">三、文件打开（OpenFile函数）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、打开方式"><span class="nav-text">1、打开方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、打开模式"><span class="nav-text">2、打开模式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、文件信息"><span class="nav-text">三、文件信息</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、获取文件信息对象，符号链接将跳转"><span class="nav-text">1、获取文件信息对象，符号链接将跳转</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、获取文件信息对象，符号链接不跳转"><span class="nav-text">2、获取文件信息对象，符号链接不跳转</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、判断文件或目录是否存在"><span class="nav-text">3、判断文件或目录是否存在</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、IsExist-反义方法"><span class="nav-text">4、IsExist 反义方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5、判断是否为权限错误"><span class="nav-text">5、判断是否为权限错误</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、文件-目录操作"><span class="nav-text">四、文件/目录操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、获取当前工作目录"><span class="nav-text">1、获取当前工作目录</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、修改当前工作目录"><span class="nav-text">2、修改当前工作目录</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、修改文件FileMode"><span class="nav-text">3、修改文件FileMode</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、修改文件的访问时间和修改时间"><span class="nav-text">4、修改文件的访问时间和修改时间</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5、创建目录"><span class="nav-text">5、创建目录</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6、递归创建目录"><span class="nav-text">6、递归创建目录</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7、移除-单一-文件-目录"><span class="nav-text">7、移除(单一)文件/目录</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8、递归删除文件-目录"><span class="nav-text">8、递归删除文件/目录</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9、文件重命名或移动"><span class="nav-text">9、文件重命名或移动</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#10、修改文件大小"><span class="nav-text">10、修改文件大小</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#11、查看两个文件信息是否指向同一文件"><span class="nav-text">11、查看两个文件信息是否指向同一文件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五、文件-目录对象"><span class="nav-text">五、文件/目录对象</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、创建文件，若存在则清空"><span class="nav-text">1、创建文件，若存在则清空</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、读模式打开文件"><span class="nav-text">2、读模式打开文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、以指定模式打开文件"><span class="nav-text">3、以指定模式打开文件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#六、文件对象属性操作"><span class="nav-text">六、文件对象属性操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、获取文件路径"><span class="nav-text">1、获取文件路径</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、获取文件信息对象"><span class="nav-text">2、获取文件信息对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、将当前工作路径修改为文件对象目录"><span class="nav-text">3、将当前工作路径修改为文件对象目录</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、修改文件模式"><span class="nav-text">4、修改文件模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5、修改文件对象size"><span class="nav-text">5、修改文件对象size</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#七、文件对象读写操作"><span class="nav-text">七、文件对象读写操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、读取文件内容"><span class="nav-text">1、读取文件内容</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、从某位置读取文件"><span class="nav-text">2、从某位置读取文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、写入内容"><span class="nav-text">3、写入内容</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、写入字符"><span class="nav-text">4、写入字符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5、从指定位置写入"><span class="nav-text">5、从指定位置写入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6、设置下次读写位置"><span class="nav-text">6、设置下次读写位置</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
