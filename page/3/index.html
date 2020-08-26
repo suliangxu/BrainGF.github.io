@@ -249,6 +249,1561 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/25/go/系统班/基础/数组/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/03/25/go/系统班/基础/数组/" itemprop="url">数组</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-03-25T15:00:37+08:00">
+                2020-03-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/go-系统班-基础/" itemprop="url" rel="index">
+                    <span itemprop="name">go - 系统班 - 基础</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>数组是同一种数据类型元素的集合。 在Go语言中，数组从声明时就确定，使用时可以修改数组成员，但是数组大小不可变化。 基本语法：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义一个长度为3元素类型为int的数组a</span></span><br><span class="line"><span class="keyword">var</span> a [<span class="number">3</span>]<span class="keyword">int</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="一、数组的定义"><a href="#一、数组的定义" class="headerlink" title="一、数组的定义"></a>一、数组的定义</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var 数组变量名 [元素数量]T</span><br></pre></td></tr></table></figure>
+
+<p>比如：<code>var a [5]int</code>， 数组的长度必须是常量，并且长度是数组类型的一部分。一旦定义，长度不能变。 <code>[5]int</code>和<code>[10]int</code>是不同的类型。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a [<span class="number">3</span>]<span class="keyword">int</span></span><br><span class="line"><span class="keyword">var</span> b [<span class="number">4</span>]<span class="keyword">int</span></span><br><span class="line">a = b <span class="comment">//不可以这样做，因为此时a和b是不同的类型</span></span><br></pre></td></tr></table></figure>
+
+<p>数组可以通过下标进行访问，下标是从<code>0</code>开始，最后一个元素下标是：<code>len-1</code>，访问越界（下标在合法范围之外），则触发访问越界，会panic。</p>
+<h3 id="二、数组的初始化"><a href="#二、数组的初始化" class="headerlink" title="二、数组的初始化"></a>二、数组的初始化</h3><h4 id="1、方法一"><a href="#1、方法一" class="headerlink" title="1、方法一"></a>1、方法一</h4><p>初始化数组时可以使用初始化列表来设置数组元素的值。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> testArray [<span class="number">3</span>]<span class="keyword">int</span>                        <span class="comment">//数组会初始化为int类型的零值</span></span><br><span class="line">	<span class="keyword">var</span> numArray = [<span class="number">3</span>]<span class="keyword">int</span>&#123;<span class="number">1</span>, <span class="number">2</span>&#125;                 <span class="comment">//使用指定的初始值完成初始化</span></span><br><span class="line">	<span class="keyword">var</span> cityArray = [<span class="number">3</span>]<span class="keyword">string</span>&#123;<span class="string">"北京"</span>, <span class="string">"上海"</span>, <span class="string">"深圳"</span>&#125; <span class="comment">//使用指定的初始值完成初始化</span></span><br><span class="line">	fmt.Println(testArray)                      <span class="comment">//[0 0 0]</span></span><br><span class="line">	fmt.Println(numArray)                       <span class="comment">//[1 2 0]</span></span><br><span class="line">	fmt.Println(cityArray)                      <span class="comment">//[北京 上海 深圳]</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2、方法二"><a href="#2、方法二" class="headerlink" title="2、方法二"></a>2、方法二</h4><p>按照上面的方法每次都要确保提供的初始值和数组长度一致，一般情况下我们可以让编译器根据初始值的个数<strong>自行推断数组的长度</strong>，例如：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> testArray [<span class="number">3</span>]<span class="keyword">int</span></span><br><span class="line">	<span class="keyword">var</span> numArray = [...]<span class="keyword">int</span>&#123;<span class="number">1</span>, <span class="number">2</span>&#125;</span><br><span class="line">	<span class="keyword">var</span> cityArray = [...]<span class="keyword">string</span>&#123;<span class="string">"北京"</span>, <span class="string">"上海"</span>, <span class="string">"深圳"</span>&#125;</span><br><span class="line">	fmt.Println(testArray)                          <span class="comment">//[0 0 0]</span></span><br><span class="line">	fmt.Println(numArray)                           <span class="comment">//[1 2]</span></span><br><span class="line">	fmt.Printf(<span class="string">"type of numArray:%T\n"</span>, numArray)   <span class="comment">//type of numArray:[2]int</span></span><br><span class="line">	fmt.Println(cityArray)                          <span class="comment">//[北京 上海 深圳]</span></span><br><span class="line">	fmt.Printf(<span class="string">"type of cityArray:%T\n"</span>, cityArray) <span class="comment">//type of cityArray:[3]string</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="3、方法三"><a href="#3、方法三" class="headerlink" title="3、方法三"></a>3、方法三</h4><p>我们还可以使用指定索引值的方式来初始化数组，例如:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	a := [...]<span class="keyword">int</span>&#123;<span class="number">1</span>: <span class="number">1</span>, <span class="number">3</span>: <span class="number">5</span>&#125;</span><br><span class="line">	fmt.Println(a)                  <span class="comment">// [0 1 0 5]</span></span><br><span class="line">	fmt.Printf(<span class="string">"type of a:%T\n"</span>, a) <span class="comment">//type of a:[4]int</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="三、数组的遍历"><a href="#三、数组的遍历" class="headerlink" title="三、数组的遍历"></a>三、数组的遍历</h3><p>遍历数组a有以下两种方法：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> a = [...]<span class="keyword">string</span>&#123;<span class="string">"北京"</span>, <span class="string">"上海"</span>, <span class="string">"深圳"</span>&#125;</span><br><span class="line">	<span class="comment">// 方法1：for循环遍历</span></span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="built_in">len</span>(a); i++ &#123;</span><br><span class="line">		fmt.Println(a[i])</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 方法2：for range遍历</span></span><br><span class="line">	<span class="keyword">for</span> index, value := <span class="keyword">range</span> a &#123;</span><br><span class="line">		fmt.Println(index, value)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="四、多维数组"><a href="#四、多维数组" class="headerlink" title="四、多维数组"></a>四、多维数组</h3><p>Go语言是支持多维数组的，我们这里以二维数组为例（数组中又嵌套数组）。</p>
+<h4 id="1、二维数组的定义"><a href="#1、二维数组的定义" class="headerlink" title="1、二维数组的定义"></a>1、二维数组的定义</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	a := [<span class="number">3</span>][<span class="number">2</span>]<span class="keyword">string</span>&#123;</span><br><span class="line">		&#123;<span class="string">"北京"</span>, <span class="string">"上海"</span>&#125;,</span><br><span class="line">		&#123;<span class="string">"广州"</span>, <span class="string">"深圳"</span>&#125;,</span><br><span class="line">		&#123;<span class="string">"成都"</span>, <span class="string">"重庆"</span>&#125;,</span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(a) <span class="comment">//[[北京 上海] [广州 深圳] [成都 重庆]]</span></span><br><span class="line">	fmt.Println(a[<span class="number">2</span>][<span class="number">1</span>]) <span class="comment">//支持索引取值:重庆</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2、二维数组的遍历"><a href="#2、二维数组的遍历" class="headerlink" title="2、二维数组的遍历"></a>2、二维数组的遍历</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	a := [<span class="number">3</span>][<span class="number">2</span>]<span class="keyword">string</span>&#123;</span><br><span class="line">		&#123;<span class="string">"北京"</span>, <span class="string">"上海"</span>&#125;,</span><br><span class="line">		&#123;<span class="string">"广州"</span>, <span class="string">"深圳"</span>&#125;,</span><br><span class="line">		&#123;<span class="string">"成都"</span>, <span class="string">"重庆"</span>&#125;,</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> _, v1 := <span class="keyword">range</span> a &#123;</span><br><span class="line">		<span class="keyword">for</span> _, v2 := <span class="keyword">range</span> v1 &#123;</span><br><span class="line">			fmt.Printf(<span class="string">"%s\t"</span>, v2)</span><br><span class="line">		&#125;</span><br><span class="line">		fmt.Println()</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">北京	上海	</span><br><span class="line">广州	深圳	</span><br><span class="line">成都	重庆</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong> 多维数组<strong>只有第一层</strong>可以使用<code>...</code>来让编译器推导数组长度。</p>
+<p>例如：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//支持的写法</span></span><br><span class="line">a := [...][<span class="number">2</span>]<span class="keyword">string</span>&#123;</span><br><span class="line">	&#123;<span class="string">"北京"</span>, <span class="string">"上海"</span>&#125;,</span><br><span class="line">	&#123;<span class="string">"广州"</span>, <span class="string">"深圳"</span>&#125;,</span><br><span class="line">	&#123;<span class="string">"成都"</span>, <span class="string">"重庆"</span>&#125;,</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//不支持多维数组的内层使用...</span></span><br><span class="line">b := [<span class="number">3</span>][...]<span class="keyword">string</span>&#123;</span><br><span class="line">	&#123;<span class="string">"北京"</span>, <span class="string">"上海"</span>&#125;,</span><br><span class="line">	&#123;<span class="string">"广州"</span>, <span class="string">"深圳"</span>&#125;,</span><br><span class="line">	&#123;<span class="string">"成都"</span>, <span class="string">"重庆"</span>&#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="五、数组是值类型"><a href="#五、数组是值类型" class="headerlink" title="五、数组是值类型"></a>五、数组是值类型</h3><p>数组是值类型，赋值和传参会复制整个数组。因此 <strong>改变副本的值，不会改变本身的值</strong>。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">modifyArray</span><span class="params">(x [3]<span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line">	x[<span class="number">0</span>] = <span class="number">100</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">modifyArray2</span><span class="params">(x [3][2]<span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line">	x[<span class="number">2</span>][<span class="number">0</span>] = <span class="number">100</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	a := [<span class="number">3</span>]<span class="keyword">int</span>&#123;<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>&#125;</span><br><span class="line">	modifyArray(a) <span class="comment">//在modify中修改的是a的副本x</span></span><br><span class="line">	fmt.Println(a) <span class="comment">//[10 20 30]</span></span><br><span class="line">	b := [<span class="number">3</span>][<span class="number">2</span>]<span class="keyword">int</span>&#123;</span><br><span class="line">		&#123;<span class="number">1</span>, <span class="number">1</span>&#125;,</span><br><span class="line">		&#123;<span class="number">1</span>, <span class="number">1</span>&#125;,</span><br><span class="line">		&#123;<span class="number">1</span>, <span class="number">1</span>&#125;,</span><br><span class="line">	&#125;</span><br><span class="line">	modifyArray2(b) <span class="comment">//在modify中修改的是b的副本x</span></span><br><span class="line">	fmt.Println(b)  <span class="comment">//[[1 1] [1 1] [1 1]]</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong></p>
+<ol>
+<li>数组支持 “==“、”!=” 操作符，因为内存总是被初始化过的。</li>
+<li><code>[n]*T</code>表示指针数组，<code>*[n]T</code>表示数组指针 。</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/25/go/系统班/基础/流程控制/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/03/25/go/系统班/基础/流程控制/" itemprop="url">流程控制</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-03-25T14:54:22+08:00">
+                2020-03-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/go-系统班-基础/" itemprop="url" rel="index">
+                    <span itemprop="name">go - 系统班 - 基础</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>流程控制是每种编程语言控制逻辑走向和执行次序的重要部分，流程控制可以说是一门语言的“经脉”。</p>
+<p>Go语言中最常用的流程控制有<code>if</code>和<code>for</code>，而<code>switch</code>和<code>goto</code>主要是为了简化代码、降低重复代码而生的结构，属于扩展类的流程控制。</p>
+<h3 id="一、if-else"><a href="#一、if-else" class="headerlink" title="一、if else"></a>一、if else</h3><h4 id="1、基本写法"><a href="#1、基本写法" class="headerlink" title="1、基本写法"></a>1、基本写法</h4><p>Go语言中<code>if</code>条件判断的格式如下：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> 表达式<span class="number">1</span> &#123;</span><br><span class="line">    分支<span class="number">1</span></span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> 表达式<span class="number">2</span> &#123;</span><br><span class="line">    分支<span class="number">2</span></span><br><span class="line">&#125; <span class="keyword">else</span>&#123;</span><br><span class="line">    分支<span class="number">3</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当表达式1的结果为<code>true</code>时，执行分支1，否则判断表达式2，如果满足则执行分支2，都不满足时，则执行分支3。 if判断中的<code>else if</code>和<code>else</code>都是可选的，可以根据实际需要进行选择。</p>
+<p>Go语言规定与<code>if</code>匹配的左括号<code>{</code>必须与<code>if和表达式</code>放在同一行，<code>{</code>放在其他位置会触发编译错误。 同理，与<code>else</code>匹配的<code>{</code>也必须与<code>else</code>写在同一行，<code>else</code>也必须与上一个<code>if</code>或<code>else if</code>右边的大括号在同一行。</p>
+<p>举个例子：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">ifDemo1</span><span class="params">()</span></span> &#123;</span><br><span class="line">	score := <span class="number">65</span></span><br><span class="line">	<span class="keyword">if</span> score &gt;= <span class="number">90</span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">"A"</span>)</span><br><span class="line">	&#125; <span class="keyword">else</span> <span class="keyword">if</span> score &gt; <span class="number">75</span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">"B"</span>)</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">"C"</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2、特殊写法"><a href="#2、特殊写法" class="headerlink" title="2、特殊写法"></a>2、特殊写法</h4><p>if条件判断还有一种特殊的写法，可以在 if 表达式之前添加一个执行语句，再根据变量值进行判断.</p>
+<p>举个例子：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">ifDemo2</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">if</span> score := <span class="number">65</span>; score &gt;= <span class="number">90</span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">"A"</span>)</span><br><span class="line">	&#125; <span class="keyword">else</span> <span class="keyword">if</span> score &gt; <span class="number">75</span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">"B"</span>)</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">"C"</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="二、for"><a href="#二、for" class="headerlink" title="二、for"></a>二、for</h3><p>Go 语言中的所有循环类型均可以使用<code>for</code>关键字来完成。</p>
+<p>for循环的基本格式如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> 初始语句;条件表达式;结束语句&#123;</span><br><span class="line">    循环体语句</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>条件表达式返回<code>true</code>时循环体不停地进行循环，直到条件表达式返回<code>false</code>时自动退出循环。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">forDemo</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">10</span>; i++ &#123;</span><br><span class="line">		fmt.Println(i)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>for循环的初始语句可以被忽略，但是初始语句后的分号必须要写，例如：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">forDemo2</span><span class="params">()</span></span> &#123;</span><br><span class="line">	i := <span class="number">0</span></span><br><span class="line">	<span class="keyword">for</span> ; i &lt; <span class="number">10</span>; i++ &#123;</span><br><span class="line">		fmt.Println(i)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>for循环的初始语句和结束语句都可以省略，例如：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">forDemo3</span><span class="params">()</span></span> &#123;</span><br><span class="line">	i := <span class="number">0</span></span><br><span class="line">	<span class="keyword">for</span> i &lt; <span class="number">10</span> &#123;</span><br><span class="line">		fmt.Println(i)</span><br><span class="line">		i++</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这种写法类似于其他编程语言中的<code>while</code>，在<code>while</code>后添加一个条件表达式，满足条件表达式时持续循环，否则结束循环。</p>
+<h4 id="无限循环"><a href="#无限循环" class="headerlink" title="无限循环"></a>无限循环</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> &#123;</span><br><span class="line">    循环体语句</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>for循环可以通过<code>break</code>、<code>goto</code>、<code>return</code>、<code>panic</code>语句强制退出循环。</p>
+<h3 id="三、for-range"><a href="#三、for-range" class="headerlink" title="三、for range"></a>三、for range</h3><p>键值循环</p>
+<p>Go语言中可以使用<code>for range</code>遍历数组、切片、字符串、map 及通道（channel）。 通过<code>for range</code>遍历的返回值有以下规律：</p>
+<ol>
+<li>数组、切片、字符串返回索引和值。</li>
+<li>map返回键和值。</li>
+<li>通道（channel）只返回通道内的值。</li>
+</ol>
+<h3 id="四、switch-case"><a href="#四、switch-case" class="headerlink" title="四、switch case"></a>四、switch case</h3><p>使用<code>switch</code>语句可方便地对大量的值进行条件判断。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">switchDemo1</span><span class="params">()</span></span> &#123;</span><br><span class="line">	finger := <span class="number">3</span></span><br><span class="line">	<span class="keyword">switch</span> finger &#123;</span><br><span class="line">	<span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">		fmt.Println(<span class="string">"大拇指"</span>)</span><br><span class="line">	<span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">		fmt.Println(<span class="string">"食指"</span>)</span><br><span class="line">	<span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">		fmt.Println(<span class="string">"中指"</span>)</span><br><span class="line">	<span class="keyword">case</span> <span class="number">4</span>:</span><br><span class="line">		fmt.Println(<span class="string">"无名指"</span>)</span><br><span class="line">	<span class="keyword">case</span> <span class="number">5</span>:</span><br><span class="line">		fmt.Println(<span class="string">"小拇指"</span>)</span><br><span class="line">	<span class="keyword">default</span>:</span><br><span class="line">		fmt.Println(<span class="string">"无效的输入！"</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Go语言规定每个<code>switch</code>只能有一个<code>default</code>分支。</p>
+<p>一个分支可以有多个值，多个case值中间使用英文逗号分隔。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">testSwitch3</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">switch</span> n := <span class="number">7</span>; n &#123;</span><br><span class="line">	<span class="keyword">case</span> <span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">9</span>:</span><br><span class="line">		fmt.Println(<span class="string">"奇数"</span>)</span><br><span class="line">	<span class="keyword">case</span> <span class="number">2</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">8</span>:</span><br><span class="line">		fmt.Println(<span class="string">"偶数"</span>)</span><br><span class="line">	<span class="keyword">default</span>:</span><br><span class="line">		fmt.Println(n)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>分支还可以使用表达式，这时候switch语句后面不需要再跟判断变量。例如：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">switchDemo4</span><span class="params">()</span></span> &#123;</span><br><span class="line">	age := <span class="number">30</span></span><br><span class="line">	<span class="keyword">switch</span> &#123;</span><br><span class="line">	<span class="keyword">case</span> age &lt; <span class="number">25</span>:</span><br><span class="line">		fmt.Println(<span class="string">"好好学习吧"</span>)</span><br><span class="line">	<span class="keyword">case</span> age &gt; <span class="number">25</span> &amp;&amp; age &lt; <span class="number">35</span>:</span><br><span class="line">		fmt.Println(<span class="string">"好好工作吧"</span>)</span><br><span class="line">	<span class="keyword">case</span> age &gt; <span class="number">60</span>:</span><br><span class="line">		fmt.Println(<span class="string">"好好享受吧"</span>)</span><br><span class="line">	<span class="keyword">default</span>:</span><br><span class="line">		fmt.Println(<span class="string">"活着真好"</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>fallthrough</code>语法可以执行满足条件的case的下一个case，是为了兼容C语言中的case设计的。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">switchDemo5</span><span class="params">()</span></span> &#123;</span><br><span class="line">	s := <span class="string">"a"</span></span><br><span class="line">	<span class="keyword">switch</span> &#123;</span><br><span class="line">	<span class="keyword">case</span> s == <span class="string">"a"</span>:</span><br><span class="line">		fmt.Println(<span class="string">"a"</span>)</span><br><span class="line">		<span class="keyword">fallthrough</span></span><br><span class="line">	<span class="keyword">case</span> s == <span class="string">"b"</span>:</span><br><span class="line">		fmt.Println(<span class="string">"b"</span>)</span><br><span class="line">	<span class="keyword">case</span> s == <span class="string">"c"</span>:</span><br><span class="line">		fmt.Println(<span class="string">"c"</span>)</span><br><span class="line">	<span class="keyword">default</span>:</span><br><span class="line">		fmt.Println(<span class="string">"..."</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a</span><br><span class="line">b</span><br></pre></td></tr></table></figure>
+
+<h3 id="五、goto"><a href="#五、goto" class="headerlink" title="五、goto"></a>五、goto</h3><p>跳转到指定标签</p>
+<p><code>goto</code>语句通过标签进行代码间的无条件跳转。<code>goto</code>语句可以在快速跳出循环、避免重复退出上有一定的帮助。Go语言中使用<code>goto</code>语句能简化一些代码的实现过程。 例如双层嵌套的for循环要退出时：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">gotoDemo1</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> breakFlag <span class="keyword">bool</span></span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">10</span>; i++ &#123;</span><br><span class="line">		<span class="keyword">for</span> j := <span class="number">0</span>; j &lt; <span class="number">10</span>; j++ &#123;</span><br><span class="line">			<span class="keyword">if</span> j == <span class="number">2</span> &#123;</span><br><span class="line">				<span class="comment">// 设置退出标签</span></span><br><span class="line">				breakFlag = <span class="literal">true</span></span><br><span class="line">				<span class="keyword">break</span></span><br><span class="line">			&#125;</span><br><span class="line">			fmt.Printf(<span class="string">"%v-%v\n"</span>, i, j)</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">// 外层for循环判断</span></span><br><span class="line">		<span class="keyword">if</span> breakFlag &#123;</span><br><span class="line">			<span class="keyword">break</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用<code>goto</code>语句能简化代码：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">gotoDemo2</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">10</span>; i++ &#123;</span><br><span class="line">		<span class="keyword">for</span> j := <span class="number">0</span>; j &lt; <span class="number">10</span>; j++ &#123;</span><br><span class="line">			<span class="keyword">if</span> j == <span class="number">2</span> &#123;</span><br><span class="line">				<span class="comment">// 设置退出标签</span></span><br><span class="line">				<span class="keyword">goto</span> breakTag</span><br><span class="line">			&#125;</span><br><span class="line">			fmt.Printf(<span class="string">"%v-%v\n"</span>, i, j)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span></span><br><span class="line">	<span class="comment">// 标签</span></span><br><span class="line">breakTag:</span><br><span class="line">	fmt.Println(<span class="string">"结束for循环"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="六、break"><a href="#六、break" class="headerlink" title="六、break"></a>六、break</h3><p><code>break</code>语句可以结束<code>for</code>、<code>switch</code>和<code>select</code>的代码块。</p>
+<p><code>break</code>语句还可以在语句后面添加标签，表示退出某个标签对应的代码块，标签要求必须定义在对应的<code>for</code>、<code>switch</code>和 <code>select</code>的代码块上。 举个例子：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">breakDemo1</span><span class="params">()</span></span> &#123;</span><br><span class="line">BREAKDEMO1:</span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">10</span>; i++ &#123;</span><br><span class="line">		<span class="keyword">for</span> j := <span class="number">0</span>; j &lt; <span class="number">10</span>; j++ &#123;</span><br><span class="line">			<span class="keyword">if</span> j == <span class="number">2</span> &#123;</span><br><span class="line">				<span class="keyword">break</span> BREAKDEMO1</span><br><span class="line">			&#125;</span><br><span class="line">			fmt.Printf(<span class="string">"%v-%v\n"</span>, i, j)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(<span class="string">"..."</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="七、continue"><a href="#七、continue" class="headerlink" title="七、continue"></a>七、continue</h3><p><code>continue</code>语句可以结束当前循环，开始下一次的循环迭代过程，仅限在<code>for</code>循环内使用。</p>
+<p>在 <code>continue</code>语句后添加标签时，表示开始标签对应的循环。例如：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">continueDemo</span><span class="params">()</span></span> &#123;</span><br><span class="line">forloop1:</span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">5</span>; i++ &#123;</span><br><span class="line">		<span class="comment">// forloop2:</span></span><br><span class="line">		<span class="keyword">for</span> j := <span class="number">0</span>; j &lt; <span class="number">5</span>; j++ &#123;</span><br><span class="line">			<span class="keyword">if</span> i == <span class="number">2</span> &amp;&amp; j == <span class="number">2</span> &#123;</span><br><span class="line">				<span class="keyword">continue</span> forloop1</span><br><span class="line">			&#125;</span><br><span class="line">			fmt.Printf(<span class="string">"%v-%v\n"</span>, i, j)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/25/go/系统班/基础/运算符/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/03/25/go/系统班/基础/运算符/" itemprop="url">运算符</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-03-25T12:21:58+08:00">
+                2020-03-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/go-系统班-基础/" itemprop="url" rel="index">
+                    <span itemprop="name">go - 系统班 - 基础</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Go 语言内置的运算符有：</p>
+<ol>
+<li>算术运算符</li>
+<li>关系运算符</li>
+<li>逻辑运算符</li>
+<li>位运算符</li>
+<li>赋值运算符</li>
+</ol>
+<h3 id="一、算术运算符"><a href="#一、算术运算符" class="headerlink" title="一、算术运算符"></a>一、算术运算符</h3><table>
+<thead>
+<tr>
+<th align="center">运算符</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">+</td>
+<td align="center">相加</td>
+</tr>
+<tr>
+<td align="center">-</td>
+<td align="center">相减</td>
+</tr>
+<tr>
+<td align="center">*</td>
+<td align="center">相乘</td>
+</tr>
+<tr>
+<td align="center">/</td>
+<td align="center">相除</td>
+</tr>
+<tr>
+<td align="center">%</td>
+<td align="center">求余</td>
+</tr>
+</tbody></table>
+<p><strong>注意：</strong> <code>++</code>（自增）和<code>--</code>（自减）在Go语言中是单独的语句，并不是运算符。</p>
+<h3 id="二、关系运算符"><a href="#二、关系运算符" class="headerlink" title="二、关系运算符"></a>二、关系运算符</h3><table>
+<thead>
+<tr>
+<th align="center">运算符</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">==</td>
+<td align="center">检查两个值是否相等，如果相等返回 True 否则返回 False。</td>
+</tr>
+<tr>
+<td align="center">!=</td>
+<td align="center">检查两个值是否不相等，如果不相等返回 True 否则返回 False。</td>
+</tr>
+<tr>
+<td align="center">&gt;</td>
+<td align="center">检查左边值是否大于右边值，如果是返回 True 否则返回 False。</td>
+</tr>
+<tr>
+<td align="center">&gt;=</td>
+<td align="center">检查左边值是否大于等于右边值，如果是返回 True 否则返回 False。</td>
+</tr>
+<tr>
+<td align="center">&lt;</td>
+<td align="center">检查左边值是否小于右边值，如果是返回 True 否则返回 False。</td>
+</tr>
+<tr>
+<td align="center">&lt;=</td>
+<td align="center">检查左边值是否小于等于右边值，如果是返回 True 否则返回 False。</td>
+</tr>
+</tbody></table>
+<h3 id="三、逻辑运算符"><a href="#三、逻辑运算符" class="headerlink" title="三、逻辑运算符"></a>三、逻辑运算符</h3><table>
+<thead>
+<tr>
+<th align="center">运算符</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">&amp;&amp;</td>
+<td align="center">逻辑 AND 运算符。 如果两边的操作数都是 True，则为 True，否则为 False。</td>
+</tr>
+<tr>
+<td align="center">||</td>
+<td align="center">逻辑 OR 运算符。 如果两边的操作数有一个 True，则为 True，否则为 False。</td>
+</tr>
+<tr>
+<td align="center">!</td>
+<td align="center">逻辑 NOT 运算符。 如果条件为 True，则为 False，否则为 True。</td>
+</tr>
+</tbody></table>
+<h3 id="四、位运算符"><a href="#四、位运算符" class="headerlink" title="四、位运算符"></a>四、位运算符</h3><p>位运算符对整数在内存中的二进制位进行操作。</p>
+<table>
+<thead>
+<tr>
+<th align="center">运算符</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">&amp;</td>
+<td align="center">参与运算的两数各对应的二进位相与。 （两位均为1才为1）</td>
+</tr>
+<tr>
+<td align="center">|</td>
+<td align="center">参与运算的两数各对应的二进位相或。 （两位有一个为1就为1）</td>
+</tr>
+<tr>
+<td align="center">^</td>
+<td align="center">参与运算的两数各对应的二进位相异或，当两对应的二进位相异时，结果为1。 （两位不一样则为1）</td>
+</tr>
+<tr>
+<td align="center">&lt;&lt;</td>
+<td align="center">左移n位就是乘以2的n次方。 “a&lt;&lt;b”是把a的各二进位全部左移b位，高位丢弃，低位补0。</td>
+</tr>
+<tr>
+<td align="center">&gt;&gt;</td>
+<td align="center">右移n位就是除以2的n次方。 “a&gt;&gt;b”是把a的各二进位全部右移b位。</td>
+</tr>
+</tbody></table>
+<h3 id="五、赋值运算符"><a href="#五、赋值运算符" class="headerlink" title="五、赋值运算符"></a>五、赋值运算符</h3><table>
+<thead>
+<tr>
+<th align="center">运算符</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">=</td>
+<td align="center">简单的赋值运算符，将一个表达式的值赋给一个左值</td>
+</tr>
+<tr>
+<td align="center">+=</td>
+<td align="center">相加后再赋值</td>
+</tr>
+<tr>
+<td align="center">-=</td>
+<td align="center">相减后再赋值</td>
+</tr>
+<tr>
+<td align="center">*=</td>
+<td align="center">相乘后再赋值</td>
+</tr>
+<tr>
+<td align="center">/=</td>
+<td align="center">相除后再赋值</td>
+</tr>
+<tr>
+<td align="center">%=</td>
+<td align="center">求余后再赋值</td>
+</tr>
+<tr>
+<td align="center">&lt;&lt;=</td>
+<td align="center">左移后赋值</td>
+</tr>
+<tr>
+<td align="center">&gt;&gt;=</td>
+<td align="center">右移后赋值</td>
+</tr>
+<tr>
+<td align="center">&amp;=</td>
+<td align="center">按位与后赋值</td>
+</tr>
+<tr>
+<td align="center">|=</td>
+<td align="center">按位或后赋值</td>
+</tr>
+<tr>
+<td align="center">^=</td>
+<td align="center">按位异或后赋值</td>
+</tr>
+</tbody></table>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/25/go/系统班/基础/基本数据类型/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/03/25/go/系统班/基础/基本数据类型/" itemprop="url">基本数据类型</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-03-25T12:16:40+08:00">
+                2020-03-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/go-系统班-基础/" itemprop="url" rel="index">
+                    <span itemprop="name">go - 系统班 - 基础</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Go语言中有丰富的数据类型，除了基本的整型、浮点型、布尔型、字符串外，还有数组、切片、结构体、函数、map、通道（channel）等。Go 语言的基本类型和其他语言大同小异。</p>
+<h3 id="一、整型"><a href="#一、整型" class="headerlink" title="一、整型"></a>一、整型</h3><p>整型分为以下两个大类： 按长度分为：int8、int16、int32、int64 对应的无符号整型：uint8、uint16、uint32、uint64</p>
+<p>其中，<code>uint8</code>就是我们熟知的<code>byte</code>型，<code>int16</code>对应C语言中的<code>short</code>型，<code>int64</code>对应C语言中的<code>long</code>型。</p>
+<table>
+<thead>
+<tr>
+<th align="center">类型</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">uint8</td>
+<td align="center">无符号 8位整型 (0 到 255)</td>
+</tr>
+<tr>
+<td align="center">uint16</td>
+<td align="center">无符号 16位整型 (0 到 65535)</td>
+</tr>
+<tr>
+<td align="center">uint32</td>
+<td align="center">无符号 32位整型 (0 到 4294967295)</td>
+</tr>
+<tr>
+<td align="center">uint64</td>
+<td align="center">无符号 64位整型 (0 到 18446744073709551615)</td>
+</tr>
+<tr>
+<td align="center">int8</td>
+<td align="center">有符号 8位整型 (-128 到 127)</td>
+</tr>
+<tr>
+<td align="center">int16</td>
+<td align="center">有符号 16位整型 (-32768 到 32767)</td>
+</tr>
+<tr>
+<td align="center">int32</td>
+<td align="center">有符号 32位整型 (-2147483648 到 2147483647)</td>
+</tr>
+<tr>
+<td align="center">int64</td>
+<td align="center">有符号 64位整型 (-9223372036854775808 到 9223372036854775807)</td>
+</tr>
+</tbody></table>
+<h4 id="特殊整型"><a href="#特殊整型" class="headerlink" title="特殊整型"></a>特殊整型</h4><table>
+<thead>
+<tr>
+<th align="center">类型</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">uint</td>
+<td align="center">32位操作系统上就是<code>uint32</code>，64位操作系统上就是<code>uint64</code></td>
+</tr>
+<tr>
+<td align="center">int</td>
+<td align="center">32位操作系统上就是<code>int32</code>，64位操作系统上就是<code>int64</code></td>
+</tr>
+<tr>
+<td align="center">uintptr</td>
+<td align="center">无符号整型，用于存放一个指针</td>
+</tr>
+</tbody></table>
+<p><strong>注意：</strong> 在使用<code>int</code>和 <code>uint</code>类型时，不能假定它是32位或64位的整型，而是考虑<code>int</code>和<code>uint</code>可能在不同平台上的差异。</p>
+<p><strong>注意事项</strong>：</p>
+<p>获取对象的长度的内建<code>len()</code>函数返回的长度可以根据不同平台的字节长度进行变化。实际使用中，切片或 map 的元素数量等都可以用<code>int</code>来表示。在涉及到二进制传输、读写文件的结构描述时，为了保持文件的结构不会受到不同编译目标平台字节长度的影响，不要使用<code>int</code>和 <code>uint</code>。</p>
+<h4 id="数字字面量语法（Number-literals-syntax）"><a href="#数字字面量语法（Number-literals-syntax）" class="headerlink" title="数字字面量语法（Number literals syntax）"></a>数字字面量语法（Number literals syntax）</h4><p>Go1.13版本之后引入了数字字面量语法，这样便于开发者以二进制、八进制或十六进制浮点数的格式定义数字，例如：</p>
+<p>v := 0b00101101， 代表二进制的 101101，相当于十进制的 45。 v := 0o377，代表八进制的 377，相当于十进制的 255。 v := 0x1p-2，代表十六进制的 1 除以 2²，也就是 0.25。 而且还允许我们用 _ 来分隔数字。</p>
+<p>比如说：v := 123_456 等于 123456。</p>
+<p>我们可以借助fmt函数来将一个整数以不同进制形式展示。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="comment">// 十进制</span></span><br><span class="line">	<span class="keyword">var</span> a <span class="keyword">int</span> = <span class="number">10</span></span><br><span class="line">	fmt.Printf(<span class="string">"%d \n"</span>, a)  <span class="comment">// 10</span></span><br><span class="line">	fmt.Printf(<span class="string">"%b \n"</span>, a)  <span class="comment">// 1010  占位符%b表示二进制</span></span><br><span class="line"> </span><br><span class="line">	<span class="comment">// 八进制  以0开头</span></span><br><span class="line">	<span class="keyword">var</span> b <span class="keyword">int</span> = <span class="number">077</span></span><br><span class="line">	fmt.Printf(<span class="string">"%o \n"</span>, b)  <span class="comment">// 77</span></span><br><span class="line"> </span><br><span class="line">	<span class="comment">// 十六进制  以0x开头</span></span><br><span class="line">	<span class="keyword">var</span> c <span class="keyword">int</span> = <span class="number">0xff</span></span><br><span class="line">	fmt.Printf(<span class="string">"%x \n"</span>, c)  <span class="comment">// ff</span></span><br><span class="line">	fmt.Printf(<span class="string">"%X \n"</span>, c)  <span class="comment">// FF</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="二、浮点型"><a href="#二、浮点型" class="headerlink" title="二、浮点型"></a>二、浮点型</h3><p>Go语言支持两种浮点型数：<code>float32</code>和<code>float64</code>。这两种浮点型数据格式遵循<code>IEEE 754</code>标准： <code>float32</code> 的浮点数的最大范围约为 <code>3.4e38</code>，可以使用常量定义：<code>math.MaxFloat32</code>。 <code>float64</code> 的浮点数的最大范围约为 <code>1.8e308</code>，可以使用一个常量定义：<code>math.MaxFloat64</code>。</p>
+<p>打印浮点数时，可以使用<code>fmt</code>包配合动词<code>%f</code>，代码如下：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">        <span class="string">"fmt"</span></span><br><span class="line">        <span class="string">"math"</span></span><br><span class="line">)</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">        fmt.Printf(<span class="string">"%f\n"</span>, math.Pi)</span><br><span class="line">        fmt.Printf(<span class="string">"%.2f\n"</span>, math.Pi)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="三、复数"><a href="#三、复数" class="headerlink" title="三、复数"></a>三、复数</h3><p>complex64和complex128</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> c1 <span class="keyword">complex64</span></span><br><span class="line">c1 = <span class="number">1</span> + <span class="number">2i</span></span><br><span class="line"><span class="keyword">var</span> c2 <span class="keyword">complex128</span></span><br><span class="line">c2 = <span class="number">2</span> + <span class="number">3i</span></span><br><span class="line">fmt.Println(c1)</span><br><span class="line">fmt.Println(c2)</span><br></pre></td></tr></table></figure>
+
+<p>复数有实部和虚部，complex64的实部和虚部为32位，complex128的实部和虚部为64位。</p>
+<h3 id="四、布尔值"><a href="#四、布尔值" class="headerlink" title="四、布尔值"></a>四、布尔值</h3><p>Go语言中以<code>bool</code>类型进行声明布尔型数据，布尔型数据只有<code>true（真）</code>和<code>false（假）</code>两个值。</p>
+<p><strong>注意：</strong></p>
+<ol>
+<li>布尔类型变量的默认值为<code>false</code>。</li>
+<li>Go 语言中不允许将整型强制转换为布尔型.</li>
+<li>布尔型无法参与数值运算，也无法与其他类型进行转换。</li>
+</ol>
+<h3 id="五、字符串"><a href="#五、字符串" class="headerlink" title="五、字符串"></a>五、字符串</h3><p>Go语言中的字符串以原生数据类型出现，使用字符串就像使用其他原生数据类型（int、bool、float32、float64 等）一样。 Go 语言里的字符串的内部实现使用<code>UTF-8</code>编码。 字符串的值为<code>双引号(&quot;)</code>中的内容，可以在Go语言的源码中直接添加非ASCII码字符，例如：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s1 := <span class="string">"hello"</span></span><br><span class="line">s2 := <span class="string">"你好"</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="字符串转义符"><a href="#字符串转义符" class="headerlink" title="字符串转义符"></a>字符串转义符</h4><p>Go 语言的字符串常见转义符包含回车、换行、单双引号、制表符等，如下表所示。</p>
+<table>
+<thead>
+<tr>
+<th align="center">转义符</th>
+<th align="center">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>\r</code></td>
+<td align="center">回车符（返回行首）</td>
+</tr>
+<tr>
+<td align="center"><code>\n</code></td>
+<td align="center">换行符（直接跳到下一行的同列位置）</td>
+</tr>
+<tr>
+<td align="center"><code>\t</code></td>
+<td align="center">制表符</td>
+</tr>
+<tr>
+<td align="center"><code>\&#39;</code></td>
+<td align="center">单引号</td>
+</tr>
+<tr>
+<td align="center"><code>\&quot;</code></td>
+<td align="center">双引号</td>
+</tr>
+<tr>
+<td align="center"><code>\\</code></td>
+<td align="center">反斜杠</td>
+</tr>
+</tbody></table>
+<p>举个例子，我们要打印一个Windows平台下的一个文件路径：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">)</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    fmt.Println(<span class="string">"str := \"c:\\Code\\lesson1\\go.exe\""</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="多行字符串"><a href="#多行字符串" class="headerlink" title="多行字符串"></a>多行字符串</h4><p>Go语言中要定义一个多行字符串时，就必须使用<code>反引号</code>字符：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">s1 := <span class="string">`第一行</span></span><br><span class="line"><span class="string">第二行</span></span><br><span class="line"><span class="string">第三行</span></span><br><span class="line"><span class="string">`</span></span><br><span class="line">fmt.Println(s1)</span><br></pre></td></tr></table></figure>
+
+<p>反引号间换行将被作为字符串中的换行，但是所有的转义字符均无效，文本将会原样输出。</p>
+<h4 id="字符串的常用操作"><a href="#字符串的常用操作" class="headerlink" title="字符串的常用操作"></a>字符串的常用操作</h4><table>
+<thead>
+<tr>
+<th align="center">介绍</th>
+<th align="left">方法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">求长度</td>
+<td align="left">len(str)</td>
+</tr>
+<tr>
+<td align="center">拼接字符串</td>
+<td align="left">+或fmt.Sprintf</td>
+</tr>
+<tr>
+<td align="center">分割</td>
+<td align="left">strings.Split</td>
+</tr>
+<tr>
+<td align="center">判断是否包含</td>
+<td align="left">strings.contains</td>
+</tr>
+<tr>
+<td align="center">前缀/后缀判断</td>
+<td align="left">strings.HasPrefix,strings.HasSuffix</td>
+</tr>
+<tr>
+<td align="center">子串出现的位置</td>
+<td align="left">strings.Index(),strings.LastIndex()</td>
+</tr>
+<tr>
+<td align="center">join操作</td>
+<td align="left">strings.Join(a[]string, sep string)</td>
+</tr>
+</tbody></table>
+<h3 id="六、byte-和-rune-类型"><a href="#六、byte-和-rune-类型" class="headerlink" title="六、byte 和 rune 类型"></a>六、byte 和 rune 类型</h3><p>组成每个字符串的元素叫做 <strong>“字符”</strong>，可以通过遍历或者单个获取字符串元素获得字符。 字符用单引号（’）包裹起来，如：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a := <span class="string">'中'</span></span><br><span class="line"><span class="keyword">var</span> b := <span class="string">'x'</span></span><br></pre></td></tr></table></figure>
+
+<p>Go 语言的字符有以下两种：</p>
+<ol>
+<li><code>uint8</code>类型，或者叫 byte 型，代表了<code>ASCII码</code>的一个字符。</li>
+<li><code>rune</code>类型，代表一个 <code>UTF-8字符</code>。</li>
+</ol>
+<p>当需要处理中文、日文或者其他复合字符时，则需要用到<code>rune</code>类型。<code>rune</code>类型实际是一个<code>int32</code>。</p>
+<p>Go 使用了特殊的 rune 类型来处理 Unicode，让基于 Unicode 的文本处理更为方便，也可以使用 byte 型进行默认字符串处理，性能和扩展性都有照顾。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 遍历字符串</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">traversalString</span><span class="params">()</span></span> &#123;</span><br><span class="line">	s := <span class="string">"hello沙河"</span></span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="built_in">len</span>(s); i++ &#123; <span class="comment">//byte</span></span><br><span class="line">		fmt.Printf(<span class="string">"%v(%c) "</span>, s[i], s[i])</span><br><span class="line">	&#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// for range 循环 是按照rune类型去遍历的</span></span><br><span class="line">	fmt.Println()</span><br><span class="line">	<span class="keyword">for</span> _, r := <span class="keyword">range</span> s &#123; <span class="comment">//rune</span></span><br><span class="line">		fmt.Printf(<span class="string">"%v(%c) "</span>, r, r)</span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">104(h) 101(e) 108(l) 108(l) 111(o) 230(æ) 178(²) 153() 230(æ) 178(²) 179(³) </span><br><span class="line">104(h) 101(e) 108(l) 108(l) 111(o) 27801(沙) 27827(河)</span><br></pre></td></tr></table></figure>
+
+<p>因为UTF8编码下一个中文汉字由3~4个字节组成，所以我们不能简单的按照字节去遍历一个包含中文的字符串，否则就会出现上面输出中第一行的结果。</p>
+<p>字符串底层是一个byte数组，所以可以和<code>[]byte</code>类型相互转换。字符串是不能修改的 字符串是由byte字节组成，所以字符串的长度是byte字节的长度。 rune类型用来表示utf8字符，一个rune字符由一个或多个byte组成。</p>
+<h4 id="修改字符串"><a href="#修改字符串" class="headerlink" title="修改字符串"></a>修改字符串</h4><p>要修改字符串，需要先将其转换成<code>[]rune</code>或<code>[]byte</code>，完成后再转换为<code>string</code>。无论哪种转换，都会重新分配内存，并复制字节数组。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">changeString</span><span class="params">()</span></span> &#123;</span><br><span class="line">	s1 := <span class="string">"big"</span></span><br><span class="line">	<span class="comment">// 强制类型转换</span></span><br><span class="line">	byteS1 := []<span class="keyword">byte</span>(s1)</span><br><span class="line">	byteS1[<span class="number">0</span>] = <span class="string">'p'</span></span><br><span class="line">	fmt.Println(<span class="keyword">string</span>(byteS1))</span><br><span class="line"></span><br><span class="line">	s2 := <span class="string">"白萝卜"</span></span><br><span class="line">	runeS2 := []<span class="keyword">rune</span>(s2)</span><br><span class="line">	runeS2[<span class="number">0</span>] = <span class="string">'红'</span></span><br><span class="line">	fmt.Println(<span class="keyword">string</span>(runeS2))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="七、类型转换"><a href="#七、类型转换" class="headerlink" title="七、类型转换"></a>七、类型转换</h3><p>Go语言中只有强制类型转换，没有隐式类型转换。该语法只能在两个类型之间支持相互转换的时候使用。</p>
+<p>强制类型转换的基本语法如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">T(表达式)</span><br></pre></td></tr></table></figure>
+
+<p>其中，T表示要转换的类型。表达式包括变量、复杂算子和函数返回值等.</p>
+<p>比如计算直角三角形的斜边长时使用math包的Sqrt()函数，该函数接收的是float64类型的参数，而变量a和b都是int类型的，这个时候就需要将a和b强制类型转换为float64类型。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">sqrtDemo</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> a, b = <span class="number">3</span>, <span class="number">4</span></span><br><span class="line">	<span class="keyword">var</span> c <span class="keyword">int</span></span><br><span class="line">	<span class="comment">// math.Sqrt()接收的参数是float64类型，需要强制转换</span></span><br><span class="line">	c = <span class="keyword">int</span>(math.Sqrt(<span class="keyword">float64</span>(a*a + b*b)))</span><br><span class="line">	fmt.Println(c)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/25/go/系统班/基础/变量和常量/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/03/25/go/系统班/基础/变量和常量/" itemprop="url">变量和常量</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-03-25T12:03:30+08:00">
+                2020-03-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/go-系统班-基础/" itemprop="url" rel="index">
+                    <span itemprop="name">go - 系统班 - 基础</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="一、标识符与关键字"><a href="#一、标识符与关键字" class="headerlink" title="一、标识符与关键字"></a>一、标识符与关键字</h3><h4 id="1、标识符"><a href="#1、标识符" class="headerlink" title="1、标识符"></a>1、标识符</h4><p>在编程语言中标识符就是程序员定义的具有特殊意义的词，比如变量名、常量名、函数名等等。 Go语言中标识符由字母数字和<code>_</code>(下划线）组成，并且只能以字母和<code>_</code>开头。 </p>
+<p>举几个例子：<code>abc</code>, <code>_</code>, <code>_123</code>, <code>a123</code>。</p>
+<h4 id="2、关键字"><a href="#2、关键字" class="headerlink" title="2、关键字"></a>2、关键字</h4><p>关键字是指编程语言中预先定义好的具有特殊含义的标识符。 关键字和保留字都不建议用作变量名。</p>
+<p>Go语言中有25个关键字：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">break</span>        <span class="keyword">default</span>      <span class="function"><span class="keyword">func</span>         <span class="title">interface</span>    <span class="title">select</span></span></span><br><span class="line"><span class="function"><span class="title">case</span>         <span class="title">defer</span>        <span class="title">go</span>           <span class="title">map</span>          <span class="title">struct</span></span></span><br><span class="line"><span class="function"><span class="title">chan</span>         <span class="title">else</span>         <span class="title">goto</span>         <span class="title">package</span>      <span class="title">switch</span></span></span><br><span class="line"><span class="function"><span class="title">const</span>        <span class="title">fallthrough</span>  <span class="title">if</span>           <span class="title">range</span>        <span class="title">type</span></span></span><br><span class="line"><span class="function"><span class="title">continue</span>     <span class="title">for</span>          <span class="title">import</span>       <span class="title">return</span>       <span class="title">var</span></span></span><br></pre></td></tr></table></figure>
+
+<p>此外，Go语言中还有37个保留字。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Constants:    <span class="literal">true</span>  <span class="literal">false</span>  <span class="literal">iota</span>  <span class="literal">nil</span></span><br><span class="line"></span><br><span class="line">    Types:    <span class="keyword">int</span>  <span class="keyword">int8</span>  <span class="keyword">int16</span>  <span class="keyword">int32</span>  <span class="keyword">int64</span>  </span><br><span class="line">              <span class="keyword">uint</span>  <span class="keyword">uint8</span>  <span class="keyword">uint16</span>  <span class="keyword">uint32</span>  <span class="keyword">uint64</span>  <span class="keyword">uintptr</span></span><br><span class="line">              <span class="keyword">float32</span>  <span class="keyword">float64</span>  <span class="keyword">complex128</span>  <span class="keyword">complex64</span></span><br><span class="line">              <span class="keyword">bool</span>  <span class="keyword">byte</span>  <span class="keyword">rune</span>  <span class="keyword">string</span>  error</span><br><span class="line"></span><br><span class="line">Functions:   <span class="built_in">make</span>  <span class="built_in">len</span>  <span class="built_in">cap</span>  <span class="built_in">new</span>  <span class="built_in">append</span>  <span class="built_in">copy</span>  <span class="built_in">close</span>  <span class="built_in">delete</span></span><br><span class="line">             <span class="built_in">complex</span>  <span class="built_in">real</span>  <span class="built_in">imag</span></span><br><span class="line">             <span class="built_in">panic</span>  <span class="built_in">recover</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="二、变量"><a href="#二、变量" class="headerlink" title="二、变量"></a>二、变量</h3><h4 id="1、变量的来历"><a href="#1、变量的来历" class="headerlink" title="1、变量的来历"></a>1、变量的来历</h4><p>程序运行过程中的数据都是保存在内存中，我们想要在代码中操作某个数据时就需要去内存上找到这个变量，但是如果我们直接在代码中通过内存地址去操作变量的话，代码的<strong>可读性会非常差而且还容易出错</strong>，所以我们就利用变量将这个数据的内存地址保存起来，以后直接通过这个变量就能找到内存上对应的数据了。</p>
+<h4 id="2、变量类型"><a href="#2、变量类型" class="headerlink" title="2、变量类型"></a>2、变量类型</h4><p>变量（Variable）的功能是存储数据。不同的变量保存的数据类型可能会不一样。经过半个多世纪的发展，编程语言已经基本形成了一套固定的类型，常见变量的数据类型有：整型、浮点型、布尔型等。</p>
+<p>Go语言中的每一个变量都有自己的类型，并且变量必须经过声明才能开始使用。</p>
+<h4 id="3、变量声明"><a href="#3、变量声明" class="headerlink" title="3、变量声明"></a>3、变量声明</h4><p>Go语言中的变量需要声明后才能使用，同一作用域内不支持重复声明。 并且Go语言的变量声明后必须使用。</p>
+<p><strong>标准声明</strong></p>
+<p>Go语言的变量声明格式为：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> 变量名 变量类型</span><br></pre></td></tr></table></figure>
+
+<p>变量声明以关键字<code>var</code>开头，变量类型放在变量的后面，行尾无需分号。 举个例子：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name <span class="keyword">string</span></span><br><span class="line"><span class="keyword">var</span> age <span class="keyword">int</span></span><br><span class="line"><span class="keyword">var</span> isOk <span class="keyword">bool</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>批量声明</strong></p>
+<p>每声明一个变量就需要写<code>var</code>关键字会比较繁琐，go语言中还支持批量变量声明：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> (</span><br><span class="line">    a <span class="keyword">string</span></span><br><span class="line">    b <span class="keyword">int</span></span><br><span class="line">    c <span class="keyword">bool</span></span><br><span class="line">    d <span class="keyword">float32</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<h4 id="4、变量的初始化"><a href="#4、变量的初始化" class="headerlink" title="4、变量的初始化"></a>4、变量的初始化</h4><p>Go语言在声明变量的时候，会自动对变量对应的内存区域进行初始化操作。每个变量会被初始化成其类型的默认值，例如： 整型和浮点型变量的默认值为<code>0</code>。 字符串变量的默认值为<code>空字符串</code>。 布尔型变量默认为<code>false</code>。 切片、函数、指针变量的默认为<code>nil</code>。</p>
+<p>当然我们也可在声明变量的时候为其指定初始值。变量初始化的标准格式如下：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> 变量名 类型 = 表达式</span><br></pre></td></tr></table></figure>
+
+<p>举个例子：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name <span class="keyword">string</span> = <span class="string">"Q1mi"</span></span><br><span class="line"><span class="keyword">var</span> age <span class="keyword">int</span> = <span class="number">18</span></span><br></pre></td></tr></table></figure>
+
+<p>或者一次初始化多个变量</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name, age = <span class="string">"Q1mi"</span>, <span class="number">20</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>类型推导</strong></p>
+<p>有时候我们会将变量的类型省略，这个时候编译器会根据等号右边的值来推导变量的类型完成初始化。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">"Q1mi"</span></span><br><span class="line"><span class="keyword">var</span> age = <span class="number">18</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>短变量声明</strong></p>
+<p>在函数内部，可以使用更简略的 <code>:=</code> 方式声明并初始化变量。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">)</span><br><span class="line"><span class="comment">// 全局变量m</span></span><br><span class="line"><span class="keyword">var</span> m = <span class="number">100</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	n := <span class="number">10</span></span><br><span class="line">	m := <span class="number">200</span> <span class="comment">// 此处声明局部变量m</span></span><br><span class="line">	fmt.Println(m, n)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>匿名变量</strong></p>
+<p>在使用多重赋值时，如果想要忽略某个值，可以使用<code>匿名变量（anonymous variable）</code>。 匿名变量用一个下划线<code>_</code>表示，例如：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">foo</span><span class="params">()</span> <span class="params">(<span class="keyword">int</span>, <span class="keyword">string</span>)</span></span> &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">10</span>, <span class="string">"Q1mi"</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	x, _ := foo()</span><br><span class="line">	_, y := foo()</span><br><span class="line">	fmt.Println(<span class="string">"x="</span>, x)</span><br><span class="line">	fmt.Println(<span class="string">"y="</span>, y)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>匿名变量不占用命名空间，不会分配内存，所以匿名变量之间不存在重复声明。 (在<code>Lua</code>等编程语言里，匿名变量也被叫做哑元变量。)</p>
+<p><strong><em>注意事项：</em></strong></p>
+<ol>
+<li>函数外的每个语句都必须以关键字开始（var、const、func等）</li>
+<li><code>:=</code>不能使用在函数外。</li>
+<li><code>_</code>多用于占位，表示忽略值。</li>
+</ol>
+<h3 id="三、常量"><a href="#三、常量" class="headerlink" title="三、常量"></a>三、常量</h3><p>相对于变量，常量是恒定不变的值，多用于定义程序运行期间不会改变的那些值。 常量的声明和变量声明非常类似，只是把<code>var</code>换成了<code>const</code>，常量在定义的时候必须赋值。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> pi = <span class="number">3.1415</span></span><br><span class="line"><span class="keyword">const</span> e = <span class="number">2.7182</span></span><br></pre></td></tr></table></figure>
+
+<p>声明了<code>pi</code>和<code>e</code>这两个常量之后，在整个程序运行期间它们的值都不能再发生变化了。</p>
+<p>多个常量也可以一起声明：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> (</span><br><span class="line">    pi = <span class="number">3.1415</span></span><br><span class="line">    e = <span class="number">2.7182</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>const同时声明多个常量时，如果省略了值则表示和上面一行的值相同。 例如：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> (</span><br><span class="line">    n1 = <span class="number">100</span></span><br><span class="line">    n2</span><br><span class="line">    n3</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>上面示例中，常量<code>n1</code>、<code>n2</code>、<code>n3</code>的值都是100。</p>
+<h3 id="四、iota"><a href="#四、iota" class="headerlink" title="四、iota"></a>四、iota</h3><p><code>iota</code>是go语言的常量计数器，只能在常量的表达式中使用。</p>
+<p><code>iota</code>在const关键字出现时将被重置为0。const中每新增一行<strong>常量声明</strong>将使<code>iota</code>计数一次(iota可理解为const语句块中的行索引)。 使用iota能简化定义，在定义枚举时很有用。</p>
+<p>举个例子：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> (</span><br><span class="line">		n1 = <span class="literal">iota</span> <span class="comment">//0</span></span><br><span class="line">		n2        <span class="comment">//1</span></span><br><span class="line">		n3        <span class="comment">//2</span></span><br><span class="line">		n4        <span class="comment">//3</span></span><br><span class="line">	)</span><br></pre></td></tr></table></figure>
+
+<p><strong>几个常见的iota示例：</strong></p>
+<p>使用<code>_</code>跳过某些值</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> (</span><br><span class="line">		n1 = <span class="literal">iota</span> <span class="comment">//0</span></span><br><span class="line">		n2        <span class="comment">//1</span></span><br><span class="line">		_</span><br><span class="line">		n4        <span class="comment">//3</span></span><br><span class="line">	)</span><br></pre></td></tr></table></figure>
+
+<p><code>iota</code>声明中间插队</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> (</span><br><span class="line">		n1 = <span class="literal">iota</span> <span class="comment">//0</span></span><br><span class="line">		n2 = <span class="number">100</span>  <span class="comment">//100</span></span><br><span class="line">		n3 = <span class="literal">iota</span> <span class="comment">//2</span></span><br><span class="line">		n4        <span class="comment">//3</span></span><br><span class="line">	)</span><br><span class="line">	<span class="keyword">const</span> n5 = <span class="literal">iota</span> <span class="comment">//0</span></span><br></pre></td></tr></table></figure>
+
+<p>定义数量级 （这里的<code>&lt;&lt;</code>表示左移操作，<code>1&lt;&lt;10</code>表示将1的二进制表示向左移10位，也就是由<code>1</code>变成了<code>10000000000</code>，也就是十进制的1024。同理<code>2&lt;&lt;2</code>表示将2的二进制表示向左移2位，也就是由<code>10</code>变成了<code>1000</code>，也就是十进制的8。）</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> (</span><br><span class="line">		_  = <span class="literal">iota</span></span><br><span class="line">		KB = <span class="number">1</span> &lt;&lt; (<span class="number">10</span> * <span class="literal">iota</span>)</span><br><span class="line">		MB = <span class="number">1</span> &lt;&lt; (<span class="number">10</span> * <span class="literal">iota</span>)</span><br><span class="line">		GB = <span class="number">1</span> &lt;&lt; (<span class="number">10</span> * <span class="literal">iota</span>)</span><br><span class="line">		TB = <span class="number">1</span> &lt;&lt; (<span class="number">10</span> * <span class="literal">iota</span>)</span><br><span class="line">		PB = <span class="number">1</span> &lt;&lt; (<span class="number">10</span> * <span class="literal">iota</span>)</span><br><span class="line">	)</span><br></pre></td></tr></table></figure>
+
+<p>多个<code>iota</code>定义在一行</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> (</span><br><span class="line">		a, b = <span class="literal">iota</span> + <span class="number">1</span>, <span class="literal">iota</span> + <span class="number">2</span> <span class="comment">//1,2</span></span><br><span class="line">		c, d                      <span class="comment">//2,3</span></span><br><span class="line">		e, f                      <span class="comment">//3,4</span></span><br><span class="line">	)</span><br></pre></td></tr></table></figure>
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/14/随笔/Mac终端TF的CPU-support问题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/03/14/随笔/Mac终端TF的CPU-support问题/" itemprop="url">Mac终端TF的CPU support问题</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-03-14T22:36:43+08:00">
+                2020-03-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/随笔/" itemprop="url" rel="index">
+                    <span itemprop="name">随笔</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>问题如下：</p>
+<p>![image-20200314223244816](/Users/hhh/Library/Application Support/typora-user-images/image-20200314223244816.png)</p>
+<p>导入Tensorflow没有问题，输出版本号也没有问题，但当实际操作起来，却是会出现如上警告</p>
+<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p>应该是由于CPU计算能力不足导致的，可以进行如下操作：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line">os.environ[<span class="string">'TF_CPP_MIN_LOG_LEVEL'</span>] = <span class="string">'2'</span></span><br></pre></td></tr></table></figure>
+
+<p>问题便可解决。</p>
+<p>原链接：<a href="https://stackoverflow.com/questions/47068709/your-cpu-supports-instructions-that-this-tensorflow-binary-was-not-compiled-to-u?answertab=votes#tab-top" target="_blank" rel="noopener">https://stackoverflow.com/questions/47068709/your-cpu-supports-instructions-that-this-tensorflow-binary-was-not-compiled-to-u?answertab=votes#tab-top</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/02/随笔/Mac平台安装scapy_找不到devpbf/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/03/02/随笔/Mac平台安装scapy_找不到devpbf/" itemprop="url">Mac平台安装scapy_找不到/dev/pbf*</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-03-02T09:25:30+08:00">
+                2020-03-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/随笔/" itemprop="url" rel="index">
+                    <span itemprop="name">随笔</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>正确的方法是先去看看/dev文件夹下是否有bpf文件，也许是bpf1、bpf2等，然后</p>
+<p>sudo chgrp admin /dev/bpf*</p>
+<p>sudo chmod g+rw /dev/bpf*</p>
+<p>然后就可以了，猜测估计是权限不足导致读取不到。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/20/人工智能/机器学习基石/09_Linear-Regression/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -798,1390 +2353,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/15/人工智能/机器学习基石/06_Theroy-of-Generalization/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/02/15/人工智能/机器学习基石/06_Theroy-of-Generalization/" itemprop="url">06_Theroy of Generalization</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-02-15T16:30:02+08:00">
-                2020-02-15
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/人工智能-机器学习基石/" itemprop="url" rel="index">
-                    <span itemprop="name">人工智能 - 机器学习基石</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>![image-20200215141046764](/Users/hhh/Library/Application Support/typora-user-images/image-20200215141046764.png)</p>
-<p>增长函数：</p>
-<p>![image-20200215141454170](/Users/hhh/Library/Application Support/typora-user-images/image-20200215141454170.png)</p>
-<p>假设：一个增长函数的最小的break point 是当 k = 2的时候：</p>
-<p>break point = 2， 即说明没有一条线能够把某两个点完全分开。</p>
-<p>当一个点时，有两种，两个点时最多有3种（因为break point为2），</p>
-<p>所以三个点时，最多可以产生几种线呢？ </p>
-<p>1、只有一个二分的时候：</p>
-<p>满足情况。没有线能够把某两个点完全分开。因为点的分布只有一种情况。</p>
-<p>若想找到能将某两个点完全分开的线，最少需要4种二分。</p>
-<p>![image-20200215144641407](/Users/hhh/Library/Application Support/typora-user-images/image-20200215144641407.png)</p>
-<p>2、有4种二分的时候：</p>
-<p>有可能存在：</p>
-<p>![image-20200215144837400](/Users/hhh/Library/Application Support/typora-user-images/image-20200215144837400.png)</p>
-<p>所以这4种划分，不能存在于假设集合当中。</p>
-<p>所以找到4种二分时的另一种情形：</p>
-<p>![image-20200215145028846](/Users/hhh/Library/Application Support/typora-user-images/image-20200215145028846.png)</p>
-<p>3、但是当二分的数目大于等于5个时，会发现无论哪种划分，都会出现某两个点完全分开的情况，所以4种二分是极限。</p>
-<p>![image-20200215145216699](/Users/hhh/Library/Application Support/typora-user-images/image-20200215145216699.png)</p>
-<p>所以当存在break point时，似乎对于后来增长函数的趋势有一些限制，</p>
-<p>能否找到一个多项式来表达假设集合里的最多的可能性，那么就可以认为这个感知器是可以学的到东西的。</p>
-<p>上限函数：</p>
-<p>已知一个增长函数在k的地方是break point，则请说出这个增长函数最多有多少种二分。</p>
-<p>用向量表示。</p>
-<p>如果可以找到这个上限函数，就可以不用考虑假说集中的细节问题。</p>
-<p>比如：有两个增长函数，他们的break point都发生在3的地方，那么只要分析B(N, 3)的地方，就是上限函数在N个点的情况下，break point是3的情形。而不用对两个增长函数进行讨论。</p>
-<p>![image-20200215150613492](/Users/hhh/Library/Application Support/typora-user-images/image-20200215150613492.png)</p>
-<p>证明：上限函数是按多项式的形式的。</p>
-<p>先对下表简单部分进行填写。</p>
-<p>![image-20200215150937091](/Users/hhh/Library/Application Support/typora-user-images/image-20200215150937091.png)</p>
-<p>接下来填B(4, 3)</p>
-<p>![image-20200215151204390](/Users/hhh/Library/Application Support/typora-user-images/image-20200215151204390.png)</p>
-<p>猜想可能B（4，3）和 B（3，？）有一定的关系。</p>
-<p>B（4，3）找到11种解。</p>
-<p>![image-20200215151407652](/Users/hhh/Library/Application Support/typora-user-images/image-20200215151407652.png)</p>
-<p>将B（4，3）这个解做一个整理（排列组合）找出特性。</p>
-<p>01和05、02和08、03和10、04和11 可以认为是成双成对的。</p>
-<p>![image-20200215151638033](/Users/hhh/Library/Application Support/typora-user-images/image-20200215151638033.png)</p>
-<p>对于3个点来说（我们可以看作把第四个去掉）</p>
-<p>在有四个点的情况下，任意的三个点都不能做二分，就会得出：</p>
-<p>$\alpha + \beta$ 会小于等于 B（3，3），就是会小于有三个点的情况下，任意的三个点都能做二分。</p>
-<p>![image-20200215152751256](/Users/hhh/Library/Application Support/typora-user-images/image-20200215152751256.png)</p>
-<p>还可以得出 在$\alpha$ 中，x1、x2、x3任意两个点都不够组成所有二分。</p>
-<p>如果任意两个可以组成所有二分，那么加上x4之后，就会变成3个点可以组成所有二分。</p>
-<p>![image-20200215153413901](/Users/hhh/Library/Application Support/typora-user-images/image-20200215153413901.png)</p>
-<p>所以合起来：</p>
-<p>![image-20200215153446859](/Users/hhh/Library/Application Support/typora-user-images/image-20200215153446859.png)</p>
-<p>然后把4换成N，3换成k，结论还是一样的。</p>
-<p>所以我们就可以得到表中某些表的上限。</p>
-<p>所以我们就得到了上限函数的上限。</p>
-<p>![image-20200215153516597](/Users/hhh/Library/Application Support/typora-user-images/image-20200215153516597.png)</p>
-<p>可以使用数学归纳法证明下列不等式。</p>
-<p>那么就可以得到：</p>
-<p>增长函数会被上限函数限制，上限函数会被上限的上限限制住，并且这个上限的上限会被一个多项式限制，这个多项式与break point有关。</p>
-<p>![image-20200215154144965](/Users/hhh/Library/Application Support/typora-user-images/image-20200215154144965.png)</p>
-<p>对于二位感知器的模型，虽然我们找不到它的增长函数，但是我们知道break point是4，所以我们可以求出上限的上限，是一个3次方的多项式。</p>
-<p>![image-20200215154518290](/Users/hhh/Library/Application Support/typora-user-images/image-20200215154518290.png)</p>
-<p>我们可以将原本的不等式进行一个小的变形：</p>
-<p>![image-20200215154826299](/Users/hhh/Library/Application Support/typora-user-images/image-20200215154826299.png)</p>
-<p>证明：</p>
-<p>第一步：</p>
-<p>Ein是有限个（输入为N个），Eout是无限多个的。</p>
-<p>思考：能否把无限多个点Eout替换成一个有限多个的数。</p>
-<p>再另外找N个点，设为D‘，得出的估计为Ein’，</p>
-<p>把各种不同的数据集拿列出来，那么中点会是在Eout的地方。</p>
-<p>若现在有一个坏事发生（即Ein和Eout离得很远），那么会有大于0.5的几率Ein‘和Ein离得很远，</p>
-<p>所以我们的坏事的概率可以从 Ein - Eout 转化成 Ein - Ein‘。</p>
-<p>所以就可以把Eout换掉。</p>
-<p>（用验证集来代替生产环境的数据）</p>
-<p>![image-20200215161426857](/Users/hhh/Library/Application Support/typora-user-images/image-20200215161426857.png)</p>
-<p>第二步：</p>
-<p>当我们的假说在D和D‘上作出一样的二分的话， 那么，二者的Ein和Ein‘也会一样。</p>
-<p>所以把所有的二分分成2N种。就是说在这2N个点上，看作出多少种二分。</p>
-<p>那么就最多会有 mH(2N) 那么多种二分，每一种抓一种代表出来，就可以做union bound了。</p>
-<p>![image-20200215162136353](/Users/hhh/Library/Application Support/typora-user-images/image-20200215162136353.png)</p>
-<p>第三步：</p>
-<p>观察Ein和Ein‘的差别。</p>
-<p>![image-20200215162340694](/Users/hhh/Library/Application Support/typora-user-images/image-20200215162340694.png)</p>
-<p>总结：</p>
-<p>机器学习中的定理：Vapnik-Chervonenkis(VC)bound</p>
-<p>![image-20200215162454459](/Users/hhh/Library/Application Support/typora-user-images/image-20200215162454459.png)</p>
-<p>所以可以得出：</p>
-<p>对于二位感知器：</p>
-<p>break point是4，他的增长函数最多对多不会跑得比n^3快。</p>
-<p>当N够大的时候，坏事发生的几率就会很小。</p>
-<p>所以算法选最小Ein就可以看成，那个g大概就会接近f。</p>
-<p>也就是说，点够多的时候，PLA的算法，真的可以达到机器学习的效果。</p>
-<p>但是任意维度的还未得到证明，只证明了2D维度的。</p>
-<p>![image-20200215163157335](/Users/hhh/Library/Application Support/typora-user-images/image-20200215163157335.png)</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/14/人工智能/机器学习基石/05_Training-versus-Testing/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/02/14/人工智能/机器学习基石/05_Training-versus-Testing/" itemprop="url">05_Training versus Testing</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-02-14T16:17:29+08:00">
-                2020-02-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/人工智能-机器学习基石/" itemprop="url" rel="index">
-                    <span itemprop="name">人工智能 - 机器学习基石</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>![image-20200214161650400](/Users/hhh/Library/Application Support/typora-user-images/image-20200214161650400.png)</p>
-<p>假如假设：</p>
-<p>训练的数据和测试假设（hypothesis）的数据，都来自同一个分布。</p>
-<p>Ein()：在训练数据中假设的表现</p>
-<p>Eout()：在测试集上假设的表现</p>
-<p>二者来自于同分布。</p>
-<p>若假设的集合不太大，并且数据量足够多的话，就能够确保对于每一个假设，Ein和Eout都会长得很像（近似相等），不论算法实际上是如何选择假设。</p>
-<p>那么算法只要选择Ein最低的假设，若Ein很接近0的话，那么Eout也会很接近0，就达到了学习的效果。</p>
-<p>![image-20200214162841322](/Users/hhh/Library/Application Support/typora-user-images/image-20200214162841322.png)</p>
-<p>第一次课：</p>
-<p>学习，就是又一个未知的f，我们希望通过算法能够找出一个g，使得g和未知的f非常的接近。</p>
-<p>即 Eout(g) 要很接近0，就是对于测试集错误率越小越好。</p>
-<p>第二次课：</p>
-<p>在我们的测试集上做的很好就好了。就是可以找一些方法使得 Ein 很接近0.</p>
-<p>第三次课：</p>
-<p>我们其实在一个很特定的范围下面做学习。如批次的数据，监督式的学习，二元的分类等等</p>
-<p>第四次课：</p>
-<p>Ein 很接近 Eout：</p>
-<p>如果假设的数量不是太多的话，有可能 Ein 和 Eout 可以很接近。</p>
-<p>所以第二次课的事情，真的就可以使得 g和f很接近。</p>
-<p>两个关键点：</p>
-<p>1、到底 Ein 和 Eout 是不是会很接近</p>
-<p>2、若二者可以有连接，那么如何使得 Ein 越来越小。</p>
-<p>![image-20200214163705841](/Users/hhh/Library/Application Support/typora-user-images/image-20200214163705841.png)</p>
-<p>M：假设集的大小（假设它是有限大的）</p>
-<p>M较小时：上次证明，有不等式，M越小，坏事发生的概率就很小</p>
-<p>M较大时：确实可能选到较好的假设，但是M较大，坏事发生的概率就增加了。</p>
-<p>所以M其实是很重要的，应慎重选择。</p>
-<p>所以无限多个M是不好的。</p>
-<p>![image-20200214164056822](/Users/hhh/Library/Application Support/typora-user-images/image-20200214164056822.png)</p>
-<p>假设可以使用有限大的 mH 来替换原来的 M。</p>
-<p>所以从 mH 中学到一个较好的假设。</p>
-<p>![image-20200214164232905](/Users/hhh/Library/Application Support/typora-user-images/image-20200214164232905.png)</p>
-<p>使用 union bound 的方式，来计算坏事发生的概率。</p>
-<p>但是，当 M 为很大的数字时，所以这个 union bound 就失效了。（加和的概率会很大）</p>
-<p>union bound 的可行是假设坏事发生的概率不会太大，并且重叠的概率不太高。（可以通过切比雪夫不等式推到）</p>
-<p>![image-20200214164825519](/Users/hhh/Library/Application Support/typora-user-images/image-20200214164825519.png)</p>
-<p>因为不同的假设（若这两个假设都不太差的话）之间的误差是较为接近的，所以 他们发生坏事的部分就会比较接近，所以当他们进行 union bound 的时候，就会发生over-estimating （过分估计，过分大的上限），才会造成没有办法处理M无限大的情况。</p>
-<p>所以我们必须找出这个（错误）重叠的部分，是否我们可以把这个无限多的M分成有限多个类别，每一类都差不多大，这样的话，我们也许能够找出哪些部分有重叠。</p>
-<p>![image-20200214165625782](/Users/hhh/Library/Application Support/typora-user-images/image-20200214165625782.png)</p>
-<p>所以如何将这些M个假设进行分类？</p>
-<p>1、对于一个点来说，其实线只有两类：一类认为这个点为+1， 另一个认为是 -1</p>
-<p>![image-20200214165908661](/Users/hhh/Library/Application Support/typora-user-images/image-20200214165908661.png)</p>
-<p>2、对于两个点，那么则有四类：</p>
-<p>![image-20200214170455766](/Users/hhh/Library/Application Support/typora-user-images/image-20200214170455766.png)</p>
-<p>3、若有三个输入，则有8类：</p>
-<p>![image-20200214170612497](/Users/hhh/Library/Application Support/typora-user-images/image-20200214170612497.png)</p>
-<p>若将三个点排在一条直线上：则只有6个类别</p>
-<p>![image-20200214170737920](/Users/hhh/Library/Application Support/typora-user-images/image-20200214170737920.png)</p>
-<p>4、对于四个点，最多有 16 种（错）。</p>
-<p>对于两两共线，只有14种，</p>
-<p>然后四个点在平面上，都会出现两两共线，所以对于四个点只有14种。</p>
-<p>![image-20200214170920946](/Users/hhh/Library/Application Support/typora-user-images/image-20200214170920946.png)</p>
-<p>所以对于每个数字，都要比2的n次方来的小。</p>
-<p>所以就算有无限多条线，那么“有效的线”总是有限的。计为effective(N)，然后用这个有限的数字，将M取代。</p>
-<p>那么当 effective(N)来的比 2^N 小很多的话，$exp^{-2\epsilon^2N}$ 又是随着N增大递减的，所以坏事发生的概率会接近0（当N足够大的时候），所以 Ein 和 Eout 会很接近，所以只要 Ein 很小的时候，Eout 也会很小，所以机器就学到了一条很好的线。</p>
-<p>所以就算有无限多条线，如果我们把无限多条线，换成 effective(N) 这个有限的数字，并且这个数字来的比2 ^ N 小得多的话，那么我们就可以保证可能可以学得到一个较好的东西。</p>
-<p>当然，这还是我们这阶段的假说。</p>
-<p>![image-20200214172108397](/Users/hhh/Library/Application Support/typora-user-images/image-20200214172108397.png)</p>
-<p>所以，到底有几种假说（hypothesis）呢？</p>
-<p>dichotomy：二分</p>
-<p>把点分成两类，圈和叉。我们考虑一个假设集合能够作出多少种二分。</p>
-<p>查看一共有几个dichotomy，来看是否能够将M换掉。</p>
-<p>![image-20200214190809418](/Users/hhh/Library/Application Support/typora-user-images/image-20200214190809418.png)</p>
-<p>其实，dichotomy是取决于输入的X，所以想要移除对X的依赖，所以我们只看最多有几种二分。（记录为mH）</p>
-<p>称为增长函数。</p>
-<p>我们会知道，增长函数的值是小于 2^N 的。</p>
-<p>![image-20200214191207269](/Users/hhh/Library/Application Support/typora-user-images/image-20200214191207269.png)</p>
-<p>通过如下的方法，可以使得函数变为 N+ 1</p>
-<p>全部点映射到一维（Positive Rays）（或者说对于一维输入），设置一个阈值来做分隔，然后就可以得到 N + 1 种假设（N+1条线）。</p>
-<p>![image-20200214191531811](/Users/hhh/Library/Application Support/typora-user-images/image-20200214191531811.png)</p>
-<p>下面是Positive Interval：</p>
-<p>得到新的成长函数。</p>
-<p>![image-20200214191916472](/Users/hhh/Library/Application Support/typora-user-images/image-20200214191916472.png)</p>
-<p>在凸集合之内，为+1，在凸集合之外为-1.</p>
-<p>![image-20200214192033246](/Users/hhh/Library/Application Support/typora-user-images/image-20200214192033246.png)</p>
-<p>使用凸多边形来画出边界。</p>
-<p>若找到N个点，我们可以找到一个集合，把他们包括进来，那么这个凸集合为 2 ^ N。</p>
-<p>![image-20200214192301616](/Users/hhh/Library/Application Support/typora-user-images/image-20200214192301616.png)</p>
-<p>所以有四个增长函数。</p>
-<p>![image-20200214192635051](/Users/hhh/Library/Application Support/typora-user-images/image-20200214192635051.png)</p>
-<p>考虑2D perceptrons 是多项式的还是指数的。</p>
-<p>在2D perceptrons 情况下，当4个点时，只有14种而不是16种。称为break point</p>
-<p>break point的意思其实也可以看为，在点数为break point时，无法找到一条线（或者说某一类的线），将这么多个点完全分开。</p>
-<p>![image-20200214192852371](/Users/hhh/Library/Application Support/typora-user-images/image-20200214192852371.png)</p>
-<p>一下，列出所有情况的break point</p>
-<p>猜想：break point可能与增长函数的增长速度有关。</p>
-<p>![image-20200214192936989](/Users/hhh/Library/Application Support/typora-user-images/image-20200214192936989.png)</p>
-<p>总结：</p>
-<p>![image-20200214193204846](/Users/hhh/Library/Application Support/typora-user-images/image-20200214193204846.png)</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/14/人工智能/机器学习基石/04_Feasibility-of-Learning/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/02/14/人工智能/机器学习基石/04_Feasibility-of-Learning/" itemprop="url">04_Feasibility of Learning</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-02-14T15:36:04+08:00">
-                2020-02-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/人工智能-机器学习基石/" itemprop="url" rel="index">
-                    <span itemprop="name">人工智能 - 机器学习基石</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>![image-20200214153521296](/Users/hhh/Library/Application Support/typora-user-images/image-20200214153521296.png)</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/13/人工智能/机器学习基石/03_Type-of-Learning/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/02/13/人工智能/机器学习基石/03_Type-of-Learning/" itemprop="url">03_Type of Learning</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-02-13T16:25:07+08:00">
-                2020-02-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/人工智能-机器学习基石/" itemprop="url" rel="index">
-                    <span itemprop="name">人工智能 - 机器学习基石</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>![image-20200213152630337](/Users/hhh/Library/Application Support/typora-user-images/image-20200213152630337.png)</p>
-<p>二分类问题是机器学习中的一种非常基础和常见的问题，由二分类问题可以进而引出多分类问题。</p>
-<p>对美元（硬币）进行分类。</p>
-<p>![image-20200213153514482](/Users/hhh/Library/Application Support/typora-user-images/image-20200213153514482.png)</p>
-<p>回归分析（输出是一个实数）：</p>
-<p>![image-20200213153746590](/Users/hhh/Library/Application Support/typora-user-images/image-20200213153746590.png)</p>
-<p>结构化的学习（输出中含有某些特定结构，要求机器学习到该结构）（端对端，结构化机器学习）：</p>
-<p>![image-20200213154245908](/Users/hhh/Library/Application Support/typora-user-images/image-20200213154245908.png)</p>
-<p>![image-20200213154331554](/Users/hhh/Library/Application Support/typora-user-images/image-20200213154331554.png)</p>
-<p>监督学习：</p>
-<p>给出标签</p>
-<p>![image-20200213154902380](/Users/hhh/Library/Application Support/typora-user-images/image-20200213154902380.png)</p>
-<p>无监督学习：</p>
-<p>没有给出标签值。</p>
-<p>![image-20200213155210483](/Users/hhh/Library/Application Support/typora-user-images/image-20200213155210483.png)</p>
-<p>![image-20200213155531445](/Users/hhh/Library/Application Support/typora-user-images/image-20200213155531445.png)</p>
-<p>半监督学习：</p>
-<p>![image-20200213155813797](/Users/hhh/Library/Application Support/typora-user-images/image-20200213155813797.png)</p>
-<p>增强学习：</p>
-<p>有输入也有输出，但输出要求给出不直接的选择，给出好还是不好。</p>
-<p>一步一步使得机器越来越好。</p>
-<p>![image-20200213160404612](/Users/hhh/Library/Application Support/typora-user-images/image-20200213160404612.png)</p>
-<p>四种不同的学习的方式，取决于想要的输出y</p>
-<p>![image-20200213160438242](/Users/hhh/Library/Application Support/typora-user-images/image-20200213160438242.png)</p>
-<p>batch learning：</p>
-<p>![image-20200213160727266](/Users/hhh/Library/Application Support/typora-user-images/image-20200213160727266.png)</p>
-<p>![image-20200213160744336](/Users/hhh/Library/Application Support/typora-user-images/image-20200213160744336.png)</p>
-<p>在线学习：</p>
-<p>![image-20200213161154829](/Users/hhh/Library/Application Support/typora-user-images/image-20200213161154829.png)</p>
-<p>主动学习：</p>
-<p>类似于机器可以问问题。</p>
-<p>通常用于取得标记很贵的时候。</p>
-<p>![image-20200213161450568](/Users/hhh/Library/Application Support/typora-user-images/image-20200213161450568.png)</p>
-<p>![image-20200213161555522](/Users/hhh/Library/Application Support/typora-user-images/image-20200213161555522.png)</p>
-<p>具体的特征：</p>
-<p>通常有人类的认知体现在里面</p>
-<p>![image-20200213161958500](/Users/hhh/Library/Application Support/typora-user-images/image-20200213161958500.png)</p>
-<p>![image-20200213162711417](/Users/hhh/Library/Application Support/typora-user-images/image-20200213162711417.png)</p>
-<p>![image-20200213162745234](/Users/hhh/Library/Application Support/typora-user-images/image-20200213162745234.png)</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/13/人工智能/机器学习基石/02_Learning-to-Answer-Yes_No/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/02/13/人工智能/机器学习基石/02_Learning-to-Answer-Yes_No/" itemprop="url">02_Learning to Answer Yes_No</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-02-13T16:21:27+08:00">
-                2020-02-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/人工智能-机器学习基石/" itemprop="url" rel="index">
-                    <span itemprop="name">人工智能 - 机器学习基石</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>![image-20200213123854013](/Users/hhh/Library/Application Support/typora-user-images/image-20200213123854013.png)</p>
-<p>从数据出发，机器学习数据，从所有的可能性H中，选出最适合的一个g，使得g无限接近f。</p>
-<p>![image-20200213124228686](/Users/hhh/Library/Application Support/typora-user-images/image-20200213124228686.png)</p>
-<p>perceptron：感知器</p>
-<p>w：权重</p>
-<p>threshold：阈值</p>
-<p>![image-20200213124822364](/Users/hhh/Library/Application Support/typora-user-images/image-20200213124822364.png)</p>
-<p>感知器在二位空间下：</p>
-<p>![image-20200213125141703](/Users/hhh/Library/Application Support/typora-user-images/image-20200213125141703.png)</p>
-<p>此时的感知器，就是线性的二分类模型。</p>
-<p>如何设计一个算法，从这么多的线中选出一条最适合的线？</p>
-<p>1、要求g和f在我们所看过的资料上，很接近：g ～ f on D</p>
-<p>2、难点：存在大量的线</p>
-<p>3、设计：已经存在一条线，然后对其进行修正，从而最终达到效果。（训练）</p>
-<p>用W0来代表一开始的线。</p>
-<p>![image-20200213125832963](/Users/hhh/Library/Application Support/typora-user-images/image-20200213125832963.png)</p>
-<p>找到这条线犯的错误的某一点，就是说这条线在这个点犯错，然后对其进行修正。</p>
-<p>1、每次只考虑一个点的更新</p>
-<p>2、从w和x的夹角来判断：</p>
-<p>若要正的，使得w和x接近一点，相反，若要负的，使得w和x离远一点。</p>
-<p>3、知道所有的输入都能够被正确分类，则得到最终的g。</p>
-<p><strong>知错能改算法</strong></p>
-<p>![image-20200213130238560](/Users/hhh/Library/Application Support/typora-user-images/image-20200213130238560.png)</p>
-<p>Cyclic PLA（循转的PLA，循环找到所有人，直到转完一圈）</p>
-<p>当然也可以选择随机跳转，但只要保证能够走完所有人。</p>
-<p>![image-20200213130340089](/Users/hhh/Library/Application Support/typora-user-images/image-20200213130340089.png)</p>
-<p>这个算法当所有的点都正确时，则会停止，那么，这个算法一定会停止吗？</p>
-<p>还有感知器算法的其他问题：</p>
-<p>![image-20200213131245432](/Users/hhh/Library/Application Support/typora-user-images/image-20200213131245432.png)</p>
-<p>PLA的停止：</p>
-<p>1、要求输入的数据要<strong>线性可分</strong>。</p>
-<p>若不满足线性可分，永远无法找到一条线，使得二者分开。</p>
-<p>![image-20200213132016693](/Users/hhh/Library/Application Support/typora-user-images/image-20200213132016693.png)</p>
-<p>使得 min（ynWTXn）——&gt; 离线最近的点都要大于0.</p>
-<p>假设得到最优的wf，那么wf和我们真正在找的wt的关系：</p>
-<p>可以认为判断wt和wf接不接近。</p>
-<p>可通过求内积的方法判断两个向量接不接近。</p>
-<p>若内积的值越大，某种角度来说，两个向量越接近。</p>
-<p>![image-20200213132748469](/Users/hhh/Library/Application Support/typora-user-images/image-20200213132748469.png)</p>
-<p>处理向量长度的问题：</p>
-<p>两个向量内积越大，不一定是角度的影响，也可能是向量长度的问题，长度越大，内积越大。</p>
-<p>原则：犯错才更新。</p>
-<p>可以得出：w(t+1) 每次最多涨最长的xn的平方。</p>
-<p>前面说到，wt和wf每次都会越来越靠近，每次都会靠近一定的份量。</p>
-<p>现在有表明，wt慢慢地涨。</p>
-<p>可以得出：两个向量的内积，真的就代表二者的角度。</p>
-<p>证明：李航统计学习方法P31，Novikoff定理。</p>
-<p>![image-20200213133835545](/Users/hhh/Library/Application Support/typora-user-images/image-20200213133835545.png)</p>
-<p>所以证明了这个PLA算法在线性可分时，一定会停下来。</p>
-<p>算法的好处：简单，快速</p>
-<p>坏处：数据要求线性可分。但我们并不知道数据是否真正线性可分。另外，就算认为线性可分，但是何时会停止？</p>
-<p>所以我们并不知道PLA是否会停，就算假设它会停，也不知道多久会停。</p>
-<p>所以PLA在实际应用的时候，还是会遇到一些问题的。</p>
-<p>![image-20200213134232636](/Users/hhh/Library/Application Support/typora-user-images/image-20200213134232636.png)</p>
-<p>如果非线性可分时。</p>
-<p>样本可能存在噪声（总体线性可分），所以如何在存在噪声的情况下找到那个最适合的分隔线。</p>
-<p>假设噪声是很小的。————&gt; 无法找到一条完美的线，那么我们就找到一条最好的线（就是找到犯错误最小的线在给定的输入下）</p>
-<p>现在在CS下，还是NP-hard问题，就是找不到一个算法来找到犯错最小的线。即：</p>
-<p>![image-20200213134828502](/Users/hhh/Library/Application Support/typora-user-images/image-20200213134828502.png)</p>
-<p>![image-20200213134906500](/Users/hhh/Library/Application Support/typora-user-images/image-20200213134906500.png)</p>
-<p>另一种算法，找到差不多的线，不见得是最完美的线。</p>
-<p>有一点贪心的做法。</p>
-<p>把我们认为最好的线总是抓在手上。</p>
-<p>Pocket Algorithm。</p>
-<p>每次找到一条新的线（随机的找）时，判断当前哪个好，然后选择。</p>
-<p>但是循环结束的条件要自己设置。（遍历次数自己设置）</p>
-<p>![image-20200213135150590](/Users/hhh/Library/Application Support/typora-user-images/image-20200213135150590.png)</p>
-<p>但是在线性可分的情况下，修正算法不如PLA来的快：</p>
-<p>1、修正算法需要对比，存储</p>
-<p>对比两条线，实际上是将所有的点进行两次计算。而PLA只是找到某一个错误的点，对其进行修正。所以修正算法来的比PLA慢，在线性可分的情况下。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/13/人工智能/机器学习基石/01_The-Learning-Problem/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/02/13/人工智能/机器学习基石/01_The-Learning-Problem/" itemprop="url">01_The Learning Problem</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-02-13T16:19:35+08:00">
-                2020-02-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/人工智能-机器学习基石/" itemprop="url" rel="index">
-                    <span itemprop="name">人工智能 - 机器学习基石</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p> 什么是机器学习</p>
-<p>学习（获得技巧）：从观察出发，经过脑子的转化，变成一个技巧。</p>
-<p>![image-20200212223353499](/Users/hhh/Library/Application Support/typora-user-images/image-20200212223353499.png)</p>
-<p>机器学习：从数据的积累来获得技巧</p>
-<p>![image-20200212223544399](/Users/hhh/Library/Application Support/typora-user-images/image-20200212223544399.png)</p>
-<p>什么是技巧？</p>
-<p> 某种表现的增进。（如预测的准确性）</p>
-<p>机器学习：</p>
-<p>从数据出发，经过电脑的计算之后，最终得到某一种表现的增进。</p>
-<p>Machin Learning:</p>
-<p>improving some preformace measure with experience computed from data.</p>
-<p>![image-20200212223753894](/Users/hhh/Library/Application Support/typora-user-images/image-20200212223753894.png)</p>
-<p>为什么使用机器学习？</p>
-<p>机器学习的应用：</p>
-<ul>
-<li>图像识别</li>
-</ul>
-<p>树的识别：</p>
-<p>1、树的定义使用程序很难实现</p>
-<p>2、从数据（观察）学习，然后进行识别</p>
-<p>3、让机器来学习，可能会比写出若干行的程序来说明如何识别一个树，来的更简单一些</p>
-<p>机器学习：让机器自己来学会、分析数据，来获得某种能力。</p>
-<p>（ML: an alternative route to build complicated systems）</p>
-<p>当人们在程序无法表达或形象的实现某个功能或无法无法制定规则时，机器学习不失为一种较好的选择。</p>
-<ol>
-<li>操纵机器人在火星的运行</li>
-<li>图像识别</li>
-<li>做预测</li>
-<li>个人化服务</li>
-</ol>
-<p>Give a computer a fish, you feed it for a day; teach it how to fish, you need it for a lifetime.</p>
-<p>机器学习的三个关键：（判断是否适合使用机器学习）</p>
-<p>1、存在潜藏的模式（有某些目标）</p>
-<p>如股市的目标：更准确。可能有某一种可以学的规则，机器可以从中学到。</p>
-<p>2、不知道如何将这个规则写下来</p>
-<p>3、有数据</p>
-<p>![image-20200212225350907](/Users/hhh/Library/Application Support/typora-user-images/image-20200212225350907.png)</p>
-<p>![image-20200212225402229](/Users/hhh/Library/Application Support/typora-user-images/image-20200212225402229.png)</p>
-<p>例子：</p>
-<p>银行是否给某个人信用卡？</p>
-<p>假如有以下几个信息：</p>
-<p>![image-20200212231550852](/Users/hhh/Library/Application Support/typora-user-images/image-20200212231550852.png)</p>
-<p>将该问题数学语言表达：</p>
-<p>![image-20200212231847914](/Users/hhh/Library/Application Support/typora-user-images/image-20200212231847914.png)</p>
-<p>![image-20200212231901828](/Users/hhh/Library/Application Support/typora-user-images/image-20200212231901828.png)</p>
-<p>![image-20200212232017940](/Users/hhh/Library/Application Support/typora-user-images/image-20200212232017940.png)</p>
-<p>g代表一种效能的增进（使得g和f越接近越好）</p>
-<p>f是未知的（若已知，可直接用程序写出算法）</p>
-<p>![image-20200212232355640](/Users/hhh/Library/Application Support/typora-user-images/image-20200212232355640.png)</p>
-<p>hypothesis set 假说的集合</p>
-<p>![image-20200212232410450](/Users/hhh/Library/Application Support/typora-user-images/image-20200212232410450.png)</p>
-<p>![image-20200212232506243](/Users/hhh/Library/Application Support/typora-user-images/image-20200212232506243.png)</p>
-<p>机器学习：从资料出发，算出一个假说g，要求g和f无限接近。</p>
-<p>机器学习和数据挖掘：</p>
-<p>机器学习，通过数据找出一个假说g，和目标f很接近</p>
-<p>数据挖掘，通过（大量的）数据来找到一些有趣的信息（暗含的有用信息）</p>
-<p>![image-20200212233051692](/Users/hhh/Library/Application Support/typora-user-images/image-20200212233051692.png)</p>
-<p>机器学习和数据挖掘：很像，但还是有区别的</p>
-<p>机器学习和人工智能：</p>
-<p>![image-20200212233315804](/Users/hhh/Library/Application Support/typora-user-images/image-20200212233315804.png)</p>
-<p>机器学习和统计学：</p>
-<p>![image-20200212233530402](/Users/hhh/Library/Application Support/typora-user-images/image-20200212233530402.png)</p>
-<p>总结：</p>
-<p>![image-20200212233733607](/Users/hhh/Library/Application Support/typora-user-images/image-20200212233733607.png)</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/11/python全栈/爬虫/01_爬虫入门之爬虫基础了解/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/02/11/python全栈/爬虫/01_爬虫入门之爬虫基础了解/" itemprop="url">02_爬虫入门之爬虫基础了解</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-02-11T13:16:31+08:00">
-                2020-02-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python全栈-爬虫/" itemprop="url" rel="index">
-                    <span itemprop="name">python全栈 - 爬虫</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="一、什么是爬虫"><a href="#一、什么是爬虫" class="headerlink" title="一、什么是爬虫"></a>一、什么是爬虫</h3><p>爬虫，即网络爬虫，大家可以理解为在网络上爬行的一只蜘蛛，互联网就比作一张大网，而爬虫便是在这张网上爬来爬去的蜘蛛，如果它遇到资源，那么他就会抓取下来。具体想抓取什么内容，这个由自己控制。</p>
-<h3 id="二、浏览网页的过程"><a href="#二、浏览网页的过程" class="headerlink" title="二、浏览网页的过程"></a>二、浏览网页的过程</h3><p>在用户浏览网页的过程中，我们可能会看到很多好看的图片，比如【<a href="http://novel.tanzhuovip.com/】，我们会看到几张的图片以及百度搜索框，这个过程其实就是用户输入网址之后，经过DNS服务器，找到服务器主机，向服务器发送一个请求，服务器经过解析之后，发送给用户的浏览器HTML、JS、CSS等文件，浏览器解析出来，用户便可以看到形形色色的图片了。" target="_blank" rel="noopener">http://novel.tanzhuovip.com/】，我们会看到几张的图片以及百度搜索框，这个过程其实就是用户输入网址之后，经过DNS服务器，找到服务器主机，向服务器发送一个请求，服务器经过解析之后，发送给用户的浏览器HTML、JS、CSS等文件，浏览器解析出来，用户便可以看到形形色色的图片了。</a></p>
-<p>因此，用户看到的网页实质是由HTML代码构成，爬虫便是这些内容，通过分析和过滤这些HTML代码，实现图片、文字等资源的获取。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">www.baidu.com</span><br><span class="line">1、本地host文件做解析</span><br><span class="line">2、本地路由</span><br><span class="line">3、DNS（域名解析服务器）</span><br><span class="line">4、百度服务器（服务器将源代码html发送至客户端，然后形成网页）</span><br><span class="line">5、到达请求的页面</span><br><span class="line"></span><br><span class="line">301  资源永久重定向</span><br><span class="line">302  资源临时重定向</span><br><span class="line">定向：跳转</span><br><span class="line">权重 SEO（搜索引擎优化）</span><br></pre></td></tr></table></figure>
-
-<h3 id="三、URL的含义"><a href="#三、URL的含义" class="headerlink" title="三、URL的含义"></a>三、URL的含义</h3><p>URL，即统一资源定位符，也就是我们说的网址，统一资源定位符是对可以从互联网上得到的资源的位置和访问方法的一种简洁的表示，是互联网上标准资源的地址。互联网上的每个文件都有一个唯一的URL，它包含的信息指出文件的位置以及浏览器该怎么处理它。</p>
-<p>URL的格式由三部分组成：</p>
-<ul>
-<li><p>第一部分是协议（或称为服务方式）</p>
-<p>http://   https://    ftp://    file://</p>
-</li>
-<li><p>第二部分是存有该资源的主机IP地址（有时也包括端口号）</p>
-<p>127.0.0.1    <a href="http://www.tanzhouedu.com" target="_blank" rel="noopener">www.tanzhouedu.com</a></p>
-<ul>
-<li>顶级域名和二级域名的区别：<ul>
-<li>顶级域名：一级域名、根域名<ul>
-<li>除了后缀（com、cn、com.cn、org.cn）以外只有一个点号</li>
-<li>baidu.com     baidu.com.cn     shangfeng.club</li>
-</ul>
-</li>
-<li>二级域名    <a href="http://www.baidu.com" target="_blank" rel="noopener">www.baidu.com</a> </li>
-<li>三级域名    a.<a href="http://www.baidu.com" target="_blank" rel="noopener">www.baidu.com</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>第三部分是主机资源的具体地址，如目录和文件名等。</p>
-</li>
-</ul>
-<p>爬虫爬取数据时必须要有一个目标的URL才可以获得数据，因此，它是爬虫获取数据的基本依据，准确理解它的含义对爬虫学习有很大帮助。</p>
-<h3 id="四、环境的配置"><a href="#四、环境的配置" class="headerlink" title="四、环境的配置"></a>四、环境的配置</h3><p>学习python，当然少不了环境的配置，该课程使用的版本为python2.7.9， 开发工具为pycharm</p>
-<h3 id="五、爬虫的重要思想"><a href="#五、爬虫的重要思想" class="headerlink" title="五、爬虫的重要思想"></a>五、爬虫的重要思想</h3><p>1、理论上来讲只要是网页上面能够看到的数据都是可以爬取的（因为所有看到的网页上的数据都是由服务器发送到我们电脑上的，只是有的数据加密过，很难解密）</p>
-<p>2、在网页上无法看到或者无法获取的数据，爬虫同样不可能拿到，比如一些付费资料</p>
-<p>3、分析网页数据的原则是从简到繁，从易到难</p>
-<ul>
-<li>直接通过网页源代码获取</li>
-<li>分析是否为ajax异步加载</li>
-<li>数据是否被加密</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2229,7 +2405,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">85</span>
+                  <span class="site-state-item-count">92</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
