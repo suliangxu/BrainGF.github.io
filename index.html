@@ -346,7 +346,7 @@
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fmt.Println(time.Now())</span><br><span class="line">fmt.Println(time.Now().Local())</span><br><span class="line">fmt.Println(time.Now().UTC())</span><br><span class="line">fmt.Println(time.Now().Location())</span><br></pre></td></tr></table></figure>
 
 <p>运行结果：</p>
-<p>![image-20200826143024985](/Users/hhh/Library/Application Support/typora-user-images/image-20200826143024985.png)</p>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/go/go%E8%AF%AD%E8%A8%80%E6%97%B6%E9%97%B4%E7%B1%BB%E5%9E%8B%E5%92%8C%E6%97%B6%E9%97%B4%E6%88%B3/01.png" alt="1"></p>
 <p><strong>注：</strong></p>
 <ul>
 <li>加不加 <strong>Local()</strong> 都是获取当地时间</li>
@@ -358,7 +358,7 @@
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fmt.Println(time.Now().Unix())</span><br><span class="line">fmt.Println(time.Now().Local().Unix())</span><br><span class="line">fmt.Println(time.Now().UTC().Unix())</span><br><span class="line">fmt.Println(time.Now().UnixNano())</span><br></pre></td></tr></table></figure>
 
 <p>运行结果：</p>
-<p>![image-20200826144034040](/Users/hhh/Library/Application Support/typora-user-images/image-20200826144034040.png)</p>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/go/go%E8%AF%AD%E8%A8%80%E6%97%B6%E9%97%B4%E7%B1%BB%E5%9E%8B%E5%92%8C%E6%97%B6%E9%97%B4%E6%88%B3/02.png" alt="2"></p>
 <p><strong>注：</strong></p>
 <ul>
 <li>此处加不加 Local()、UTC() 结果都是一样的</li>
@@ -369,7 +369,7 @@
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">t := time.Now()</span><br><span class="line">str := t.Format(<span class="string">"2006-01-02 15:04:05"</span>)</span><br><span class="line">str1 := t.Format(<span class="string">"2006年1月2日 15:04:05"</span>)</span><br><span class="line">fmt.Println(t)</span><br><span class="line">fmt.Println(str)</span><br><span class="line">fmt.Println(str1)</span><br></pre></td></tr></table></figure>
 
 <p>运行结果：</p>
-<p>![image-20200826144700134](/Users/hhh/Library/Application Support/typora-user-images/image-20200826144700134.png)</p>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/go/go%E8%AF%AD%E8%A8%80%E6%97%B6%E9%97%B4%E7%B1%BB%E5%9E%8B%E5%92%8C%E6%97%B6%E9%97%B4%E6%88%B3/03.png" alt="3"></p>
 <p>其中，<code>t</code> 为Time类型，<code>str</code> 和 <code>str1</code> 都是字符串类型。</p>
 <p><strong>func Parse(layout, value string) (Time, error)</strong></p>
 <ul>
@@ -380,18 +380,18 @@
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">t := time.Now()</span><br><span class="line">str := t.Format(<span class="string">"2006-01-02 15:04:05"</span>)</span><br><span class="line">str1 := t.Format(<span class="string">"2006年1月2日 15:04:05"</span>)</span><br><span class="line">timestamp, _ := time.Parse(<span class="string">"2006-01-02 15:04:05"</span>, str)</span><br><span class="line">timestamp1, _ := time.Parse(<span class="string">"2006年1月2日 15:04:05"</span>, str1)</span><br><span class="line">fmt.Println(timestamp)</span><br><span class="line">fmt.Println(timestamp1)</span><br></pre></td></tr></table></figure>
 
 <p>运行结果：</p>
-<p>![image-20200826150748069](/Users/hhh/Library/Application Support/typora-user-images/image-20200826150748069.png)</p>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/go/go%E8%AF%AD%E8%A8%80%E6%97%B6%E9%97%B4%E7%B1%BB%E5%9E%8B%E5%92%8C%E6%97%B6%E9%97%B4%E6%88%B3/04.png" alt="4"></p>
 <h4 id="四、时间类型转时间戳"><a href="#四、时间类型转时间戳" class="headerlink" title="四、时间类型转时间戳"></a>四、时间类型转时间戳</h4><p><strong>func (t Time) Unix( ) int64</strong></p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">t := time.Now()</span><br><span class="line">str := t.Format(<span class="string">"2006-01-02 15:04:05"</span>)</span><br><span class="line">timestamp, _ := time.Parse(<span class="string">"2006-01-02 15:04:05"</span>, str)</span><br><span class="line">fmt.Println(timestamp.Unix())</span><br></pre></td></tr></table></figure>
 
 <p>运行结果：</p>
-<p>![image-20200826151305916](/Users/hhh/Library/Application Support/typora-user-images/image-20200826151305916.png)</p>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/go/go%E8%AF%AD%E8%A8%80%E6%97%B6%E9%97%B4%E7%B1%BB%E5%9E%8B%E5%92%8C%E6%97%B6%E9%97%B4%E6%88%B3/05.png" alt="5"></p>
 <h4 id="五、时间戳转时间类型"><a href="#五、时间戳转时间类型" class="headerlink" title="五、时间戳转时间类型"></a>五、时间戳转时间类型</h4><p><strong>func Unix(sec int64, nsec int64) Time</strong></p>
 <p>第一个参数为秒，第二个为纳秒，且可选转换为当地时间还是伦敦时间</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">tmsp := time.Now().Unix()</span><br><span class="line">fmt.Println(tmsp)</span><br><span class="line">t1 := time.Unix(tmsp, <span class="number">0</span>).UTC()</span><br><span class="line">t2 := time.Unix(tmsp, tmsp).Local()</span><br><span class="line">fmt.Println(t1)</span><br><span class="line">fmt.Println(t2)</span><br></pre></td></tr></table></figure>
 
 <p>运行结果：</p>
-<p>![image-20200826151554983](/Users/hhh/Library/Application Support/typora-user-images/image-20200826151554983.png)</p>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/go/go%E8%AF%AD%E8%A8%80%E6%97%B6%E9%97%B4%E7%B1%BB%E5%9E%8B%E5%92%8C%E6%97%B6%E9%97%B4%E6%88%B3/06.png" alt="6"></p>
 
           
         
