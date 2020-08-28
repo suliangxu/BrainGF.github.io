@@ -249,6 +249,840 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/01/人工智能/Tensorflow/CH2-Tensorflow-keras实战/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/02/01/人工智能/Tensorflow/CH2-Tensorflow-keras实战/" itemprop="url">CH2-Tensorflow-keras实战</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-02-01T15:08:28+08:00">
+                2020-02-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/人工智能-Tensorflow/" itemprop="url" rel="index">
+                    <span itemprop="name">人工智能 - Tensorflow</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="（一）理论部分"><a href="#（一）理论部分" class="headerlink" title="（一）理论部分"></a>（一）理论部分</h2><h3 id="一、Tensorflow-keras简介"><a href="#一、Tensorflow-keras简介" class="headerlink" title="一、Tensorflow-keras简介"></a>一、Tensorflow-keras简介</h3><h4 id="1、keras是什么"><a href="#1、keras是什么" class="headerlink" title="1、keras是什么"></a>1、keras是什么</h4><ul>
+<li>基于python的高级神经网络API</li>
+<li>Francois Chollet 于 2014 - 2015 年编写Keras</li>
+<li>以Tensorflow、CNTK或者Theano为后端运行，keras必须有后端才可以运行<ul>
+<li>后端可以切换，现在多用tensorflow</li>
+</ul>
+</li>
+<li>极方便于快速实验，帮助用户以最少的时间验证自己的想法</li>
+</ul>
+<h4 id="2、Tensorflow-kears是什么"><a href="#2、Tensorflow-kears是什么" class="headerlink" title="2、Tensorflow-kears是什么"></a>2、Tensorflow-kears是什么</h4><ul>
+<li>Tensorflow对Kears API规范的实现</li>
+<li>相对于以tensorflow为后端的keras，Tensorflow-keras与Tensorflow结合更加紧密</li>
+<li>实现在tf.keras空间下</li>
+</ul>
+<h4 id="3、Tf-keras-和-Keras-联系"><a href="#3、Tf-keras-和-Keras-联系" class="headerlink" title="3、Tf.keras 和 Keras 联系"></a>3、Tf.keras 和 Keras 联系</h4><ul>
+<li>基于同一套API<ul>
+<li>keras程序可以通过改导入方式轻松转为tf.keras程序</li>
+<li>反之不可能成立，因为tf.keras有其他特性</li>
+</ul>
+</li>
+<li>相同的JSON和HDF5模型序列化格式和语义</li>
+</ul>
+<h4 id="4、Tf-keras-和-Keras-区别"><a href="#4、Tf-keras-和-Keras-区别" class="headerlink" title="4、Tf.keras 和 Keras 区别"></a>4、Tf.keras 和 Keras 区别</h4><ul>
+<li>Tf.keras全面支持eager mode<ul>
+<li>只是用keras.Sequential 和 keras.Model时没有影响</li>
+<li>自定义Model内部运算逻辑的时候会有影响<ul>
+<li>Tf低层API可以使用keras的model.fit等抽象</li>
+<li>适用于研究人员</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Tf.keras支持基于tf.data模型训练</li>
+<li>Tf.keras支持TPU训练</li>
+<li>Tf.keras支持tf.distribution中的分布式策略</li>
+<li>其他特性<ul>
+<li>Tf.keras可以与Tensorflow中的estimator集成</li>
+<li>Tf.keras可以保存为SavedModel</li>
+</ul>
+</li>
+</ul>
+<h4 id="5、如何选择"><a href="#5、如何选择" class="headerlink" title="5、如何选择"></a>5、如何选择</h4><ul>
+<li>如果想用到Tf.keras的任何一个特性，那么选Tf.keras</li>
+<li>如果后端互换性很重要，那么选kreas</li>
+<li>如果都不重要，那随便</li>
+</ul>
+<h3 id="二、分类问题、回归问题、损失函数"><a href="#二、分类问题、回归问题、损失函数" class="headerlink" title="二、分类问题、回归问题、损失函数"></a>二、分类问题、回归问题、损失函数</h3><h4 id="1、分类问题与回归问题"><a href="#1、分类问题与回归问题" class="headerlink" title="1、分类问题与回归问题"></a>1、分类问题与回归问题</h4><ul>
+<li>分类问题预测的是类别，模型的输出是概率分布<ul>
+<li>三分类问题输出例子：[0.2, 0.7, 0.1]</li>
+</ul>
+</li>
+<li>回归问题预测的是值，模型的输出是一个实数值</li>
+</ul>
+<p>分类问题：</p>
+<ul>
+<li>需要衡量目标类别与当前预测的差距<ul>
+<li>三分类问题输出例子：[0.2, 0.7, 0.1]</li>
+<li>三分类真实类别：2 -&gt; one_hot -&gt; [0, 0, 1]</li>
+</ul>
+</li>
+<li>One-hot 编码，把正整数变为向量表达<ul>
+<li>生成一个长度不小于正整数的向量，只有正整数的位置处为1，其余位置都为0</li>
+</ul>
+</li>
+</ul>
+<h4 id="2、目标函数"><a href="#2、目标函数" class="headerlink" title="2、目标函数"></a>2、目标函数</h4><p>为什么需要目标函数？</p>
+<ul>
+<li>参数是逐步调整的</li>
+<li>目标函数可以帮助衡量模型的好坏<ul>
+<li>Model A: [0.1, 0.4, 0.5]</li>
+<li>Model B: [0.1, 0.2, 0.7]</li>
+</ul>
+</li>
+</ul>
+<h5 id="（1）分类问题目标函数"><a href="#（1）分类问题目标函数" class="headerlink" title="（1）分类问题目标函数"></a>（1）分类问题目标函数</h5><ul>
+<li><p>平方差损失</p>
+<p>$\frac{1}{n}\sum_{x,y}\frac{1}{2}(y-Model(x))^2$</p>
+<ul>
+<li>举例：<ul>
+<li>预测值：[0.2, 0.7, 0.1]</li>
+<li>真是值：[0, 0, 1]</li>
+<li>损失函数值：[(0.2-0)^2 + (0.7-0)^2 + (0.1-1)^2]*0.2 = 0.65</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>交叉熵损失</p>
+<p>$\frac{1}{n}\sum_{x,y}yln(Model(x))$</p>
+</li>
+</ul>
+<h5 id="（2）回归问题目标函数"><a href="#（2）回归问题目标函数" class="headerlink" title="（2）回归问题目标函数"></a>（2）回归问题目标函数</h5><ul>
+<li>预测值与真实值的差距</li>
+<li>平方差损失</li>
+<li>绝对值损失</li>
+</ul>
+<p><strong>模型就是调整参数，使得目标函数逐渐变小的过程。</strong></p>
+<h3 id="三、神经网络、激活函数、批归一化、Dropout"><a href="#三、神经网络、激活函数、批归一化、Dropout" class="headerlink" title="三、神经网络、激活函数、批归一化、Dropout"></a>三、神经网络、激活函数、批归一化、Dropout</h3><h4 id="1、神经网络"><a href="#1、神经网络" class="headerlink" title="1、神经网络"></a>1、神经网络</h4><p>神经网络训练：</p>
+<ul>
+<li>下山算法<ul>
+<li>找到方向</li>
+<li>走一步</li>
+</ul>
+</li>
+<li>梯度下降<ul>
+<li>求导</li>
+<li>更新参数</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/Tensorflow/Tensorflow%E5%85%A5%E9%97%A8%E5%88%B0%E8%BF%9B%E9%98%B6/CH_2/1.png" alt="image-20200201162733682"></p>
+<p>深度神经网络：</p>
+<ul>
+<li>层次非常深的神经网络</li>
+</ul>
+<h4 id="2、激活函数"><a href="#2、激活函数" class="headerlink" title="2、激活函数"></a>2、激活函数</h4><p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/Tensorflow/Tensorflow%E5%85%A5%E9%97%A8%E5%88%B0%E8%BF%9B%E9%98%B6/CH_2/2.png" alt="image-20200201162851693"></p>
+<p>为什么要用激活函数？</p>
+<p>selu 激活函数？</p>
+<h4 id="3、归一化与批归一化"><a href="#3、归一化与批归一化" class="headerlink" title="3、归一化与批归一化"></a>3、归一化与批归一化</h4><p>归一化：</p>
+<ul>
+<li>Min-max归一化：x *= (x-min)/(max-min)</li>
+<li>Z-score 归一化： x *= (x-u) / sigma</li>
+</ul>
+<p>批归一化：</p>
+<ul>
+<li>每一层的激活值都做归一化（每一层的输入上都做归一化）</li>
+</ul>
+<p>为什么归一化会有效？</p>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/Tensorflow/Tensorflow%E5%85%A5%E9%97%A8%E5%88%B0%E8%BF%9B%E9%98%B6/CH_2/3.png" alt="image-20200201163200091"></p>
+<p>左图未归一化</p>
+<p>椭圆求导不一定指向圆心，求导过程比较曲折，最终走到圆心</p>
+<p>归一化后每次指向圆心，使训练速度增快</p>
+<h4 id="4、Dropout"><a href="#4、Dropout" class="headerlink" title="4、Dropout"></a>4、Dropout</h4><p>什么是Dropout？</p>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/Tensorflow/Tensorflow%E5%85%A5%E9%97%A8%E5%88%B0%E8%BF%9B%E9%98%B6/CH_2/4.png" alt="image-20200201163420794"></p>
+<p>随机地丢弃神经元</p>
+<p>Dropout的作用：</p>
+<ul>
+<li>防止过拟合<ul>
+<li>训练集上很好，测试集上不好</li>
+<li>参数太多，记住样本，不能泛化</li>
+</ul>
+</li>
+</ul>
+<p>为什么有效？</p>
+<h3 id="四、Wide-amp-deep-模型"><a href="#四、Wide-amp-deep-模型" class="headerlink" title="四、Wide &amp; deep 模型"></a>四、Wide &amp; deep 模型</h3><ul>
+<li><p>Google 16 年发布，用于分类和回归</p>
+</li>
+<li><p>应用到了Google Play中的应用推荐</p>
+</li>
+<li><p>原始论文：<a href="https://arxiv.org/pdf/1606.07792v1.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1606.07792v1.pdf</a></p>
+</li>
+</ul>
+<h4 id="1、稀疏特征与密集特征"><a href="#1、稀疏特征与密集特征" class="headerlink" title="1、稀疏特征与密集特征"></a>1、稀疏特征与密集特征</h4><h5 id="（1）稀疏特征"><a href="#（1）稀疏特征" class="headerlink" title="（1）稀疏特征"></a>（1）稀疏特征</h5><ul>
+<li>离散值特征</li>
+<li>One-hot表示</li>
+<li>Eg：专业 = {计算机，人文，其他}， 人文 = [0, 1, 0]</li>
+<li>叉乘之后<ul>
+<li>稀疏特征做叉乘获取共现信息</li>
+<li>实现记忆的效果</li>
+</ul>
+</li>
+</ul>
+<p>稀疏特征——优缺点</p>
+<ul>
+<li>优点<ul>
+<li>有效，广泛用于工业界</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>需要人工设计（选择某几个做叉乘，减少计算量）</li>
+<li>可能过拟合，所有特征都叉乘，相当于记住每一个样本</li>
+</ul>
+</li>
+</ul>
+<h5 id="（2）密集特征"><a href="#（2）密集特征" class="headerlink" title="（2）密集特征"></a>（2）密集特征</h5><ul>
+<li>向量表达<ul>
+<li>Eg：词表 = {人工智能， 你， 他， 慕课网}</li>
+<li>他 = [0.3, 0.2, 0.6, （n维向量）]</li>
+</ul>
+</li>
+<li>Word2vec工具<ul>
+<li>男 - 女 = 国王 - 王后</li>
+</ul>
+</li>
+</ul>
+<p>密集特征的优缺点：</p>
+<ul>
+<li>优点<ul>
+<li>带有语义信息，不同向量之间有相关性</li>
+<li>兼容没有出现过的特征组合</li>
+<li>更少人工参与</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>过度泛化，推荐不怎么相关的产品</li>
+</ul>
+</li>
+</ul>
+<h4 id="2、Wide-amp-deep-vs-Wide-or-deep"><a href="#2、Wide-amp-deep-vs-Wide-or-deep" class="headerlink" title="2、Wide &amp; deep vs (Wide or deep)"></a>2、Wide &amp; deep vs (Wide or deep)</h4><p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/Tensorflow/Tensorflow%E5%85%A5%E9%97%A8%E5%88%B0%E8%BF%9B%E9%98%B6/CH_2/5.png" alt="image-20200202144141139"></p>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/Tensorflow/Tensorflow%E5%85%A5%E9%97%A8%E5%88%B0%E8%BF%9B%E9%98%B6/CH_2/6.png" alt="image-20200202144320195"></p>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/Tensorflow/Tensorflow%E5%85%A5%E9%97%A8%E5%88%B0%E8%BF%9B%E9%98%B6/CH_2/7.png" alt="image-20200202144335754"></p>
+<p>推荐算法的模型图（典型的Wide &amp; deep模型）</p>
+<h3 id="五、超参数搜索"><a href="#五、超参数搜索" class="headerlink" title="五、超参数搜索"></a>五、超参数搜索</h3><h4 id="1、为什么要超参数搜索"><a href="#1、为什么要超参数搜索" class="headerlink" title="1、为什么要超参数搜索"></a>1、为什么要超参数搜索</h4><ul>
+<li>神经网络有很多训练过程中不变的参数<ul>
+<li>网络结构参数：几层，每层宽度，每层激活函数等</li>
+<li>训练参数：batch_size，学习率，学习率衰减算法等</li>
+</ul>
+</li>
+<li>手工去试耗费人力</li>
+</ul>
+<h4 id="2、搜索策略"><a href="#2、搜索策略" class="headerlink" title="2、搜索策略"></a>2、搜索策略</h4><ul>
+<li>网格搜索</li>
+<li>随机搜索</li>
+<li>遗传算法搜索</li>
+<li>启发式搜索</li>
+</ul>
+<h5 id="（1）网格搜索"><a href="#（1）网格搜索" class="headerlink" title="（1）网格搜索"></a>（1）网格搜索</h5><p>将各种超参数离散化成几个值，然后把这几个值一一组合起来，然后一一尝试</p>
+<ul>
+<li>定义n维方格</li>
+<li>每个方格对应一组超参数</li>
+<li>一组一组参数尝试（找到最好的组合方式）</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/Tensorflow/Tensorflow%E5%85%A5%E9%97%A8%E5%88%B0%E8%BF%9B%E9%98%B6/CH_2/8.png" alt="image-20200202175757456"></p>
+<h5 id="（2）随机搜索"><a href="#（2）随机搜索" class="headerlink" title="（2）随机搜索"></a>（2）随机搜索</h5><p>随机生成参数组合，保证最优解有可能被搜索到（空间中的其他位置）</p>
+<ul>
+<li>参数的生成方式为随机</li>
+<li>可探索的空间更大</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/Tensorflow/Tensorflow%E5%85%A5%E9%97%A8%E5%88%B0%E8%BF%9B%E9%98%B6/CH_2/9.png" alt="image-20200202175937147"></p>
+<h5 id="（3）遗传搜索"><a href="#（3）遗传搜索" class="headerlink" title="（3）遗传搜索"></a>（3）遗传搜索</h5><ul>
+<li>对自然界的模拟</li>
+<li>A、初始化一组参数集合 –&gt; 训练 –&gt; 得到模型指标作为生存概率（适者生存）</li>
+<li>B、选择 –&gt; 交叉  –&gt;  变异  –&gt; 产生下一代集合<ul>
+<li>交叉：在两个参数集合中各取一部分，组合起来形成一组新的参数集合</li>
+<li>变异：某一个或者某几个参数进行微调</li>
+</ul>
+</li>
+<li>C、重新得到A，重复进行</li>
+<li>找到表现最好的参数集合</li>
+</ul>
+<h5 id="（4）启发式搜索"><a href="#（4）启发式搜索" class="headerlink" title="（4）启发式搜索"></a>（4）启发式搜索</h5><ul>
+<li>研究热点 -AutoML</li>
+<li>使用循环神经网络生成参数</li>
+<li>使用强化学习来进行反馈，使用模型来训练生成参数</li>
+</ul>
+<h2 id="（二）实战部分"><a href="#（二）实战部分" class="headerlink" title="（二）实战部分"></a>（二）实战部分</h2><h3 id="一、Keras-搭建分类模型"><a href="#一、Keras-搭建分类模型" class="headerlink" title="一、Keras 搭建分类模型"></a>一、Keras 搭建分类模型</h3><h3 id="二、Keras回调函数"><a href="#二、Keras回调函数" class="headerlink" title="二、Keras回调函数"></a>二、Keras回调函数</h3><p>回调函数是一个函数的合集，会在训练的阶段中所使用。你可以使用回调函数来查看训练模型的内在状态和统计。</p>
+<h3 id="三、Keras搭建回归模型"><a href="#三、Keras搭建回归模型" class="headerlink" title="三、Keras搭建回归模型"></a>三、Keras搭建回归模型</h3><h3 id="四、Keras搭建深度神经网络"><a href="#四、Keras搭建深度神经网络" class="headerlink" title="四、Keras搭建深度神经网络"></a>四、Keras搭建深度神经网络</h3><h3 id="五、Keras实现-wide-amp-deep-模型"><a href="#五、Keras实现-wide-amp-deep-模型" class="headerlink" title="五、Keras实现 wide &amp; deep 模型"></a>五、Keras实现 wide &amp; deep 模型</h3><ul>
+<li>子类API</li>
+<li>功能API（函数式API）</li>
+<li>多输入与多输出</li>
+</ul>
+<h3 id="六、Keras-与-scikit-learn-实现超参数搜索"><a href="#六、Keras-与-scikit-learn-实现超参数搜索" class="headerlink" title="六、Keras 与 scikit-learn 实现超参数搜索"></a>六、Keras 与 scikit-learn 实现超参数搜索</h3><ul>
+<li>使用scikit实现超参数搜索</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/31/人工智能/Tensorflow/CH1-Tensorflow简介/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/01/31/人工智能/Tensorflow/CH1-Tensorflow简介/" itemprop="url">CH1-Tensorflow简介</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-01-31T23:59:02+08:00">
+                2020-01-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/人工智能-Tensorflow/" itemprop="url" rel="index">
+                    <span itemprop="name">人工智能 - Tensorflow</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="一、Tensorflow是什么"><a href="#一、Tensorflow是什么" class="headerlink" title="一、Tensorflow是什么"></a>一、Tensorflow是什么</h3><p>Google的开源软件库</p>
+<ul>
+<li>采取数据流图，用于数值计算</li>
+<li>支持多种平台——GPU、CPU、移动设备</li>
+<li>最初用于深度学习，变得越来越通用（只要是能够表达成数据流图的问题，都能使用tf解决）</li>
+</ul>
+<h4 id="1、数据流图"><a href="#1、数据流图" class="headerlink" title="1、数据流图"></a>1、数据流图</h4><ul>
+<li>节点——处理数据</li>
+<li>线——节点间的输入输出关系（数据依赖关系）</li>
+<li>线上运输张量（数据，所有的n维数据：tensor）</li>
+<li>节点被分配到各种计算设备上运行</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/Tensorflow/Tensorflow%E5%85%A5%E9%97%A8%E5%88%B0%E8%BF%9B%E9%98%B6/CH_1/1.png" alt="image-20200131115222448"></p>
+<h4 id="2、Tensorflow的特性"><a href="#2、Tensorflow的特性" class="headerlink" title="2、Tensorflow的特性"></a>2、Tensorflow的特性</h4><ul>
+<li>高度的灵活性</li>
+<li>真正的可移植性（可在多个设备上运行）</li>
+<li>产品和科研结合（做研究的代码可以无缝地使用在产品上）</li>
+<li>自动求微分（反向传播时非常方便）</li>
+<li>多语言支持（python、C++、Java、R、JS）</li>
+<li>性能最优化</li>
+</ul>
+<h3 id="二、Tensorflow版本变迁"><a href="#二、Tensorflow版本变迁" class="headerlink" title="二、Tensorflow版本变迁"></a>二、Tensorflow版本变迁</h3><p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/Tensorflow/Tensorflow%E5%85%A5%E9%97%A8%E5%88%B0%E8%BF%9B%E9%98%B6/CH_1/2.png" alt="image-20200131115857281"></p>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/Tensorflow/Tensorflow%E5%85%A5%E9%97%A8%E5%88%B0%E8%BF%9B%E9%98%B6/CH_1/3.png" alt="image-20200131115933294"></p>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/Tensorflow/Tensorflow%E5%85%A5%E9%97%A8%E5%88%B0%E8%BF%9B%E9%98%B6/CH_1/5.png" alt="image-20200131120257760"></p>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/Tensorflow/Tensorflow%E5%85%A5%E9%97%A8%E5%88%B0%E8%BF%9B%E9%98%B6/CH_1/6.png" alt="image-20200131120407010"></p>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/Tensorflow/Tensorflow%E5%85%A5%E9%97%A8%E5%88%B0%E8%BF%9B%E9%98%B6/CH_1/7.png" alt="image-20200131120820583"></p>
+<p><strong>Tensorflow1.0——主要特性：</strong></p>
+<ul>
+<li>XLA——Accelerate Linear Algebra（专门针对线性运算的编译器，使得训练速度加快）<ul>
+<li>提升训练速度58倍</li>
+<li>可以在移动设备运行</li>
+</ul>
+</li>
+<li>引入更高级别的API——tf.layers / tf.metrics / tf.losses / tf.keras</li>
+<li>Tensorflow调试器</li>
+<li>支持docker镜像，引入tensorflow serving 服务</li>
+</ul>
+<p><strong>Tensorflow1.0——架构：</strong></p>
+<ul>
+<li>Keras</li>
+<li>Estimator</li>
+<li>Datasets</li>
+<li>Layers</li>
+<li>Distribution engine</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/Tensorflow/Tensorflow%E5%85%A5%E9%97%A8%E5%88%B0%E8%BF%9B%E9%98%B6/CH_1/8.png" alt="image-20200131120820583"></p>
+<p><strong>Tensorflow2.0——主要特性：</strong></p>
+<ul>
+<li>使用 tf.keras 和 eager mode 进行更加简单的模型构建</li>
+<li>鲁棒的跨平台模型部署</li>
+<li>强大的研究实验</li>
+<li>清楚不推荐使用的API和减少重复来简化API</li>
+</ul>
+<p><strong>Tensorflow2.0——架构：</strong></p>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/Tensorflow/Tensorflow%E5%85%A5%E9%97%A8%E5%88%B0%E8%BF%9B%E9%98%B6/CH_1/9.png" alt="image-20200131121612375"></p>
+<p><strong>Tensorflow2.0——简化的模型开发流程：</strong></p>
+<ul>
+<li>使用 tf.data 加载数据</li>
+<li>使用 tf.keras 构建模型，也可以使用 premade estimator 来验证模型<ul>
+<li>使用 tensorflow hub 进行迁移学习</li>
+</ul>
+</li>
+<li>使用 eager mode 进行运行和调试</li>
+<li>使用分发策略来进行分布式训练</li>
+<li>导出到 SavedModel</li>
+<li>使用Tensorflow Serve、Tensorflow Lite、Tensorflow.js 部署模型</li>
+</ul>
+<p><strong>Tensorflow2.0——强大的跨平台能力：</strong></p>
+<ul>
+<li>Tensorflow 服务<ul>
+<li>直接通过 HTTP/REST 或 GRPC/协议缓冲区</li>
+</ul>
+</li>
+<li>Tensorflow Lite —— 可部署在Android、iOS 和嵌入式上</li>
+<li>Tensorflow.js —— 在JavaScript中部署模型</li>
+<li>其他语言<ul>
+<li>C、Java、Go、C#、Rust、Julia、R等</li>
+</ul>
+</li>
+</ul>
+<p><strong>Tensorflow2.0——强大的研究实验：</strong></p>
+<ul>
+<li>Keras 功能 API 和子类API，允许创建复杂的拓扑结构</li>
+<li>自定义训练逻辑，使用 tf.GradientTape 和 tf.custom_gradient 进行更细粒度的控制</li>
+<li>低层API自始自终可以与高层结合使用，完全的可定制</li>
+<li>高级扩展：Ragged Tensors、Tensor2Tensor等</li>
+</ul>
+<h3 id="三、Tensorflow-VS-Pytorch"><a href="#三、Tensorflow-VS-Pytorch" class="headerlink" title="三、Tensorflow VS Pytorch"></a>三、Tensorflow VS Pytorch</h3><h4 id="1、入门时间"><a href="#1、入门时间" class="headerlink" title="1、入门时间"></a>1、入门时间</h4><ul>
+<li>Tensorflow 1.* <ul>
+<li>静态图</li>
+<li>学习额外概念<ul>
+<li>图、会话、变量、占位符等</li>
+</ul>
+</li>
+<li>写样板代码</li>
+</ul>
+</li>
+<li>Tensorflow 2.*<ul>
+<li>动态图</li>
+<li>Eager mode避免1.0缺点，直接集成在python中</li>
+</ul>
+</li>
+<li>Pytorch<ul>
+<li>动态图</li>
+<li>Numpy的扩展，直接集成在python中  </li>
+</ul>
+</li>
+</ul>
+<p><strong>图结构：</strong></p>
+<ul>
+<li>静态图<ul>
+<li>效率高</li>
+</ul>
+</li>
+<li>动态图<ul>
+<li>调试容易（可随意变动图结构）</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/Tensorflow/Tensorflow%E5%85%A5%E9%97%A8%E5%88%B0%E8%BF%9B%E9%98%B6/CH_1/10.png" alt="image-20200131123226233"></p>
+<p>图结构——代码示例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1 + 1/2 + 1/2^2 + 1/2^3 + ... + 1/2^50</span></span><br><span class="line"><span class="comment">### tensorflow 1.*</span></span><br><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line">print(tf.__version__)</span><br><span class="line"></span><br><span class="line">x = tf.Variable(<span class="number">0.</span>)</span><br><span class="line">y = tf.Variable(<span class="number">1.</span>)</span><br><span class="line"> </span><br><span class="line">print(x)</span><br><span class="line">print(y)</span><br><span class="line"><span class="comment"># x = x + y</span></span><br><span class="line">add_op = x.assign(x + y)</span><br><span class="line"><span class="comment"># y = y / 2</span></span><br><span class="line">div_op = x.assign(y / <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</span><br><span class="line">	   sess.run(tf.global_variables_initializer())</span><br><span class="line">	    <span class="keyword">for</span> iteration <span class="keyword">in</span> range(<span class="number">50</span>):</span><br><span class="line">	        sess.run(add_op)</span><br><span class="line">	        sess.run(div_op)</span><br><span class="line">	    </span><br><span class="line">	    print(x.eval()) <span class="comment"># 2.0</span></span><br><span class="line"></span><br><span class="line"><span class="comment">### pytorch</span></span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line">print(torch.__version__)</span><br><span class="line"></span><br><span class="line">x = torch.Tensor([<span class="number">0.</span>])</span><br><span class="line">y = torch.Tensor([<span class="number">1.</span>])</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> iteration <span class="keyword">in</span> range(<span class="number">50</span>):</span><br><span class="line">		x = x + y</span><br><span class="line">	  y = y / <span class="number">2</span></span><br><span class="line">  </span><br><span class="line">print(x)</span><br><span class="line"></span><br><span class="line"><span class="comment">### tensorflow 2.*</span></span><br><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"><span class="comment"># tf.enable_eager_execution()</span></span><br><span class="line"></span><br><span class="line">print(tf.__version__)</span><br><span class="line"></span><br><span class="line">x = tf.Variable(<span class="number">0.</span>)</span><br><span class="line">y = tf.Variable(<span class="number">1.</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> iteration <span class="keyword">in</span> range(<span class="number">50</span>):</span><br><span class="line">    x = x + y</span><br><span class="line">    y = y / <span class="number">2</span></span><br><span class="line"></span><br><span class="line">print(x.numpy())</span><br><span class="line"></span><br><span class="line"><span class="comment">### python</span></span><br><span class="line">x = <span class="number">0</span></span><br><span class="line">y = <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> iteration <span class="keyword">in</span> range(<span class="number">50</span>):</span><br><span class="line">    x = x + y</span><br><span class="line">    y = y / <span class="number">2</span></span><br><span class="line">    </span><br><span class="line">print(x)</span><br></pre></td></tr></table></figure>
+
+<h4 id="2、图创建和调试"><a href="#2、图创建和调试" class="headerlink" title="2、图创建和调试"></a>2、图创建和调试</h4><ul>
+<li>TensorFlow 1.*<ul>
+<li>静态图，难以调试，学习tfdbg调试</li>
+</ul>
+</li>
+<li>Tensorflow 2.0 与pytorch<ul>
+<li>动态图，python自带调试工具</li>
+</ul>
+</li>
+</ul>
+<h4 id="3、全面性"><a href="#3、全面性" class="headerlink" title="3、全面性"></a>3、全面性</h4><ul>
+<li>pytorch 缺少<ul>
+<li>沿维度翻转张量（np.flip, np.flipud, np.fliplr）</li>
+<li>检查无穷与非数值张量（np.is_nan, np.is_inf）</li>
+<li>快速傅立叶变换（np.fft）</li>
+</ul>
+</li>
+<li>随着时间变化，pytorch与tensorflow越来越接近</li>
+</ul>
+<h4 id="4、序列化与部署"><a href="#4、序列化与部署" class="headerlink" title="4、序列化与部署"></a>4、序列化与部署</h4><ul>
+<li>Tensorflow 支持更加广泛<ul>
+<li>图保存为 protocol buffer</li>
+<li>跨语言</li>
+<li>跨平台</li>
+</ul>
+</li>
+<li>Pytorch 支持比较简单</li>
+</ul>
+<h3 id="四、Tensorflow环境配置"><a href="#四、Tensorflow环境配置" class="headerlink" title="四、Tensorflow环境配置"></a>四、Tensorflow环境配置</h3>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/30/python/Keras载入mnist数据集出错问题解决方案/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/01/30/python/Keras载入mnist数据集出错问题解决方案/" itemprop="url">Keras载入mnist数据集出错问题解决方案</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-01-30T18:16:03+08:00">
+                2020-01-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ol>
+<li>找到本地keras目录下的mnist.py文件<br>通常在这个目录下。<br>..\Anaconda3\Lib\site-packages\keras\datasets</li>
+<li>下载mnist.npz文件到本地<br>下载链接如下。<br><a href="https://pan.baidu.com/s/1C3c2Vn-_616GqeEn7hQQ2Q" target="_blank" rel="noopener">https://pan.baidu.com/s/1C3c2Vn-_616GqeEn7hQQ2Q</a></li>
+<li>修改mnist.py文件为以下内容，并保存</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> __future__ <span class="keyword">import</span> absolute_import</span><br><span class="line"><span class="keyword">from</span> __future__ <span class="keyword">import</span> division</span><br><span class="line"><span class="keyword">from</span> __future__ <span class="keyword">import</span> print_function</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> ..utils.data_utils <span class="keyword">import</span> get_file</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment">#cui 2018.07.08,修改</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">load_data</span><span class="params">(path=<span class="string">'mnist.npz'</span>)</span>:</span></span><br><span class="line">    <span class="string">"""Loads the MNIST dataset.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    # Arguments</span></span><br><span class="line"><span class="string">        path: path where to cache the dataset locally</span></span><br><span class="line"><span class="string">            (relative to ~/.keras/datasets).</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    # Returns</span></span><br><span class="line"><span class="string">        Tuple of Numpy arrays: `(x_train, y_train), (x_test, y_test)`.</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    path = <span class="string">'E:/Data/Mnist/mnist.npz'</span> <span class="comment">#此处的path为你刚刚防止mnist.py的目录。注意斜杠</span></span><br><span class="line">    f = np.load(path)</span><br><span class="line">    x_train, y_train = f[<span class="string">'x_train'</span>], f[<span class="string">'y_train'</span>]</span><br><span class="line">    x_test, y_test = f[<span class="string">'x_test'</span>], f[<span class="string">'y_test'</span>]</span><br><span class="line">    f.close()</span><br><span class="line">    <span class="keyword">return</span> (x_train, y_train), (x_test, y_test)</span><br></pre></td></tr></table></figure>
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/21/Linux/Linux基础/Linux教程（9）Linux-yum命令/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2704,619 +3538,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/17/Linux/Linux基础/Linux教程（2）Linux系统启动过程/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/01/17/Linux/Linux基础/Linux教程（2）Linux系统启动过程/" itemprop="url">Linux教程（2）Linux系统启动过程</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-01-17T17:44:05+08:00">
-                2020-01-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux-Linux基础/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux - Linux基础</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="一、Linux启动"><a href="#一、Linux启动" class="headerlink" title="一、Linux启动"></a>一、Linux启动</h3><p>Linux启动时我们会看到很多启动信息。</p>
-<p>Linux系统的启动过程并不是大家想象中的那么复杂，其过程可以分为5个阶段：</p>
-<ul>
-<li>内核的引导</li>
-<li>运行init</li>
-<li>系统初始化</li>
-<li>建立终端</li>
-<li>用户登录系统</li>
-</ul>
-<p>init程序的类型：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1 --&gt; SysV : init, CentOS 5之前，配置文件：/etc/inittab</span><br><span class="line">2 --&gt; Upstart: init, CentOS 6, 配置文件：/etc/inittab, /etc/init/*.conf</span><br><span class="line">3 --&gt; Systemd: systemd, CentOS 7, 配置文件：/usr/lib/system、/etc/systemd/system</span><br></pre></td></tr></table></figure>
-
-<h4 id="1、内核引导"><a href="#1、内核引导" class="headerlink" title="1、内核引导"></a>1、内核引导</h4><p>当计算机打开电源后，首先是BIOS开机自检，按照BIOS中设置的启动设备（通常是硬盘）来启动。</p>
-<p>操作系统接管硬件以后，首先读入 /boot 目录下的内核文件。</p>
-<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/Linux/Linux%E5%9F%BA%E7%A1%80/Linux%E6%95%99%E7%A8%8B%EF%BC%882%EF%BC%89/1.png" alt="img"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">附：BIOS</span><br><span class="line">    BIOS 是英文&quot;Basic Input Output System&quot;的缩略语，直译过来后中文名称就是&quot;基本输入输出系统&quot;。其实，它是一组固化到计算机内主板上一个ROM芯片上的程序，它保存着计算机最重要的基本输入输出的程序、系统设置信息、开机后自检程序和系统自启动程序。 其主要功能是为计算机提供最底层的、最直接的硬件设置和控制。</span><br><span class="line">    计算机在运行时，首先会进入BIOS，它在计算机系统中起着非常重要的作用。一块主板性能优越与否，很大程度上取决于主板上的BIOS管理功能是否先进。</span><br></pre></td></tr></table></figure>
-
-<h4 id="2、运行init"><a href="#2、运行init" class="headerlink" title="2、运行init"></a>2、运行init</h4><p>init进程是系统所有进程的<strong>起点</strong>，你可以把它比拟成系统所有进程的老祖宗，没有这个进程，系统中任何进程都不会启动。</p>
-<p>init程序首先是<strong>需要读取配置文件</strong> /etc/inittab</p>
-<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/Linux/Linux%E5%9F%BA%E7%A1%80/Linux%E6%95%99%E7%A8%8B%EF%BC%882%EF%BC%89/2.png" alt="img"></p>
-<p><strong>运行级别：</strong></p>
-<p>许多程序需要开机启动。它们在Windows叫做“服务”（service），在Linux叫做<strong>“守护进程”</strong>（daemon）。</p>
-<p><strong>init进程的一大任务，就是去运行这些开机启动的程序。</strong></p>
-<p>但是，不同的场合需要启动不同的程序，比如用作服务器时，需要启动Apache，用作桌面就不需要。</p>
-<p>Linux允许为不同场合，分配不同的开机启动程序，这就叫做<strong>”运行级别“</strong>（runlevel）。也就是说，启动时根据”运行级别“，确定要运行哪些程序。</p>
-<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/Linux/Linux%E5%9F%BA%E7%A1%80/Linux%E6%95%99%E7%A8%8B%EF%BC%882%EF%BC%89/3.png" alt="img"></p>
-<p>Linux系统有7个运行级别（runlevel）：</p>
-<ul>
-<li>级别0：系统停机状态，系统默认运行级别不能设为0，否则不能正常启动</li>
-<li>级别1：单用户工作状态，root权限；用于系统维护；禁止远程登录</li>
-<li>级别2：多用户状态（没有NFS）</li>
-<li>级别3：完全的多用户状态（有NFS），登录后进入控制台命令行模式</li>
-<li>级别4：系统未使用，保留</li>
-<li>级别5：X11控制台，登录后进入图形GUI模式</li>
-<li>级别6：系统正常关闭并重启，默认运行级别不能设为6，否则不能正常启动</li>
-</ul>
-<h4 id="3、系统初始化"><a href="#3、系统初始化" class="headerlink" title="3、系统初始化"></a>3、系统初始化</h4><p>在init配置文件中有这么一行：<code>si::sysinit:/etc/rc.d/rc.sysinit</code></p>
-<p>它调用执行了 /etc/rc.d/rc.sysinit，而rc.sysinit 是一个bash shell的脚本，它主要是完成一些系统初始化的工作，<strong>rc.sysinit是每一个运行级别都要首先运行的重要脚本</strong>。</p>
-<p>它主要完成的工作有：激活交换分区检查磁盘，加载硬件模块以及其他一些需要优先执行的任务。</p>
-<p><code>l5:5:wait:/etc/rc.d/rc 5</code></p>
-<p>这一行表示以5为参数运行 /etc/rc.d/rc，/etc/rc.d/rc 是一个Shell脚本，它接受5作为参数，去执行 /etc/rc.d/rc5.d/ 目录下的所有的 rc 启动脚本，/etc/rc.d/rc5.d/ 目录中的这些启动脚本实际上都是一些连接文件，而不是真正的rc启动脚本，真正的rc启动脚本实际上都是放在 /etc/rc.d/init.d/ 目录下。</p>
-<p>而这些rc启动脚本有着类似的用法，它们一般能接受 start、restart、status等参数。</p>
-<p>/etc/rc.d/rd5.d/ 中的rc启动脚本通常是K或S开头的连接文件，对于以S开头的启动副本，将以start参数来运行。</p>
-<p>而如果发现存在相应的脚本也存在K打头的连接，而且已经处于运行状态了（以 /var/lock/subsys/ 下的文件作为标志，则首先将以stop为参数停止这些已经启动了的守护进程，然后再重新运行。</p>
-<p><strong>这样做是为了保证是当init改变运行级别时，所有相关的守护进程都将重启。</strong></p>
-<p>至于在每个运行级别中将运行哪些守护进程，用户可以通过 chkconfig 或 setup 中的“System Services” 来自行设定。</p>
-<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/Linux/Linux%E5%9F%BA%E7%A1%80/Linux%E6%95%99%E7%A8%8B%EF%BC%882%EF%BC%89/4.png" alt="img"></p>
-<h4 id="4、建立终端"><a href="#4、建立终端" class="headerlink" title="4、建立终端"></a>4、建立终端</h4><p>rc执行完毕后，返回init。这时基本系统环境已经设置好了，各种守护进程也已经启动了。</p>
-<p><strong>init接下来会打开6个终端，以便用户登录系统</strong>。在initial中的以下6行就是定义了6个终端：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1:2345:respawn:/sbin/mingetty tty1</span><br><span class="line">2:2345:respawn:/sbin/mingetty tty2</span><br><span class="line">3:2345:respawn:/sbin/mingetty tty3</span><br><span class="line">4:2345:respawn:/sbin/mingetty tty4</span><br><span class="line">5:2345:respawn:/sbin/mingetty tty5</span><br><span class="line">6:2345:respawn:/sbin/mingetty tty6</span><br></pre></td></tr></table></figure>
-
-<p>从上面可以看出在2、3、4、5的运行级别中都将以 respawn 方式运行 mingetty 程序，mingetty 程序能打开终端、设置模式。同时它会显示一个文本登录界面，这个界面就是我们经常看到的登录界面，在这个登录界面中会提示用户输入用户名，而用户输入的用户将作为参数传给login程序来验证用户的身份。</p>
-<h4 id="5、用户登录系统"><a href="#5、用户登录系统" class="headerlink" title="5、用户登录系统"></a>5、用户登录系统</h4><p>一般来说，用户的登录方式有三种：</p>
-<ul>
-<li>命令行登录</li>
-<li>ssh登录</li>
-<li>图形界面登录</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/Linux/Linux%E5%9F%BA%E7%A1%80/Linux%E6%95%99%E7%A8%8B%EF%BC%882%EF%BC%89/5.png" alt="img"></p>
-<p>对于运行级别为5的图形方式用户来说，他们的登录是通过一个图形化的登录界面。登录成功后可以进入 KDE、Gnome 等窗口管理器。</p>
-<p>而本文主要讲的还是文本方式登录的情况：当我们看到mingetty的登录界面时，我们就可以输入用户名和密码来登录系统了。</p>
-<p><strong>Linux 的账号验证程序是 login，login 会接收 mingetty 传来的用户名作为用户名参数。</strong></p>
-<p>然后 login 会对用户名进行分析：如果用户名不是 root ，且存在 /etc/nologin/ 文件，login将输出 nologin 文件的内容，然后退出。</p>
-<p>这通常用来系统维护时防止非 root 用户登录。只有 /etc/securetty 中登记了的终端才允许 root 用户登录，如果不存在这个文件，则root用户可以在任何终端上登录。</p>
-<p>/etc/usertty文件用于对用户作出附加访问限制，如果不存在这个文件，则没有其他限制。</p>
-<h3 id="二、图形模式与文字模式的切换方式"><a href="#二、图形模式与文字模式的切换方式" class="headerlink" title="二、图形模式与文字模式的切换方式"></a>二、图形模式与文字模式的切换方式</h3><p>Linux预设提供了六个命令窗口终端机让我们来登录。</p>
-<p>默认我们登录的就是第一个窗口，也就是 tty1，这6个窗口分别为 tty1，tty2，…，tty6，<strong>你可以按下 Ctrl + Alt + F1～F6来切换他们</strong>。</p>
-<p>如果你安装了图形界面，默认情况下是进入图形界面的，此时你就可以按 Ctrl + Alt + F1～F6 来进入其中一个命令窗口界面。</p>
-<p>当你进入命令窗口界面后再返回图形界面只要按下 Ctrl + Alt + F7 就回来了。</p>
-<p>如果你用的vmware虚拟机，命令窗口切换的快捷键为 Alt + Space + F1～F6.如果你在图形界面下，请按 Alt + Shift + Ctrl + F1~F6 切换至命令窗口。</p>
-<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/Linux/Linux%E5%9F%BA%E7%A1%80/Linux%E6%95%99%E7%A8%8B%EF%BC%882%EF%BC%89/6.png" alt="img"></p>
-<h3 id="三、Linux关机"><a href="#三、Linux关机" class="headerlink" title="三、Linux关机"></a>三、Linux关机</h3><p>Linux领域内大多用在服务器上，很少遇到关机的操作。毕竟服务器上跑一个服务是永无止境的，除非特殊情况下，不得已才会关机。</p>
-<p>正确的关机流程为：</p>
-<p><strong><em>sync –&gt;  shutdown –&gt; reboot –&gt; halt</em></strong></p>
-<p>关机指令为：shutdown，你可以 man shutdown 来看一下帮助文档。</p>
-<p>例如，你可以运行如下命令关机：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">sync 将数据由内存同步到硬盘中。</span><br><span class="line"></span><br><span class="line">shutdown 关机指令，你可以man shutdown 来看一下帮助文档。例如你可以运行如下命令关机：</span><br><span class="line"></span><br><span class="line">shutdown –h 10 ‘This server will shutdown after 10 mins’ 这个命令告诉大家，计算机将在10分钟后关机，并且会显示在登陆用户的当前屏幕中。</span><br><span class="line"></span><br><span class="line">shutdown –h now 立马关机</span><br><span class="line"></span><br><span class="line">shutdown –h 20:25 系统会在今天20:25关机</span><br><span class="line"></span><br><span class="line">shutdown –h +10 十分钟后关机</span><br><span class="line"></span><br><span class="line">shutdown –r now 系统立马重启</span><br><span class="line"></span><br><span class="line">shutdown –r +10 系统十分钟后重启</span><br><span class="line"></span><br><span class="line">reboot 就是重启，等同于 shutdown –r now</span><br><span class="line"></span><br><span class="line">halt 关闭系统，等同于shutdown –h now 和 poweroff</span><br></pre></td></tr></table></figure>
-
-<p>不管是重启系统还是关闭系统，首先要运行 sync 命令，把内存中的数据写到磁盘中。</p>
-<p>关机的命令有： <strong>shutdown -h now halt poweroff</strong> 和 <strong>init 0</strong>，</p>
-<p>重启系统的命令有： <strong>shutdown -r now reboot init 6</strong>。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/17/Linux/Linux基础/Linux教程（1）Linux简介/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/01/17/Linux/Linux基础/Linux教程（1）Linux简介/" itemprop="url">Linux教程（1）Linux简介</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-01-17T16:30:17+08:00">
-                2020-01-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux-Linux基础/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux - Linux基础</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Linux内核最初只是由芬兰人<strong>林纳斯·托瓦兹（Linus Torvalds）</strong>在赫尔辛基大学上学时出于个人爱好而编写的。</p>
-<p>Linux是一套免费使用和自由传播的<strong>类Unix操作系统</strong>，是一个基于POSIX 和 UNIX 的多用户、多任务、支持多线程和多CPU的操作系统。</p>
-<p>Linux能运行的主要的UNIX工具软件、应用程序和网络协议。它支持32位和64位硬件。Linux继承了Unix以网络为核心的设计思想，是一个性能稳定的多用户网络操作系统。</p>
-<h4 id="一、Linux的发行版"><a href="#一、Linux的发行版" class="headerlink" title="一、Linux的发行版"></a>一、Linux的发行版</h4><p>Linux的发行版说简单点就是将Linux内核与应用软件做一个打包。</p>
-<p><img src="https://www.runoob.com/wp-content/uploads/2014/06/1511849829609658.jpg" alt="img"></p>
-<p>目前市面上较知名的发行版有：Ubuntu、RedHat、CentOS、Debian、Fedora、SuSE、OpenSUSE、Arch Linux、SolusOS等。</p>
-<p><img src="https://www.runoob.com/wp-content/uploads/2014/06/wKioL1bvVPWAu7hqAAEyirVUn3c446.jpg-wh_651x-s_3197843091.jpg" alt="img"></p>
-<h4 id="二、Linux应用领域"><a href="#二、Linux应用领域" class="headerlink" title="二、Linux应用领域"></a>二、Linux应用领域</h4><p>今天各种场合都有各种Linux发行版，从嵌入式设备到超级计算机，并且在服务器领域确定了地位，通常服务器使用LAMP（Linux + Apache + MySQL + PHP）或 LNMY（Linux + Nginx + MySQL + PHP）组合。</p>
-<p>目前，Linux不仅在家庭与企业中使用，并且在政府中也很受欢迎。</p>
-<h4 id="三、Linux-vs-Windows"><a href="#三、Linux-vs-Windows" class="headerlink" title="三、Linux vs Windows"></a>三、Linux vs Windows</h4><table>
-<thead>
-<tr>
-<th align="left">比较</th>
-<th align="left">Windows</th>
-<th align="left">Linux</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">界面</td>
-<td align="left">界面统一，外壳程序固定所有 Windows 程序菜单几乎一致，快捷键也几乎相同</td>
-<td align="left">图形界面风格依发布版不同而不同，可能互不兼容。GNU/Linux 的终端机是从 UNIX 传承下来，基本命令和操作方法也几乎一致。</td>
-</tr>
-<tr>
-<td align="left">驱动程序</td>
-<td align="left">驱动程序丰富，版本更新频繁。默认安装程序里面一般包含有该版本发布时流行的硬件驱动程序，之后所出的新硬件驱动依赖于硬件厂商提供。对于一些老硬件，如果没有了原配的驱动有时很难支持。另外，有时硬件厂商未提供所需版本的 Windows 下的驱动，也会比较头痛。</td>
-<td align="left">由志愿者开发，由 Linux 核心开发小组发布，很多硬件厂商基于版权考虑并未提供驱动程序，尽管多数无需手动安装，但是涉及安装则相对复杂，使得新用户面对驱动程序问题（是否存在和安装方法）会一筹莫展。但是在开源开发模式下，许多老硬件尽管在Windows下很难支持的也容易找到驱动。HP、Intel、AMD 等硬件厂商逐步不同程度支持开源驱动，问题正在得到缓解。</td>
-</tr>
-<tr>
-<td align="left">使用</td>
-<td align="left">使用比较简单，容易入门。图形化界面对没有计算机背景知识的用户使用十分有利。</td>
-<td align="left">图形界面使用简单，容易入门。文字界面，需要学习才能掌握。</td>
-</tr>
-<tr>
-<td align="left">学习</td>
-<td align="left">系统构造复杂、变化频繁，且知识、技能淘汰快，深入学习困难。</td>
-<td align="left">系统构造简单、稳定，且知识、技能传承性好，深入学习相对容易。</td>
-</tr>
-<tr>
-<td align="left">软件</td>
-<td align="left">每一种特定功能可能都需要商业软件的支持，需要购买相应的授权。</td>
-<td align="left">大部分软件都可以自由获取，同样功能的软件选择较少。</td>
-</tr>
-</tbody></table>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/17/python全栈/第01部分：基础+模块+面向对象+网络编程/模块/python模块之psutil/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/01/17/python全栈/第01部分：基础+模块+面向对象+网络编程/模块/python模块之psutil/" itemprop="url">python模块之psutil</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-01-17T11:44:52+08:00">
-                2020-01-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python全栈-01部分-模块和包/" itemprop="url" rel="index">
-                    <span itemprop="name">python全栈 -01部分 -模块和包</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="一、psutil模块的介绍"><a href="#一、psutil模块的介绍" class="headerlink" title="一、psutil模块的介绍"></a>一、psutil模块的介绍</h3><p>在Python中，我们可以使用psutil这个第三方模块去获取信息的信息。</p>
-<p>psutil模块可以跨平台使用，支持Linux／UNIX／OSX／Windows等，它主要用来做系统监控，性能分析，进程管理等。</p>
-<p>安装psutil模块也非常简单，在cmd命令行下输入：pip  install  psutil</p>
-<h3 id="二、psutil模块的使用"><a href="#二、psutil模块的使用" class="headerlink" title="二、psutil模块的使用"></a>二、psutil模块的使用</h3><h4 id="1、获取CPU信息"><a href="#1、获取CPU信息" class="headerlink" title="1、获取CPU信息"></a>1、获取CPU信息</h4><p><strong><em>psutil.cpu_times( )</em></strong></p>
-<p>获取CPU的完整信息。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> psutil</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>psutil.cpu_times()</span><br><span class="line">scputimes(user=<span class="number">1082.5689395</span>, system=<span class="number">1252.5164289000004</span>, idle=<span class="number">10992.4232638</span>, interrupt=<span class="number">93.35099840000001</span>, dpc=<span class="number">41.667867099999995</span>)</span><br></pre></td></tr></table></figure>
-
-<p><strong><em>psutil.cpu_count( )</em></strong></p>
-<p>获取CPU的逻辑个数。</p>
-<p><strong><em>psutil.cpu_count(logical=False)</em></strong></p>
-<p>获取CPU的物理个数；默认logical值为True</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>psutil.cpu_count()</span><br><span class="line"><span class="number">4</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>psutil.cpu_count(logical=<span class="literal">False</span>)</span><br><span class="line"><span class="number">2</span></span><br></pre></td></tr></table></figure>
-
-<p><strong><em>cpu_percent( )</em></strong></p>
-<p>获取系统CPU使用率。</p>
-<p>其有两个参数，分别是interval和percpu；</p>
-<p>interval指定的是计算cpu使用率的时间间隔，percpu则指定是选择总的使用率还是每个cpu的使用率；</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line"><span class="meta">... </span>    psutil.cpu_percent(interval=<span class="number">1</span>)</span><br><span class="line">...</span><br><span class="line"><span class="number">7.4</span></span><br><span class="line"><span class="number">7.8</span></span><br><span class="line"><span class="number">8.2</span></span><br><span class="line"><span class="number">8.6</span></span><br><span class="line"><span class="number">9.3</span></span><br><span class="line"><span class="number">8.1</span></span><br><span class="line"><span class="number">8.0</span></span><br><span class="line"><span class="number">7.3</span></span><br><span class="line"><span class="number">9.8</span></span><br><span class="line"><span class="number">15.8</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line"><span class="meta">... </span>    psutil.cpu_percent(interval=<span class="number">1</span>,percpu=<span class="literal">True</span>)</span><br><span class="line">...</span><br><span class="line">[<span class="number">10.9</span>, <span class="number">11.8</span>, <span class="number">15.6</span>, <span class="number">0.0</span>]</span><br><span class="line">[<span class="number">13.8</span>, <span class="number">3.1</span>, <span class="number">10.8</span>, <span class="number">3.1</span>]</span><br><span class="line">[<span class="number">14.1</span>, <span class="number">8.7</span>, <span class="number">6.3</span>, <span class="number">0.0</span>]</span><br><span class="line">[<span class="number">14.1</span>, <span class="number">9.1</span>, <span class="number">6.3</span>, <span class="number">0.0</span>]</span><br><span class="line">[<span class="number">15.6</span>, <span class="number">8.8</span>, <span class="number">17.2</span>, <span class="number">0.0</span>]</span><br><span class="line">[<span class="number">23.4</span>, <span class="number">3.1</span>, <span class="number">9.4</span>, <span class="number">0.0</span>]</span><br><span class="line">[<span class="number">18.7</span>, <span class="number">9.0</span>, <span class="number">7.8</span>, <span class="number">0.0</span>]</span><br><span class="line">[<span class="number">15.6</span>, <span class="number">9.1</span>, <span class="number">14.1</span>, <span class="number">0.0</span>]</span><br><span class="line">[<span class="number">26.6</span>, <span class="number">0.0</span>, <span class="number">23.4</span>, <span class="number">0.0</span>]</span><br><span class="line">[<span class="number">7.8</span>, <span class="number">9.4</span>, <span class="number">18.7</span>, <span class="number">0.0</span>]</span><br></pre></td></tr></table></figure>
-
-<h4 id="2、获取内存信息"><a href="#2、获取内存信息" class="headerlink" title="2、获取内存信息"></a>2、获取内存信息</h4><p><strong><em>psutil.virtual_memory( )</em></strong></p>
-<p>获取系统内存的使用情况。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>psutil.virtual_memory()</span><br><span class="line">svmem(total=<span class="number">8457662464</span>, available=<span class="number">3598602240</span>, percent=<span class="number">57.5</span>, used=<span class="number">4859060224</span>, free=<span class="number">3598602240</span>)</span><br></pre></td></tr></table></figure>
-
-<p>可以看到，总内存大小是8457662464KB=8 GB，已用4859060224 KB= 4.5 GB，使用了57.5%。剩余内存为3598602240KB=3.5G；</p>
-<p><strong><em>psutil.swap_memory( )</em></strong></p>
-<p>获取系统交换内存的统计信息。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>psutil.swap_memory()</span><br><span class="line">sswap(total=<span class="number">16913375232</span>, used=<span class="number">5444091904</span>, free=<span class="number">11469283328</span>, percent=<span class="number">32.2</span>, sin=<span class="number">0</span>, sout=<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
-
-<h4 id="3、获取磁盘信息"><a href="#3、获取磁盘信息" class="headerlink" title="3、获取磁盘信息"></a>3、获取磁盘信息</h4><p><strong><em>psutil.disk_partitions( )</em></strong></p>
-<p> 获取磁盘分区的信息</p>
-<p><strong><em>psutil.disk_usage(‘/‘)</em></strong></p>
-<p>获取磁盘的使用情况</p>
-<p><strong><em>psutil.disk_io_counters( )</em></strong></p>
-<p> 获取磁盘的IO统计信息（读写速度等）</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>psutil.disk_partitions()</span><br><span class="line">[sdiskpart(device=<span class="string">'C:\\'</span>, mountpoint=<span class="string">'C:\\'</span>, fstype=<span class="string">'NTFS'</span>, opts=<span class="string">'rw,fixed'</span>), sdiskpart(device=<span class="string">'D:\\'</span>, mountpoint=<span class="string">'D:\\'</span>, fstype=<span class="string">'NTFS'</span>, opts=<span class="string">'rw,fixe</span></span><br><span class="line"><span class="string">d'</span>), sdiskpart(device=<span class="string">'E:\\'</span>, mountpoint=<span class="string">'E:\\'</span>, fstype=<span class="string">'NTFS'</span>, opts=<span class="string">'rw,fixed'</span>)]</span><br><span class="line"> </span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>psutil.disk_usage(<span class="string">'/'</span>)</span><br><span class="line">sdiskusage(total=<span class="number">119821824000</span>, used=<span class="number">60241117184</span>, free=<span class="number">59580706816</span>, percent=<span class="number">50.3</span>)</span><br><span class="line"> </span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>psutil.disk_io_counters()</span><br><span class="line">sdiskio(read_count=<span class="number">207246</span>, write_count=<span class="number">87647</span>, read_bytes=<span class="number">5948826624</span>, write_bytes=<span class="number">5090843648</span>, read_time=<span class="number">745</span>, write_time=<span class="number">252</span>)</span><br></pre></td></tr></table></figure>
-
-<h4 id="4、获取网络信息"><a href="#4、获取网络信息" class="headerlink" title="4、获取网络信息"></a>4、获取网络信息</h4><p><strong><em>psutil.net_io_counters( )</em></strong></p>
-<p>获取总的网络IO信息</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>psutil.net_io_counters()</span><br><span class="line">snetio(bytes_sent=<span class="number">3398615</span>, bytes_recv=<span class="number">14170744</span>, packets_sent=<span class="number">28431</span>, packets_recv=<span class="number">25604</span>, errin=<span class="number">0</span>, errout=<span class="number">255</span>, dropin=<span class="number">0</span>, dropout=<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
-
-<p><strong><em>psutil.net_io_counters(pernic=True)</em></strong></p>
-<p>获取网卡的IO信息</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>psutil.net_io_counters(pernic=<span class="literal">True</span>)</span><br><span class="line">&#123;<span class="string">'Npcap Loopback Adapter'</span>: snetio(bytes_sent=<span class="number">0</span>, bytes_recv=<span class="number">0</span>, packets_sent=<span class="number">0</span>, packets_recv=<span class="number">0</span>, errin=<span class="number">0</span>, errout=<span class="number">0</span>, dropin=<span class="number">0</span>, dropout=<span class="number">0</span>), <span class="string">'本地连接'</span>: snetio(bytes_sent=<span class="number">0</span>, bytes_recv=<span class="number">0</span>, packets_sent=<span class="number">0</span>, packets_recv=<span class="number">0</span>, errin=<span class="number">0</span>, errout=<span class="number">0</span>, dropin=<span class="number">0</span>, dropout=<span class="number">0</span>), <span class="string">'无线网络连接'</span>: snetio(bytes_sent=<span class="number">3397477</span>, by</span><br><span class="line">tes_recv=<span class="number">14170950</span>, packets_sent=<span class="number">24199</span>, packets_recv=<span class="number">24613</span>, errin=<span class="number">0</span>, errout=<span class="number">255</span>, dropin=<span class="number">0</span>, dropout=<span class="number">0</span>)&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong><em>psutil.net_if_addrs( )</em></strong></p>
-<p> 获取网络接口信息</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>psutil.net_if_addrs()</span><br><span class="line">&#123;<span class="string">'Npcap Loopback Adapter'</span>: [snicaddr(family=&lt;AddressFamily.AF_LINK: <span class="number">-1</span>&gt;, address=<span class="string">'02-00-4C-4F-4F-50'</span>, netmask=<span class="literal">None</span>, broadcast=<span class="literal">None</span>, ptp=<span class="literal">None</span>), snicadd</span><br><span class="line">r(family=&lt;AddressFamily.AF_INET: <span class="number">2</span>&gt;, address=<span class="string">'127.0.0.1'</span>, netmask=<span class="string">'255.0.0.0'</span>, broadcast=<span class="literal">None</span>, ptp=<span class="literal">None</span>), snicaddr(family=&lt;AddressFamily.AF_INET6: <span class="number">23</span>&gt;</span><br><span class="line">, address=<span class="string">'::1'</span>, netmask=<span class="literal">None</span>, broadcast=<span class="literal">None</span>, ptp=<span class="literal">None</span>)], <span class="string">'本地连接'</span>: [snicaddr(family=&lt;AddressFamilyn.AF_LINK: <span class="number">-1</span>&gt;, address=<span class="string">'FC-45-96-7F-7E-9E'</span>, netm</span><br><span class="line">ask=<span class="literal">None</span>, broadcast=<span class="literal">None</span>, ptp=<span class="literal">None</span>), snicaddr(family=&lt;AddressFamily.AF_INET: <span class="number">2</span>&gt;, address=<span class="string">'169.254.64.227'</span>, netmask=<span class="string">'255.255.0.0'</span>, broadcast=<span class="literal">None</span>, ptp=</span><br><span class="line"><span class="literal">None</span>), snicaddr(family=&lt;AddressFamily.AF_INET6: <span class="number">23</span>&gt;, address=<span class="string">'fe80::9594:8742:c758:40e3'</span>, netmask=<span class="literal">None</span>, broadcast=<span class="literal">None</span>, ptp=<span class="literal">None</span>)]&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong><em>psutil.net_if_stats( )</em></strong></p>
-<p>获取网络接口状态信息</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>psutil.net_if_stats()</span><br><span class="line">&#123;<span class="string">'本地连接'</span>: snicstats(isup=<span class="literal">False</span>, duplex=&lt;NicDuplex.NIC_DUPLEX_FULL: <span class="number">2</span>&gt;, speed=<span class="number">0</span>, mtu=<span class="number">1500</span>), <span class="string">'VMware Network Adapter VMnet1'</span>: snicstats(isup=<span class="literal">True</span>, du</span><br><span class="line">plex=&lt;NicDuplex.NIC_DUPLEX_FULL: <span class="number">2</span>&gt;, speed=<span class="number">100</span>, mtu=<span class="number">1500</span>), <span class="string">'VMware Network Adapter VMnet8'</span>: snicstats(isup=<span class="literal">True</span>, duplex=&lt;NicDuplex.NIC_DUPLEX_FULL: <span class="number">2</span>&gt;</span><br><span class="line">, speed=<span class="number">100</span>, mtu=<span class="number">1500</span>), <span class="string">'Loopback Pseudo-Interface 1'</span>: snicstats(isup=<span class="literal">True</span>, duplex=&lt;NicDuplex.NIC_DUPLEX_FULL: <span class="number">2</span>&gt;, speed=<span class="number">1073</span>, mtu=<span class="number">1500</span>), <span class="string">'Npcap Loopb</span></span><br><span class="line"><span class="string">ack Adapter'</span>: snicstats(isup=<span class="literal">True</span>, duplex=&lt;NicDuplex.NIC_DUPLEX_FULL: <span class="number">2</span>&gt;, speed=<span class="number">10</span>, mtu=<span class="number">1500</span>), <span class="string">'无线网络连接'</span>: snicstats(isup=<span class="literal">True</span>, duplex=&lt;NicDuplex.</span><br><span class="line">NIC_DUPLEX_FULL: <span class="number">2</span>&gt;, speed=<span class="number">4294</span>, mtu=<span class="number">1500</span>), <span class="string">'isatap.&#123;53D15CD1-4A3F-4911-9824-DC7F561E0DFA&#125;'</span>: snicstats(isup=<span class="literal">False</span>, duplex=&lt;NicDuplex.NIC_DUPLEX_FULL:</span><br><span class="line"><span class="number">2</span>&gt;, speed=<span class="number">0</span>, mtu=<span class="number">1280</span>)&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="5、获取其他系统信息"><a href="#5、获取其他系统信息" class="headerlink" title="5、获取其他系统信息"></a>5、获取其他系统信息</h4><p>获取系统的开机时间，并转化为自然的格式</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>psutil.boot_time()</span><br><span class="line"><span class="number">1551576293.0</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> datetime</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>datetime.datetime.fromtimestamp(psutil.boot_time ()).strftime(<span class="string">"%Y-%m-%d %H: %M: %S"</span>)</span><br><span class="line"><span class="string">'2019-03-03 09: 24: 53'</span></span><br></pre></td></tr></table></figure>
-
-<p>获取连接系统的用户列表：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>psutil.users()</span><br><span class="line">[suser(name=<span class="string">'Lenovo'</span>, terminal=<span class="literal">None</span>, host=<span class="string">'0.0.0.0'</span>, started=<span class="number">1551576310.0</span>, pid=<span class="literal">None</span>)]</span><br></pre></td></tr></table></figure>
-
-<p>获取系统全部的进程信息：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>psutil.pids()</span><br><span class="line">[<span class="number">0</span>, <span class="number">4</span>, <span class="number">404</span>, <span class="number">632</span>, <span class="number">728</span>, <span class="number">736</span>, <span class="number">796</span>, <span class="number">832</span>, <span class="number">844</span>, <span class="number">852</span>, <span class="number">948</span>, <span class="number">648</span>, <span class="number">848</span>, <span class="number">1032</span>, <span class="number">1056</span>, <span class="number">1180</span>, <span class="number">1260</span>, <span class="number">1364</span>, <span class="number">1412</span>, <span class="number">1436</span>, <span class="number">1576</span>, <span class="number">1692</span>, <span class="number">1736</span>, <span class="number">1868</span>, <span class="number">1964</span>, <span class="number">1464</span>, <span class="number">1460</span>, <span class="number">2176</span></span><br><span class="line">, <span class="number">2224</span>, <span class="number">2248</span>, <span class="number">2312</span>, <span class="number">2400</span>, <span class="number">2464</span>, <span class="number">2508</span>, <span class="number">2576</span>, <span class="number">2672</span>, <span class="number">2732</span>, <span class="number">2776</span>, <span class="number">2820</span>, <span class="number">2940</span>, <span class="number">2460</span>, <span class="number">3276</span>, <span class="number">3396</span>, <span class="number">3540</span>, <span class="number">4000</span>, <span class="number">2164</span>, <span class="number">1880</span>, <span class="number">3600</span>, <span class="number">4076</span>, <span class="number">4588</span>, <span class="number">4608</span>, <span class="number">4916</span>, <span class="number">4924</span></span><br><span class="line">, <span class="number">4972</span>, <span class="number">5316</span>, <span class="number">6000</span>, <span class="number">6284</span>, <span class="number">7040</span>, <span class="number">6844</span>, <span class="number">7132</span>, <span class="number">6976</span>, <span class="number">5268</span>, <span class="number">4148</span>, <span class="number">7476</span>, <span class="number">7776</span>, <span class="number">8188</span>, <span class="number">4084</span>, <span class="number">2688</span>, <span class="number">5088</span>, <span class="number">6352</span>, <span class="number">9036</span>, <span class="number">8560</span>, <span class="number">7784</span>, <span class="number">8436</span>, <span class="number">8448</span>, <span class="number">8284</span>, <span class="number">8228</span>, <span class="number">9196</span></span><br><span class="line">, <span class="number">9192</span>, <span class="number">2984</span>, <span class="number">1988</span>, <span class="number">8392</span>, <span class="number">7724</span>, <span class="number">1844</span>, <span class="number">3232</span>, <span class="number">2188</span>, <span class="number">7984</span>, <span class="number">4288</span>, <span class="number">4268</span>, <span class="number">7916</span>, <span class="number">9468</span>, <span class="number">3308</span>]</span><br></pre></td></tr></table></figure>
-
-<p>获取单个进程的信息：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>p=psutil.Process(<span class="number">1988</span>)<span class="comment">#获取指定进程ID=1988</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>p.name()   <span class="comment">#进程名</span></span><br><span class="line"><span class="string">'vmware.exe'</span></span><br><span class="line"> </span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>p.exe       <span class="comment">#进程的bin路径</span></span><br><span class="line">&lt;bound method Process.exe of psutil.Process(pid=<span class="number">1988</span>, name=<span class="string">'vmware.exe'</span>, started=<span class="string">'09:48:13'</span>)&gt;</span><br><span class="line"> </span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>p.cwd()  <span class="comment">#进程的工作目录绝对路径</span></span><br><span class="line"><span class="string">'E:\\soft_file\\VMWARE'</span></span><br><span class="line"> </span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>p.cmdline() <span class="comment">#进程启动的命令行</span></span><br><span class="line">[<span class="string">'E:\\soft_file\\VMWARE\\vmware.exe'</span>]</span><br><span class="line"> </span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>p.ppid()  <span class="comment">#父进程ID         </span></span><br><span class="line"><span class="number">4972</span></span><br><span class="line"> </span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>p.parent()   <span class="comment">#父进程             </span></span><br><span class="line">psutil.Process(pid=<span class="number">4972</span>, name=<span class="string">'DesktopMgr64.exe'</span>, started=<span class="string">'09:25:21'</span>)</span><br><span class="line"> </span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>p.children()  <span class="comment"># 子进程列表</span></span><br><span class="line">[psutil.Process(pid=<span class="number">7724</span>, name=<span class="string">'vmware-tray.exe'</span>, started=<span class="string">'09:48:18'</span>), psutil.Process(pid=<span class="number">1844</span>, name=<span class="string">'vmware-unity-helper.exe'</span>, started=<span class="string">'09:48:25'</span>)]</span><br><span class="line"> </span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>p.status()  <span class="comment"># 进程状态</span></span><br><span class="line"><span class="string">'running'</span></span><br><span class="line"> </span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>p.username()    <span class="comment">#进程的用户名</span></span><br><span class="line"><span class="string">'Lenovo-PC\\Lenovo'</span></span><br><span class="line"> </span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>p.create_time()   <span class="comment"># 进程创建的时间</span></span><br><span class="line"><span class="number">1551577693.0</span></span><br><span class="line"> </span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>p.cpu_times() <span class="comment"># 进程使用的CPU时间</span></span><br><span class="line">pcputimes(user=<span class="number">6.552042</span>, system=<span class="number">6.3804409</span>, children_user=<span class="number">0.0</span>, children_system=<span class="number">0.0</span>)</span><br><span class="line"> </span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>p.memory_info() <span class="comment"># 进程使用的内存</span></span><br><span class="line">pmem(rss=<span class="number">122986496</span>, vms=<span class="number">96821248</span>, num_page_faults=<span class="number">131494</span>, peak_wset=<span class="number">133181440</span>, wset=<span class="number">122986496</span>, peak_paged_pool=<span class="number">529816</span>, paged_pool=<span class="number">488896</span>, peak_nonpage</span><br><span class="line">d_pool=<span class="number">97656</span>, nonpaged_pool=<span class="number">89240</span>, pagefile=<span class="number">96821248</span>, peak_pagefile=<span class="number">107077632</span>, private=<span class="number">96821248</span>)</span><br><span class="line"> </span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>p.num_threads() <span class="comment"># 进程的线程数量</span></span><br><span class="line"><span class="number">17</span></span><br><span class="line"> </span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>p.threads() <span class="comment"># 所有线程信息</span></span><br><span class="line">[pthread(id=<span class="number">8792</span>, user_time=<span class="number">6.021638599999999</span>, system_time=<span class="number">5.7876370999999995</span>), pthread(id=<span class="number">8528</span>, user_time=<span class="number">0.031200199999999997</span>, system_time=<span class="number">0.0312001</span></span><br><span class="line"><span class="number">99999999997</span>), ....]</span><br><span class="line"> </span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>p.terminate()<span class="comment"># 结束进程</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="三、查看硬件信息脚本"><a href="#三、查看硬件信息脚本" class="headerlink" title="三、查看硬件信息脚本"></a>三、查看硬件信息脚本</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment">#coding:utf-8</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> psutil</span><br><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="comment"># 当前时间</span></span><br><span class="line">now_time = time.strftime(<span class="string">'%Y-%m-%d-%H:%M:%S'</span>, time.localtime(time.time()))</span><br><span class="line">print(now_time)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看cpu物理个数的信息</span></span><br><span class="line">print(<span class="string">u"物理CPU个数: %s"</span> % psutil.cpu_count(logical=<span class="literal">False</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment">#CPU的使用率</span></span><br><span class="line">cpu = (str(psutil.cpu_percent(<span class="number">1</span>))) + <span class="string">'%'</span></span><br><span class="line">print(<span class="string">u"cup使用率: %s"</span> % cpu)</span><br><span class="line"></span><br><span class="line"><span class="comment">#查看内存信息,剩余内存.free  总共.total</span></span><br><span class="line"><span class="comment">#round()函数方法为返回浮点数x的四舍五入值。</span></span><br><span class="line"></span><br><span class="line">free = str(round(psutil.virtual_memory().free / (<span class="number">1024.0</span> * <span class="number">1024.0</span> * <span class="number">1024.0</span>), <span class="number">2</span>))</span><br><span class="line">total = str(round(psutil.virtual_memory().total / (<span class="number">1024.0</span> * <span class="number">1024.0</span> * <span class="number">1024.0</span>), <span class="number">2</span>))</span><br><span class="line">memory = int(psutil.virtual_memory().total - psutil.virtual_memory().free) / float(psutil.virtual_memory().total)</span><br><span class="line">print(<span class="string">u"物理内存： %s G"</span> % total)</span><br><span class="line">print(<span class="string">u"剩余物理内存： %s G"</span> % free)</span><br><span class="line">print(<span class="string">u"物理内存使用率： %s %%"</span> % int(memory * <span class="number">100</span>))</span><br><span class="line"><span class="comment"># 系统启动时间</span></span><br><span class="line">print(<span class="string">u"系统启动时间: %s"</span> % datetime.datetime.fromtimestamp(psutil.boot_time()).strftime(<span class="string">"%Y-%m-%d %H:%M:%S"</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 系统用户</span></span><br><span class="line">users_count = len(psutil.users())</span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># &gt;&gt;&gt; for u in psutil.users():</span></span><br><span class="line"><span class="comment"># ...   print(u)</span></span><br><span class="line"><span class="comment"># ...</span></span><br><span class="line"><span class="comment"># suser(name='root', terminal='pts/0', host='61.135.18.162', started=1505483904.0)</span></span><br><span class="line"><span class="comment"># suser(name='root', terminal='pts/5', host='61.135.18.162', started=1505469056.0)</span></span><br><span class="line"><span class="comment"># &gt;&gt;&gt; u.name</span></span><br><span class="line"><span class="comment"># 'root'</span></span><br><span class="line"><span class="comment"># &gt;&gt;&gt; u.terminal</span></span><br><span class="line"><span class="comment"># 'pts/5'</span></span><br><span class="line"><span class="comment"># &gt;&gt;&gt; u.host</span></span><br><span class="line"><span class="comment"># '61.135.18.162'</span></span><br><span class="line"><span class="comment"># &gt;&gt;&gt; u.started</span></span><br><span class="line"><span class="comment"># 1505469056.0</span></span><br><span class="line"><span class="comment"># &gt;&gt;&gt;</span></span><br><span class="line"></span><br><span class="line">users_list = <span class="string">","</span>.join([u.name <span class="keyword">for</span> u <span class="keyword">in</span> psutil.users()])</span><br><span class="line">print(<span class="string">u"当前有%s个用户，分别是 %s"</span> % (users_count, users_list))</span><br><span class="line"></span><br><span class="line"><span class="comment">#网卡，可以得到网卡属性，连接数，当前流量等信息</span></span><br><span class="line">net = psutil.net_io_counters()</span><br><span class="line">bytes_sent = <span class="string">'&#123;0:.2f&#125; Mb'</span>.format(net.bytes_recv / <span class="number">1024</span> / <span class="number">1024</span>)</span><br><span class="line">bytes_rcvd = <span class="string">'&#123;0:.2f&#125; Mb'</span>.format(net.bytes_sent / <span class="number">1024</span> / <span class="number">1024</span>)</span><br><span class="line">print(<span class="string">u"网卡接收流量 %s 网卡发送流量 %s"</span> % (bytes_rcvd, bytes_sent))</span><br><span class="line"></span><br><span class="line">io = psutil.disk_partitions()</span><br><span class="line"><span class="comment"># print(io)</span></span><br><span class="line"><span class="comment"># print("io[-1]为",io[-1])</span></span><br><span class="line"><span class="comment">#del io[-1]</span></span><br><span class="line"></span><br><span class="line">print(<span class="string">'-----------------------------磁盘信息---------------------------------------'</span>)</span><br><span class="line"></span><br><span class="line">print(<span class="string">"系统磁盘信息："</span> + str(io))</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> io:</span><br><span class="line">    o = psutil.disk_usage(i.device)</span><br><span class="line">    print(<span class="string">"总容量："</span> + str(int(o.total / (<span class="number">1024.0</span> * <span class="number">1024.0</span> * <span class="number">1024.0</span>))) + <span class="string">"G"</span>)</span><br><span class="line">    print(<span class="string">"已用容量："</span> + str(int(o.used / (<span class="number">1024.0</span> * <span class="number">1024.0</span> * <span class="number">1024.0</span>))) + <span class="string">"G"</span>)</span><br><span class="line">    print(<span class="string">"可用容量："</span> + str(int(o.free / (<span class="number">1024.0</span> * <span class="number">1024.0</span> * <span class="number">1024.0</span>))) + <span class="string">"G"</span>)</span><br><span class="line"></span><br><span class="line">print(<span class="string">'-----------------------------进程信息-------------------------------------'</span>)</span><br><span class="line"><span class="comment"># 查看系统全部进程</span></span><br><span class="line"><span class="keyword">for</span> pnum <span class="keyword">in</span> psutil.pids():</span><br><span class="line">    p = psutil.Process(pnum)</span><br><span class="line">    print(<span class="string">u"进程名 %-20s  内存利用率 %-18s 进程状态 %-10s 创建时间 %-10s "</span> \</span><br><span class="line">    % (p.name(), p.memory_percent(), p.status(), p.create_time()))</span><br></pre></td></tr></table></figure>
-
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -3369,7 +3590,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">92</span>
+                  <span class="site-state-item-count">95</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -3380,7 +3601,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>

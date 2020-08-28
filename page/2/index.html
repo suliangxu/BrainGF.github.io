@@ -249,6 +249,463 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/08/Linux/Shell/Shell安装python(linux)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/05/08/Linux/Shell/Shell安装python(linux)/" itemprop="url">Shell安装python(linux)</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-05-08T16:59:21+08:00">
+                2020-05-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux-Shell/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux - Shell</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h3><p>安装python环境 3.7.7，因为 psutil包 的某些方法在3.8或更高版本失效，为保持原代码的可用性，安装3.7.7，并一起安装psutil包。</p>
+<p>对文件夹的要求：</p>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/Linux/Shell/Shell%E5%AE%89%E8%A3%85python(linux)/1.png" alt></p>
+<p><strong>三个文件必须在同一文件夹下。</strong></p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><p>代码如下：（要求有网的环境下）</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">"开始安装python环境"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">installFun</span></span>()&#123;</span><br><span class="line">  <span class="built_in">echo</span> <span class="string">"python3.7.x未安装，正在进行安装..."</span></span><br><span class="line">  yum install zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel gcc* make -y</span><br><span class="line">  tar -zxvf Python-3.7.7.tgz</span><br><span class="line">  <span class="built_in">cd</span> Python-3.7.7</span><br><span class="line">  ./configure prefix=/usr/<span class="built_in">local</span>/python3</span><br><span class="line">  make &amp;&amp; make install</span><br><span class="line">  rm /usr/bin/python</span><br><span class="line">  rm /usr/bin/pip</span><br><span class="line">  ln -s /usr/<span class="built_in">local</span>/python3/bin/python3 /usr/bin/python</span><br><span class="line">  ln -s /usr/<span class="built_in">local</span>/python3/bin/pip3 /usr/bin/pip</span><br><span class="line">  res=`python -V 2&gt;&amp;1`</span><br><span class="line">  <span class="built_in">echo</span> <span class="string">"python3.7.x已安装，版本为：<span class="variable">$res</span>"</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">res=`python -V 2&gt;&amp;1 | grep <span class="string">"Python 3.7."</span>`</span><br><span class="line"><span class="keyword">if</span> [ $? -eq 0 ]; <span class="keyword">then</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">"python3.7.x已安装，版本为：<span class="variable">$res</span>"</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">  installFun</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> ..</span><br><span class="line">rm -rf Python-3.7.7</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"查看pip3是否成功安装"</span></span><br><span class="line">res=`pip -V 2&gt;&amp;1`</span><br><span class="line"><span class="keyword">if</span> [ $? -eq 0 ]; <span class="keyword">then</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">"pip3正确配置"</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">"pip3配置..."</span></span><br><span class="line">  <span class="built_in">hash</span> pip</span><br><span class="line">  <span class="built_in">echo</span> <span class="string">"pip3已配置"</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"开始安装所需的第三方包：psutil"</span></span><br><span class="line">res=`pip list | grep <span class="string">"psutil"</span>`</span><br><span class="line"><span class="keyword">if</span> [ $? -eq 0 ]; <span class="keyword">then</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">"psutil已安装"</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">"psutil未安装，正在进行安装..."</span></span><br><span class="line">  tar -zxvf psutil-5.7.0.tar.gz</span><br><span class="line">  <span class="built_in">cd</span> psutil-5.7.0</span><br><span class="line">  python setup.py build</span><br><span class="line">  python setup.py install</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"><span class="built_in">cd</span> ..</span><br><span class="line">rm -rf psutil-5.7.0</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"安装完毕!"</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h3><p>某些语句的注释：</p>
+<h4 id="prefix"><a href="#prefix" class="headerlink" title="prefix"></a>prefix</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./configure prefix=/usr/<span class="built_in">local</span>/python3</span><br></pre></td></tr></table></figure>
+
+<p>./configure命令执行完毕之后创建一个文件creating Makefile，供下面的make命令使用 执行make install之后就会<strong>把程序安装到我们指定的目录中去</strong>。</p>
+<p>Configure是一个可执行脚本，它有很多选项，在待安装的源码路径下使用命令./configure –help输出详细的选项列表。其中 –prefix选项是配置安装的路径。</p>
+<p>如果不配置该选项，安装后可执行文件默认放在/usr /local/bin，库文件默认放在/usr/local/lib，配置文件默认放在/usr/local/etc，其它的资源文件放在/usr /local/share，比较凌乱。</p>
+<p>如果配置–prefix如：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./configure --prefix=/usr/<span class="built_in">local</span>/<span class="built_in">test</span></span><br></pre></td></tr></table></figure>
+
+<p>可以把所有资源文件放在/usr/local/test的路径中，不会杂乱。用了—prefix选项的另一个好处是卸载软件或移植软件。当某个安装的软件不再需要时，只须简单的删除该安装目录，就可以把软件卸载得干干净净；移植软件只需拷贝整个目录到另外一个机器即可（相同的操作系统）。</p>
+<p>当然要卸载程序，也可以在原来的make目录下用一次make uninstall，但前提是make文件指定过uninstall。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/08/go/Go程序监听并处理信号/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/05/08/go/Go程序监听并处理信号/" itemprop="url">Go程序监听并处理信号</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-05-08T16:48:19+08:00">
+                2020-05-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/go/" itemprop="url" rel="index">
+                    <span itemprop="name">go</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>当运行一个终端程序或守护(daemon)进程时，经常需要响应来自用户或系统的信号来实现诸如：退出/重启/清理(clean up) 等工作，又或者利用信号通知机制实现一些业务功能，如：更新缓存、发送通知…</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">   <span class="string">"fmt"</span></span><br><span class="line">   <span class="string">"os"</span></span><br><span class="line">   <span class="string">"os/signal"</span></span><br><span class="line">   <span class="string">"syscall"</span></span><br><span class="line">   <span class="string">"time"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> FILENAME = <span class="string">"go-example.txt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"></span><br><span class="line">   SignalHandler()</span><br><span class="line"></span><br><span class="line">   CreateFile()</span><br><span class="line"></span><br><span class="line">   <span class="keyword">for</span> &#123;</span><br><span class="line">      fmt.Println(<span class="string">"- Sleeping"</span>)</span><br><span class="line">      time.Sleep(<span class="number">10</span> * time.Second)</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//监听并处理信号</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">SignalHandler</span><span class="params">()</span></span> &#123;</span><br><span class="line">   c := <span class="built_in">make</span>(<span class="keyword">chan</span> os.Signal, <span class="number">2</span>)</span><br><span class="line">   signal.Notify(c, os.Interrupt, syscall.SIGTERM)</span><br><span class="line">   <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">      &lt;-c <span class="comment">//阻塞等待</span></span><br><span class="line">      DeleteFile() <span class="comment">//清理工作</span></span><br><span class="line">      os.Exit(<span class="number">0</span>)</span><br><span class="line">   &#125;()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//程序开始时创建一个文件，当退出程序时需要删除(clean up)该文件</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">CreateFile</span><span class="params">()</span></span> &#123;</span><br><span class="line">   fmt.Println(<span class="string">"- Create Out Example File"</span>)</span><br><span class="line">   file, _ := os.Create(FILENAME)</span><br><span class="line">   <span class="keyword">defer</span> file.Close()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//清理工作：删除文件</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">DeleteFile</span><span class="params">()</span></span> &#123;</span><br><span class="line">   fmt.Println(<span class="string">"- Run Clean Up - Delete Our Example File"</span>)</span><br><span class="line">   _ = os.Remove(FILENAME)</span><br><span class="line">   fmt.Println(<span class="string">"- Good bye!"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>执行结果输出如下：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ go run sigint.go</span><br><span class="line">- Create Out Example File</span><br><span class="line">- Sleeping</span><br><span class="line">- Ctrl+C pressed <span class="keyword">in</span> Terminal</span><br><span class="line">- Run Clean Up - Delete Our Example File</span><br><span class="line">- Good <span class="built_in">bye</span>!</span><br></pre></td></tr></table></figure>
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/08/go/Go语言复制文件/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/05/08/go/Go语言复制文件/" itemprop="url">Go语言复制文件</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-05-08T16:46:24+08:00">
+                2020-05-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/go/" itemprop="url" rel="index">
+                    <span itemprop="name">go</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>如果是大文件，我们可以使用<code>os包</code>，使用<code>os.Open()</code>和<code>os.Create()</code>都可以获取到文件句柄(文件指针)，然后通过文件句柄(文件指针)的<code>Read()</code>和<code>Write()</code>方法，按照字节读取和写入来实现复制文件的功能</p>
+<p>对于大文件，我们可以采用下面的方式：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"io"</span></span><br><span class="line">	<span class="string">"log"</span></span><br><span class="line">	<span class="string">"os"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">CopyFile</span><span class="params">(srcFileName <span class="keyword">string</span>, dstFileName <span class="keyword">string</span>)</span></span> &#123;</span><br><span class="line">	<span class="comment">//打开源文件</span></span><br><span class="line">	srcFile, err := os.Open(srcFileName)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		log.Fatalf(<span class="string">"源文件读取失败,原因是:%v\n"</span>, err)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">defer</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">		err = srcFile.Close()</span><br><span class="line">		<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">			log.Fatalf(<span class="string">"源文件关闭失败,原因是:%v\n"</span>, err)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;()</span><br><span class="line"></span><br><span class="line">	<span class="comment">//创建目标文件,稍后会向这个目标文件写入拷贝内容</span></span><br><span class="line">	distFile, err := os.Create(dstFileName)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		log.Fatalf(<span class="string">"目标文件创建失败,原因是:%v\n"</span>, err)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">defer</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">		err = distFile.Close()</span><br><span class="line">		<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">			log.Fatalf(<span class="string">"目标文件关闭失败,原因是:%v\n"</span>, err)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;()</span><br><span class="line">	<span class="comment">//定义指定长度的字节切片,每次最多读取指定长度</span></span><br><span class="line">	<span class="keyword">var</span> tmp = <span class="built_in">make</span>([]<span class="keyword">byte</span>, <span class="number">1024</span>*<span class="number">4</span>)</span><br><span class="line">	<span class="comment">//循环读取并写入</span></span><br><span class="line">	<span class="keyword">for</span> &#123;</span><br><span class="line">		n, err := srcFile.Read(tmp)</span><br><span class="line">		n, _ = distFile.Write(tmp[:n])</span><br><span class="line">		<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">			<span class="keyword">if</span> err == io.EOF &#123;<span class="comment">//读到了文件末尾,并且写入完毕,任务完成返回(关闭文件的操作由defer来完成)</span></span><br><span class="line">				<span class="keyword">return</span></span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				log.Fatalf(<span class="string">"拷贝过程中发生错误,错误原因为:%v\n"</span>, err)</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	CopyFile(<span class="string">"./worm.mp4"</span>, <span class="string">"./dist.mp4"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用io包的Copy方法也能实现文件复制功能：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"io"</span></span><br><span class="line">	<span class="string">"os"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">//自己编写一个函数，接收两个文件路径 srcFileName dstFileName</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">CopyFile</span><span class="params">(dstFileName <span class="keyword">string</span>, srcFileName <span class="keyword">string</span>)</span> <span class="params">(written <span class="keyword">int64</span>, err error)</span></span> &#123;</span><br><span class="line"></span><br><span class="line">	srcFile, err := os.Open(srcFileName)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Printf(<span class="string">"open file err = %v\n"</span>, err)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">defer</span> srcFile.Close()</span><br><span class="line"></span><br><span class="line">	<span class="comment">//打开dstFileName</span></span><br><span class="line"></span><br><span class="line">	dstFile, err := os.OpenFile(dstFileName, os.O_WRONLY | os.O_CREATE, <span class="number">0755</span>)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Printf(<span class="string">"open file err = %v\n"</span>, err)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">defer</span> dstFile.Close()</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> io.Copy(dstFile, srcFile)</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"></span><br><span class="line">	result, err := CopyFile(<span class="string">"./src/main/dst.png"</span>, <span class="string">"./src/main/file.png"</span>)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> err == <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">"拷贝成功!,拷贝的字节数为: "</span>, result)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>还可以使用下面的方法：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"bufio"</span></span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"io"</span></span><br><span class="line">	<span class="string">"os"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">//自己编写一个函数，接收两个文件路径 srcFileName dstFileName</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">CopyFile</span><span class="params">(dstFileName <span class="keyword">string</span>, srcFileName <span class="keyword">string</span>)</span> <span class="params">(written <span class="keyword">int64</span>, err error)</span></span> &#123;</span><br><span class="line"></span><br><span class="line">	srcFile, err := os.Open(srcFileName)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Printf(<span class="string">"open file err = %v\n"</span>, err)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">defer</span> srcFile.Close()</span><br><span class="line"></span><br><span class="line">	<span class="comment">//通过srcFile，获取到Reader</span></span><br><span class="line">	reader := bufio.NewReader(srcFile)</span><br><span class="line"></span><br><span class="line">	<span class="comment">//打开dstFileName</span></span><br><span class="line">	dstFile, err := os.OpenFile(dstFileName, os.O_WRONLY | os.O_CREATE, <span class="number">0666</span>)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Printf(<span class="string">"open file err = %v\n"</span>, err)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	writer := bufio.NewWriter(dstFile)</span><br><span class="line">	<span class="keyword">defer</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">		writer.Flush() <span class="comment">//把缓冲区的内容写入到文件</span></span><br><span class="line">		dstFile.Close()</span><br><span class="line"></span><br><span class="line">	&#125;()</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> io.Copy(writer, reader)</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"></span><br><span class="line">	result, err := CopyFile(<span class="string">"./src/main/dst.png"</span>, <span class="string">"./src/main/file.png"</span>)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> err == <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">"拷贝成功!拷贝的字节大写为: "</span>, result)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/08/go/Go语言os包操作/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1662,649 +2119,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/01/随笔/将本地项目上传gitlab/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/05/01/随笔/将本地项目上传gitlab/" itemprop="url">将本地项目上传gitlab</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-05-01T15:09:29+08:00">
-                2020-05-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/随笔/" itemprop="url" rel="index">
-                    <span itemprop="name">随笔</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="一、安装-git"><a href="#一、安装-git" class="headerlink" title="一、安装 git"></a>一、安装 git</h3><p><a href="https://git-scm.com/downloads" target="_blank" rel="noopener">https://git-scm.com/downloads</a></p>
-<h3 id="二、新建工程"><a href="#二、新建工程" class="headerlink" title="二、新建工程"></a>二、新建工程</h3><p><strong>若gitlab端已经有工程，则跳过此步骤</strong></p>
-<h4 id="1、步骤一"><a href="#1、步骤一" class="headerlink" title="1、步骤一"></a>1、步骤一</h4><p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/%E9%9A%8F%E7%AC%94/%E5%B0%86%E6%9C%AC%E5%9C%B0%E9%A1%B9%E7%9B%AE%E4%B8%8A%E4%BC%A0gitlab/1.png" alt></p>
-<h4 id="2、步骤二"><a href="#2、步骤二" class="headerlink" title="2、步骤二"></a>2、步骤二</h4><p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/%E9%9A%8F%E7%AC%94/%E5%B0%86%E6%9C%AC%E5%9C%B0%E9%A1%B9%E7%9B%AE%E4%B8%8A%E4%BC%A0gitlab/2.png" alt></p>
-<h4 id="3、创建分支（可选）"><a href="#3、创建分支（可选）" class="headerlink" title="3、创建分支（可选）"></a>3、创建分支（可选）</h4><p>可以选择不创建分支，则默认为 <strong>master</strong> 。</p>
-<p>此处作者创建分支 <strong>dev</strong> 。</p>
-<h3 id="三、创建密钥"><a href="#三、创建密钥" class="headerlink" title="三、创建密钥"></a>三、创建密钥</h3><p><strong>若己经绑定密钥则可以跳过此步骤</strong></p>
-<h4 id="1、进入bash环境"><a href="#1、进入bash环境" class="headerlink" title="1、进入bash环境"></a>1、进入bash环境</h4><p>选中文件夹，右键</p>
-<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/%E9%9A%8F%E7%AC%94/%E5%B0%86%E6%9C%AC%E5%9C%B0%E9%A1%B9%E7%9B%AE%E4%B8%8A%E4%BC%A0gitlab/3.png" alt></p>
-<h4 id="2、创建-ssh文件夹"><a href="#2、创建-ssh文件夹" class="headerlink" title="2、创建.ssh文件夹"></a>2、创建.ssh文件夹</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd ~/.ssh/</span><br></pre></td></tr></table></figure>
-
-<p>如果提示 “ No such file or directory”，你可以手动的创建一个 .ssh文件夹即可：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir ~/.ssh</span><br></pre></td></tr></table></figure>
-
-<h4 id="3、配置全局name和email"><a href="#3、配置全局name和email" class="headerlink" title="3、配置全局name和email"></a>3、配置全局name和email</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name <span class="string">"your name"</span></span><br><span class="line">git config --global user.email <span class="string">"your email"</span></span><br></pre></td></tr></table></figure>
-
-<p>此处的信息可以参照创建的工程 Git global setup</p>
-<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/%E9%9A%8F%E7%AC%94/%E5%B0%86%E6%9C%AC%E5%9C%B0%E9%A1%B9%E7%9B%AE%E4%B8%8A%E4%BC%A0gitlab/4.png" alt></p>
-<h4 id="4、生成key"><a href="#4、生成key" class="headerlink" title="4、生成key"></a>4、生成key</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">"your email"</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/%E9%9A%8F%E7%AC%94/%E5%B0%86%E6%9C%AC%E5%9C%B0%E9%A1%B9%E7%9B%AE%E4%B8%8A%E4%BC%A0gitlab/5.png" alt></p>
-<h4 id="5、创建密钥"><a href="#5、创建密钥" class="headerlink" title="5、创建密钥"></a>5、创建密钥</h4><p>上面步骤会生成两个文件：id_rsa和id_rsa.pub</p>
-<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/%E9%9A%8F%E7%AC%94/%E5%B0%86%E6%9C%AC%E5%9C%B0%E9%A1%B9%E7%9B%AE%E4%B8%8A%E4%BC%A0gitlab/6.png" alt></p>
-<p>把id_rsa.pub里的内容粘贴到gitlab密钥中</p>
-<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/%E9%9A%8F%E7%AC%94/%E5%B0%86%E6%9C%AC%E5%9C%B0%E9%A1%B9%E7%9B%AE%E4%B8%8A%E4%BC%A0gitlab/7.png" alt></p>
-<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/%E9%9A%8F%E7%AC%94/%E5%B0%86%E6%9C%AC%E5%9C%B0%E9%A1%B9%E7%9B%AE%E4%B8%8A%E4%BC%A0gitlab/8.png" alt></p>
-<p>密钥创建成功</p>
-<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/%E9%9A%8F%E7%AC%94/%E5%B0%86%E6%9C%AC%E5%9C%B0%E9%A1%B9%E7%9B%AE%E4%B8%8A%E4%BC%A0gitlab/9.png" alt></p>
-<h3 id="四、上传项目"><a href="#四、上传项目" class="headerlink" title="四、上传项目"></a>四、上传项目</h3><h4 id="1、进入bash环境-1"><a href="#1、进入bash环境-1" class="headerlink" title="1、进入bash环境"></a>1、进入bash环境</h4><p>选中文件夹，右键  git bash here</p>
-<h4 id="2、克隆远程仓库"><a href="#2、克隆远程仓库" class="headerlink" title="2、克隆远程仓库"></a>2、克隆远程仓库</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> xx@xxxxxx.git</span><br></pre></td></tr></table></figure>
-
-<p>连接远程仓库，<code>xx@xxxxxx.git</code> 为gitlab上project的地址-</p>
-<h4 id="3、创建分支（可选）-1"><a href="#3、创建分支（可选）-1" class="headerlink" title="3、创建分支（可选）"></a>3、创建分支（可选）</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git branch &lt;分支名&gt;    <span class="comment"># 新建分支</span></span><br><span class="line">git checkout &lt;分支名&gt;  <span class="comment"># 切换到新建分支</span></span><br><span class="line">git branch -a         <span class="comment"># 查看当前的所有分支</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="4、代码合并"><a href="#4、代码合并" class="headerlink" title="4、代码合并"></a>4、代码合并</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull --rebase origin &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
-
-<h4 id="5、上传"><a href="#5、上传" class="headerlink" title="5、上传"></a>5、上传</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br><span class="line">git status   <span class="comment"># 查看当前状态</span></span><br><span class="line">git commit -m <span class="string">"Info"</span></span><br><span class="line">git push -u origin &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/25/go/系统班/基础/map/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/03/25/go/系统班/基础/map/" itemprop="url">map</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-03-25T15:28:34+08:00">
-                2020-03-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/go-系统班-基础/" itemprop="url" rel="index">
-                    <span itemprop="name">go - 系统班 - 基础</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>map是一种无序的基于<code>key-value</code>的数据结构，Go语言中的map是引用类型，必须初始化才能使用。</p>
-<h3 id="一、map定义"><a href="#一、map定义" class="headerlink" title="一、map定义"></a>一、map定义</h3><p>Go语言中 <code>map</code>的定义语法如下：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">map</span>[KeyType]ValueType</span><br></pre></td></tr></table></figure>
-
-<p>其中，</p>
-<ul>
-<li>KeyType:表示键的类型。</li>
-<li>ValueType:表示键对应的值的类型。</li>
-</ul>
-<p>map类型的变量默认初始值为nil，需要使用make()函数来分配内存。语法为：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">make</span>(<span class="keyword">map</span>[KeyType]ValueType, [<span class="built_in">cap</span>])</span><br></pre></td></tr></table></figure>
-
-<p>其中cap表示map的容量，该参数虽然不是必须的，但是我们应该在初始化map的时候就为其指定一个合适的容量。</p>
-<h3 id="二、map基本使用"><a href="#二、map基本使用" class="headerlink" title="二、map基本使用"></a>二、map基本使用</h3><h4 id="1、获取元素"><a href="#1、获取元素" class="headerlink" title="1、获取元素"></a>1、获取元素</h4><p>map中的数据都是成对出现的，map的基本使用示例代码如下：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	scoreMap := <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">int</span>, <span class="number">8</span>)</span><br><span class="line">	scoreMap[<span class="string">"张三"</span>] = <span class="number">90</span></span><br><span class="line">	scoreMap[<span class="string">"小明"</span>] = <span class="number">100</span></span><br><span class="line">	fmt.Println(scoreMap)</span><br><span class="line">	fmt.Println(scoreMap[<span class="string">"小明"</span>])</span><br><span class="line">	fmt.Printf(<span class="string">"type of a:%T\n"</span>, scoreMap)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>输出：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">map[小明:100 张三:90]</span><br><span class="line">100</span><br><span class="line"><span class="built_in">type</span> of a:map[string]int</span><br></pre></td></tr></table></figure>
-
-<p>map也支持在声明的时候填充元素，例如：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	userInfo := <span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">string</span>&#123;</span><br><span class="line">		<span class="string">"username"</span>: <span class="string">"沙河小王子"</span>,</span><br><span class="line">		<span class="string">"password"</span>: <span class="string">"123456"</span>,</span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(userInfo) <span class="comment">//</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="2、判断某个键是否存在"><a href="#2、判断某个键是否存在" class="headerlink" title="2、判断某个键是否存在"></a>2、判断某个键是否存在</h4><p>Go语言中有个判断map中键是否存在的特殊写法，格式如下:</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">value, ok := <span class="keyword">map</span>[key]</span><br></pre></td></tr></table></figure>
-
-<p>举个例子：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	scoreMap := <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">int</span>)</span><br><span class="line">	scoreMap[<span class="string">"张三"</span>] = <span class="number">90</span></span><br><span class="line">	scoreMap[<span class="string">"小明"</span>] = <span class="number">100</span></span><br><span class="line">	<span class="comment">// 如果key存在ok为true,v为对应的值；不存在ok为false,v为值类型的零值</span></span><br><span class="line">	v, ok := scoreMap[<span class="string">"张三"</span>]</span><br><span class="line">	<span class="keyword">if</span> ok &#123;</span><br><span class="line">		fmt.Println(v)</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">"查无此人"</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="3、遍历"><a href="#3、遍历" class="headerlink" title="3、遍历"></a>3、遍历</h4><p>Go语言中使用<code>for range</code>遍历map。</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	scoreMap := <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">int</span>)</span><br><span class="line">	scoreMap[<span class="string">"张三"</span>] = <span class="number">90</span></span><br><span class="line">	scoreMap[<span class="string">"小明"</span>] = <span class="number">100</span></span><br><span class="line">	scoreMap[<span class="string">"娜扎"</span>] = <span class="number">60</span></span><br><span class="line">	<span class="keyword">for</span> k, v := <span class="keyword">range</span> scoreMap &#123;</span><br><span class="line">		fmt.Println(k, v)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>但我们只想遍历key的时候，可以按下面的写法：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	scoreMap := <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">int</span>)</span><br><span class="line">	scoreMap[<span class="string">"张三"</span>] = <span class="number">90</span></span><br><span class="line">	scoreMap[<span class="string">"小明"</span>] = <span class="number">100</span></span><br><span class="line">	scoreMap[<span class="string">"娜扎"</span>] = <span class="number">60</span></span><br><span class="line">	<span class="keyword">for</span> k := <span class="keyword">range</span> scoreMap &#123;</span><br><span class="line">		fmt.Println(k)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>注意：</strong> 遍历map时的元素顺序与添加键值对的顺序无关。</p>
-<h4 id="4、删除键值对"><a href="#4、删除键值对" class="headerlink" title="4、删除键值对"></a>4、删除键值对</h4><p>使用<code>delete()</code>内建函数从map中删除一组键值对，<code>delete()</code>函数的格式如下：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">delete</span>(<span class="keyword">map</span>, key)</span><br></pre></td></tr></table></figure>
-
-<p>其中，</p>
-<ul>
-<li>map:表示要删除键值对的map</li>
-<li>key:表示要删除的键值对的键</li>
-</ul>
-<p>示例代码如下：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	scoreMap := <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">int</span>)</span><br><span class="line">	scoreMap[<span class="string">"张三"</span>] = <span class="number">90</span></span><br><span class="line">	scoreMap[<span class="string">"小明"</span>] = <span class="number">100</span></span><br><span class="line">	scoreMap[<span class="string">"娜扎"</span>] = <span class="number">60</span></span><br><span class="line">	<span class="built_in">delete</span>(scoreMap, <span class="string">"小明"</span>)<span class="comment">//将小明:100从map中删除</span></span><br><span class="line">	<span class="keyword">for</span> k,v := <span class="keyword">range</span> scoreMap&#123;</span><br><span class="line">		fmt.Println(k, v)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="5、按照指定顺序遍历map"><a href="#5、按照指定顺序遍历map" class="headerlink" title="5、按照指定顺序遍历map"></a>5、按照指定顺序遍历map</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	rand.Seed(time.Now().UnixNano()) <span class="comment">//初始化随机数种子</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">var</span> scoreMap = <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">int</span>, <span class="number">200</span>)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">100</span>; i++ &#123;</span><br><span class="line">		key := fmt.Sprintf(<span class="string">"stu%02d"</span>, i) <span class="comment">//生成stu开头的字符串</span></span><br><span class="line">		value := rand.Intn(<span class="number">100</span>)          <span class="comment">//生成0~99的随机整数</span></span><br><span class="line">		scoreMap[key] = value</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//取出map中的所有key存入切片keys</span></span><br><span class="line">	<span class="keyword">var</span> keys = <span class="built_in">make</span>([]<span class="keyword">string</span>, <span class="number">0</span>, <span class="number">200</span>)</span><br><span class="line">	<span class="keyword">for</span> key := <span class="keyword">range</span> scoreMap &#123;</span><br><span class="line">		keys = <span class="built_in">append</span>(keys, key)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//对切片进行排序</span></span><br><span class="line">	sort.Strings(keys)</span><br><span class="line">	<span class="comment">//按照排序后的key遍历map</span></span><br><span class="line">	<span class="keyword">for</span> _, key := <span class="keyword">range</span> keys &#123;</span><br><span class="line">		fmt.Println(key, scoreMap[key])</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="6、元素为map类型的切片"><a href="#6、元素为map类型的切片" class="headerlink" title="6、元素为map类型的切片"></a>6、元素为map类型的切片</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> mapSlice = <span class="built_in">make</span>([]<span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">int</span>, <span class="number">8</span>, <span class="number">8</span>)   <span class="comment">// 完成了切片的初始化</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">//mapSlice[0]["沙河小王子"] = 100   // Wrong，未完成map的初始化</span></span><br><span class="line"></span><br><span class="line">	mapSlice[<span class="number">0</span>] = <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">int</span>, <span class="number">8</span>)   <span class="comment">// 完成了map的初始化</span></span><br><span class="line">	mapSlice[<span class="number">0</span>][<span class="string">"沙河小王子"</span>] = <span class="number">100</span></span><br><span class="line"></span><br><span class="line">	fmt.Println(mapSlice)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="7、值为切片类型的map"><a href="#7、值为切片类型的map" class="headerlink" title="7、值为切片类型的map"></a>7、值为切片类型的map</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> sliceMap = <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">string</span>][]<span class="keyword">int</span>, <span class="number">8</span>)  <span class="comment">// 只完成map的初始化</span></span><br><span class="line">	v, ok := sliceMap[<span class="string">"中国"</span>]</span><br><span class="line">	<span class="keyword">if</span> ok&#123;</span><br><span class="line">		fmt.Println(v)</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		sliceMap[<span class="string">"中国"</span>] = <span class="built_in">make</span>([]<span class="keyword">int</span>, <span class="number">8</span>)  <span class="comment">// 完成了对切片的初始化</span></span><br><span class="line">		sliceMap[<span class="string">"中国"</span>][<span class="number">0</span>] = <span class="number">100</span></span><br><span class="line">		sliceMap[<span class="string">"中国"</span>][<span class="number">1</span>] = <span class="number">200</span></span><br><span class="line">		sliceMap[<span class="string">"中国"</span>][<span class="number">3</span>] = <span class="number">300</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> k, v := <span class="keyword">range</span> sliceMap&#123;</span><br><span class="line">		fmt.Println(k, v)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/25/go/系统班/基础/切片/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/03/25/go/系统班/基础/切片/" itemprop="url">切片</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-03-25T15:22:47+08:00">
-                2020-03-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/go-系统班-基础/" itemprop="url" rel="index">
-                    <span itemprop="name">go - 系统班 - 基础</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="零、引子"><a href="#零、引子" class="headerlink" title="零、引子"></a>零、引子</h3><p>因为数组的长度是固定的并且数组长度属于类型的一部分，所以数组有很多的局限性。 例如：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">arraySum</span><span class="params">(x [3]<span class="keyword">int</span>)</span> <span class="title">int</span></span>&#123;</span><br><span class="line">    sum := <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> _, v := <span class="keyword">range</span> x&#123;</span><br><span class="line">        sum = sum + v</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sum</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这个求和函数只能接受<code>[3]int</code>类型，其他的都不支持。 再比如，</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a := [<span class="number">3</span>]<span class="keyword">int</span>&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;</span><br></pre></td></tr></table></figure>
-
-<p>数组a中已经有三个元素了，我们不能再继续往数组a中添加新元素了。</p>
-<h3 id="一、切片的定义"><a href="#一、切片的定义" class="headerlink" title="一、切片的定义"></a>一、切片的定义</h3><p>切片（Slice）是一个拥有相同类型元素的可变长度的序列。它是基于数组类型做的一层封装。它非常灵活，支持自动扩容。</p>
-<p>切片是一个引用类型，它的内部结构包含<code>地址</code>、<code>长度</code>和<code>容量</code>。切片一般用于快速地操作一块数据集合。</p>
-<p>声明切片类型的基本语法如下：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name []T</span><br></pre></td></tr></table></figure>
-
-<p>其中，</p>
-<ul>
-<li>name:表示变量名</li>
-<li>T:表示切片中的元素类型</li>
-</ul>
-<p>举个例子：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// 声明切片类型</span></span><br><span class="line">	<span class="keyword">var</span> a []<span class="keyword">string</span>              <span class="comment">//声明一个字符串切片</span></span><br><span class="line">	<span class="keyword">var</span> b = []<span class="keyword">int</span>&#123;&#125;             <span class="comment">//声明一个整型切片并初始化</span></span><br><span class="line">	<span class="keyword">var</span> c = []<span class="keyword">bool</span>&#123;<span class="literal">false</span>, <span class="literal">true</span>&#125; <span class="comment">//声明一个布尔切片并初始化</span></span><br><span class="line">	<span class="keyword">var</span> d = []<span class="keyword">bool</span>&#123;<span class="literal">false</span>, <span class="literal">true</span>&#125; <span class="comment">//声明一个布尔切片并初始化</span></span><br><span class="line">	fmt.Println(a)              <span class="comment">//[]</span></span><br><span class="line">	fmt.Println(b)              <span class="comment">//[]</span></span><br><span class="line">	fmt.Println(c)              <span class="comment">//[false true]</span></span><br><span class="line">	fmt.Println(a == <span class="literal">nil</span>)       <span class="comment">//true</span></span><br><span class="line">	fmt.Println(b == <span class="literal">nil</span>)       <span class="comment">//false</span></span><br><span class="line">	fmt.Println(c == <span class="literal">nil</span>)       <span class="comment">//false</span></span><br><span class="line">	<span class="comment">// fmt.Println(c == d)   //切片是引用类型，不支持直接比较，只能和nil比较</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="切片的长度和容量"><a href="#切片的长度和容量" class="headerlink" title="切片的长度和容量"></a>切片的长度和容量</h4><p>切片拥有自己的长度和容量，我们可以通过使用内置的<code>len()</code>函数求长度，使用内置的<code>cap()</code>函数求切片的容量。</p>
-<h3 id="二、切片表达式"><a href="#二、切片表达式" class="headerlink" title="二、切片表达式"></a>二、切片表达式</h3><p>切片表达式从字符串、数组、指向数组或切片的指针构造子字符串或切片。它有两种变体：一种指定low和high两个索引界限值的简单的形式，另一种是除了low和high索引界限值外还指定容量的完整的形式。</p>
-<h4 id="1、简单的切片表达式"><a href="#1、简单的切片表达式" class="headerlink" title="1、简单的切片表达式"></a>1、简单的切片表达式</h4><p>切片的底层就是一个数组，所以我们可以基于数组通过切片表达式得到切片。 切片表达式中的<code>low</code>和<code>high</code>表示一个索引范围（左包含，又不包含），也就是下面代码中从数组a中选出<code>1&lt;=索引值&lt;4</code>的元素组成切片s，得到的切片<code>长度=high-low</code>，容量等于得到的切片的底层数组的容量。</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	a := [<span class="number">5</span>]<span class="keyword">int</span>&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>&#125;</span><br><span class="line">	s := a[<span class="number">1</span>:<span class="number">3</span>]  <span class="comment">// s := a[low:high]</span></span><br><span class="line">	fmt.Printf(<span class="string">"s:%v len(s):%v cap(s):%v\n"</span>, s, <span class="built_in">len</span>(s), <span class="built_in">cap</span>(s))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>输出：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s:[2 3] len(s):2 <span class="built_in">cap</span>(s):4</span><br></pre></td></tr></table></figure>
-
-<p>为了方便起见，可以省略切片表达式中的任何索引。省略了<code>low</code>则默认为0；省略了<code>high</code>则默认为切片操作数的长度:</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a[<span class="number">2</span>:]  <span class="comment">// 等同于 a[2:len(a)]</span></span><br><span class="line">a[:<span class="number">3</span>]  <span class="comment">// 等同于 a[0:3]</span></span><br><span class="line">a[:]   <span class="comment">// 等同于 a[0:len(a)]</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>注意：</strong></p>
-<p>对于数组或字符串，如果<code>0 &lt;= low &lt;= high &lt;= len(a)</code>，则索引合法，否则就会索引越界（out of range）。</p>
-<p>对切片再执行切片表达式时（切片再切片），<code>high</code>的上限边界是切片的容量<code>cap(a)</code>，而不是长度。<strong>常量索引</strong>必须是非负的，并且可以用int类型的值表示;对于数组或常量字符串，常量索引也必须在有效范围内。如果<code>low</code>和<code>high</code>两个指标都是常数，它们必须满足<code>low &lt;= high</code>。如果索引在运行时超出范围，就会发生运行时<code>panic</code>。</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	a := [<span class="number">5</span>]<span class="keyword">int</span>&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>&#125;</span><br><span class="line">	s := a[<span class="number">1</span>:<span class="number">3</span>]  <span class="comment">// s := a[low:high]</span></span><br><span class="line">	fmt.Printf(<span class="string">"s:%v len(s):%v cap(s):%v\n"</span>, s, <span class="built_in">len</span>(s), <span class="built_in">cap</span>(s))</span><br><span class="line">	s2 := s[<span class="number">3</span>:<span class="number">4</span>]  <span class="comment">// 索引的上限是cap(s)而不是len(s)</span></span><br><span class="line">	fmt.Printf(<span class="string">"s2:%v len(s2):%v cap(s2):%v\n"</span>, s2, <span class="built_in">len</span>(s2), <span class="built_in">cap</span>(s2))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>输出：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s:[2 3] len(s):2 <span class="built_in">cap</span>(s):4</span><br><span class="line">s2:[5] len(s2):1 <span class="built_in">cap</span>(s2):1</span><br></pre></td></tr></table></figure>
-
-<h4 id="2、完整切片表达式"><a href="#2、完整切片表达式" class="headerlink" title="2、完整切片表达式"></a>2、完整切片表达式</h4><p>对于数组，指向数组的指针，或切片a(<strong>注意不能是字符串</strong>)支持完整切片表达式：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a[low : high : max]</span><br></pre></td></tr></table></figure>
-
-<p>上面的代码会构造与简单切片表达式<code>a[low: high]</code>相同类型、相同长度和元素的切片。另外，它会将得到的结果切片的容量设置为<code>max-low</code>。在完整切片表达式中只有第一个索引值（low）可以省略；它默认为0。</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	a := [<span class="number">5</span>]<span class="keyword">int</span>&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>&#125;</span><br><span class="line">	t := a[<span class="number">1</span>:<span class="number">3</span>:<span class="number">5</span>]</span><br><span class="line">	fmt.Printf(<span class="string">"t:%v len(t):%v cap(t):%v\n"</span>, t, <span class="built_in">len</span>(t), <span class="built_in">cap</span>(t))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>输出结果：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">t:[2 3] len(t):2 <span class="built_in">cap</span>(t):4</span><br></pre></td></tr></table></figure>
-
-<p>完整切片表达式需要满足的条件是<code>0 &lt;= low &lt;= high &lt;= max &lt;= cap(a)</code>，其他条件和简单切片表达式相同。</p>
-<h4 id="3、使用-make-函数构造切片"><a href="#3、使用-make-函数构造切片" class="headerlink" title="3、使用 make() 函数构造切片"></a>3、使用 make() 函数构造切片</h4><p>我们上面都是基于数组来创建的切片，如果需要动态的创建一个切片，我们就需要使用内置的<code>make()</code>函数，格式如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make([]T, size, <span class="built_in">cap</span>)</span><br></pre></td></tr></table></figure>
-
-<p>其中：</p>
-<ul>
-<li>T:切片的元素类型</li>
-<li>size:切片中元素的数量</li>
-<li>cap:切片的容量</li>
-</ul>
-<p>举个例子：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	a := <span class="built_in">make</span>([]<span class="keyword">int</span>, <span class="number">2</span>, <span class="number">10</span>)</span><br><span class="line">	fmt.Println(a)      <span class="comment">//[0 0]</span></span><br><span class="line">	fmt.Println(<span class="built_in">len</span>(a)) <span class="comment">//2</span></span><br><span class="line">	fmt.Println(<span class="built_in">cap</span>(a)) <span class="comment">//10</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>上面代码中<code>a</code>的内部存储空间已经分配了10个，但实际上只用了2个。 容量并不会影响当前元素的个数，所以<code>len(a)</code>返回2，<code>cap(a)</code>则返回该切片的容量。</p>
-<h3 id="三、切片的本质"><a href="#三、切片的本质" class="headerlink" title="三、切片的本质"></a>三、切片的本质</h3><p>切片的本质就是对底层数组的封装，它包含了三个信息：底层数组的指针、切片的长度（len）和切片的容量（cap）。</p>
-<p>举个例子，现在有一个数组<code>a := [8]int{0, 1, 2, 3, 4, 5, 6, 7}</code>，切片<code>s1 := a[:5]</code>，相应示意图如下。</p>
-<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/go/%E5%9F%BA%E7%A1%80%E7%8F%AD/%E5%88%87%E7%89%87/slice_01.png" alt></p>
-<p>切片<code>s2 := a[3:6]</code>，相应示意图如下：</p>
-<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/go/%E5%9F%BA%E7%A1%80%E7%8F%AD/%E5%88%87%E7%89%87/slice_02.png" alt></p>
-<h3 id="四、相关操作"><a href="#四、相关操作" class="headerlink" title="四、相关操作"></a>四、相关操作</h3><h4 id="1、判断切片是否为空"><a href="#1、判断切片是否为空" class="headerlink" title="1、判断切片是否为空"></a>1、判断切片是否为空</h4><p>要检查切片是否为空，请始终使用<code>len(s) == 0</code>来判断，而不应该使用<code>s == nil</code>来判断。</p>
-<p><strong>切片之间是不能比较的</strong>，我们不能使用<code>==</code>操作符来判断两个切片是否含有全部相等元素。 切片唯一合法的比较操作是和<code>nil</code>比较。 一个<code>nil</code>值的切片并没有底层数组，一个<code>nil</code>值的切片的长度和容量都是0。但是我们不能说一个长度和容量都是0的切片一定是<code>nil</code>，例如下面的示例：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s1 []<span class="keyword">int</span>         <span class="comment">//len(s1)=0;cap(s1)=0;s1==nil</span></span><br><span class="line">s2 := []<span class="keyword">int</span>&#123;&#125;        <span class="comment">//len(s2)=0;cap(s2)=0;s2!=nil</span></span><br><span class="line">s3 := <span class="built_in">make</span>([]<span class="keyword">int</span>, <span class="number">0</span>) <span class="comment">//len(s3)=0;cap(s3)=0;s3!=nil</span></span><br></pre></td></tr></table></figure>
-
-<p>所以要判断一个切片是否是空的，要是用<code>len(s) == 0</code>来判断，不应该使用<code>s == nil</code>来判断。</p>
-<h4 id="2、切片的赋值拷贝"><a href="#2、切片的赋值拷贝" class="headerlink" title="2、切片的赋值拷贝"></a>2、切片的赋值拷贝</h4><p>下面的代码中演示了拷贝前后两个变量共享底层数组，对一个切片的修改会影响另一个切片的内容，这点需要特别注意。</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	s1 := <span class="built_in">make</span>([]<span class="keyword">int</span>, <span class="number">3</span>) <span class="comment">//[0 0 0]</span></span><br><span class="line">	s2 := s1             <span class="comment">//将s1直接赋值给s2，s1和s2共用一个底层数组</span></span><br><span class="line">	s2[<span class="number">0</span>] = <span class="number">100</span></span><br><span class="line">	fmt.Println(s1) <span class="comment">//[100 0 0]</span></span><br><span class="line">	fmt.Println(s2) <span class="comment">//[100 0 0]</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="3、切片遍历"><a href="#3、切片遍历" class="headerlink" title="3、切片遍历"></a>3、切片遍历</h4><p>切片的遍历方式和数组是一致的，支持索引遍历和<code>for range</code>遍历。</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	s := []<span class="keyword">int</span>&#123;<span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="built_in">len</span>(s); i++ &#123;</span><br><span class="line">		fmt.Println(i, s[i])</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> index, value := <span class="keyword">range</span> s &#123;</span><br><span class="line">		fmt.Println(index, value)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="4、添加元素"><a href="#4、添加元素" class="headerlink" title="4、添加元素"></a>4、添加元素</h4><p>Go语言的内建函数<code>append()</code>可以为切片动态添加元素。 可以一次添加一个元素，可以添加多个元素，也可以添加另一个切片中的元素（后面加…）。</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">var</span> s []<span class="keyword">int</span></span><br><span class="line">	s = <span class="built_in">append</span>(s, <span class="number">1</span>)        <span class="comment">// [1]</span></span><br><span class="line">	s = <span class="built_in">append</span>(s, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>)  <span class="comment">// [1 2 3 4]</span></span><br><span class="line">	s2 := []<span class="keyword">int</span>&#123;<span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>&#125;  </span><br><span class="line">	s = <span class="built_in">append</span>(s, s2...)    <span class="comment">// [1 2 3 4 5 6 7]</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>注意：</strong>通过var声明的零值切片可以在<code>append()</code>函数直接使用，无需初始化。</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s []<span class="keyword">int</span></span><br><span class="line">s = <span class="built_in">append</span>(s, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)</span><br></pre></td></tr></table></figure>
-
-<p>没有必要像下面的代码一样初始化一个切片再传入<code>append()</code>函数使用，</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">s := []<span class="keyword">int</span>&#123;&#125;  <span class="comment">// 没有必要初始化</span></span><br><span class="line">s = <span class="built_in">append</span>(s, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> s = <span class="built_in">make</span>([]<span class="keyword">int</span>)  <span class="comment">// 没有必要初始化</span></span><br><span class="line">s = <span class="built_in">append</span>(s, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)</span><br></pre></td></tr></table></figure>
-
-<p>每个切片会指向一个底层数组，这个数组的容量够用就添加新增元素。当底层数组不能容纳新增的元素时，切片就会自动按照一定的策略进行“扩容”，此时该切片指向的底层数组就会更换。“扩容”操作往往发生在<code>append()</code>函数调用时，所以我们通常都需要用原变量接收append函数的返回值。</p>
-<p>举个例子：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">//append()添加元素和切片扩容</span></span><br><span class="line">	<span class="keyword">var</span> numSlice []<span class="keyword">int</span></span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">10</span>; i++ &#123;</span><br><span class="line">		numSlice = <span class="built_in">append</span>(numSlice, i)</span><br><span class="line">		fmt.Printf(<span class="string">"%v  len:%d  cap:%d  ptr:%p\n"</span>, numSlice, <span class="built_in">len</span>(numSlice), <span class="built_in">cap</span>(numSlice), numSlice)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>输出：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[0]  len:1  <span class="built_in">cap</span>:1  ptr:0xc0000a8000</span><br><span class="line">[0 1]  len:2  <span class="built_in">cap</span>:2  ptr:0xc0000a8040</span><br><span class="line">[0 1 2]  len:3  <span class="built_in">cap</span>:4  ptr:0xc0000b2020</span><br><span class="line">[0 1 2 3]  len:4  <span class="built_in">cap</span>:4  ptr:0xc0000b2020</span><br><span class="line">[0 1 2 3 4]  len:5  <span class="built_in">cap</span>:8  ptr:0xc0000b6000</span><br><span class="line">[0 1 2 3 4 5]  len:6  <span class="built_in">cap</span>:8  ptr:0xc0000b6000</span><br><span class="line">[0 1 2 3 4 5 6]  len:7  <span class="built_in">cap</span>:8  ptr:0xc0000b6000</span><br><span class="line">[0 1 2 3 4 5 6 7]  len:8  <span class="built_in">cap</span>:8  ptr:0xc0000b6000</span><br><span class="line">[0 1 2 3 4 5 6 7 8]  len:9  <span class="built_in">cap</span>:16  ptr:0xc0000b8000</span><br><span class="line">[0 1 2 3 4 5 6 7 8 9]  len:10  <span class="built_in">cap</span>:16  ptr:0xc0000b8000</span><br></pre></td></tr></table></figure>
-
-<p>从上面的结果可以看出：</p>
-<ol>
-<li><code>append()</code>函数将元素追加到切片的最后并返回该切片。</li>
-<li>切片numSlice的容量按照1，2，4，8，16这样的规则自动进行扩容，每次扩容后都是扩容前的2倍。</li>
-</ol>
-<p>append()函数还支持一次性追加多个元素。 例如：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> citySlice []<span class="keyword">string</span></span><br><span class="line"><span class="comment">// 追加一个元素</span></span><br><span class="line">citySlice = <span class="built_in">append</span>(citySlice, <span class="string">"北京"</span>)</span><br><span class="line"><span class="comment">// 追加多个元素</span></span><br><span class="line">citySlice = <span class="built_in">append</span>(citySlice, <span class="string">"上海"</span>, <span class="string">"广州"</span>, <span class="string">"深圳"</span>)</span><br><span class="line"><span class="comment">// 追加切片</span></span><br><span class="line">a := []<span class="keyword">string</span>&#123;<span class="string">"成都"</span>, <span class="string">"重庆"</span>&#125;</span><br><span class="line">citySlice = <span class="built_in">append</span>(citySlice, a...)</span><br><span class="line">fmt.Println(citySlice) <span class="comment">//[北京 上海 广州 深圳 成都 重庆]</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="5、扩容策略"><a href="#5、扩容策略" class="headerlink" title="5、扩容策略"></a>5、扩容策略</h4><p>可以通过查看<code>$GOROOT/src/runtime/slice.go</code>源码，其中扩容相关代码如下：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">newcap := old.<span class="built_in">cap</span></span><br><span class="line">doublecap := newcap + newcap</span><br><span class="line"><span class="keyword">if</span> <span class="built_in">cap</span> &gt; doublecap &#123;</span><br><span class="line">	newcap = <span class="built_in">cap</span></span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">	<span class="keyword">if</span> old.<span class="built_in">len</span> &lt; <span class="number">1024</span> &#123;</span><br><span class="line">		newcap = doublecap</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="comment">// Check 0 &lt; newcap to detect overflow</span></span><br><span class="line">		<span class="comment">// and prevent an infinite loop.</span></span><br><span class="line">		<span class="keyword">for</span> <span class="number">0</span> &lt; newcap &amp;&amp; newcap &lt; <span class="built_in">cap</span> &#123;</span><br><span class="line">			newcap += newcap / <span class="number">4</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">// Set newcap to the requested cap when</span></span><br><span class="line">		<span class="comment">// the newcap calculation overflowed.</span></span><br><span class="line">		<span class="keyword">if</span> newcap &lt;= <span class="number">0</span> &#123;</span><br><span class="line">			newcap = <span class="built_in">cap</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>从上面的代码可以看出以下内容：</p>
-<ul>
-<li>首先判断，如果新申请容量（cap）大于2倍的旧容量（old.cap），最终容量（newcap）就是新申请的容量（cap）。</li>
-<li>否则判断，如果旧切片的长度小于1024，则最终容量(newcap)就是旧容量(old.cap)的两倍，即（newcap=doublecap），</li>
-<li>否则判断，如果旧切片长度大于等于1024，则最终容量（newcap）从旧容量（old.cap）开始循环增加原来的1/4，即（newcap=old.cap,for {newcap += newcap/4}）直到最终容量（newcap）大于等于新申请的容量(cap)，即（newcap &gt;= cap）</li>
-<li>如果最终容量（cap）计算值溢出，则最终容量（cap）就是新申请容量（cap）。</li>
-</ul>
-<p>需要注意的是，切片扩容还会根据切片中元素的类型不同而做不同的处理，比如<code>int</code>和<code>string</code>类型的处理方式就不一样。</p>
-<h4 id="6、copy-复制切片"><a href="#6、copy-复制切片" class="headerlink" title="6、copy() 复制切片"></a>6、copy() 复制切片</h4><p>首先我们来看一个问题：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	a := []<span class="keyword">int</span>&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>&#125;</span><br><span class="line">	b := a</span><br><span class="line">	fmt.Println(a) <span class="comment">//[1 2 3 4 5]</span></span><br><span class="line">	fmt.Println(b) <span class="comment">//[1 2 3 4 5]</span></span><br><span class="line">	b[<span class="number">0</span>] = <span class="number">1000</span></span><br><span class="line">	fmt.Println(a) <span class="comment">//[1000 2 3 4 5]</span></span><br><span class="line">	fmt.Println(b) <span class="comment">//[1000 2 3 4 5]</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>由于切片是引用类型，所以a和b其实都指向了同一块内存地址。修改b的同时a的值也会发生变化。</p>
-<p>Go语言内建的<code>copy()</code>函数可以迅速地将一个切片的数据复制到另外一个切片空间中，<code>copy()</code>函数的使用格式如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">copy(destSlice, srcSlice []T)</span><br></pre></td></tr></table></figure>
-
-<p>其中：</p>
-<ul>
-<li>srcSlice: 数据来源切片</li>
-<li>destSlice: 目标切片</li>
-</ul>
-<p>举个例子：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// copy()复制切片</span></span><br><span class="line">	a := []<span class="keyword">int</span>&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>&#125;</span><br><span class="line">	c := <span class="built_in">make</span>([]<span class="keyword">int</span>, <span class="number">5</span>, <span class="number">5</span>)</span><br><span class="line">	<span class="built_in">copy</span>(c, a)     <span class="comment">//使用copy()函数将切片a中的元素复制到切片c</span></span><br><span class="line">	fmt.Println(a) <span class="comment">//[1 2 3 4 5]</span></span><br><span class="line">	fmt.Println(c) <span class="comment">//[1 2 3 4 5]</span></span><br><span class="line">	c[<span class="number">0</span>] = <span class="number">1000</span></span><br><span class="line">	fmt.Println(a) <span class="comment">//[1 2 3 4 5]</span></span><br><span class="line">	fmt.Println(c) <span class="comment">//[1000 2 3 4 5]</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="7、删除元素"><a href="#7、删除元素" class="headerlink" title="7、删除元素"></a>7、删除元素</h4><p>Go语言中并没有删除切片元素的专用方法，我们可以使用切片本身的特性来删除元素。 代码如下：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// 从切片中删除元素</span></span><br><span class="line">	a := []<span class="keyword">int</span>&#123;<span class="number">30</span>, <span class="number">31</span>, <span class="number">32</span>, <span class="number">33</span>, <span class="number">34</span>, <span class="number">35</span>, <span class="number">36</span>, <span class="number">37</span>&#125;</span><br><span class="line">	<span class="comment">// 要删除索引为2的元素</span></span><br><span class="line">	a = <span class="built_in">append</span>(a[:<span class="number">2</span>], a[<span class="number">3</span>:]...)</span><br><span class="line">	fmt.Println(a) <span class="comment">//[30 31 33 34 35 36 37]</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>总结一下就是：要从切片a中删除索引为<code>index</code>的元素，操作方法是<code>a = append(a[:index], a[index+1:]...)</code></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2357,7 +2171,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">92</span>
+                  <span class="site-state-item-count">95</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -2368,7 +2182,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>

@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="1、查看版本1rpm -q centos-release  2、重启 reboot shutdown -r now       立即重启 shutdown -r 10         等待10min重启 shutdown -r 00:00   在00:00时刻重启  3、关机 halt poweroff    shutdown -h now    立即关机      shutdown -h 10">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-08-26T06:20:07.846Z">
+<meta property="og:updated_time" content="2020-08-27T06:18:36.310Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="centOS的基础操作汇总">
 <meta name="twitter:description" content="1、查看版本1rpm -q centos-release  2、重启 reboot shutdown -r now       立即重启 shutdown -r 10         等待10min重启 shutdown -r 00:00   在00:00时刻重启  3、关机 halt poweroff    shutdown -h now    立即关机      shutdown -h 10">
@@ -358,6 +358,10 @@
 </ol>
 <h4 id="4、查看端口情况"><a href="#4、查看端口情况" class="headerlink" title="4、查看端口情况"></a>4、查看端口情况</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -anp | grep 9090</span><br></pre></td></tr></table></figure>
 
+<h4 id="5、防火墙对外开放端口"><a href="#5、防火墙对外开放端口" class="headerlink" title="5、防火墙对外开放端口"></a>5、防火墙对外开放端口</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --zone=public --add-port=80/tcp --permanent</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --reload</span><br></pre></td></tr></table></figure>
+
 
       
     </div>
@@ -473,7 +477,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">92</span>
+                  <span class="site-state-item-count">95</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -484,7 +488,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -544,7 +548,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、查看版本"><span class="nav-text">1、查看版本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、重启"><span class="nav-text">2、重启</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、关机"><span class="nav-text">3、关机</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、查看端口情况"><span class="nav-text">4、查看端口情况</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、查看版本"><span class="nav-text">1、查看版本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、重启"><span class="nav-text">2、重启</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、关机"><span class="nav-text">3、关机</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、查看端口情况"><span class="nav-text">4、查看端口情况</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5、防火墙对外开放端口"><span class="nav-text">5、防火墙对外开放端口</span></a></li></ol></div>
             
 
           </div>
