@@ -249,6 +249,602 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/13/人工智能/机器学习基石/02_Learning-to-Answer-Yes_No/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/02/13/人工智能/机器学习基石/02_Learning-to-Answer-Yes_No/" itemprop="url">02_Learning to Answer Yes_No</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-02-13T16:21:27+08:00">
+                2020-02-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/人工智能-机器学习基石/" itemprop="url" rel="index">
+                    <span itemprop="name">人工智能 - 机器学习基石</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>![image-20200213123854013](/Users/hhh/Library/Application Support/typora-user-images/image-20200213123854013.png)</p>
+<p>从数据出发，机器学习数据，从所有的可能性H中，选出最适合的一个g，使得g无限接近f。</p>
+<p>![image-20200213124228686](/Users/hhh/Library/Application Support/typora-user-images/image-20200213124228686.png)</p>
+<p>perceptron：感知器</p>
+<p>w：权重</p>
+<p>threshold：阈值</p>
+<p>![image-20200213124822364](/Users/hhh/Library/Application Support/typora-user-images/image-20200213124822364.png)</p>
+<p>感知器在二位空间下：</p>
+<p>![image-20200213125141703](/Users/hhh/Library/Application Support/typora-user-images/image-20200213125141703.png)</p>
+<p>此时的感知器，就是线性的二分类模型。</p>
+<p>如何设计一个算法，从这么多的线中选出一条最适合的线？</p>
+<p>1、要求g和f在我们所看过的资料上，很接近：g ～ f on D</p>
+<p>2、难点：存在大量的线</p>
+<p>3、设计：已经存在一条线，然后对其进行修正，从而最终达到效果。（训练）</p>
+<p>用W0来代表一开始的线。</p>
+<p>![image-20200213125832963](/Users/hhh/Library/Application Support/typora-user-images/image-20200213125832963.png)</p>
+<p>找到这条线犯的错误的某一点，就是说这条线在这个点犯错，然后对其进行修正。</p>
+<p>1、每次只考虑一个点的更新</p>
+<p>2、从w和x的夹角来判断：</p>
+<p>若要正的，使得w和x接近一点，相反，若要负的，使得w和x离远一点。</p>
+<p>3、知道所有的输入都能够被正确分类，则得到最终的g。</p>
+<p><strong>知错能改算法</strong></p>
+<p>![image-20200213130238560](/Users/hhh/Library/Application Support/typora-user-images/image-20200213130238560.png)</p>
+<p>Cyclic PLA（循转的PLA，循环找到所有人，直到转完一圈）</p>
+<p>当然也可以选择随机跳转，但只要保证能够走完所有人。</p>
+<p>![image-20200213130340089](/Users/hhh/Library/Application Support/typora-user-images/image-20200213130340089.png)</p>
+<p>这个算法当所有的点都正确时，则会停止，那么，这个算法一定会停止吗？</p>
+<p>还有感知器算法的其他问题：</p>
+<p>![image-20200213131245432](/Users/hhh/Library/Application Support/typora-user-images/image-20200213131245432.png)</p>
+<p>PLA的停止：</p>
+<p>1、要求输入的数据要<strong>线性可分</strong>。</p>
+<p>若不满足线性可分，永远无法找到一条线，使得二者分开。</p>
+<p>![image-20200213132016693](/Users/hhh/Library/Application Support/typora-user-images/image-20200213132016693.png)</p>
+<p>使得 min（ynWTXn）——&gt; 离线最近的点都要大于0.</p>
+<p>假设得到最优的wf，那么wf和我们真正在找的wt的关系：</p>
+<p>可以认为判断wt和wf接不接近。</p>
+<p>可通过求内积的方法判断两个向量接不接近。</p>
+<p>若内积的值越大，某种角度来说，两个向量越接近。</p>
+<p>![image-20200213132748469](/Users/hhh/Library/Application Support/typora-user-images/image-20200213132748469.png)</p>
+<p>处理向量长度的问题：</p>
+<p>两个向量内积越大，不一定是角度的影响，也可能是向量长度的问题，长度越大，内积越大。</p>
+<p>原则：犯错才更新。</p>
+<p>可以得出：w(t+1) 每次最多涨最长的xn的平方。</p>
+<p>前面说到，wt和wf每次都会越来越靠近，每次都会靠近一定的份量。</p>
+<p>现在有表明，wt慢慢地涨。</p>
+<p>可以得出：两个向量的内积，真的就代表二者的角度。</p>
+<p>证明：李航统计学习方法P31，Novikoff定理。</p>
+<p>![image-20200213133835545](/Users/hhh/Library/Application Support/typora-user-images/image-20200213133835545.png)</p>
+<p>所以证明了这个PLA算法在线性可分时，一定会停下来。</p>
+<p>算法的好处：简单，快速</p>
+<p>坏处：数据要求线性可分。但我们并不知道数据是否真正线性可分。另外，就算认为线性可分，但是何时会停止？</p>
+<p>所以我们并不知道PLA是否会停，就算假设它会停，也不知道多久会停。</p>
+<p>所以PLA在实际应用的时候，还是会遇到一些问题的。</p>
+<p>![image-20200213134232636](/Users/hhh/Library/Application Support/typora-user-images/image-20200213134232636.png)</p>
+<p>如果非线性可分时。</p>
+<p>样本可能存在噪声（总体线性可分），所以如何在存在噪声的情况下找到那个最适合的分隔线。</p>
+<p>假设噪声是很小的。————&gt; 无法找到一条完美的线，那么我们就找到一条最好的线（就是找到犯错误最小的线在给定的输入下）</p>
+<p>现在在CS下，还是NP-hard问题，就是找不到一个算法来找到犯错最小的线。即：</p>
+<p>![image-20200213134828502](/Users/hhh/Library/Application Support/typora-user-images/image-20200213134828502.png)</p>
+<p>![image-20200213134906500](/Users/hhh/Library/Application Support/typora-user-images/image-20200213134906500.png)</p>
+<p>另一种算法，找到差不多的线，不见得是最完美的线。</p>
+<p>有一点贪心的做法。</p>
+<p>把我们认为最好的线总是抓在手上。</p>
+<p>Pocket Algorithm。</p>
+<p>每次找到一条新的线（随机的找）时，判断当前哪个好，然后选择。</p>
+<p>但是循环结束的条件要自己设置。（遍历次数自己设置）</p>
+<p>![image-20200213135150590](/Users/hhh/Library/Application Support/typora-user-images/image-20200213135150590.png)</p>
+<p>但是在线性可分的情况下，修正算法不如PLA来的快：</p>
+<p>1、修正算法需要对比，存储</p>
+<p>对比两条线，实际上是将所有的点进行两次计算。而PLA只是找到某一个错误的点，对其进行修正。所以修正算法来的比PLA慢，在线性可分的情况下。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/13/人工智能/机器学习基石/01_The-Learning-Problem/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/02/13/人工智能/机器学习基石/01_The-Learning-Problem/" itemprop="url">01_The Learning Problem</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-02-13T16:19:35+08:00">
+                2020-02-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/人工智能-机器学习基石/" itemprop="url" rel="index">
+                    <span itemprop="name">人工智能 - 机器学习基石</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p> 什么是机器学习</p>
+<p>学习（获得技巧）：从观察出发，经过脑子的转化，变成一个技巧。</p>
+<p>![image-20200212223353499](/Users/hhh/Library/Application Support/typora-user-images/image-20200212223353499.png)</p>
+<p>机器学习：从数据的积累来获得技巧</p>
+<p>![image-20200212223544399](/Users/hhh/Library/Application Support/typora-user-images/image-20200212223544399.png)</p>
+<p>什么是技巧？</p>
+<p> 某种表现的增进。（如预测的准确性）</p>
+<p>机器学习：</p>
+<p>从数据出发，经过电脑的计算之后，最终得到某一种表现的增进。</p>
+<p>Machin Learning:</p>
+<p>improving some preformace measure with experience computed from data.</p>
+<p>![image-20200212223753894](/Users/hhh/Library/Application Support/typora-user-images/image-20200212223753894.png)</p>
+<p>为什么使用机器学习？</p>
+<p>机器学习的应用：</p>
+<ul>
+<li>图像识别</li>
+</ul>
+<p>树的识别：</p>
+<p>1、树的定义使用程序很难实现</p>
+<p>2、从数据（观察）学习，然后进行识别</p>
+<p>3、让机器来学习，可能会比写出若干行的程序来说明如何识别一个树，来的更简单一些</p>
+<p>机器学习：让机器自己来学会、分析数据，来获得某种能力。</p>
+<p>（ML: an alternative route to build complicated systems）</p>
+<p>当人们在程序无法表达或形象的实现某个功能或无法无法制定规则时，机器学习不失为一种较好的选择。</p>
+<ol>
+<li>操纵机器人在火星的运行</li>
+<li>图像识别</li>
+<li>做预测</li>
+<li>个人化服务</li>
+</ol>
+<p>Give a computer a fish, you feed it for a day; teach it how to fish, you need it for a lifetime.</p>
+<p>机器学习的三个关键：（判断是否适合使用机器学习）</p>
+<p>1、存在潜藏的模式（有某些目标）</p>
+<p>如股市的目标：更准确。可能有某一种可以学的规则，机器可以从中学到。</p>
+<p>2、不知道如何将这个规则写下来</p>
+<p>3、有数据</p>
+<p>![image-20200212225350907](/Users/hhh/Library/Application Support/typora-user-images/image-20200212225350907.png)</p>
+<p>![image-20200212225402229](/Users/hhh/Library/Application Support/typora-user-images/image-20200212225402229.png)</p>
+<p>例子：</p>
+<p>银行是否给某个人信用卡？</p>
+<p>假如有以下几个信息：</p>
+<p>![image-20200212231550852](/Users/hhh/Library/Application Support/typora-user-images/image-20200212231550852.png)</p>
+<p>将该问题数学语言表达：</p>
+<p>![image-20200212231847914](/Users/hhh/Library/Application Support/typora-user-images/image-20200212231847914.png)</p>
+<p>![image-20200212231901828](/Users/hhh/Library/Application Support/typora-user-images/image-20200212231901828.png)</p>
+<p>![image-20200212232017940](/Users/hhh/Library/Application Support/typora-user-images/image-20200212232017940.png)</p>
+<p>g代表一种效能的增进（使得g和f越接近越好）</p>
+<p>f是未知的（若已知，可直接用程序写出算法）</p>
+<p>![image-20200212232355640](/Users/hhh/Library/Application Support/typora-user-images/image-20200212232355640.png)</p>
+<p>hypothesis set 假说的集合</p>
+<p>![image-20200212232410450](/Users/hhh/Library/Application Support/typora-user-images/image-20200212232410450.png)</p>
+<p>![image-20200212232506243](/Users/hhh/Library/Application Support/typora-user-images/image-20200212232506243.png)</p>
+<p>机器学习：从资料出发，算出一个假说g，要求g和f无限接近。</p>
+<p>机器学习和数据挖掘：</p>
+<p>机器学习，通过数据找出一个假说g，和目标f很接近</p>
+<p>数据挖掘，通过（大量的）数据来找到一些有趣的信息（暗含的有用信息）</p>
+<p>![image-20200212233051692](/Users/hhh/Library/Application Support/typora-user-images/image-20200212233051692.png)</p>
+<p>机器学习和数据挖掘：很像，但还是有区别的</p>
+<p>机器学习和人工智能：</p>
+<p>![image-20200212233315804](/Users/hhh/Library/Application Support/typora-user-images/image-20200212233315804.png)</p>
+<p>机器学习和统计学：</p>
+<p>![image-20200212233530402](/Users/hhh/Library/Application Support/typora-user-images/image-20200212233530402.png)</p>
+<p>总结：</p>
+<p>![image-20200212233733607](/Users/hhh/Library/Application Support/typora-user-images/image-20200212233733607.png)</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/11/python全栈/爬虫/01_爬虫入门之爬虫基础了解/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/02/11/python全栈/爬虫/01_爬虫入门之爬虫基础了解/" itemprop="url">02_爬虫入门之爬虫基础了解</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-02-11T13:16:31+08:00">
+                2020-02-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python全栈-爬虫/" itemprop="url" rel="index">
+                    <span itemprop="name">python全栈 - 爬虫</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="一、什么是爬虫"><a href="#一、什么是爬虫" class="headerlink" title="一、什么是爬虫"></a>一、什么是爬虫</h3><p>爬虫，即网络爬虫，大家可以理解为在网络上爬行的一只蜘蛛，互联网就比作一张大网，而爬虫便是在这张网上爬来爬去的蜘蛛，如果它遇到资源，那么他就会抓取下来。具体想抓取什么内容，这个由自己控制。</p>
+<h3 id="二、浏览网页的过程"><a href="#二、浏览网页的过程" class="headerlink" title="二、浏览网页的过程"></a>二、浏览网页的过程</h3><p>在用户浏览网页的过程中，我们可能会看到很多好看的图片，比如【<a href="http://novel.tanzhuovip.com/】，我们会看到几张的图片以及百度搜索框，这个过程其实就是用户输入网址之后，经过DNS服务器，找到服务器主机，向服务器发送一个请求，服务器经过解析之后，发送给用户的浏览器HTML、JS、CSS等文件，浏览器解析出来，用户便可以看到形形色色的图片了。" target="_blank" rel="noopener">http://novel.tanzhuovip.com/】，我们会看到几张的图片以及百度搜索框，这个过程其实就是用户输入网址之后，经过DNS服务器，找到服务器主机，向服务器发送一个请求，服务器经过解析之后，发送给用户的浏览器HTML、JS、CSS等文件，浏览器解析出来，用户便可以看到形形色色的图片了。</a></p>
+<p>因此，用户看到的网页实质是由HTML代码构成，爬虫便是这些内容，通过分析和过滤这些HTML代码，实现图片、文字等资源的获取。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">www.baidu.com</span><br><span class="line">1、本地host文件做解析</span><br><span class="line">2、本地路由</span><br><span class="line">3、DNS（域名解析服务器）</span><br><span class="line">4、百度服务器（服务器将源代码html发送至客户端，然后形成网页）</span><br><span class="line">5、到达请求的页面</span><br><span class="line"></span><br><span class="line">301  资源永久重定向</span><br><span class="line">302  资源临时重定向</span><br><span class="line">定向：跳转</span><br><span class="line">权重 SEO（搜索引擎优化）</span><br></pre></td></tr></table></figure>
+
+<h3 id="三、URL的含义"><a href="#三、URL的含义" class="headerlink" title="三、URL的含义"></a>三、URL的含义</h3><p>URL，即统一资源定位符，也就是我们说的网址，统一资源定位符是对可以从互联网上得到的资源的位置和访问方法的一种简洁的表示，是互联网上标准资源的地址。互联网上的每个文件都有一个唯一的URL，它包含的信息指出文件的位置以及浏览器该怎么处理它。</p>
+<p>URL的格式由三部分组成：</p>
+<ul>
+<li><p>第一部分是协议（或称为服务方式）</p>
+<p>http://   https://    ftp://    file://</p>
+</li>
+<li><p>第二部分是存有该资源的主机IP地址（有时也包括端口号）</p>
+<p>127.0.0.1    <a href="http://www.tanzhouedu.com" target="_blank" rel="noopener">www.tanzhouedu.com</a></p>
+<ul>
+<li>顶级域名和二级域名的区别：<ul>
+<li>顶级域名：一级域名、根域名<ul>
+<li>除了后缀（com、cn、com.cn、org.cn）以外只有一个点号</li>
+<li>baidu.com     baidu.com.cn     shangfeng.club</li>
+</ul>
+</li>
+<li>二级域名    <a href="http://www.baidu.com" target="_blank" rel="noopener">www.baidu.com</a> </li>
+<li>三级域名    a.<a href="http://www.baidu.com" target="_blank" rel="noopener">www.baidu.com</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>第三部分是主机资源的具体地址，如目录和文件名等。</p>
+</li>
+</ul>
+<p>爬虫爬取数据时必须要有一个目标的URL才可以获得数据，因此，它是爬虫获取数据的基本依据，准确理解它的含义对爬虫学习有很大帮助。</p>
+<h3 id="四、环境的配置"><a href="#四、环境的配置" class="headerlink" title="四、环境的配置"></a>四、环境的配置</h3><p>学习python，当然少不了环境的配置，该课程使用的版本为python2.7.9， 开发工具为pycharm</p>
+<h3 id="五、爬虫的重要思想"><a href="#五、爬虫的重要思想" class="headerlink" title="五、爬虫的重要思想"></a>五、爬虫的重要思想</h3><p>1、理论上来讲只要是网页上面能够看到的数据都是可以爬取的（因为所有看到的网页上的数据都是由服务器发送到我们电脑上的，只是有的数据加密过，很难解密）</p>
+<p>2、在网页上无法看到或者无法获取的数据，爬虫同样不可能拿到，比如一些付费资料</p>
+<p>3、分析网页数据的原则是从简到繁，从易到难</p>
+<ul>
+<li>直接通过网页源代码获取</li>
+<li>分析是否为ajax异步加载</li>
+<li>数据是否被加密</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/11/python全栈/爬虫/02_常用的爬虫模块及使用方法/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1518,514 +2114,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/05/go/linux下编译、后台运行、开机启动golang程序/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/02/05/go/linux下编译、后台运行、开机启动golang程序/" itemprop="url">linux下编译、后台运行、开机启动golang程序</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-02-05T11:18:46+08:00">
-                2020-02-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/go/" itemprop="url" rel="index">
-                    <span itemprop="name">go</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>编译</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go build test.go</span><br></pre></td></tr></table></figure>
-
-<p>指定输出文件</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go build -o mygameserver</span><br></pre></td></tr></table></figure>
-
-<p>修改权限命令</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod 777 程序名称</span><br></pre></td></tr></table></figure>
-
-<p>后台运行的命令</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup ./程序名 &amp;</span><br></pre></td></tr></table></figure>
-
-<p>不输出错误信息</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup ./程序名 &gt;/dev/null 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure>
-
-<p>如果要关闭程序，可以使用命令”ps” 查看后台程序的pid，然后使用“kill 程序pid”命令，关闭程序比如程序名为test，可以用如下命令查询</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps aux|grep test</span><br></pre></td></tr></table></figure>
-
-<p>关掉进程</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kill 进程编号</span><br></pre></td></tr></table></figure>
-
-<p> 开机启动glang</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/rc.local` `添加``cd gopath``nohup ./main &amp;</span><br></pre></td></tr></table></figure>
-
-<p>golang编译程序从后台运行，不出现dos窗口</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go build -ldflags <span class="string">"-H windowsgui"</span></span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/04/人工智能/Tensorflow/CH4-Tf.data_API的使用/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/02/04/人工智能/Tensorflow/CH4-Tf.data_API的使用/" itemprop="url">CH4-Tf.data_API的使用</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-02-04T23:03:36+08:00">
-                2020-02-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/人工智能-Tensorflow/" itemprop="url" rel="index">
-                    <span itemprop="name">人工智能 - Tensorflow</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ul>
-<li>Dataset 基础API的使用</li>
-<li>Dataset 读取CSV文件</li>
-<li>Dataset 读取tfrecode 文件</li>
-</ul>
-<p>API列表：</p>
-<ul>
-<li>Dataset 基础使用<ul>
-<li>tf.data.Dataset.from_tensor_slices</li>
-<li>repeat, batch, interleave, map, shuffle, list_files</li>
-</ul>
-</li>
-<li>csv<ul>
-<li>tf.data.TextLineDataset</li>
-<li>tf.io.decode_csv</li>
-</ul>
-</li>
-<li>Tfrecord<ul>
-<li>tf.train.FloatList, tf.train.Int64List, tf.train.BytesList</li>
-<li>tf.train.Feature, tf.train.Features, tf.train.Example</li>
-<li>example.SerializeToString</li>
-<li>tf.io.ParseSingleExample</li>
-<li>tf.io.VarLenFeature, tf.io.TFRecordOptions</li>
-</ul>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/03/人工智能/Tensorflow/CH3-Tensorflow基础API/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/02/03/人工智能/Tensorflow/CH3-Tensorflow基础API/" itemprop="url">CH3-Tensorflow基础API</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-02-03T16:33:37+08:00">
-                2020-02-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/人工智能-Tensorflow/" itemprop="url" rel="index">
-                    <span itemprop="name">人工智能 - Tensorflow</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="一、基础API"><a href="#一、基础API" class="headerlink" title="一、基础API"></a>一、基础API</h3><p>API 列表</p>
-<ul>
-<li>基础数据类型<ul>
-<li>tf.constant, tf.string</li>
-<li>tf.ragged.constant, tf.SparseTensor, tf.Variable</li>
-</ul>
-</li>
-<li>自定义损失函数——tf.reduce_mean</li>
-<li>自定义层次—— Keras.layers.Lambda 和继承法</li>
-<li>tf.function<ul>
-<li>tf.function, tf.autograph.to_code, get_concrete_function</li>
-</ul>
-</li>
-<li>GraphDef<ul>
-<li>get_operations, get_operation_by_name</li>
-<li>get_tensor_by_name, as_graph_def</li>
-</ul>
-</li>
-<li>自动求导<ul>
-<li>tf.GradientTape</li>
-<li>Optimzier.apply_gradients</li>
-</ul>
-</li>
-</ul>
-<h3 id="二、基础API与keras的集成"><a href="#二、基础API与keras的集成" class="headerlink" title="二、基础API与keras的集成"></a>二、基础API与keras的集成</h3><h4 id="1、自定义损失函数"><a href="#1、自定义损失函数" class="headerlink" title="1、自定义损失函数"></a>1、自定义损失函数</h4><h4 id="2、自定义层次"><a href="#2、自定义层次" class="headerlink" title="2、自定义层次"></a>2、自定义层次</h4><h3 id="三、-tf-function的使用"><a href="#三、-tf-function的使用" class="headerlink" title="三、@tf.function的使用"></a>三、@tf.function的使用</h3><p>@tf.function </p>
-<ul>
-<li>将python函数编译成图</li>
-<li>易于将模型导出成为 GraphDef + checkpoint 或者 SavedModel</li>
-<li>使得 eager execution 可以默认打开</li>
-<li>1.0 的代码可以通过tf.function 来继续在2.0 里使用<ul>
-<li>替代 session</li>
-</ul>
-</li>
-</ul>
-<h4 id="1、图结构"><a href="#1、图结构" class="headerlink" title="1、图结构"></a>1、图结构</h4><h3 id="四、自定义求导"><a href="#四、自定义求导" class="headerlink" title="四、自定义求导"></a>四、自定义求导</h3>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2078,7 +2166,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">95</span>
+                  <span class="site-state-item-count">98</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

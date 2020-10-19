@@ -249,6 +249,450 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/10/09/随笔/DB_monitor的启动/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/10/09/随笔/DB_monitor的启动/" itemprop="url">DB_monitor的启动</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-10-09T11:27:28+08:00">
+                2020-10-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/随笔/" itemprop="url" rel="index">
+                    <span itemprop="name">随笔</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>原网址：</p>
+<h2 id="https-github-com-gumengkai-db-monitor"><a href="#https-github-com-gumengkai-db-monitor" class="headerlink" title="https://github.com/gumengkai/db_monitor"></a><a href="https://github.com/gumengkai/db_monitor" target="_blank" rel="noopener">https://github.com/gumengkai/db_monitor</a></h2><h2 id="https-github-com-gumengkai-db-monitor-vue"><a href="#https-github-com-gumengkai-db-monitor-vue" class="headerlink" title="https://github.com/gumengkai/db_monitor_vue"></a><a href="https://github.com/gumengkai/db_monitor_vue" target="_blank" rel="noopener">https://github.com/gumengkai/db_monitor_vue</a></h2><h2 id="开启数据库："><a href="#开启数据库：" class="headerlink" title="开启数据库："></a>开启数据库：</h2><p>mysql：3306</p>
+<p>redis：6379</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/<span class="built_in">local</span>/bin/redis-server  /home/data/redis-3.2.1/redis.conf</span><br></pre></td></tr></table></figure>
+
+<h2 id="启动顺序："><a href="#启动顺序：" class="headerlink" title="启动顺序："></a>启动顺序：</h2><p>1、启动Django：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup python manage.py runserver 0.0.0.0:8000 &amp;</span><br></pre></td></tr></table></figure>
+
+<p>2、配置环境变量：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> PATH=/usr/<span class="built_in">local</span>/python3/bin:<span class="variable">$PATH</span></span><br><span class="line"><span class="built_in">export</span> PYTHONOPTIMIZE=1</span><br></pre></td></tr></table></figure>
+
+<p>3、启动celery：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nohup celery –A db_monitor worker –l info &amp;</span><br><span class="line">nohup celery –A db_monitor beat –l info &amp;</span><br></pre></td></tr></table></figure>
+
+<p>4、启动Vue</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup ./start.sh &amp;</span><br></pre></td></tr></table></figure>
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/10/02/随笔/tensorflow与Keras的对应关系/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/10/02/随笔/tensorflow与Keras的对应关系/" itemprop="url">tensorflow与Keras的对应关系</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-10-02T15:27:29+08:00">
+                2020-10-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/随笔/" itemprop="url" rel="index">
+                    <span itemprop="name">随笔</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>查看以下网址：</p>
+<p><a href="https://docs.floydhub.com/guides/environments/" target="_blank" rel="noopener">https://docs.floydhub.com/guides/environments/</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/16/随笔/pip豆瓣源/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/09/16/随笔/pip豆瓣源/" itemprop="url">pip豆瓣源</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-09-16T23:22:46+08:00">
+                2020-09-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/随笔/" itemprop="url" rel="index">
+                    <span itemprop="name">随笔</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install tensorflow -i http://pypi.douban.com/simple --trusted-host pypi.douban.com</span><br></pre></td></tr></table></figure>
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/28/python/python字典排序/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1342,568 +1786,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/26/Linux/Linux基础/centOS的基础操作汇总/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/08/26/Linux/Linux基础/centOS的基础操作汇总/" itemprop="url">centOS的基础操作汇总</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-08-26T11:35:30+08:00">
-                2020-08-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux-Linux基础/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux - Linux基础</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="1、查看版本"><a href="#1、查看版本" class="headerlink" title="1、查看版本"></a>1、查看版本</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -q centos-release</span><br></pre></td></tr></table></figure>
-
-<h4 id="2、重启"><a href="#2、重启" class="headerlink" title="2、重启"></a>2、重启</h4><ol>
-<li><code>reboot</code></li>
-<li><code>shutdown -r now</code>       立即重启</li>
-<li><code>shutdown -r 10</code>         等待10min重启</li>
-<li><code>shutdown -r 00:00</code>   在00:00时刻重启</li>
-</ol>
-<h4 id="3、关机"><a href="#3、关机" class="headerlink" title="3、关机"></a>3、关机</h4><ol>
-<li><code>halt</code></li>
-<li><code>poweroff</code>   </li>
-<li><code>shutdown -h now</code>    立即关机     </li>
-<li><code>shutdown -h 10</code>      等待10min关机</li>
-<li>可使用 <code>shutdown -c</code> 取消重启或关机</li>
-</ol>
-<h4 id="4、查看端口情况"><a href="#4、查看端口情况" class="headerlink" title="4、查看端口情况"></a>4、查看端口情况</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -anp | grep 9090</span><br></pre></td></tr></table></figure>
-
-<h4 id="5、防火墙对外开放端口"><a href="#5、防火墙对外开放端口" class="headerlink" title="5、防火墙对外开放端口"></a>5、防火墙对外开放端口</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --zone=public --add-port=80/tcp --permanent</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --reload</span><br></pre></td></tr></table></figure>
-
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/26/Linux/Linux基础/重定向/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/08/26/Linux/Linux基础/重定向/" itemprop="url">重定向</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-08-26T11:27:34+08:00">
-                2020-08-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux-Linux基础/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux - Linux基础</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>在Linux的任务中，我们常常会用到 <strong>nohup</strong> 命令来在后台运行某些服务，当在后台运行程序时，自然就会关注到程序的 <strong>输入、输出和错误</strong> 的问题。</p>
-<h4 id="一、文件描述符"><a href="#一、文件描述符" class="headerlink" title="一、文件描述符"></a>一、文件描述符</h4><p>Linux中一切皆文件，包括标准输入设备和标准输出设备在内的所有计算机硬件都是文件。</p>
-<p>与输入输出有关的文件描述符主要有三个：<strong>0、1和2</strong></p>
-<table>
-<thead>
-<tr>
-<th align="center">文件描述符</th>
-<th align="center">文件名</th>
-<th align="center">类型</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">0</td>
-<td align="center">stdin</td>
-<td align="center">标准输入文件</td>
-</tr>
-<tr>
-<td align="center">1</td>
-<td align="center">stdout</td>
-<td align="center">标准输出文件</td>
-</tr>
-<tr>
-<td align="center">2</td>
-<td align="center">stdeer</td>
-<td align="center">标准错误输出文件</td>
-</tr>
-</tbody></table>
-<h4 id="二、重定向"><a href="#二、重定向" class="headerlink" title="二、重定向"></a>二、重定向</h4><table>
-<thead>
-<tr>
-<th align="left">类型</th>
-<th align="left">符号</th>
-<th align="left">作用</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">标准输出重定向</td>
-<td align="left">command &gt;file</td>
-<td align="left">覆盖，将正确输出结果输出到文件 file 中</td>
-</tr>
-<tr>
-<td align="left">标准输出重定向</td>
-<td align="left">command &gt;&gt;file</td>
-<td align="left">追加，将正确输出结果输出到文件 file 中</td>
-</tr>
-<tr>
-<td align="left">标准错误输出重定向</td>
-<td align="left">command 2&gt;file</td>
-<td align="left">覆盖，将错误信息输出到文件 file 中</td>
-</tr>
-<tr>
-<td align="left">标准错误输出重定向</td>
-<td align="left">command 2&gt;&gt;file</td>
-<td align="left">追加，将错误信息输出到文件 file 中</td>
-</tr>
-<tr>
-<td align="left">正确输出和错误信息同时保存</td>
-<td align="left">command &gt;file 2&gt;&amp;1</td>
-<td align="left">覆盖，把正确输出和错误信息同时输出到文件 file 中</td>
-</tr>
-<tr>
-<td align="left">正确输出和错误信息同时保存</td>
-<td align="left">command &gt;&gt;file 2&gt;&amp;1</td>
-<td align="left">追加，把正确输出和错误信息同时输出到文件 file 中</td>
-</tr>
-<tr>
-<td align="left">正确输出和错误信息同时保存</td>
-<td align="left">command &gt;file1 2&gt;file2</td>
-<td align="left">覆盖， 把正确输出结果输出到 file1，错误信息输出到 file2</td>
-</tr>
-<tr>
-<td align="left">正确输出和错误信息同时保存</td>
-<td align="left">command &gt;&gt;file1 2&gt;&gt;file2</td>
-<td align="left">追加， 把正确输出结果输出到 file1，错误信息输出到 file2</td>
-</tr>
-<tr>
-<td align="left">正确输出和错误信息同时保存</td>
-<td align="left">command &gt;file 2&gt;file</td>
-<td align="left"><strong>不推荐</strong> （导致文件打开两次，引起资源竞争）</td>
-</tr>
-<tr>
-<td align="left">正确输出和错误信息同时保存</td>
-<td align="left">command &gt;&gt;file 2&gt;&gt;file</td>
-<td align="left"><strong>不推荐</strong>（同上</td>
-</tr>
-<tr>
-<td align="left">输入重定向</td>
-<td align="left">command &lt;file</td>
-<td align="left">将文件 file 中的内容作为输入</td>
-</tr>
-<tr>
-<td align="left">输入重定向</td>
-<td align="left">command &lt;&lt;END</td>
-<td align="left">从标准输入（键盘）读取数据，直到分界符 END 停止（可自定义）</td>
-</tr>
-<tr>
-<td align="left">输入重定向</td>
-<td align="left">command &lt;file1 &gt;file2</td>
-<td align="left">将文件 file1 中的内容作为输入，并将处理结果输出到文件 file2</td>
-</tr>
-</tbody></table>
-<p><strong>注：</strong></p>
-<ul>
-<li>若不写文件描述符，在 <code>&lt;</code> 后默认为0，在 <code>&gt;</code> 后默认为1</li>
-<li>文件描述符与 <code>&lt;</code> 、<code>&gt;</code> 符号之间不允许有空格</li>
-<li>若既不想将输出结果保存到文件，又不想输出到屏幕，可以输出到 <strong>/dev/null</strong> 文件中<ul>
-<li>可以将 /dev/null 看成系统垃圾箱</li>
-</ul>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/27/随笔/Mac删除-.Ds_Store文件/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/07/27/随笔/Mac删除-.Ds_Store文件/" itemprop="url">Mac删除 .Ds_Store 文件</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-07-27T16:09:58+08:00">
-                2020-07-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/随笔/" itemprop="url" rel="index">
-                    <span itemprop="name">随笔</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>.DS_Store(英文全称 Desktop Services Store)是一种由苹果公司的Mac OS X操作系统所创造的隐藏文件，目的在于存贮目录的自定义属性，例如文件们的图标位置或者是背景色的选择。相当于 Windows 下的 desktop.ini。</p>
-<p>Mac 删除当前目录下所有.DS_Store文件 </p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find ./ -name <span class="string">".DS_Store"</span> -depth -<span class="built_in">exec</span> rm &#123;&#125; \;</span><br></pre></td></tr></table></figure>
-
-<p>禁止.DS_store生成：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool TRUE</span><br></pre></td></tr></table></figure>
-
-<p>恢复.DS_store生成：恢复.DS_store生成：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">defaults delete com.apple.desktopservices DSDontWriteNetworkStores</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1956,7 +1838,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">95</span>
+                  <span class="site-state-item-count">98</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

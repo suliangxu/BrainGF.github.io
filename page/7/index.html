@@ -249,6 +249,999 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/20/Linux/Linux基础/Linux教程（5）Linux文件与目录管理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/01/20/Linux/Linux基础/Linux教程（5）Linux文件与目录管理/" itemprop="url">Linux教程（5）Linux文件与目录管理</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-01-20T16:12:05+08:00">
+                2020-01-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux-Linux基础/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux - Linux基础</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Linux的目录结构为树状结构，最顶级的目录为根目录/。</p>
+<p>其他目录通过挂载可以将它们添加到树中，通过解除挂载可以移除它们。</p>
+<p><strong>绝对路径与相对路径：</strong></p>
+<ul>
+<li><p><strong>绝对路径</strong></p>
+<p>绝对路径的写法，由根目录 / 写起，例如： /usr/share/doc 这个目录。</p>
+</li>
+<li><p><strong>相对路径</strong></p>
+<p>相对路径的写法，不是由 / 写起，例如由 /usr/share/doc 要到 /usr/share/man 底下时，可以写成 cd ../man ，这就是相对路径的写法。</p>
+</li>
+</ul>
+<h3 id="一、处理目录的常用命令"><a href="#一、处理目录的常用命令" class="headerlink" title="一、处理目录的常用命令"></a>一、处理目录的常用命令</h3><ul>
+<li><strong>ls：</strong> 列出命令</li>
+<li><strong>cd：</strong> 切换目录</li>
+<li><strong>pwd：</strong> 显示当前目录</li>
+<li><strong>rmdir：</strong> 删除一个空的目录</li>
+<li><strong>cp：</strong> 复制文件或目录</li>
+<li><strong>rm：</strong> 移除文件或目录</li>
+<li><strong>mv：</strong> 移动文件与目录，或修改文件与目录的名称</li>
+</ul>
+<p>你可以使用 <strong>man [命令]</strong> 来查看各个命令的使用文档，如： man cp。</p>
+<h4 id="1、ls（列出目录）"><a href="#1、ls（列出目录）" class="headerlink" title="1、ls（列出目录）"></a>1、ls（列出目录）</h4><p>在Linux系统当中，ls命令可能是最常被运行的。</p>
+<p>语法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~] ls [-aAdfFhilnrRSt] 目录名称</span><br><span class="line">[root@www ~] ls [--color=&#123;never,auto,always&#125;] 目录名称</span><br><span class="line">[root@www ~] ls [--full-time] 目录名称</span><br></pre></td></tr></table></figure>
+
+<p>选项与参数：</p>
+<ul>
+<li><p><strong>- a</strong></p>
+<p>全部的文件，连同隐藏文件（开头为 . 的文件）一起列出来（常用）</p>
+</li>
+<li><p><strong>- d</strong></p>
+<p>仅列出目录本身，而不是列出目录内的文件数据（常用）</p>
+</li>
+<li><p><strong>- l</strong></p>
+<p>常数据串列出，包含文件的属性与权限等等数据（常用）</p>
+</li>
+</ul>
+<p>将家目录下的所有文件列出来（含属性与隐藏档）</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~]<span class="comment"># ls -al ~</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="2、cd（切换目录）"><a href="#2、cd（切换目录）" class="headerlink" title="2、cd（切换目录）"></a>2、cd（切换目录）</h4><p>cd 是 Change Directory 的缩写，这是用来变换工作目录的命令。</p>
+<p>语法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd [相对路径或绝对路径]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">使用 mkdir 命令创建 runoob 目录</span></span><br><span class="line">[root@www ~] mkdir runoob</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">使用绝对路径切换到 runoob 目录</span></span><br><span class="line">[root@www ~] cd /root/runoob/</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">使用相对路径切换到 runoob 目录</span></span><br><span class="line">[root@www ~] cd ./runoob/</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 表示回到自己的家目录，亦即是 /root 这个目录</span></span><br><span class="line">[root@www runoob] cd ~</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 表示去到目前的上一级目录，亦即是 /root 的上一级目录的意思；</span></span><br><span class="line">[root@www ~] cd ..</span><br></pre></td></tr></table></figure>
+
+<h4 id="3、pwd（显示目前所在的目录）"><a href="#3、pwd（显示目前所在的目录）" class="headerlink" title="3、pwd（显示目前所在的目录）"></a>3、pwd（显示目前所在的目录）</h4><p>pwd 是 Print Working Directory 的缩写，也就是显示目前所在目录的命令。</p>
+<p>语法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~] pwd [-P]</span><br></pre></td></tr></table></figure>
+
+<p>选项与参数：</p>
+<ul>
+<li><p><strong>- P</strong> </p>
+<p>显示出确实的路径，而非使用连结（link）路径</p>
+</li>
+</ul>
+<p>示例：单纯显示出目前的工作目录：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~] pwd</span><br><span class="line">/root   &lt;== 显示出目录啦～</span><br></pre></td></tr></table></figure>
+
+<p>示例：显示出实际的工作目录，而非连结档本身的目录名而已：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~] cd /var/mail   &lt;==注意，/var/mail是一个连结档</span><br><span class="line">[root@www mail] pwd</span><br><span class="line">/var/mail         &lt;==列出目前的工作目录</span><br><span class="line">[root@www mail] pwd -P</span><br><span class="line">/var/spool/mail   &lt;==怎么回事？有没有加 -P 差很多～</span><br><span class="line">[root@www mail] ls -ld /var/mail</span><br><span class="line">lrwxrwxrwx 1 root root 10 Sep  4 17:54 /var/mail -&gt; spool/mail</span><br><span class="line"><span class="meta">#</span><span class="bash"> 看到这里应该知道为啥了吧？因为 /var/mail 是连结档，连结到 /var/spool/mail </span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 所以，加上 <span class="built_in">pwd</span> -P 的选项后，会不以连结档的数据显示，而是显示正确的完整路径啊！</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="4、mkdir（创建新目录）"><a href="#4、mkdir（创建新目录）" class="headerlink" title="4、mkdir（创建新目录）"></a>4、mkdir（创建新目录）</h4><p>如果想要创建新目录的话，应使用 mkdir（make directory）。</p>
+<p>语法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir [-mp] 目录名称</span><br></pre></td></tr></table></figure>
+
+<p>选项与参数：</p>
+<ul>
+<li><p><strong>- m</strong> </p>
+<p>配置文件的权限</p>
+</li>
+<li><p><strong>- p</strong> </p>
+<p>将所需要的目录（包含上一级目录）递归创建</p>
+</li>
+</ul>
+<p>示例：在 /tmp 下创建多个新目录：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~] cd /tmp</span><br><span class="line">[root@www tmp] mkdir test    &lt;==创建一名为 test 的新目录</span><br><span class="line">[root@www tmp] mkdir test1/test2/test3/test4</span><br><span class="line">mkdir: cannot create directory `test1/test2/test3/test4': </span><br><span class="line">No such file or directory       &lt;== 没办法直接创建此目录啊！</span><br><span class="line">[root@www tmp] mkdir -p test1/test2/test3/test4       &lt;== 加了这个 -p 的选项，可以自行帮你创建多层目录！</span><br></pre></td></tr></table></figure>
+
+<p>示例：创建权限为 rwx–x–x 的目录：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@www tmp] mkdir -m 711 test2</span><br><span class="line">[root@www tmp] ls -l</span><br><span class="line">drwxr-xr-x  3 root  root 4096 Jul 18 12:50 test</span><br><span class="line">drwxr-xr-x  3 root  root 4096 Jul 18 12:53 test1</span><br><span class="line">drwx--x--x  2 root  root 4096 Jul 18 12:54 test2</span><br></pre></td></tr></table></figure>
+
+<h4 id="5、rmdir（删除空的目录）"><a href="#5、rmdir（删除空的目录）" class="headerlink" title="5、rmdir（删除空的目录）"></a>5、rmdir（删除空的目录）</h4><p>语法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rmdir [-p] 目录名称</span><br></pre></td></tr></table></figure>
+
+<p>选项与参数：</p>
+<ul>
+<li><p><strong>- p</strong></p>
+<p>连同上一级【空的】目录也一起删除</p>
+</li>
+</ul>
+<p>示例：删除 runoob 目录：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@www tmp] rmdir runoob/</span><br></pre></td></tr></table></figure>
+
+<p>示例：将 mkdir 示例中创建的目录删除：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@www tmp] ls -l   &lt;==看看有多少目录存在？</span><br><span class="line">drwxr-xr-x  3 root  root 4096 Jul 18 12:50 test</span><br><span class="line">drwxr-xr-x  3 root  root 4096 Jul 18 12:53 test1</span><br><span class="line">drwx--x--x  2 root  root 4096 Jul 18 12:54 test2</span><br><span class="line">[root@www tmp] rmdir test   &lt;==可直接删除掉，没问题</span><br><span class="line">[root@www tmp] rmdir test1  &lt;==因为尚有内容，所以无法删除！</span><br><span class="line">rmdir: `test1': Directory not empty</span><br><span class="line">[root@www tmp] rmdir -p test1/test2/test3/test4</span><br><span class="line">[root@www tmp] ls -l        &lt;==您看看，底下的输出中test与test1不见了！</span><br><span class="line">drwx--x--x  2 root  root 4096 Jul 18 12:54 test2</span><br></pre></td></tr></table></figure>
+
+<p>注：rmdir 仅能删除空的目录，你可以使用 rm 命令来删除非空目录。</p>
+<h4 id="6、cp（复制文件或目录）"><a href="#6、cp（复制文件或目录）" class="headerlink" title="6、cp（复制文件或目录）"></a>6、cp（复制文件或目录）</h4><p>语法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~]# cp [-adfilprsu] 来源档(source) 目标档(destination)</span><br><span class="line">[root@www ~]# cp [options] source1 source2 source3 .... directory</span><br></pre></td></tr></table></figure>
+
+<p>选项与参数：</p>
+<ul>
+<li><p><strong>- a</strong></p>
+<p>相当于 -pdr 的意思，至于 pdr 请参考下列说明；(常用)</p>
+</li>
+<li><p><strong>- d</strong></p>
+<p>若来源档为连结档的属性(link file)，则复制连结档属性而非文件本身；</p>
+</li>
+<li><p><strong>- f</strong></p>
+<p>为强制(force)的意思，若目标文件已经存在且无法开启，则移除后再尝试一次；</p>
+</li>
+<li><p><strong>- i</strong></p>
+<p>若目标档(destination)已经存在时，在覆盖时会先询问动作的进行(常用)</p>
+</li>
+<li><p><strong>- l</strong></p>
+<p>进行硬式连结(hard link)的连结档创建，而非复制文件本身；</p>
+</li>
+<li><p><strong>- p</strong></p>
+<p>连同文件的属性一起复制过去，而非使用默认属性(备份常用)；</p>
+</li>
+<li><p><strong>- r</strong></p>
+<p>递归持续复制，用於目录的复制行为；(常用)</p>
+</li>
+<li><p><strong>- s</strong></p>
+<p>复制成为符号连结档 (symbolic link)，亦即『捷径』文件；</p>
+</li>
+<li><p><strong>- u</strong></p>
+<p>若 destination 比 source 旧才升级 destination ！</p>
+</li>
+</ul>
+<p>用 root 身份，将 root 目录下的 .bashrc 复制到 /tmp 下，并命名为 bashrc</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~] cp ~/.bashrc /tmp/bashrc</span><br><span class="line">[root@www ~] cp -i ~/.bashrc /tmp/bashrc</span><br><span class="line">cp: overwrite `/tmp/bashrc'? n  &lt;==n不覆盖，y为覆盖</span><br></pre></td></tr></table></figure>
+
+<h4 id="7、rm（移除文件或目录）"><a href="#7、rm（移除文件或目录）" class="headerlink" title="7、rm（移除文件或目录）"></a>7、rm（移除文件或目录）</h4><p>语法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm [-fir] 文件或目录</span><br></pre></td></tr></table></figure>
+
+<p>选项与参数：</p>
+<ul>
+<li><p><strong>- f</strong></p>
+<p>就是 force 的意思，忽略不存在的文件，不会出现警告信息</p>
+</li>
+<li><p><strong>- i</strong></p>
+<p>互动模式，在删除前会询问使用者是否动作</p>
+</li>
+<li><p><strong>- r</strong></p>
+<p>递归删除</p>
+</li>
+</ul>
+<p>示例：删除 bashrc：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@www tmp] rm -i bashrc</span><br><span class="line">rm: remove regular file `bashrc'? y</span><br></pre></td></tr></table></figure>
+
+<p>若加上 - i 的选项就会主动询问，避免你删除到错误的档名！</p>
+<h4 id="8、mv（移动文件与目录，或修改名称）"><a href="#8、mv（移动文件与目录，或修改名称）" class="headerlink" title="8、mv（移动文件与目录，或修改名称）"></a>8、mv（移动文件与目录，或修改名称）</h4><p>语法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~] mv [-fiu] source destination</span><br><span class="line">[root@www ~] mv [options] source1 source2 source3 .... directory</span><br></pre></td></tr></table></figure>
+
+<p>选项与参数：</p>
+<ul>
+<li><p><strong>- f</strong></p>
+<p>force 强制的意思，如果目标文件已经存在，不会询问而直接覆盖</p>
+</li>
+<li><p><strong>- i</strong></p>
+<p>若目标文件（destination）已经存在时，就会询问是否覆盖</p>
+</li>
+<li><p><strong>- u</strong></p>
+<p>若目标文件已经存在，且 source 比较新，才会升级（update）</p>
+</li>
+</ul>
+<p>示例：复制一文件，创建一目录，将文件移动到目录中：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~] cd /tmp</span><br><span class="line">[root@www tmp] cp ~/.bashrc bashrc</span><br><span class="line">[root@www tmp] mkdir mvtest</span><br><span class="line">[root@www tmp] mv bashrc mvtest</span><br></pre></td></tr></table></figure>
+
+<p>示例：将刚刚的目录名称更名为 mvtest2</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@www tmp] mv mvtest mvtest2</span><br></pre></td></tr></table></figure>
+
+<h3 id="二、文件内容查看"><a href="#二、文件内容查看" class="headerlink" title="二、文件内容查看"></a>二、文件内容查看</h3><p>Linux系统中使用以下命令来查看文件的内容：</p>
+<ul>
+<li><p><strong>cat</strong></p>
+<p>由第一行开始显示文件内容</p>
+</li>
+<li><p><strong>tac</strong></p>
+<p>从最后一行开始显示，可以看出 tac 是cat 的倒着写</p>
+</li>
+<li><p><strong>nl</strong></p>
+<p>显示的时候，顺道输出行号</p>
+</li>
+<li><p><strong>more</strong></p>
+<p>一页一页的显示文件内容</p>
+</li>
+<li><p><strong>less</strong></p>
+<p>与more类似，但它可以往前翻页</p>
+</li>
+<li><p>head</p>
+<p>只看头几行</p>
+</li>
+<li><p>tail</p>
+<p>只看后几行</p>
+</li>
+</ul>
+<p>你可以使用 man [命令] 来查看各个命令的使用文档，如：man cp</p>
+<h4 id="1、cat"><a href="#1、cat" class="headerlink" title="1、cat"></a>1、cat</h4><p>由第一行开始显示文件内容</p>
+<p>语法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat [-AbEnTv]</span><br></pre></td></tr></table></figure>
+
+<p>选项与参数：</p>
+<ul>
+<li><p><strong>- A</strong></p>
+<p>相当于 -vET 的整合选项，可列出一些特殊字符而不是空白</p>
+</li>
+<li><p><strong>- b</strong></p>
+<p>列出行号，仅针对非空白行作出行号显示，空白行不标行号</p>
+</li>
+<li><p><strong>- E</strong></p>
+<p>将结尾的断行字节 $ 显示出来</p>
+</li>
+<li><p><strong>- n</strong></p>
+<p>列印出行号，连同空白行也会有行号，与 - b 选项不同</p>
+</li>
+<li><p><strong>- T</strong></p>
+<p>将 [tab] 键以 ^l 显示出来</p>
+</li>
+<li><p><strong>- v</strong></p>
+<p>列出一些看不出来的特殊字符</p>
+</li>
+</ul>
+<p>示例：检看 /etc/issue 这个文件的内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~]# cat /etc/issue</span><br><span class="line">CentOS release 6.4 (Final)</span><br><span class="line">Kernel \r on an \m</span><br></pre></td></tr></table></figure>
+
+<h4 id="2、tac"><a href="#2、tac" class="headerlink" title="2、tac"></a>2、tac</h4><p>tac 与 cat 命令刚好相反，文件内容从最后一行开始显示，可以看出 tac 是 cat 的倒着写。</p>
+<p>如：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~] tac /etc/issue</span><br><span class="line"></span><br><span class="line">Kernel \r on an \m</span><br><span class="line">CentOS release 6.4 (Final)</span><br></pre></td></tr></table></figure>
+
+<h4 id="3、nl"><a href="#3、nl" class="headerlink" title="3、nl"></a>3、nl</h4><p><strong>显示行号</strong></p>
+<p>语法：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nl [-bnw] 文件</span><br></pre></td></tr></table></figure>
+
+<p>选项与参数：</p>
+<ul>
+<li><p><strong>- b</strong>      </p>
+<p>指定行号指定的方式，主要有两种：</p>
+<ul>
+<li><strong>- b a：</strong> 表示不论是否为空行，也同样列出行号（类似 cat -n）</li>
+<li><strong>- b t：</strong> 如果有空行，空的那一行不要列出行号（默认值）</li>
+</ul>
+</li>
+<li><p><strong>- n</strong></p>
+<p>列出行号表示的方法，主要有三种：</p>
+<ul>
+<li><strong>- n ln：</strong> 行号在荧幕的左方显示</li>
+<li><strong>- n rn：</strong> 行号在自己栏位的最右方显示，且不加0</li>
+<li><strong>- n rz：</strong> 行号在自己栏位的最右方显示，且加0</li>
+</ul>
+</li>
+</ul>
+<p>示例：用 nl 列出 /etc/issue 的内容 </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~] nl /etc/issue</span><br><span class="line">     1  CentOS release 6.4 (Final)</span><br><span class="line">     2  Kernel \r on an \m</span><br></pre></td></tr></table></figure>
+
+<h4 id="4、more"><a href="#4、more" class="headerlink" title="4、more"></a>4、more</h4><p><strong>一页一页翻动</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~]more /etc/man_db.config </span><br><span class="line"><span class="meta">#</span><span class="bash"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Generated automatically from man.conf.in by the</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> configure script.</span></span><br><span class="line"><span class="meta">#</span><span class="bash"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> man.conf from man-1.6d</span></span><br><span class="line">....(中间省略)....</span><br><span class="line"><span class="meta">--More--(28%</span><span class="bash">)  &lt;== 重点在这一行喔！你的光标也会在这里等待你的命令</span></span><br></pre></td></tr></table></figure>
+
+<p>在 more 这个程序的运行过程中，可以按以下几个按键：</p>
+<ul>
+<li><p><strong>空白键（space）</strong></p>
+<p>代表向下翻一页</p>
+</li>
+<li><p><strong>Enter</strong></p>
+<p>代表向下翻一行</p>
+</li>
+<li><p><strong>/ 字串</strong></p>
+<p>代表在这个显示的内容当中，向下搜寻 字串 这个关键词</p>
+</li>
+<li><p><strong>: f</strong></p>
+<p>立刻显示出档名以及目前显示的行数</p>
+</li>
+<li><p><strong>q</strong></p>
+<p>代表立刻离开 more， 不再显示该文件内容</p>
+</li>
+<li><p><strong>b</strong> 或 <strong>[ctrl]-b</strong> </p>
+<p>代表往回翻页，不过该动作只对文件有用，对管线无用</p>
+</li>
+</ul>
+<h4 id="5、less"><a href="#5、less" class="headerlink" title="5、less"></a>5、less</h4><p><strong>一页一页翻动</strong></p>
+<p>示例：输出/etc/man.config文件的内容：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~] less /etc/man.config</span><br><span class="line"><span class="meta">#</span><span class="bash"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Generated automatically from man.conf.in by the</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> configure script.</span></span><br><span class="line"><span class="meta">#</span><span class="bash"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> man.conf from man-1.6d</span></span><br><span class="line">....(中间省略)....</span><br><span class="line">:   &lt;== 这里可以等待你输入命令！</span><br></pre></td></tr></table></figure>
+
+<p>less运行时，可以输入的命令有：</p>
+<ul>
+<li><p><strong>空白键</strong>  </p>
+<p>向下翻动一页；</p>
+</li>
+<li><p><strong>[pagedown]</strong></p>
+<p>向下翻动一页；</p>
+</li>
+<li><p><strong>[pageup]</strong></p>
+<p>向上翻动一页；</p>
+</li>
+<li><p><strong>/ 字串</strong>   </p>
+<p>向下搜寻『字串』的功能；</p>
+</li>
+<li><p><strong>? 字串</strong>  </p>
+<p>向上搜寻『字串』的功能；</p>
+</li>
+<li><p><strong>n</strong>     </p>
+<p>重复前一个搜寻 (与 / 或 ? 有关！)</p>
+</li>
+<li><p><strong>N</strong>    </p>
+<p>反向的重复前一个搜寻 (与 / 或 ? 有关！)</p>
+</li>
+<li><p><strong>q</strong>     </p>
+<p>离开 less 这个程序；</p>
+</li>
+</ul>
+<h4 id="6、head"><a href="#6、head" class="headerlink" title="6、head"></a>6、head</h4><p><strong>取出文件前面几行</strong></p>
+<p>语法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">head [-n number] 文件</span><br></pre></td></tr></table></figure>
+
+<p>选项与参数：</p>
+<ul>
+<li><p><strong>- n</strong></p>
+<p>后面接数字，代表显示几行的意思</p>
+</li>
+</ul>
+<p>默认的情况中，显示前面 10 行。</p>
+<p>示例：显示前20行：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~] head -n 20 /etc/man.config</span><br></pre></td></tr></table></figure>
+
+<h4 id="7、tail"><a href="#7、tail" class="headerlink" title="7、tail"></a>7、tail</h4><p><strong>取出文件后面几行</strong></p>
+<p>语法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tail [-n number] 文件</span><br></pre></td></tr></table></figure>
+
+<p>选项与参数：</p>
+<ul>
+<li><p><strong>- n</strong></p>
+<p>后面接数字，代表显示几行的意思</p>
+</li>
+<li><p><strong>- f</strong> </p>
+<p>表示持续侦测后面所接的档名，要等到按下[ctrl]-c才会结束tail的侦测</p>
+</li>
+</ul>
+<p>默认的情况中，显示最后 10 行。</p>
+<p>示例：显示后20行：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~] tail -n 20 /etc/man.config</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/19/Linux/Linux基础/Linux教程（4）Linux文件基本属性/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/01/19/Linux/Linux基础/Linux教程（4）Linux文件基本属性/" itemprop="url">Linux教程（4）Linux文件基本属性</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-01-19T14:18:06+08:00">
+                2020-01-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux-Linux基础/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux - Linux基础</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="一、基本属性"><a href="#一、基本属性" class="headerlink" title="一、基本属性"></a>一、基本属性</h4><p>Linux系统是一种典型的多用户系统，不同的用户处于不同的地位，拥有不同的权限。为了保护系统的安全性，Linux系统对不同的用户访问同一文件（包括目录文件）的权限做了不同的规定。</p>
+<p>在Linux中我们可以使用 <code>ll</code> 或 <code>ls -l</code> 命令来显示一个文件的属性以及文件所属的用户和组，如：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@www /]# ls -l</span><br><span class="line">total 64</span><br><span class="line">dr-xr-xr-x   2 root root 4096 Dec 14  2012 bin</span><br><span class="line">dr-xr-xr-x   4 root root 4096 Apr 19  2012 boot</span><br><span class="line">……</span><br></pre></td></tr></table></figure>
+
+<p>实例中，bin文件的第一个属性用 “d” 表示。“d” 在Linux中代表该文件是一个目录文件。</p>
+<p>在Linux中第一个字符代表这个文件是目录、文件或链接文件等等。</p>
+<ul>
+<li>当为 <strong>【 d 】</strong> 则是目录</li>
+<li>当为 <strong>【 - 】</strong> 则是文件</li>
+<li>当为 <strong>【 l 】</strong> 则是链接文档（link file）</li>
+<li>当为 <strong>【 b 】</strong> 则是装置文件里面的可供存储的接口设备（可随机存取装置）</li>
+<li>当为 <strong>【 c 】</strong> 则是装置文件里面的串行端口设备，例如键盘、鼠标（一次性读取装置）</li>
+</ul>
+<p>接下来的字符中，以3个为一组，且均为<strong>“rwx”</strong> 的三个参数的组合。其中，</p>
+<ul>
+<li>【 r 】–&gt; 可读（read）</li>
+<li>【 w 】–&gt; 可读（write）</li>
+<li>【 x 】–&gt; 可执行（execute）</li>
+</ul>
+<p>注： 这三个权限的位置不会改变，如果没有权限，就会出现减号 <strong>“ - ”</strong> 。</p>
+<p>每个文件的属性由左边第一部分的10个字符来确定：</p>
+<p><img src="https://www.runoob.com/wp-content/uploads/2014/06/363003_1227493859FdXT.png" alt="363003_1227493859FdXT"></p>
+<p>从左至右用0 - 9这些数字来表示。</p>
+<ul>
+<li>第0位确定文件类型</li>
+<li>第1-3位确定属主（该文件的所有者）拥有该文件的权限</li>
+<li>第4-6位确定属组（所有者的同组用户）拥有该文件的权限</li>
+<li>第7-9位确定其他用户拥有该文件的权限</li>
+</ul>
+<h3 id="二、文件属主和属组"><a href="#二、文件属主和属组" class="headerlink" title="二、文件属主和属组"></a>二、文件属主和属组</h3><p>对于文件来说，它都有一个特定的所有者，也就是对该文件具有所有权的用户<strong>（属主）</strong>。</p>
+<p>同时，在Linux系统中，用户是按组分类的，一个用户属于一个或多个组<strong>（属组）</strong>。</p>
+<p>文件所有者以外的用户又可以分为文件所有者的 <strong>同组用户</strong> 和 <strong>其他用户</strong> 。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@www /]# ls -l</span><br><span class="line">total 64</span><br><span class="line">drwxr-xr-x 2 root  root  4096 Feb 15 14:46 cron</span><br><span class="line">drwxr-xr-x 3 mysql mysql 4096 Apr 21  2014 mysql</span><br><span class="line">……</span><br></pre></td></tr></table></figure>
+
+<p>以上实例中，mysql 文件是一个目录文件，属主和属组都为 mysql，属主有可读、可写、可执行的权限；与属主同组的其他用户有可读和可执行的权限；其他用户也有可读和可执行的权限。</p>
+<p>对于root 用户来说，一般情况下，文件的权限对其不起作用。</p>
+<h3 id="三、更改文件属性"><a href="#三、更改文件属性" class="headerlink" title="三、更改文件属性"></a>三、更改文件属性</h3><h4 id="1、chgrp"><a href="#1、chgrp" class="headerlink" title="1、chgrp"></a>1、chgrp</h4><p><strong>更改文件属组</strong></p>
+<p>语法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chgrp [-R] 属组名 文件名</span><br></pre></td></tr></table></figure>
+
+<p>参数选项：</p>
+<ul>
+<li><p>-R</p>
+<p>递归更改文件属组，就是在更改某个目录文件的属组时，如果加上 -R的参数，那么该目录下的所有文件的属主都会更改。</p>
+</li>
+</ul>
+<h4 id="2、chown"><a href="#2、chown" class="headerlink" title="2、chown"></a>2、chown</h4><p><strong>更改文件属主，也可以同时更改文件属组</strong></p>
+<p>语法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chown [–R] 属主名 文件名</span><br><span class="line">chown [-R] 属主名：属组名 文件名</span><br></pre></td></tr></table></figure>
+
+<p>进入 /root 目录（～），将 install.log 的拥有者改为 bin 这个账号：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~] cd ~</span><br><span class="line">[root@www ~]# chown bin install.log</span><br><span class="line">[root@www ~]# ls -l</span><br><span class="line">-rw-r--r--  1 bin  users 68495 Jun 25 08:53 install.log</span><br></pre></td></tr></table></figure>
+
+<p>将 install.log 的拥有者与群组该回 root：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~]# chown root:root install.log</span><br><span class="line">[root@www ~]# ls -l</span><br><span class="line">-rw-r--r--  1 root root 68495 Jun 25 08:53 install.log</span><br></pre></td></tr></table></figure>
+
+<h4 id="3、chmod"><a href="#3、chmod" class="headerlink" title="3、chmod"></a>3、chmod</h4><p><strong>更改文件9个属性</strong></p>
+<p>Linux文件属性有两种设置方法：</p>
+<ul>
+<li>数字</li>
+<li>符号</li>
+</ul>
+<p>Linux文件的基本权限就有9个，分别是 owner/group/others 三种身份各有自己的 read/write/execute权限。</p>
+<p>==数字类型改变文件权限==</p>
+<p>上面已经提到，文件的权限字符为：<strong>“-rwxrwxrwx”</strong> ，这9个权限是三个三个一组的！其中，我们可以使用数字来代表各个权限。各权限的分数对照表如下：</p>
+<ul>
+<li><strong>r</strong> –&gt; 4</li>
+<li><strong>w</strong> –&gt; 2</li>
+<li><strong>x</strong> –&gt; 1</li>
+</ul>
+<p>每种身份（ owner/group/others ）各自的三个权限（ r/w/x）分数是需要累加的，例如，当权限为：【-rwxrwx—】，分数则是：</p>
+<ul>
+<li>owner = rwx = 4+2+1 = 7</li>
+<li>group = rwx = 4+2+1 = 7</li>
+<li>others = — = 0+0+0 = 0</li>
+</ul>
+<p>所以该文件的权限数字为 770 。</p>
+<p>变更指令chmod的语法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chomd [-R] xyz 文件或目录</span><br></pre></td></tr></table></figure>
+
+<p>选项与参数：</p>
+<ul>
+<li><p>xyz</p>
+<p>就是刚刚提到的数字类型的权限属性，为rwx属性数值的相加</p>
+</li>
+<li><p>-R</p>
+<p>进行递归的持续变更，亦即连同次目录下的所有文件都会变更</p>
+</li>
+</ul>
+<p>例如：</p>
+<p>如果要将 .bashrc 这个文件所有的权限都设定启用，那么命令如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~]# ls -al .bashrc</span><br><span class="line">-rw-r--r--  1 root root 395 Jul  4 11:45 .bashrc</span><br><span class="line">[root@www ~]# chmod 777 .bashrc</span><br><span class="line">[root@www ~]# ls -al .bashrc</span><br><span class="line">-rwxrwxrwx  1 root root 395 Jul  4 11:45 .bashrc</span><br></pre></td></tr></table></figure>
+
+<p>同理，如果要将权限变成 -rwxr-xr– ，权限的分数就变成 754。</p>
+<p>==符号类型改变文件权限==</p>
+<p>使用<strong>u，g，o</strong> 来代表三种身份的权限。</p>
+<p>u为user，g为group，o为others。</p>
+<p>此外，<strong>a</strong> 则代表 <strong>all</strong>，即全部的身份。读写的权限可以写成 <strong>r，w，x</strong> ，如下表：</p>
+<table>
+<thead>
+<tr>
+<th align="center">chmod</th>
+<th align="center">u</th>
+<th align="center">+ (加入)</th>
+<th align="center">r</th>
+<th align="center">文件或目录</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"></td>
+<td align="center"><strong>g</strong></td>
+<td align="center"><strong>- (除去)</strong></td>
+<td align="center"><strong>w</strong></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center"><strong>o</strong></td>
+<td align="center"><strong>= (设定)</strong></td>
+<td align="center"><strong>x</strong></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center"><strong>a</strong></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<p>如果我们需要将文件权限设置为 <strong>-rwxr-xr–</strong> ，可以使用</p>
+<p><code>chmod u=rwx, g=rx, o=r 文件名</code></p>
+<p>来设定。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">  touch test1    // 创建 test1 文件</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ls -al test1    // 查看 test1 默认权限</span></span><br><span class="line">-rw-r--r-- 1 root root 0 Nov 15 10:32 test1</span><br><span class="line"><span class="meta">#</span><span class="bash"> chmod u=rwx,g=rx,o=r  test1    // 修改 test1 权限</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ls -al test1</span></span><br><span class="line">-rwxr-xr-- 1 root root 0 Nov 15 10:32 test1</span><br></pre></td></tr></table></figure>
+
+<p>若要拿掉全部人的可执行权限，则：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">  chmod  a-x test1</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ls -al test1</span></span><br><span class="line">-rw-r--r-- 1 root root 0 Nov 15 10:32 test1</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/17/Linux/Linux基础/Linux教程（3）Linux系统目录结构/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/01/17/Linux/Linux基础/Linux教程（3）Linux系统目录结构/" itemprop="url">Linux教程（3）Linux系统目录结构</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-01-17T18:24:04+08:00">
+                2020-01-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux-Linux基础/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux - Linux基础</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>登录系统后，在当前命令窗口下输入命令：</p>
+<p><code>ls /</code></p>
+<p>你会看到如下图所示：</p>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/Linux/Linux%E5%9F%BA%E7%A1%80/Linux%E6%95%99%E7%A8%8B%EF%BC%883%EF%BC%89/1.png" alt="img"></p>
+<p>树状目录结构：</p>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/Linux/Linux%E5%9F%BA%E7%A1%80/Linux%E6%95%99%E7%A8%8B%EF%BC%883%EF%BC%89/2.jpg" alt="img"></p>
+<p>以下是对这些目录的解释：</p>
+<ul>
+<li><p><strong>/bin</strong></p>
+<p>bin是Binary的缩写, 这个目录存放着最经常使用的命令。</p>
+</li>
+<li><p><strong>/boot</strong></p>
+<p>这里存放的是启动Linux时使用的一些核心文件，包括一些连接文件以及镜像文件。</p>
+</li>
+<li><p><strong>/dev</strong></p>
+<p>dev是Device(设备)的缩写, 该目录下存放的是Linux的外部设备，在Linux中访问设备的方式和访问文件的方式是相同的。</p>
+</li>
+<li><p><strong>/etc</strong></p>
+<p>这个目录用来存放所有的系统管理所需要的配置文件和子目录。</p>
+</li>
+<li><p><strong>/home</strong></p>
+<p>用户的主目录，在Linux中，每个用户都有一个自己的目录，一般该目录名是以用户的账号命名的。</p>
+</li>
+<li><p><strong>/lib</strong></p>
+<p>这个目录里存放着系统最基本的动态连接共享库，其作用类似于Windows里的DLL文件。几乎所有的应用程序都需要用到这些共享库。</p>
+</li>
+<li><p><strong>/lost+found</strong></p>
+<p>这个目录一般情况下是空的，当系统非法关机后，这里就存放了一些文件。</p>
+</li>
+<li><p><strong>/media</strong></p>
+<p>linux系统会自动识别一些设备，例如U盘、光驱等等，当识别后，linux会把识别的设备挂载到这个目录下。</p>
+</li>
+<li><p><strong>/mnt</strong></p>
+<p>系统提供该目录是为了让用户临时挂载别的文件系统的，我们可以将光驱挂载在/mnt/上，然后进入该目录就可以查看光驱里的内容了。</p>
+</li>
+<li><p><strong>/opt</strong></p>
+<p>这是给主机额外安装软件所摆放的目录。比如你安装一个ORACLE数据库则就可以放到这个目录下。默认是空的。</p>
+</li>
+<li><p><strong>/proc</strong></p>
+<p>这个目录是一个虚拟的目录，它是系统内存的映射，我们可以通过直接访问这个目录来获取系统信息。<br>这个目录的内容不在硬盘上而是在内存里，我们也可以直接修改里面的某些文件，比如可以通过下面的命令来屏蔽主机的ping命令，使别人无法ping你的机器：</p>
+<p><code>echo 1 &gt; /proc/sys/net/ipv4/icmp_echo_ignore_all</code></p>
+</li>
+<li><p><strong>/root</strong></p>
+<p>该目录为系统管理员，也称作超级权限者的用户主目录。</p>
+</li>
+<li><p><strong>/sbin</strong></p>
+<p>s就是Super User的意思，这里存放的是系统管理员使用的系统管理程序。</p>
+</li>
+<li><p><strong>/selinux</strong></p>
+<p>这个目录是Redhat/CentOS所特有的目录，Selinux是一个安全机制，类似于windows的防火墙，但是这套机制比较复杂，这个目录就是存放selinux相关的文件的。</p>
+</li>
+<li><p><strong>/srv</strong></p>
+<p>该目录存放一些服务启动之后需要提取的数据。</p>
+</li>
+<li><p><strong>/sys</strong></p>
+<p>这是linux2.6内核的一个很大的变化。该目录下安装了2.6内核中新出现的一个文件系统 sysfs 。</p>
+<p>sysfs文件系统集成了下面3种文件系统的信息：针对进程信息的proc文件系统、针对设备的devfs文件系统以及针对伪终端的devpts文件系统。</p>
+<p>该文件系统是内核设备树的一个直观反映。</p>
+<p>当一个内核对象被创建的时候，对应的文件和目录也在内核对象子系统中被创建。</p>
+</li>
+<li><p><strong>/tmp</strong></p>
+<p>这个目录是用来存放一些临时文件的。</p>
+</li>
+<li><p><strong>/usr</strong></p>
+<p>这是一个非常重要的目录，用户的很多应用程序和文件都放在这个目录下，类似于windows下的program files目录。</p>
+</li>
+<li><p><strong>/usr/bin</strong></p>
+<p>系统用户使用的应用程序。</p>
+</li>
+<li><p><strong>/usr/sbin</strong></p>
+<p>超级用户使用的比较高级的管理程序和系统守护程序。</p>
+</li>
+<li><p><strong>/usr/src</strong></p>
+<p>内核源代码默认的放置目录。</p>
+</li>
+<li><p><strong>/var</strong></p>
+<p>这个目录中存放着在不断扩充着的东西，我们习惯将那些经常被修改的目录放在这个目录下。包括各种日志文件。</p>
+</li>
+<li><p><strong>/run</strong></p>
+<p>是一个临时文件系统，存储系统启动以来的信息。当系统重启时，这个目录下的文件应该被删掉或清除。如果你的系统上有 /var/run 目录，应该让它指向 run。</p>
+</li>
+</ul>
+<p>在Linux系统中，有几个目录是比较重要的，平时需要注意不要误删或者随意更改内部文件。</p>
+<ul>
+<li><p><strong>/etc</strong></p>
+<p>上边也提到了，这个是系统中的配置文件，如果你更改了该目录下的某个文件可能会导致系统不能启动。</p>
+</li>
+<li><p><strong>/bin</strong>， <strong>/sbin</strong>， <strong>/usr/bin</strong>， <strong>/usr/sbin</strong></p>
+<p>这是系统预设的执行文件的放置目录，比如 ls 就是在/bin/ls 目录下的。</p>
+<p>值得提出的是，/bin, /usr/bin 是给系统用户使用的指令（除root外的通用户），而/sbin, /usr/sbin 则是给root使用的指令。</p>
+</li>
+<li><p><strong>/var</strong></p>
+<p>这是一个非常重要的目录，系统上跑了很多程序，那么每个程序都会有相应的日志产生，而这些日志就被记录到这个目录下，具体在/var/log 目录下，另外mail的预设放置也是在这里。</p>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/17/Linux/Linux基础/Linux教程（2）Linux系统启动过程/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1529,634 +2522,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/17/随笔/conda下的source无法激活的问题/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/01/17/随笔/conda下的source无法激活的问题/" itemprop="url">conda下的source无法激活的问题</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-01-17T09:21:21+08:00">
-                2020-01-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/随笔/" itemprop="url" rel="index">
-                    <span itemprop="name">随笔</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>conda自带的activate命令可以直接调用conda下的环境路径，所以在无法用source激活时，可以选择一下命令来激活python虚拟环境：</p>
-<p><code>conda activate YourEnvs</code></p>
-<p>开启环境：</p>
-<p><code>source activate tensorflow</code></p>
-<p>关闭环境：</p>
-<p><code>source deactivate</code></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/17/python/pip命令的使用/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/01/17/python/pip命令的使用/" itemprop="url">pip命令的使用</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-01-17T09:17:49+08:00">
-                2020-01-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>pip 安装，更新模块</p>
-<p>model_name 是对应的模块名</p>
-<ul>
-<li><p>查看所有可能更新的模块：</p>
-<p><code>pip list --outdated</code></p>
-</li>
-<li><p>更新某一模块：</p>
-<p><code>pip install --upgrade model_name</code></p>
-</li>
-<li><p>指定更新源更新模块：</p>
-<p><code>pip install --upgrade -i https://pypi.douban.com/simple modle_name</code></p>
-</li>
-<li><p>安装对应的模块：</p>
-<p><code>pip install pip-review</code></p>
-</li>
-<li><p>更新所有模块：</p>
-<p><code>pip-review --local --interactive</code></p>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/29/人工智能/机器学习算法比较/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/12/29/人工智能/机器学习算法比较/" itemprop="url">机器学习算法比较</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-12-29T17:08:43+08:00">
-                2019-12-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/人工智能/" itemprop="url" rel="index">
-                    <span itemprop="name">人工智能</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>本文主要回顾下几个常用算法的适应场景及其优缺点！（提示：部分内容摘自网络）。</p>
-<p>主要来自博客：<a href="http://www.csuldw.com/2016/02/26/2016-02-26-choosing-a-machine-learning-classifier/" target="_blank" rel="noopener">http://www.csuldw.com/2016/02/26/2016-02-26-choosing-a-machine-learning-classifier/</a></p>
-<p>机器学习算法太多了，分类、回归、聚类、推荐、图像识别领域等等，要想找到一个合适算法真的不容易，所以在实际应用中，我们一般都是采用启发式学习方式来实验。通常最开始我们都会选择大家普遍认同的算法，诸如SVM，GBDT，Adaboost，现在深度学习很火热，神经网络也是一个不错的选择。假如你在乎精度（accuracy）的话，最好的方法就是通过<strong><em>交叉验证（cross-validation）</em></strong>对各个算法一个个地进行测试，进行比较，然后调整参数确保每个算法达到最优解，最后选择最好的一个。</p>
-<p>但是如果你只是在寻找一个“足够好”的算法来解决你的问题，或者这里有些技巧可以参考，下面来分析下各个算法的优缺点，基于算法的优缺点，更易于我们去选择它。</p>
-<h3 id="一、偏差与方差"><a href="#一、偏差与方差" class="headerlink" title="一、偏差与方差"></a>一、偏差与方差</h3><p>在统计学中，一个模型好坏，是根据偏差和方差来衡量的，所以我们先来普及一下偏差(bias)和方差(variance)：</p>
-<ul>
-<li>偏差：描述的是预测值（估计值）的期望E’与真实值Y之间的差距。偏差越大，越偏离真实数据。</li>
-</ul>
-<p>​        $Bias[\hat{f(x)}]=E[\hat{f(x)}]−f(x)$</p>
-<ul>
-<li>方差：描述的是预测值P的变化范围，离散程度，是预测值的方差，也就是离其期望值E的距离。方差越大，数据的分布越分散。</li>
-</ul>
-<p>$Var[\hat{f(x)}] = E[(\hat{f(x)} - E[{\hat{f(x)])}}^2]$</p>
-<p>模型的真实误差是两者之和，如公式<a href="http://www.csuldw.com/2016/02/26/2016-02-26-choosing-a-machine-learning-classifier/#mjx-eqn-3" target="_blank" rel="noopener">(3)</a>：</p>
-<p>$E[(y−\hat{f(x)})^2]=Bias[\hat{f(x)}]^2+Var[\hat{f(x)}]+σ^2$</p>
-<p>通常情况下，如果是小训练集，高偏差/低方差的分类器（例如，朴素贝叶斯NB）要比低偏差/高方差大分类的优势大（例如，KNN），因为后者会发生过拟合（overfiting）。然而，随着你训练集的增长，模型对于原数据的预测能力就越好，偏差就会降低，此时低偏差/高方差的分类器就会渐渐的表现其优势（因为它们有较低的渐近误差），而高偏差分类器这时已经不足以提供准确的模型了。</p>
-<p>当然，你也可以认为这是生成模型（如NB）与判别模型（如KNN）的一个区别。</p>
-<p><strong><em>为什么说朴素贝叶斯是高偏差低方差?</em></strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">以下内容引自知乎：</span><br><span class="line"></span><br><span class="line">首先，假设你知道训练集和测试集的关系。简单来讲是我们要在训练集上学习一个模型，然后拿到测试集去用，效果好不好要根据测试集的错误率来衡量。但很多时候，我们只能假设测试集和训练集的是符合同一个数据分布的，但却拿不到真正的测试数据。这时候怎么在只看到训练错误率的情况下，去衡量测试错误率呢？</span><br><span class="line"></span><br><span class="line">由于训练样本很少（至少不足够多），所以通过训练集得到的模型，总不是真正正确的。（就算在训练集上正确率100%，也不能说明它刻画了真实的数据分布，要知道刻画真实的数据分布才是我们的目的，而不是只刻画训练集的有限的数据点）。而且，实际中，训练样本往往还有一定的噪音误差，所以如果太追求在训练集上的完美而采用一个很复杂的模型，会使得模型把训练集里面的误差都当成了真实的数据分布特征，从而得到错误的数据分布估计。这样的话，到了真正的测试集上就错的一塌糊涂了（这种现象叫过拟合）。但是也不能用太简单的模型，否则在数据分布比较复杂的时候，模型就不足以刻画数据分布了（体现为连在训练集上的错误率都很高，这种现象较欠拟合）。过拟合表明采用的模型比真实的数据分布更复杂，而欠拟合表示采用的模型比真实的数据分布要简单。</span><br><span class="line"></span><br><span class="line">在统计学习框架下，大家刻画模型复杂度的时候，有这么个观点，认为Error = Bias + Variance。这里的Error大概可以理解为模型的预测错误率，是有两部分组成的，一部分是由于模型太简单而带来的估计不准确的部分（Bias），另一部分是由于模型太复杂而带来的更大的变化空间和不确定性（Variance）。</span><br><span class="line"></span><br><span class="line">所以，这样就容易分析朴素贝叶斯了。它简单的假设了各个数据之间是无关的，是一个被严重简化了的模型。所以，对于这样一个简单模型，大部分场合都会Bias部分大于Variance部分，也就是说高偏差而低方差。</span><br><span class="line"></span><br><span class="line">在实际中，为了让Error尽量小，我们在选择模型的时候需要平衡Bias和Variance所占的比例，也就是平衡over-fitting和under-fitting。</span><br></pre></td></tr></table></figure>
-
-<p>偏差、方差、模型复杂度三者之间的关系使用下图表示会更容易理解：</p>
-<p><img src="http://www.csuldw.com/assets/articleImg/bias_variance.png" alt="img"></p>
-<p>当模型复杂度上升的时候，偏差会逐渐变小，而方差会逐渐变大。</p>
-<h3 id="二、常见算法的优缺点"><a href="#二、常见算法的优缺点" class="headerlink" title="二、常见算法的优缺点"></a>二、常见算法的优缺点</h3><h4 id="1、朴素贝叶斯"><a href="#1、朴素贝叶斯" class="headerlink" title="1、朴素贝叶斯"></a>1、朴素贝叶斯</h4><p>朴素贝叶斯属于<strong>生成式模型</strong>（关于生成模型和判别式模型，主要还是在于是否需要求联合分布），比较简单，你只需做一堆计数即可。如果注有条件独立性假设（一个比较严格的条件），朴素贝叶斯分类器的收敛速度将快于判别模型，比如逻辑回归，所以你只需要较少的训练数据即可。</p>
-<p>即使NB条件独立假设不成立，NB分类器在实践中仍然表现的很出色。它的主要缺点是它不能学习特征间的相互作用，用mRMR中R来讲，就是特征冗余。引用一个比较经典的例子，比如，虽然你喜欢Brad Pitt和Tom Cruise的电影，但是它不能学习出你不喜欢他们在一起演的电影。</p>
-<p><strong>优点</strong>：</p>
-<ul>
-<li>朴素贝叶斯模型发源于古典数学理论，有着坚实的数学基础，以及稳定的分类效率。</li>
-<li>对小规模的数据表现很好，能个处理多分类任务，适合增量式训练；</li>
-<li>对缺失数据不太敏感，算法也比较简单，常用于文本分类。</li>
-</ul>
-<p><strong>缺点</strong>：</p>
-<ul>
-<li>需要计算先验概率；</li>
-<li>分类决策存在错误率；</li>
-<li>对输入数据的表达形式很敏感。</li>
-</ul>
-<hr>
-<h4 id="2-Logistic-Regression"><a href="#2-Logistic-Regression" class="headerlink" title="2.Logistic Regression"></a>2.Logistic Regression</h4><p>逻辑回归属于<strong><em>判别式模型</em></strong>，同时伴有很多模型正则化的方法（L0， L1，L2，etc），而且你不必像在用朴素贝叶斯那样担心你的特征是否相关。与决策树、SVM相比，你还会得到一个不错的概率解释，你甚至可以轻松地利用新数据来更新模型（使用在线梯度下降算法-online gradient descent）。</p>
-<p>如果你需要一个概率架构（比如，简单地调节分类阈值，指明不确定性，或者是要获得置信区间），或者你希望以后将更多的训练数据快速整合到模型中去，那么使用它吧。</p>
-<p><strong>Sigmoid函数</strong>：表达式为公式</p>
-<p>​            $f(x) = \frac{1}{1+e^{-x}}$</p>
-<p><strong>优点：</strong></p>
-<ul>
-<li>实现简单，广泛的应用于工业问题上；</li>
-<li>分类时计算量非常小，速度很快，存储资源低；</li>
-<li>便利的观测样本概率分数；</li>
-<li>对逻辑回归而言，多重共线性并不是问题，它可以结合L2正则化来解决该问题；</li>
-</ul>
-<p><strong>缺点</strong>：</p>
-<ul>
-<li>当特征空间很大时，逻辑回归的性能不是很好；</li>
-<li>容易<strong>欠拟合</strong>，一般准确度不太高</li>
-<li>不能很好地处理大量多类特征或变量；</li>
-<li>只能处理两分类问题（在此基础上衍生出来的softmax可以用于多分类），且必须<strong>线性可分</strong>；</li>
-<li>对于非线性特征，需要进行转换；</li>
-</ul>
-<hr>
-<h4 id="3、线性回归"><a href="#3、线性回归" class="headerlink" title="3、线性回归"></a>3、线性回归</h4><p>线性回归是用于回归的，它不像Logistic回归那样用于分类，其基本思想是用<strong>梯度下降法</strong>对最小二乘法形式的误差函数进行优化，当然也可以用normal equation直接求得参数的解，结果为：</p>
-<p>$\hat{w} = (X^TX)^{-1}X^Ty$</p>
-<p>而在LWLR（局部加权线性回归）中，参数的计算表达式为：</p>
-<p>$\hat{w} = (X^TWX)^{-1}X^TWy$</p>
-<p>由此可见LWLR与LR不同，LWLR是一个非参数模型，因为每次进行回归计算都要遍历训练样本至少一次。</p>
-<p><strong>优点</strong>： 实现简单，计算简单；</p>
-<p><strong>缺点</strong>： 不能拟合非线性数据.</p>
-<hr>
-<h4 id="4、KNN"><a href="#4、KNN" class="headerlink" title="4、KNN"></a>4、KNN</h4><p>KNN即最近邻算法，其主要过程为：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1. 计算训练样本和测试样本中每个样本点的距离（常见的距离度量有欧式距离，马氏距离等）；</span><br><span class="line">2. 对上面所有的距离值进行排序(升序)；</span><br><span class="line">3. 选前k个最小距离的样本；</span><br><span class="line">4. 根据这k个样本的标签进行投票，得到最后的分类类别；</span><br></pre></td></tr></table></figure>
-
-<p>如何选择一个最佳的K值，这取决于数据。一般情况下，在分类时较大的K值能够减小噪声的影响，但会使类别之间的界限变得模糊。一个较好的K值可通过各种启发式技术来获取，比如，交叉验证。另外噪声和非相关性特征向量的存在会使K近邻算法的准确性减小。近邻算法具有较强的一致性结果，随着数据趋于无限，算法保证错误率不会超过贝叶斯算法错误率的两倍。对于一些好的K值，K近邻保证错误率不会超过贝叶斯理论误差率。</p>
-<p><strong>优点</strong></p>
-<ul>
-<li>理论成熟，思想简单，既可以用来做分类也可以用来做回归；</li>
-<li>可用于非线性分类；</li>
-<li>训练时间复杂度为O(n)；</li>
-<li>对数据没有假设，准确度高，对outlier不敏感；</li>
-</ul>
-<p><strong>缺点</strong></p>
-<ul>
-<li>计算量大（体现在距离计算上）；</li>
-<li>样本不平衡问题（即有些类别的样本数量很多，而其它样本的数量很少）效果差；</li>
-<li>需要大量内存；</li>
-</ul>
-<hr>
-<h4 id="5、决策树"><a href="#5、决策树" class="headerlink" title="5、决策树"></a>5、决策树</h4><p>决策树的一大优势就是易于解释。它可以毫无压力地处理特征间的交互关系并且是非参数化的，因此你不必担心异常值或者数据是否线性可分（举个例子，决策树能轻松处理好类别A在某个特征维度x的末端，类别B在中间，然后类别A又出现在特征维度x前端的情况）。它的缺点之一就是不支持在线学习，于是在新样本到来后，决策树需要全部重建。另一个缺点就是容易出现过拟合，但这也就是诸如随机森林RF（或提升树boosted tree）之类的集成方法的切入点。</p>
-<p>另外，随机森林经常是很多分类问题的赢家（通常比支持向量机好上那么一丁点），它训练快速并且可调，同时你无须担心要像支持向量机那样调一大堆参数，所以在以前都一直很受欢迎。</p>
-<p>决策树中很重要的一点就是选择一个属性进行分枝，因此要注意一下信息增益的计算公式，并深入理解它。</p>
-<p>信息熵的计算公式如下:</p>
-<p>$H=-\sum_{i=1}^n p(xi)log_{2}{p(xi)}$</p>
-<p>其中的n代表有n个分类类别（比如假设是二类问题，那么n=2）。分别计算这2类样本在总样本中出现的概率p1和p2，这样就可以计算出未选中属性分枝前的信息熵。</p>
-<p>现在选中一个属性 $xi$ 用来进行分枝，此时分枝规则是：如果       $xi=v$  的话，将样本分到树的一个分支；如果不相等则进入另一个分支。很显然，分支中的样本很有可能包括2个类别，分别计算这2个分支的熵H1和H2,计算出分枝后的总信息熵 $H’ =p1 * H1+p2 * H2$ ,则此时的信息增益 $ΔH = H - H’$ 。以信息增益为原则，把所有的属性都测试一边，选择一个使增益最大的属性作为本次分枝属性。</p>
-<p><strong>决策树自身的优点</strong></p>
-<ul>
-<li>计算简单，易于理解，可解释性强；</li>
-<li>比较适合处理有缺失属性的样本；</li>
-<li>能够处理不相关的特征；</li>
-<li>在相对短的时间内能够对大型数据源做出可行且效果良好的结果。</li>
-</ul>
-<p><strong>缺点</strong></p>
-<ul>
-<li>容易发生过拟合（随机森林可以很大程度上减少过拟合）；</li>
-<li>忽略了数据之间的相关性；</li>
-<li>对于那些各类别样本数量不一致的数据，在决策树当中,信息增益的结果偏向于那些具有更多数值的特征（只要是使用了信息增益，都有这个缺点，如RF）。</li>
-</ul>
-<h5 id="1-Adaboosting"><a href="#1-Adaboosting" class="headerlink" title="(1) Adaboosting"></a>(1) Adaboosting</h5><p>Adaboost是一种加和模型，每个模型都是基于上一次模型的错误率来建立的，过分关注分错的样本，而对正确分类的样本减少关注度，逐次迭代之后，可以得到一个相对较好的模型。该算法是一种典型的boosting算法，其加和理论的优势可以使用Hoeffding不等式得以解释。有兴趣的同学可以阅读下笔者后面写的这篇文章<a href="http://www.csuldw.com/2016/08/28/2016-08-28-adaboost-algorithm-theory/" target="_blank" rel="noopener">Adaboost - 新的角度理解权值更新策略</a>.下面总结下它的优缺点。</p>
-<p><strong>优点</strong></p>
-<ul>
-<li>Adaboost是一种有很高精度的分类器。</li>
-<li>可以使用各种方法构建子分类器，Adaboost算法提供的是框架。</li>
-<li>当使用简单分类器时，计算出的结果是可以理解的，并且弱分类器的构造极其简单。</li>
-<li>简单，不用做特征筛选。</li>
-<li>不易发生overfitting。</li>
-</ul>
-<p>关于随机森林和GBDT等组合算法，参考这篇文章：[机器学习-组合算法总结](<a href="http://www.csuldw.com/2015/07/22/2015-07-22" target="_blank" rel="noopener">http://www.csuldw.com/2015/07/22/2015-07-22</a>  ensemble/)</p>
-<p><strong>缺点：</strong></p>
-<p>​    对outlier比较敏感</p>
-<hr>
-<h4 id="6、SVM"><a href="#6、SVM" class="headerlink" title="6、SVM"></a>6、SVM</h4><p>支持向量机，一个经久不衰的算法，高准确率，为避免过拟合提供了很好的理论保证，而且就算数据在原特征空间线性不可分，只要给个合适的核函数，它就能运行得很好。在动辄超高维的文本分类问题中特别受欢迎。可惜内存消耗大，难以解释，运行和调参也有些烦人，而随机森林却刚好避开了这些缺点，比较实用。</p>
-<p><strong>优点</strong></p>
-<ul>
-<li>可以解决高维问题，即大型特征空间；</li>
-<li>能够处理非线性特征的相互作用；</li>
-<li>无需依赖整个数据；</li>
-<li>可以提高泛化能力；</li>
-</ul>
-<p><strong>缺点</strong></p>
-<ul>
-<li>当观测样本很多时，效率并不是很高；</li>
-<li>对非线性问题没有通用解决方案，有时候很难找到一个合适的核函数；</li>
-<li>对缺失数据敏感；</li>
-</ul>
-<p>对于核的选择也是有技巧的（libsvm中自带了四种核函数：线性核、多项式核、RBF以及sigmoid核）：</p>
-<ul>
-<li>第一，如果样本数量小于特征数，那么就没必要选择非线性核，简单的使用线性核就可以了；</li>
-<li>第二，如果样本数量大于特征数目，这时可以使用非线性核，将样本映射到更高维度，一般可以得到更好的结果；</li>
-<li>第三，如果样本数目和特征数目相等，该情况可以使用非线性核，原理和第二种一样。</li>
-</ul>
-<p>对于第一种情况，也可以先对数据进行降维，然后使用非线性核，这也是一种方法。</p>
-<hr>
-<h4 id="7、人工神经网络"><a href="#7、人工神经网络" class="headerlink" title="7、人工神经网络"></a>7、人工神经网络</h4><p><strong>优点：</strong></p>
-<ul>
-<li>分类的准确度高；</li>
-<li>并行分布处理能力强,分布存储及学习能力强，</li>
-<li>对噪声神经有较强的鲁棒性和容错能力，能充分逼近复杂的非线性关系；</li>
-<li>具备联想记忆的功能。</li>
-</ul>
-<p><strong>缺点：</strong></p>
-<ul>
-<li>神经网络需要大量的参数，如网络拓扑结构、权值和阈值的初始值；</li>
-<li>不能观察之间的学习过程，输出结果难以解释，会影响到结果的可信度和可接受程度；</li>
-<li>学习时间过长,甚至可能达不到学习的目的。</li>
-</ul>
-<hr>
-<h4 id="8、K-Means-聚类"><a href="#8、K-Means-聚类" class="headerlink" title="8、K - Means 聚类"></a>8、K - Means 聚类</h4><p>之前笔者写过一篇关于K-Means聚类的文章，参见<a href="http://www.csuldw.com/2015/06/03/2015-06-03-ml-algorithm-K-means/" target="_blank" rel="noopener">机器学习算法-K-means聚类</a>。关于K-Means的推导，里面可是有大学问的，蕴含着强大的EM思想。</p>
-<p><strong>优点</strong></p>
-<ul>
-<li>算法简单，容易实现 ；</li>
-<li>对处理大数据集，该算法是相对可伸缩的和高效率的，因为它的复杂度大约是O(nkt)，其中n是所有对象的数目，k是簇的数目,t是迭代的次数。通常k&lt;&lt;nk&lt;&lt;n。这个算法通常局部收敛。</li>
-<li>算法尝试找出使平方误差函数值最小的k个划分。当簇是密集的、球状或团状的，且簇与簇之间区别明显时，聚类效果较好。</li>
-</ul>
-<p><strong>缺点</strong></p>
-<ul>
-<li>对数据类型要求较高，适合数值型数据；</li>
-<li>可能收敛到局部最小值，在大规模数据上收敛较慢 </li>
-<li>K值比较难以选取；</li>
-<li>对初值的簇心值敏感，对于不同的初始值，可能会导致不同的聚类结果；</li>
-<li>不适合于发现非凸面形状的簇，或者大小差别很大的簇。</li>
-<li>对于”噪声”和孤立点数据敏感，少量的该类数据能够对平均值产生极大影响。</li>
-</ul>
-<h3 id="三、算法选择参考"><a href="#三、算法选择参考" class="headerlink" title="三、算法选择参考"></a>三、算法选择参考</h3><p>之前笔者翻译过一些国外的文章，其中有一篇文章中给出了一个简单的算法选择技巧：</p>
-<ol>
-<li>首次应该选择的就是逻辑回归，如果它的效果不怎么样，那么可以将它的结果作为基准来参考，在基础上与其他算法进行比较；</li>
-<li>然后试试决策树（随机森林）看看是否可以大幅度提升你的模型性能。即便最后你并没有把它当做为最终模型，你也可以使用随机森林来移除噪声变量，做特征选择；</li>
-<li>如果特征的数量和观测样本特别多，那么当资源和时间充足时（这个前提很重要），使用SVM不失为一种选择。</li>
-</ol>
-<p>通常情况下：【GBDT&gt;=SVM&gt;=RF&gt;=Adaboost&gt;=Other…】，现在深度学习很热门，很多领域都用到，它是以神经网络为基础的，目前笔者自己也在学习，只是理论知识不扎实，理解的不够深入，这里就不做介绍了，希望以后可以写一片抛砖引玉的文章。</p>
-<p>算法固然重要，<strong>但好的数据却要优于好的算法</strong>，设计优良特征是大有裨益的。假如你有一个超大数据集，那么无论你使用哪种算法可能对分类性能都没太大影响（此时就可以根据速度和易用性来进行抉择）。</p>
-<h3 id="四、参考文献"><a href="#四、参考文献" class="headerlink" title="四、参考文献"></a>四、参考文献</h3><p>[1] <a href="https://en.wikipedia.org/wiki/Bias–variance_tradeoff" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Bias%E2%80%93variance_tradeoff</a></p>
-<p>[2] <a href="http://blog.echen.me/2011/04/27/choosing-a-machine-learning-classifier/" target="_blank" rel="noopener">http://blog.echen.me/2011/04/27/choosing-a-machine-learning-classifier/</a></p>
-<p>[3]<a href="http://www.csuldw.com/2016/02/26/2016-02-26-choosing-a-machine-learning-classifier/" target="_blank" rel="noopener">http://www.csuldw.com/2016/02/26/2016-02-26-choosing-a-machine-learning-classifier/</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2209,7 +2574,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">95</span>
+                  <span class="site-state-item-count">98</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
