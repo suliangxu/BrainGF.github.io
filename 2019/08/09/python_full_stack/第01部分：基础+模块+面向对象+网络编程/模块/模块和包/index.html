@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="模块,包,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="（一）模块一、什么是模块​        常见的场景：一个模块就是一个包含了python定义和声明的文件，文件名就是模块名字加上.py的后缀。    但其实import加载的模块分为四个通用类别：　 　　1 使用python编写的代码（.py文件） 　　2 已被编译为共享库或DLL的C或C++扩展 　　3 包好一组模块的包 　　4 使用C编写并链接到python解释器的内置模块 二、为何要使用模块">
+<meta name="keywords" content="模块,包">
+<meta property="og:type" content="article">
+<meta property="og:title" content="模块和包">
+<meta property="og:url" content="http://yoursite.com/2019/08/09/python_full_stack/第01部分：基础+模块+面向对象+网络编程/模块/模块和包/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="（一）模块一、什么是模块​        常见的场景：一个模块就是一个包含了python定义和声明的文件，文件名就是模块名字加上.py的后缀。    但其实import加载的模块分为四个通用类别：　 　　1 使用python编写的代码（.py文件） 　　2 已被编译为共享库或DLL的C或C++扩展 　　3 包好一组模块的包 　　4 使用C编写并链接到python解释器的内置模块 二、为何要使用模块">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://images2017.cnblogs.com/blog/827651/201708/827651-20170809105059949-1199069919.png">
+<meta property="og:updated_time" content="2019-08-09T11:45:24.239Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="模块和包">
+<meta name="twitter:description" content="（一）模块一、什么是模块​        常见的场景：一个模块就是一个包含了python定义和声明的文件，文件名就是模块名字加上.py的后缀。    但其实import加载的模块分为四个通用类别：　 　　1 使用python编写的代码（.py文件） 　　2 已被编译为共享库或DLL的C或C++扩展 　　3 包好一组模块的包 　　4 使用C编写并链接到python解释器的内置模块 二、为何要使用模块">
+<meta name="twitter:image" content="https://images2017.cnblogs.com/blog/827651/201708/827651-20170809105059949-1199069919.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/08/09/python_full_stack/第01部分：基础+模块+面向对象+网络编程/模块/模块和包/">
+
+
+
+
+
+  <title>模块和包 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/09/python_full_stack/第01部分：基础+模块+面向对象+网络编程/模块/模块和包/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">模块和包</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-09T07:53:58+08:00">
+                2019-08-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python全栈-01部分-模块和包/" itemprop="url" rel="index">
+                    <span itemprop="name">python全栈 -01部分 -模块和包</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="（一）模块"><a href="#（一）模块" class="headerlink" title="（一）模块"></a>（一）模块</h2><h3 id="一、什么是模块"><a href="#一、什么是模块" class="headerlink" title="一、什么是模块"></a>一、什么是模块</h3><p>​        常见的场景：一个模块就是一个包含了python定义和声明的文件，文件名就是模块名字加上.py的后缀。</p>
+<p>   但其实import加载的模块分为四个通用类别：　</p>
+<p>　　1 使用python编写的代码（.py文件）</p>
+<p>　　2 已被编译为共享库或DLL的C或C++扩展</p>
+<p>　　3 包好一组模块的包</p>
+<p>　　4 使用C编写并链接到python解释器的内置模块</p>
+<h3 id="二、为何要使用模块"><a href="#二、为何要使用模块" class="headerlink" title="二、为何要使用模块"></a>二、为何要使用模块</h3><p>​    如果你退出python解释器然后重新进入，那么你之前定义的函数或者变量都将丢失，因此我们通常将程序写到文件中以便永久保存下来，需要时就通过python test.py方式去执行，此时test.py被称为脚本script。</p>
+<p>​    随着程序的发展，功能越来越多，为了方便管理，我们通常将程序分成一个个的文件，这样做程序的结构更清晰，方便管理。这时我们不仅仅可以把这些文件当做脚本去执行，还可以把他们当做模块来导入到其他的模块中，实现了功能的重复利用，</p>
+<h3 id="三、如何使用模块"><a href="#三、如何使用模块" class="headerlink" title="三、如何使用模块"></a>三、如何使用模块</h3><h4 id="1、import"><a href="#1、import" class="headerlink" title="1、import"></a>1、import</h4><p>示例文件：自定义模块my_module.py，文件名my_module.py,模块名my_module</p>
+<p>my_module模块:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#my_module.py</span></span><br><span class="line">print(<span class="string">'from the my_module.py'</span>)</span><br><span class="line"></span><br><span class="line">money=<span class="number">1000</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">read1</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">'my_module-&gt;read1-&gt;money'</span>,money)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">read2</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">'my_module-&gt;read2 calling read1'</span>)</span><br><span class="line">    read1()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">change</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">global</span> money</span><br><span class="line">    money=<span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<p>​        模块可以包含可执行的语句和函数的定义，这些语句的目的是初始化模块，它们只在模块名第一次遇到导入import语句时才执行（import语句是可以在程序中的任意位置使用的,且针对同一个模块很import多次,为了防止你重复导入，python的优化手段是：第一次导入后就将模块名加载到内存了，后续的import语句仅是对已经加载大内存中的模块对象增加了一次引用，不会重新执行模块内的语句），如下 </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#demo.py</span></span><br><span class="line"><span class="keyword">import</span> my_module <span class="comment">#只在第一次导入时才执行my_module.py内代码,此处的显式效果是只打印一次'from the my_module.py',当然其他的顶级代码也都被执行了,只不过没有显示效果.</span></span><br><span class="line"><span class="keyword">import</span> my_module</span><br><span class="line"><span class="keyword">import</span> my_module</span><br><span class="line"><span class="keyword">import</span> my_module</span><br><span class="line"></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">执行结果：</span></span><br><span class="line"><span class="string">from the my_module.py</span></span><br><span class="line"><span class="string">'''</span></span><br></pre></td></tr></table></figure>
+
+<p>​        我们可以从sys.modules中找到当前已经加载的模块，sys.modules是一个字典，内部包含模块名与模块对象的映射，该字典决定了导入模块时是否需要重新导入。</p>
+<p>​        每个模块都是一个独立的名称空间，定义在这个模块中的函数，把这个模块的名称空间当做全局名称空间，这样我们在编写自己的模块时，就不用担心我们定义在自己模块中全局变量会在被导入时，与使用者的全局变量冲突</p>
+<p>测试一:money与my_module.money不冲突</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#测试一:money与my_module.money不冲突</span></span><br><span class="line"><span class="comment">#demo.py</span></span><br><span class="line"><span class="keyword">import</span> my_module</span><br><span class="line">money=<span class="number">10</span></span><br><span class="line">print(my_module.money)</span><br><span class="line"></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">执行结果：</span></span><br><span class="line"><span class="string">from the my_module.py</span></span><br><span class="line"><span class="string">'''</span></span><br></pre></td></tr></table></figure>
+
+<p>测试二：read1与my_module.read1不冲突</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#测试二：read1与my_module.read1不冲突</span></span><br><span class="line"><span class="comment">#demo.py</span></span><br><span class="line"><span class="keyword">import</span> my_module</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">read1</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">'========'</span>)</span><br><span class="line">my_module.read1()</span><br><span class="line"></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">执行结果:</span></span><br><span class="line"><span class="string">from the my_module.py</span></span><br><span class="line"><span class="string">my_module-&gt;read1-&gt;money 1000</span></span><br><span class="line"><span class="string">'''</span></span><br></pre></td></tr></table></figure>
+
+<p>测试三：执行my_module.change()操作的全局变量money仍然是my_module中的</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#测试三：执行my_module.change()操作的全局变量money仍然是my_module中的</span></span><br><span class="line"><span class="comment">#demo.py</span></span><br><span class="line"><span class="keyword">import</span> my_module</span><br><span class="line">money=<span class="number">1</span></span><br><span class="line">my_module.change()</span><br><span class="line">print(money)</span><br><span class="line"></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">执行结果：</span></span><br><span class="line"><span class="string">from the my_module.py</span></span><br><span class="line"><span class="string">'''</span></span><br></pre></td></tr></table></figure>
+
+<p>总结：首次导入模块my_module时会做三件事：</p>
+<p>1.为源文件(my_module模块)创建新的名称空间，在my_module中定义的函数和方法若是使用到了global时访问的就是这个名称空间。</p>
+<p>2.在新创建的命名空间中执行模块中包含的代码，见初始导入import my_module</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1 提示:导入模块时到底执行了什么？</span><br><span class="line">2 </span><br><span class="line">3 In fact function definitions are also ‘statements’ that are ‘executed’; the execution of a module-level function definition enters the function name in the module’s global symbol table.</span><br><span class="line">4 事实上函数定义也是“被执行”的语句，模块级别函数定义的执行将函数名放入模块全局名称空间表，用globals()可以查看</span><br></pre></td></tr></table></figure>
+
+<p>3.创建名字my_module来引用该命名空间</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1 这个名字和变量名没什么区别，都是‘第一类的’，且使用my_module.名字的方式可以访问my_module.py文件中定义的名字，my_module.名字与test.py中的名字来自两个完全不同的地方。</span><br></pre></td></tr></table></figure>
+
+<p>为模块名起别名，相当于m1=1;m2=m1</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> my_module <span class="keyword">as</span> sm</span><br><span class="line">print(sm.money)</span><br></pre></td></tr></table></figure>
+
+<p>示范用法一：</p>
+<p>有两中sql模块mysql和oracle，根据用户的输入，选择不同的sql功能</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#mysql.py</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sqlparse</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">'from mysql sqlparse'</span>)</span><br><span class="line"><span class="comment">#oracle.py</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sqlparse</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">'from oracle sqlparse'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#test.py</span></span><br><span class="line">db_type=input(<span class="string">'&gt;&gt;: '</span>)</span><br><span class="line"><span class="keyword">if</span> db_type == <span class="string">'mysql'</span>:</span><br><span class="line">    <span class="keyword">import</span> mysql <span class="keyword">as</span> db</span><br><span class="line"><span class="keyword">elif</span> db_type == <span class="string">'oracle'</span>:</span><br><span class="line">    <span class="keyword">import</span> oracle <span class="keyword">as</span> db</span><br><span class="line"></span><br><span class="line">db.sqlparse()</span><br></pre></td></tr></table></figure>
+
+<p>示范用法二： </p>
+<p>​        为已经导入的模块起别名的方式对编写可扩展的代码很有用，假设有两个模块xmlreader.py和csvreader.py，它们都定义了函数read_data(filename):用来从文件中读取一些数据，但采用不同的输入格式。可以编写代码来选择性地挑选读取模块，例如</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> file_format == <span class="string">'xml'</span>:</span><br><span class="line">     <span class="keyword">import</span> xmlreader <span class="keyword">as</span> reader</span><br><span class="line"><span class="keyword">elif</span> file_format == <span class="string">'csv'</span>:</span><br><span class="line">     <span class="keyword">import</span> csvreader <span class="keyword">as</span> reader</span><br><span class="line">data=reader.read_date(filename)</span><br></pre></td></tr></table></figure>
+
+<p>在一行导入多个模块</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys,os,re</span><br></pre></td></tr></table></figure>
+
+<h4 id="2、-from-…-import…"><a href="#2、-from-…-import…" class="headerlink" title="2、 from … import…"></a>2、 <strong>from … import…</strong></h4><p>​        对比import my_module，会将源文件的名称空间’my_module’带到当前名称空间中，使用时必须是my_module.名字的方式</p>
+<p>​        而from 语句相当于import，也会创建新的名称空间，但是将my_module中的名字直接导入到当前的名称空间中，在当前名称空间中，直接使用名字就可以了</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> my_module <span class="keyword">import</span> read1,read2</span><br></pre></td></tr></table></figure>
+
+<p>这样在当前位置直接使用read1和read2就好了，执行时，仍然以my_module.py文件全局名称空间</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#测试一：导入的函数read1，执行时仍然回到my_module.py中寻找全局变量money</span></span><br><span class="line"><span class="comment">#demo.py</span></span><br><span class="line"><span class="keyword">from</span> my_module <span class="keyword">import</span> read1</span><br><span class="line">money=<span class="number">1000</span></span><br><span class="line">read1()</span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">执行结果:</span></span><br><span class="line"><span class="string">from the my_module.py</span></span><br><span class="line"><span class="string">spam-&gt;read1-&gt;money 1000</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#测试二:导入的函数read2，执行时需要调用read1(),仍然回到my_module.py中找read1()</span></span><br><span class="line"><span class="comment">#demo.py</span></span><br><span class="line"><span class="keyword">from</span> my_module <span class="keyword">import</span> read2</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">read1</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">'=========='</span>)</span><br><span class="line">read2()</span><br><span class="line"></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">执行结果:</span></span><br><span class="line"><span class="string">from the my_module.py</span></span><br><span class="line"><span class="string">my_module-&gt;read2 calling read1</span></span><br><span class="line"><span class="string">my_module-&gt;read1-&gt;money 1000</span></span><br><span class="line"><span class="string">'''</span></span><br></pre></td></tr></table></figure>
+
+<p>如果当前有重名read1或者read2，那么会有覆盖效果。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#测试三:导入的函数read1，被当前位置定义的read1覆盖掉了</span></span><br><span class="line"><span class="comment">#demo.py</span></span><br><span class="line"><span class="keyword">from</span> my_module <span class="keyword">import</span> read1</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">read1</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">'=========='</span>)</span><br><span class="line">read1()</span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">执行结果:</span></span><br><span class="line"><span class="string">from the my_module.py</span></span><br><span class="line"><span class="string">==========</span></span><br><span class="line"><span class="string">'''</span></span><br></pre></td></tr></table></figure>
+
+<p>需要特别强调的一点是：python中的变量赋值不是一种存储操作，而只是一种绑定关系，如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> my_module <span class="keyword">import</span> money,read1</span><br><span class="line">money=<span class="number">100</span> <span class="comment">#将当前位置的名字money绑定到了100</span></span><br><span class="line">print(money) <span class="comment">#打印当前的名字</span></span><br><span class="line">read1() <span class="comment">#读取my_module.py中的名字money,仍然为1000</span></span><br><span class="line"></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">from the my_module.py</span></span><br><span class="line"><span class="string">my_module-&gt;read1-&gt;money 1000</span></span><br><span class="line"><span class="string">'''</span></span><br></pre></td></tr></table></figure>
+
+<p>也支持as</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> my_module <span class="keyword">import</span> read1 <span class="keyword">as</span> read</span><br></pre></td></tr></table></figure>
+
+<p>也支持导入多行</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> my_module <span class="keyword">import</span> (read1,</span><br><span class="line">                       read2,</span><br><span class="line">                 			 money)</span><br></pre></td></tr></table></figure>
+
+<p>​        from my_module import * 把my_module中所有的不是以下划线(_)开头的名字都导入到当前位置，大部分情况下我们的python程序不应该使用这种导入方式，因为*你不知道你导入什么名字，很有可能会覆盖掉你之前已经定义的名字。而且可读性极其的差，在交互式环境中导入时没有问题。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> my_module <span class="keyword">import</span> * <span class="comment">#将模块my_module中所有的名字都导入到当前名称空间</span></span><br><span class="line">print(money)</span><br><span class="line">print(read1)</span><br><span class="line">print(read2)</span><br><span class="line">print(change)</span><br><span class="line"></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">执行结果:</span></span><br><span class="line"><span class="string">from the my_module.py</span></span><br><span class="line"><span class="string">&lt;function read1 at 0x1012e8158&gt;</span></span><br><span class="line"><span class="string">&lt;function read2 at 0x1012e81e0&gt;</span></span><br><span class="line"><span class="string">&lt;function change at 0x1012e8268&gt;</span></span><br><span class="line"><span class="string">'''</span></span><br></pre></td></tr></table></figure>
+
+<p>在my_module.py中新增一行</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">__all__=[<span class="string">'money'</span>,<span class="string">'read1'</span>] <span class="comment">#这样在另外一个文件中用from my_module import *就这能导入列表中规定的两个名字</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>如果my_module.py中的名字前加_,即_money，则from my_module import *,则_money不能被导入</strong></p>
+<p><strong>模块的循环引用问题</strong></p>
+<p>思考：假如有两个模块a，b。我可不可以在a模块中import b ，再在b模块中import a</p>
+<p><strong>模块的加载与修改</strong></p>
+<p>​        考虑到性能的原因，每个模块只被导入一次,放入字典sys.modules中，如果你改变了模块的内容，你必须重启程序，python不支持重新加载或卸载之前导入的模块，</p>
+<p>​        有的同学可能会想到直接从sys.modules中删除一个模块不就可以卸载了吗，注意了，你删了sys.modules中的模块对象仍然可能被其他程序的组件所引用，因而不会被清除。</p>
+<p>​        特别的对于我们引用了这个模块中的一个类，用这个类产生了很多对象，因而这些对象都有关于这个模块的引用。</p>
+<p>​        如果只是你想交互测试的一个模块，使用 importlib.reload(), e.g. import importlib; importlib.reload(modulename)，这只能用于测试环境。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># aa.py</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func1</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">'func1'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>测试代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time,importlib</span><br><span class="line"><span class="keyword">import</span> aa</span><br><span class="line"> </span><br><span class="line">time.sleep(<span class="number">20</span>)</span><br><span class="line"><span class="comment"># importlib.reload(aa)</span></span><br><span class="line">aa.func1()</span><br></pre></td></tr></table></figure>
+
+<p>在20秒的等待时间里，修改aa.py中func1的内容，等待test.py的结果。</p>
+<p>打开importlib注释，重新测试</p>
+<h4 id="3、把模块当作脚本运行"><a href="#3、把模块当作脚本运行" class="headerlink" title="3、把模块当作脚本运行"></a>3、把模块当作脚本运行</h4><p>我们可以通过模块的全局变量__name__来查看模块名：<br>当做脚本运行：<br>__name__ 等于’__main__‘</p>
+<p>当做模块导入：<br>__name__= 模块名</p>
+<p>作用：用来控制.py文件在不同的应用场景下执行不同的逻辑<br>if __name__ == ‘__main__‘:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fib</span><span class="params">(n)</span>:</span>   </span><br><span class="line">    a, b = <span class="number">0</span>, <span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> b &lt; n:</span><br><span class="line">        print(b, end=<span class="string">' '</span>)</span><br><span class="line">        a, b = b, a+b</span><br><span class="line">    print()</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    print(__name__)</span><br><span class="line">    num = input(<span class="string">'num :'</span>)</span><br><span class="line">    fib(int(num))</span><br></pre></td></tr></table></figure>
+
+<h4 id="4、模块搜索路径"><a href="#4、模块搜索路径" class="headerlink" title="4、模块搜索路径"></a>4、模块搜索路径</h4><p>python解释器在启动时会自动加载一些模块，可以使用sys.modules查看</p>
+<p>在第一次导入某个模块时（比如my_module），会先检查该模块是否已经被加载到内存中（当前执行文件的名称空间对应的内存），如果有则直接引用</p>
+<p>如果没有，解释器则会查找同名的内建模块，如果还没有找到就从sys.path给出的目录列表中依次寻找my_module.py文件。</p>
+<p><strong>所以总结模块的查找顺序是：内存中已经加载的模块-&gt;内置模块-&gt;sys.path路径中包含的模块</strong></p>
+<p>sys.path的初始化的值来自于：</p>
+<p>The directory containing the input script (or the current directory when no file is specified).<br>PYTHONPATH (a list of directory names, with the same syntax as the shell variable PATH).<br>The installation-dependent default.</p>
+<p>需要特别注意的是：我们自定义的模块名不应该与系统内置模块重名。虽然每次都说，但是仍然会有人不停的犯错。 </p>
+<p>在初始化后，python程序可以修改sys.path,路径放到前面的优先于标准库被加载。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> sys</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sys.path.append(<span class="string">'/a/b/c/d'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sys.path.insert(<span class="number">0</span>,<span class="string">'/x/y/z'</span>) <span class="comment">#排在前的目录，优先被搜索</span></span><br></pre></td></tr></table></figure>
+
+<p>​        注意：搜索时按照sys.path中从左到右的顺序查找，位于前的优先被查找，sys.path中还可能包含.zip归档文件和.egg文件，python会把.zip归档文件当成一个目录去处理。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#首先制作归档文件：zip module.zip foo.py bar.py</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line">sys.path.append(<span class="string">'module.zip'</span>)</span><br><span class="line"><span class="keyword">import</span> foo,bar</span><br><span class="line"></span><br><span class="line"><span class="comment">#也可以使用zip中目录结构的具体位置</span></span><br><span class="line">sys.path.append(<span class="string">'module.zip/lib/python'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#windows下的路径不加r开头，会语法错误</span></span><br><span class="line">sys.path.insert(<span class="number">0</span>,<span class="string">r'C:\Users\Administrator\PycharmProjects\a'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>​        至于.egg文件是由setuptools创建的包，这是按照第三方python库和扩展时使用的一种常见格式，.egg文件实际上只是添加了额外元数据(如版本号，依赖项等)的.zip文件。</p>
+<p>​        需要强调的一点是：只能从.zip文件中导入.py，.pyc等文件。使用C编写的共享库和扩展块无法直接从.zip文件中加载（此时setuptools等打包系统有时能提供一种规避方法），且从.zip中加载文件不会创建.pyc或者.pyo文件，因此一定要事先创建他们，来避免加载模块是性能下降。</p>
+<p><strong>官网解释</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#官网链接：https://docs.python.org/3/tutorial/modules.html#the-module-search-path</span><br><span class="line">搜索路径：</span><br><span class="line">当一个命名为my_module的模块被导入时</span><br><span class="line">    解释器首先会从内建模块中寻找该名字</span><br><span class="line">    找不到，则去sys.path中找该名字</span><br><span class="line"></span><br><span class="line">sys.path从以下位置初始化</span><br><span class="line">执行文件所在的当前目录</span><br><span class="line">PTYHONPATH（包含一系列目录名，与shell变量PATH语法一样）</span><br><span class="line">依赖安装时默认指定的</span><br><span class="line"></span><br><span class="line">注意：在支持软连接的文件系统中，执行脚本所在的目录是在软连接之后被计算的，换句话说，包含软连接的目录不会被添加到模块的搜索路径中</span><br><span class="line"></span><br><span class="line">在初始化后，我们也可以在python程序中修改sys.path,执行文件所在的路径默认是sys.path的第一个目录，在所有标准库路径的前面。这意味着，当前目录是优先于标准库目录的，需要强调的是：我们自定义的模块名不要跟python标准库的模块名重复，除非你是故意的，傻叉。</span><br></pre></td></tr></table></figure>
+
+<h4 id="5、编译python文件"><a href="#5、编译python文件" class="headerlink" title="5、编译python文件"></a>5、编译python文件</h4><p>​        为了提高加载模块的速度，强调强调强调：提高的是加载速度而绝非运行速度。python解释器会在<strong>pycache</strong>目录中下缓存每个模块编译后的版本，格式为：module.version.pyc。通常会包含python的版本号。例如，在CPython3.3版本下，    my_module.py模块会被缓存成<strong>pycache</strong>/my_module.cpython-33.pyc。这种命名规范保证了编译后的结果多版本共存。</p>
+<p>​        Python检查源文件的修改时间与编译的版本进行对比，如果过期就需要重新编译。这是完全自动的过程。并且编译的模块是平台独立的，所以相同的库可以在不同的架构的系统之间共享，即pyc使一种跨平台的字节码，类似于JAVA火.NET,是由python虚拟机来执行的，但是pyc的内容跟python的版本相关，不同的版本编译后的pyc文件不同，2.5编译的pyc文件不能到3.5上执行，并且pyc文件是可以反编译的，因而它的出现仅仅是用来提升模块的加载速度的。</p>
+<p>python解释器在以下两种情况下不检测缓存<br>　　1 如果是在命令行中被直接导入模块，则按照这种方式，每次导入都会重新编译，并且不会存储编译后的结果（python3.3以前的版本应该是这样）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -m my_module.py</span><br></pre></td></tr></table></figure>
+
+<p>2 如果源文件不存在，那么缓存的结果也不会被使用，如果想在没有源文件的情况下来使用编译后的结果，则编译后的结果必须在源目录下 </p>
+<p>提示：</p>
+<p>1.模块名区分大小写，foo.py与FOO.py代表的是两个模块</p>
+<p>2.你可以使用-O或者-OO转换python命令来减少编译模块的大小</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-O转换会帮你去掉assert语句</span><br><span class="line">-OO转换会帮你去掉assert语句和__doc__文档字符串</span><br><span class="line">由于一些程序可能依赖于assert语句或文档字符串，你应该在在确认需要的情况下使用这些选项。</span><br></pre></td></tr></table></figure>
+
+<p>3.在速度上从.pyc文件中读指令来执行不会比从.py文件中读指令执行更快，只有在模块被加载时，.pyc文件才是更快的</p>
+<p>4.只有使用import语句是才将文件自动编译为.pyc文件，在命令行或标准输入中指定运行脚本则不会生成这类文件，因而我们可以使用compieall模块为一个目录中的所有模块创建.pyc文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">模块可以作为一个脚本（使用python -m compileall）编译Python源</span><br><span class="line"> </span><br><span class="line">python -m compileall /module_directory 递归着编译</span><br><span class="line">如果使用python -O -m compileall /module_directory -l则只一层</span><br><span class="line"> </span><br><span class="line">命令行里使用compile()函数时，自动使用python -O -m compileall</span><br><span class="line"> </span><br><span class="line">详见：https://docs.python.org/3/library/compileall.html#module-compileall</span><br></pre></td></tr></table></figure>
+
+<h4 id="6、补充：dir-函数"><a href="#6、补充：dir-函数" class="headerlink" title="6、补充：dir() 函数"></a>6、补充：dir() 函数</h4><p>内建函数dir是用来查找模块中定义的名字，返回一个有序字符串列表</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> my_module</span><br><span class="line">dir(my_module)</span><br></pre></td></tr></table></figure>
+
+<p>如果没有参数,dir()列举出当前定义的名字</p>
+<p>dir()不会列举出内建函数或者变量的名字，它们都被定义到了标准模块builtin中，可以列举出它们，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> builtins</span><br><span class="line">dir(builtins)</span><br></pre></td></tr></table></figure>
+
+<h2 id="（二）包"><a href="#（二）包" class="headerlink" title="（二）包"></a>（二）包</h2><p>包是一种通过使用‘.模块名’来组织python模块名称空间的方式。</p>
+<p><strong>１. 无论是import形式还是from…import形式，凡是在导入语句中（而不是在使用时）遇到带点的，都要第一时间提高警觉：这是关于包才有的导入语法</strong></p>
+<p><strong>2. 包是目录级的（文件夹级），文件夹是用来组成py文件（包的本质就是一个包含<strong>init</strong>.py文件的目录）</strong></p>
+<p><strong>3. import导入文件时，产生名称空间中的名字来源于文件，import 包，产生的名称空间的名字同样来源于文件，即包下的<strong>init</strong>.py，导入包本质就是在导入该文件</strong></p>
+<p><strong>强调：</strong></p>
+<p>　　<strong>1. 在python3中，即使包下没有<strong>init</strong>.py文件，import 包仍然不会报错，而在python2中，包下一定要有该文件，否则import 包报错</strong></p>
+<p>　　<strong>2. 创建包的目的不是为了运行，而是被导入使用，记住，包只是模块的一种形式而已，包即模块</strong></p>
+<p>包A和包B下有同名模块也不会冲突，如A.a与B.a来自俩个命名空间</p>
+<p>创建目录代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line">os.makedirs(<span class="string">'glance/api'</span>)</span><br><span class="line">os.makedirs(<span class="string">'glance/cmd'</span>)</span><br><span class="line">os.makedirs(<span class="string">'glance/db'</span>)</span><br><span class="line">l = []</span><br><span class="line">l.append(open(<span class="string">'glance/__init__.py'</span>,<span class="string">'w'</span>))</span><br><span class="line">l.append(open(<span class="string">'glance/api/__init__.py'</span>,<span class="string">'w'</span>))</span><br><span class="line">l.append(open(<span class="string">'glance/api/policy.py'</span>,<span class="string">'w'</span>))</span><br><span class="line">l.append(open(<span class="string">'glance/api/versions.py'</span>,<span class="string">'w'</span>))</span><br><span class="line">l.append(open(<span class="string">'glance/cmd/__init__.py'</span>,<span class="string">'w'</span>))</span><br><span class="line">l.append(open(<span class="string">'glance/cmd/manage.py'</span>,<span class="string">'w'</span>))</span><br><span class="line">l.append(open(<span class="string">'glance/db/models.py'</span>,<span class="string">'w'</span>))</span><br><span class="line">map(<span class="keyword">lambda</span> f:f.close() ,l)</span><br></pre></td></tr></table></figure>
+
+<p>目录结构：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">glance/                   <span class="comment">#Top-level package</span></span><br><span class="line"></span><br><span class="line">├── __init__.py      <span class="comment">#Initialize the glance package</span></span><br><span class="line"></span><br><span class="line">├── api                  <span class="comment">#Subpackage for api</span></span><br><span class="line"></span><br><span class="line">│   ├── __init__.py</span><br><span class="line"></span><br><span class="line">│   ├── policy.py</span><br><span class="line"></span><br><span class="line">│   └── versions.py</span><br><span class="line"></span><br><span class="line">├── cmd                <span class="comment">#Subpackage for cmd</span></span><br><span class="line"></span><br><span class="line">│   ├── __init__.py</span><br><span class="line"></span><br><span class="line">│   └── manage.py</span><br><span class="line"></span><br><span class="line">└── db                  <span class="comment">#Subpackage for db</span></span><br><span class="line"></span><br><span class="line">    ├── __init__.py</span><br><span class="line"></span><br><span class="line">    └── models.py</span><br></pre></td></tr></table></figure>
+
+<p>文件内容:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#文件内容</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#policy.py</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">'from policy.py'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#versions.py</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">create_resource</span><span class="params">(conf)</span>:</span></span><br><span class="line">    print(<span class="string">'from version.py: '</span>,conf)</span><br><span class="line"></span><br><span class="line"><span class="comment">#manage.py</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">'from manage.py'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#models.py</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">register_models</span><span class="params">(engine)</span>:</span></span><br><span class="line">    print(<span class="string">'from models.py: '</span>,engine)</span><br></pre></td></tr></table></figure>
+
+<h3 id="一、注意事项"><a href="#一、注意事项" class="headerlink" title="一、注意事项"></a>一、注意事项</h3><p>​        1.关于包相关的导入语句也分为import和from … import …两种，但是无论哪种，无论在什么位置，在导入时都必须遵循一个原则：凡是在导入时带点的，点的左边都必须是一个包，否则非法。可以带有一连串的点，如item.subitem.subsubitem,但都必须遵循这个原则。</p>
+<p>​        2.对于导入后，在使用时就没有这种限制了，点的左边可以是包,模块，函数，类(它们都可以用点的方式调用自己的属性)。</p>
+<p>​        3.对比import item 和from item import name的应用场景：<br>如果我们想直接使用name那必须使用后者。</p>
+<h3 id="二、import"><a href="#二、import" class="headerlink" title="二、import"></a>二、import</h3><p>我们在与包glance同级别的文件中测试</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> glance.db.models</span><br><span class="line">glance.db.models.register_models(<span class="string">'mysql'</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="三、from-…-import-…"><a href="#三、from-…-import-…" class="headerlink" title="三、from … import …"></a>三、from … import …</h3><p><strong>需要注意的是from后import导入的模块，必须是明确的一个不能带点，否则会有语法错误，如：from a import b.c是错误语法</strong></p>
+<p>我们在与包glance同级别的文件中测试</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> glance.db <span class="keyword">import</span> models</span><br><span class="line">models.register_models(<span class="string">'mysql'</span>)</span><br><span class="line"> </span><br><span class="line"><span class="keyword">from</span> glance.db.models <span class="keyword">import</span> register_models</span><br><span class="line">register_models(<span class="string">'mysql'</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="四、-init-py文件"><a href="#四、-init-py文件" class="headerlink" title="四、__init__.py文件"></a>四、__init__.py文件</h3><p>​        不管是哪种方式，只要是第一次导入包或者是包的任何其他部分，都会依次执行包下的<strong>init</strong>.py文件(我们可以在每个包的文件内都打印一行内容来验证一下)，这个文件可以为空，但是也可以存放一些初始化包的代码。</p>
+<h3 id="五、from-glance-api-import"><a href="#五、from-glance-api-import" class="headerlink" title="五、from glance.api import *"></a>五、from glance.api import *</h3><p>​        在讲模块时，我们已经讨论过了从一个模块内导入所有<em>，此处我们研究从一个包导入所有</em>。</p>
+<p>​        此处是想从包api中导入所有，实际上该语句只会导入包api下__init__.py文件中定义的名字，我们可以在这个文件中定义__all___:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#在__init__.py中定义</span></span><br><span class="line">x=<span class="number">10</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">'from api.__init.py'</span>)</span><br><span class="line"></span><br><span class="line">__all__=[<span class="string">'x'</span>,<span class="string">'func'</span>,<span class="string">'policy'</span>]</span><br></pre></td></tr></table></figure>
+
+<p>此时我们在于glance同级的文件中执行from glance.api import *就导入__all__中的内容（versions仍然不能导入）。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">glance/                   </span><br><span class="line"></span><br><span class="line">├── __init__.py      </span><br><span class="line"></span><br><span class="line">├── api                  </span><br><span class="line"></span><br><span class="line">│   ├── __init__.py   __all__ = [<span class="string">'policy'</span>,<span class="string">'versions'</span>] </span><br><span class="line"></span><br><span class="line">│   ├── policy.py</span><br><span class="line"></span><br><span class="line">│   └── versions.py</span><br><span class="line"></span><br><span class="line">├── cmd               __all__ = [<span class="string">'manage'</span>]    </span><br><span class="line"></span><br><span class="line">│   ├── __init__.py</span><br><span class="line"></span><br><span class="line">│   └── manage.py    </span><br><span class="line"></span><br><span class="line">└── db                __all__ = [<span class="string">'models'</span>]              </span><br><span class="line"></span><br><span class="line">    ├── __init__.py</span><br><span class="line"></span><br><span class="line">    └── models.py</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> glance.api <span class="keyword">import</span> *</span><br><span class="line">policy.get()</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> glance.api <span class="keyword">import</span> *</span><br></pre></td></tr></table></figure>
+
+<h3 id="六、绝对导入和相对导入"><a href="#六、绝对导入和相对导入" class="headerlink" title="六、绝对导入和相对导入"></a>六、绝对导入和相对导入</h3><p>​        我们的最顶级包glance是写给别人用的，然后在glance包内部也会有彼此之间互相导入的需求，这时候就有绝对导入和相对导入两种方式：</p>
+<p>绝对导入：以glance作为起始</p>
+<p>相对导入：用.或者..的方式最为起始（只能在一个包中使用，不能用于不同目录内）</p>
+<p>例如：我们在glance/api/version.py中想要导入glance/cmd/manage.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">在glance/api/version.py</span><br><span class="line"></span><br><span class="line"><span class="comment">#绝对导入</span></span><br><span class="line"><span class="keyword">from</span> glance.cmd <span class="keyword">import</span> manage</span><br><span class="line">manage.main()</span><br><span class="line"></span><br><span class="line"><span class="comment">#相对导入</span></span><br><span class="line"><span class="keyword">from</span> ..cmd <span class="keyword">import</span> manage</span><br><span class="line">manage.main()</span><br></pre></td></tr></table></figure>
+
+<p>测试结果：注意一定要在于glance同级的文件中测试</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> glance.api <span class="keyword">import</span> versions</span><br></pre></td></tr></table></figure>
+
+<p>​        注意：在使用pycharm时，有的情况会为你多做一些事情，这是软件相关的东西，会影响你对模块导入的理解，因而在测试时，一定要回到命令行去执行，模拟我们生产环境，你总不能拿着pycharm去上线代码吧！！！</p>
+<p>​        <strong>特别需要注意的是：可以用import导入内置或者第三方模块（已经在sys.path中），但是要绝对避免使用import来导入自定义包的子模块(没有在sys.path中)，应该使用from… import …的绝对或者相对导入,且包的相对导入只能用from的形式。</strong></p>
+<p>​        比如我们想在glance/api/versions.py中导入glance/api/policy.py，有的同学一抽这俩模块是在同一个目录下，十分开心的就去做了，它直接这么做</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#在version.py中</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> policy</span><br><span class="line">policy.get()</span><br></pre></td></tr></table></figure>
+
+<p>​        没错，我们单独运行version.py是一点问题没有的，运行version.py的路径搜索就是从当前路径开始的，于是在导入policy时能在当前目录下找到</p>
+<p>​        但是你想啊，你子包中的模块version.py极有可能是被一个glance包同一级别的其他文件导入，比如我们在于glance同级下的一个test.py文件中导入version.py，如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> glance.api <span class="keyword">import</span> versions</span><br><span class="line"></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">执行结果:</span></span><br><span class="line"><span class="string">ImportError: No module named 'policy'</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">分析:</span></span><br><span class="line"><span class="string">此时我们导入versions在versions.py中执行</span></span><br><span class="line"><span class="string">import policy需要找从sys.path也就是从当前目录找policy.py,</span></span><br><span class="line"><span class="string">这必然是找不到的</span></span><br><span class="line"><span class="string">'''</span></span><br></pre></td></tr></table></figure>
+
+<p>绝对导入</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">glance/                   </span><br><span class="line"></span><br><span class="line">├── __init__.py      <span class="keyword">from</span> glance <span class="keyword">import</span> api</span><br><span class="line">                             <span class="keyword">from</span> glance <span class="keyword">import</span> cmd</span><br><span class="line">                             <span class="keyword">from</span> glance <span class="keyword">import</span> db</span><br><span class="line"></span><br><span class="line">├── api                  </span><br><span class="line"></span><br><span class="line">│   ├── __init__.py  <span class="keyword">from</span> glance.api <span class="keyword">import</span> policy</span><br><span class="line">                              <span class="keyword">from</span> glance.api <span class="keyword">import</span> versions</span><br><span class="line"></span><br><span class="line">│   ├── policy.py</span><br><span class="line"></span><br><span class="line">│   └── versions.py</span><br><span class="line"></span><br><span class="line">├── cmd                 <span class="keyword">from</span> glance.cmd <span class="keyword">import</span> manage</span><br><span class="line"></span><br><span class="line">│   ├── __init__.py</span><br><span class="line"></span><br><span class="line">│   └── manage.py</span><br><span class="line"></span><br><span class="line">└── db                   <span class="keyword">from</span> glance.db <span class="keyword">import</span> models</span><br><span class="line"></span><br><span class="line">    ├── __init__.py</span><br><span class="line"></span><br><span class="line">    └── models.py</span><br></pre></td></tr></table></figure>
+
+<p>相对导入</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">glance/                   </span><br><span class="line"></span><br><span class="line">├── __init__.py      <span class="keyword">from</span> . <span class="keyword">import</span> api  <span class="comment">#.表示当前目录</span></span><br><span class="line">                     <span class="keyword">from</span> . <span class="keyword">import</span> cmd</span><br><span class="line">                     <span class="keyword">from</span> . <span class="keyword">import</span> db</span><br><span class="line"></span><br><span class="line">├── api                  </span><br><span class="line"></span><br><span class="line">│   ├── __init__.py  <span class="keyword">from</span> . <span class="keyword">import</span> policy</span><br><span class="line">                     <span class="keyword">from</span> . <span class="keyword">import</span> versions</span><br><span class="line"></span><br><span class="line">│   ├── policy.py</span><br><span class="line"></span><br><span class="line">│   └── versions.py</span><br><span class="line"></span><br><span class="line">├── cmd              <span class="keyword">from</span> . <span class="keyword">import</span> manage</span><br><span class="line"></span><br><span class="line">│   ├── __init__.py</span><br><span class="line"></span><br><span class="line">│   └── manage.py    <span class="keyword">from</span> ..api <span class="keyword">import</span> policy   </span><br><span class="line">                     <span class="comment">#..表示上一级目录，想再manage中使用policy中的方法就需要回到上一级glance目录往下找api包，从api导入policy</span></span><br><span class="line"></span><br><span class="line">└── db               <span class="keyword">from</span> . <span class="keyword">import</span> models</span><br><span class="line"></span><br><span class="line">    ├── __init__.py</span><br><span class="line"></span><br><span class="line">    └── models.py</span><br></pre></td></tr></table></figure>
+
+<h3 id="七、单独导入包"><a href="#七、单独导入包" class="headerlink" title="七、单独导入包"></a>七、单独导入包</h3><p>单独导入包名称时不会导入包中所有包含的所有子模块，如</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#在与glance同级的test.py中</span></span><br><span class="line"><span class="keyword">import</span> glance</span><br><span class="line">glance.cmd.manage.main()</span><br><span class="line"></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">执行结果：</span></span><br><span class="line"><span class="string">AttributeError: module 'glance' has no attribute 'cmd'</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">'''</span></span><br></pre></td></tr></table></figure>
+
+<p>解决方法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#glance/__init__.py</span></span><br><span class="line"><span class="keyword">from</span> . <span class="keyword">import</span> cmd</span><br><span class="line"> </span><br><span class="line"><span class="comment">#glance/cmd/__init__.py</span></span><br><span class="line"><span class="keyword">from</span> . <span class="keyword">import</span> manage</span><br></pre></td></tr></table></figure>
+
+<p>执行：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#在于glance同级的test.py中</span></span><br><span class="line"><span class="keyword">import</span> glance</span><br><span class="line">glance.cmd.manage.main()</span><br></pre></td></tr></table></figure>
+
+<p>千万别问：__all__不能解决吗，__all__是用于控制from…import *</p>
+<p>import glance之后直接调用模块中的方法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">glance/                   </span><br><span class="line"></span><br><span class="line">├── __init__.py     <span class="keyword">from</span> .api <span class="keyword">import</span> *</span><br><span class="line">                    <span class="keyword">from</span> .cmd <span class="keyword">import</span> *</span><br><span class="line">                    <span class="keyword">from</span> .db <span class="keyword">import</span> *    </span><br><span class="line">├── api                  </span><br><span class="line"></span><br><span class="line">│   ├── __init__.py   __all__ = [<span class="string">'policy'</span>,<span class="string">'versions'</span>] </span><br><span class="line"></span><br><span class="line">│   ├── policy.py</span><br><span class="line"></span><br><span class="line">│   └── versions.py</span><br><span class="line"></span><br><span class="line">├── cmd               __all__ = [<span class="string">'manage'</span>]    </span><br><span class="line"></span><br><span class="line">│   ├── __init__.py</span><br><span class="line"></span><br><span class="line">│   └── manage.py    </span><br><span class="line"></span><br><span class="line">└── db                __all__ = [<span class="string">'models'</span>]              </span><br><span class="line"></span><br><span class="line">    ├── __init__.py</span><br><span class="line"></span><br><span class="line">    └── models.py</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> glance</span><br><span class="line">policy.get()</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> glance</span><br></pre></td></tr></table></figure>
+
+<h2 id="（三）软件开发规范"><a href="#（三）软件开发规范" class="headerlink" title="（三）软件开发规范"></a>（三）软件开发规范</h2><p><img src="https://images2017.cnblogs.com/blog/827651/201708/827651-20170809105059949-1199069919.png" alt="img"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#=============&gt;bin目录：存放执行脚本</span></span><br><span class="line"><span class="comment">#start.py</span></span><br><span class="line"><span class="keyword">import</span> sys,os</span><br><span class="line"></span><br><span class="line">BASE_DIR=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))</span><br><span class="line">sys.path.append(BASE_DIR)</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> core <span class="keyword">import</span> core</span><br><span class="line"><span class="keyword">from</span> conf <span class="keyword">import</span> my_log_settings</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    my_log_settings.load_my_logging_cfg()</span><br><span class="line">    core.run()</span><br><span class="line"></span><br><span class="line"><span class="comment">#=============&gt;conf目录：存放配置文件</span></span><br><span class="line"><span class="comment">#config.ini</span></span><br><span class="line">[DEFAULT]</span><br><span class="line">user_timeout = <span class="number">1000</span></span><br><span class="line"></span><br><span class="line">[egon]</span><br><span class="line">password = <span class="number">123</span></span><br><span class="line">money = <span class="number">10000000</span></span><br><span class="line"></span><br><span class="line">[alex]</span><br><span class="line">password = alex3714</span><br><span class="line">money=<span class="number">10000000000</span></span><br><span class="line"></span><br><span class="line">[yuanhao]</span><br><span class="line">password = ysb123</span><br><span class="line">money=<span class="number">10</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#settings.py</span></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line">config_path=<span class="string">r'%s\%s'</span> %(os.path.dirname(os.path.abspath(__file__)),<span class="string">'config.ini'</span>)</span><br><span class="line">user_timeout=<span class="number">10</span></span><br><span class="line">user_db_path=<span class="string">r'%s\%s'</span> %(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),\</span><br><span class="line">                     <span class="string">'db'</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#my_log_settings.py</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">logging配置</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> logging.config</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义三种日志输出格式 开始</span></span><br><span class="line"></span><br><span class="line">standard_format = <span class="string">'[%(asctime)s][%(threadName)s:%(thread)d][task_id:%(name)s][%(filename)s:%(lineno)d]'</span> \</span><br><span class="line">                  <span class="string">'[%(levelname)s][%(message)s]'</span> <span class="comment">#其中name为getlogger指定的名字</span></span><br><span class="line"></span><br><span class="line">simple_format = <span class="string">'[%(levelname)s][%(asctime)s][%(filename)s:%(lineno)d]%(message)s'</span></span><br><span class="line"></span><br><span class="line">id_simple_format = <span class="string">'[%(levelname)s][%(asctime)s] %(message)s'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义日志输出格式 结束</span></span><br><span class="line"></span><br><span class="line">logfile_dir = <span class="string">r'%s\log'</span> %os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  <span class="comment"># log文件的目录</span></span><br><span class="line"></span><br><span class="line">logfile_name = <span class="string">'all2.log'</span>  <span class="comment"># log文件名</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果不存在定义的日志目录就创建一个</span></span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> os.path.isdir(logfile_dir):</span><br><span class="line">    os.mkdir(logfile_dir)</span><br><span class="line"></span><br><span class="line"><span class="comment"># log文件的全路径</span></span><br><span class="line">logfile_path = os.path.join(logfile_dir, logfile_name)</span><br><span class="line"></span><br><span class="line"><span class="comment"># log配置字典</span></span><br><span class="line">LOGGING_DIC = &#123;</span><br><span class="line">    <span class="string">'version'</span>: <span class="number">1</span>,</span><br><span class="line">    <span class="string">'disable_existing_loggers'</span>: <span class="literal">False</span>,</span><br><span class="line">    <span class="string">'formatters'</span>: &#123;</span><br><span class="line">        <span class="string">'standard'</span>: &#123;</span><br><span class="line">            <span class="string">'format'</span>: standard_format</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="string">'simple'</span>: &#123;</span><br><span class="line">            <span class="string">'format'</span>: simple_format</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">'filters'</span>: &#123;&#125;,</span><br><span class="line">    <span class="string">'handlers'</span>: &#123;</span><br><span class="line">        <span class="comment">#打印到终端的日志</span></span><br><span class="line">        <span class="string">'console'</span>: &#123;</span><br><span class="line">            <span class="string">'level'</span>: <span class="string">'DEBUG'</span>,</span><br><span class="line">            <span class="string">'class'</span>: <span class="string">'logging.StreamHandler'</span>,  <span class="comment"># 打印到屏幕</span></span><br><span class="line">            <span class="string">'formatter'</span>: <span class="string">'simple'</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="comment">#打印到文件的日志,收集info及以上的日志</span></span><br><span class="line">        <span class="string">'default'</span>: &#123;</span><br><span class="line">            <span class="string">'level'</span>: <span class="string">'DEBUG'</span>,</span><br><span class="line">            <span class="string">'class'</span>: <span class="string">'logging.handlers.RotatingFileHandler'</span>,  <span class="comment"># 保存到文件</span></span><br><span class="line">            <span class="string">'formatter'</span>: <span class="string">'standard'</span>,</span><br><span class="line">            <span class="string">'filename'</span>: logfile_path,  <span class="comment"># 日志文件</span></span><br><span class="line">            <span class="string">'maxBytes'</span>: <span class="number">1024</span>*<span class="number">1024</span>*<span class="number">5</span>,  <span class="comment"># 日志大小 5M</span></span><br><span class="line">            <span class="string">'backupCount'</span>: <span class="number">5</span>,</span><br><span class="line">            <span class="string">'encoding'</span>: <span class="string">'utf-8'</span>,  <span class="comment"># 日志文件的编码，再也不用担心中文log乱码了</span></span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">'loggers'</span>: &#123;</span><br><span class="line">        <span class="comment">#logging.getLogger(__name__)拿到的logger配置</span></span><br><span class="line">        <span class="string">''</span>: &#123;</span><br><span class="line">            <span class="string">'handlers'</span>: [<span class="string">'default'</span>, <span class="string">'console'</span>],  <span class="comment"># 这里把上面定义的两个handler都加上，即log数据既写入文件又打印到屏幕</span></span><br><span class="line">            <span class="string">'level'</span>: <span class="string">'DEBUG'</span>,</span><br><span class="line">            <span class="string">'propagate'</span>: <span class="literal">True</span>,  <span class="comment"># 向上（更高level的logger）传递</span></span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">load_my_logging_cfg</span><span class="params">()</span>:</span></span><br><span class="line">    logging.config.dictConfig(LOGGING_DIC)  <span class="comment"># 导入上面定义的logging配置</span></span><br><span class="line">    logger = logging.getLogger(__name__)  <span class="comment"># 生成一个log实例</span></span><br><span class="line">    logger.info(<span class="string">'It works!'</span>)  <span class="comment"># 记录该文件的运行状态</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    load_my_logging_cfg()</span><br><span class="line"></span><br><span class="line"><span class="comment">#=============&gt;core目录：存放核心逻辑</span></span><br><span class="line"><span class="comment">#core.py</span></span><br><span class="line"><span class="keyword">import</span> logging</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">from</span> conf <span class="keyword">import</span> settings</span><br><span class="line"><span class="keyword">from</span> lib <span class="keyword">import</span> read_ini</span><br><span class="line"></span><br><span class="line">config=read_ini.read(settings.config_path)</span><br><span class="line">logger=logging.getLogger(__name__)</span><br><span class="line"></span><br><span class="line">current_user=&#123;<span class="string">'user'</span>:<span class="literal">None</span>,<span class="string">'login_time'</span>:<span class="literal">None</span>,<span class="string">'timeout'</span>:int(settings.user_timeout)&#125;</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">auth</span><span class="params">(func)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">(*args,**kwargs)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> current_user[<span class="string">'user'</span>]:</span><br><span class="line">            interval=time.time()-current_user[<span class="string">'login_time'</span>]</span><br><span class="line">            <span class="keyword">if</span> interval &lt; current_user[<span class="string">'timeout'</span>]:</span><br><span class="line">                <span class="keyword">return</span> func(*args,**kwargs)</span><br><span class="line">        name = input(<span class="string">'name&gt;&gt;: '</span>)</span><br><span class="line">        password = input(<span class="string">'password&gt;&gt;: '</span>)</span><br><span class="line">        <span class="keyword">if</span> config.has_section(name):</span><br><span class="line">            <span class="keyword">if</span> password == config.get(name,<span class="string">'password'</span>):</span><br><span class="line">                logger.info(<span class="string">'登录成功'</span>)</span><br><span class="line">                current_user[<span class="string">'user'</span>]=name</span><br><span class="line">                current_user[<span class="string">'login_time'</span>]=time.time()</span><br><span class="line">                <span class="keyword">return</span> func(*args,**kwargs)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            logger.error(<span class="string">'用户名不存在'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> wrapper</span><br><span class="line"></span><br><span class="line"><span class="meta">@auth</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">buy</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">'buy...'</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">@auth</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">run</span><span class="params">()</span>:</span></span><br><span class="line"></span><br><span class="line">    print(<span class="string">'''</span></span><br><span class="line"><span class="string">购物</span></span><br><span class="line"><span class="string">查看余额</span></span><br><span class="line"><span class="string">转账</span></span><br><span class="line"><span class="string">    '''</span>)</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        choice = input(<span class="string">'&gt;&gt;: '</span>).strip()</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> choice:<span class="keyword">continue</span></span><br><span class="line">        <span class="keyword">if</span> choice == <span class="string">'1'</span>:</span><br><span class="line">            buy()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    run()</span><br><span class="line"></span><br><span class="line"><span class="comment">#=============&gt;db目录：存放数据库文件</span></span><br><span class="line"><span class="comment">#alex_json</span></span><br><span class="line"><span class="comment">#egon_json</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#=============&gt;lib目录：存放自定义的模块与包</span></span><br><span class="line"><span class="comment">#read_ini.py</span></span><br><span class="line"><span class="keyword">import</span> configparser</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">read</span><span class="params">(config_file)</span>:</span></span><br><span class="line">    config=configparser.ConfigParser()</span><br><span class="line">    config.read(config_file)</span><br><span class="line">    <span class="keyword">return</span> config</span><br><span class="line"></span><br><span class="line"><span class="comment">#=============&gt;log目录：存放日志</span></span><br><span class="line"><span class="comment">#all2.log</span></span><br><span class="line">[<span class="number">2017</span><span class="number">-07</span><span class="number">-29</span> <span class="number">00</span>:<span class="number">31</span>:<span class="number">40</span>,<span class="number">272</span>][MainThread:<span class="number">11692</span>][task_id:conf.my_log_settings][my_log_settings.py:<span class="number">75</span>][INFO][It works!]</span><br><span class="line">[<span class="number">2017</span><span class="number">-07</span><span class="number">-29</span> <span class="number">00</span>:<span class="number">31</span>:<span class="number">41</span>,<span class="number">789</span>][MainThread:<span class="number">11692</span>][task_id:core.core][core.py:<span class="number">25</span>][ERROR][用户名不存在]</span><br><span class="line">[<span class="number">2017</span><span class="number">-07</span><span class="number">-29</span> <span class="number">00</span>:<span class="number">31</span>:<span class="number">46</span>,<span class="number">394</span>][MainThread:<span class="number">12348</span>][task_id:conf.my_log_settings][my_log_settings.py:<span class="number">75</span>][INFO][It works!]</span><br><span class="line">[<span class="number">2017</span><span class="number">-07</span><span class="number">-29</span> <span class="number">00</span>:<span class="number">31</span>:<span class="number">47</span>,<span class="number">629</span>][MainThread:<span class="number">12348</span>][task_id:core.core][core.py:<span class="number">25</span>][ERROR][用户名不存在]</span><br><span class="line">[<span class="number">2017</span><span class="number">-07</span><span class="number">-29</span> <span class="number">00</span>:<span class="number">31</span>:<span class="number">57</span>,<span class="number">912</span>][MainThread:<span class="number">10528</span>][task_id:conf.my_log_settings][my_log_settings.py:<span class="number">75</span>][INFO][It works!]</span><br><span class="line">[<span class="number">2017</span><span class="number">-07</span><span class="number">-29</span> <span class="number">00</span>:<span class="number">32</span>:<span class="number">03</span>,<span class="number">340</span>][MainThread:<span class="number">12744</span>][task_id:conf.my_log_settings][my_log_settings.py:<span class="number">75</span>][INFO][It works!]</span><br><span class="line">[<span class="number">2017</span><span class="number">-07</span><span class="number">-29</span> <span class="number">00</span>:<span class="number">32</span>:<span class="number">05</span>,<span class="number">065</span>][MainThread:<span class="number">12916</span>][task_id:conf.my_log_settings][my_log_settings.py:<span class="number">75</span>][INFO][It works!]</span><br><span class="line">[<span class="number">2017</span><span class="number">-07</span><span class="number">-29</span> <span class="number">00</span>:<span class="number">32</span>:<span class="number">08</span>,<span class="number">181</span>][MainThread:<span class="number">12916</span>][task_id:core.core][core.py:<span class="number">25</span>][ERROR][用户名不存在]</span><br><span class="line">[<span class="number">2017</span><span class="number">-07</span><span class="number">-29</span> <span class="number">00</span>:<span class="number">32</span>:<span class="number">13</span>,<span class="number">638</span>][MainThread:<span class="number">7220</span>][task_id:conf.my_log_settings][my_log_settings.py:<span class="number">75</span>][INFO][It works!]</span><br><span class="line">[<span class="number">2017</span><span class="number">-07</span><span class="number">-29</span> <span class="number">00</span>:<span class="number">32</span>:<span class="number">23</span>,<span class="number">005</span>][MainThread:<span class="number">7220</span>][task_id:core.core][core.py:<span class="number">20</span>][INFO][登录成功]</span><br><span class="line">[<span class="number">2017</span><span class="number">-07</span><span class="number">-29</span> <span class="number">00</span>:<span class="number">32</span>:<span class="number">40</span>,<span class="number">941</span>][MainThread:<span class="number">7220</span>][task_id:core.core][core.py:<span class="number">20</span>][INFO][登录成功]</span><br><span class="line">[<span class="number">2017</span><span class="number">-07</span><span class="number">-29</span> <span class="number">00</span>:<span class="number">32</span>:<span class="number">47</span>,<span class="number">222</span>][MainThread:<span class="number">7220</span>][task_id:core.core][core.py:<span class="number">20</span>][INFO][登录成功]</span><br><span class="line">[<span class="number">2017</span><span class="number">-07</span><span class="number">-29</span> <span class="number">00</span>:<span class="number">32</span>:<span class="number">51</span>,<span class="number">949</span>][MainThread:<span class="number">7220</span>][task_id:core.core][core.py:<span class="number">25</span>][ERROR][用户名不存在]</span><br><span class="line">[<span class="number">2017</span><span class="number">-07</span><span class="number">-29</span> <span class="number">00</span>:<span class="number">33</span>:<span class="number">00</span>,<span class="number">213</span>][MainThread:<span class="number">7220</span>][task_id:core.core][core.py:<span class="number">20</span>][INFO][登录成功]</span><br><span class="line">[<span class="number">2017</span><span class="number">-07</span><span class="number">-29</span> <span class="number">00</span>:<span class="number">33</span>:<span class="number">50</span>,<span class="number">118</span>][MainThread:<span class="number">8500</span>][task_id:conf.my_log_settings][my_log_settings.py:<span class="number">75</span>][INFO][It works!]</span><br><span class="line">[<span class="number">2017</span><span class="number">-07</span><span class="number">-29</span> <span class="number">00</span>:<span class="number">33</span>:<span class="number">55</span>,<span class="number">845</span>][MainThread:<span class="number">8500</span>][task_id:core.core][core.py:<span class="number">20</span>][INFO][登录成功]</span><br><span class="line">[<span class="number">2017</span><span class="number">-07</span><span class="number">-29</span> <span class="number">00</span>:<span class="number">34</span>:<span class="number">06</span>,<span class="number">837</span>][MainThread:<span class="number">8500</span>][task_id:core.core][core.py:<span class="number">25</span>][ERROR][用户名不存在]</span><br><span class="line">[<span class="number">2017</span><span class="number">-07</span><span class="number">-29</span> <span class="number">00</span>:<span class="number">34</span>:<span class="number">09</span>,<span class="number">405</span>][MainThread:<span class="number">8500</span>][task_id:core.core][core.py:<span class="number">25</span>][ERROR][用户名不存在]</span><br><span class="line">[<span class="number">2017</span><span class="number">-07</span><span class="number">-29</span> <span class="number">00</span>:<span class="number">34</span>:<span class="number">10</span>,<span class="number">645</span>][MainThread:<span class="number">8500</span>][task_id:core.core][core.py:<span class="number">25</span>][ERROR][用户名不存在]</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/模块/" rel="tag"># 模块</a>
+          
+            <a href="/tags/包/" rel="tag"># 包</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/08/python_full_stack/第01部分：基础+模块+面向对象+网络编程/模块/常用模块（二）/" rel="next" title="常用模块（二）">
+                <i class="fa fa-chevron-left"></i> 常用模块（二）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/09/python_full_stack/第02部分：并发编程+数据库+前端/并发编程/协程/" rel="prev" title="协程">
+                协程 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="John Doe">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">100</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://suliangxu.github.io" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:1193135584@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#（一）模块"><span class="nav-text">（一）模块</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、什么是模块"><span class="nav-text">一、什么是模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、为何要使用模块"><span class="nav-text">二、为何要使用模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、如何使用模块"><span class="nav-text">三、如何使用模块</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、import"><span class="nav-text">1、import</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、-from-…-import…"><span class="nav-text">2、 from … import…</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、把模块当作脚本运行"><span class="nav-text">3、把模块当作脚本运行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、模块搜索路径"><span class="nav-text">4、模块搜索路径</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5、编译python文件"><span class="nav-text">5、编译python文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6、补充：dir-函数"><span class="nav-text">6、补充：dir() 函数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#（二）包"><span class="nav-text">（二）包</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、注意事项"><span class="nav-text">一、注意事项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、import"><span class="nav-text">二、import</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、from-…-import-…"><span class="nav-text">三、from … import …</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、-init-py文件"><span class="nav-text">四、__init__.py文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五、from-glance-api-import"><span class="nav-text">五、from glance.api import *</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#六、绝对导入和相对导入"><span class="nav-text">六、绝对导入和相对导入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#七、单独导入包"><span class="nav-text">七、单独导入包</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#（三）软件开发规范"><span class="nav-text">（三）软件开发规范</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

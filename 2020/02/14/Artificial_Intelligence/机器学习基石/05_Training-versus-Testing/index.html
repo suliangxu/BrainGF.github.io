@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="ML,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="![image-20200214161650400](/Users/hhh/Library/Application Support/typora-user-images/image-20200214161650400.png) 假如假设： 训练的数据和测试假设（hypothesis）的数据，都来自同一个分布。 Ein()：在训练数据中假设的表现 Eout()：在测试集上假设的表现 二者来自于同分布">
+<meta name="keywords" content="ML">
+<meta property="og:type" content="article">
+<meta property="og:title" content="05_Training versus Testing">
+<meta property="og:url" content="http://yoursite.com/2020/02/14/Artificial_Intelligence/机器学习基石/05_Training-versus-Testing/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="![image-20200214161650400](/Users/hhh/Library/Application Support/typora-user-images/image-20200214161650400.png) 假如假设： 训练的数据和测试假设（hypothesis）的数据，都来自同一个分布。 Ein()：在训练数据中假设的表现 Eout()：在测试集上假设的表现 二者来自于同分布">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-02-15T06:40:46.582Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="05_Training versus Testing">
+<meta name="twitter:description" content="![image-20200214161650400](/Users/hhh/Library/Application Support/typora-user-images/image-20200214161650400.png) 假如假设： 训练的数据和测试假设（hypothesis）的数据，都来自同一个分布。 Ein()：在训练数据中假设的表现 Eout()：在测试集上假设的表现 二者来自于同分布">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/02/14/Artificial_Intelligence/机器学习基石/05_Training-versus-Testing/">
+
+
+
+
+
+  <title>05_Training versus Testing | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/14/Artificial_Intelligence/机器学习基石/05_Training-versus-Testing/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">05_Training versus Testing</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-02-14T16:17:29+08:00">
+                2020-02-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/人工智能-机器学习基石/" itemprop="url" rel="index">
+                    <span itemprop="name">人工智能 - 机器学习基石</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>![image-20200214161650400](/Users/hhh/Library/Application Support/typora-user-images/image-20200214161650400.png)</p>
+<p>假如假设：</p>
+<p>训练的数据和测试假设（hypothesis）的数据，都来自同一个分布。</p>
+<p>Ein()：在训练数据中假设的表现</p>
+<p>Eout()：在测试集上假设的表现</p>
+<p>二者来自于同分布。</p>
+<p>若假设的集合不太大，并且数据量足够多的话，就能够确保对于每一个假设，Ein和Eout都会长得很像（近似相等），不论算法实际上是如何选择假设。</p>
+<p>那么算法只要选择Ein最低的假设，若Ein很接近0的话，那么Eout也会很接近0，就达到了学习的效果。</p>
+<p>![image-20200214162841322](/Users/hhh/Library/Application Support/typora-user-images/image-20200214162841322.png)</p>
+<p>第一次课：</p>
+<p>学习，就是又一个未知的f，我们希望通过算法能够找出一个g，使得g和未知的f非常的接近。</p>
+<p>即 Eout(g) 要很接近0，就是对于测试集错误率越小越好。</p>
+<p>第二次课：</p>
+<p>在我们的测试集上做的很好就好了。就是可以找一些方法使得 Ein 很接近0.</p>
+<p>第三次课：</p>
+<p>我们其实在一个很特定的范围下面做学习。如批次的数据，监督式的学习，二元的分类等等</p>
+<p>第四次课：</p>
+<p>Ein 很接近 Eout：</p>
+<p>如果假设的数量不是太多的话，有可能 Ein 和 Eout 可以很接近。</p>
+<p>所以第二次课的事情，真的就可以使得 g和f很接近。</p>
+<p>两个关键点：</p>
+<p>1、到底 Ein 和 Eout 是不是会很接近</p>
+<p>2、若二者可以有连接，那么如何使得 Ein 越来越小。</p>
+<p>![image-20200214163705841](/Users/hhh/Library/Application Support/typora-user-images/image-20200214163705841.png)</p>
+<p>M：假设集的大小（假设它是有限大的）</p>
+<p>M较小时：上次证明，有不等式，M越小，坏事发生的概率就很小</p>
+<p>M较大时：确实可能选到较好的假设，但是M较大，坏事发生的概率就增加了。</p>
+<p>所以M其实是很重要的，应慎重选择。</p>
+<p>所以无限多个M是不好的。</p>
+<p>![image-20200214164056822](/Users/hhh/Library/Application Support/typora-user-images/image-20200214164056822.png)</p>
+<p>假设可以使用有限大的 mH 来替换原来的 M。</p>
+<p>所以从 mH 中学到一个较好的假设。</p>
+<p>![image-20200214164232905](/Users/hhh/Library/Application Support/typora-user-images/image-20200214164232905.png)</p>
+<p>使用 union bound 的方式，来计算坏事发生的概率。</p>
+<p>但是，当 M 为很大的数字时，所以这个 union bound 就失效了。（加和的概率会很大）</p>
+<p>union bound 的可行是假设坏事发生的概率不会太大，并且重叠的概率不太高。（可以通过切比雪夫不等式推到）</p>
+<p>![image-20200214164825519](/Users/hhh/Library/Application Support/typora-user-images/image-20200214164825519.png)</p>
+<p>因为不同的假设（若这两个假设都不太差的话）之间的误差是较为接近的，所以 他们发生坏事的部分就会比较接近，所以当他们进行 union bound 的时候，就会发生over-estimating （过分估计，过分大的上限），才会造成没有办法处理M无限大的情况。</p>
+<p>所以我们必须找出这个（错误）重叠的部分，是否我们可以把这个无限多的M分成有限多个类别，每一类都差不多大，这样的话，我们也许能够找出哪些部分有重叠。</p>
+<p>![image-20200214165625782](/Users/hhh/Library/Application Support/typora-user-images/image-20200214165625782.png)</p>
+<p>所以如何将这些M个假设进行分类？</p>
+<p>1、对于一个点来说，其实线只有两类：一类认为这个点为+1， 另一个认为是 -1</p>
+<p>![image-20200214165908661](/Users/hhh/Library/Application Support/typora-user-images/image-20200214165908661.png)</p>
+<p>2、对于两个点，那么则有四类：</p>
+<p>![image-20200214170455766](/Users/hhh/Library/Application Support/typora-user-images/image-20200214170455766.png)</p>
+<p>3、若有三个输入，则有8类：</p>
+<p>![image-20200214170612497](/Users/hhh/Library/Application Support/typora-user-images/image-20200214170612497.png)</p>
+<p>若将三个点排在一条直线上：则只有6个类别</p>
+<p>![image-20200214170737920](/Users/hhh/Library/Application Support/typora-user-images/image-20200214170737920.png)</p>
+<p>4、对于四个点，最多有 16 种（错）。</p>
+<p>对于两两共线，只有14种，</p>
+<p>然后四个点在平面上，都会出现两两共线，所以对于四个点只有14种。</p>
+<p>![image-20200214170920946](/Users/hhh/Library/Application Support/typora-user-images/image-20200214170920946.png)</p>
+<p>所以对于每个数字，都要比2的n次方来的小。</p>
+<p>所以就算有无限多条线，那么“有效的线”总是有限的。计为effective(N)，然后用这个有限的数字，将M取代。</p>
+<p>那么当 effective(N)来的比 2^N 小很多的话，$exp^{-2\epsilon^2N}$ 又是随着N增大递减的，所以坏事发生的概率会接近0（当N足够大的时候），所以 Ein 和 Eout 会很接近，所以只要 Ein 很小的时候，Eout 也会很小，所以机器就学到了一条很好的线。</p>
+<p>所以就算有无限多条线，如果我们把无限多条线，换成 effective(N) 这个有限的数字，并且这个数字来的比2 ^ N 小得多的话，那么我们就可以保证可能可以学得到一个较好的东西。</p>
+<p>当然，这还是我们这阶段的假说。</p>
+<p>![image-20200214172108397](/Users/hhh/Library/Application Support/typora-user-images/image-20200214172108397.png)</p>
+<p>所以，到底有几种假说（hypothesis）呢？</p>
+<p>dichotomy：二分</p>
+<p>把点分成两类，圈和叉。我们考虑一个假设集合能够作出多少种二分。</p>
+<p>查看一共有几个dichotomy，来看是否能够将M换掉。</p>
+<p>![image-20200214190809418](/Users/hhh/Library/Application Support/typora-user-images/image-20200214190809418.png)</p>
+<p>其实，dichotomy是取决于输入的X，所以想要移除对X的依赖，所以我们只看最多有几种二分。（记录为mH）</p>
+<p>称为增长函数。</p>
+<p>我们会知道，增长函数的值是小于 2^N 的。</p>
+<p>![image-20200214191207269](/Users/hhh/Library/Application Support/typora-user-images/image-20200214191207269.png)</p>
+<p>通过如下的方法，可以使得函数变为 N+ 1</p>
+<p>全部点映射到一维（Positive Rays）（或者说对于一维输入），设置一个阈值来做分隔，然后就可以得到 N + 1 种假设（N+1条线）。</p>
+<p>![image-20200214191531811](/Users/hhh/Library/Application Support/typora-user-images/image-20200214191531811.png)</p>
+<p>下面是Positive Interval：</p>
+<p>得到新的成长函数。</p>
+<p>![image-20200214191916472](/Users/hhh/Library/Application Support/typora-user-images/image-20200214191916472.png)</p>
+<p>在凸集合之内，为+1，在凸集合之外为-1.</p>
+<p>![image-20200214192033246](/Users/hhh/Library/Application Support/typora-user-images/image-20200214192033246.png)</p>
+<p>使用凸多边形来画出边界。</p>
+<p>若找到N个点，我们可以找到一个集合，把他们包括进来，那么这个凸集合为 2 ^ N。</p>
+<p>![image-20200214192301616](/Users/hhh/Library/Application Support/typora-user-images/image-20200214192301616.png)</p>
+<p>所以有四个增长函数。</p>
+<p>![image-20200214192635051](/Users/hhh/Library/Application Support/typora-user-images/image-20200214192635051.png)</p>
+<p>考虑2D perceptrons 是多项式的还是指数的。</p>
+<p>在2D perceptrons 情况下，当4个点时，只有14种而不是16种。称为break point</p>
+<p>break point的意思其实也可以看为，在点数为break point时，无法找到一条线（或者说某一类的线），将这么多个点完全分开。</p>
+<p>![image-20200214192852371](/Users/hhh/Library/Application Support/typora-user-images/image-20200214192852371.png)</p>
+<p>一下，列出所有情况的break point</p>
+<p>猜想：break point可能与增长函数的增长速度有关。</p>
+<p>![image-20200214192936989](/Users/hhh/Library/Application Support/typora-user-images/image-20200214192936989.png)</p>
+<p>总结：</p>
+<p>![image-20200214193204846](/Users/hhh/Library/Application Support/typora-user-images/image-20200214193204846.png)</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ML/" rel="tag"># ML</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/02/14/Artificial_Intelligence/机器学习基石/04_Feasibility-of-Learning/" rel="next" title="04_Feasibility of Learning">
+                <i class="fa fa-chevron-left"></i> 04_Feasibility of Learning
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/02/15/Artificial_Intelligence/机器学习基石/06_Theroy-of-Generalization/" rel="prev" title="06_Theroy of Generalization">
+                06_Theroy of Generalization <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="John Doe">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">100</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://suliangxu.github.io" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:1193135584@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

@@ -249,6 +249,302 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/05/go/go实现定期运行任务/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/02/05/go/go实现定期运行任务/" itemprop="url">go实现定期运行任务</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-02-05T11:24:36+08:00">
+                2020-02-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/go/" itemprop="url" rel="index">
+                    <span itemprop="name">go</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    GlobalLimit := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">string</span>, <span class="number">1</span>) </span><br><span class="line">    <span class="keyword">for</span> &#123;</span><br><span class="line">        GlobalLimit &lt;- <span class="string">"s"</span></span><br><span class="line">        time.AfterFunc(<span class="number">3</span>*time.Second, <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">            fmt.Println(<span class="string">"1"</span>)</span><br><span class="line">            <span class="comment">//写你的业务逻辑</span></span><br><span class="line">            &lt;-GlobalLimit</span><br><span class="line">        &#125;)</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/05/go/go_build-不同系统下的可执行文件/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/02/05/go/go_build-不同系统下的可执行文件/" itemprop="url">go_build-不同系统下的可执行文件</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-02-05T11:22:27+08:00">
+                2020-02-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/go/" itemprop="url" rel="index">
+                    <span itemprop="name">go</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Golang 支持在一个平台下生成另一个平台可执行程序的交叉编译功能。</p>
+<p><strong>1、Mac下编译Linux, Windows平台的64位可执行程序：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build test.go</span><br><span class="line">$ CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build test.go</span><br></pre></td></tr></table></figure>
+
+<p><strong>2、Linux下编译Mac, Windows平台的64位可执行程序：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ CGO_ENABLED=0 GOOS=darwin GOARCH=amd64 go build test.go</span><br><span class="line">$ CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build test.go</span><br></pre></td></tr></table></figure>
+
+<p><strong>3、Windows下编译Mac, Linux平台的64位可执行程序：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ SET CGO_ENABLED=0SET GOOS=darwin3 SET GOARCH=amd64 go build test.go</span><br><span class="line">$ SET CGO_ENABLED=0 SET GOOS=linux SET GOARCH=amd64 go build  test.go</span><br></pre></td></tr></table></figure>
+
+<p>注：如果编译web等工程项目，直接cd到工程目录下直接执行以上命令</p>
+<p>GOOS：目标可执行程序运行操作系统，支持 darwin，freebsd，linux，windows<br>GOARCH：目标可执行程序操作系统构架，包括 386，amd64，arm</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/05/go/linux下编译、后台运行、开机启动golang程序/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -415,7 +711,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/04/人工智能/Tensorflow/CH4-Tf.data_API的使用/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/04/Artificial_Intelligence/Tensorflow/CH4-Tf.data_API的使用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -434,7 +730,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/02/04/人工智能/Tensorflow/CH4-Tf.data_API的使用/" itemprop="url">CH4-Tf.data_API的使用</a></h1>
+                <a class="post-title-link" href="/2020/02/04/Artificial_Intelligence/Tensorflow/CH4-Tf.data_API的使用/" itemprop="url">CH4-Tf.data_API的使用</a></h1>
         
 
         <div class="post-meta">
@@ -582,7 +878,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/03/人工智能/Tensorflow/CH3-Tensorflow基础API/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/03/Artificial_Intelligence/Tensorflow/CH3-Tensorflow基础API/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -601,7 +897,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/02/03/人工智能/Tensorflow/CH3-Tensorflow基础API/" itemprop="url">CH3-Tensorflow基础API</a></h1>
+                <a class="post-title-link" href="/2020/02/03/Artificial_Intelligence/Tensorflow/CH3-Tensorflow基础API/" itemprop="url">CH3-Tensorflow基础API</a></h1>
         
 
         <div class="post-meta">
@@ -757,7 +1053,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/01/人工智能/Tensorflow/CH2-Tensorflow-keras实战/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/01/Artificial_Intelligence/Tensorflow/CH2-Tensorflow-keras实战/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -776,7 +1072,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/02/01/人工智能/Tensorflow/CH2-Tensorflow-keras实战/" itemprop="url">CH2-Tensorflow-keras实战</a></h1>
+                <a class="post-title-link" href="/2020/02/01/Artificial_Intelligence/Tensorflow/CH2-Tensorflow-keras实战/" itemprop="url">CH2-Tensorflow-keras实战</a></h1>
         
 
         <div class="post-meta">
@@ -1151,7 +1447,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/31/人工智能/Tensorflow/CH1-Tensorflow简介/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/31/Artificial_Intelligence/Tensorflow/CH1-Tensorflow简介/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -1170,7 +1466,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/01/31/人工智能/Tensorflow/CH1-Tensorflow简介/" itemprop="url">CH1-Tensorflow简介</a></h1>
+                <a class="post-title-link" href="/2020/01/31/Artificial_Intelligence/Tensorflow/CH1-Tensorflow简介/" itemprop="url">CH1-Tensorflow简介</a></h1>
         
 
         <div class="post-meta">
@@ -2266,793 +2562,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/21/Linux/Linux基础/Linux教程（7）Linux磁盘管理/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/01/21/Linux/Linux基础/Linux教程（7）Linux磁盘管理/" itemprop="url">Linux教程（7）Linux磁盘管理</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-01-21T15:40:55+08:00">
-                2020-01-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux-Linux基础/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux - Linux基础</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="一、常用命令"><a href="#一、常用命令" class="headerlink" title="一、常用命令"></a>一、常用命令</h3><p>Linux磁盘管理好坏直接关系到整个系统的性能问题。</p>
-<p>Linux磁盘管理常用三个命令为df、du和fdisk。</p>
-<ul>
-<li><p><strong>df</strong></p>
-<p>列出文件系统的整体磁盘使用量</p>
-</li>
-<li><p><strong>du</strong></p>
-<p>检查磁盘空间使用量</p>
-</li>
-<li><p><strong>fdisk</strong></p>
-<p>用于磁盘分区</p>
-</li>
-</ul>
-<h4 id="1、df"><a href="#1、df" class="headerlink" title="1、df"></a>1、df</h4><p>df命令参数功能：<strong>检查文件系统的磁盘空间占用情况</strong>。可以利用该命令来获取硬盘被占用了多少空间，目前还剩下多少空间等信息。</p>
-<p>语法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df [-ahikHTm] [目录或文件名]</span><br></pre></td></tr></table></figure>
-
-<p>选项与参数：</p>
-<ul>
-<li><p><strong>- a</strong></p>
-<p>列出所有的文件系统，包括系统特有的 /proc 等文件系统；</p>
-</li>
-<li><p><strong>- k</strong> </p>
-<p>以 KBytes 的容量显示各文件系统；</p>
-</li>
-<li><p><strong>- m</strong> </p>
-<p>以 MBytes 的容量显示各文件系统；</p>
-</li>
-<li><p><strong>- h</strong> </p>
-<p>以人们较易阅读的 GBytes, MBytes, KBytes 等格式自行显示；</p>
-</li>
-<li><p><strong>- H</strong> </p>
-<p>以 M=1000K 取代 M=1024K 的进位方式；</p>
-</li>
-<li><p><strong>- T</strong> </p>
-<p>显示文件系统类型, 连同该 partition 的 filesystem 名称 (例如 ext3) 也列出；</p>
-</li>
-<li><p><strong>- i</strong> </p>
-<p>不用硬盘容量，而以 inode 的数量来显示</p>
-</li>
-</ul>
-<p>示例：</p>
-<p>将系统内所有的文件系统列出来！</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~]df</span><br><span class="line">Filesystem      <span class="number">1</span>K-blocks      Used Available Use% Mounted on</span><br><span class="line">/dev/hdc2         <span class="number">9920624</span>   <span class="number">3823112</span>   <span class="number">5585444</span>  <span class="number">41</span>% /</span><br><span class="line">/dev/hdc3         <span class="number">4956316</span>    <span class="number">141376</span>   <span class="number">4559108</span>   <span class="number">4</span>% /home</span><br><span class="line">/dev/hdc1          <span class="number">101086</span>     <span class="number">11126</span>     <span class="number">84741</span>  <span class="number">12</span>% /boot</span><br><span class="line">tmpfs              <span class="number">371332</span>         <span class="number">0</span>    <span class="number">371332</span>   <span class="number">0</span>% /dev/shm</span><br></pre></td></tr></table></figure>
-
-<p>在 Linux 底下如果 df 没有加任何选项，那么默认会将系统内所有的 (不含特殊内存内的文件系统与 swap) 都以 1 Kbytes 的容量来列出来！</p>
-<p>示例：</p>
-<p>将容量结果以易读的容量格式显示出来</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~]df -h</span><br><span class="line">Filesystem            Size  Used Avail Use% Mounted on</span><br><span class="line">/dev/hdc2             <span class="number">9</span>.<span class="number">5</span>G  <span class="number">3</span>.<span class="number">7</span>G  <span class="number">5</span>.<span class="number">4</span>G  <span class="number">41</span>% /</span><br><span class="line">/dev/hdc3             <span class="number">4</span>.<span class="number">8</span>G  <span class="number">139</span>M  <span class="number">4</span>.<span class="number">4</span>G   <span class="number">4</span>% /home</span><br><span class="line">/dev/hdc1              <span class="number">99</span>M   <span class="number">11</span>M   <span class="number">83</span>M  <span class="number">12</span>% /boot</span><br><span class="line">tmpfs                 <span class="number">363</span>M     <span class="number">0</span>  <span class="number">363</span>M   <span class="number">0</span>% /dev/shm</span><br></pre></td></tr></table></figure>
-
-<p>示例：</p>
-<p>将系统内的所有特殊文件格式及名称都列出来</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~]df -<span class="built_in">aT</span></span><br><span class="line">Filesystem    <span class="built_in">Type</span> <span class="number">1</span>K-blocks    Used Available Use% Mounted on</span><br><span class="line">/dev/hdc2     ext3   <span class="number">9920624</span> <span class="number">3823112</span>   <span class="number">5585444</span>  <span class="number">41</span>% /</span><br><span class="line">proc          proc         <span class="number">0</span>       <span class="number">0</span>         <span class="number">0</span>   -  /proc</span><br><span class="line">sysfs        sysfs         <span class="number">0</span>       <span class="number">0</span>         <span class="number">0</span>   -  /sys</span><br><span class="line">devpts      devpts         <span class="number">0</span>       <span class="number">0</span>         <span class="number">0</span>   -  /dev/pts</span><br><span class="line">/dev/hdc3     ext3   <span class="number">4956316</span>  <span class="number">141376</span>   <span class="number">4559108</span>   <span class="number">4</span>% /home</span><br><span class="line">/dev/hdc1     ext3    <span class="number">101086</span>   <span class="number">11126</span>     <span class="number">84741</span>  <span class="number">12</span>% /boot</span><br><span class="line">tmpfs        tmpfs    <span class="number">371332</span>       <span class="number">0</span>    <span class="number">371332</span>   <span class="number">0</span>% /dev/shm</span><br><span class="line">none   binfmt_misc         <span class="number">0</span>       <span class="number">0</span>         <span class="number">0</span>   -  /proc/sys/<span class="built_in">fs</span>/binfmt_misc</span><br><span class="line">sunrpc  rpc_pipefs         <span class="number">0</span>       <span class="number">0</span>         <span class="number">0</span>   -  /var/lib/nfs/rpc_pipefs</span><br></pre></td></tr></table></figure>
-
-<p>示例：</p>
-<p>将 /etc 底下的可用的磁盘容量以易读的容量格式显示</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~] df -h /etc</span><br><span class="line">Filesystem            Size  Used Avail Use% Mounted on</span><br><span class="line">/dev/hdc2             <span class="number">9</span>.<span class="number">5</span>G  <span class="number">3</span>.<span class="number">7</span>G  <span class="number">5</span>.<span class="number">4</span>G  <span class="number">41</span>% /</span><br></pre></td></tr></table></figure>
-
-<h4 id="2、du"><a href="#2、du" class="headerlink" title="2、du"></a>2、du</h4><p>Linux du命令也是查看使用空间的，但是与df命令不同的是Linux du命令是<strong>对文件和目录磁盘使用的空间的查看</strong>，还是和df命令有一些区别的，这里介绍Linux du命令。</p>
-<p>语法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">du [-ahskm] 文件或目录名称</span><br></pre></td></tr></table></figure>
-
-<p>选项与参数：</p>
-<ul>
-<li><p><strong>- a</strong> </p>
-<p>列出所有的文件与目录容量，因为默认仅统计目录底下的文件量而已。</p>
-</li>
-<li><p><strong>- h</strong> </p>
-<p>以人们较易读的容量格式 (G/M) 显示；</p>
-</li>
-<li><p><strong>- s</strong> </p>
-<p>列出总量而已，而不列出每个各别的目录占用容量；</p>
-</li>
-<li><p><strong>- S</strong> </p>
-<p>不包括子目录下的总计，与 -s 有点差别。</p>
-</li>
-<li><p><strong>- k</strong> </p>
-<p>以 KBytes 列出容量显示；</p>
-</li>
-<li><p><strong>- m</strong> </p>
-<p>以 MBytes 列出容量显示；</p>
-</li>
-</ul>
-<p>示例：</p>
-<p>只列出当前目录下的所有文件夹容量（包括隐藏文件夹）:</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~] du</span><br><span class="line"><span class="number">8</span>       ./test4     &lt;==每个目录都会列出来</span><br><span class="line"><span class="number">8</span>       ./test2</span><br><span class="line">....中间省略....</span><br><span class="line"><span class="number">12</span>      ./.gconfd   &lt;==包括隐藏文件的目录</span><br><span class="line"><span class="number">220</span>     .           &lt;==这个目录(.)所占用的总量</span><br></pre></td></tr></table></figure>
-
-<p>直接输入 du 没有加任何选项时，则 du 会分析当前所在目录的文件与目录所占用的硬盘空间。</p>
-<p>示例：</p>
-<p>将文件的容量也列出来</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~] du -a</span><br><span class="line"><span class="number">12</span>      ./install.log.syslog   &lt;==有文件的列表了</span><br><span class="line"><span class="number">8</span>       ./.bash_logout</span><br><span class="line"><span class="number">8</span>       ./test4</span><br><span class="line"><span class="number">8</span>       ./test2</span><br><span class="line">....中间省略....</span><br><span class="line"><span class="number">12</span>      ./.gconfd</span><br><span class="line"><span class="number">220</span>     .</span><br></pre></td></tr></table></figure>
-
-<p>### </p>
-<p>示例：</p>
-<p>检查根目录底下每个目录所占用的容量</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~] du -sm /*</span><br><span class="line"><span class="number">7</span>       /bin</span><br><span class="line"><span class="number">6</span>       /boot</span><br><span class="line">.....中间省略....</span><br><span class="line"><span class="number">0</span>       /proc</span><br><span class="line">.....中间省略....</span><br><span class="line"><span class="number">1</span>       /tmp</span><br><span class="line"><span class="number">3859</span>    /usr     &lt;==系统初期最大就是他了啦！</span><br><span class="line"><span class="number">77</span>      /var</span><br></pre></td></tr></table></figure>
-
-<p>通配符 * 来代表每个目录。</p>
-<p>与 df 不一样的是，du 这个命令其实会直接到文件系统内去搜寻所有的文件数据。</p>
-<h4 id="3、fdisk"><a href="#3、fdisk" class="headerlink" title="3、fdisk"></a>3、fdisk</h4><p>fdisk 是 Linux 的磁盘分区表操作工具。</p>
-<p>语法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fdisk [-l] 装置名称</span><br></pre></td></tr></table></figure>
-
-<p>选项与参数：</p>
-<ul>
-<li><p><strong>- l</strong></p>
-<p> 输出后面接的装置所有的分区内容。若仅有 fdisk -l 时， 则系统将会把整个系统内能够搜寻到的装置的分区均列出来。</p>
-</li>
-</ul>
-<p>示例：</p>
-<p>列出所有分区信息</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">[root@AY120919111755c246621 tmp]fdisk -l</span><br><span class="line"></span><br><span class="line">Disk /dev/xvda: <span class="number">21</span>.<span class="number">5</span> GB, <span class="number">21474836480</span> bytes</span><br><span class="line"><span class="number">255</span> heads, <span class="number">63</span> sectors/track, <span class="number">2610</span> cylinders</span><br><span class="line">Units = cylinders of <span class="number">16065</span> * <span class="number">512</span> = <span class="number">8225280</span> bytes</span><br><span class="line">Sector size (logical/physical): <span class="number">512</span> bytes / <span class="number">512</span> bytes</span><br><span class="line">I/O size (minimum/optimal): <span class="number">512</span> bytes / <span class="number">512</span> bytes</span><br><span class="line">Disk identifier: <span class="number">0</span>x00000000</span><br><span class="line"></span><br><span class="line">    Device Boot      <span class="built_in">Start</span>         End      Blocks   Id  System</span><br><span class="line">/dev/xvda1   *           <span class="number">1</span>        <span class="number">2550</span>    <span class="number">20480000</span>   <span class="number">83</span>  Linux</span><br><span class="line">/dev/xvda2            <span class="number">2550</span>        <span class="number">2611</span>      <span class="number">490496</span>   <span class="number">82</span>  Linux swap / Solaris</span><br><span class="line"></span><br><span class="line">Disk /dev/xvdb: <span class="number">21</span>.<span class="number">5</span> GB, <span class="number">21474836480</span> bytes</span><br><span class="line"><span class="number">255</span> heads, <span class="number">63</span> sectors/track, <span class="number">2610</span> cylinders</span><br><span class="line">Units = cylinders of <span class="number">16065</span> * <span class="number">512</span> = <span class="number">8225280</span> bytes</span><br><span class="line">Sector size (logical/physical): <span class="number">512</span> bytes / <span class="number">512</span> bytes</span><br><span class="line">I/O size (minimum/optimal): <span class="number">512</span> bytes / <span class="number">512</span> bytes</span><br><span class="line">Disk identifier: <span class="number">0</span>x56f40944</span><br><span class="line"></span><br><span class="line">    Device Boot      <span class="built_in">Start</span>         End      Blocks   Id  System</span><br><span class="line">/dev/xvdb2               <span class="number">1</span>        <span class="number">2610</span>    <span class="number">20964793</span>+  <span class="number">83</span>  Linux</span><br></pre></td></tr></table></figure>
-
-<p>示例：</p>
-<p>找出你系统中的根目录所在磁盘，并查阅该硬盘内的相关信息</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~] df /            &lt;==注意：重点在找出磁盘文件名而已</span><br><span class="line">Filesystem           <span class="number">1</span>K-blocks      Used Available Use% Mounted on</span><br><span class="line">/dev/hdc2              <span class="number">9920624</span>   <span class="number">3823168</span>   <span class="number">5585388</span>  <span class="number">41</span>% /</span><br><span class="line"></span><br><span class="line">[root@www ~]# fdisk /dev/hdc  &lt;==仔细看，不要加上数字喔！</span><br><span class="line">The number of cylinders <span class="keyword">for</span> this disk is <span class="built_in">set</span> to <span class="number">5005</span>.</span><br><span class="line">There is nothing wrong with that, but this is larger than <span class="number">1024</span>,</span><br><span class="line">and could <span class="keyword">in</span> certain setups cause problems with:</span><br><span class="line"><span class="number">1</span>) software that runs <span class="built_in">at</span> boot <span class="built_in">time</span> (e.g., old versions of LILO)</span><br><span class="line"><span class="number">2</span>) booting and partitioning software from other OSs</span><br><span class="line">   (e.g., DOS FDISK, OS/<span class="number">2</span> FDISK)</span><br><span class="line"></span><br><span class="line">Command (m <span class="keyword">for</span> <span class="built_in">help</span>):     &lt;==等待你的输入！</span><br></pre></td></tr></table></figure>
-
-<p>输入 m 后，就会看到底下这些命令介绍</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Command (m <span class="keyword">for</span> <span class="built_in">help</span>): m   &lt;== 输入 m 后，就会看到底下这些命令介绍</span><br><span class="line">Command action</span><br><span class="line">   a   toggle a bootable flag</span><br><span class="line">   b   edit bsd disklabel</span><br><span class="line">   c   toggle the dos compatibility flag</span><br><span class="line">   d   delete a partition            &lt;==删除一个partition</span><br><span class="line">   l   list known partition types</span><br><span class="line">   m   <span class="built_in">print</span> this menu</span><br><span class="line">   n   add a new partition           &lt;==新增一个partition</span><br><span class="line">   o   create a new empty DOS partition table</span><br><span class="line">   p   <span class="built_in">print</span> the partition table     &lt;==在屏幕上显示分割表</span><br><span class="line">   q   quit without saving changes   &lt;==不储存离开fdisk程序</span><br><span class="line">   s   create a new empty Sun disklabel</span><br><span class="line">   t   change a partition's system id</span><br><span class="line">   u   change display/entry units</span><br><span class="line">   v   <span class="built_in">verify</span> the partition table</span><br><span class="line">   w   write table to disk and <span class="keyword">exit</span>  &lt;==将刚刚的动作写入分割表</span><br><span class="line">   x   extra functionality (experts only)</span><br></pre></td></tr></table></figure>
-
-<p>离开 fdisk 时按下 <code>q</code>，那么所有的动作都不会生效！相反的， 按下<code>w</code>就是动作生效的意思。</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Command (m <span class="keyword">for</span> <span class="built_in">help</span>): p  &lt;== 这里可以输出目前磁盘的状态</span><br><span class="line"></span><br><span class="line">Disk /dev/hdc: <span class="number">41</span>.<span class="number">1</span> GB, <span class="number">41174138880</span> bytes        &lt;==这个磁盘的文件名与容量</span><br><span class="line"><span class="number">255</span> heads, <span class="number">63</span> sectors/track, <span class="number">5005</span> cylinders      &lt;==磁头、扇区与磁柱大小</span><br><span class="line">Units = cylinders of <span class="number">16065</span> * <span class="number">512</span> = <span class="number">8225280</span> bytes &lt;==每个磁柱的大小</span><br><span class="line"></span><br><span class="line">   Device Boot      <span class="built_in">Start</span>         End      Blocks   Id  System</span><br><span class="line">/dev/hdc1   *           <span class="number">1</span>          <span class="number">13</span>      <span class="number">104391</span>   <span class="number">83</span>  Linux</span><br><span class="line">/dev/hdc2              <span class="number">14</span>        <span class="number">1288</span>    <span class="number">10241437</span>+  <span class="number">83</span>  Linux</span><br><span class="line">/dev/hdc3            <span class="number">1289</span>        <span class="number">1925</span>     <span class="number">5116702</span>+  <span class="number">83</span>  Linux</span><br><span class="line">/dev/hdc4            <span class="number">1926</span>        <span class="number">5005</span>    <span class="number">24740100</span>    <span class="number">5</span>  Extended</span><br><span class="line">/dev/hdc5            <span class="number">1926</span>        <span class="number">2052</span>     <span class="number">1020096</span>   <span class="number">82</span>  Linux swap / Solaris</span><br><span class="line"># 装置文件名 启动区否 开始磁柱    结束磁柱  <span class="number">1</span>K大小容量 磁盘分区槽内的系统</span><br><span class="line"></span><br><span class="line">Command (m <span class="keyword">for</span> <span class="built_in">help</span>): q</span><br></pre></td></tr></table></figure>
-
-<p>想要不储存离开吗？按下 q 就对了！不要随便按 w 啊！</p>
-<p>使用 <code>p</code> 可以列出目前这颗磁盘的分割表信息，这个信息的上半部在显示整体磁盘的状态。</p>
-<h3 id="二、磁盘格式化"><a href="#二、磁盘格式化" class="headerlink" title="二、磁盘格式化"></a>二、磁盘格式化</h3><p>磁盘分割完毕后，要对文件系统进行格式化。格式化命令为</p>
-<p><strong>mkfs</strong> （make filesystem）</p>
-<p>语法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkfs [-t 文件系统格式] 装置文件名</span><br></pre></td></tr></table></figure>
-
-<p>选项与参数：</p>
-<ul>
-<li><p><strong>- t</strong></p>
-<p>可以接文件系统格式，例如 ext3, ext2, vfat 等(系统有支持才会生效)</p>
-</li>
-</ul>
-<p>示例：</p>
-<p>查看 mkfs 支持的文件格式</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~] mkfs[tab][tab]</span><br><span class="line">mkfs         mkfs.cramfs  mkfs.ext2    mkfs.ext3    mkfs.msdos   mkfs.vfat</span><br></pre></td></tr></table></figure>
-
-<p>按下两个[tab]，会发现 mkfs 支持的文件格式如上所示。</p>
-<p>示例：</p>
-<p>将分区 /dev/hdc6（可指定你自己的分区） 格式化为 ext3 文件系统：</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~] mkfs -t ext3 /dev/hdc6</span><br><span class="line">mke2fs <span class="number">1</span>.<span class="number">39</span> (<span class="number">29</span>-May-<span class="number">2006</span>)</span><br><span class="line"><span class="function">Filesystem label=                &lt;==这里指的是分割槽的名称(<span class="title">label</span>)</span></span><br><span class="line"><span class="function"><span class="title">OS</span> <span class="title">type</span>: <span class="title">Linux</span></span></span><br><span class="line"><span class="function"><span class="title">Block</span> <span class="title">size</span>=4096 (<span class="title">log</span>=2)          &lt;==<span class="title">block</span> 的大小配置为 4<span class="title">K</span> </span></span><br><span class="line"><span class="function"><span class="title">Fragment</span> <span class="title">size</span>=4096 (<span class="title">log</span>=2)</span></span><br><span class="line"><span class="function">251392 <span class="title">inodes</span>, 502023 <span class="title">blocks</span>     &lt;==由此配置决定的<span class="title">inode</span>/<span class="title">block</span>数量</span></span><br><span class="line"><span class="function">25101 <span class="title">blocks</span> (5.00%) <span class="title">reserved</span> <span class="title">for</span> <span class="title">the</span> <span class="title">super</span> <span class="title">user</span></span></span><br><span class="line"><span class="function"><span class="title">First</span> <span class="title">data</span> <span class="title">block</span>=0</span></span><br><span class="line"><span class="function"><span class="title">Maximum</span> <span class="title">filesystem</span> <span class="title">blocks</span>=515899392</span></span><br><span class="line"><span class="function">16 <span class="title">block</span> <span class="title">groups</span></span></span><br><span class="line"><span class="function">32768 <span class="title">blocks</span> <span class="title">per</span> <span class="title">group</span>, 32768 <span class="title">fragments</span> <span class="title">per</span> <span class="title">group</span></span></span><br><span class="line"><span class="function">15712 <span class="title">inodes</span> <span class="title">per</span> <span class="title">group</span></span></span><br><span class="line"><span class="function"><span class="title">Superblock</span> <span class="title">backups</span> <span class="title">stored</span> <span class="title">on</span> <span class="title">blocks</span>:</span></span><br><span class="line"><span class="function">        32768, 98304, 163840, 229376, 294912</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="title">Writing</span> <span class="title">inode</span> <span class="title">tables</span>: <span class="title">done</span></span></span><br><span class="line"><span class="function"><span class="title">Creating</span> <span class="title">journal</span> (8192 <span class="title">blocks</span>): <span class="title">done</span> &lt;==有日志记录</span></span><br><span class="line"><span class="function"><span class="title">Writing</span> <span class="title">superblocks</span> <span class="title">and</span> <span class="title">filesystem</span> <span class="title">accounting</span> <span class="title">information</span>: <span class="title">done</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="title">This</span> <span class="title">filesystem</span> <span class="title">will</span> <span class="title">be</span> <span class="title">automatically</span> <span class="title">checked</span> <span class="title">every</span> 34 <span class="title">mounts</span> <span class="title">or</span></span></span><br><span class="line"><span class="function">180 <span class="title">days</span>, <span class="title">whichever</span> <span class="title">comes</span> <span class="title">first</span>.  <span class="title">Use</span> <span class="title">tune2fs</span> -<span class="title">c</span> <span class="title">or</span> -<span class="title">i</span> <span class="title">to</span> <span class="title">override</span>.</span></span><br><span class="line"><span class="function"># 这样就创建起来我们所需要的 <span class="title">Ext3</span> 文件系统了！简单明了！</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="三、磁盘检验"><a href="#三、磁盘检验" class="headerlink" title="三、磁盘检验"></a>三、磁盘检验</h3><p><strong>fsck</strong>（file system check）</p>
-<p>用来检查和维护不一致的文件系统。</p>
-<p>若系统掉电或磁盘发生问题，可利用fsck命令对文件系统进行检查。</p>
-<p>语法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fsck [-t 文件系统] [-ACay] 装置名称</span><br></pre></td></tr></table></figure>
-
-<p>选项与参数：</p>
-<ul>
-<li><p><strong>- t</strong> </p>
-<p>给定档案系统的型式，若在 /etc/fstab 中已有定义或 kernel 本身已支援的则不需加上此参数</p>
-</li>
-<li><p><strong>- s</strong> </p>
-<p>依序一个一个地执行 fsck 的指令来检查</p>
-</li>
-<li><p><strong>- A</strong></p>
-<p>对/etc/fstab 中所有列出来的 分区（partition）做检查</p>
-</li>
-<li><p><strong>- C</strong></p>
-<p>显示完整的检查进度</p>
-</li>
-<li><p><strong>- d</strong></p>
-<p>打印出 e2fsck 的 debug 结果</p>
-</li>
-<li><p><strong>- p</strong></p>
-<p>同时有 -A 条件时，同时有多个 fsck 的检查一起执行</p>
-</li>
-<li><p><strong>- R</strong></p>
-<p>同时有 -A 条件时，省略 / 不检查</p>
-</li>
-<li><p><strong>- V</strong></p>
-<p>详细显示模式</p>
-</li>
-<li><p><strong>- a</strong></p>
-<p>如果检查有错则自动修复</p>
-</li>
-<li><p><strong>- r</strong></p>
-<p> 如果检查有错则由使用者回答是否修复</p>
-</li>
-<li><p><strong>- y</strong></p>
-<p> 选项指定检测每个文件是自动输入yes，在不确定那些是不正常的时候，可以执行 # fsck -y 全部检查修复。</p>
-</li>
-</ul>
-<p>示例：</p>
-<p>查看系统有多少文件系统支持的 fsck 命令：</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~] fsck[tab][tab]</span><br><span class="line">fsck         fsck.cramfs  fsck.ext2    fsck.ext3    fsck.msdos   fsck.vfat</span><br></pre></td></tr></table></figure>
-
-<p>示例：</p>
-<p>强制检测 /dev/hdc6 分区:</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~] fsck -C -f -t ext3 /dev/hdc6 </span><br><span class="line">fsck <span class="number">1</span>.<span class="number">39</span> (<span class="number">29</span>-May-<span class="number">2006</span>)</span><br><span class="line">e2fsck <span class="number">1</span>.<span class="number">39</span> (<span class="number">29</span>-May-<span class="number">2006</span>)</span><br><span class="line">Pass <span class="number">1</span>: Checking inodes, blocks, and sizes</span><br><span class="line">Pass <span class="number">2</span>: Checking directory structure</span><br><span class="line">Pass <span class="number">3</span>: Checking directory connectivity</span><br><span class="line">Pass <span class="number">4</span>: Checking reference counts</span><br><span class="line">Pass <span class="number">5</span>: Checking group summary information</span><br><span class="line"><span class="function">vbird_logical: 11/251968 <span class="title">files</span> (9.1% <span class="title">non</span>-<span class="title">contiguous</span>), 36926/1004046 <span class="title">blocks</span></span></span><br></pre></td></tr></table></figure>
-
-<p>如果没有加上 -f 的选项，则由于这个文件系统不曾出现问题，检查的经过非常快速！若加上 -f 强制检查，才会一项一项的显示过程。</p>
-<h3 id="四、磁盘挂载与卸除"><a href="#四、磁盘挂载与卸除" class="headerlink" title="四、磁盘挂载与卸除"></a>四、磁盘挂载与卸除</h3><h4 id="1、挂载：mount"><a href="#1、挂载：mount" class="headerlink" title="1、挂载：mount"></a>1、挂载：mount</h4><p>语法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mount [-t 文件系统] [-L Label名] [-o 额外选项] [-n]  装置文件名  挂载点</span><br></pre></td></tr></table></figure>
-
-<p>示例：</p>
-<p>用默认的方式，将刚刚创建的 /dev/hdc6 挂载到 /mnt/hdc6 上面！</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~] <span class="built_in">mkdir</span> /mnt/hdc6</span><br><span class="line">[root@www ~] mount /dev/hdc6 /mnt/hdc6</span><br><span class="line">[root@www ~] df</span><br><span class="line">Filesystem           <span class="number">1</span>K-blocks      Used Available Use% Mounted on</span><br><span class="line">.....中间省略.....</span><br><span class="line">/dev/hdc6              <span class="number">1976312</span>     <span class="number">42072</span>   <span class="number">1833836</span>   <span class="number">3</span>% /mnt/hdc6</span><br></pre></td></tr></table></figure>
-
-<h4 id="2、卸除：umount"><a href="#2、卸除：umount" class="headerlink" title="2、卸除：umount"></a>2、卸除：umount</h4><p>语法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">umount [-fn] 装置文件名或挂载点</span><br></pre></td></tr></table></figure>
-
-<p>选项与参数：</p>
-<ul>
-<li><p><strong>- f</strong> </p>
-<p>强制卸除！可用在类似网络文件系统 (NFS) 无法读取到的情况下；</p>
-</li>
-<li><p>*<em>- n *</em></p>
-<p>不升级 /etc/mtab 情况下卸除。</p>
-</li>
-</ul>
-<p>示例：</p>
-<p>卸载/dev/hdc6 </p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~] umount /dev/hdc6</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/21/Linux/Linux基础/Linux教程（6）Linux用户和用户组管理/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/01/21/Linux/Linux基础/Linux教程（6）Linux用户和用户组管理/" itemprop="url">Linux教程（6）Linux用户和用户组管理</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-01-21T11:49:37+08:00">
-                2020-01-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux-Linux基础/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux - Linux基础</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Linux系统是一个多用户多任务的分时操作系统，任何一个要使用系统资源的用户，都必须首先向系统管理员申请一个账号，然后以这个账号的身份进入系统。</p>
-<p>用户的账号一方面可以帮助系统管理员对使用系统的用户进行跟踪，并控制他们对系统资源的访问；另一方面，可以帮助用户组织文件，并为用户提供安全性保护。</p>
-<p><strong>每个用户账号都拥有一个唯一的用户名和各自的口令。</strong></p>
-<p>用户在登录时键入正确的用户名和口令后，就能进入系统和自己的主目录。</p>
-<p>实现用户账号的管理，要完成的工作主要有以下几个方面：</p>
-<ul>
-<li>用户账号的添加、删除与修改</li>
-<li>用户口令的管理</li>
-<li>用户组的管理</li>
-</ul>
-<h3 id="一、系统用户账号的管理"><a href="#一、系统用户账号的管理" class="headerlink" title="一、系统用户账号的管理"></a>一、系统用户账号的管理</h3><p>用户账号的管理工作主要涉及到用户账号的<strong>添加、修改和删除</strong>。</p>
-<p>添加用户账号就是在系统中创建一个新账号，然后为新账号分配用户号、用户组、主目录和登录Shell等资源。</p>
-<p><strong>刚添加的账号是被锁定的，无法使用。</strong></p>
-<h4 id="1、增加账号"><a href="#1、增加账号" class="headerlink" title="1、增加账号"></a>1、增加账号</h4><p>添加新的用户账号：<strong>useradd</strong></p>
-<p>语法：</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">useradd 选项 用户名</span><br></pre></td></tr></table></figure>
-
-<p>参数说明：</p>
-<ul>
-<li><p><strong>选项</strong></p>
-<ul>
-<li><strong>- c comment</strong> <ul>
-<li>指定一段注释性描述</li>
-</ul>
-</li>
-<li><strong>- d 目录</strong><ul>
-<li>指定用户主目录，如果此目录不存在，则同时使用 - m选项，可以创建主目录</li>
-</ul>
-</li>
-<li><strong>- g 用户组</strong><ul>
-<li>指定用户所属的用户组</li>
-</ul>
-</li>
-<li><strong>- G 用户组</strong><ul>
-<li>用户组</li>
-</ul>
-</li>
-<li><strong>- s Shell文件</strong><ul>
-<li>指定用户的登录Shell</li>
-</ul>
-</li>
-<li><strong>- u 用户号</strong><ul>
-<li>指定用户的用户号，如果同时有 - o选项，则可以重复使用其他用户的标识号</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p><strong>用户名</strong></p>
-<p>指定新账号的登录名</p>
-</li>
-</ul>
-<p>示例：</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">useradd –d  /home/sam -m sam</span><br></pre></td></tr></table></figure>
-
-<p>此命令创建了一个用户sam，其中-d和-m选项用来为登录名sam产生一个主目录 /home/sam（/home为默认的用户主目录所在的父目录）。</p>
-<p>示例：</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">useradd -s /bin/sh -g group –G adm,root gem</span><br></pre></td></tr></table></figure>
-
-<p>此命令新建了一个用户gem，该用户的登录Shell是 <code>/bin/sh</code>，它属于group用户组，同时又属于adm和root用户组，其中group用户组是其主组。</p>
-<p>这里可能新建组：<code>groupadd group及groupadd adm</code></p>
-<p>增加用户账号就是在/etc/passwd文件中为新用户增加一条记录，同时更新其他系统文件如/etc/shadow, /etc/group等。</p>
-<p>Linux提供了集成的系统管理工具userconf，它可以用来对用户账号进行统一管理。</p>
-<h4 id="2、删除账号"><a href="#2、删除账号" class="headerlink" title="2、删除账号"></a>2、删除账号</h4><p>删除一个已有的用户账号：<strong>userdel</strong></p>
-<p>如果一个用户的账号不再使用，可以从系统中删除。删除用户账号就是要将/etc/passwd等系统文件中的该用户记录删除，必要时还删除用户的主目录。</p>
-<p>语法：</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">userdel 选项 用户名</span><br></pre></td></tr></table></figure>
-
-<p>选项：</p>
-<ul>
-<li><p><strong>- r</strong></p>
-<p>把用户的主目录一起删除（常用）</p>
-</li>
-</ul>
-<p>示例：</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">userdel -r sam</span><br></pre></td></tr></table></figure>
-
-<p>此命令删除用户sam在系统文件中（主要是/etc/passwd, /etc/shadow, /etc/group等）的记录，同时删除用户的主目录。</p>
-<h4 id="3、修改"><a href="#3、修改" class="headerlink" title="3、修改"></a>3、修改</h4><p>修改已有用户的信息：<strong>usermod</strong></p>
-<p>语法：</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">usermod 选项 用户名</span><br></pre></td></tr></table></figure>
-
-<p>选项与 useradd 命令中的选项一样，可以为用户指定新的资源值。</p>
-<p>另外，有些系统可以使用选项：</p>
-<p><strong>- l 新用户名</strong></p>
-<p>这个选项指定一个新的账号，即将原来的用户名改为新的用户名。</p>
-<p>示例：</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">usermod -s /bin/ksh -d /home/z –g developer sam</span><br></pre></td></tr></table></figure>
-
-<p>此命令将用户sam的登录Shell修改为ksh，主目录改为/home/z，用户组改为developer。</p>
-<h4 id="4、用户口令的管理"><a href="#4、用户口令的管理" class="headerlink" title="4、用户口令的管理"></a>4、用户口令的管理</h4><p>用户管理的一项重要内容是用户口令的管理。用户账号刚创建时没有口令，但是被系统锁定，无法使用，<strong>必须为其指定口令后才可以使用</strong>，即使是指定空口令。</p>
-<p>指定和修改用户口令：<strong>passwd</strong></p>
-<p><strong>超级用户可以为自己和其他用户指定口令，普通用户只能用它修改自己的口令。</strong></p>
-<p>语法：</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">passwd 选项 用户名</span><br></pre></td></tr></table></figure>
-
-<p>选项：</p>
-<ul>
-<li><p><strong>- l</strong></p>
-<p>锁定口令，即禁用账号</p>
-</li>
-<li><p><strong>- u</strong></p>
-<p>口令解锁</p>
-</li>
-<li><p><strong>- d</strong></p>
-<p>使账号无口令</p>
-</li>
-<li><p><strong>- f</strong></p>
-<p>强迫用户下次登录时修改口令</p>
-</li>
-</ul>
-<p>如果默认用户名，则修改当前用户的口令。</p>
-<p>示例：假设当前用户是sam，则下面的命令修改该用户自己的口令：</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ passwd </span><br><span class="line">Old password:****** </span><br><span class="line">New password:******* </span><br><span class="line">Re-enter new password:*******</span><br></pre></td></tr></table></figure>
-
-<p>如果是超级用户，可以用下列形式指定任何用户的口令：</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">passwd sam </span><br><span class="line">New password:******* </span><br><span class="line">Re-enter new password:*******</span><br></pre></td></tr></table></figure>
-
-<p>普通用户修改自己的口令时，passwd命令会先询问原口令，验证后再要求用户输入两遍新口令，如果两次输入的口令一致，则将这个口令指定给用户；而超级用户为用户指定口令时，就不需要知道原口令。</p>
-<p>为了系统安全起见，用户应该选择比较复杂的口令，例如最好使用8位长的口令，口令中包含有大写、小写字母和数字，并且应该与姓名、生日等不相同。</p>
-<p>为用户指定空口令时，执行下列形式的命令：</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">passwd -d sam</span><br></pre></td></tr></table></figure>
-
-<p>此命令将用户 sam 的口令删除，这样用户 sam 下一次登录时，系统就不再允许该用户登录了。</p>
-<p>passwd 命令还可以用 <strong>- l (lock)</strong> 选项锁定某一用户，使其不能登录，例如：</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">passwd -l sam</span><br></pre></td></tr></table></figure>
-
-<h3 id="二、系统用户组的管理"><a href="#二、系统用户组的管理" class="headerlink" title="二、系统用户组的管理"></a>二、系统用户组的管理</h3><p>每个用户都有一个用户组，系统可以对一个用户组中的所有用户进行集中管理。不同Linux 系统对用户组的规定有所不同，如Linux下的用户属于与它同名的用户组，这个用户组在创建用户时同时创建。</p>
-<p>用户组的管理涉及用户组的添加、删除和修改。组的增加、删除和修改实际上就是对/etc/group文件的更新。</p>
-<h4 id="1、增加用户组"><a href="#1、增加用户组" class="headerlink" title="1、增加用户组"></a>1、增加用户组</h4><p><strong>groupadd</strong></p>
-<p>语法：</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">groupadd 选项 用户组</span><br></pre></td></tr></table></figure>
-
-<p>选项：</p>
-<ul>
-<li><p><strong>- g GID</strong></p>
-<p>指定新用户组的组标识号（GID）</p>
-</li>
-<li><p><strong>- o</strong></p>
-<p>一般与- g 选项同时使用，表示新用户组的GID可以与系统已有的用户组的GID相同。</p>
-</li>
-</ul>
-<p>示例：</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">groupadd group1</span><br></pre></td></tr></table></figure>
-
-<p>此命令向系统中增加了一个新组group1，新组的组标识号是在当前已有的最大组标识号的基础上加1。</p>
-<p>示例：</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">groupadd -g <span class="number">101</span> group2</span><br></pre></td></tr></table></figure>
-
-<p>此命令向系统中增加了一个新组group2，同时指定新组的组标识号是101。</p>
-<h4 id="2、删除用户组"><a href="#2、删除用户组" class="headerlink" title="2、删除用户组"></a>2、删除用户组</h4><p><strong>groupdel</strong></p>
-<p>格式：</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">groupdel 用户组</span><br></pre></td></tr></table></figure>
-
-<p>示例：</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">groupdel group1</span><br></pre></td></tr></table></figure>
-
-<p>此命令从系统中删除组group1。</p>
-<h4 id="3、修改用户组属性"><a href="#3、修改用户组属性" class="headerlink" title="3、修改用户组属性"></a>3、修改用户组属性</h4><p><strong>groupmod</strong></p>
-<p>语法：</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">groupmod 选项 用户组</span><br></pre></td></tr></table></figure>
-
-<p>选项：</p>
-<ul>
-<li><p><strong>- g GID</strong></p>
-<p> 为用户组指定新的组标识号。</p>
-</li>
-<li><p><strong>- o</strong></p>
-<p> 与-g选项同时使用，用户组的新GID可以与系统已有用户组的GID相同。</p>
-</li>
-<li><p><strong>- n新用户组</strong></p>
-<p> 将用户组的名字改为新名字</p>
-</li>
-</ul>
-<p>示例：</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">groupmod -g <span class="number">102</span> group2</span><br></pre></td></tr></table></figure>
-
-<p>此命令将组group2的组标识号修改为102。</p>
-<p>示例：</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">groupmod –g <span class="number">10000</span> -n group3 group2</span><br></pre></td></tr></table></figure>
-
-<p>此命令将组group2的标识号改为10000，组名修改为group3。</p>
-<h4 id="4、切换用户组"><a href="#4、切换用户组" class="headerlink" title="4、切换用户组"></a>4、切换用户组</h4><p><strong>newgrp</strong></p>
-<p>如果一个用户同时属于多个用户组，那么用户可以在用户组之间切换，以便具有其他用户组的权限。</p>
-<p><strong>这个命令的参数就是目的用户组。</strong></p>
-<p>示例：</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ newgrp root</span><br></pre></td></tr></table></figure>
-
-<p>这条命令将当前用户切换到root用户组，前提条件是root用户组确实是该用户的主组或附加组。类似于用户账号的管理，用户组的管理也可以通过集成的系统管理工具来完成。</p>
-<h3 id="三、与用户账号有关的系统文件"><a href="#三、与用户账号有关的系统文件" class="headerlink" title="三、与用户账号有关的系统文件"></a>三、与用户账号有关的系统文件</h3><p>完成用户管理的工作有许多种方法，但是每一种方法实际上都是对有关的系统文件进行修改。</p>
-<p>与用户和用户组相关的信息都存放在一些系统文件中，这些文件包括/etc/passwd, /etc/shadow, /etc/group等。</p>
-<p>下面分别介绍这些文件的内容。</p>
-<h4 id="1、-etc-passwd"><a href="#1、-etc-passwd" class="headerlink" title="1、/etc/passwd"></a>1、/etc/passwd</h4><p><strong>/etc/passwd文件是用户管理工作涉及的最重要的一个文件</strong></p>
-<p>Linux系统中的每个用户都在/etc/passwd文件中有一个对应的记录行，它记录了这个用户的一些基本属性。</p>
-<p>这个文件对所有用户都是可读的。它的内容类似下面的例子：</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">cat /etc/passwd</span><br><span class="line"></span><br><span class="line"><span class="function">root:<span class="title">x</span>:0:0:<span class="title">Superuser</span>:/:</span></span><br><span class="line"><span class="function"><span class="title">daemon:x</span>:1:1:<span class="title">System</span> <span class="title">daemons</span>:/<span class="title">etc</span>:</span></span><br><span class="line"><span class="function"><span class="title">bin:x</span>:2:2:<span class="title">Owner</span> <span class="title">of</span> <span class="title">system</span> <span class="title">commands</span>:/<span class="title">bin</span>:</span></span><br><span class="line"><span class="function"><span class="title">sys:x</span>:3:3:<span class="title">Owner</span> <span class="title">of</span> <span class="title">system</span> <span class="title">files</span>:/<span class="title">usr</span>/<span class="title">sys</span>:</span></span><br><span class="line"><span class="function"><span class="title">adm:x</span>:4:4:<span class="title">System</span> <span class="title">accounting</span>:/<span class="title">usr</span>/<span class="title">adm</span>:</span></span><br><span class="line"><span class="function"><span class="title">uucp:x</span>:5:5:<span class="title">UUCP</span> <span class="title">administrator</span>:/<span class="title">usr</span>/<span class="title">lib</span>/<span class="title">uucp</span>:</span></span><br><span class="line"><span class="function"><span class="title">auth:x</span>:7:21:<span class="title">Authentication</span> <span class="title">administrator</span>:/<span class="title">tcb</span>/<span class="title">files</span>/<span class="title">auth</span>:</span></span><br><span class="line"><span class="function"><span class="title">cron:x</span>:9:16:<span class="title">Cron</span> <span class="title">daemon</span>:/<span class="title">usr</span>/<span class="title">spool</span>/<span class="title">cron</span>:</span></span><br><span class="line"><span class="function"><span class="title">listen:x</span>:37:4:<span class="title">Network</span> <span class="title">daemon</span>:/<span class="title">usr</span>/<span class="title">net</span>/<span class="title">nls</span>:</span></span><br><span class="line"><span class="function"><span class="title">lp:x</span>:71:18:<span class="title">Printer</span> <span class="title">administrator</span>:/<span class="title">usr</span>/<span class="title">spool</span>/<span class="title">lp</span>:</span></span><br><span class="line"><span class="function"><span class="title">sam:x</span>:200:50:<span class="title">Sam</span> <span class="title">san</span>:/<span class="title">home</span>/<span class="title">sam</span>:/<span class="title">bin</span>/<span class="title">sh</span></span></span><br></pre></td></tr></table></figure>
-
-<p>从上面的例子我们可以看到，/etc/passwd中一行记录对应着一个用户，每行记录又被冒号(:)分隔为7个字段，其格式和具体含义如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">用户名:口令:用户标识号:组标识号:注释性描述:主目录:登录Shell</span><br></pre></td></tr></table></figure>
-
-<p><strong>（1）”用户名”是代表用户账号的字符串。</strong></p>
-<p>通常长度不超过8个字符，并且由大小写字母和/或数字组成。登录名中不能有冒号(:)，因为冒号在这里是分隔符。</p>
-<p>为了兼容起见，登录名中最好不要包含点字符(.)，并且不使用连字符(-)和加号(+)打头。</p>
-<p><strong>（2）“口令”一些系统中，存放着加密后的用户口令字。</strong></p>
-<p>虽然这个字段存放的只是用户口令的加密串，不是明文，但是由于/etc/passwd文件对所有用户都可读，所以这仍是一个安全隐患。因此，现在许多Linux 系统（如SVR4）都使用了shadow技术，把真正的加密后的用户口令字存放到/etc/shadow文件中，而在/etc/passwd文件的口令字段中只存放一个特殊的字符，例如“x”或者“*”。</p>
-<p><strong>（3）“用户标识号”是一个整数，系统内部用它来标识用户。</strong></p>
-<p>一般情况下它与用户名是一一对应的。如果几个用户名对应的用户标识号是一样的，系统内部将把它们视为同一个用户，但是它们可以有不同的口令、不同的主目录以及不同的登录Shell等。</p>
-<p>通常用户标识号的取值范围是0～65 535。0是超级用户root的标识号，1～99由系统保留，作为管理账号，普通用户的标识号从100开始。在Linux系统中，这个界限是500。</p>
-<p><strong>（4）“组标识号”字段记录的是用户所属的用户组。</strong></p>
-<p>它对应着/etc/group文件中的一条记录。</p>
-<p><strong>（5）“注释性描述”字段记录着用户的一些个人情况。</strong></p>
-<p>例如用户的真实姓名、电话、地址等，这个字段并没有什么实际的用途。在不同的Linux 系统中，这个字段的格式并没有统一。在许多Linux系统中，这个字段存放的是一段任意的注释性描述文字，用做finger命令的输出。</p>
-<p><strong>（6）“主目录”，也就是用户的起始工作目录。</strong></p>
-<p>它是用户在登录到系统之后所处的目录。在大多数系统中，各用户的主目录都被组织在同一个特定的目录下，而用户主目录的名称就是该用户的登录名。各用户对自己的主目录有读、写、执行（搜索）权限，其他用户对此目录的访问权限则根据具体情况设置。</p>
-<p><strong>（7）用户登录后，要启动一个进程，负责将用户的操作传给内核，这个进程是用户登录到系统后运行的命令解释器或某个特定的程序，即Shell。</strong></p>
-<p>Shell是用户与Linux系统之间的接口。Linux的Shell有许多种，每种都有不同的特点。常用的有sh(Bourne Shell), csh(C Shell), ksh(Korn Shell), tcsh(TENEX/TOPS-20 type C Shell), bash(Bourne Again Shell)等。</p>
-<p>系统管理员可以根据系统情况和用户习惯为用户指定某个Shell。如果不指定Shell，那么系统使用sh为默认的登录Shell，即这个字段的值为/bin/sh。</p>
-<p>用户的登录Shell也可以指定为某个特定的程序（此程序不是一个命令解释器）。</p>
-<p>利用这一特点，我们可以限制用户只能运行指定的应用程序，在该应用程序运行结束后，用户就自动退出了系统。有些Linux 系统要求只有那些在系统中登记了的程序才能出现在这个字段中。</p>
-<p><strong>（8）系统中有一类用户称为伪用户（pseudo users）。</strong></p>
-<p>这些用户在/etc/passwd文件中也占有一条记录，但是不能登录，因为它们的登录Shell为空。它们的存在主要是方便系统管理，满足相应的系统进程对文件属主的要求。</p>
-<p>常见的伪用户如下所示：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">伪 用 户 含 义 </span><br><span class="line">bin 拥有可执行的用户命令文件 </span><br><span class="line">sys 拥有系统文件 </span><br><span class="line">adm 拥有帐户文件 </span><br><span class="line">uucp UUCP使用 </span><br><span class="line">lp lp或lpd子系统使用 </span><br><span class="line">nobody NFS使用</span><br></pre></td></tr></table></figure>
-
-<h4 id="2、-etc-shadow"><a href="#2、-etc-shadow" class="headerlink" title="2、/etc/shadow"></a>2、/etc/shadow</h4><p><strong>除了上面列出的伪用户外，还有许多标准的伪用户，例如：audit, cron, mail, usenet等，它们也都各自为相关的进程和文件所需要。</strong></p>
-<p>由于/etc/passwd文件是所有用户都可读的，如果用户的密码太简单或规律比较明显的话，一台普通的计算机就能够很容易地将它破解，因此对安全性要求较高的Linux系统都把加密后的口令字分离出来，单独存放在一个文件中，这个文件是/etc/shadow文件。 有超级用户才拥有该文件读权限，这就保证了用户密码的安全性。</p>
-<p><strong>/etc/shadow中的记录行与/etc/passwd中的一一对应，它由pwconv命令根据/etc/passwd中的数据自动产生</strong></p>
-<p>它的文件格式与/etc/passwd类似，由若干个字段组成，字段之间用”:”隔开。这些字段是：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">登录名:加密口令:最后一次修改时间:最小时间间隔:最大时间间隔:警告时间:不活动时间:失效时间:标志</span><br></pre></td></tr></table></figure>
-
-<ol>
-<li>“登录名”是与/etc/passwd文件中的登录名相一致的用户账号</li>
-<li>“口令”字段存放的是加密后的用户口令字，长度为13个字符。如果为空，则对应用户没有口令，登录时不需要口令；如果含有不属于集合 { ./0-9A-Za-z }中的字符，则对应的用户不能登录。</li>
-<li>“最后一次修改时间”表示的是从某个时刻起，到用户最后一次修改口令时的天数。时间起点对不同的系统可能不一样。例如在SCO Linux 中，这个时间起点是1970年1月1日。</li>
-<li>“最小时间间隔”指的是两次修改口令之间所需的最小天数。</li>
-<li>“最大时间间隔”指的是口令保持有效的最大天数。</li>
-<li>“警告时间”字段表示的是从系统开始警告用户到用户密码正式失效之间的天数。</li>
-<li>“不活动时间”表示的是用户没有登录活动但账号仍能保持有效的最大天数。</li>
-<li>“失效时间”字段给出的是一个绝对的天数，如果使用了这个字段，那么就给出相应账号的生存期。期满后，该账号就不再是一个合法的账号，也就不能再用来登录了。</li>
-</ol>
-<p>下面是/etc/shadow的一个例子：</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">cat /etc/shadow</span><br><span class="line"></span><br><span class="line"><span class="function">root:<span class="title">Dnakfw28zf38w</span>:8764:0:168:7:::</span></span><br><span class="line"><span class="function"><span class="title">daemon</span>:*::0:0::::</span></span><br><span class="line"><span class="function"><span class="title">bin</span>:*::0:0::::</span></span><br><span class="line"><span class="function"><span class="title">sys</span>:*::0:0::::</span></span><br><span class="line"><span class="function"><span class="title">adm</span>:*::0:0::::</span></span><br><span class="line"><span class="function"><span class="title">uucp</span>:*::0:0::::</span></span><br><span class="line"><span class="function"><span class="title">nuucp</span>:*::0:0::::</span></span><br><span class="line"><span class="function"><span class="title">auth</span>:*::0:0::::</span></span><br><span class="line"><span class="function"><span class="title">cron</span>:*::0:0::::</span></span><br><span class="line"><span class="function"><span class="title">listen</span>:*::0:0::::</span></span><br><span class="line"><span class="function"><span class="title">lp</span>:*::0:0::::</span></span><br><span class="line"><span class="function"><span class="title">sam:EkdiSECLWPdSa</span>:9740:0:0::::</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="3、-etc-group"><a href="#3、-etc-group" class="headerlink" title="3、/etc/group"></a>3、/etc/group</h4><p><strong>用户组的所有信息都存放在/etc/group文件中</strong></p>
-<p>将用户分组是Linux 系统中对用户进行管理及控制访问权限的一种手段。</p>
-<p>每个用户都属于某个用户组；一个组中可以有多个用户，一个用户也可以属于不同的组。</p>
-<p>当一个用户同时是多个组中的成员时，在/etc/passwd文件中记录的是用户所属的主组，也就是登录时所属的默认组，而其他组称为附加组。</p>
-<p>用户要访问属于附加组的文件时，必须首先使用newgrp命令使自己成为所要访问的组中的成员。</p>
-<p>用户组的所有信息都存放在/etc/group文件中。此文件的格式也类似于/etc/passwd文件，由冒号(:)隔开若干个字段，这些字段有：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">组名:口令:组标识号:组内用户列表</span><br></pre></td></tr></table></figure>
-
-<ol>
-<li>“组名”是用户组的名称，由字母或数字构成。与/etc/passwd中的登录名一样，组名不应重复。</li>
-<li>“口令”字段存放的是用户组加密后的口令字。一般Linux 系统的用户组都没有口令，即这个字段一般为空，或者是*。</li>
-<li>“组标识号”与用户标识号类似，也是一个整数，被系统内部用来标识组。</li>
-<li>“组内用户列表”是属于这个组的所有用户的列表/b]，不同用户之间用逗号(,)分隔。这个用户组可能是用户的主组，也可能是附加组。</li>
-</ol>
-<p>/etc/group文件的一个例子如下：</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">root::0:<span class="title">root</span></span></span><br><span class="line"><span class="function"><span class="title">bin</span>::2:<span class="title">root</span>,<span class="title">bin</span></span></span><br><span class="line"><span class="function"><span class="title">sys</span>::3:<span class="title">root</span>,<span class="title">uucp</span></span></span><br><span class="line"><span class="function"><span class="title">adm</span>::4:<span class="title">root</span>,<span class="title">adm</span></span></span><br><span class="line"><span class="function"><span class="title">daemon</span>::5:<span class="title">root</span>,<span class="title">daemon</span></span></span><br><span class="line"><span class="function"><span class="title">lp</span>::7:<span class="title">root</span>,<span class="title">lp</span></span></span><br><span class="line"><span class="function"><span class="title">users</span>::20:<span class="title">root</span>,<span class="title">sam</span></span></span><br></pre></td></tr></table></figure>
-
-<h3 id="四、添加批量用户"><a href="#四、添加批量用户" class="headerlink" title="四、添加批量用户"></a>四、添加批量用户</h3><p>添加和删除用户对每位Linux系统管理员都是轻而易举的事，比较棘手的是如果要添加几十个、上百个甚至上千个用户时，我们不太可能还使用useradd一个一个地添加，必然要找一种简便的创建大量用户的方法。Linux系统提供了创建大量用户的工具，可以让您立即创建大量用户，方法如下：</p>
-<p><strong>（1）先编辑一个文本用户文件。</strong></p>
-<p>每一列按照<code>/etc/passwd</code>密码文件的格式书写，要注意每个用户的用户名、UID、宿主目录都不可以相同，其中密码栏可以留做空白或输入x号。一个范例文件user.txt内容如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">user001::600:100:user:/home/user001:/bin/bash</span><br><span class="line">user002::601:100:user:/home/user002:/bin/bash</span><br><span class="line">user003::602:100:user:/home/user003:/bin/bash</span><br><span class="line">user004::603:100:user:/home/user004:/bin/bash</span><br><span class="line">user005::604:100:user:/home/user005:/bin/bash</span><br><span class="line">user006::605:100:user:/home/user006:/bin/bash</span><br></pre></td></tr></table></figure>
-
-<p><strong>（2）以root身份执行命令 <code>/usr/sbin/newusers</code>，从刚创建的用户文件<code>user.txt</code>中导入数据，创建用户：</strong></p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">newusers &lt; user.txt</span><br></pre></td></tr></table></figure>
-
-<p>然后可以执行命令 <code>vipw</code> 或 <code>vi /etc/passwd</code> 检查 <code>/etc/passwd</code> 文件是否已经出现这些用户的数据，并且用户的宿主目录是否已经创建。</p>
-<p><strong>（3）执行命令/usr/sbin/pwunconv。</strong></p>
-<p>将 <code>/etc/shadow</code> 产生的 <code>shadow</code> 密码解码，然后回写到 <code>/etc/passwd</code> 中，并将<code>/etc/shadow</code>的<code>shadow</code>密码栏删掉。这是为了方便下一步的密码转换工作，即先取消 <code>shadow password</code> 功能。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pwunconv</span><br></pre></td></tr></table></figure>
-
-<p><strong>（4）编辑每个用户的密码对照文件。</strong></p>
-<p>格式为：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">用户名:密码</span><br></pre></td></tr></table></figure>
-
-<p>实例文件 <code>passwd.txt</code> 内容如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">user001:123456</span><br><span class="line">user002:123456</span><br><span class="line">user003:123456</span><br><span class="line">user004:123456</span><br><span class="line">user005:123456</span><br><span class="line">user006:123456</span><br></pre></td></tr></table></figure>
-
-<p><strong>（5）以 root 身份执行命令 <code>/usr/sbin/chpasswd</code>。</strong></p>
-<p>创建用户密码，<code>chpasswd</code> 会将经过 <code>/usr/bin/passwd</code> 命令编码过的密码写入 <code>/etc/passwd</code> 的密码栏。</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chpasswd &lt; passwd.txt</span><br></pre></td></tr></table></figure>
-
-<p><strong>（6）确定密码经编码写入/etc/passwd的密码栏后。</strong></p>
-<p>执行命令 <code>/usr/sbin/pwconv</code> 将密码编码为 <code>shadow password</code>，并将结果写入 <code>/etc/shadow</code>。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pwconv</span><br></pre></td></tr></table></figure>
-
-<p>这样就完成了大量用户的创建了，之后您可以到/home下检查这些用户宿主目录的权限设置是否都正确，并登录验证用户密码是否正确。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -3105,7 +2614,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">98</span>
+                  <span class="site-state-item-count">100</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -3116,7 +2625,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -3127,7 +2636,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -3180,7 +2689,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

@@ -249,7 +249,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/09/python全栈/第01部分：基础+模块+面向对象+网络编程/模块/模块和包/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/10/python/python-字典、列表、字符串之间的转换/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -268,7 +268,409 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/08/09/python全栈/第01部分：基础+模块+面向对象+网络编程/模块/模块和包/" itemprop="url">模块和包</a></h1>
+                <a class="post-title-link" href="/2019/08/10/python/python-字典、列表、字符串之间的转换/" itemprop="url">python 字典、列表、字符串之间的转换</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-10T16:08:53+08:00">
+                2019-08-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="一、列表与字符串转换"><a href="#一、列表与字符串转换" class="headerlink" title="一、列表与字符串转换"></a>一、列表与字符串转换</h3><h4 id="1、列表转字符串"><a href="#1、列表转字符串" class="headerlink" title="1、列表转字符串"></a>1、列表转字符串</h4><p>将列表中的内容拼接成一个字符串</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>l = [<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">''</span>.join(l)</span><br><span class="line"><span class="string">'abc'</span></span><br></pre></td></tr></table></figure>
+
+<p>将列表中的值转换成字符串</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>l = [<span class="string">'a'</span>, <span class="number">1</span>, <span class="string">'b'</span>, <span class="number">2</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>[str(i) <span class="keyword">for</span> i <span class="keyword">in</span> l]</span><br><span class="line">[<span class="string">'a'</span>, <span class="string">'1'</span>, <span class="string">'b'</span>, <span class="string">'2'</span>]</span><br></pre></td></tr></table></figure>
+
+<h4 id="2、字符串转列表"><a href="#2、字符串转列表" class="headerlink" title="2、字符串转列表"></a>2、字符串转列表</h4><p>用eval转换</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>s = <span class="string">"['a', 'b', 'c']"</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>eval(s)</span><br><span class="line">[<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>]</span><br></pre></td></tr></table></figure>
+
+<p>将字符串每个字符转成列表中的值</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>s = <span class="string">'abc'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>list(s)</span><br><span class="line">[<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>]</span><br></pre></td></tr></table></figure>
+
+<p>将字符串按某方式分割成列表</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>s = <span class="string">'a,b,c'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s.split(<span class="string">','</span>)</span><br><span class="line">[<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>]</span><br></pre></td></tr></table></figure>
+
+<h3 id="二、列表与字典转换"><a href="#二、列表与字典转换" class="headerlink" title="二、列表与字典转换"></a>二、列表与字典转换</h3><h4 id="1、列表转字典"><a href="#1、列表转字典" class="headerlink" title="1、列表转字典"></a>1、列表转字典</h4><p>将两个列表转成字典</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>l = [<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>t = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>zip(l, t)</span><br><span class="line">&lt;zip object at <span class="number">0x1033ff508</span>&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>dict(zip(l, t))</span><br><span class="line">&#123;<span class="string">'a'</span>: <span class="number">1</span>, <span class="string">'b'</span>: <span class="number">2</span>, <span class="string">'c'</span>: <span class="number">3</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<p>将嵌套列表转为字典</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>l = [[<span class="string">'a'</span>, <span class="number">1</span>], [<span class="string">'b'</span>, <span class="number">2</span>], [<span class="string">'c'</span>, <span class="number">3</span>]]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>dict(l)</span><br><span class="line">&#123;<span class="string">'a'</span>: <span class="number">1</span>, <span class="string">'b'</span>: <span class="number">2</span>, <span class="string">'c'</span>: <span class="number">3</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2、字典转列表"><a href="#2、字典转列表" class="headerlink" title="2、字典转列表"></a>2、字典转列表</h4><p>字典中键、值转为列表</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>d = &#123;<span class="string">'a'</span>:<span class="number">1</span>, <span class="string">'b'</span>:<span class="number">2</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>list(d.keys())</span><br><span class="line">[<span class="string">'a'</span>, <span class="string">'b'</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>list(d.values())</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>]</span><br></pre></td></tr></table></figure>
+
+<h3 id="三、字典与字符串转换"><a href="#三、字典与字符串转换" class="headerlink" title="三、字典与字符串转换"></a>三、字典与字符串转换</h3><h4 id="1、字符串转字典"><a href="#1、字符串转字典" class="headerlink" title="1、字符串转字典"></a>1、字符串转字典</h4><p>用eval转换</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>s = <span class="string">"&#123;'a':1, 'b':2&#125;"</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>eval(s)</span><br><span class="line">&#123;<span class="string">'a'</span>: <span class="number">1</span>, <span class="string">'b'</span>: <span class="number">2</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<p>用json.loads转换</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>s = <span class="string">'&#123;"a":1, "b":2&#125;'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> json</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>json.loads(s)</span><br><span class="line">&#123;<span class="string">'a'</span>: <span class="number">1</span>, <span class="string">'b'</span>: <span class="number">2</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2、字典转字符串"><a href="#2、字典转字符串" class="headerlink" title="2、字典转字符串"></a>2、字典转字符串</h4><p>用json.dumps转换</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>d = &#123;<span class="string">'a'</span>:<span class="number">1</span>, <span class="string">'b'</span>:<span class="number">2</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> json</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>json.dumps(d)</span><br><span class="line"><span class="string">'&#123;"a": 1, "b": 2&#125;'</span></span><br></pre></td></tr></table></figure>
+
+<p>强转换</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>d = &#123;<span class="string">'a'</span>:<span class="number">1</span>, <span class="string">'b'</span>:<span class="number">2</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>str(d)</span><br><span class="line"><span class="string">"&#123;'a': 1, 'b': 2&#125;"</span></span><br></pre></td></tr></table></figure>
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/09/python_full_stack/第02部分：并发编程+数据库+前端/并发编程/协程/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/09/python_full_stack/第02部分：并发编程+数据库+前端/并发编程/协程/" itemprop="url">协程</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-09T08:13:27+08:00">
+                2019-08-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python全栈-02部分-并发编程/" itemprop="url" rel="index">
+                    <span itemprop="name">python全栈 -02部分 -并发编程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="（一）引子"><a href="#（一）引子" class="headerlink" title="（一）引子"></a>（一）引子</h2><p>​        之前我们学习了线程、进程的概念，了解了在操作系统中<strong>进程是资源分配的最小单位,线程是CPU调度的最小单位。</strong>按道理来说我们已经算是把cpu的利用率提高很多了。但是我们知道无论是创建多进程还是创建多线程来解决问题，都要消耗一定的时间来创建进程、创建线程、以及管理他们之间的切换。</p>
+<p>　　随着我们对于效率的追求不断提高，<strong>基于单线程来实现并发</strong>又成为一个新的课题，即只用一个主线程（很明显可利用的cpu只有一个）情况下实现并发。这样就可以节省创建线进程所消耗的时间。</p>
+<p>　　为此我们需要先回顾下并发的本质：切换+保存状态</p>
+<p> 　　cpu正在运行一个任务，会在两种情况下切走去执行其他的任务（切换由操作系统强制控制），一种情况是该任务发生了阻塞，另外一种情况是该任务计算的时间过长</p>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/python%E5%85%A8%E6%A0%88/%E7%AC%AC02%E9%83%A8%E5%88%86%EF%BC%9A%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2B%E6%95%B0%E6%8D%AE%E5%BA%93%2B%E5%89%8D%E7%AB%AF/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/12.png" alt></p>
+<p>​        ps：在介绍进程理论时，提及进程的三种执行状态，而线程才是执行单位，所以也可以将上图理解为线程的三种状态 </p>
+<p>　　 一：其中第二种情况并不能提升效率，只是为了让cpu能够雨露均沾，实现看起来所有任务都被“同时”执行的效果，如果多个任务都是纯计算的，这种切换反而会降低效率。</p>
+<p>　　为此我们可以基于yield来验证。yield本身就是一种在单线程下可以保存任务运行状态的方法，我们来简单复习一下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#1 yiled可以保存状态，yield的状态保存与操作系统的保存线程状态很像，但是yield是代码级别控制的，更轻量级</span></span><br><span class="line"><span class="comment">#2 send可以把一个函数的结果传给另外一个函数，以此实现单线程内程序之间的切换</span></span><br></pre></td></tr></table></figure>
+
+<p>单纯地切换反而会降低运行效率:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#串行执行</span></span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">consumer</span><span class="params">(res)</span>:</span></span><br><span class="line">    <span class="string">'''任务1:接收数据,处理数据'''</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">producer</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="string">'''任务2:生产数据'''</span></span><br><span class="line">    res=[]</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10000000</span>):</span><br><span class="line">        res.append(i)</span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line">start=time.time()</span><br><span class="line"><span class="comment">#串行执行</span></span><br><span class="line">res=producer()</span><br><span class="line">consumer(res) <span class="comment">#写成consumer(producer())会降低执行效率</span></span><br><span class="line">stop=time.time()</span><br><span class="line">print(stop-start) <span class="comment">#1.5536692142486572</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#基于yield并发执行</span></span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">consumer</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="string">'''任务1:接收数据,处理数据'''</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        x=<span class="keyword">yield</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">producer</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="string">'''任务2:生产数据'''</span></span><br><span class="line">    g=consumer()</span><br><span class="line">    next(g)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10000000</span>):</span><br><span class="line">        g.send(i)</span><br><span class="line"></span><br><span class="line">start=time.time()</span><br><span class="line"><span class="comment">#基于yield保存状态,实现两个任务直接来回切换,即并发的效果</span></span><br><span class="line"><span class="comment">#PS:如果每个任务中都加上打印,那么明显地看到两个任务的打印是你一次我一次,即并发执行的.</span></span><br><span class="line">producer()</span><br><span class="line"></span><br><span class="line">stop=time.time()</span><br><span class="line">print(stop-start) <span class="comment">#2.0272178649902344</span></span><br></pre></td></tr></table></figure>
+
+<p>​        二：第一种情况的切换。在任务一遇到io情况下，切到任务二去执行，这样就可以利用任务一阻塞的时间完成任务二的计算，效率的提升就在于此。</p>
+<p>yield无法做到遇到io阻塞:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">consumer</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="string">'''任务1:接收数据,处理数据'''</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        x=<span class="keyword">yield</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">producer</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="string">'''任务2:生产数据'''</span></span><br><span class="line">    g=consumer()</span><br><span class="line">    next(g)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10000000</span>):</span><br><span class="line">        g.send(i)</span><br><span class="line">        time.sleep(<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">start=time.time()</span><br><span class="line">producer() <span class="comment">#并发执行,但是任务producer遇到io就会阻塞住,并不会切到该线程内的其他任务去执行</span></span><br><span class="line"></span><br><span class="line">stop=time.time()</span><br><span class="line">print(stop-start)</span><br></pre></td></tr></table></figure>
+
+<p>​        <strong>对于单线程下，我们不可避免程序中出现io操作，但如果我们能在自己的程序中（即用户程序级别，而非操作系统级别）控制单线程下的多个任务能在一个任务遇到io阻塞时就切换到另外一个任务去计算，这样就保证了该线程能够最大限度地处于就绪态，即随时都可以被cpu执行的状态，相当于我们在用户程序级别将自己的io操作最大限度地隐藏起来，从而可以迷惑操作系统，让其看到：该线程好像是一直在计算，io比较少，从而更多的将cpu的执行权限分配给我们的线程。</strong></p>
+<p>​        协程的本质就是在单线程下，由用户自己控制一个任务遇到io阻塞了就切换另外一个任务去执行，以此来提升效率。为了实现它，我们需要找寻一种可以同时满足以下条件的解决方案：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#1. 可以控制多个任务之间的切换，切换之前将任务的状态保存下来，以便重新运行时，可以基于暂停的位置继续执行。</span></span><br><span class="line"><span class="comment">#2. 作为1的补充：可以检测io操作，在遇到io操作的情况下才发生切换</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="（二）协程介绍"><a href="#（二）协程介绍" class="headerlink" title="（二）协程介绍"></a>（二）协程介绍</h2><p>协程：是单线程下的并发，又称微线程，纤程。英文名Coroutine。一句话说明什么是协程：<strong>协程是一种用户态的轻量级线程，即协程是由用户程序自己控制调度的。、</strong></p>
+<p>需要强调的是：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#1. python的线程属于内核级别的，即由操作系统控制调度（如单线程遇到io或执行时间过长就会被迫交出cpu执行权限，切换其他线程运行）</span></span><br><span class="line"><span class="comment">#2. 单线程内开启协程，一旦遇到io，就会从应用程序级别（而非操作系统）控制切换，以此来提升效率（！！！非io操作的切换与效率无关</span></span><br></pre></td></tr></table></figure>
+
+<p>对比操作系统控制线程的切换，用户在单线程内控制协程的切换</p>
+<p>优点如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#1. 协程的切换开销更小，属于程序级别的切换，操作系统完全感知不到，因而更加轻量级</span></span><br><span class="line"><span class="comment">#2. 单线程内就可以实现并发的效果，最大限度地利用cpu</span></span><br></pre></td></tr></table></figure>
+
+<p>缺点如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#1. 协程的本质是单线程下，无法利用多核，可以是一个程序开启多个进程，每个进程内开启多个线程，每个线程内开启协程</span></span><br><span class="line"><span class="comment">#2. 协程指的是单个线程，因而一旦协程出现阻塞，将会阻塞整个线程</span></span><br></pre></td></tr></table></figure>
+
+<p>总结协程特点：</p>
+<ol>
+<li><strong>必须在只有一个单线程里实现并发</strong></li>
+<li><strong>修改共享数据不需加锁</strong></li>
+<li><strong>用户程序里自己保存多个控制流的上下文栈</strong></li>
+<li><strong>附加：一个协程遇到IO操作自动切换到其它协程（如何实现检测IO，yield、greenlet都无法实现，就用到了gevent模块（select机制））</strong></li>
+</ol>
+<h2 id="（三）Greenlet模块"><a href="#（三）Greenlet模块" class="headerlink" title="（三）Greenlet模块"></a>（三）Greenlet模块</h2><p>安装 ：pip3 install greenlet</p>
+<p>greenlet实现状态切换:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> greenlet <span class="keyword">import</span> greenlet</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">eat</span><span class="params">(name)</span>:</span></span><br><span class="line">    print(<span class="string">'%s eat 1'</span> %name)</span><br><span class="line">    g2.switch(<span class="string">'egon'</span>)</span><br><span class="line">    print(<span class="string">'%s eat 2'</span> %name)</span><br><span class="line">    g2.switch()</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">play</span><span class="params">(name)</span>:</span></span><br><span class="line">    print(<span class="string">'%s play 1'</span> %name)</span><br><span class="line">    g1.switch()</span><br><span class="line">    print(<span class="string">'%s play 2'</span> %name)</span><br><span class="line"></span><br><span class="line">g1=greenlet(eat)</span><br><span class="line">g2=greenlet(play)</span><br><span class="line"></span><br><span class="line">g1.switch(<span class="string">'egon'</span>)<span class="comment">#可以在第一次switch时传入参数，以后都不需要</span></span><br></pre></td></tr></table></figure>
+
+<p>单纯的切换（在没有io的情况下或者没有重复开辟内存空间的操作），反而会降低程序的执行速度</p>
+<p>效率对比:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#顺序执行</span></span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f1</span><span class="params">()</span>:</span></span><br><span class="line">    res=<span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">100000000</span>):</span><br><span class="line">        res+=i</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f2</span><span class="params">()</span>:</span></span><br><span class="line">    res=<span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">100000000</span>):</span><br><span class="line">        res*=i</span><br><span class="line"></span><br><span class="line">start=time.time()</span><br><span class="line">f1()</span><br><span class="line">f2()</span><br><span class="line">stop=time.time()</span><br><span class="line">print(<span class="string">'run time is %s'</span> %(stop-start)) <span class="comment">#10.985628366470337</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#切换</span></span><br><span class="line"><span class="keyword">from</span> greenlet <span class="keyword">import</span> greenlet</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f1</span><span class="params">()</span>:</span></span><br><span class="line">    res=<span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">100000000</span>):</span><br><span class="line">        res+=i</span><br><span class="line">        g2.switch()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f2</span><span class="params">()</span>:</span></span><br><span class="line">    res=<span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">100000000</span>):</span><br><span class="line">        res*=i</span><br><span class="line">        g1.switch()</span><br><span class="line"></span><br><span class="line">start=time.time()</span><br><span class="line">g1=greenlet(f1)</span><br><span class="line">g2=greenlet(f2)</span><br><span class="line">g1.switch()</span><br><span class="line">stop=time.time()</span><br><span class="line">print(<span class="string">'run time is %s'</span> %(stop-start)) <span class="comment"># 52.763017892837524</span></span><br></pre></td></tr></table></figure>
+
+<p>​        greenlet只是提供了一种比generator更加便捷的切换方式，当切到一个任务执行时如果遇到io，那就原地阻塞，仍然是没有解决遇到IO自动切换来提升效率的问题。</p>
+<p>​        单线程里的这20个任务的代码通常会既有计算操作又有阻塞操作，我们完全可以在执行任务1时遇到阻塞，就利用阻塞的时间去执行任务2。。。。如此，才能提高效率，这就用到了Gevent模块。</p>
+<h2 id="（四）Gevent模块"><a href="#（四）Gevent模块" class="headerlink" title="（四）Gevent模块"></a>（四）Gevent模块</h2><p>安装：pip3 install gevent</p>
+<p>​        Gevent 是一个第三方库，可以轻松通过gevent实现并发同步或异步编程，在gevent中用到的主要模式是<strong>Greenlet</strong>, 它是以C扩展模块形式接入Python的轻量级协程。 Greenlet全部运行在主程序操作系统进程的内部，但它们被协作式地调度。</p>
+<p>用法介绍:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">g1=gevent.spawn(func,<span class="number">1</span>,,<span class="number">2</span>,<span class="number">3</span>,x=<span class="number">4</span>,y=<span class="number">5</span>)<span class="comment">#创建一个协程对象g1，spawn括号内第一个参数是函数名，如eat，后面可以有多个参数，可以是位置实参或关键字实参，都是传给函数eat的</span></span><br><span class="line"></span><br><span class="line">g2=gevent.spawn(func2)</span><br><span class="line"></span><br><span class="line">g1.join() <span class="comment">#等待g1结束</span></span><br><span class="line"></span><br><span class="line">g2.join() <span class="comment">#等待g2结束</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#或者上述两步合作一步：gevent.joinall([g1,g2])</span></span><br><span class="line"></span><br><span class="line">g1.value<span class="comment">#拿到func1的返回值</span></span><br></pre></td></tr></table></figure>
+
+<p>例：遇到io主动切换</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gevent</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">eat</span><span class="params">(name)</span>:</span></span><br><span class="line">    print(<span class="string">'%s eat 1'</span> %name)</span><br><span class="line">    gevent.sleep(<span class="number">2</span>)</span><br><span class="line">    print(<span class="string">'%s eat 2'</span> %name)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">play</span><span class="params">(name)</span>:</span></span><br><span class="line">    print(<span class="string">'%s play 1'</span> %name)</span><br><span class="line">    gevent.sleep(<span class="number">1</span>)</span><br><span class="line">    print(<span class="string">'%s play 2'</span> %name)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">g1=gevent.spawn(eat,<span class="string">'egon'</span>)</span><br><span class="line">g2=gevent.spawn(play,name=<span class="string">'egon'</span>)</span><br><span class="line">g1.join()</span><br><span class="line">g2.join()</span><br><span class="line"><span class="comment">#或者gevent.joinall([g1,g2])</span></span><br><span class="line">print(<span class="string">'主'</span>)</span><br></pre></td></tr></table></figure>
+
+<p><strong>上例gevent.sleep(2)模拟的是gevent可以识别的io阻塞</strong>,<strong>而time.sleep(2)或其他的阻塞,gevent是不能直接识别的需要用下面一行代码,打补丁,就可以识别了</strong></p>
+<p><strong>from gevent import monkey;monkey.patch_all()必须放到被打补丁者的前面，如time，socket模块之前</strong></p>
+<p><strong>或者我们干脆记忆成：要用gevent，需要将from gevent import monkey;monkey.patch_all()放到文件的开头</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> gevent <span class="keyword">import</span> monkey;monkey.patch_all()</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> gevent</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">eat</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">'eat food 1'</span>)</span><br><span class="line">    time.sleep(<span class="number">2</span>)</span><br><span class="line">    print(<span class="string">'eat food 2'</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">play</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">'play 1'</span>)</span><br><span class="line">    time.sleep(<span class="number">1</span>)</span><br><span class="line">    print(<span class="string">'play 2'</span>)</span><br><span class="line"></span><br><span class="line">g1=gevent.spawn(eat)</span><br><span class="line">g2=gevent.spawn(play)</span><br><span class="line">gevent.joinall([g1,g2])</span><br><span class="line">print(<span class="string">'主'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>我们可以用threading.current_thread().getName()来查看每个g1和g2，查看的结果为DummyThread-n，即假线程</p>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/python%E5%85%A8%E6%A0%88/%E7%AC%AC02%E9%83%A8%E5%88%86%EF%BC%9A%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2B%E6%95%B0%E6%8D%AE%E5%BA%93%2B%E5%89%8D%E7%AB%AF/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/13.png" alt="img"></p>
+<p>查看threading.current_thread().getName()</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> gevent <span class="keyword">import</span> monkey;monkey.patch_all()</span><br><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"><span class="keyword">import</span> gevent</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">eat</span><span class="params">()</span>:</span></span><br><span class="line">    print(threading.current_thread().getName())</span><br><span class="line">    print(<span class="string">'eat food 1'</span>)</span><br><span class="line">    time.sleep(<span class="number">2</span>)</span><br><span class="line">    print(<span class="string">'eat food 2'</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">play</span><span class="params">()</span>:</span></span><br><span class="line">    print(threading.current_thread().getName())</span><br><span class="line">    print(<span class="string">'play 1'</span>)</span><br><span class="line">    time.sleep(<span class="number">1</span>)</span><br><span class="line">    print(<span class="string">'play 2'</span>)</span><br><span class="line"></span><br><span class="line">g1=gevent.spawn(eat)</span><br><span class="line">g2=gevent.spawn(play)</span><br><span class="line">gevent.joinall([g1,g2])</span><br><span class="line">print(<span class="string">'主'</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="（五）Gevent之同步与异步"><a href="#（五）Gevent之同步与异步" class="headerlink" title="（五）Gevent之同步与异步"></a>（五）Gevent之同步与异步</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> gevent <span class="keyword">import</span> spawn,joinall,monkey;monkey.patch_all()</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">task</span><span class="params">(pid)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Some non-deterministic task</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    time.sleep(<span class="number">0.5</span>)</span><br><span class="line">    print(<span class="string">'Task %s done'</span> % pid)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">synchronous</span><span class="params">()</span>:</span>  <span class="comment"># 同步</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">        task(i)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">asynchronous</span><span class="params">()</span>:</span> <span class="comment"># 异步</span></span><br><span class="line">    g_l=[spawn(task,i) <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>)]</span><br><span class="line">    joinall(g_l)</span><br><span class="line">    print(<span class="string">'DONE'</span>)</span><br><span class="line">    </span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    print(<span class="string">'Synchronous:'</span>)</span><br><span class="line">    synchronous()</span><br><span class="line">    print(<span class="string">'Asynchronous:'</span>)</span><br><span class="line">    asynchronous()</span><br><span class="line"><span class="comment">#  上面程序的重要部分是将task函数封装到Greenlet内部线程的gevent.spawn。</span></span><br><span class="line"><span class="comment">#  初始化的greenlet列表存放在数组threads中，此数组被传给gevent.joinall 函数，</span></span><br><span class="line"><span class="comment">#  后者阻塞当前流程，并执行所有给定的greenlet任务。执行流程只会在 所有greenlet执行完后才会继续向下走。</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="（六）Gevent之应用举例"><a href="#（六）Gevent之应用举例" class="headerlink" title="（六）Gevent之应用举例"></a>（六）Gevent之应用举例</h2><p><strong>注意 ：</strong>from gevent import monkey;monkey.patch_all()一定要放到导入socket模块之前，否则gevent无法识别socket的阻塞</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 协程 : 能够在一个线程中实现并发效果的概念</span></span><br><span class="line">    <span class="comment">#    能够规避一些任务中的IO操作</span></span><br><span class="line">    <span class="comment">#    在任务的执行过程中,检测到IO就切换到其他任务</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="1、爬虫"><a href="#1、爬虫" class="headerlink" title="1、爬虫"></a>1、爬虫</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> gevent <span class="keyword">import</span> monkey;monkey.patch_all()</span><br><span class="line"><span class="keyword">import</span> gevent</span><br><span class="line"><span class="keyword">from</span> urllib.request <span class="keyword">import</span> urlopen    <span class="comment"># 内置的模块</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_url</span><span class="params">(url)</span>:</span></span><br><span class="line">    response = urlopen(url)</span><br><span class="line">    content = response.read().decode(<span class="string">'utf-8'</span>)</span><br><span class="line">    <span class="keyword">return</span> len(content)</span><br><span class="line"></span><br><span class="line">g1 = gevent.spawn(get_url, <span class="string">'http://www.baidu.com'</span>)</span><br><span class="line">g2 = gevent.spawn(get_url, <span class="string">'http://www.sogou.com'</span>)</span><br><span class="line">g3 = gevent.spawn(get_url, <span class="string">'http://www.taobao.com'</span>)</span><br><span class="line">g4 = gevent.spawn(get_url, <span class="string">'http://www.hao123.com'</span>)</span><br><span class="line">g5 = gevent.spawn(get_url, <span class="string">'http://www.cnblogs.com'</span>)</span><br><span class="line">gevent.joinall([g1 , g2, g3, g4, g5])</span><br><span class="line">print(g1.value)</span><br><span class="line">print(g2.value)</span><br><span class="line">print(g3.value)</span><br><span class="line">print(g4.value)</span><br><span class="line">print(g5.value)</span><br><span class="line"></span><br><span class="line"><span class="comment"># ret = get_url('http://www.baidu.com')</span></span><br><span class="line"><span class="comment"># print(ret)</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2、socket"><a href="#2、socket" class="headerlink" title="2、socket"></a>2、socket</h3><p>通过gevent实现单线程下的socket并发</p>
+<p>server</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> gevent <span class="keyword">import</span> monkey;monkey.patch_all()</span><br><span class="line"><span class="keyword">from</span> socket <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> gevent</span><br><span class="line"></span><br><span class="line"><span class="comment">#如果不想用money.patch_all()打补丁,可以用gevent自带的socket</span></span><br><span class="line"><span class="comment"># from gevent import socket</span></span><br><span class="line"><span class="comment"># s=socket.socket()</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">server</span><span class="params">(server_ip,port)</span>:</span></span><br><span class="line">    s=socket(AF_INET,SOCK_STREAM)</span><br><span class="line">    s.setsockopt(SOL_SOCKET,SO_REUSEADDR,<span class="number">1</span>)</span><br><span class="line">    s.bind((server_ip,port))</span><br><span class="line">    s.listen(<span class="number">5</span>)</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        conn,addr=s.accept()</span><br><span class="line">        gevent.spawn(talk,conn,addr)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">talk</span><span class="params">(conn,addr)</span>:</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">            res=conn.recv(<span class="number">1024</span>)</span><br><span class="line">            print(<span class="string">'client %s:%s msg: %s'</span> %(addr[<span class="number">0</span>],addr[<span class="number">1</span>],res))</span><br><span class="line">            conn.send(res.upper())</span><br><span class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">        print(e)</span><br><span class="line">    <span class="keyword">finally</span>:</span><br><span class="line">        conn.close()</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    server(<span class="string">'127.0.0.1'</span>,<span class="number">8080</span>)</span><br></pre></td></tr></table></figure>
+
+<p>client</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> socket <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">client=socket(AF_INET,SOCK_STREAM)</span><br><span class="line">client.connect((<span class="string">'127.0.0.1'</span>,<span class="number">8080</span>))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    msg=input(<span class="string">'&gt;&gt;: '</span>).strip()</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> msg:<span class="keyword">continue</span></span><br><span class="line"></span><br><span class="line">    client.send(msg.encode(<span class="string">'utf-8'</span>))</span><br><span class="line">    msg=client.recv(<span class="number">1024</span>)</span><br><span class="line">    print(msg.decode(<span class="string">'utf-8'</span>))</span><br></pre></td></tr></table></figure>
+
+<p>多线程并发多个客户端</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> threading <span class="keyword">import</span> Thread</span><br><span class="line"><span class="keyword">from</span> socket <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">client</span><span class="params">(server_ip,port)</span>:</span></span><br><span class="line">    c=socket(AF_INET,SOCK_STREAM) <span class="comment">#套接字对象一定要加到函数内，即局部名称空间内，放在函数外则被所有线程共享，则大家公用一个套接字对象，那么客户端端口永远一样了</span></span><br><span class="line">    c.connect((server_ip,port))</span><br><span class="line"></span><br><span class="line">    count=<span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        c.send((<span class="string">'%s say hello %s'</span> %(threading.current_thread().getName(),count)).encode(<span class="string">'utf-8'</span>))</span><br><span class="line">        msg=c.recv(<span class="number">1024</span>)</span><br><span class="line">        print(msg.decode(<span class="string">'utf-8'</span>))</span><br><span class="line">        count+=<span class="number">1</span></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">500</span>):</span><br><span class="line">        t=Thread(target=client,args=(<span class="string">'127.0.0.1'</span>,<span class="number">8080</span>))</span><br><span class="line">        t.start()</span><br></pre></td></tr></table></figure>
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/09/python_full_stack/第01部分：基础+模块+面向对象+网络编程/模块/模块和包/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/09/python_full_stack/第01部分：基础+模块+面向对象+网络编程/模块/模块和包/" itemprop="url">模块和包</a></h1>
         
 
         <div class="post-meta">
@@ -598,7 +1000,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/08/python全栈/第01部分：基础+模块+面向对象+网络编程/模块/常用模块（二）/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/08/python_full_stack/第01部分：基础+模块+面向对象+网络编程/模块/常用模块（二）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -617,7 +1019,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/08/08/python全栈/第01部分：基础+模块+面向对象+网络编程/模块/常用模块（二）/" itemprop="url">常用模块（二）</a></h1>
+                <a class="post-title-link" href="/2019/08/08/python_full_stack/第01部分：基础+模块+面向对象+网络编程/模块/常用模块（二）/" itemprop="url">常用模块（二）</a></h1>
         
 
         <div class="post-meta">
@@ -800,7 +1202,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/08/python全栈/第02部分：并发编程+数据库+前端/并发编程/线程（二）/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/08/python_full_stack/第02部分：并发编程+数据库+前端/并发编程/线程（二）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -819,7 +1221,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/08/08/python全栈/第02部分：并发编程+数据库+前端/并发编程/线程（二）/" itemprop="url">线程（二）</a></h1>
+                <a class="post-title-link" href="/2019/08/08/python_full_stack/第02部分：并发编程+数据库+前端/并发编程/线程（二）/" itemprop="url">线程（二）</a></h1>
         
 
         <div class="post-meta">
@@ -1063,7 +1465,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/05/Python Data Analysis/第二章：NumPy数组/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/05/Python_Data Analysis/第二章：NumPy数组/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -1082,7 +1484,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/08/05/Python Data Analysis/第二章：NumPy数组/" itemprop="url">第二章：NumPy数组</a></h1>
+                <a class="post-title-link" href="/2019/08/05/Python_Data Analysis/第二章：NumPy数组/" itemprop="url">第二章：NumPy数组</a></h1>
         
 
         <div class="post-meta">
@@ -2021,7 +2423,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/04/python全栈/第02部分：并发编程+数据库+前端/并发编程/线程（一）/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/04/python_full_stack/第02部分：并发编程+数据库+前端/并发编程/线程（一）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -2040,7 +2442,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/08/04/python全栈/第02部分：并发编程+数据库+前端/并发编程/线程（一）/" itemprop="url">线程（一）</a></h1>
+                <a class="post-title-link" href="/2019/08/04/python_full_stack/第02部分：并发编程+数据库+前端/并发编程/线程（一）/" itemprop="url">线程（一）</a></h1>
         
 
         <div class="post-meta">
@@ -2224,7 +2626,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/03/python全栈/第02部分：并发编程+数据库+前端/并发编程/进程（二）/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/03/python_full_stack/第02部分：并发编程+数据库+前端/并发编程/进程（二）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -2243,7 +2645,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/08/03/python全栈/第02部分：并发编程+数据库+前端/并发编程/进程（二）/" itemprop="url">进程（二）</a></h1>
+                <a class="post-title-link" href="/2019/08/03/python_full_stack/第02部分：并发编程+数据库+前端/并发编程/进程（二）/" itemprop="url">进程（二）</a></h1>
         
 
         <div class="post-meta">
@@ -2585,7 +2987,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/03/python全栈/第02部分：并发编程+数据库+前端/并发编程/进程（一）/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/03/python_full_stack/第02部分：并发编程+数据库+前端/并发编程/进程（一）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -2604,7 +3006,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/08/03/python全栈/第02部分：并发编程+数据库+前端/并发编程/进程（一）/" itemprop="url">进程（一）</a></h1>
+                <a class="post-title-link" href="/2019/08/03/python_full_stack/第02部分：并发编程+数据库+前端/并发编程/进程（一）/" itemprop="url">进程（一）</a></h1>
         
 
         <div class="post-meta">
@@ -2818,7 +3220,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/02/python全栈/第02部分：并发编程+数据库+前端/并发编程/操作系统的发展史/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/02/python_full_stack/第02部分：并发编程+数据库+前端/并发编程/操作系统的发展史/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -2837,7 +3239,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/08/02/python全栈/第02部分：并发编程+数据库+前端/并发编程/操作系统的发展史/" itemprop="url">操作系统的发展史</a></h1>
+                <a class="post-title-link" href="/2019/08/02/python_full_stack/第02部分：并发编程+数据库+前端/并发编程/操作系统的发展史/" itemprop="url">操作系统的发展史</a></h1>
         
 
         <div class="post-meta">
@@ -3044,953 +3446,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/29/python全栈/第01部分：基础+模块+面向对象+网络编程/网络编程/计算机网络/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/29/python全栈/第01部分：基础+模块+面向对象+网络编程/网络编程/计算机网络/" itemprop="url">计算机网络</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-29T22:57:50+08:00">
-                2019-07-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python全栈-01部分-网络编程/" itemprop="url" rel="index">
-                    <span itemprop="name">python全栈 -01部分 -网络编程</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="（一）计算机网络的发展及基础网络概念"><a href="#（一）计算机网络的发展及基础网络概念" class="headerlink" title="（一）计算机网络的发展及基础网络概念"></a>（一）计算机网络的发展及基础网络概念</h2><h3 id="一、早期：联机"><a href="#一、早期：联机" class="headerlink" title="一、早期：联机"></a>一、早期：联机</h3><p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/python%E5%85%A8%E6%A0%88/%E7%AC%AC01%E9%83%A8%E5%88%86%EF%BC%9A%E5%9F%BA%E7%A1%80%2B%E6%A8%A1%E5%9D%97%2B%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%2B%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/11.png" alt></p>
-<h3 id="二、以太网：局域网与交换机"><a href="#二、以太网：局域网与交换机" class="headerlink" title="二、以太网：局域网与交换机"></a>二、以太网：局域网与交换机</h3><p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/python%E5%85%A8%E6%A0%88/%E7%AC%AC01%E9%83%A8%E5%88%86%EF%BC%9A%E5%9F%BA%E7%A1%80%2B%E6%A8%A1%E5%9D%97%2B%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%2B%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/12.png" alt></p>
-<p>交换机——解决多台电脑的通信问题(广播、单播、组播)</p>
-<h4 id="1、广播"><a href="#1、广播" class="headerlink" title="1、广播"></a>1、广播</h4><p>​        主机之间“一对所有”的通讯模式，网络对其中每一台主机发出的信号都进行无条件复制并转发，<strong>所有主机都可以接收到所有信息（不管你是否需要）</strong>，由于其不用路径选择，所以其网络成本可以很低廉。有线电视网就是典型的广播型网络，我们的电视机实际上是接受到所有频道的信号，但只将一个频道的信号还原成画面。在数据网络中也允许广播的存在，但其被限制在二层交换机的局域网范围内，禁止广播数据穿过路由器，防止广播数据影响大面积的主机。</p>
-<p>​        <a href="https://baike.baidu.com/item/广播风暴/3574878?fr=aladdin" target="_blank" rel="noopener">广播风暴</a>：简单的讲是指当广播数据充斥网络无法处理，并占用大量<a href="https://baike.baidu.com/item/网络带宽/6120475" target="_blank" rel="noopener">网络带宽</a>，导致正常业务不能运行，甚至彻底瘫痪，这就发生了“广播风暴”。一个<a href="https://baike.baidu.com/item/数据帧/10571824" target="_blank" rel="noopener">数据帧</a>或包被传输到本地<a href="https://baike.baidu.com/item/网段/11026985" target="_blank" rel="noopener">网段</a> （由<a href="https://baike.baidu.com/item/广播域/5293530" target="_blank" rel="noopener">广播域</a>定义）上的每个<a href="https://baike.baidu.com/item/节点/865052" target="_blank" rel="noopener">节点</a>就是广播；由于<a href="https://baike.baidu.com/item/网络拓扑/4804125" target="_blank" rel="noopener">网络拓扑</a>的设计和连接问题，或其他原因导致广播在网段内大量复制，传播<a href="https://baike.baidu.com/item/数据帧/10571824" target="_blank" rel="noopener">数据帧</a>，导致网络性能下降，甚至<a href="https://baike.baidu.com/item/网络瘫痪/5928979" target="_blank" rel="noopener">网络瘫痪</a>，这就是广播风暴。</p>
-<h4 id="2、ip地址与ip协议"><a href="#2、ip地址与ip协议" class="headerlink" title="2、ip地址与ip协议"></a>2、ip地址与ip协议</h4><ul>
-<li>规定网络地址的协议叫ip协议，它定义的地址称之为ip地址，广泛采用的v4版本即ipv4，它规定网络地址由32位2进制表示</li>
-<li>范围0.0.0.0-255.255.255.255</li>
-<li>一个ip地址通常写成四段十进制数，例：172.16.10.1</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ip保留地址：</span><br><span class="line"></span><br><span class="line">a类网   10.0.0.0~10.255.255.255</span><br><span class="line"></span><br><span class="line">b类网   172.16.0.0~172.31.255.255</span><br><span class="line"></span><br><span class="line">c类网   192.168.0.0~192.168.255.255</span><br></pre></td></tr></table></figure>
-
-<h4 id="3、mac地址"><a href="#3、mac地址" class="headerlink" title="3、mac地址"></a>3、mac地址</h4><p>​        head中包含的源和目标地址由来：ethernet规定接入internet的设备都必须具备网卡，发送端和接收端的地址便是指网卡的地址，即mac地址。</p>
-<p>　　mac地址：每块网卡出厂时都被烧制上一个世界唯一的mac地址，长度为48位2进制，通常由12位16进制数表示（前六位是厂商编号，后六位是流水线号）</p>
-<h4 id="4、arp协议——查询IP地址和MAC地址的对应关系"><a href="#4、arp协议——查询IP地址和MAC地址的对应关系" class="headerlink" title="4、arp协议——查询IP地址和MAC地址的对应关系"></a>4、arp协议——查询IP地址和MAC地址的对应关系</h4><p>​        地址解析协议，即ARP（Address Resolution Protocol），是根据IP地址获取物理地址的一个TCP/IP协议。</p>
-<p>　　主机发送信息时将包含目标IP地址的ARP请求广播到网络上的所有主机，并接收返回消息，以此确定目标的物理地址。</p>
-<p>　　收到返回消息后将该IP地址和物理地址存入本机ARP缓存中并保留一定时间，下次请求时直接查询ARP缓存以节约资源。</p>
-<p>　　地址解析协议是建立在网络中各个主机互相信任的基础上的，网络上的主机可以自主发送ARP应答消息，其他主机收到应答报文时不会检测该报文的真实性就会将其记入本机ARP缓存；由此攻击者就可以向某一主机发送伪ARP应答报文，使其发送的信息无法到达预期的主机或到达错误的主机，这就构成了一个ARP欺骗。ARP命令可用于查询本机ARP缓存中IP地址和MAC地址的对应关系、添加或删除静态对应关系等。相关协议有RARP、代理ARP。NDP用于在IPv6中代替地址解析协议。</p>
-<h3 id="三、广域网与路由器"><a href="#三、广域网与路由器" class="headerlink" title="三、广域网与路由器"></a>三、广域网与路由器</h3><p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/python%E5%85%A8%E6%A0%88/%E7%AC%AC01%E9%83%A8%E5%88%86%EF%BC%9A%E5%9F%BA%E7%A1%80%2B%E6%A8%A1%E5%9D%97%2B%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%2B%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/13.png" alt></p>
-<h4 id="1、网关"><a href="#1、网关" class="headerlink" title="1、网关"></a>1、网关</h4><p>​        大家都知道，从一个房间走到另一个房间，必然要经过一扇门。同样，从一个网络向另一个网络发送消息，也必须经过一道“关口”，这道关口就是网关。顾名思义网关（Gateway）就是一个网络连接到另一个网络的“关口”。也就是网络关卡。</p>
-<p>​        网关(Gateway)又称网间连接器、协议转换器。默认网关在网络层上以实现网络互连，是最复杂的网络互连设备，仅用于两个高层协议不同的网络互连。网关的结构也和路由器类似，不同的是互连层。网关既可以用于广域网互连，也可以用于局域网互连 [1]  。</p>
-<p>​        网关ip：局域网内的机器访问公网ip，就通过网关访问</p>
-<h4 id="2、路由器"><a href="#2、路由器" class="headerlink" title="2、路由器"></a>2、路由器</h4><p>​        路由器（Router），是连接因特网中各局域网、广域网的设备，它会根据信道的情况自动选择和设定路由，以最佳路径，按前后顺序发送信号。 路由器是互联网络的枢纽，”交通警察”。目前路由器已经广泛应用于各行各业，各种不同档次的产品已成为实现各种骨干网内部连接、骨干网间互联和骨干网与互联网互联互通业务的主力军。路由和交换机之间的主要区别就是交换机发生在OSI参考模型第二层（数据链路层），而路由发生在第三层，即网络层。这一区别决定了路由和交换机在移动信息的过程中需使用不同的控制信息，所以说两者实现各自功能的方式是不同的。</p>
-<p>　　路由器（Router）又称网关设备（Gateway）是用于连接多个逻辑上分开的网络，所谓逻辑网络是代表一个单独的网络或者一个子网。当数据从一个子网传输到另一个子网时，可通过路由器的路由功能来完成。因此，路由器具有判断网络地址和选择IP路径的功能，它能在多网络互联环境中，建立灵活的连接，可用完全不同的数据分组和介质访问方法连接各种子网，路由器只接受源站或其他路由器的信息，属网络层的一种互联设备。</p>
-<h4 id="3、局域网"><a href="#3、局域网" class="headerlink" title="3、局域网"></a>3、局域网</h4><p>​        局域网（Local Area Network，LAN）是指在某一区域内由多台计算机互联成的计算机组。一般是方圆几千米以内。局域网可以实现文件管理、应用软件共享、打印机共享、工作组内的日程安排、电子邮件和传真通信服务等功能。局域网是封闭型的，可以由办公室内的两台计算机组成，也可以由一个公司内的上千台计算机组成。</p>
-<h3 id="三、子网掩码"><a href="#三、子网掩码" class="headerlink" title="三、子网掩码"></a>三、子网掩码</h3><p>​    所谓”子网掩码”，就是表示子网络特征的一个参数。它在形式上等同于IP地址，也是一个32位二进制数字，它的网络部分全部为1，主机部分全部为0。比如，IP地址172.16.10.1，如果已知网络部分是前24位，主机部分是后8位，那么子网络掩码就是11111111.11111111.11111111.00000000，写成十进制就是255.255.255.0。</p>
-<p>　　<strong>知道”子网掩码”，我们就能判断，任意两个IP地址是否处在同一个子网络。</strong>方法是将两个IP地址与子网掩码分别进行AND运算（两个数位都为1，运算结果为1，否则为0），然后比较结果是否相同，如果是的话，就表明它们在同一个子网络中，否则就不是。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">比如，已知IP地址172.16.10.1和172.16.10.2的子网掩码都是255.255.255.0，请问它们是否在同一个子网络？两者与子网掩码分别进行AND运算，</span><br><span class="line"></span><br><span class="line">172.16.10.1：10101100.00010000.00001010.000000001</span><br><span class="line">255255.255.255.0:11111111.11111111.11111111.00000000</span><br><span class="line">AND运算得网络地址结果：10101100.00010000.00001010.000000001-&gt;172.16.10.0</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">172.16.10.2：10101100.00010000.00001010.00000010</span><br><span class="line">255255.255.255.0:11111111.11111111.11111111.00000000</span><br><span class="line">AND运算得网络地址结果：10101100.00010000.00001010.000000001-&gt;172.16.10.0</span><br><span class="line">结果都是172.16.10.0，因此它们在同一个子网络。</span><br></pre></td></tr></table></figure>
-
-<p>总结一下，IP协议的作用主要有两个，一个是为每一台计算机分配IP地址，另一个是确定哪些地址在同一个子网络。</p>
-<h3 id="四、tcp协议和udp协议"><a href="#四、tcp协议和udp协议" class="headerlink" title="四、tcp协议和udp协议"></a>四、tcp协议和udp协议</h3><p>​        用于应用程序之间的通信。如果说ip地址和mac地址帮我们确定唯一的一台机器，那么我们怎么找到一台机器上的一个软件呢？</p>
-<h4 id="1、端口"><a href="#1、端口" class="headerlink" title="1、端口"></a>1、端口</h4><p>​        我们知道，一台拥有IP地址的主机可以提供许多服务，比如Web服务、FTP服务、SMTP服务等，这些服务完全可以通过1个IP地址来实现。那么，主机是怎样区分不同的网络服务呢？显然不能只靠IP地址，因为IP 地址与网络服务的关系是一对多的关系。实际上是通过“IP地址+端口号”来区分不同的服务的。</p>
-<p>​        在计算机上，每一个需要网络通信的程序，都会开一个端口。在同一时间只会有一个程序占用一个端口，不可能在同一时间有两个及以上程序占用同一个端口。所以通过端口来找到程序。</p>
-<p>​        端口的范围： 0 - 65535， 一般我们使用8000之后的端口。靠前的端口有可能是系统默认使用的。</p>
-<p>​        IP —— 确定唯一一台机器</p>
-<p>​        端口 —— 确定唯一一台程序</p>
-<p>​        IP+端口 —— 找到唯一的一台机器上的唯一的一个程序</p>
-<h4 id="2、TCP协议"><a href="#2、TCP协议" class="headerlink" title="2、TCP协议"></a>2、TCP协议</h4><p>​        当应用程序希望通过 TCP 与另一个应用程序通信时，它会发送一个通信请求。这个请求必须被送到一个确切的地址。在双方“握手”之后，TCP 将在两个应用程序之间建立一个全双工 (full-duplex) 的通信。</p>
-<p>​        全双工：双方都能互相收发消息。</p>
-<p>　　这个全双工的通信将占用两个计算机之间的通信线路，直到它被一方或双方关闭为止。</p>
-<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/python%E5%85%A8%E6%A0%88/%E7%AC%AC01%E9%83%A8%E5%88%86%EF%BC%9A%E5%9F%BA%E7%A1%80%2B%E6%A8%A1%E5%9D%97%2B%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%2B%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/14.png" alt></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">tcp的三次握手:</span><br><span class="line">			TCP是因特网中的传输层协议，使用三次握手协议建立连接。当主动方发出SYN连接请求后，等待对方回答SYN+ACK[1]，并最终对对方的 SYN 执行 ACK 确认。这种建立连接的方法可以防止产生错误的连接。[1] </span><br><span class="line">TCP三次握手的过程如下：</span><br><span class="line">客户端发送SYN（SEQ=x）报文给服务器端，进入SYN_SEND状态。</span><br><span class="line">服务器端收到SYN报文，回应一个SYN （SEQ=y）ACK(ACK=x+1）报文，进入SYN_RECV状态。</span><br><span class="line">客户端收到服务器端的SYN报文，回应一个ACK(ACK=y+1）报文，进入Established状态。</span><br><span class="line">三次握手完成，TCP客户端和服务器端成功地建立连接，可以开始传输数据了。</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">tcp的四次挥手:</span><br><span class="line">建立一个连接需要三次握手，而终止一个连接要经过四次握手，这是由TCP的半关闭（half-close）造成的。</span><br><span class="line">(1) 某个应用进程首先调用close，称该端执行“主动关闭”（active close）。该端的TCP于是发送一个FIN分节，表示数据发送完毕。</span><br><span class="line">(2) 接收到这个FIN的对端执行 “被动关闭”（passive close），这个FIN由TCP确认。</span><br><span class="line">注意：FIN的接收也作为一个文件结束符（end-of-file）传递给接收端应用进程，放在已排队等候该应用进程接收的任何其他数据之后，因为，FIN的接收意味着接收端应用进程在相应连接上再无额外数据可接收。</span><br><span class="line">(3) 一段时间后，接收到这个文件结束符的应用进程将调用close关闭它的套接字。这导致它的TCP也发送一个FIN。</span><br><span class="line">(4) 接收这个最终FIN的原发送端TCP（即执行主动关闭的那一端）确认这个FIN。[1] </span><br><span class="line">既然每个方向都需要一个FIN和一个ACK，因此通常需要4个分节。</span><br><span class="line">注意：</span><br><span class="line">(1) “通常”是指，某些情况下，步骤1的FIN随数据一起发送，另外，步骤2和步骤3发送的分节都出自执行被动关闭那一端，有可能被合并成一个分节。[2] </span><br><span class="line">(2) 在步骤2与步骤3之间，从执行被动关闭一端到执行主动关闭一端流动数据是可能的，这称为“半关闭”（half-close）。</span><br><span class="line">(3) 当一个Unix进程无论自愿地（调用exit或从main函数返回）还是非自愿地（收到一个终止本进程的信号）终止时，所有打开的描述符都被关闭，这也导致仍然打开的任何TCP连接上也发出一个FIN。</span><br><span class="line">无论是客户还是服务器，任何一端都可以执行主动关闭。通常情况是，客户执行主动关闭，但是某些协议，例如，HTTP/1.0却由服务器执行主动关闭。[2]</span><br></pre></td></tr></table></figure>
-
-<h4 id="3、UDP协议"><a href="#3、UDP协议" class="headerlink" title="3、UDP协议"></a>3、UDP协议</h4><p>　　当应用程序希望通过UDP与一个应用程序通信时，传输数据之前源端和终端不建立连接。</p>
-<p>　　当它想传送时就简单地去抓取来自应用程序的数据，并尽可能快地把它扔到网络上。</p>
-<h3 id="五、tcp和udp的对比"><a href="#五、tcp和udp的对比" class="headerlink" title="五、tcp和udp的对比"></a>五、tcp和udp的对比</h3><p>​        TCP—传输控制协议,提供的是面向连接、可靠的字节流服务。当客户和服务器彼此交换数据前，必须先在双方之间建立一个TCP连接，之后才能传输数据。TCP提供超时重发，丢弃重复数据，检验数据，流量控制等功能，保证数据能从一端传到另一端。<br>​        UDP—用户数据报协议，是一个简单的面向数据报的运输层协议。UDP不提供可靠性，它只是把应用程序传给IP层的数据报发送出去，但是并不能保证它们能到达目的地。由于UDP在传输数据报前不用在客户和服务器之间建立一个连接，且没有超时重发等机制，故而传输速度很快</p>
-<p>​        tcp：打电话</p>
-<p>​        udp：发短信</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">更多：</span><br><span class="line">		现在Internet上流行的协议是TCP/IP协议，该协议中对低于1024的端口都有确切的定义，他们对应着Internet上一些常见的服务。这些常见的服务可以分为使用TCP端口（面向连接）和使用UDP端口（面向无连接）两种。 </span><br><span class="line">		说到TCP和UDP,首先要明白“连接”和“无连接”的含义，他们的关系可以用一个形象地比喻来说明，就是打电话和写信。两个人如果要通话，首先要建立连接——即打电话时的拨号，等待响应后——即接听电话后，才能相互传递信息，最后还要断开连接——即挂电话。写信就比较简单了，填写好收信人的地址后将信投入邮筒，收信人就可以收到了。从这个分析可以看出，建立连接可以在需要痛心地双方建立一个传递信息的通道，在发送方发送请求连接信息接收方响应后，由于是在接受方响应后才开始传递信息，而且是在一个通道中传送，因此接受方能比较完整地收到发送方发出的信息，即信息传递的可靠性比较高。但也正因为需要建立连接，使资源开销加大（在建立连接前必须等待接受方响应，传输信息过程中必须确认信息是否传到及断开连接时发出相应的信号等），独占一个通道，在断开连接钱不能建立另一个连接，即两人在通话过程中第三方不能打入电话。而无连接是一开始就发送信息（严格说来，这是没有开始、结束的），只是一次性的传递，是先不需要接受方的响应，因而在一定程度上也无法保证信息传递的可靠性了，就像写信一样，我们只是将信寄出去，却不能保证收信人一定可以收到。 </span><br><span class="line">		TCP是面向连接的，有比较高的可靠性， 一些要求比较高的服务一般使用这个协议，如FTP、Telnet、SMTP、HTTP、POP3等。</span><br><span class="line">而UDP是面向无连接的，使用这个协议的常见服务有DNS、SNMP、QQ等。对于QQ必须另外说明一下，QQ2003以前是只使用UDP协议的，其服务器使用8000端口，侦听是否有信息传来，客户端使用4000端口，向外发送信息（这也就不难理解在一般的显IP的QQ版本中显示好友的IP地址信息中端口常为4000或其后续端口的原因了），即QQ程序既接受服务又提供服务，在以后的QQ版本中也支持使用TCP协议了。</span><br></pre></td></tr></table></figure>
-
-<h2 id="（二）互联网协议与osi模型"><a href="#（二）互联网协议与osi模型" class="headerlink" title="（二）互联网协议与osi模型"></a>（二）互联网协议与osi模型</h2><p>互联网协议按照功能不同分为osi七层或tcp/ip五层或tcp/ip四层</p>
-<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/python%E5%85%A8%E6%A0%88/%E7%AC%AC01%E9%83%A8%E5%88%86%EF%BC%9A%E5%9F%BA%E7%A1%80%2B%E6%A8%A1%E5%9D%97%2B%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%2B%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/15.png" alt></p>
-<h3 id="一、每层运行常见物理设备"><a href="#一、每层运行常见物理设备" class="headerlink" title="一、每层运行常见物理设备"></a>一、每层运行常见物理设备</h3><p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/python%E5%85%A8%E6%A0%88/%E7%AC%AC01%E9%83%A8%E5%88%86%EF%BC%9A%E5%9F%BA%E7%A1%80%2B%E6%A8%A1%E5%9D%97%2B%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%2B%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/16.png" alt></p>
-<h3 id="二、每层运行常见的协议"><a href="#二、每层运行常见的协议" class="headerlink" title="二、每层运行常见的协议"></a>二、每层运行常见的协议</h3><p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/python%E5%85%A8%E6%A0%88/%E7%AC%AC01%E9%83%A8%E5%88%86%EF%BC%9A%E5%9F%BA%E7%A1%80%2B%E6%A8%A1%E5%9D%97%2B%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%2B%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/17.png" alt></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/24/python全栈/第01部分：基础+模块+面向对象+网络编程/模块/常用模块（一）/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/24/python全栈/第01部分：基础+模块+面向对象+网络编程/模块/常用模块（一）/" itemprop="url">常用模块（一）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-24T00:25:31+08:00">
-                2019-07-24
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python全栈-01部分-模块和包/" itemprop="url" rel="index">
-                    <span itemprop="name">python全栈 -01部分 -模块和包</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>[TOC]</p>
-<h2 id="（一）认识模块"><a href="#（一）认识模块" class="headerlink" title="（一）认识模块"></a>（一）认识模块</h2><h3 id="一、什么是模块"><a href="#一、什么是模块" class="headerlink" title="一、什么是模块"></a>一、什么是模块</h3><h4 id="1、什么是模块"><a href="#1、什么是模块" class="headerlink" title="1、什么是模块"></a>1、什么是模块</h4><p>常见的场景：一个模块就是一个包含了python定义和声明的文件，文件名就是模块名字加上.py的后缀。</p>
-<p>   但其实import加载的模块分为四个通用类别：　</p>
-<ol>
-<li>使用python编写的代码（.py文件）</li>
-<li>已被编译为共享库或DLL的C或C++扩展</li>
-<li>包好一组模块的包</li>
-<li>使用C编写并链接到python解释器的内置模块</li>
-</ol>
-<h4 id="2、为何要使用模块"><a href="#2、为何要使用模块" class="headerlink" title="2、为何要使用模块"></a>2、为何要使用模块</h4><p>​        如果你退出python解释器然后重新进入，那么你之前定义的函数或者变量都将丢失，因此我们通常将程序写到文件中以便永久保存下来，需要时就通过python test.py方式去执行，此时test.py被称为脚本script。</p>
-<p>​        随着程序的发展，功能越来越多，为了方便管理，我们通常将程序分成一个个的文件，这样做程序的结构更清晰，方便管理。这时我们不仅仅可以把这些文件当做脚本去执行，还可以把他们当做模块来导入到其他的模块中，实现了功能的重复利用</p>
-<h3 id="二、模块的导入和使用"><a href="#二、模块的导入和使用" class="headerlink" title="二、模块的导入和使用"></a>二、模块的导入和使用</h3><p>见 “模块和包”</p>
-<h2 id="（二）常用模块（一）"><a href="#（二）常用模块（一）" class="headerlink" title="（二）常用模块（一）"></a>（二）常用模块（一）</h2><h3 id="一、collections模块"><a href="#一、collections模块" class="headerlink" title="一、collections模块"></a>一、collections模块</h3><p>在内置数据类型（dict、list、set、tuple）的基础上，collections模块还提供了几个额外的数据类型：Counter、deque、defaultdict、namedtuple和OrderedDict等。</p>
-<ol>
-<li>namedtuple: 生成可以使用名字来访问元素内容的tuple</li>
-<li>deque: 双端队列，可以快速的从另外一侧追加和推出对象</li>
-<li>Counter: 计数器，主要用来计数 </li>
-<li>OrderedDict: 有序字典 </li>
-<li>defaultdict: 带有默认值的字典</li>
-</ol>
-<h4 id="1、namedtuple"><a href="#1、namedtuple" class="headerlink" title="1、namedtuple"></a>1、namedtuple</h4><p>我们知道tuple可以表示不变集合，例如，一个点的二维坐标就可以表示成：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>p = (<span class="number">1</span>, <span class="number">2</span>)</span><br></pre></td></tr></table></figure>
-
-<p>但是，看到(1, 2)，很难看出这个tuple是用来表示一个坐标的。</p>
-<p>这时，namedtuple就派上了用场：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> collections <span class="keyword">import</span> namedtuple</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Point = namedtuple(<span class="string">'Point'</span>, [<span class="string">'x'</span>, <span class="string">'y'</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>p = Point(<span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>p.x</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>p.y</span><br></pre></td></tr></table></figure>
-
-<p>类似的，如果要用坐标和半径表示一个圆，也可以用namedtuple定义：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#namedtuple('名称', [属性list]):</span></span><br><span class="line">Circle = namedtuple(<span class="string">'Circle'</span>, [<span class="string">'x'</span>, <span class="string">'y'</span>, <span class="string">'r'</span>])</span><br></pre></td></tr></table></figure>
-
-<h4 id="2、deque"><a href="#2、deque" class="headerlink" title="2、deque"></a>2、deque</h4><p>​        使用list存储数据时，按索引访问元素很快，但是插入和删除元素就很慢了，因为list是线性存储，数据量大的时候，插入和删除效率很低。</p>
-<p>​         deque是为了高效实现插入和删除操作的双向列表，适合用于队列和栈：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> collections <span class="keyword">import</span> deque</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>q = deque([<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>q.append(<span class="string">'x'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>q.appendleft(<span class="string">'y'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>q</span><br><span class="line">deque([<span class="string">'y'</span>, <span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>, <span class="string">'x'</span>])</span><br></pre></td></tr></table></figure>
-
-<p>deque除了实现list的<code>append()</code>和<code>pop()</code>外，还支持<code>appendleft()</code>和<code>popleft()</code>，这样就可以非常高效地往头部添加或删除元素。</p>
-<h4 id="3、OrderedDict"><a href="#3、OrderedDict" class="headerlink" title="3、OrderedDict"></a>3、OrderedDict</h4><p>使用dict时，Key是无序的。在对dict做迭代时，我们无法确定Key的顺序。</p>
-<p>如果要保持Key的顺序，可以用<code>OrderedDict</code>：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> collections <span class="keyword">import</span> OrderedDict</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>d = dict([(<span class="string">'a'</span>, <span class="number">1</span>), (<span class="string">'b'</span>, <span class="number">2</span>), (<span class="string">'c'</span>, <span class="number">3</span>)])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>d <span class="comment"># dict的Key是无序的</span></span><br><span class="line">&#123;<span class="string">'a'</span>: <span class="number">1</span>, <span class="string">'c'</span>: <span class="number">3</span>, <span class="string">'b'</span>: <span class="number">2</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>od = OrderedDict([(<span class="string">'a'</span>, <span class="number">1</span>), (<span class="string">'b'</span>, <span class="number">2</span>), (<span class="string">'c'</span>, <span class="number">3</span>)])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>od <span class="comment"># OrderedDict的Key是有序的</span></span><br><span class="line">OrderedDict([(<span class="string">'a'</span>, <span class="number">1</span>), (<span class="string">'b'</span>, <span class="number">2</span>), (<span class="string">'c'</span>, <span class="number">3</span>)])</span><br></pre></td></tr></table></figure>
-
-<p>注意，<code>OrderedDict</code>的Key会按照插入的顺序排列，不是Key本身排序：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>od = OrderedDict()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>od[<span class="string">'z'</span>] = <span class="number">1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>od[<span class="string">'y'</span>] = <span class="number">2</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>od[<span class="string">'x'</span>] = <span class="number">3</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>od.keys() <span class="comment"># 按照插入的Key的顺序返回</span></span><br><span class="line">[<span class="string">'z'</span>, <span class="string">'y'</span>, <span class="string">'x'</span>]</span><br></pre></td></tr></table></figure>
-
-<h4 id="4、defaultdict"><a href="#4、defaultdict" class="headerlink" title="4、defaultdict"></a>4、defaultdict</h4><p>有如下值集合 [<code>11</code>,<code>22</code>,<code>33</code>,<code>44</code>,<code>55</code>,<code>66</code>,<code>77</code>,<code>88</code>,<code>99</code>,<code>90.</code>..]，将所有大于 66的值保存至字典的第一个key中，将小于 66的值保存至第二个key的值中。<br>即： {k1: 大于66, k2: 小于66}</p>
-<p><strong>原生字典解决方法</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">values = [<span class="number">11</span>, <span class="number">22</span>, <span class="number">33</span>,<span class="number">44</span>,<span class="number">55</span>,<span class="number">66</span>,<span class="number">77</span>,<span class="number">88</span>,<span class="number">99</span>,<span class="number">90</span>]</span><br><span class="line"></span><br><span class="line">my_dict = &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> value <span class="keyword">in</span>  values:</span><br><span class="line">    <span class="keyword">if</span> value&gt;<span class="number">66</span>:</span><br><span class="line">        <span class="keyword">if</span> my_dict.has_key(<span class="string">'k1'</span>):</span><br><span class="line">            my_dict[<span class="string">'k1'</span>].append(value)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            my_dict[<span class="string">'k1'</span>] = [value]</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">if</span> my_dict.has_key(<span class="string">'k2'</span>):</span><br><span class="line">            my_dict[<span class="string">'k2'</span>].append(value)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            my_dict[<span class="string">'k2'</span>] = [value]</span><br></pre></td></tr></table></figure>
-
-<p><strong>defaultdict字典解决方法</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> defaultdict</span><br><span class="line"></span><br><span class="line">values = [<span class="number">11</span>, <span class="number">22</span>, <span class="number">33</span>,<span class="number">44</span>,<span class="number">55</span>,<span class="number">66</span>,<span class="number">77</span>,<span class="number">88</span>,<span class="number">99</span>,<span class="number">90</span>]</span><br><span class="line"></span><br><span class="line">my_dict = defaultdict(list)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> value <span class="keyword">in</span>  values:</span><br><span class="line">    <span class="keyword">if</span> value&gt;<span class="number">66</span>:</span><br><span class="line">        my_dict[<span class="string">'k1'</span>].append(value)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        my_dict[<span class="string">'k2'</span>].append(value)</span><br></pre></td></tr></table></figure>
-
-<p>使用<code>dict</code>时，如果引用的Key不存在，就会抛出<code>KeyError</code>。如果希望key不存在时，返回一个默认值，就可以用<code>defaultdict</code>：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> collections <span class="keyword">import</span> defaultdict</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>dd = defaultdict(<span class="keyword">lambda</span>: <span class="string">'N/A'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>dd[<span class="string">'key1'</span>] = <span class="string">'abc'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>dd[<span class="string">'key1'</span>] <span class="comment"># key1存在</span></span><br><span class="line"><span class="string">'abc'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>dd[<span class="string">'key2'</span>] <span class="comment"># key2不存在，返回默认值</span></span><br><span class="line"><span class="string">'N/A'</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="5、Counter"><a href="#5、Counter" class="headerlink" title="5、Counter"></a>5、Counter</h4><p>Counter类的目的是用来跟踪值出现的次数。它是一个无序的容器类型，以字典的键值对形式存储，其中元素作为key，其计数作为value。计数值可以是任意的Interger（包括0和负数）。Counter类和其他语言的bags或multisets很相似。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">c = Counter(<span class="string">'abcdeabcdabcaba'</span>)</span><br><span class="line"><span class="keyword">print</span> c</span><br><span class="line">输出：Counter(&#123;<span class="string">'a'</span>: <span class="number">5</span>, <span class="string">'b'</span>: <span class="number">4</span>, <span class="string">'c'</span>: <span class="number">3</span>, <span class="string">'d'</span>: <span class="number">2</span>, <span class="string">'e'</span>: <span class="number">1</span>&#125;)</span><br></pre></td></tr></table></figure>
-
-<h3 id="二、时间模块"><a href="#二、时间模块" class="headerlink" title="二、时间模块"></a>二、时间模块</h3><p>和时间有关系的我们就要用到时间模块。在使用模块之前，应该首先导入这个模块。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#常用方法</span><br><span class="line">1.time.sleep(secs)</span><br><span class="line">(线程)推迟指定的时间运行。单位为秒。</span><br><span class="line">2.time.time()</span><br><span class="line">获取当前时间戳</span><br></pre></td></tr></table></figure>
-
-<h4 id="1、表示时间的三种方式"><a href="#1、表示时间的三种方式" class="headerlink" title="1、表示时间的三种方式"></a>1、表示时间的三种方式</h4><p>在Python中，通常有这三种方式来表示时间：时间戳、元组(struct_time)、格式化的时间字符串：</p>
-<ol>
-<li><p>时间戳(timestamp) ：通常来说，时间戳表示的是从1970年1月1日00:00:00开始按秒计算的偏移量。我们运行“type(time.time())”，返回的是float类型。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">python中时间日期格式化符号：</span><br><span class="line">%y 两位数的年份表示（00-99）</span><br><span class="line">%Y 四位数的年份表示（000-9999）</span><br><span class="line">%m 月份（01-12）</span><br><span class="line">%d 月内中的一天（0-31）</span><br><span class="line">%H 24小时制小时数（0-23）</span><br><span class="line">%I 12小时制小时数（01-12）</span><br><span class="line">%M 分钟数（00=59）</span><br><span class="line">%S 秒（00-59）</span><br><span class="line">%a 本地简化星期名称</span><br><span class="line">%A 本地完整星期名称</span><br><span class="line">%b 本地简化的月份名称</span><br><span class="line">%B 本地完整的月份名称</span><br><span class="line">%c 本地相应的日期表示和时间表示</span><br><span class="line">%j 年内的一天（001-366）</span><br><span class="line">%p 本地A.M.或P.M.的等价符</span><br><span class="line">%U 一年中的星期数（00-53）星期天为星期的开始</span><br><span class="line">%w 星期（0-6），星期天为星期的开始</span><br><span class="line">%W 一年中的星期数（00-53）星期一为星期的开始</span><br><span class="line">%x 本地相应的日期表示</span><br><span class="line">%X 本地相应的时间表示</span><br><span class="line">%Z 当前时区的名称</span><br><span class="line">%% %号本身</span><br></pre></td></tr></table></figure>
-
-
-
-</li>
-</ol>
-<ol start="2">
-<li><p>格式化的时间字符串(Format String)： ‘1999-12-06’</p>
-<table>
-<thead>
-<tr>
-<th align="left">索引（Index）</th>
-<th>属性（Attribute）</th>
-<th align="left">值（Values）</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">0</td>
-<td>tm_year（年）</td>
-<td align="left">比如2011</td>
-</tr>
-<tr>
-<td align="left">1</td>
-<td>tm_mon（月）</td>
-<td align="left">1 - 12</td>
-</tr>
-<tr>
-<td align="left">2</td>
-<td>tm_mday（日）</td>
-<td align="left">1 - 31</td>
-</tr>
-<tr>
-<td align="left">3</td>
-<td>tm_hour（时）</td>
-<td align="left">0 - 23</td>
-</tr>
-<tr>
-<td align="left">4</td>
-<td>tm_min（分）</td>
-<td align="left">0 - 59</td>
-</tr>
-<tr>
-<td align="left">5</td>
-<td>tm_sec（秒）</td>
-<td align="left">0 - 60</td>
-</tr>
-<tr>
-<td align="left">6</td>
-<td>tm_wday（weekday）</td>
-<td align="left">0 - 6（0表示周一）</td>
-</tr>
-<tr>
-<td align="left">7</td>
-<td>tm_yday（一年中的第几天）</td>
-<td align="left">1 - 366</td>
-</tr>
-<tr>
-<td align="left">8</td>
-<td>tm_isdst（是否是夏令时）</td>
-<td align="left">默认为0</td>
-</tr>
-</tbody></table>
-</li>
-</ol>
-<p>首先，我们先导入time模块，来认识一下python中表示时间的几种格式：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#导入时间模块</span></span><br><span class="line">&gt;&gt;&gt;<span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="comment">#时间戳</span></span><br><span class="line">&gt;&gt;&gt;time.time()</span><br><span class="line"><span class="number">1500875844.800804</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#时间字符串</span></span><br><span class="line">&gt;&gt;&gt;time.strftime(<span class="string">"%Y-%m-%d %X"</span>)</span><br><span class="line"><span class="string">'2017-07-24 13:54:37'</span></span><br><span class="line">&gt;&gt;&gt;time.strftime(<span class="string">"%Y-%m-%d %H-%M-%S"</span>)</span><br><span class="line"><span class="string">'2017-07-24 13-55-04'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#时间元组:localtime将一个时间戳转换为当前时区的struct_time</span></span><br><span class="line">time.localtime()</span><br><span class="line">time.struct_time(tm_year=<span class="number">2017</span>, tm_mon=<span class="number">7</span>, tm_mday=<span class="number">24</span>,</span><br><span class="line">　　　　　　　　　　tm_hour=<span class="number">13</span>, tm_min=<span class="number">59</span>, tm_sec=<span class="number">37</span>, </span><br><span class="line">                 tm_wday=<span class="number">0</span>, tm_yday=<span class="number">205</span>, tm_isdst=<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
-
-<p><strong><em>小结：</em></strong></p>
-<p>时间戳是计算机能够识别的时间；时间字符串是人能够看懂的时间；元组则是用来操作时间的</p>
-<h4 id="2、几种格式之间的转换"><a href="#2、几种格式之间的转换" class="headerlink" title="2、几种格式之间的转换"></a>2、几种格式之间的转换</h4><p><img src="https://images2015.cnblogs.com/blog/827651/201707/827651-20170724144151992-1508626640.png" alt></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#时间戳--&gt;结构化时间</span></span><br><span class="line"><span class="comment">#time.gmtime(时间戳)    #UTC时间，与英国伦敦当地时间一致</span></span><br><span class="line"><span class="comment">#time.localtime(时间戳) #当地时间。例如我们现在在北京执行这个方法：与UTC时间相差8小时，UTC时间+8小时 = 北京时间 </span></span><br><span class="line">&gt;&gt;&gt;time.gmtime(<span class="number">1500000000</span>)</span><br><span class="line">time.struct_time(tm_year=<span class="number">2017</span>, tm_mon=<span class="number">7</span>, tm_mday=<span class="number">14</span>, tm_hour=<span class="number">2</span>, tm_min=<span class="number">40</span>, tm_sec=<span class="number">0</span>, tm_wday=<span class="number">4</span>, tm_yday=<span class="number">195</span>, tm_isdst=<span class="number">0</span>)</span><br><span class="line">&gt;&gt;&gt;time.localtime(<span class="number">1500000000</span>)</span><br><span class="line">time.struct_time(tm_year=<span class="number">2017</span>, tm_mon=<span class="number">7</span>, tm_mday=<span class="number">14</span>, tm_hour=<span class="number">10</span>, tm_min=<span class="number">40</span>, tm_sec=<span class="number">0</span>, tm_wday=<span class="number">4</span>, tm_yday=<span class="number">195</span>, tm_isdst=<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#结构化时间--&gt;时间戳　</span></span><br><span class="line"><span class="comment">#time.mktime(结构化时间)</span></span><br><span class="line">&gt;&gt;&gt;time_tuple = time.localtime(<span class="number">1500000000</span>)</span><br><span class="line">&gt;&gt;&gt;time.mktime(time_tuple)</span><br><span class="line"><span class="number">1500000000.0</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#结构化时间--&gt;字符串时间</span></span><br><span class="line"><span class="comment">#time.strftime("格式定义","结构化时间")  结构化时间参数若不传，则显示当前时间</span></span><br><span class="line">&gt;&gt;&gt;time.strftime(<span class="string">"%Y-%m-%d %X"</span>)</span><br><span class="line"><span class="string">'2017-07-24 14:55:36'</span></span><br><span class="line">&gt;&gt;&gt;time.strftime(<span class="string">"%Y-%m-%d"</span>,time.localtime(<span class="number">1500000000</span>))</span><br><span class="line"><span class="string">'2017-07-14'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#字符串时间--&gt;结构化时间</span></span><br><span class="line"><span class="comment">#time.strptime(时间字符串,字符串对应格式)</span></span><br><span class="line">&gt;&gt;&gt;time.strptime(<span class="string">"2017-03-16"</span>,<span class="string">"%Y-%m-%d"</span>)</span><br><span class="line">time.struct_time(tm_year=<span class="number">2017</span>, tm_mon=<span class="number">3</span>, tm_mday=<span class="number">16</span>, tm_hour=<span class="number">0</span>, tm_min=<span class="number">0</span>, tm_sec=<span class="number">0</span>, tm_wday=<span class="number">3</span>, tm_yday=<span class="number">75</span>, tm_isdst=<span class="number">-1</span>)</span><br><span class="line">&gt;&gt;&gt;time.strptime(<span class="string">"07/24/2017"</span>,<span class="string">"%m/%d/%Y"</span>)</span><br><span class="line">time.struct_time(tm_year=<span class="number">2017</span>, tm_mon=<span class="number">7</span>, tm_mday=<span class="number">24</span>, tm_hour=<span class="number">0</span>, tm_min=<span class="number">0</span>, tm_sec=<span class="number">0</span>, tm_wday=<span class="number">0</span>, tm_yday=<span class="number">205</span>, tm_isdst=<span class="number">-1</span>)</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://images2015.cnblogs.com/blog/827651/201707/827651-20170724144235883-1963884021.png" alt></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#结构化时间 --&gt; %a %b %d %H:%M:%S %Y串</span></span><br><span class="line"><span class="comment">#time.asctime(结构化时间) 如果不传参数，直接返回当前时间的格式化串</span></span><br><span class="line">&gt;&gt;&gt;time.asctime(time.localtime(<span class="number">1500000000</span>))</span><br><span class="line"><span class="string">'Fri Jul 14 10:40:00 2017'</span></span><br><span class="line">&gt;&gt;&gt;time.asctime()</span><br><span class="line"><span class="string">'Mon Jul 24 15:18:33 2017'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#时间戳 --&gt; %a %b %d %H:%M:%S %Y串</span></span><br><span class="line"><span class="comment">#time.ctime(时间戳)  如果不传参数，直接返回当前时间的格式化串</span></span><br><span class="line">&gt;&gt;&gt;time.ctime()</span><br><span class="line"><span class="string">'Mon Jul 24 15:19:07 2017'</span></span><br><span class="line">&gt;&gt;&gt;time.ctime(<span class="number">1500000000</span>)</span><br><span class="line"><span class="string">'Fri Jul 14 10:40:00 2017'</span></span><br></pre></td></tr></table></figure>
-
-<p>计算时间差：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line">true_time=time.mktime(time.strptime(<span class="string">'2017-09-11 08:30:00'</span>,<span class="string">'%Y-%m-%d %H:%M:%S'</span>))</span><br><span class="line">time_now=time.mktime(time.strptime(<span class="string">'2017-09-12 11:00:00'</span>,<span class="string">'%Y-%m-%d %H:%M:%S'</span>))</span><br><span class="line">dif_time=time_now-true_time</span><br><span class="line">struct_time=time.gmtime(dif_time)</span><br><span class="line">print(<span class="string">'过去了%d年%d月%d天%d小时%d分钟%d秒'</span>%(struct_time.tm_year<span class="number">-1970</span>,struct_time.tm_mon<span class="number">-1</span>,</span><br><span class="line">                                       struct_time.tm_mday<span class="number">-1</span>,struct_time.tm_hour,</span><br><span class="line">                                       struct_time.tm_min,struct_time.tm_sec))</span><br></pre></td></tr></table></figure>
-
-<h3 id="三、random模块"><a href="#三、random模块" class="headerlink" title="三、random模块"></a>三、random模块</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> random</span><br><span class="line"><span class="comment">#随机小数</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>random.random()      <span class="comment"># 大于0且小于1之间的小数</span></span><br><span class="line"><span class="number">0.7664338663654585</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>random.uniform(<span class="number">1</span>,<span class="number">3</span>) <span class="comment">#大于1小于3的小数</span></span><br><span class="line"><span class="number">1.6270147180533838</span></span><br><span class="line"><span class="comment">#恒富：发红包</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#随机整数</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>random.randint(<span class="number">1</span>,<span class="number">5</span>)  <span class="comment"># 大于等于1且小于等于5之间的整数</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>random.randrange(<span class="number">1</span>,<span class="number">10</span>,<span class="number">2</span>) <span class="comment"># 大于等于1且小于10之间的奇数</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#随机选择一个返回</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>random.choice([<span class="number">1</span>,<span class="string">'23'</span>,[<span class="number">4</span>,<span class="number">5</span>]])  <span class="comment"># #1或者23或者[4,5]</span></span><br><span class="line"><span class="comment">#随机选择多个返回，返回的个数为函数的第二个参数</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>random.sample([<span class="number">1</span>,<span class="string">'23'</span>,[<span class="number">4</span>,<span class="number">5</span>]],<span class="number">2</span>) <span class="comment"># #列表元素任意2个组合</span></span><br><span class="line">[[<span class="number">4</span>, <span class="number">5</span>], <span class="string">'23'</span>]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#打乱列表顺序</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>item=[<span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">7</span>,<span class="number">9</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>random.shuffle(item) <span class="comment"># 打乱次序</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>item</span><br><span class="line">[<span class="number">5</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">7</span>, <span class="number">9</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>random.shuffle(item)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>item</span><br><span class="line">[<span class="number">5</span>, <span class="number">9</span>, <span class="number">7</span>, <span class="number">1</span>, <span class="number">3</span>]</span><br></pre></td></tr></table></figure>
-
-<p>生成随机验证码：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">v_code</span><span class="params">()</span>:</span></span><br><span class="line"></span><br><span class="line">    code = <span class="string">''</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">5</span>):</span><br><span class="line"></span><br><span class="line">        num=random.randint(<span class="number">0</span>,<span class="number">9</span>)</span><br><span class="line">        alf=chr(random.randint(<span class="number">65</span>,<span class="number">90</span>))</span><br><span class="line">        add=random.choice([num,alf])</span><br><span class="line">        code=<span class="string">""</span>.join([code,str(add)])</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> code</span><br><span class="line"></span><br><span class="line">print(v_code())</span><br></pre></td></tr></table></figure>
-
-<h3 id="四、os模块"><a href="#四、os模块" class="headerlink" title="四、os模块"></a>四、os模块</h3><p>os模块是与操作系统交互的一个接口</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">os.makedirs(<span class="string">'dirname1/dirname2'</span>)    可生成多层递归目录</span><br><span class="line">os.removedirs(<span class="string">'dirname1'</span>)    若目录为空，则删除，并递归到上一级目录，如若也为空，则删除，依此类推</span><br><span class="line">os.mkdir(<span class="string">'dirname'</span>)    生成单级目录；相当于shell中mkdir dirname</span><br><span class="line">os.rmdir(<span class="string">'dirname'</span>)    删除单级空目录，若目录不为空则无法删除，报错；相当于shell中rmdir dirname</span><br><span class="line">os.listdir(<span class="string">'dirname'</span>)    列出指定目录下的所有文件和子目录，包括隐藏文件，并以列表方式打印</span><br><span class="line">os.remove()  删除一个文件</span><br><span class="line">os.rename(<span class="string">"oldname"</span>,<span class="string">"newname"</span>)  重命名文件/目录</span><br><span class="line">os.stat(<span class="string">'path/filename'</span>)  获取文件/目录信息</span><br><span class="line"></span><br><span class="line">os.system(<span class="string">"bash command"</span>)  运行shell命令，直接显示</span><br><span class="line">os.popen(<span class="string">"bash command).read()  运行shell命令，获取执行结果</span></span><br><span class="line"><span class="string">os.getcwd() 获取当前工作目录，即当前python脚本工作的目录路径</span></span><br><span class="line"><span class="string">os.chdir("</span>dirname<span class="string">")  改变当前脚本工作目录；相当于shell下cd</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">os.path</span></span><br><span class="line"><span class="string">os.path.abspath(path) 返回path规范化的绝对路径</span></span><br><span class="line"><span class="string">os.path.split(path) 将path分割成目录和文件名二元组返回 </span></span><br><span class="line"><span class="string">os.path.dirname(path) 返回path的目录。其实就是os.path.split(path)的第一个元素 </span></span><br><span class="line"><span class="string">os.path.basename(path) 返回path最后的文件名。如何path以／或\结尾，那么就会返回空值。即os.path.split(path)的第二个元素</span></span><br><span class="line"><span class="string">os.path.exists(path)  如果path存在，返回True；如果path不存在，返回False</span></span><br><span class="line"><span class="string">os.path.isabs(path)  如果path是绝对路径，返回True</span></span><br><span class="line"><span class="string">os.path.isfile(path)  如果path是一个存在的文件，返回True。否则返回False</span></span><br><span class="line"><span class="string">os.path.isdir(path)  如果path是一个存在的目录，则返回True。否则返回False</span></span><br><span class="line"><span class="string">os.path.join(path1[, path2[, ...]])  将多个路径组合后返回，第一个绝对路径之前的参数将被忽略</span></span><br><span class="line"><span class="string">os.path.getatime(path)  返回path所指向的文件或者目录的最后访问时间</span></span><br><span class="line"><span class="string">os.path.getmtime(path)  返回path所指向的文件或者目录的最后修改时间</span></span><br><span class="line"><span class="string">os.path.getsize(path) 返回path的大小</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>注意：</strong>os.stat(‘path/filename’)  获取文件/目录信息 的结构说明</p>
-<p>stat结构：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">stat 结构:</span><br><span class="line"></span><br><span class="line">st_mode: inode 保护模式</span><br><span class="line">st_ino: inode 节点号。</span><br><span class="line">st_dev: inode 驻留的设备。</span><br><span class="line">st_nlink: inode 的链接数。</span><br><span class="line">st_uid: 所有者的用户ID。</span><br><span class="line">st_gid: 所有者的组ID。</span><br><span class="line">st_size: 普通文件以字节为单位的大小；包含等待某些特殊文件的数据。</span><br><span class="line">st_atime: 上次访问的时间。</span><br><span class="line">st_mtime: 最后一次修改的时间。</span><br><span class="line">st_ctime: 由操作系统报告的&quot;ctime&quot;。在某些系统上（如Unix）是最新的元数据更改的时间，在其它系统上（如Windows）是创建时间（详细信息参见平台的文档）。</span><br></pre></td></tr></table></figure>
-
-<p>os模块的属性：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">os.sep    输出操作系统特定的路径分隔符，win下为&quot;\\&quot;,Linux下为&quot;/&quot;</span><br><span class="line">os.linesep    输出当前平台使用的行终止符，win下为&quot;\r\n&quot;,Linux下为&quot;\n&quot;</span><br><span class="line">os.pathsep    输出用于分割文件路径的字符串 win下为;,Linux下为:</span><br><span class="line">os.name    输出字符串指示当前使用平台。win-&gt;&apos;nt&apos;; Linux-&gt;&apos;posix&apos;</span><br></pre></td></tr></table></figure>
-
-<h3 id="五、sys模块"><a href="#五、sys模块" class="headerlink" title="五、sys模块"></a>五、sys模块</h3><p>sys模块是与python解释器交互的一个接口</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sys.argv           命令行参数List，第一个元素是程序本身路径</span><br><span class="line">sys.exit(n)        退出程序，正常退出时exit(0),错误退出sys.exit(1)</span><br><span class="line">sys.version        获取Python解释程序的版本信息</span><br><span class="line">sys.path           返回模块的搜索路径，初始化时使用PYTHONPATH环境变量的值</span><br><span class="line">sys.platform       返回操作系统平台名称</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    sys.exit(<span class="number">1</span>)</span><br><span class="line"><span class="keyword">except</span> SystemExit <span class="keyword">as</span> e:</span><br><span class="line">    print(e)</span><br></pre></td></tr></table></figure>
-
-<h3 id="六、序列化模块"><a href="#六、序列化模块" class="headerlink" title="六、序列化模块"></a>六、序列化模块</h3><p>什么叫序列化——将原本的字典、列表等内容转换成一个字符串的过程就叫做<strong>序列化</strong>。</p>
-<p>为什么要有序列化模块：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">比如，我们在python代码中计算的一个数据需要给另外一段程序使用，那我们怎么给？</span><br><span class="line">现在我们能想到的方法就是存在文件里，然后另一个python程序再从文件里读出来。</span><br><span class="line">但是我们都知道，对于文件来说是没有字典这个概念的，所以我们只能将数据转换成字典放到文件中。</span><br><span class="line">你一定会问，将字典转换成一个字符串很简单，就是str(dic)就可以办到了，为什么我们还要学习序列化模块呢？</span><br><span class="line">没错序列化的过程就是从dic 变成str(dic)的过程。现在你可以通过str(dic)，将一个名为dic的字典转换成一个字符串，</span><br><span class="line">但是你要怎么把一个字符串转换成字典呢？</span><br><span class="line">聪明的你肯定想到了eval()，如果我们将一个字符串类型的字典str_dic传给eval，就会得到一个返回的字典类型了。</span><br><span class="line">eval()函数十分强大，但是eval是做什么的？e官方demo解释为：将字符串str当成有效的表达式来求值并返回计算结果。</span><br><span class="line">ＢＵＴ！强大的函数有代价。安全性是其最大的缺点。</span><br><span class="line">想象一下，如果我们从文件中读出的不是一个数据结构，而是一句&quot;删除文件&quot;类似的破坏性语句，那么后果实在不堪设设想。</span><br><span class="line">而使用eval就要担这个风险。</span><br><span class="line">所以，我们并不推荐用eval方法来进行反序列化操作(将str转换成python中的数据结构)</span><br></pre></td></tr></table></figure>
-
-<p><strong>序列化的目的</strong></p>
-<p>1、以某种存储形式使自定义<a href="https://baike.baidu.com/item/对象持久化" target="_blank" rel="noopener">对象持久化</a>；</p>
-<p>2、将对象从一个地方传递到另一个地方。</p>
-<p>3、使程序更具维护性。</p>
-<p><img src="https://images2017.cnblogs.com/blog/827651/201708/827651-20170805234418803-1378181341.png" alt></p>
-<p>用于序列化的两个模块</p>
-<ul>
-<li>json，用于字符串 和 python数据类型间进行转换</li>
-<li>pickle，用于python特有的类型 和 python的数据类型间进行转换</li>
-</ul>
-<h4 id="1、json"><a href="#1、json" class="headerlink" title="1、json"></a>1、json</h4><p>Json模块提供了四个功能：dumps、dump、loads、load</p>
-<p><strong>loads和dumps</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> json</span><br><span class="line">dic = &#123;<span class="string">'k1'</span>:<span class="string">'v1'</span>,<span class="string">'k2'</span>:<span class="string">'v2'</span>,<span class="string">'k3'</span>:<span class="string">'v3'</span>&#125;</span><br><span class="line">str_dic = json.dumps(dic)  <span class="comment">#序列化：将一个字典转换成一个字符串</span></span><br><span class="line">print(type(str_dic),str_dic)  <span class="comment">#&lt;class 'str'&gt; &#123;"k3": "v3", "k1": "v1", "k2": "v2"&#125;</span></span><br><span class="line"><span class="comment">#注意，json转换完的字符串类型的字典中的字符串是由""表示的</span></span><br><span class="line"></span><br><span class="line">dic2 = json.loads(str_dic)  <span class="comment">#反序列化：将一个字符串格式的字典转换成一个字典</span></span><br><span class="line"><span class="comment">#注意，要用json的loads功能处理的字符串类型的字典中的字符串必须由""表示</span></span><br><span class="line">print(type(dic2),dic2)  <span class="comment">#&lt;class 'dict'&gt; &#123;'k1': 'v1', 'k2': 'v2', 'k3': 'v3'&#125;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">list_dic = [<span class="number">1</span>,[<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>],<span class="number">3</span>,&#123;<span class="string">'k1'</span>:<span class="string">'v1'</span>,<span class="string">'k2'</span>:<span class="string">'v2'</span>&#125;]</span><br><span class="line">str_dic = json.dumps(list_dic) <span class="comment">#也可以处理嵌套的数据类型 </span></span><br><span class="line">print(type(str_dic),str_dic) <span class="comment">#&lt;class 'str'&gt; [1, ["a", "b", "c"], 3, &#123;"k1": "v1", "k2": "v2"&#125;]</span></span><br><span class="line">list_dic2 = json.loads(str_dic)</span><br><span class="line">print(type(list_dic2),list_dic2) <span class="comment">#&lt;class 'list'&gt; [1, ['a', 'b', 'c'], 3, &#123;'k1': 'v1', 'k2': 'v2'&#125;]</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>load和dump</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> json</span><br><span class="line">f = open(<span class="string">'json_file'</span>,<span class="string">'w'</span>)</span><br><span class="line">dic = &#123;<span class="string">'k1'</span>:<span class="string">'v1'</span>,<span class="string">'k2'</span>:<span class="string">'v2'</span>,<span class="string">'k3'</span>:<span class="string">'v3'</span>&#125;</span><br><span class="line">json.dump(dic,f)  <span class="comment">#dump方法接收一个文件句柄，直接将字典转换成json字符串写入文件</span></span><br><span class="line">f.close()</span><br><span class="line"></span><br><span class="line">f = open(<span class="string">'json_file'</span>)</span><br><span class="line">dic2 = json.load(f)  <span class="comment">#load方法接收一个文件句柄，直接将文件中的json字符串转换成数据结构返回</span></span><br><span class="line">f.close()</span><br><span class="line">print(type(dic2),dic2)</span><br></pre></td></tr></table></figure>
-
-<p><strong>ensure_ascii关键字参数</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> json</span><br><span class="line">f = open(<span class="string">'file'</span>,<span class="string">'w'</span>)</span><br><span class="line">json.dump(&#123;<span class="string">'国籍'</span>:<span class="string">'中国'</span>&#125;,f)</span><br><span class="line">ret = json.dumps(&#123;<span class="string">'国籍'</span>:<span class="string">'中国'</span>&#125;)</span><br><span class="line">f.write(ret+<span class="string">'\n'</span>)</span><br><span class="line">json.dump(&#123;<span class="string">'国籍'</span>:<span class="string">'美国'</span>&#125;,f,ensure_ascii=<span class="literal">False</span>)</span><br><span class="line">ret = json.dumps(&#123;<span class="string">'国籍'</span>:<span class="string">'美国'</span>&#125;,ensure_ascii=<span class="literal">False</span>)</span><br><span class="line">f.write(ret+<span class="string">'\n'</span>)</span><br><span class="line">f.close()</span><br></pre></td></tr></table></figure>
-
-<p><strong>其他参数说明</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Serialize obj to a JSON formatted str.(字符串表示的json对象) </span><br><span class="line">Skipkeys：默认值是False，如果dict的keys内的数据不是python的基本类型(str,unicode,int,long,float,bool,None)，设置为False时，就会报TypeError的错误。此时设置成True，则会跳过这类key </span><br><span class="line">ensure_ascii:，当它为True的时候，所有非ASCII码字符显示为\uXXXX序列，只需在dump时将ensure_ascii设置为False即可，此时存入json的中文即可正常显示。) </span><br><span class="line">If check_circular is false, then the circular reference check for container types will be skipped and a circular reference will result in an OverflowError (or worse). </span><br><span class="line">If allow_nan is false, then it will be a ValueError to serialize out of range float values (nan, inf, -inf) in strict compliance of the JSON specification, instead of using the JavaScript equivalents (NaN, Infinity, -Infinity). </span><br><span class="line">indent：应该是一个非负的整型，如果是0就是顶格分行显示，如果为空就是一行最紧凑显示，否则会换行且按照indent的数值显示前面的空白分行显示，这样打印出来的json数据也叫pretty-printed json </span><br><span class="line">separators：分隔符，实际上是(item_separator, dict_separator)的一个元组，默认的就是(‘,’,’:’)；这表示dictionary内keys之间用“,”隔开，而KEY和value之间用“：”隔开。 </span><br><span class="line">default(obj) is a function that should return a serializable version of obj or raise TypeError. The default simply raises TypeError. </span><br><span class="line">sort_keys：将数据根据keys的值进行排序。 </span><br><span class="line">To use a custom JSONEncoder subclass (e.g. one that overrides the .default() method to serialize additional types), specify it with the cls kwarg; otherwise JSONEncoder is used.</span><br></pre></td></tr></table></figure>
-
-<p><strong>json的格式化输出</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> json</span><br><span class="line">data = &#123;<span class="string">'username'</span>:[<span class="string">'李华'</span>,<span class="string">'二愣子'</span>],<span class="string">'sex'</span>:<span class="string">'male'</span>,<span class="string">'age'</span>:<span class="number">16</span>&#125;</span><br><span class="line">json_dic2 = json.dumps(data,sort_keys=<span class="literal">True</span>,indent=<span class="number">2</span>,separators=(<span class="string">','</span>,<span class="string">':'</span>),ensure_ascii=<span class="literal">False</span>)</span><br><span class="line">print(json_dic2)</span><br></pre></td></tr></table></figure>
-
-<h4 id="2、pickle"><a href="#2、pickle" class="headerlink" title="2、pickle"></a>2、pickle</h4><p>pickle模块提供了四个功能：dumps、dump(序列化，存）、loads（反序列化，读）、load  （不仅可以序列化字典，列表…<strong>可以把python中任意的数据类型序列化</strong>）</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pickle</span><br><span class="line">dic = &#123;<span class="string">'k1'</span>:<span class="string">'v1'</span>,<span class="string">'k2'</span>:<span class="string">'v2'</span>,<span class="string">'k3'</span>:<span class="string">'v3'</span>&#125;</span><br><span class="line">str_dic = pickle.dumps(dic)</span><br><span class="line">print(str_dic)  <span class="comment">#一串二进制内容</span></span><br><span class="line"></span><br><span class="line">dic2 = pickle.loads(str_dic)</span><br><span class="line">print(dic2)    <span class="comment">#字典</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line">struct_time  = time.localtime(<span class="number">1000000000</span>)</span><br><span class="line">print(struct_time)</span><br><span class="line">f = open(<span class="string">'pickle_file'</span>,<span class="string">'wb'</span>)</span><br><span class="line">pickle.dump(struct_time,f)</span><br><span class="line">f.close()</span><br><span class="line"></span><br><span class="line">f = open(<span class="string">'pickle_file'</span>,<span class="string">'rb'</span>)</span><br><span class="line">struct_time2 = pickle.load(f)</span><br><span class="line">print(struct_time2.tm_year)</span><br></pre></td></tr></table></figure>
-
-<p>这时候机智的你又要说了，既然pickle如此强大，为什么还要学json呢？<br>这里我们要说明一下，json是一种所有的语言都可以识别的数据结构。<br>如果我们将一个字典或者序列化成了一个json存在文件里，那么java代码或者js代码也可以拿来用。<br>但是如果我们用pickle进行序列化，其他语言就不能读懂这是什么了～<br>所以，如果你序列化的内容是列表或者字典，我们非常推荐你使用json模块<br>但如果出于某种原因你不得不序列化其他的数据类型，而未来你还会用python对这个数据进行反序列化的话，那么就可以使用pickle</p>
-<h3 id="七、re模块"><a href="#七、re模块" class="headerlink" title="七、re模块"></a>七、re模块</h3><p>讲正题之前我们先来看一个例子：<a href="https://reg.jd.com/reg/person?ReturnUrl=https%3A//www.jd.com/" target="_blank" rel="noopener">https://reg.jd.com/reg/person?ReturnUrl=https%3A//www.jd.com/</a></p>
-<p>这是京东的注册页面，打开页面我们就看到这些要求输入个人信息的提示。<br>假如我们随意的在手机号码这一栏输入一个11111111111，它会提示我们格式有误。<br>这个功能是怎么实现的呢？<br>假如现在你用python写一段代码，类似：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">phone_number = input(<span class="string">'please input your phone number ： '</span>)</span><br></pre></td></tr></table></figure>
-
-<p>你怎么判断这个phone_number是合法的呢？</p>
-<p>根据手机号码一共11位并且是只以13、14、15、18开头的数字这些特点，我们用python写了如下代码：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    phone_number = input(<span class="string">'please input your phone number ： '</span>)</span><br><span class="line">    <span class="keyword">if</span> len(phone_number) == <span class="number">11</span> \</span><br><span class="line">            <span class="keyword">and</span> phone_number.isdigit()\</span><br><span class="line">            <span class="keyword">and</span> (phone_number.startswith(<span class="string">'13'</span>) \</span><br><span class="line">            <span class="keyword">or</span> phone_number.startswith(<span class="string">'14'</span>) \</span><br><span class="line">            <span class="keyword">or</span> phone_number.startswith(<span class="string">'15'</span>) \</span><br><span class="line">            <span class="keyword">or</span> phone_number.startswith(<span class="string">'18'</span>)):</span><br><span class="line">        print(<span class="string">'是合法的手机号码'</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        print(<span class="string">'不是合法的手机号码'</span>)</span><br></pre></td></tr></table></figure>
-
-<p>这是你的写法，现在我要展示一下我的写法：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line">phone_number = input(<span class="string">'please input your phone number ： '</span>)</span><br><span class="line"><span class="keyword">if</span> re.match(<span class="string">'^(13|14|15|18)[0-9]&#123;9&#125;$'</span>,phone_number):</span><br><span class="line">        print(<span class="string">'是合法的手机号码'</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">        print(<span class="string">'不是合法的手机号码'</span>)</span><br></pre></td></tr></table></figure>
-
-<p>对比上面的两种写法，此时此刻，我要问你你喜欢哪种方法呀？你肯定还是会说第一种，为什么呢？因为第一种不用学呀！<br>但是如果现在有一个文件，我让你从整个文件里匹配出所有的手机号码。你用python给我写个试试？<br>但是学了今天的技能之后，分分钟帮你搞定！</p>
-<p>今天我们要学习python里的<strong>re模块和正则表达式</strong>，学会了这个就可以帮我们解决刚刚的疑问。正则表达式不仅在python领域，在整个编程届都占有举足轻重的地位。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">正则表达式和re模块:</span><br><span class="line">不管以后你是不是去做python开发，只要你是一个程序员就应该了解正则表达式的基本使用。如果未来你要在爬虫领域发展，你就更应该好好学习这方面的知识。</span><br><span class="line">但是你要知道，re模块本质上和正则表达式没有一毛钱的关系。re模块和正则表达式的关系 类似于 time模块和时间的关系</span><br><span class="line">你没有学习python之前，也不知道有一个time模块，但是你已经认识时间了 12:30就表示中午十二点半（这个时间可好，一般这会儿就该下课了）。</span><br><span class="line">时间有自己的格式，年月日时分秒，12个月，365天......已经成为了一种规则。你也早就牢记于心了。time模块只不过是python提供给我们的可以方便我们操作时间的一个工具而已</span><br></pre></td></tr></table></figure>
-
-<p><strong>正则表达式</strong>本身也和python没有什么关系，就是<strong>匹配字符串内容的一种规则</strong>。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">官方定义：正则表达式是对字符串操作的一种逻辑公式，就是用事先定义好的一些特定字符、及这些特定字符的组合，组成一个“规则字符串”，这个“规则字符串”用来表达对字符串的一种过滤逻辑。</span><br></pre></td></tr></table></figure>
-
-<h4 id="（1）正则表达式"><a href="#（1）正则表达式" class="headerlink" title="（1）正则表达式"></a>（1）正则表达式</h4><p>​        一说规则我已经知道你很晕了，现在就让我们先来看一些实际的应用。<em>在线测试工具 <a href="http://tool.chinaz.com/regex/" target="_blank" rel="noopener">http://tool.chinaz.com/regex/</a></em></p>
-<p>​        首先你要知道的是，谈到正则，就只和字符串相关了。在我给你提供的工具中，你输入的每一个字都是一个字符串。<br>其次，如果在一个位置的一个值，不会出现什么变化，那么是不需要规则的。<br>　　比如你要用”1”去匹配”1”，或者用”2”去匹配”2”，直接就可以匹配上。这连python的字符串操作都可以轻松做到。<br>那么在之后我们更多要考虑的是在<strong>同一个位置上</strong>可以出现的字符的范围。</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">字符组 ： [字符组]</span><br><span class="line">在同一个位置可能出现的各种字符组成了一个字符组，在正则表达式中用[]表示</span><br><span class="line">字符分为很多类，比如数字、字母、标点等等。</span><br><span class="line">假如你现在要求一个位置&quot;只能出现一个数字&quot;,那么这个位置上的字符只能是0、1、2...9这10个数之一。</span><br></pre></td></tr></table></figure>
-
-<table>
-<thead>
-<tr>
-<th><code>正则</code></th>
-<th><code>待匹配字符</code></th>
-<th><code>匹配结果</code></th>
-<th><code>说明</code></th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>[0123456789]</code></td>
-<td><code>8</code></td>
-<td><code>True</code></td>
-<td><code>在一个字符组里枚举合法的所有字符，字符组里的任意一个字符和&quot;待匹配字符&quot;相同都视为可以匹配</code></td>
-</tr>
-<tr>
-<td><code>[0123456789]</code></td>
-<td><code>a</code></td>
-<td><code>False</code></td>
-<td><code>由于字符组中没有&quot;a&quot;字符，所以不能匹配</code></td>
-</tr>
-<tr>
-<td><code>[0-9]</code></td>
-<td><code>7</code></td>
-<td><code>True</code></td>
-<td><code>也可以用-表示范围,[0-9]就和[0123456789]是一个意思</code></td>
-</tr>
-<tr>
-<td><code>[a-z]</code></td>
-<td><code>s</code></td>
-<td><code>True</code></td>
-<td><code>同样的如果要匹配所有的小写字母，直接用[a-z]就可以表示</code></td>
-</tr>
-<tr>
-<td><code>[A-Z]</code></td>
-<td><code>B</code></td>
-<td><code>True</code></td>
-<td><code>[A-Z]就表示所有的大写字母</code></td>
-</tr>
-<tr>
-<td><code>[0-9a-fA-F]</code></td>
-<td><code>e</code></td>
-<td><code>True</code></td>
-<td><code>可以匹配数字，大小写形式的a～f，用来验证十六进制字符</code></td>
-</tr>
-</tbody></table>
-<p><strong><em>字符：</em></strong></p>
-<table>
-<thead>
-<tr>
-<th><code>元字符</code></th>
-<th><code>匹配内容</code></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>.</td>
-<td>匹配除换行符以外的任意字符</td>
-</tr>
-<tr>
-<td>\w</td>
-<td>匹配字母或数字或下划线</td>
-</tr>
-<tr>
-<td>\s</td>
-<td>匹配任意的空白符</td>
-</tr>
-<tr>
-<td>\d</td>
-<td>匹配数字</td>
-</tr>
-<tr>
-<td>\n</td>
-<td>匹配一个换行符</td>
-</tr>
-<tr>
-<td>\t</td>
-<td>匹配一个制表符</td>
-</tr>
-<tr>
-<td>\b</td>
-<td>匹配一个单词的结尾</td>
-</tr>
-<tr>
-<td>^</td>
-<td>匹配字符串的开始</td>
-</tr>
-<tr>
-<td>$</td>
-<td>匹配字符串的结尾</td>
-</tr>
-<tr>
-<td>\W</td>
-<td><code>匹配非字母或数字或下划线</code></td>
-</tr>
-<tr>
-<td>\D</td>
-<td><code>匹配非数字</code></td>
-</tr>
-<tr>
-<td>\S</td>
-<td><code>匹配非空白符</code></td>
-</tr>
-<tr>
-<td>a|b</td>
-<td><code>匹配字符a或字符b</code></td>
-</tr>
-<tr>
-<td>()</td>
-<td><code>匹配括号内的表达式，也表示一个组</code></td>
-</tr>
-<tr>
-<td>[…]</td>
-<td><code>匹配字符组中的字符</code></td>
-</tr>
-<tr>
-<td>[^…]</td>
-<td><code>匹配除了字符组中字符的所有字符</code></td>
-</tr>
-</tbody></table>
-<p><strong><em>量词：</em></strong></p>
-<table>
-<thead>
-<tr>
-<th><code>量词</code></th>
-<th><code>用法说明</code></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>*</td>
-<td>重复零次或更多次</td>
-</tr>
-<tr>
-<td>+</td>
-<td>重复一次或更多次</td>
-</tr>
-<tr>
-<td>?</td>
-<td>重复零次或一次</td>
-</tr>
-<tr>
-<td>{n}</td>
-<td>重复n次</td>
-</tr>
-<tr>
-<td>{n,}</td>
-<td>重复n次或更多次</td>
-</tr>
-<tr>
-<td>{n,m}</td>
-<td>重复n到m次</td>
-</tr>
-</tbody></table>
-<h5 id="1、"><a href="#1、" class="headerlink" title="1、. ^ $"></a>1、. ^ $</h5><table>
-<thead>
-<tr>
-<th>正则</th>
-<th>待匹配字符</th>
-<th>匹配 结果</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>海.</td>
-<td>海燕海娇海东</td>
-<td>海燕海娇海东</td>
-<td>匹配所有”海.”的字符</td>
-</tr>
-<tr>
-<td>^海.</td>
-<td>海燕海娇海东</td>
-<td>海燕</td>
-<td>只从开头匹配”海.”</td>
-</tr>
-<tr>
-<td>海.$</td>
-<td>海燕海娇海东</td>
-<td>海东</td>
-<td>只匹配结尾的”海.$”</td>
-</tr>
-</tbody></table>
-<h5 id="2、"><a href="#2、" class="headerlink" title="2、* + ? { }"></a>2、* + ? { }</h5><table>
-<thead>
-<tr>
-<th>正则</th>
-<th>待匹配字符</th>
-<th>匹配 结果</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>李.?</td>
-<td>李杰和李莲英和李二棍子</td>
-<td>李杰 李莲 李二</td>
-<td><code>?表示重复零次或一次，即只匹配&quot;李&quot;后面一个任意字符</code></td>
-</tr>
-<tr>
-<td>李.*</td>
-<td>李杰和李莲英和李二棍子</td>
-<td>李杰和李莲英和李二棍子</td>
-<td><code>*表示重复零次或多次，即匹配&quot;李&quot;后面0或多个任意字符</code></td>
-</tr>
-<tr>
-<td>李.+</td>
-<td>李杰和李莲英和李二棍子</td>
-<td>李杰和李莲英和李二棍子</td>
-<td><code>+表示重复一次或多次，即只匹配&quot;李&quot;后面1个或多个任意字符</code></td>
-</tr>
-<tr>
-<td>李.{1,2}</td>
-<td>李杰和李莲英和李二棍子</td>
-<td>李杰和 李莲英 李二棍</td>
-<td><code>{1,2}匹配1到2次任意字符</code></td>
-</tr>
-</tbody></table>
-<p><strong><em>注意：</em></strong></p>
-<p>前面的*,+,?等都是贪婪匹配，也就是尽可能匹配，后面加?号使其变成惰性匹配</p>
-<table>
-<thead>
-<tr>
-<th>正则</th>
-<th>待匹配字符</th>
-<th>匹配 结果</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>李.*?</td>
-<td>李杰和李莲英和李二棍子</td>
-<td>李 李 李</td>
-<td>惰性匹配</td>
-</tr>
-</tbody></table>
-<h5 id="3、字符集［］［-］"><a href="#3、字符集［］［-］" class="headerlink" title="3、字符集［］［^］"></a>3、字符集［］［^］</h5><table>
-<thead>
-<tr>
-<th>正则</th>
-<th>待匹配字符</th>
-<th>匹配 结果</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>李[杰莲英二棍子]*</td>
-<td>李杰和李莲英和李二棍子</td>
-<td>李杰 李莲英 李二棍子</td>
-<td><code>表示匹配&quot;李&quot;字后面[杰莲英二棍子]的字符任意次</code></td>
-</tr>
-<tr>
-<td>李[^和]*</td>
-<td>李杰和李莲英和李二棍子</td>
-<td>李杰 李莲英 李二棍子</td>
-<td><code>表示匹配一个不是&quot;和&quot;的字符任意次</code></td>
-</tr>
-<tr>
-<td>[\d]</td>
-<td>456bdha3</td>
-<td>4 5 6 3</td>
-<td><code>表示匹配任意一个数字，匹配到4个结果</code></td>
-</tr>
-<tr>
-<td>[\d]+</td>
-<td>456bdha3</td>
-<td>456 3</td>
-<td><code>表示匹配任意个数字，匹配到2个结果</code></td>
-</tr>
-</tbody></table>
-<h5 id="4、分组-与-或-｜［-］"><a href="#4、分组-与-或-｜［-］" class="headerlink" title="4、分组 ()与 或 ｜［^］"></a>4、分组 ()与 或 ｜［^］</h5><p>身份证号码是一个长度为15或18个字符的字符串，如果是15位则全部由数字组成，首位不能为0；如果是18位，则前17位全部是数字，末位可能是数字或x，下面我们尝试用正则来表示：</p>
-<table>
-<thead>
-<tr>
-<th>正则</th>
-<th>待匹配字符</th>
-<th>匹配 结果</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>^[1-9]\d{13,16}[0-9x]$</td>
-<td>110101198001017032</td>
-<td>110101198001017032</td>
-<td>表示可以匹配一个正确的身份证号</td>
-</tr>
-<tr>
-<td>^[1-9]\d{13,16}[0-9x]$</td>
-<td>1101011980010170</td>
-<td>1101011980010170</td>
-<td><code>表示也可以匹配这串数字，但这并不是一个正确的身份证号码，它是一个16位的数字</code></td>
-</tr>
-<tr>
-<td>^[1-9]\d{14}(\d{2}[0-9x])?$</td>
-<td>1101011980010170</td>
-<td>False</td>
-<td><code>现在不会匹配错误的身份证号了()表示分组，将\d{2}[0-9x]分成一组，就可以整体约束他们出现的次数为0-1次</code></td>
-</tr>
-<tr>
-<td>^([1-9]\d{16}[0-9x]|[1-9]\d{14})$</td>
-<td>110105199812067023</td>
-<td>110105199812067023</td>
-<td><code>表示先匹配[1-9]\d{16}[0-9x]如果没有匹配上就匹配[1-9]\d{14}</code></td>
-</tr>
-</tbody></table>
-<h5 id="5、转义符"><a href="#5、转义符" class="headerlink" title="5、转义符 \"></a>5、转义符 \</h5><p>在正则表达式中，有很多有特殊意义的是元字符，比如\n和\s等，如果要在正则中匹配正常的”\n”而不是”换行符”就需要对”\“进行转义，变成’\\‘。</p>
-<p>在python中，无论是正则表达式，还是待匹配的内容，都是以字符串的形式出现的，在字符串中\也有特殊的含义，本身还需要转义。所以如果匹配一次”\n”,字符串中要写成’\\n’，那么正则里就要写成”\\\\n”,这样就太麻烦了。这个时候我们就用到了r’\n’这个概念，此时的正则是r’\\n’就可以了。</p>
-<table>
-<thead>
-<tr>
-<th>正则</th>
-<th>待匹配字符</th>
-<th>匹配 结果</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>\n</td>
-<td>\n</td>
-<td>False</td>
-<td><code>因为在正则表达式中\是有特殊意义的字符，所以要匹配\n本身，用表达式\n无法匹配</code></td>
-</tr>
-<tr>
-<td>\\n</td>
-<td>\n</td>
-<td>True</td>
-<td><code>转义\之后变成\\，即可匹配</code></td>
-</tr>
-<tr>
-<td>“\\\\n”</td>
-<td>‘\\n’</td>
-<td>True</td>
-<td><code>如果在python中，字符串中的&#39;\&#39;也需要转义，所以每一个字符串&#39;\&#39;又需要转义一次</code></td>
-</tr>
-<tr>
-<td>r’\\n’</td>
-<td>r’\n’</td>
-<td>True</td>
-<td><code>在字符串之前加r，让整个字符串不转义</code></td>
-</tr>
-</tbody></table>
-<h5 id="6、贪婪匹配"><a href="#6、贪婪匹配" class="headerlink" title="6、贪婪匹配"></a>6、贪婪匹配</h5><p>贪婪匹配：在满足匹配时，匹配尽可能长的字符串，默认情况下，采用贪婪匹配</p>
-<table>
-<thead>
-<tr>
-<th>正则</th>
-<th>待匹配字符</th>
-<th>匹配 结果</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>&lt;.*&gt;</td>
-<td><script>...<script></td>
-<td><script>...<script></td>
-<td><code>默认为贪婪匹配模式，会匹配尽量长的字符串</code></td>
-</tr>
-<tr>
-<td><.*?></td>
-<td>r'\d'</td>
-<td><script> <script></td>
-<td><code>加上？为将贪婪匹配模式转为非贪婪匹配模式，会匹配尽量短的字符串</code></td>
-</tr>
-</tbody></table>
-<p>几个常用的非贪婪匹配Pattern：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">*? 重复任意次，但尽可能少重复</span><br><span class="line">+? 重复1次或更多次，但尽可能少重复</span><br><span class="line">?? 重复0次或1次，但尽可能少重复</span><br><span class="line">&#123;n,m&#125;? 重复n到m次，但尽可能少重复</span><br><span class="line">&#123;n,&#125;? 重复n次以上，但尽可能少重复</span><br></pre></td></tr></table></figure>
-
-<p>. * ? 的用法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">. 是任意字符</span><br><span class="line">* 是取 0 至 无限长度</span><br><span class="line">? 是非贪婪模式。</span><br><span class="line">  何在一起就是 取尽量少的任意字符，一般不会这么单独写，他大多用在：</span><br><span class="line">  .*?x</span><br><span class="line"></span><br><span class="line">就是取前面任意长度的字符，直到一个x出现</span><br></pre></td></tr></table></figure>
-
-<h4 id="（2）re模块下的常用方法"><a href="#（2）re模块下的常用方法" class="headerlink" title="（2）re模块下的常用方法"></a>（2）re模块下的常用方法</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line">ret = re.findall(<span class="string">'a'</span>, <span class="string">'eva egon yuan'</span>)  <span class="comment"># 返回所有满足匹配条件的结果,放在列表里</span></span><br><span class="line">print(ret) <span class="comment">#结果 : ['a', 'a']</span></span><br><span class="line"></span><br><span class="line">ret = re.search(<span class="string">'a'</span>, <span class="string">'eva egon yuan'</span>).group()</span><br><span class="line">print(ret) <span class="comment">#结果 : 'a'</span></span><br><span class="line"><span class="comment"># 函数会在字符串内查找模式匹配,只到找到第一个匹配然后返回一个包含匹配信息的对象,该对象可以</span></span><br><span class="line"><span class="comment"># 通过调用group()方法得到匹配的字符串,如果字符串没有匹配，则返回None。</span></span><br><span class="line"></span><br><span class="line">ret = re.match(<span class="string">'a'</span>, <span class="string">'abc'</span>).group()  <span class="comment"># 同search,不过尽在字符串开始处进行匹配</span></span><br><span class="line">print(ret)</span><br><span class="line"><span class="comment">#结果 : 'a'</span></span><br><span class="line"></span><br><span class="line">ret = re.split(<span class="string">'[ab]'</span>, <span class="string">'abcd'</span>)  <span class="comment"># 先按'a'分割得到''和'bcd',在对''和'bcd'分别按'b'分割</span></span><br><span class="line">print(ret)  <span class="comment"># ['', '', 'cd']</span></span><br><span class="line"></span><br><span class="line">ret = re.sub(<span class="string">'\d'</span>, <span class="string">'H'</span>, <span class="string">'eva3egon4yuan4'</span>, <span class="number">1</span>)<span class="comment">#将数字替换成'H'，参数1表示只替换1个</span></span><br><span class="line">print(ret) <span class="comment">#evaHegon4yuan4</span></span><br><span class="line"></span><br><span class="line">ret = re.subn(<span class="string">'\d'</span>, <span class="string">'H'</span>, <span class="string">'eva3egon4yuan4'</span>)<span class="comment">#将数字替换成'H'，返回元组(替换的结果,替换了多少次)</span></span><br><span class="line">print(ret)</span><br><span class="line"></span><br><span class="line">obj = re.compile(<span class="string">'\d&#123;3&#125;'</span>)  <span class="comment">#将正则表达式编译成为一个 正则表达式对象，规则要匹配的是3个数字</span></span><br><span class="line">ret = obj.search(<span class="string">'abc123eeee'</span>) <span class="comment">#正则表达式对象调用search，参数为待匹配的字符串</span></span><br><span class="line">print(ret.group())  <span class="comment">#结果 ： 123</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line">ret = re.finditer(<span class="string">'\d'</span>, <span class="string">'ds3sy4784a'</span>)   <span class="comment">#finditer返回一个存放匹配结果的迭代器</span></span><br><span class="line">print(ret)  <span class="comment"># &lt;callable_iterator object at 0x10195f940&gt;</span></span><br><span class="line">print(next(ret).group())  <span class="comment">#查看第一个结果</span></span><br><span class="line">print(next(ret).group())  <span class="comment">#查看第二个结果</span></span><br><span class="line">print([i.group() <span class="keyword">for</span> i <span class="keyword">in</span> ret])  <span class="comment">#查看剩余的左右结果</span></span><br></pre></td></tr></table></figure>
-
-<p><strong><em>注意：</em></strong></p>
-<ol>
-<li><p>findall的优先级查询：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">import re</span><br><span class="line"></span><br><span class="line">ret = re.findall(&apos;www.(baidu|oldboy).com&apos;, &apos;www.oldboy.com&apos;)</span><br><span class="line">print(ret)  # [&apos;oldboy&apos;]     这是因为findall会优先把匹配结果组里内容返回,如果想要匹配结果,取消权限即可</span><br><span class="line"></span><br><span class="line">ret = re.findall(&apos;www.(?:baidu|oldboy).com&apos;, &apos;www.oldboy.com&apos;)</span><br><span class="line">print(ret)  # [&apos;www.oldboy.com&apos;]</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>split的优先级查询</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ret=re.split(&quot;\d+&quot;,&quot;eva3egon4yuan&quot;)</span><br><span class="line">print(ret) #结果 ： [&apos;eva&apos;, &apos;egon&apos;, &apos;yuan&apos;]</span><br><span class="line"></span><br><span class="line">ret=re.split(&quot;(\d+)&quot;,&quot;eva3egon4yuan&quot;)</span><br><span class="line">print(ret) #结果 ： [&apos;eva&apos;, &apos;3&apos;, &apos;egon&apos;, &apos;4&apos;, &apos;yuan&apos;]</span><br><span class="line"></span><br><span class="line">#在匹配部分加上（）之后所切出的结果是不同的，</span><br><span class="line">#没有（）的没有保留所匹配的项，但是有（）的却能够保留了匹配的项，</span><br><span class="line">#这个在某些需要保留匹配部分的使用过程是非常重要的。</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<h4 id="（3）综合练习与扩展"><a href="#（3）综合练习与扩展" class="headerlink" title="（3）综合练习与扩展"></a>（3）综合练习与扩展</h4><h5 id="1、匹配标签"><a href="#1、匹配标签" class="headerlink" title="1、匹配标签"></a>1、匹配标签</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">ret = re.search(<span class="string">"&lt;(?P&lt;tag_name&gt;\w+)&gt;\w+&lt;/(?P=tag_name)&gt;"</span>,<span class="string">"&lt;h1&gt;hello&lt;/h1&gt;"</span>)</span><br><span class="line"><span class="comment">#还可以在分组中利用?&lt;name&gt;的形式给分组起名字</span></span><br><span class="line"><span class="comment">#获取的匹配结果可以直接用group('名字')拿到对应的值</span></span><br><span class="line">print(ret.group(<span class="string">'tag_name'</span>))  <span class="comment">#结果 ：h1</span></span><br><span class="line">print(ret.group())  <span class="comment">#结果 ：&lt;h1&gt;hello&lt;/h1&gt;</span></span><br><span class="line"></span><br><span class="line">ret = re.search(<span class="string">r"&lt;(\w+)&gt;\w+&lt;/\1&gt;"</span>,<span class="string">"&lt;h1&gt;hello&lt;/h1&gt;"</span>)</span><br><span class="line"><span class="comment">#如果不给组起名字，也可以用\序号来找到对应的组，表示要找的内容和前面的组内容一致</span></span><br><span class="line"><span class="comment">#获取的匹配结果可以直接用group(序号)拿到对应的值</span></span><br><span class="line">print(ret.group(<span class="number">1</span>))</span><br><span class="line">print(ret.group())  <span class="comment">#结果 ：&lt;h1&gt;hello&lt;/h1&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h5 id="2、匹配整数"><a href="#2、匹配整数" class="headerlink" title="2、匹配整数"></a>2、匹配整数</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line">ret=re.findall(<span class="string">r"\d+"</span>,<span class="string">"1-2*(60+(-40.35/5)-(-4*3))"</span>)</span><br><span class="line">print(ret) <span class="comment">#['1', '2', '60', '40', '35', '5', '4', '3']</span></span><br><span class="line">ret=re.findall(<span class="string">r"-?\d+\.\d*|(-?\d+)"</span>,<span class="string">"1-2*(60+(-40.35/5)-(-4*3))"</span>)</span><br><span class="line">print(ret) <span class="comment">#['1', '-2', '60', '', '5', '-4', '3']</span></span><br><span class="line">ret.remove(<span class="string">""</span>)</span><br><span class="line">print(ret) <span class="comment">#['1', '-2', '60', '5', '-4', '3']</span></span><br></pre></td></tr></table></figure>
-
-<h5 id="3、数字匹配"><a href="#3、数字匹配" class="headerlink" title="3、数字匹配"></a>3、数字匹配</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">1、 匹配一段文本中的每行的邮箱</span><br><span class="line">      http://blog.csdn.net/make164492212/article/details/51656638</span><br><span class="line"></span><br><span class="line">2、 匹配一段文本中的每行的时间字符串，比如：‘1990-07-12’；</span><br><span class="line"></span><br><span class="line">   分别取出1年的12个月（^(0?[1-9]|1[0-2])$）、</span><br><span class="line">   一个月的31天：^((0?[1-9])|((1|2)[0-9])|30|31)$</span><br><span class="line"></span><br><span class="line">3、 匹配qq号。(腾讯QQ号从10000开始)  ［1,9］[0,9]&#123;4,&#125;</span><br><span class="line"></span><br><span class="line">4、 匹配一个浮点数。       ^(-?\d+)(\.\d+)?$   或者  -?\d+\.?\d*</span><br><span class="line"></span><br><span class="line">5、 匹配汉字。             ^[\u4e00-\u9fa5]&#123;0,&#125;$ </span><br><span class="line"></span><br><span class="line">6、 匹配出所有整数</span><br></pre></td></tr></table></figure>
-
-<h5 id="4、爬虫练习"><a href="#4、爬虫练习" class="headerlink" title="4、爬虫练习"></a>4、爬虫练习</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getPage</span><span class="params">(url)</span>:</span></span><br><span class="line"></span><br><span class="line">    response=requests.get(url)</span><br><span class="line">    <span class="keyword">return</span> response.text</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">parsePage</span><span class="params">(s)</span>:</span></span><br><span class="line">    </span><br><span class="line">    com=re.compile(<span class="string">'&lt;div class="item"&gt;.*?&lt;div class="pic"&gt;.*?&lt;em .*?&gt;(?P&lt;id&gt;\d+).*?&lt;span class="title"&gt;(?P&lt;title&gt;.*?)&lt;/span&gt;'</span></span><br><span class="line">                   <span class="string">'.*?&lt;span class="rating_num" .*?&gt;(?P&lt;rating_num&gt;.*?)&lt;/span&gt;.*?&lt;span&gt;(?P&lt;comment_num&gt;.*?)评价&lt;/span&gt;'</span>,re.S)</span><br><span class="line"></span><br><span class="line">    ret=com.finditer(s)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> ret:</span><br><span class="line">        <span class="keyword">yield</span> &#123;</span><br><span class="line">            <span class="string">"id"</span>:i.group(<span class="string">"id"</span>),</span><br><span class="line">            <span class="string">"title"</span>:i.group(<span class="string">"title"</span>),</span><br><span class="line">            <span class="string">"rating_num"</span>:i.group(<span class="string">"rating_num"</span>),</span><br><span class="line">            <span class="string">"comment_num"</span>:i.group(<span class="string">"comment_num"</span>),</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">(num)</span>:</span></span><br><span class="line"></span><br><span class="line">    url=<span class="string">'https://movie.douban.com/top250?start=%s&amp;filter='</span>%num</span><br><span class="line">    response_html=getPage(url)</span><br><span class="line">    ret=parsePage(response_html)</span><br><span class="line">    print(ret)</span><br><span class="line">    f=open(<span class="string">"move_info7"</span>,<span class="string">"a"</span>,encoding=<span class="string">"utf8"</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> obj <span class="keyword">in</span> ret:</span><br><span class="line">        print(obj)</span><br><span class="line">        data=json.dumps(obj,ensure_ascii=<span class="literal">False</span>)</span><br><span class="line">        f.write(data+<span class="string">"\n"</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    count=<span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">        main(count)</span><br><span class="line">        count+=<span class="number">25</span></span><br></pre></td></tr></table></figure>
-
-<p>简化版：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">from</span> urllib.request <span class="keyword">import</span> urlopen</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getPage</span><span class="params">(url)</span>:</span></span><br><span class="line">    response = urlopen(url)</span><br><span class="line">    <span class="keyword">return</span> response.read().decode(<span class="string">'utf-8'</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">parsePage</span><span class="params">(s)</span>:</span></span><br><span class="line">    com = re.compile(</span><br><span class="line">        <span class="string">'&lt;div class="item"&gt;.*?&lt;div class="pic"&gt;.*?&lt;em .*?&gt;(?P&lt;id&gt;\d+).*?&lt;span class="title"&gt;(?P&lt;title&gt;.*?)&lt;/span&gt;'</span></span><br><span class="line">        <span class="string">'.*?&lt;span class="rating_num" .*?&gt;(?P&lt;rating_num&gt;.*?)&lt;/span&gt;.*?&lt;span&gt;(?P&lt;comment_num&gt;.*?)评价&lt;/span&gt;'</span>, re.S)</span><br><span class="line"></span><br><span class="line">    ret = com.finditer(s)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> ret:</span><br><span class="line">        <span class="keyword">yield</span> &#123;</span><br><span class="line">            <span class="string">"id"</span>: i.group(<span class="string">"id"</span>),</span><br><span class="line">            <span class="string">"title"</span>: i.group(<span class="string">"title"</span>),</span><br><span class="line">            <span class="string">"rating_num"</span>: i.group(<span class="string">"rating_num"</span>),</span><br><span class="line">            <span class="string">"comment_num"</span>: i.group(<span class="string">"comment_num"</span>),</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">(num)</span>:</span></span><br><span class="line">    url = <span class="string">'https://movie.douban.com/top250?start=%s&amp;filter='</span> % num</span><br><span class="line">    response_html = getPage(url)</span><br><span class="line">    ret = parsePage(response_html)</span><br><span class="line">    print(ret)</span><br><span class="line">    f = open(<span class="string">"move_info7"</span>, <span class="string">"a"</span>, encoding=<span class="string">"utf8"</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> obj <span class="keyword">in</span> ret:</span><br><span class="line">        print(obj)</span><br><span class="line">        data = str(obj)</span><br><span class="line">        f.write(data + <span class="string">"\n"</span>)</span><br><span class="line"></span><br><span class="line">count = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">    main(count)</span><br><span class="line">    count += <span class="number">25</span></span><br></pre></td></tr></table></figure>
-
-<p>flags：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">flags有很多可选值：</span><br><span class="line"></span><br><span class="line">re.I(IGNORECASE)忽略大小写，括号内是完整的写法</span><br><span class="line">re.M(MULTILINE)多行模式，改变^和$的行为</span><br><span class="line">re.S(DOTALL)点可以匹配任意字符，包括换行符</span><br><span class="line">re.L(LOCALE)做本地化识别的匹配，表示特殊字符集 \w, \W, \b, \B, \s, \S 依赖于当前环境，不推荐使用</span><br><span class="line">re.U(UNICODE) 使用\w \W \s \S \d \D使用取决于unicode定义的字符属性。在python3中默认使用该flag</span><br><span class="line">re.X(VERBOSE)冗长模式，该模式下pattern字符串可以是多行的，忽略空白字符，并可以添加注释</span><br></pre></td></tr></table></figure>
-
-</script></td></tr></tbody></table>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -4043,7 +3498,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">98</span>
+                  <span class="site-state-item-count">100</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -4054,7 +3509,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -4065,7 +3520,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -4118,7 +3573,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

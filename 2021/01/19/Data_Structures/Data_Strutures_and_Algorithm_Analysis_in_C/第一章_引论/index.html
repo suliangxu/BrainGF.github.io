@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="数据结构与算法（C）,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1.1 本书讨论内容列出两个例子，说明对于某个具体问题来说，想要编码找出解决方案是容易的，但是我们还要追求高效率。 1、选择问题 设有一组 N 个数而要确定其中第 k 个最大者。 2、字谜问题 输入一些含字母的二维数组和一个单词列表组成，目标是找出字谜中的单词，这些单词可能是水平、垂直或沿对角线以任何方向放置的。 示例： 下图中，字谜由单词 this、two、fat 和 that 组成。 ![im">
+<meta name="keywords" content="数据结构与算法（C）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第一章_引论">
+<meta property="og:url" content="http://yoursite.com/2021/01/19/Data_Structures/Data_Strutures_and_Algorithm_Analysis_in_C/第一章_引论/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="1.1 本书讨论内容列出两个例子，说明对于某个具体问题来说，想要编码找出解决方案是容易的，但是我们还要追求高效率。 1、选择问题 设有一组 N 个数而要确定其中第 k 个最大者。 2、字谜问题 输入一些含字母的二维数组和一个单词列表组成，目标是找出字谜中的单词，这些单词可能是水平、垂直或沿对角线以任何方向放置的。 示例： 下图中，字谜由单词 this、two、fat 和 that 组成。 ![im">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2021-01-19T05:42:16.640Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="第一章_引论">
+<meta name="twitter:description" content="1.1 本书讨论内容列出两个例子，说明对于某个具体问题来说，想要编码找出解决方案是容易的，但是我们还要追求高效率。 1、选择问题 设有一组 N 个数而要确定其中第 k 个最大者。 2、字谜问题 输入一些含字母的二维数组和一个单词列表组成，目标是找出字谜中的单词，这些单词可能是水平、垂直或沿对角线以任何方向放置的。 示例： 下图中，字谜由单词 this、two、fat 和 that 组成。 ![im">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2021/01/19/Data_Structures/Data_Strutures_and_Algorithm_Analysis_in_C/第一章_引论/">
+
+
+
+
+
+  <title>第一章_引论 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/01/19/Data_Structures/Data_Strutures_and_Algorithm_Analysis_in_C/第一章_引论/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">第一章_引论</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-01-19T13:42:16+08:00">
+                2021-01-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据结构-数据结构与算法（C）/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构 - 数据结构与算法（C）</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="1-1-本书讨论内容"><a href="#1-1-本书讨论内容" class="headerlink" title="1.1 本书讨论内容"></a>1.1 本书讨论内容</h3><p>列出两个例子，说明对于某个具体问题来说，想要编码找出解决方案是容易的，但是我们还要追求高效率。</p>
+<p><strong>1、选择问题</strong></p>
+<p>设有一组 N 个数而要确定其中第 k 个最大者。</p>
+<p><strong>2、字谜问题</strong></p>
+<p>输入一些含字母的二维数组和一个单词列表组成，目标是找出字谜中的单词，这些单词可能是水平、垂直或沿对角线以任何方向放置的。</p>
+<p>示例：</p>
+<p>下图中，字谜由单词 this、two、fat 和 that 组成。</p>
+<p>![image-20210119115749708](/Users/hhh/Library/Application Support/typora-user-images/image-20210119115749708.png)</p>
+<blockquote>
+<p>写出一个可以工作的程序并不够。如果这个程序在巨大的数据集上运行，那么运行时间就变成了重要的问题。</p>
+<p>我们将在本书中看到对于大量输入如何估计程序的运行时间，尤其是如何在尚未具体编码的情况下比较两个程序的运行时间。</p>
+<p>我们还将看到彻底改进程序速度以及确定程序瓶颈的方法。</p>
+</blockquote>
+<p>以上便是数据结构与算法要解决的核心问题。</p>
+<h3 id="1-2-数学知识复习"><a href="#1-2-数学知识复习" class="headerlink" title="1.2 数学知识复习"></a>1.2 数学知识复习</h3><h4 id="1-2-1-指数"><a href="#1-2-1-指数" class="headerlink" title="1.2.1 指数"></a>1.2.1 指数</h4><p>$$<br>X^{a}X^{b} = X^{a+b}\<br>\frac{X^{A}}{X^{B}} = X^{A-B}\<br>(X^{A})^{B} = X^{AB}\<br>X^{N} + X^{N} = 2^X{N} \neq X^{2N}\<br>2^{N} + 2^{N} = 2^{N+1}<br>$$</p>
+<h4 id="1-2-2-对数"><a href="#1-2-2-对数" class="headerlink" title="1.2.2 对数"></a>1.2.2 对数</h4><p><strong>在计算机科学中，除非有特别声明，所有的对数都是以 2 为底的。</strong></p>
+<p><strong>定义：</strong> 当且仅当 $\log_XB = A$，$X^{A} = B$。</p>
+<p><strong>定理1.1</strong><br>$$<br>\log_AB = \frac{\log_CB}{\log_CA} \quad; \quad C&gt;0<br>$$<br><strong>定理1.2</strong><br>$$<br>logAB = log A + logB\<br>log\frac{A}{B} = logA - logB\<br>log(A^{B}) = BlogA\<br>log X &lt; X \quad(对所有的 X&gt;0成立)\<br>log1 = 0 ,\quad log2=1, \quad log1024=10<br>$$</p>
+<h4 id="1-2-3-级数"><a href="#1-2-3-级数" class="headerlink" title="1.2.3 级数"></a>1.2.3 级数</h4><p>$$<br>\sum_{i=0}^{N} 2^i = 2^{N+1} - 1\<br>\sum_{i=0}^{N} A^i = \frac{A^{N+1} - 1}{A - 1}\<br>$$</p>
+<p>当 0 &lt; A &lt; 1，则：<br>$$<br>\sum_{i=0}^{N}A^i \leq \frac{1}{1-N}<br>$$<br>当 $N\rightarrow\infty$ 时，该和趋于 $\frac{1}{A-1}$ 。</p>
+<p><strong>推论：</strong><br>$$<br>\sum_{i=1}^{N}f(N) = Nf(N)\<br>\sum_{i=n_0}^{N}f(i) = \sum_{i=1}^{N}f(i) - \sum_{i=1}^{n_0-1}f(i)<br>$$</p>
+<h4 id="1-2-4-模运算"><a href="#1-2-4-模运算" class="headerlink" title="1.2.4 模运算"></a>1.2.4 模运算</h4><p>若 N 整除 A-B，那么就称 A 与 B 同余（congruent），记为 $A\equiv B(mod \quad N)$。</p>
+<p>例：$81 \equiv 61 \equiv 1(mod \quad 1)$</p>
+<p><strong>注：</strong></p>
+<p>模运算是非常耗费资源的：<br>$$<br>N % 10 = N - \left \lfloor \frac{N} {10}\right \rfloor*10<br>$$<br>其中， $\left \lfloor \quad \right \rfloor$ 为下取整。</p>
+<h4 id="1-2-5-证明方法"><a href="#1-2-5-证明方法" class="headerlink" title="1.2.5 证明方法"></a>1.2.5 证明方法</h4><p><strong>归纳法</strong> 、 <strong>反证法</strong></p>
+<h3 id="1-3-递归简论"><a href="#1-3-递归简论" class="headerlink" title="1.3 递归简论"></a>1.3 递归简论</h3><p>当编写递归程序的时候，关键是要牢记递归的四条基本原则：</p>
+<ol>
+<li><strong>基准情况。</strong> 必须有某些基准的情形，它们不用递归就能求解。</li>
+<li><strong>不断推进。</strong> 对于那些需要递归求解的情形，递归调用必须能够朝着产生基准情形的方向推进。</li>
+<li><strong>设计法则。</strong> 假设所有的递归调用都能运行。</li>
+<li><strong>合成效益法则。</strong> 在求解一个问题的同一实例时，切勿在不同的递归调用中做重复性的工作。</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/数据结构与算法（C）/" rel="tag"># 数据结构与算法（C）</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/10/09/Essay/DB_monitor的启动/" rel="next" title="DB_monitor的启动">
+                <i class="fa fa-chevron-left"></i> DB_monitor的启动
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/01/19/Data_Structures/Data_Strutures_and_Algorithm_Analysis_in_C/第二章_算法分析/" rel="prev" title="第二章_算法分析">
+                第二章_算法分析 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="John Doe">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">100</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://suliangxu.github.io" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:1193135584@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-本书讨论内容"><span class="nav-text">1.1 本书讨论内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-数学知识复习"><span class="nav-text">1.2 数学知识复习</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-1-指数"><span class="nav-text">1.2.1 指数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-2-对数"><span class="nav-text">1.2.2 对数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-3-级数"><span class="nav-text">1.2.3 级数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-4-模运算"><span class="nav-text">1.2.4 模运算</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-5-证明方法"><span class="nav-text">1.2.5 证明方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-递归简论"><span class="nav-text">1.3 递归简论</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

@@ -249,6 +249,652 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/25/go/系统班/基础/运算符/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/03/25/go/系统班/基础/运算符/" itemprop="url">运算符</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-03-25T12:21:58+08:00">
+                2020-03-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/go-系统班-基础/" itemprop="url" rel="index">
+                    <span itemprop="name">go - 系统班 - 基础</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Go 语言内置的运算符有：</p>
+<ol>
+<li>算术运算符</li>
+<li>关系运算符</li>
+<li>逻辑运算符</li>
+<li>位运算符</li>
+<li>赋值运算符</li>
+</ol>
+<h3 id="一、算术运算符"><a href="#一、算术运算符" class="headerlink" title="一、算术运算符"></a>一、算术运算符</h3><table>
+<thead>
+<tr>
+<th align="center">运算符</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">+</td>
+<td align="center">相加</td>
+</tr>
+<tr>
+<td align="center">-</td>
+<td align="center">相减</td>
+</tr>
+<tr>
+<td align="center">*</td>
+<td align="center">相乘</td>
+</tr>
+<tr>
+<td align="center">/</td>
+<td align="center">相除</td>
+</tr>
+<tr>
+<td align="center">%</td>
+<td align="center">求余</td>
+</tr>
+</tbody></table>
+<p><strong>注意：</strong> <code>++</code>（自增）和<code>--</code>（自减）在Go语言中是单独的语句，并不是运算符。</p>
+<h3 id="二、关系运算符"><a href="#二、关系运算符" class="headerlink" title="二、关系运算符"></a>二、关系运算符</h3><table>
+<thead>
+<tr>
+<th align="center">运算符</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">==</td>
+<td align="center">检查两个值是否相等，如果相等返回 True 否则返回 False。</td>
+</tr>
+<tr>
+<td align="center">!=</td>
+<td align="center">检查两个值是否不相等，如果不相等返回 True 否则返回 False。</td>
+</tr>
+<tr>
+<td align="center">&gt;</td>
+<td align="center">检查左边值是否大于右边值，如果是返回 True 否则返回 False。</td>
+</tr>
+<tr>
+<td align="center">&gt;=</td>
+<td align="center">检查左边值是否大于等于右边值，如果是返回 True 否则返回 False。</td>
+</tr>
+<tr>
+<td align="center">&lt;</td>
+<td align="center">检查左边值是否小于右边值，如果是返回 True 否则返回 False。</td>
+</tr>
+<tr>
+<td align="center">&lt;=</td>
+<td align="center">检查左边值是否小于等于右边值，如果是返回 True 否则返回 False。</td>
+</tr>
+</tbody></table>
+<h3 id="三、逻辑运算符"><a href="#三、逻辑运算符" class="headerlink" title="三、逻辑运算符"></a>三、逻辑运算符</h3><table>
+<thead>
+<tr>
+<th align="center">运算符</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">&amp;&amp;</td>
+<td align="center">逻辑 AND 运算符。 如果两边的操作数都是 True，则为 True，否则为 False。</td>
+</tr>
+<tr>
+<td align="center">||</td>
+<td align="center">逻辑 OR 运算符。 如果两边的操作数有一个 True，则为 True，否则为 False。</td>
+</tr>
+<tr>
+<td align="center">!</td>
+<td align="center">逻辑 NOT 运算符。 如果条件为 True，则为 False，否则为 True。</td>
+</tr>
+</tbody></table>
+<h3 id="四、位运算符"><a href="#四、位运算符" class="headerlink" title="四、位运算符"></a>四、位运算符</h3><p>位运算符对整数在内存中的二进制位进行操作。</p>
+<table>
+<thead>
+<tr>
+<th align="center">运算符</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">&amp;</td>
+<td align="center">参与运算的两数各对应的二进位相与。 （两位均为1才为1）</td>
+</tr>
+<tr>
+<td align="center">|</td>
+<td align="center">参与运算的两数各对应的二进位相或。 （两位有一个为1就为1）</td>
+</tr>
+<tr>
+<td align="center">^</td>
+<td align="center">参与运算的两数各对应的二进位相异或，当两对应的二进位相异时，结果为1。 （两位不一样则为1）</td>
+</tr>
+<tr>
+<td align="center">&lt;&lt;</td>
+<td align="center">左移n位就是乘以2的n次方。 “a&lt;&lt;b”是把a的各二进位全部左移b位，高位丢弃，低位补0。</td>
+</tr>
+<tr>
+<td align="center">&gt;&gt;</td>
+<td align="center">右移n位就是除以2的n次方。 “a&gt;&gt;b”是把a的各二进位全部右移b位。</td>
+</tr>
+</tbody></table>
+<h3 id="五、赋值运算符"><a href="#五、赋值运算符" class="headerlink" title="五、赋值运算符"></a>五、赋值运算符</h3><table>
+<thead>
+<tr>
+<th align="center">运算符</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">=</td>
+<td align="center">简单的赋值运算符，将一个表达式的值赋给一个左值</td>
+</tr>
+<tr>
+<td align="center">+=</td>
+<td align="center">相加后再赋值</td>
+</tr>
+<tr>
+<td align="center">-=</td>
+<td align="center">相减后再赋值</td>
+</tr>
+<tr>
+<td align="center">*=</td>
+<td align="center">相乘后再赋值</td>
+</tr>
+<tr>
+<td align="center">/=</td>
+<td align="center">相除后再赋值</td>
+</tr>
+<tr>
+<td align="center">%=</td>
+<td align="center">求余后再赋值</td>
+</tr>
+<tr>
+<td align="center">&lt;&lt;=</td>
+<td align="center">左移后赋值</td>
+</tr>
+<tr>
+<td align="center">&gt;&gt;=</td>
+<td align="center">右移后赋值</td>
+</tr>
+<tr>
+<td align="center">&amp;=</td>
+<td align="center">按位与后赋值</td>
+</tr>
+<tr>
+<td align="center">|=</td>
+<td align="center">按位或后赋值</td>
+</tr>
+<tr>
+<td align="center">^=</td>
+<td align="center">按位异或后赋值</td>
+</tr>
+</tbody></table>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/25/go/系统班/基础/基本数据类型/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/03/25/go/系统班/基础/基本数据类型/" itemprop="url">基本数据类型</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-03-25T12:16:40+08:00">
+                2020-03-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/go-系统班-基础/" itemprop="url" rel="index">
+                    <span itemprop="name">go - 系统班 - 基础</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Go语言中有丰富的数据类型，除了基本的整型、浮点型、布尔型、字符串外，还有数组、切片、结构体、函数、map、通道（channel）等。Go 语言的基本类型和其他语言大同小异。</p>
+<h3 id="一、整型"><a href="#一、整型" class="headerlink" title="一、整型"></a>一、整型</h3><p>整型分为以下两个大类： 按长度分为：int8、int16、int32、int64 对应的无符号整型：uint8、uint16、uint32、uint64</p>
+<p>其中，<code>uint8</code>就是我们熟知的<code>byte</code>型，<code>int16</code>对应C语言中的<code>short</code>型，<code>int64</code>对应C语言中的<code>long</code>型。</p>
+<table>
+<thead>
+<tr>
+<th align="center">类型</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">uint8</td>
+<td align="center">无符号 8位整型 (0 到 255)</td>
+</tr>
+<tr>
+<td align="center">uint16</td>
+<td align="center">无符号 16位整型 (0 到 65535)</td>
+</tr>
+<tr>
+<td align="center">uint32</td>
+<td align="center">无符号 32位整型 (0 到 4294967295)</td>
+</tr>
+<tr>
+<td align="center">uint64</td>
+<td align="center">无符号 64位整型 (0 到 18446744073709551615)</td>
+</tr>
+<tr>
+<td align="center">int8</td>
+<td align="center">有符号 8位整型 (-128 到 127)</td>
+</tr>
+<tr>
+<td align="center">int16</td>
+<td align="center">有符号 16位整型 (-32768 到 32767)</td>
+</tr>
+<tr>
+<td align="center">int32</td>
+<td align="center">有符号 32位整型 (-2147483648 到 2147483647)</td>
+</tr>
+<tr>
+<td align="center">int64</td>
+<td align="center">有符号 64位整型 (-9223372036854775808 到 9223372036854775807)</td>
+</tr>
+</tbody></table>
+<h4 id="特殊整型"><a href="#特殊整型" class="headerlink" title="特殊整型"></a>特殊整型</h4><table>
+<thead>
+<tr>
+<th align="center">类型</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">uint</td>
+<td align="center">32位操作系统上就是<code>uint32</code>，64位操作系统上就是<code>uint64</code></td>
+</tr>
+<tr>
+<td align="center">int</td>
+<td align="center">32位操作系统上就是<code>int32</code>，64位操作系统上就是<code>int64</code></td>
+</tr>
+<tr>
+<td align="center">uintptr</td>
+<td align="center">无符号整型，用于存放一个指针</td>
+</tr>
+</tbody></table>
+<p><strong>注意：</strong> 在使用<code>int</code>和 <code>uint</code>类型时，不能假定它是32位或64位的整型，而是考虑<code>int</code>和<code>uint</code>可能在不同平台上的差异。</p>
+<p><strong>注意事项</strong>：</p>
+<p>获取对象的长度的内建<code>len()</code>函数返回的长度可以根据不同平台的字节长度进行变化。实际使用中，切片或 map 的元素数量等都可以用<code>int</code>来表示。在涉及到二进制传输、读写文件的结构描述时，为了保持文件的结构不会受到不同编译目标平台字节长度的影响，不要使用<code>int</code>和 <code>uint</code>。</p>
+<h4 id="数字字面量语法（Number-literals-syntax）"><a href="#数字字面量语法（Number-literals-syntax）" class="headerlink" title="数字字面量语法（Number literals syntax）"></a>数字字面量语法（Number literals syntax）</h4><p>Go1.13版本之后引入了数字字面量语法，这样便于开发者以二进制、八进制或十六进制浮点数的格式定义数字，例如：</p>
+<p>v := 0b00101101， 代表二进制的 101101，相当于十进制的 45。 v := 0o377，代表八进制的 377，相当于十进制的 255。 v := 0x1p-2，代表十六进制的 1 除以 2²，也就是 0.25。 而且还允许我们用 _ 来分隔数字。</p>
+<p>比如说：v := 123_456 等于 123456。</p>
+<p>我们可以借助fmt函数来将一个整数以不同进制形式展示。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="comment">// 十进制</span></span><br><span class="line">	<span class="keyword">var</span> a <span class="keyword">int</span> = <span class="number">10</span></span><br><span class="line">	fmt.Printf(<span class="string">"%d \n"</span>, a)  <span class="comment">// 10</span></span><br><span class="line">	fmt.Printf(<span class="string">"%b \n"</span>, a)  <span class="comment">// 1010  占位符%b表示二进制</span></span><br><span class="line"> </span><br><span class="line">	<span class="comment">// 八进制  以0开头</span></span><br><span class="line">	<span class="keyword">var</span> b <span class="keyword">int</span> = <span class="number">077</span></span><br><span class="line">	fmt.Printf(<span class="string">"%o \n"</span>, b)  <span class="comment">// 77</span></span><br><span class="line"> </span><br><span class="line">	<span class="comment">// 十六进制  以0x开头</span></span><br><span class="line">	<span class="keyword">var</span> c <span class="keyword">int</span> = <span class="number">0xff</span></span><br><span class="line">	fmt.Printf(<span class="string">"%x \n"</span>, c)  <span class="comment">// ff</span></span><br><span class="line">	fmt.Printf(<span class="string">"%X \n"</span>, c)  <span class="comment">// FF</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="二、浮点型"><a href="#二、浮点型" class="headerlink" title="二、浮点型"></a>二、浮点型</h3><p>Go语言支持两种浮点型数：<code>float32</code>和<code>float64</code>。这两种浮点型数据格式遵循<code>IEEE 754</code>标准： <code>float32</code> 的浮点数的最大范围约为 <code>3.4e38</code>，可以使用常量定义：<code>math.MaxFloat32</code>。 <code>float64</code> 的浮点数的最大范围约为 <code>1.8e308</code>，可以使用一个常量定义：<code>math.MaxFloat64</code>。</p>
+<p>打印浮点数时，可以使用<code>fmt</code>包配合动词<code>%f</code>，代码如下：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">        <span class="string">"fmt"</span></span><br><span class="line">        <span class="string">"math"</span></span><br><span class="line">)</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">        fmt.Printf(<span class="string">"%f\n"</span>, math.Pi)</span><br><span class="line">        fmt.Printf(<span class="string">"%.2f\n"</span>, math.Pi)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="三、复数"><a href="#三、复数" class="headerlink" title="三、复数"></a>三、复数</h3><p>complex64和complex128</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> c1 <span class="keyword">complex64</span></span><br><span class="line">c1 = <span class="number">1</span> + <span class="number">2i</span></span><br><span class="line"><span class="keyword">var</span> c2 <span class="keyword">complex128</span></span><br><span class="line">c2 = <span class="number">2</span> + <span class="number">3i</span></span><br><span class="line">fmt.Println(c1)</span><br><span class="line">fmt.Println(c2)</span><br></pre></td></tr></table></figure>
+
+<p>复数有实部和虚部，complex64的实部和虚部为32位，complex128的实部和虚部为64位。</p>
+<h3 id="四、布尔值"><a href="#四、布尔值" class="headerlink" title="四、布尔值"></a>四、布尔值</h3><p>Go语言中以<code>bool</code>类型进行声明布尔型数据，布尔型数据只有<code>true（真）</code>和<code>false（假）</code>两个值。</p>
+<p><strong>注意：</strong></p>
+<ol>
+<li>布尔类型变量的默认值为<code>false</code>。</li>
+<li>Go 语言中不允许将整型强制转换为布尔型.</li>
+<li>布尔型无法参与数值运算，也无法与其他类型进行转换。</li>
+</ol>
+<h3 id="五、字符串"><a href="#五、字符串" class="headerlink" title="五、字符串"></a>五、字符串</h3><p>Go语言中的字符串以原生数据类型出现，使用字符串就像使用其他原生数据类型（int、bool、float32、float64 等）一样。 Go 语言里的字符串的内部实现使用<code>UTF-8</code>编码。 字符串的值为<code>双引号(&quot;)</code>中的内容，可以在Go语言的源码中直接添加非ASCII码字符，例如：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s1 := <span class="string">"hello"</span></span><br><span class="line">s2 := <span class="string">"你好"</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="字符串转义符"><a href="#字符串转义符" class="headerlink" title="字符串转义符"></a>字符串转义符</h4><p>Go 语言的字符串常见转义符包含回车、换行、单双引号、制表符等，如下表所示。</p>
+<table>
+<thead>
+<tr>
+<th align="center">转义符</th>
+<th align="center">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>\r</code></td>
+<td align="center">回车符（返回行首）</td>
+</tr>
+<tr>
+<td align="center"><code>\n</code></td>
+<td align="center">换行符（直接跳到下一行的同列位置）</td>
+</tr>
+<tr>
+<td align="center"><code>\t</code></td>
+<td align="center">制表符</td>
+</tr>
+<tr>
+<td align="center"><code>\&#39;</code></td>
+<td align="center">单引号</td>
+</tr>
+<tr>
+<td align="center"><code>\&quot;</code></td>
+<td align="center">双引号</td>
+</tr>
+<tr>
+<td align="center"><code>\\</code></td>
+<td align="center">反斜杠</td>
+</tr>
+</tbody></table>
+<p>举个例子，我们要打印一个Windows平台下的一个文件路径：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">)</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    fmt.Println(<span class="string">"str := \"c:\\Code\\lesson1\\go.exe\""</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="多行字符串"><a href="#多行字符串" class="headerlink" title="多行字符串"></a>多行字符串</h4><p>Go语言中要定义一个多行字符串时，就必须使用<code>反引号</code>字符：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">s1 := <span class="string">`第一行</span></span><br><span class="line"><span class="string">第二行</span></span><br><span class="line"><span class="string">第三行</span></span><br><span class="line"><span class="string">`</span></span><br><span class="line">fmt.Println(s1)</span><br></pre></td></tr></table></figure>
+
+<p>反引号间换行将被作为字符串中的换行，但是所有的转义字符均无效，文本将会原样输出。</p>
+<h4 id="字符串的常用操作"><a href="#字符串的常用操作" class="headerlink" title="字符串的常用操作"></a>字符串的常用操作</h4><table>
+<thead>
+<tr>
+<th align="center">介绍</th>
+<th align="left">方法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">求长度</td>
+<td align="left">len(str)</td>
+</tr>
+<tr>
+<td align="center">拼接字符串</td>
+<td align="left">+或fmt.Sprintf</td>
+</tr>
+<tr>
+<td align="center">分割</td>
+<td align="left">strings.Split</td>
+</tr>
+<tr>
+<td align="center">判断是否包含</td>
+<td align="left">strings.contains</td>
+</tr>
+<tr>
+<td align="center">前缀/后缀判断</td>
+<td align="left">strings.HasPrefix,strings.HasSuffix</td>
+</tr>
+<tr>
+<td align="center">子串出现的位置</td>
+<td align="left">strings.Index(),strings.LastIndex()</td>
+</tr>
+<tr>
+<td align="center">join操作</td>
+<td align="left">strings.Join(a[]string, sep string)</td>
+</tr>
+</tbody></table>
+<h3 id="六、byte-和-rune-类型"><a href="#六、byte-和-rune-类型" class="headerlink" title="六、byte 和 rune 类型"></a>六、byte 和 rune 类型</h3><p>组成每个字符串的元素叫做 <strong>“字符”</strong>，可以通过遍历或者单个获取字符串元素获得字符。 字符用单引号（’）包裹起来，如：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a := <span class="string">'中'</span></span><br><span class="line"><span class="keyword">var</span> b := <span class="string">'x'</span></span><br></pre></td></tr></table></figure>
+
+<p>Go 语言的字符有以下两种：</p>
+<ol>
+<li><code>uint8</code>类型，或者叫 byte 型，代表了<code>ASCII码</code>的一个字符。</li>
+<li><code>rune</code>类型，代表一个 <code>UTF-8字符</code>。</li>
+</ol>
+<p>当需要处理中文、日文或者其他复合字符时，则需要用到<code>rune</code>类型。<code>rune</code>类型实际是一个<code>int32</code>。</p>
+<p>Go 使用了特殊的 rune 类型来处理 Unicode，让基于 Unicode 的文本处理更为方便，也可以使用 byte 型进行默认字符串处理，性能和扩展性都有照顾。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 遍历字符串</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">traversalString</span><span class="params">()</span></span> &#123;</span><br><span class="line">	s := <span class="string">"hello沙河"</span></span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="built_in">len</span>(s); i++ &#123; <span class="comment">//byte</span></span><br><span class="line">		fmt.Printf(<span class="string">"%v(%c) "</span>, s[i], s[i])</span><br><span class="line">	&#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// for range 循环 是按照rune类型去遍历的</span></span><br><span class="line">	fmt.Println()</span><br><span class="line">	<span class="keyword">for</span> _, r := <span class="keyword">range</span> s &#123; <span class="comment">//rune</span></span><br><span class="line">		fmt.Printf(<span class="string">"%v(%c) "</span>, r, r)</span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">104(h) 101(e) 108(l) 108(l) 111(o) 230(æ) 178(²) 153() 230(æ) 178(²) 179(³) </span><br><span class="line">104(h) 101(e) 108(l) 108(l) 111(o) 27801(沙) 27827(河)</span><br></pre></td></tr></table></figure>
+
+<p>因为UTF8编码下一个中文汉字由3~4个字节组成，所以我们不能简单的按照字节去遍历一个包含中文的字符串，否则就会出现上面输出中第一行的结果。</p>
+<p>字符串底层是一个byte数组，所以可以和<code>[]byte</code>类型相互转换。字符串是不能修改的 字符串是由byte字节组成，所以字符串的长度是byte字节的长度。 rune类型用来表示utf8字符，一个rune字符由一个或多个byte组成。</p>
+<h4 id="修改字符串"><a href="#修改字符串" class="headerlink" title="修改字符串"></a>修改字符串</h4><p>要修改字符串，需要先将其转换成<code>[]rune</code>或<code>[]byte</code>，完成后再转换为<code>string</code>。无论哪种转换，都会重新分配内存，并复制字节数组。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">changeString</span><span class="params">()</span></span> &#123;</span><br><span class="line">	s1 := <span class="string">"big"</span></span><br><span class="line">	<span class="comment">// 强制类型转换</span></span><br><span class="line">	byteS1 := []<span class="keyword">byte</span>(s1)</span><br><span class="line">	byteS1[<span class="number">0</span>] = <span class="string">'p'</span></span><br><span class="line">	fmt.Println(<span class="keyword">string</span>(byteS1))</span><br><span class="line"></span><br><span class="line">	s2 := <span class="string">"白萝卜"</span></span><br><span class="line">	runeS2 := []<span class="keyword">rune</span>(s2)</span><br><span class="line">	runeS2[<span class="number">0</span>] = <span class="string">'红'</span></span><br><span class="line">	fmt.Println(<span class="keyword">string</span>(runeS2))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="七、类型转换"><a href="#七、类型转换" class="headerlink" title="七、类型转换"></a>七、类型转换</h3><p>Go语言中只有强制类型转换，没有隐式类型转换。该语法只能在两个类型之间支持相互转换的时候使用。</p>
+<p>强制类型转换的基本语法如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">T(表达式)</span><br></pre></td></tr></table></figure>
+
+<p>其中，T表示要转换的类型。表达式包括变量、复杂算子和函数返回值等.</p>
+<p>比如计算直角三角形的斜边长时使用math包的Sqrt()函数，该函数接收的是float64类型的参数，而变量a和b都是int类型的，这个时候就需要将a和b强制类型转换为float64类型。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">sqrtDemo</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> a, b = <span class="number">3</span>, <span class="number">4</span></span><br><span class="line">	<span class="keyword">var</span> c <span class="keyword">int</span></span><br><span class="line">	<span class="comment">// math.Sqrt()接收的参数是float64类型，需要强制转换</span></span><br><span class="line">	c = <span class="keyword">int</span>(math.Sqrt(<span class="keyword">float64</span>(a*a + b*b)))</span><br><span class="line">	fmt.Println(c)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/25/go/系统班/基础/变量和常量/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -472,7 +1118,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/14/随笔/Mac终端TF的CPU-support问题/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/14/Essay/Mac终端TF的CPU-support问题/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -491,7 +1137,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/03/14/随笔/Mac终端TF的CPU-support问题/" itemprop="url">Mac终端TF的CPU support问题</a></h1>
+                <a class="post-title-link" href="/2020/03/14/Essay/Mac终端TF的CPU-support问题/" itemprop="url">Mac终端TF的CPU support问题</a></h1>
         
 
         <div class="post-meta">
@@ -621,7 +1267,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/02/随笔/Mac平台安装scapy_找不到devpbf/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/02/Essay/Mac平台安装scapy_找不到devpbf/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -640,7 +1286,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/03/02/随笔/Mac平台安装scapy_找不到devpbf/" itemprop="url">Mac平台安装scapy_找不到/dev/pbf*</a></h1>
+                <a class="post-title-link" href="/2020/03/02/Essay/Mac平台安装scapy_找不到devpbf/" itemprop="url">Mac平台安装scapy_找不到/dev/pbf*</a></h1>
         
 
         <div class="post-meta">
@@ -766,7 +1412,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/20/人工智能/机器学习基石/09_Linear-Regression/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/20/Artificial_Intelligence/机器学习基石/09_Linear-Regression/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -785,7 +1431,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/02/20/人工智能/机器学习基石/09_Linear-Regression/" itemprop="url">09_Linear Regression</a></h1>
+                <a class="post-title-link" href="/2020/02/20/Artificial_Intelligence/机器学习基石/09_Linear-Regression/" itemprop="url">09_Linear Regression</a></h1>
         
 
         <div class="post-meta">
@@ -922,7 +1568,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/19/人工智能/机器学习基石/08_Noise-and-Error/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/19/Artificial_Intelligence/机器学习基石/08_Noise-and-Error/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -941,7 +1587,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/02/19/人工智能/机器学习基石/08_Noise-and-Error/" itemprop="url">08_Noise and Error</a></h1>
+                <a class="post-title-link" href="/2020/02/19/Artificial_Intelligence/机器学习基石/08_Noise-and-Error/" itemprop="url">08_Noise and Error</a></h1>
         
 
         <div class="post-meta">
@@ -1117,7 +1763,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/16/人工智能/机器学习基石/07_VC-Dimension/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/16/Artificial_Intelligence/机器学习基石/07_VC-Dimension/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -1136,7 +1782,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/02/16/人工智能/机器学习基石/07_VC-Dimension/" itemprop="url">07_VC Dimension</a></h1>
+                <a class="post-title-link" href="/2020/02/16/Artificial_Intelligence/机器学习基石/07_VC-Dimension/" itemprop="url">07_VC Dimension</a></h1>
         
 
         <div class="post-meta">
@@ -1328,7 +1974,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/15/人工智能/机器学习基石/06_Theroy-of-Generalization/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/15/Artificial_Intelligence/机器学习基石/06_Theroy-of-Generalization/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -1347,7 +1993,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/02/15/人工智能/机器学习基石/06_Theroy-of-Generalization/" itemprop="url">06_Theroy of Generalization</a></h1>
+                <a class="post-title-link" href="/2020/02/15/Artificial_Intelligence/机器学习基石/06_Theroy-of-Generalization/" itemprop="url">06_Theroy of Generalization</a></h1>
         
 
         <div class="post-meta">
@@ -1558,7 +2204,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/14/人工智能/机器学习基石/05_Training-versus-Testing/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/14/Artificial_Intelligence/机器学习基石/05_Training-versus-Testing/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -1577,7 +2223,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/02/14/人工智能/机器学习基石/05_Training-versus-Testing/" itemprop="url">05_Training versus Testing</a></h1>
+                <a class="post-title-link" href="/2020/02/14/Artificial_Intelligence/机器学习基石/05_Training-versus-Testing/" itemprop="url">05_Training versus Testing</a></h1>
         
 
         <div class="post-meta">
@@ -1776,328 +2422,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/14/人工智能/机器学习基石/04_Feasibility-of-Learning/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/02/14/人工智能/机器学习基石/04_Feasibility-of-Learning/" itemprop="url">04_Feasibility of Learning</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-02-14T15:36:04+08:00">
-                2020-02-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/人工智能-机器学习基石/" itemprop="url" rel="index">
-                    <span itemprop="name">人工智能 - 机器学习基石</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>![image-20200214153521296](/Users/hhh/Library/Application Support/typora-user-images/image-20200214153521296.png)</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/13/人工智能/机器学习基石/03_Type-of-Learning/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/02/13/人工智能/机器学习基石/03_Type-of-Learning/" itemprop="url">03_Type of Learning</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-02-13T16:25:07+08:00">
-                2020-02-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/人工智能-机器学习基石/" itemprop="url" rel="index">
-                    <span itemprop="name">人工智能 - 机器学习基石</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>![image-20200213152630337](/Users/hhh/Library/Application Support/typora-user-images/image-20200213152630337.png)</p>
-<p>二分类问题是机器学习中的一种非常基础和常见的问题，由二分类问题可以进而引出多分类问题。</p>
-<p>对美元（硬币）进行分类。</p>
-<p>![image-20200213153514482](/Users/hhh/Library/Application Support/typora-user-images/image-20200213153514482.png)</p>
-<p>回归分析（输出是一个实数）：</p>
-<p>![image-20200213153746590](/Users/hhh/Library/Application Support/typora-user-images/image-20200213153746590.png)</p>
-<p>结构化的学习（输出中含有某些特定结构，要求机器学习到该结构）（端对端，结构化机器学习）：</p>
-<p>![image-20200213154245908](/Users/hhh/Library/Application Support/typora-user-images/image-20200213154245908.png)</p>
-<p>![image-20200213154331554](/Users/hhh/Library/Application Support/typora-user-images/image-20200213154331554.png)</p>
-<p>监督学习：</p>
-<p>给出标签</p>
-<p>![image-20200213154902380](/Users/hhh/Library/Application Support/typora-user-images/image-20200213154902380.png)</p>
-<p>无监督学习：</p>
-<p>没有给出标签值。</p>
-<p>![image-20200213155210483](/Users/hhh/Library/Application Support/typora-user-images/image-20200213155210483.png)</p>
-<p>![image-20200213155531445](/Users/hhh/Library/Application Support/typora-user-images/image-20200213155531445.png)</p>
-<p>半监督学习：</p>
-<p>![image-20200213155813797](/Users/hhh/Library/Application Support/typora-user-images/image-20200213155813797.png)</p>
-<p>增强学习：</p>
-<p>有输入也有输出，但输出要求给出不直接的选择，给出好还是不好。</p>
-<p>一步一步使得机器越来越好。</p>
-<p>![image-20200213160404612](/Users/hhh/Library/Application Support/typora-user-images/image-20200213160404612.png)</p>
-<p>四种不同的学习的方式，取决于想要的输出y</p>
-<p>![image-20200213160438242](/Users/hhh/Library/Application Support/typora-user-images/image-20200213160438242.png)</p>
-<p>batch learning：</p>
-<p>![image-20200213160727266](/Users/hhh/Library/Application Support/typora-user-images/image-20200213160727266.png)</p>
-<p>![image-20200213160744336](/Users/hhh/Library/Application Support/typora-user-images/image-20200213160744336.png)</p>
-<p>在线学习：</p>
-<p>![image-20200213161154829](/Users/hhh/Library/Application Support/typora-user-images/image-20200213161154829.png)</p>
-<p>主动学习：</p>
-<p>类似于机器可以问问题。</p>
-<p>通常用于取得标记很贵的时候。</p>
-<p>![image-20200213161450568](/Users/hhh/Library/Application Support/typora-user-images/image-20200213161450568.png)</p>
-<p>![image-20200213161555522](/Users/hhh/Library/Application Support/typora-user-images/image-20200213161555522.png)</p>
-<p>具体的特征：</p>
-<p>通常有人类的认知体现在里面</p>
-<p>![image-20200213161958500](/Users/hhh/Library/Application Support/typora-user-images/image-20200213161958500.png)</p>
-<p>![image-20200213162711417](/Users/hhh/Library/Application Support/typora-user-images/image-20200213162711417.png)</p>
-<p>![image-20200213162745234](/Users/hhh/Library/Application Support/typora-user-images/image-20200213162745234.png)</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2150,7 +2474,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">98</span>
+                  <span class="site-state-item-count">100</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -2161,7 +2485,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -2172,7 +2496,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -2225,7 +2549,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

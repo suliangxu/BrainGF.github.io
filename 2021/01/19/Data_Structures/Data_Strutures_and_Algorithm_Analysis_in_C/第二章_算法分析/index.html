@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="数据结构与算法（C）,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="2.1 数学基础2.1.1 增长率相关定义有以下四个定义： 定义： 如果存在正常数 $c$ 和 $n_0$ 使得当 $N\geq n_0$ 时 $T(N) \leq cf(N)$ ，则记为 $T(N) = O(f(N))$ 。  定义： 如果存在正常数 $c$ 和 $n_0$ 使得当 $N\geq n_0$ 时 $T(N) \geq cg(N)$ ，则记为 $T(N) = \Omega(g(N))">
+<meta name="keywords" content="数据结构与算法（C）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第二章_算法分析">
+<meta property="og:url" content="http://yoursite.com/2021/01/19/Data_Structures/Data_Strutures_and_Algorithm_Analysis_in_C/第二章_算法分析/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="2.1 数学基础2.1.1 增长率相关定义有以下四个定义： 定义： 如果存在正常数 $c$ 和 $n_0$ 使得当 $N\geq n_0$ 时 $T(N) \leq cf(N)$ ，则记为 $T(N) = O(f(N))$ 。  定义： 如果存在正常数 $c$ 和 $n_0$ 使得当 $N\geq n_0$ 时 $T(N) \geq cg(N)$ ，则记为 $T(N) = \Omega(g(N))">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2021-01-22T05:56:12.050Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="第二章_算法分析">
+<meta name="twitter:description" content="2.1 数学基础2.1.1 增长率相关定义有以下四个定义： 定义： 如果存在正常数 $c$ 和 $n_0$ 使得当 $N\geq n_0$ 时 $T(N) \leq cf(N)$ ，则记为 $T(N) = O(f(N))$ 。  定义： 如果存在正常数 $c$ 和 $n_0$ 使得当 $N\geq n_0$ 时 $T(N) \geq cg(N)$ ，则记为 $T(N) = \Omega(g(N))">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2021/01/19/Data_Structures/Data_Strutures_and_Algorithm_Analysis_in_C/第二章_算法分析/">
+
+
+
+
+
+  <title>第二章_算法分析 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/01/19/Data_Structures/Data_Strutures_and_Algorithm_Analysis_in_C/第二章_算法分析/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">第二章_算法分析</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-01-19T20:18:23+08:00">
+                2021-01-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据结构-数据结构与算法（C）/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构 - 数据结构与算法（C）</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="2-1-数学基础"><a href="#2-1-数学基础" class="headerlink" title="2.1 数学基础"></a>2.1 数学基础</h3><h4 id="2-1-1-增长率相关定义"><a href="#2-1-1-增长率相关定义" class="headerlink" title="2.1.1 增长率相关定义"></a>2.1.1 增长率相关定义</h4><p>有以下四个定义：</p>
+<p><strong>定义：</strong> 如果存在正常数 $c$ 和 $n_0$ 使得当 $N\geq n_0$ 时 $T(N) \leq cf(N)$ ，则记为 $T(N) = O(f(N))$ 。 </p>
+<p><strong>定义：</strong> 如果存在正常数 $c$ 和 $n_0$ 使得当 $N\geq n_0$ 时 $T(N) \geq cg(N)$ ，则记为 $T(N) = \Omega(g(N))$ 。 </p>
+<p><strong>定义：</strong> 当且仅当 $T(N) = O(h(N))$ 且 $T(N) = \Omega (h(N))$ 时，$T(N) = \Theta (h(N))$ 。</p>
+<p><strong>定义：</strong> 如果 $T(N) = O(p(N))$ 且 $T(N) \neq \Theta (p(N))$ ，则 $T(N) = o(p(N))$。</p>
+<p>这些定义的目的是在函数间建立一种相对的级别。比较两个函数的相对增长率（relative rate of growth）。</p>
+<p><strong>注：</strong></p>
+<p>第一个定义是说，最后总会存在某个点 $n_0$ ，从它以后 $cf(N)$ 总是至少与 $T(N)$ 一样大，从而忽略常数因子，则 $f(N)$ 至少与 $T(N)$ 一样大。</p>
+<p>如：$T(N) = 1000N, \quad f(N) = N^2, \quad n_0=1000, \quad c=1$ ，因此可以说 $1000N = O(N^2)$（N平方级）。</p>
+<p>用传统不等式来计算增长率，则可看出：</p>
+<ul>
+<li>第一个定义是说 $T(N)$ 的增长率小于等于 $f(N)$ 的增长率</li>
+<li>第二个定义是说 $T(N)$ 的增长率大于等于 $g(N)$ 的增长率</li>
+<li>第三个定义是说 $T(N)$ 的增长率等于 $h(N)$ 的增长率</li>
+<li>第四个定义是说 $T(N)$ 的增长率小于 $p(N)$ 的增长率</li>
+</ul>
+<p><strong>上界与下界：</strong></p>
+<p>当我们说 $T(N) = O(N)$ 时，是在保证函数 $T(N)$ 以不快于 $f(N)$ 的速度增长，因此 $f(N)$ 是 $T(N)$ 的上界（upper bound）。与此同时， $f(N) = \Omega (T(N))$ 意味着 $T(N)$ 是 $f(N)$ 的下界（lower bound）。</p>
+<p>如： $N^3$ 增长得比 $N^2$ 快，因此我们可以说 $N^2 = O(N^3)$ 或 $N^3 = \Omega(N^2)$ 。</p>
+<p>再如：$f(N) = N^2$ 和 $g(N) = 2N^2$ 以相同的速率增长，从而 $f(N) = O(g(N))$ 和 $f(N) = \Omega (g(N))$ 都是成立的。</p>
+<p>此时，$g(N) = O(N^4), \quad g(N)=O(N^3), \quad g(N) = O(N^2)$ 都是成立的，<strong>但最后一个选择是最好的答案</strong>。</p>
+<h4 id="2-2-2-重要法则"><a href="#2-2-2-重要法则" class="headerlink" title="2.2.2 重要法则"></a>2.2.2 重要法则</h4><p><strong>法则1：</strong> 如果 $T_1(N) = O(f(N))$ 且 $T_2(N) = O(g(N))$ ，那么：</p>
+<p>$(a) \quad T_1(N) + T_2(N) = max(O(f(N)), \quad O(g(N)))$</p>
+<p>$(b) \quad T_1(N) * T_2(N) = O(f(N) * g(N))$</p>
+<p><strong>法则2：</strong> 如果 $T(N)$ 是一个 $k$ 次多项式，则 $T(N) = \Theta (N^k)$</p>
+<p><strong>法则3：</strong> 对任意常数 $k$ ，$log^k N = O(N)$ 。它告诉我们对数增长得非常缓慢。</p>
+<p>以上法则足以按照增长率对大部分常见的函数进行分类，如下图。</p>
+<p>![image-20210119190554258](/Users/hhh/Library/Application Support/typora-user-images/image-20210119190554258.png)</p>
+<p><strong>注1：</strong></p>
+<p>在需要大O表示的任何分析中，可以进行各种简化：低阶项一般可以忽略，常数项也可以弃掉，（此时，要求的精度是很低的）</p>
+<p><strong>注2：</strong></p>
+<p>我们总能通过计算极限 $\lim_{a \rightarrow \infty} \frac{f(N)}{g(N)} $ 来确定两个函数 $f(N)$ 和 $g(N)$ 的相对增长率，必要时可以使用<strong>洛必达法则</strong>。该极限可以有以下四种可能的值：</p>
+<ul>
+<li>极限是 0 ： 这意味着 $f(N) = o(g(N))$</li>
+<li>极限是 $c \neq 0$ ：这意味着 $f(N) = \Theta (g(N))$</li>
+<li>极限是 $\infty$ ：这意味着 $g(N) = o(f(N))$ </li>
+<li>极限摆动：二者无关</li>
+</ul>
+<p><strong>注3：</strong></p>
+<p>风格上应该要注意：</p>
+<ul>
+<li>不要说成 $f(N) \leq O(g(N))$ ，因为定义已经隐含不等式了</li>
+<li>写成 $f(N) \geq O(g(N))$ 是错误的，它没有意义</li>
+</ul>
+<h3 id="2-2-模型"><a href="#2-2-模型" class="headerlink" title="2.2 模型"></a>2.2 模型</h3><h3 id="2-3-要分析的问题"><a href="#2-3-要分析的问题" class="headerlink" title="2.3 要分析的问题"></a>2.3 要分析的问题</h3><p>要分析的最重要的资源一般就是运行时间。有几个因素影响着程序的运行时间，有些因素（如编译器和计算机）此处不予考虑，剩下的因素则是 <strong>所使用的算法</strong> 以及 <strong>对该算法的输入</strong> 。</p>
+<p>可以想象（书上有详细数据证明），即使输入量的大小是适度的，算法依旧有着高效低效之分，且低效算法依旧无用。</p>
+<h3 id="2-4-运行时间计算"><a href="#2-4-运行时间计算" class="headerlink" title="2.4 运行时间计算"></a>2.4 运行时间计算</h3><p>为了简化分析，我们将采用以下的约定：<strong>不存在特定的时间单元。</strong></p>
+<p>因此，我们抛弃前导常数，抛弃低阶项，要做的就是计算大O的运行时间。由于大O是一个上界，因此我们必须仔细考虑，绝不要低估程序的运行时间。</p>
+<h4 id="2-4-1-一个简单的例子"><a href="#2-4-1-一个简单的例子" class="headerlink" title="2.4.1 一个简单的例子"></a>2.4.1 一个简单的例子</h4><p>一下是计算 $\sum_{i=1}^{N}i^3$ 的一个简单的程序片段：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Sum</span><span class="params">(<span class="keyword">int</span> N)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i, PartialSum;</span><br><span class="line">	</span><br><span class="line">	PartialSum = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (i=<span class="number">1</span>; i&lt;=N; i++)</span><br><span class="line">		PartialSum += i * i * i;</span><br><span class="line">		</span><br><span class="line">	<span class="keyword">return</span> PartialSum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>对该程序分析如下：</p>
+<ul>
+<li>声明不计时间</li>
+<li>第4行和第8行各占一个时间单元</li>
+<li>第6行每执行一次占用4个时间单元（两次乘法、一次加法、一次赋值），执行 $N$ 次共占用 $4N$ 个时间单元。</li>
+<li>第5行的总开销是：初始化占1个时间单元，所有的测试占 $N + 1$ 个时间单元，以及所有的自增运算占 $N$ 个时间单元，共 $2N+2$ 个时间单元</li>
+<li>忽略调用函数和返回值的开销</li>
+</ul>
+<p>得到的总量是 $6N + 4$ 。因此，我们说这个函数是 $O(N)$ 的。</p>
+<p>可以看出，以上步骤是非常繁琐的，可以利用法则对该过程进行简化。</p>
+<h4 id="2-4-2-一般法则"><a href="#2-4-2-一般法则" class="headerlink" title="2.4.2 一般法则"></a>2.4.2 一般法则</h4><p><strong>法则1 —— for循环：</strong></p>
+<p>一次for循环的运行时间至多是该for循环内语句（包括测试）的运行时间乘以迭代的次数。</p>
+<p><strong>法则2 —— 嵌套的for循环：</strong></p>
+<p>从里向外分析这些循环。在一组嵌套循环内部的一条语句总的运行时间为该语句的运行时间乘以该组所有的for循环的大小的乘积。</p>
+<p>例：下面程序片段的运行时间为 $O(N^2)$ ：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (i=<span class="number">0</span>; i&lt;N; i++)</span><br><span class="line">	<span class="keyword">for</span> (j=<span class="number">0</span>; j&lt;N; j++)</span><br><span class="line">		k++;</span><br></pre></td></tr></table></figure>
+
+<p><strong>法则3 —— 顺序语句：</strong></p>
+<p>将各个语句的运行时间求和即可。（这意味着，其中的最大值就是所得的运行时间）</p>
+<p>例：下面的程序片段先用去 $O(N)$ ，再花费 $O(N^2)$ ，总的开销也是 $O(N^2)$ ：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (i=<span class="number">0</span>; i&lt;N; i++)</span><br><span class="line">	A[i] = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (i=<span class="number">0</span>; i&lt;N; i++)</span><br><span class="line">	<span class="keyword">for</span> (j=<span class="number">0</span>; j&lt;N; j++)</span><br><span class="line">		A[i] += A[j] + i + j;</span><br></pre></td></tr></table></figure>
+
+<p><strong>法则4 —— if/else 语句：</strong></p>
+<p>对于程序片段</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (condition)</span><br><span class="line">	S1</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">	S2</span><br></pre></td></tr></table></figure>
+
+<p>一个 if/else 语句的运行时间从不超过判断的时间加上S1和S2中运行时间较长者的总的运行时间。</p>
+<p>显然，在某些情况下这么估计有些过高，但绝不会估计过低。</p>
+<p>例：下面递归函数运行时间为 $O(N)$ ：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">long</span> <span class="keyword">int</span> <span class="title">Factorial</span><span class="params">(<span class="keyword">int</span> N)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (N &lt;= <span class="number">1</span>)</span><br><span class="line">		<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		<span class="keyword">return</span> N * Factorial(N - <span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-4-3-斐波那契数列"><a href="#2-4-3-斐波那契数列" class="headerlink" title="2.4.3 斐波那契数列"></a>2.4.3 斐波那契数列</h4><p><strong>1、问题描述：</strong></p>
+<p>$F_0 = 1, \quad F_1 = 1, \quad F_2 = 2, \quad F_3 = 3, \quad F_4 = 5, \quad \cdots, \quad F_i = F_{i-1} + F_{i-2}, \quad \cdots$  。编码如下，讨论时间复杂度。</p>
+<p><strong>2、代码片段：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">long</span> <span class="keyword">int</span> <span class="title">Fib</span><span class="params">(<span class="keyword">int</span> N)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (N &lt;= <span class="number">1</span>)</span><br><span class="line">		<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		<span class="keyword">return</span> Fib(N<span class="number">-1</span>) + Fib(N<span class="number">-2</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>3、分析：</strong></p>
+<p>（1）忽略常数、判断等，T(0) = T(1) = 1</p>
+<p>（2）对于N为其他值的运行时间则需要相对于基准情形的运行时间来衡量：</p>
+<p>​        N &gt; 2：</p>
+<p>第一次函数调用是 Fib(N -1)，按照 T 的定义，它需要 T(N - 1) 个时间单元；同理，第二次函数调用需要 T(N - 2) 个时间单元。</p>
+<p>因此，总的时间需求为 T(N - 1) + T(N - 2) + 2。（“2” 是判断 + 两次调用之间的加法）</p>
+<p>由于 $Fib(N) = Fib(N-1) + Fib(N-2)$ ，因此，由归纳法易证明 $T(N) \geq Fib(N)$ ，再由归纳法可以证明：<br>$$<br>Fib(N) \geq (\frac{3}{2})^N, \quad N &gt; 4<br>$$<br><strong>证：</strong></p>
+<p>由于：<br>$$<br>Fib(N) = Fib(N-1) + Fib(N-2)<br>$$<br>将归纳假设用于等号右边，我们可以得到：<br>$$<br>Fib(N+1) \geq (\frac{3}{2})^N + (\frac{3}{2})^{N-1} = \frac{2}{3} \cdot (\frac{3}{2})^{N+1} + \frac{4}{9} \cdot (\frac{3}{2})^{N+1} = \frac{10}{9} \cdot (\frac{3}{2})^{N+1} \geq (\frac{3}{2})^{N+1}<br>$$<br>证毕。</p>
+<p><strong>可见，这个程序的运行是以指数的速度增长的。</strong></p>
+<h4 id="2-4-4-最大子序和"><a href="#2-4-4-最大子序和" class="headerlink" title="2.4.4 最大子序和"></a>2.4.4 最大子序和</h4><p><strong>1、问题描述：</strong></p>
+<p>给定整数 $A_1, \quad A_2, \quad A_3, \quad \cdots, \quad A_N$ （可能有负数），求 $\sum_{k=i}^{j} A_k$ 的最大值（为方便起见，如果所有整数均为负数，则最大子序列和为0）。</p>
+<p>例：输入 $-2, \quad 11, \quad -4, \quad 13, \quad -5, \quad -2$ 时，答案为 20 （从 $A_2$ 到 $A _4$ ）。</p>
+<p><strong>2、解法1：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">MaxSubsequenceSum</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span> A[], <span class="keyword">int</span> N)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> ThisSum, MaxSum, i, j, k;</span><br><span class="line">	</span><br><span class="line">	MaxSum = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (i=<span class="number">0</span>; i&lt;N; i++)</span><br><span class="line">		<span class="keyword">for</span> (j=i; j&lt;N; j++)&#123;</span><br><span class="line">			ThisSum = <span class="number">0</span>;</span><br><span class="line">			</span><br><span class="line">			<span class="keyword">for</span> (k=i; k&lt;=j; k++)</span><br><span class="line">				ThisSum += A[k];</span><br><span class="line">			</span><br><span class="line">			<span class="keyword">if</span> (ThisSum &gt; MaxSum)</span><br><span class="line">				MaxSum = ThisSum;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> MaxSum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>耗时是由主要计算下式：<br>$$<br>\sum_{i=0}^{N-1} \sum_{j=i}^{N-1} \sum_{k=i}^{j} 1<br>$$<br>首先，有<br>$$<br>\sum_{k=i}^{j}1 = j - i + 1\<br>\sum_{j=i}^{N-1} (j - i + 1) = \frac{(N - i + 1)(N-i)}{2}<br>$$<br>接着，得到<br>$$<br>\begin{align}<br>&amp; \sum_{i=0}^{N-1} \frac{(N - i + 1)(N - i)}{2}\<br>=&amp; \sum_{i=1}^{N} \frac{(N - i + 1)(N - i + 2)}{2}\<br>=&amp; \frac{1}{2} \sum_{i=1}^{N} i^2 - (N + \frac{3}{2}) \sum_{i=1}^{N} i + \frac{1}{2}(N^2 + 3N + 2) \sum_{i=1}^{N} 1\<br>=&amp; \frac{1}{2} \frac{N(N+1)(2N+1)}{6} - (N + \frac{3}{2})\frac{N(N+1)}{2} + \frac{N^2 + 3N +2}{2} N\<br>=&amp; \frac{N^3 + 3N^2 + 2N}{6}<br>\end{align}<br>$$<br>可见，该解法的时间复杂度为 $O(N^3)$  （其实为 $\Theta(N^3)$ ）。</p>
+<p><strong>3、解法2:</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">MaxSubsequenceSum</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span> A[], <span class="keyword">int</span> N)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> ThisSum, MaxSum, i, j;</span><br><span class="line">	</span><br><span class="line">	MaxSum = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (i=<span class="number">0</span>; i&lt;N; i++)&#123;</span><br><span class="line">    ThisSum = <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (j=i; j&lt;N; j++)&#123;</span><br><span class="line">				ThisSum += A[j];</span><br><span class="line">			</span><br><span class="line">			<span class="keyword">if</span> (ThisSum &gt; MaxSum)</span><br><span class="line">				MaxSum = ThisSum;</span><br><span class="line">		&#125;</span><br><span class="line">  &#125;</span><br><span class="line">		<span class="keyword">return</span> MaxSum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>显然，该解法的时间复杂度为 $O(N^2)$ 。</p>
+<p><strong>4、解法3:</strong></p>
+<p><strong>算法思想：—— 分治策略</strong></p>
+<p>（1）分：把问题分成两个大致相等的子问题，然后递归地对他们求解</p>
+<p>（2）治：将两个子问题合并到一起并可能再做些少量的附加工作，最后得到整个问题的解</p>
+<p>在该问题中，最大子序列和可能出现在三处：</p>
+<ul>
+<li>输入数据的左半部分</li>
+<li>输入数据的右半部分</li>
+<li>跨越两个部分</li>
+</ul>
+<p>前两种情况可以递归求解，第三种情况可以通过求出前半部分的最大和以及后半部分的最大和而得到。</p>
+<p>例：</p>
+<p>![image-20210122003328161](/Users/hhh/Library/Application Support/typora-user-images/image-20210122003328161.png)</p>
+<ul>
+<li>前半部分的最大子序列和为 6</li>
+<li>后半部分的最大子序列和为 8</li>
+<li>前半部分包含最后一个元素的最大和为 4</li>
+<li>后半部分包含其第一个元素的最大和为 7</li>
+<li>所以，跨越两个部分的最大和为 4 + 7 = 11 （最终结果）</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Max3</span><span class="params">(a, b, c)</span></span>&#123; <span class="comment">// 返回 a、b、c 中的最大的数</span></span><br><span class="line">	<span class="keyword">int</span> max;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">if</span> a &gt;= b</span><br><span class="line">		max = a;</span><br><span class="line">   <span class="keyword">else</span> </span><br><span class="line">   	max = b;</span><br><span class="line">   	</span><br><span class="line">   <span class="keyword">if</span> max &gt;= c</span><br><span class="line">   	<span class="keyword">return</span> max;</span><br><span class="line">   <span class="keyword">else</span></span><br><span class="line">   	reuturn c;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">MaxSubSum</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span> A[], <span class="keyword">int</span> Left, <span class="keyword">int</span> Right)</span></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> MaxLeftSum, MaxRightSum, MaxLeftBorderSum, MaxRightBorderSum, LeftBorderSum, RightBorderSum;</span><br><span class="line">  <span class="keyword">int</span> Center, i;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">if</span> (Left == Right)</span><br><span class="line">    <span class="keyword">if</span> (A[Left] &gt; <span class="number">0</span>)</span><br><span class="line">      <span class="keyword">return</span> A[Left];</span><br><span class="line">  	<span class="keyword">else</span></span><br><span class="line">      <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">  </span><br><span class="line">  Center = (Left + Right) / <span class="number">2</span>;</span><br><span class="line">  MaxLeftSum = MaxSubSum(A, Left, Center);</span><br><span class="line">  MaxRightSum = MaxSubSum(A, Center+<span class="number">1</span>, Right);</span><br><span class="line">  </span><br><span class="line">  MaxLeftBorderSum = LeftBorderSum = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span> (i=Center; i&gt;=Left; i--)&#123;</span><br><span class="line">    LeftBorderSum += A[i];</span><br><span class="line">    <span class="keyword">if</span> (LeftBorderSum &gt; MaxLeftBorderSum)</span><br><span class="line">      MaxLeftBorderSum = LeftBorderSum;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  MaxRightBorderSum = RightBorderSum = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span> (i=Center+<span class="number">1</span>; i&lt;=Right; i++)&#123;</span><br><span class="line">    RightBorderSum += A[i];</span><br><span class="line">    <span class="keyword">if</span> (RightBorderSum &gt; MaxRightBorderSum)</span><br><span class="line">      MaxRightBorderSum = RightBorderSum;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> Max3(MaxLeftSum, MaxRightSum, MaxLeftBorderSum+MaxRightBorderSum);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">MaxSubsequenceSum</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span> A[], <span class="keyword">int</span> N)</span></span>&#123;</span><br><span class="line">  <span class="keyword">return</span> MaxSubSum(A, <span class="number">0</span>, N<span class="number">-1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>时间复杂度分析：</strong></p>
+<ul>
+<li><p>19 ～ 23 行：$O(1)$</p>
+</li>
+<li><p>29 ～ 41 行： $O(N)$</p>
+</li>
+<li><p>26 和 27 行：这两行为求解大小为 $\frac{N}{2}$ 的子序列问题（假设 N 为偶数），因此这两行花费了 $2T(\frac{N}{2})$ 个时间单元</p>
+</li>
+<li><p>所以该解法花费的总时间单元为 $2T({\frac{N}{2}}) + O(N)$ </p>
+</li>
+</ul>
+<p>得到方程组：<br>$$<br>T(1) = 1\<br>T(N) = 2T({\frac{N}{2}}) + O(N)<br>$$<br>为简化计算，可以用 $N$ 代替方程中的 $O(N)$ 项，由于 $T(N)$ 最终还是要用大O来表示，所以该操作无关紧要。</p>
+<p>观察规律可以看出：</p>
+<p>$T(2) = 4 = 2<em>2, \quad T(4) = 12 = 4</em>3, \quad T(8) = 32 = 8*4, \quad T(16) = 80 = 16 * 5, \quad \cdots$ </p>
+<p>可以得出：<br>$$<br>T(N) = N * (k+1) = N logN +N = O(NlogN) , \quad if \quad N = 2^k<br>$$<br><strong>所以这个解法的时间复杂度为 $O(N log N)$ 。</strong></p>
+<p><strong>注：</strong> 这个分析假设 N 是偶数，不然 $\frac{N}{2}$ 就不确定了。通过该分析的递归性质可知，实际上只有当 N 是 2 的幂时，结果才是合理的，否则我们最重要遇到大小不是偶数的子问题，方程就无效了。当 N 不是 2 的幂的时候，我们多少需要更加复杂的一些分析，但是大O的结果是不变的。</p>
+<p><strong>5、解法4:</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">MaxSubsequenceSum</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span> A[], <span class="keyword">int</span> N)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> ThisSum, MaxSum, i;</span><br><span class="line">	</span><br><span class="line">	ThisSum = MaxSum = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;N; i++)&#123;</span><br><span class="line">		ThisSum += A[i];</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span> (ThisSum &gt; MaxSum)</span><br><span class="line">			MaxSum = ThisSum;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">			ThisSum = <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> Maxsum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>易知，该解法的时间复杂度为 $O(N)$ 。</p>
+<h4 id="2-4-5-运行时间中的对数"><a href="#2-4-5-运行时间中的对数" class="headerlink" title="2.4.5 运行时间中的对数"></a>2.4.5 运行时间中的对数</h4><p>有如下法则：</p>
+<blockquote>
+<p>如果一个算法用常数时间 $(O(1))$ 将问题的大小削减为其一部分（通常是 $\frac{1}{2}$ ），那么该算法就是 $O(logN)$ 的。</p>
+<p>另一方面，如果使用常数时间只是把问题减少一个常数（如将问题减少1），那么这种算法就是 $O(N)$  的。</p>
+</blockquote>
+<p>有如下三个例子为例。</p>
+<h5 id="2-4-5-1-对分查找"><a href="#2-4-5-1-对分查找" class="headerlink" title="2.4.5.1 对分查找"></a>2.4.5.1 对分查找</h5><p><strong>1、问题描述：</strong></p>
+<p>该问题（binary search）又称折半查找、二分查找。</p>
+<p>给定一个整数 $X$ 和整数 $A_0, \quad A_1, \quad \cdots, \quad A_N-1$，后者已经预先排序并在内存中。求使得 $A_i = X$ 的下标 $i$ ，如果 $X$ 不在数据中，则返回 $i = -1$ 。</p>
+<p><strong>2、算法程序：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">BinarySearch</span><span class="params">(<span class="keyword">const</span> ElementType A[], ElementType X, <span class="keyword">int</span> N)</span></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> Low, Mid, High;</span><br><span class="line">  </span><br><span class="line">  Low = <span class="number">0</span>;</span><br><span class="line">  High = N - <span class="number">1</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">while</span> (Low &lt;= High)&#123;</span><br><span class="line">    Mid = (Low + High) / <span class="number">2</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span>(A[Mid] &lt; X)</span><br><span class="line">      Low = Mid +<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (A[Mid] &gt; X)</span><br><span class="line">      High = Mid - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">      <span class="keyword">return</span> Mid;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> NotFound;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>3、时间复杂度分析：</strong></p>
+<p>循环从 $High - Low = N - 1$ 开始，并在 $High - Low \geq -1 $ 结束。每次循环后 $High - Low$ 的值至少将改次循环前的值折半，于是，循环的次数最多为 $\left \lceil log(N-1) \right \rceil + 2$ 。</p>
+<p>如：若 $High - Low = 128$ ，则在歌词迭代后 $High - Low$ 的最大值是64、32、16、8、4、2、1、0、-1。</p>
+<p><strong>因此，运行时间是 $O(logN)$ 。</strong></p>
+<p><strong>4、折半查找分析：</strong></p>
+<p>折半查找提供了在 $O(log N)$ 时间内的查找操作，但是其他所有操作（尤其是插入操作）均需要 $O(N)$ 的时间。</p>
+<p><strong>在数据稳定（即不允许插入和删除操作）的应用中，这可能是非常有用的。</strong>此时输入数据需要一次排序，但是此后的访问会很快。</p>
+<h5 id="2-4-5-2-欧几里得算法"><a href="#2-4-5-2-欧几里得算法" class="headerlink" title="2.4.5.2 欧几里得算法"></a>2.4.5.2 欧几里得算法</h5><p><strong>1、问题描述：</strong></p>
+<p>计算两个整数的最大公因数。</p>
+<p><strong>2、算法程序</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">Gcd</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">int</span> M, <span class="keyword">unsigned</span> <span class="keyword">int</span> N)</span></span>&#123;</span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> Rem;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">while</span>(N &gt; <span class="number">0</span>)&#123;</span><br><span class="line">    Rem = M % N;</span><br><span class="line">    M = N;</span><br><span class="line">    N = Rem;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> M;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>3、时间复杂度分析</strong></p>
+<p>例：$M = 1989, \quad N = 1590$ ，则余数序列是 399、393、6、3、0。从而，$Gcd(1989, 1590) = 3$ 。</p>
+<p>估计算法的整个运行时间依赖于确定余数序列究竟有多长。虽然 $log N$ 看似是理想的答案，但是我们看不出余数的值按照常数因子递减的必然性，如余数从399仅降到393。</p>
+<p>事实上，在一次迭代中余数并不按照一个常数因子递减。然而我们可以证明，在两次迭代以后，余数最多是原始值的一半。这就证明了迭代次数最多是 $2logN = O(logN)$ 。</p>
+<p><strong>定理：</strong> 如果 $M&gt;N$ ，则 $M \mod N &lt; \frac{M}{2}$ 。</p>
+<p><strong>证明：</strong></p>
+<p>（1）若 $N \leq \frac{M}{2}$ ，则余数小于 N ，成立。</p>
+<p>（2）若 $N &gt; \frac{M}{2}$ ，此时M只含有一个N，余数为 $M - N &lt; \frac{M}{2}$ ，成立。</p>
+<p>证毕。</p>
+<h5 id="2-4-5-3-幂运算"><a href="#2-4-5-3-幂运算" class="headerlink" title="2.4.5.3 幂运算"></a>2.4.5.3 幂运算</h5><p><strong>1、问题描述：</strong></p>
+<p>计算一个整数的幂，即 $X^N$ 。</p>
+<p><strong>2、算法代码：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">long</span> <span class="keyword">int</span> <span class="title">Pow</span><span class="params">(<span class="keyword">long</span> <span class="keyword">int</span> X, <span class="keyword">unsigned</span> <span class="keyword">int</span> N)</span></span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (N == <span class="number">0</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">if</span> (N == <span class="number">1</span>)</span><br><span class="line">    <span class="keyword">return</span> X;</span><br><span class="line">  <span class="keyword">if</span> (IsEven(N))  <span class="comment">// 判断 N 是否为偶数</span></span><br><span class="line">    <span class="keyword">return</span> Pow(X*X, N/<span class="number">2</span>);</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">    <span class="keyword">return</span> Pow(X*X, N/<span class="number">2</span>) * X;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>3、算法思想：</strong><br>$$<br>\left{\begin{matrix}<br>X^N =&amp; X^{\frac{N}{2}} \cdot X^{\frac{N}{2}} \quad &amp;if \quad N\mod2 == 0  \<br>X^N =&amp; X^{\frac{N-1}{2}} \cdot X^{\frac{N-1}{2}} \cdot X \quad &amp;if \quad N\mod2 == 1<br>\end{matrix}\right.<br>$$</p>
+<p>例如，计算 $X^{62}$ ，算法将如下进行，只用到9次乘法。<br>$$<br>X^{62} = (X^{31})^2, \quad X^{31} = (X^{15})^2 \cdot X\<br>X^{15} = (X^{7})^2 \cdot X, \quad X^{7} = (X^{3})^2 \cdot X\<br>X^{3} = (X^{1})^2 \cdot X<br>$$<br>显然，所需要乘法次数最多是 $2log N$ 。</p>
+<p><strong>时间复杂度为 $O(log N)$ 。</strong> </p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/数据结构与算法（C）/" rel="tag"># 数据结构与算法（C）</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/01/19/Data_Structures/Data_Strutures_and_Algorithm_Analysis_in_C/第一章_引论/" rel="next" title="第一章_引论">
+                <i class="fa fa-chevron-left"></i> 第一章_引论
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="John Doe">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">100</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://suliangxu.github.io" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:1193135584@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-数学基础"><span class="nav-text">2.1 数学基础</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-1-增长率相关定义"><span class="nav-text">2.1.1 增长率相关定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-2-重要法则"><span class="nav-text">2.2.2 重要法则</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-模型"><span class="nav-text">2.2 模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-要分析的问题"><span class="nav-text">2.3 要分析的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-运行时间计算"><span class="nav-text">2.4 运行时间计算</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-1-一个简单的例子"><span class="nav-text">2.4.1 一个简单的例子</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-2-一般法则"><span class="nav-text">2.4.2 一般法则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-3-斐波那契数列"><span class="nav-text">2.4.3 斐波那契数列</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-4-最大子序和"><span class="nav-text">2.4.4 最大子序和</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-5-运行时间中的对数"><span class="nav-text">2.4.5 运行时间中的对数</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-4-5-1-对分查找"><span class="nav-text">2.4.5.1 对分查找</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-4-5-2-欧几里得算法"><span class="nav-text">2.4.5.2 欧几里得算法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-4-5-3-幂运算"><span class="nav-text">2.4.5.3 幂运算</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

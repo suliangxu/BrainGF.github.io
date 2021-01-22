@@ -1,0 +1,1615 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="NumPy,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="[TOC] 2.1 NumPy数组对象NumPy中的多维数组数组称为ndarray， 它有两个组成部分。  数据本身 描述数据的元数据  在数组的处理过程中，原始数据不受影响，变化的只是元数据而已。 123ndarray 与 arange()用arange()函数来生成的数组是一维数组，而ndarray则可以具有一个以上的维度。  NumPy数组的优势：NumPy数组通常是由相同种类的元素组成的，">
+<meta name="keywords" content="NumPy">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第二章：NumPy数组">
+<meta property="og:url" content="http://yoursite.com/2019/08/05/Python_Data Analysis/第二章：NumPy数组/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="[TOC] 2.1 NumPy数组对象NumPy中的多维数组数组称为ndarray， 它有两个组成部分。  数据本身 描述数据的元数据  在数组的处理过程中，原始数据不受影响，变化的只是元数据而已。 123ndarray 与 arange()用arange()函数来生成的数组是一维数组，而ndarray则可以具有一个以上的维度。  NumPy数组的优势：NumPy数组通常是由相同种类的元素组成的，">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/python%20Data%20Analysis/%E7%AC%AC%E4%BA%8C%E7%AB%A0%20NumPy%E6%95%B0%E7%BB%84/1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/python%20Data%20Analysis/%E7%AC%AC%E4%BA%8C%E7%AB%A0%20NumPy%E6%95%B0%E7%BB%84/2.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/python%20Data%20Analysis/%E7%AC%AC%E4%BA%8C%E7%AB%A0%20NumPy%E6%95%B0%E7%BB%84/3.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/python%20Data%20Analysis/%E7%AC%AC%E4%BA%8C%E7%AB%A0%20NumPy%E6%95%B0%E7%BB%84/4.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/python%20Data%20Analysis/%E7%AC%AC%E4%BA%8C%E7%AB%A0%20NumPy%E6%95%B0%E7%BB%84/5.png">
+<meta property="og:updated_time" content="2019-08-10T13:58:47.014Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="第二章：NumPy数组">
+<meta name="twitter:description" content="[TOC] 2.1 NumPy数组对象NumPy中的多维数组数组称为ndarray， 它有两个组成部分。  数据本身 描述数据的元数据  在数组的处理过程中，原始数据不受影响，变化的只是元数据而已。 123ndarray 与 arange()用arange()函数来生成的数组是一维数组，而ndarray则可以具有一个以上的维度。  NumPy数组的优势：NumPy数组通常是由相同种类的元素组成的，">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/python%20Data%20Analysis/%E7%AC%AC%E4%BA%8C%E7%AB%A0%20NumPy%E6%95%B0%E7%BB%84/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/08/05/Python_Data Analysis/第二章：NumPy数组/">
+
+
+
+
+
+  <title>第二章：NumPy数组 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/05/Python_Data Analysis/第二章：NumPy数组/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">第二章：NumPy数组</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-05T18:44:53+08:00">
+                2019-08-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python-Data-Analysis/" itemprop="url" rel="index">
+                    <span itemprop="name">Python Data Analysis</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>[TOC]</p>
+<h3 id="2-1-NumPy数组对象"><a href="#2-1-NumPy数组对象" class="headerlink" title="2.1 NumPy数组对象"></a>2.1 NumPy数组对象</h3><p>NumPy中的多维数组数组称为ndarray， 它有两个组成部分。</p>
+<ul>
+<li>数据本身</li>
+<li>描述数据的元数据</li>
+</ul>
+<p>在数组的处理过程中，原始数据不受影响，变化的只是元数据而已。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ndarray 与 arange()</span><br><span class="line"></span><br><span class="line">用arange()函数来生成的数组是一维数组，而ndarray则可以具有一个以上的维度。</span><br></pre></td></tr></table></figure>
+
+<h4 id="NumPy数组的优势："><a href="#NumPy数组的优势：" class="headerlink" title="NumPy数组的优势："></a>NumPy数组的优势：</h4><p><strong>NumPy数组通常是由相同种类的元素组成的，即数组中的数据项的数据类型必须一致。</strong></p>
+<ul>
+<li>NumPy数组元素类型一致<ul>
+<li>好处：由于知道数组元素的类型相同，所以能轻松确定存储数组所需空间的大小。</li>
+</ul>
+</li>
+<li>NumPy数组能够运用向量化运算来处理整个数组<ul>
+<li>而完成同样的任务，Python列表则通常必须借助循环语句遍历列表，并对逐个元素进行相应的处理。</li>
+</ul>
+</li>
+<li>NumPy使用了优化过的C API，所以运算速度格外的快。</li>
+</ul>
+<p><code>In : a = arange(5)</code>                                                           </p>
+<p><code>In : a.dtype</code>                                                                 </p>
+<p><code>Out: dtype(&#39;int64&#39;)</code></p>
+<p>此处使用了arange（）来建立数组，并且查看了该数组的数据类型。</p>
+<p><code>In: a</code>                                                                       </p>
+<p><code>Out: array([0, 1, 2, 3, 4])</code></p>
+<p><code>In: a.shape</code>                                                                 </p>
+<p><code>Out: (5,)</code></p>
+<p>如你所见，该向量有5个元素，它们的值分别是从0到4。</p>
+<p>该数组的shape属性是一个元组（就本例而言，这是一个单元素元组），存放的是数组在每一个维度的长度。</p>
+<h3 id="2-2-创建多维数组"><a href="#2-2-创建多维数组" class="headerlink" title="2.2 创建多维数组"></a>2.2 创建多维数组</h3><ol>
+<li><p>创建多维数组，代码如下：</p>
+<p><code>In: m = array([arange(2), arange(2)])</code>                                       </p>
+<p><code>In: m</code>                                                                       </p>
+<p><code>Out:</code> </p>
+<p><code>array([[0, 1],</code></p>
+<p>​              <code>[0, 1]])</code></p>
+</li>
+<li><p>显示该数组的形状，代码如下：</p>
+<p><code>In: m.shape</code>                                                                 </p>
+<p><code>Out: (2, 2)</code></p>
+</li>
+</ol>
+<p>创建一个 ndarray 只需调用 NumPy 的 array 函数即可：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">numpy.array(object, dtype = <span class="literal">None</span>, copy = <span class="literal">True</span>, order = <span class="literal">None</span>, subok = <span class="literal">False</span>, ndmin = <span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+<p><strong>参数说明：</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">object</td>
+<td align="left">数组或嵌套的数列</td>
+</tr>
+<tr>
+<td align="left">dtype</td>
+<td align="left">数组元素的数据类型，可选</td>
+</tr>
+<tr>
+<td align="left">copy</td>
+<td align="left">对象是否需要复制，可选</td>
+</tr>
+<tr>
+<td align="left">order</td>
+<td align="left">创建数组的样式，C为行方向，F为列方向，A为任意方向（默认）</td>
+</tr>
+<tr>
+<td align="left">subok</td>
+<td align="left">默认返回一个与基类类型一致的数组</td>
+</tr>
+<tr>
+<td align="left">ndmin</td>
+<td align="left">指定生成数组的最小维度</td>
+</tr>
+</tbody></table>
+<h3 id="2-3-选择NumPy数组元素"><a href="#2-3-选择NumPy数组元素" class="headerlink" title="2.3 选择NumPy数组元素"></a>2.3 选择NumPy数组元素</h3><p><code>In: a = array([[1, 2], [3, 4]])</code>                                             </p>
+<p><code>In: a</code>                                                                       </p>
+<p><code>Out:</code> </p>
+<p><code>array([[1, 2],</code></p>
+<p>​              <code>[3, 4]])</code></p>
+<p>上面的矩阵是通过向array()函数传递一个由列表组成的列表得到的。</p>
+<p>下面，通过下标来逐个选择矩阵的各个元素。</p>
+<p><code>In: a[0, 0]</code>                                                                 </p>
+<p><code>Out: 1</code></p>
+<p><code>In: a[0, 1]</code>                                                                 </p>
+<p><code>Out: 2</code>                                                           </p>
+<p><code>In : a[1, 0]</code>                                                                 </p>
+<p><code>Out: 3</code></p>
+<p><code>In: a[1, 1]</code>                                                                </p>
+<p><code>Out: 4</code></p>
+<p>可见，对于数组a，只要通过<code>a[m, n]</code>的形式，就能访问数组内的元素，其中m和n为数组元素的下标。数组元素的下标如下所示：</p>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/python%20Data%20Analysis/%E7%AC%AC%E4%BA%8C%E7%AB%A0%20NumPy%E6%95%B0%E7%BB%84/1.png" alt="1"></p>
+<h3 id="2-4-NumPy的数值类型"><a href="#2-4-NumPy的数值类型" class="headerlink" title="2.4 NumPy的数值类型"></a>2.4 NumPy的数值类型</h3><p>下表概述了NumPy的各种数值类型：</p>
+<table>
+<thead>
+<tr>
+<th align="left">类型</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">bool</td>
+<td align="left">布尔型数据类型（True 或者 False），占用1比特</td>
+</tr>
+<tr>
+<td align="left">inti</td>
+<td align="left">其长度取决于平台的整数（通常为int32 或 int64）</td>
+</tr>
+<tr>
+<td align="left">int8</td>
+<td align="left">字节类型（-128 to 127）</td>
+</tr>
+<tr>
+<td align="left">int16</td>
+<td align="left">整型（-32768 to 32767）</td>
+</tr>
+<tr>
+<td align="left">int32</td>
+<td align="left">整型（-$2^{31}$  to  $2^{31}-1$）</td>
+</tr>
+<tr>
+<td align="left">int64</td>
+<td align="left">整型（-$2^{63}$  to  $2^{63}-1$））</td>
+</tr>
+<tr>
+<td align="left">uint8</td>
+<td align="left">无符号整型（0 to 255）</td>
+</tr>
+<tr>
+<td align="left">uint16</td>
+<td align="left">无符号整型（0 to 65535）</td>
+</tr>
+<tr>
+<td align="left">uint32</td>
+<td align="left">无符号整型（0 to $2^{31}-1$）</td>
+</tr>
+<tr>
+<td align="left">uint64</td>
+<td align="left">无符号整型（0 to $2^{63}-1$）</td>
+</tr>
+<tr>
+<td align="left">float16</td>
+<td align="left">半精度浮点数，包括：1 个符号位，5 个指数位，10 个尾数位</td>
+</tr>
+<tr>
+<td align="left">float32</td>
+<td align="left">单精度浮点数，包括：1 个符号位，8 个指数位，23 个尾数位</td>
+</tr>
+<tr>
+<td align="left">float64或float</td>
+<td align="left">双精度浮点数，包括：1 个符号位，11 个指数位，52 个尾数位</td>
+</tr>
+<tr>
+<td align="left">complex_</td>
+<td align="left">complex128 类型的简写，即 128 位复数</td>
+</tr>
+<tr>
+<td align="left">complex64</td>
+<td align="left">复数，表示双 32 位浮点数（实数部分和虚数部分）</td>
+</tr>
+<tr>
+<td align="left">complex128</td>
+<td align="left">复数，表示双 64 位浮点数（实数部分和虚数部分）</td>
+</tr>
+</tbody></table>
+<p>注：NumPy跟数学运算有关的数据类型的名称都以数字结尾。这个数字指示了该类型的变量所占用的二进制位数。</p>
+<p>每一种数据类型都有相应的转换函数：</p>
+<p><code>In: float64(32)</code>                                                            </p>
+<p><code>Out: 32.0</code></p>
+<p><code>In: int8(42.0)</code>                                                             </p>
+<p><code>Out: 42</code></p>
+<p><code>In: bool(42)</code>                                                               </p>
+<p><code>Out: True</code></p>
+<p><code>In: bool(0)</code>                                                                </p>
+<p><code>Out: False</code></p>
+<p><code>In: bool(42.0)</code>                                                             </p>
+<p><code>Out: True</code></p>
+<p><code>In: float(True)</code>                                                            </p>
+<p><code>Out: 1.0</code></p>
+<p><code>In: float(False)</code>                                                           </p>
+<p><code>Out: 0.0</code></p>
+<p>许多函数都带有一个指定数据类型的参数，该参数通常是可选的：</p>
+<p><code>In: arange(7, dtype=uint16)</code>                                                </p>
+<p><code>Out: array([0, 1, 2, 3, 4, 5, 6], dtype=uint16)</code></p>
+<p>注：</p>
+<ol>
+<li><p>不允许把复数类型转化成整型。会引发TypeError错误：</p>
+<p><code>In: float(42.0 + 1.j)</code>                                                      </p>
+<p><code>Traceback (most recent call last)</code></p>
+<p><code>&lt;ipython-input-20-c164c131df24&gt; in &lt;module&gt;</code></p>
+<p>​    <code>float(42.0 + 1.j)</code></p>
+<p><code>TypeError: can&#39;t convert complex to float</code></p>
+</li>
+<li><p>同样也不允许复数转化成浮点数</p>
+</li>
+<li><p>允许把浮点数转换成复数  如：complex(1.0)是合法的</p>
+</li>
+<li><p>复数的实部和虚部分别使用 real( ) 函数和 imag( ) 函数来提取</p>
+</li>
+</ol>
+<h4 id="2-4-1-数据类型对象"><a href="#2-4-1-数据类型对象" class="headerlink" title="2.4.1 数据类型对象"></a>2.4.1 数据类型对象</h4><p><strong>数据类型对象</strong>是numpy.dtype类的实例。</p>
+<p>数据类型对象是用来描述与数组对应的内存区域如何使用，这依赖如下几个方面：</p>
+<ul>
+<li>数据的类型（整数，浮点数或者 Python 对象）</li>
+<li>数据的大小（例如， 整数使用多少个字节存储）</li>
+<li>数据的字节顺序（小端法或大端法）</li>
+<li>在结构化类型的情况下，字段的名称、每个字段的数据类型和每个字段所取的内存块的部分</li>
+<li>如果数据类型是子数组，它的形状和数据类型</li>
+</ul>
+<p>数据类型对象表明了数据占用的字节数。所占用的具体数目一般存放在 dtype 的 itemsize 属性中：</p>
+<p><code>In: a = array([[1,2],[3,4]])</code><br><code>In: a.dtype.itemsize</code><br><code>Out: 8</code></p>
+<h4 id="2-4-2-字符码"><a href="#2-4-2-字符码" class="headerlink" title="2.4.2 字符码"></a>2.4.2 字符码</h4><p>NumPy之所以提供字符码，是为了和其前身Numeric向后兼容。</p>
+<p>一般不建议使用字符码。</p>
+<table>
+<thead>
+<tr>
+<th align="left">字符</th>
+<th align="left">对应类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">b</td>
+<td align="left">布尔型</td>
+</tr>
+<tr>
+<td align="left">i</td>
+<td align="left">(有符号) 整型</td>
+</tr>
+<tr>
+<td align="left">u</td>
+<td align="left">无符号整型 integer</td>
+</tr>
+<tr>
+<td align="left">f</td>
+<td align="left">单精度浮点型</td>
+</tr>
+<tr>
+<td align="left">d</td>
+<td align="left">双精度浮点型</td>
+</tr>
+<tr>
+<td align="left">c</td>
+<td align="left">复数浮点型</td>
+</tr>
+<tr>
+<td align="left">m</td>
+<td align="left">timedelta（时间间隔）</td>
+</tr>
+<tr>
+<td align="left">M</td>
+<td align="left">datetime（日期时间）</td>
+</tr>
+<tr>
+<td align="left">D</td>
+<td align="left">复数型</td>
+</tr>
+<tr>
+<td align="left">O</td>
+<td align="left">(Python) 对象</td>
+</tr>
+<tr>
+<td align="left">S, a</td>
+<td align="left">(byte-)字符串</td>
+</tr>
+<tr>
+<td align="left">U</td>
+<td align="left">Unicode</td>
+</tr>
+<tr>
+<td align="left">V</td>
+<td align="left">原始数据 (void)</td>
+</tr>
+</tbody></table>
+<p><code>In: arange(7, dtype=&#39;f&#39;)</code>                                                   </p>
+<p><code>Out: array([0., 1., 2., 3., 4., 5., 6.], dtype=float32)</code></p>
+<p><code>In:  arange(7, dtype=&#39;D&#39;)</code>                                                  </p>
+<p><code>Out: array([0.+0.j, 1.+0.j, 2.+0.j, 3.+0.j, 4.+0.j, 5.+0.j, 6.+0.j])</code></p>
+<h4 id="2-4-3-Dtype-构造函数"><a href="#2-4-3-Dtype-构造函数" class="headerlink" title="2.4.3 Dtype 构造函数"></a>2.4.3 Dtype 构造函数</h4><p>创建数据类型时，手段有很多，下面以浮点型数据为例进行说明。</p>
+<ul>
+<li><p>可以用Python自带的常规浮点型</p>
+<p><code>In: dtype(float)</code><br><code>Out: float64</code></p>
+</li>
+<li><p>可以用字符码规定单精度浮点数</p>
+<p><code>In: dtype(&#39;f&#39;)</code><br><code>Out: float32</code></p>
+</li>
+<li><p>可以用字符码规定双精度浮点数</p>
+<p><code>In: dtype(&#39;d&#39;)</code><br><code>Out: loat64</code></p>
+</li>
+<li><p>可以通过dtype构造函数传递一个双字符码。</p>
+<ul>
+<li>第一个字符表示数据类型</li>
+<li>第二个字符表示一个数字，表示该类型占用的字节数（数字2、4、8分别对应16位、32位、64位浮点数）</li>
+</ul>
+<p><code>In: dtype(&#39;f8&#39;)</code><br><code>Out: float64</code></p>
+</li>
+</ul>
+<p>可以通过sctypeDict.keys()函数列出所有数据类型的字符码。</p>
+<p><code>In: sctypeDict.keys()</code>                                                      </p>
+<p><code>Out: dict_keys([&#39;?&#39;, 0, &#39;byte&#39;, &#39;b&#39;, 1, &#39;ubyte&#39;, &#39;B&#39;, 2, &#39;short&#39;, &#39;h&#39;, 3, &#39;ushort&#39;, &#39;H&#39;, 4, &#39;i&#39;, 5, &#39;uint&#39;, &#39;I&#39;, 6, &#39;intp&#39;, &#39;p&#39;, 7, &#39;uintp&#39;, &#39;P&#39;, 8, &#39;long&#39;, &#39;l&#39;, &#39;L&#39;, &#39;longlong&#39;, &#39;q&#39;, 9, &#39;ulonglong&#39;, &#39;Q&#39;, 10, &#39;half&#39;, &#39;e&#39;, 23, &#39;f&#39;, 11, &#39;double&#39;, &#39;d&#39;, 12, &#39;longdouble&#39;, &#39;g&#39;, 13, &#39;cfloat&#39;, &#39;F&#39;, 14, &#39;cdouble&#39;, &#39;D&#39;, 15, &#39;clongdouble&#39;, &#39;G&#39;, 16, &#39;O&#39;, 17, &#39;S&#39;, 18, &#39;unicode&#39;, &#39;U&#39;, 19, &#39;void&#39;, &#39;V&#39;, 20, &#39;M&#39;, 21, &#39;m&#39;, 22, &#39;bool8&#39;, &#39;Bool&#39;, &#39;b1&#39;, &#39;int64&#39;, &#39;Int64&#39;, &#39;i8&#39;, &#39;uint64&#39;, &#39;Uint64&#39;, &#39;u8&#39;, &#39;float16&#39;, &#39;Float16&#39;, &#39;f2&#39;, &#39;float32&#39;, &#39;Float32&#39;, &#39;f4&#39;, &#39;float64&#39;, &#39;Float64&#39;, &#39;f8&#39;, &#39;float128&#39;, &#39;Float128&#39;, &#39;f16&#39;, &#39;complex64&#39;, &#39;Complex32&#39;, &#39;c8&#39;, &#39;complex128&#39;, &#39;Complex64&#39;, &#39;c16&#39;, &#39;complex256&#39;, &#39;Complex128&#39;, &#39;c32&#39;, &#39;object0&#39;, &#39;Object0&#39;, &#39;bytes0&#39;, &#39;Bytes0&#39;, &#39;str0&#39;, &#39;Str0&#39;, &#39;void0&#39;, &#39;Void0&#39;, &#39;datetime64&#39;, &#39;Datetime64&#39;, &#39;M8&#39;, &#39;timedelta64&#39;, &#39;Timedelta64&#39;, &#39;m8&#39;, &#39;UInt64&#39;, &#39;int32&#39;, &#39;Int32&#39;, &#39;i4&#39;, &#39;uint32&#39;, &#39;UInt32&#39;, &#39;u4&#39;, &#39;int16&#39;, &#39;Int16&#39;, &#39;i2&#39;, &#39;uint16&#39;, &#39;UInt16&#39;, &#39;u2&#39;, &#39;int8&#39;, &#39;Int8&#39;, &#39;i1&#39;, &#39;uint8&#39;, &#39;UInt8&#39;, &#39;u1&#39;, &#39;complex_&#39;, &#39;int0&#39;, &#39;uint0&#39;, &#39;single&#39;, &#39;csingle&#39;, &#39;singlecomplex&#39;, &#39;float_&#39;, &#39;intc&#39;, &#39;uintc&#39;, &#39;int_&#39;, &#39;longfloat&#39;, &#39;clongfloat&#39;, &#39;longcomplex&#39;, &#39;bool_&#39;, &#39;bytes_&#39;, &#39;string_&#39;, &#39;unicode_&#39;, &#39;object_&#39;, &#39;str_&#39;, &#39;int&#39;, &#39;float&#39;, &#39;complex&#39;, &#39;bool&#39;, &#39;object&#39;, &#39;str&#39;, &#39;bytes&#39;, &#39;a&#39;])</code></p>
+<h4 id="2-4-4-dtype属性"><a href="#2-4-4-dtype属性" class="headerlink" title="2.4.4 dtype属性"></a>2.4.4 dtype属性</h4><p>dtype 对象是使用以下语法构造的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">numpy.dtype(object, align, copy)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>object - 要转换为的数据类型对象</li>
+<li>align - 如果为 true，填充字段使其类似 C 的结构体。</li>
+<li>copy - 复制 dtype 对象 ，如果为 false，则是对内置数据类型对象的引用</li>
+</ul>
+<p>dtype的属性str中保存的是一个表示数据类型的字符串</p>
+<ul>
+<li>第一个字符描述字节顺序<ul>
+<li>字节顺序是通过对数据类型预先设定”&lt;”或”&gt;”来决定的。”&lt;”意味着小端法(最小值存储在最小的地址，即低位组放在最前面)。”&gt;”意味着大端法(最重要的字节存储在最小的地址，即高位组放在最前面)。</li>
+</ul>
+</li>
+<li>如果需要，后面会跟着字符码和数字，用来表示存储每个数组元素所需的字节数</li>
+</ul>
+<p><code>In: t = dtype(&#39;Float64&#39;)</code>                                                    </p>
+<p><code>In: t.str</code>                                                                   </p>
+<p><code>Out: &#39;&lt;f8&#39;</code></p>
+<h3 id="2-5-一维数组的切片与索引"><a href="#2-5-一维数组的切片与索引" class="headerlink" title="2.5 一维数组的切片与索引"></a>2.5 一维数组的切片与索引</h3><p>一维NumPy数组的切片操作与Python列表的切片一样。</p>
+<p><code>In: a = arange(9)</code>                                                           </p>
+<p><code>In: a[3:7]</code>                                                                  </p>
+<p><code>Out: array([3, 4, 5, 6])</code>                                                            </p>
+<p><code>In: a[:7:2]</code>                                                                 </p>
+<p><code>Out: array([0, 2, 4, 6])</code></p>
+<p><code>In: a[::-1]</code>                                                                 </p>
+<p><code>Out: array([8, 7, 6, 5, 4, 3, 2, 1, 0])</code></p>
+<h3 id="2-6-处理数组形状"><a href="#2-6-处理数组形状" class="headerlink" title="2.6 处理数组形状"></a>2.6 处理数组形状</h3><p>首先，先创建数组：</p>
+<p><code>b = np.arange(24).reshape(2, 3, 4)</code></p>
+<ul>
+<li><p><strong>拆解</strong>    </p>
+<ul>
+<li>可以用 ravel() 函数将多维数组变成一维数组</li>
+</ul>
+<p><code>In: b</code></p>
+<p><code>Out:</code></p>
+<p><code>[[[ 0  1  2  3]</code><br>  <code>[ 4  5  6  7]</code><br>  <code>[ 8  9 10 11]]</code><br> <code>[[12 13 14 15]</code><br>  <code>[16 17 18 19]</code><br>  <code>[20 21 22 23]]]</code></p>
+</li>
+</ul>
+<p>  <code>In: b.ravel()</code></p>
+<p>  <code>Out:</code></p>
+<p>  <code>[ 0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23]</code></p>
+<ul>
+<li><p><strong>拉直</strong>    </p>
+<ul>
+<li>flatten() 函数其功能与 ravel() 相同<ul>
+<li>但 flatten() 函数返回的是真实的数组，需要分配新的内存空间</li>
+<li>而 ravel() 函数返回的只是数组的视图 </li>
+</ul>
+</li>
+</ul>
+<p><code>In: b.flatten()</code></p>
+<p><code>Out:</code></p>
+<p><code>[ 0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23]</code></p>
+</li>
+</ul>
+<ul>
+<li><p><strong>用元组指定数组形状</strong>    </p>
+<ul>
+<li>除 reshape() 函数外，还可以用元组来轻松定义数组的形状</li>
+</ul>
+<p><code>In: b.shape = (6,4)</code><br><code>In: b</code></p>
+<p><code>Out:</code></p>
+<p><code>[[ 0  1  2  3]</code><br> <code>[ 4  5  6  7]</code><br> <code>[ 8  9 10 11]</code><br> <code>[12 13 14 15]</code><br> <code>[16 17 18 19]</code><br> <code>[20 21 22 23]]</code></p>
+</li>
+</ul>
+<ul>
+<li><p><strong>转置</strong></p>
+<p><code>In: b.transpose()</code></p>
+<p><code>Out:</code></p>
+<p><code>[[ 0  4  8 12 16 20]</code><br> <code>[ 1  5  9 13 17 21]</code><br> <code>[ 2  6 10 14 18 22]</code><br> <code>[ 3  7 11 15 19 23]]</code></p>
+</li>
+</ul>
+<ul>
+<li><p><strong>调整大小</strong></p>
+<ul>
+<li>函数 resize() 的作用类似于 reshape() ，但是会改变所作用的数组</li>
+</ul>
+<p><code>In: b.resize((2,12))</code><br><code>In: b</code></p>
+<p><code>Out:</code></p>
+<p><code>[[ 0  1  2  3  4  5  6  7  8  9 10 11]</code><br> <code>[12 13 14 15 16 17 18 19 20 21 22 23]]</code></p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">b = np.arange(<span class="number">24</span>).reshape(<span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>)      <span class="comment"># 创建了一个三维数组</span></span><br><span class="line">print(<span class="string">'b:\n'</span>, b)</span><br><span class="line"></span><br><span class="line">print(<span class="string">'\nb.ravel()\n'</span>, b.ravel())    <span class="comment"># 拆解，利用ravel（）函数将多维数组变成一维数组</span></span><br><span class="line"></span><br><span class="line">print(<span class="string">'\nb.flatten()\n'</span>,b.flatten())    <span class="comment"># 拉直</span></span><br><span class="line"></span><br><span class="line">b.shape = (<span class="number">6</span>, <span class="number">4</span>)    <span class="comment"># 重新规定形状</span></span><br><span class="line">print(<span class="string">'\nb.shape = (6, 4)\n'</span>, b)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">print(<span class="string">'\nb.transpose()\n'</span>,b.transpose())    <span class="comment"># 转置</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">b.resize((<span class="number">2</span>, <span class="number">12</span>))    <span class="comment"># 调整大小</span></span><br><span class="line">print(<span class="string">'\nb.resize((2, 12))\n'</span>, b)</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-6-1-堆叠数组"><a href="#2-6-1-堆叠数组" class="headerlink" title="2.6.1 堆叠数组"></a>2.6.1 堆叠数组</h4><p>从深度看，数组既可以横向叠放，也可以竖向叠放。</p>
+<p>首先，先建立数组：</p>
+<p><code>In: a = arange(9).reshape(3,3)</code></p>
+<p><code>In: a</code></p>
+<p><code>Out:</code></p>
+<p><code>[[0 1 2]</code><br> <code>[3 4 5]</code><br> <code>[6 7 8]]</code></p>
+<p><code>In: b = 2 * a</code></p>
+<p><code>In: b</code></p>
+<p><code>Out:</code></p>
+<p><code>[[ 0  2  4]</code><br> <code>[ 6  8 10]</code><br> <code>[12 14 16]]</code></p>
+<ul>
+<li><p><strong>水平叠加</strong></p>
+<ul>
+<li><strong>hstack()</strong> 函数</li>
+</ul>
+<p><code>In: hstack((a, b))</code></p>
+<p><code>Out:</code></p>
+<p><code>[[ 0  1  2  0  2  4]</code><br> <code>[ 3  4  5  6  8 10]</code><br> <code>[ 6  7  8 12 14 16]]</code></p>
+</li>
+</ul>
+<ul>
+<li><p>用 <strong>concatenate()</strong> 函数也能达到同样的效果</p>
+<p><code>In: concatenate((a, b), axis=1)</code></p>
+<p><code>Out:</code></p>
+<p><code>[[ 0  1  2  0  2  4]  [ 3  4  5  6  8 10]  [ 6  7  8 12 14 16]]</code></p>
+</li>
+</ul>
+<ul>
+<li><p><strong>垂直叠加</strong></p>
+<ul>
+<li><p><strong>vsatck()</strong> 函数</p>
+<p><code>In: vstack((a, b))</code><br><code>[[ 0  1  2]</code><br> <code>[ 3  4  5]</code><br> <code>[ 6  7  8]</code><br> <code>[ 0  2  4]</code><br> <code>[ 6  8 10]</code><br> <code>[12 14 16]]</code></p>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>当参数 axis 置 0 时，<strong>concatenate()</strong> 函数也会得到同样的效果</p>
+<p><code>In: concatenate((a, b), axis=0)</code><br><code>[[ 0  1  2]</code><br> <code>[ 3  4  5]</code><br> <code>[ 6  7  8]</code><br> <code>[ 0  2  4]</code><br> <code>[ 6  8 10]</code><br><code>[12 14 16]]</code></p>
+</li>
+</ul>
+<ul>
+<li><p><strong>深度叠加</strong></p>
+<ul>
+<li><p><strong>dstack()</strong> 函数</p>
+<ul>
+<li>这种方法是沿着第三个坐标轴（纵向）的方向来叠加一摞数组</li>
+<li>举例来说，可以在一个图像数据的二维数组上叠加另一幅图像的数据</li>
+</ul>
+<p><code>In: dstack((a, b))</code><br><code>[[[ 0  0]</code><br>  <code>[ 1  2]</code><br>  <code>[ 2  4]]</code><br> <code>[[ 3  6]</code><br>  <code>[ 4  8]</code><br>  <code>[ 5 10]]</code><br> <code>[[ 6 12]</code><br>  <code>[ 7 14]</code><br>  <code>[ 8 16]]]</code></p>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p><strong>列式堆叠</strong></p>
+<ul>
+<li><p><strong>column_stack()</strong></p>
+<p><code>In: oned = arange(2)</code><br><code>In: oned</code><br><code>[0 1]</code><br><code>In: twice_oned = 2 * oned</code><br><code>In: twice_oned</code><br><code>[0 2]</code><br><code>In: column_stack((oned, twice_oned))</code><br><code>[[0 0]</code><br> <code>[1 2]]</code></p>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>用这种方法堆叠二维数组，过程类似于 <strong>hstack()</strong> 函数</p>
+<p><code>In: column_stack((a, b))</code><br><code>[[ 0  1  2  0  2  4]</code><br> <code>[ 3  4  5  6  8 10]</code><br> <code>[ 6  7  8 12 14 16]]</code></p>
+<p><code>In: column_stack((a, b)) == hstack((a, b))</code><br><code>[[ True  True  True  True  True  True]</code><br> <code>[ True  True  True  True  True  True]</code><br><code>[ True  True  True  True  True  True]]</code></p>
+</li>
+</ul>
+<ul>
+<li><p><strong>行式堆叠</strong></p>
+<ul>
+<li><p><strong>row_stack()</strong></p>
+<p><code>In: row_stack((oned, twice_oned))</code><br><code>[[0 1]</code><br> <code>[0 2]]</code></p>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>对于二维数组，row_stack() 函数相当于 <strong>vstack()</strong> 函数</p>
+<p><code>In: row_stack((a, b))</code><br><code>[[ 0  1  2]</code><br> <code>[ 3  4  5]</code><br> <code>[ 6  7  8]</code><br> <code>[ 0  2  4]</code><br> <code>[ 6  8 10]</code><br> <code>[12 14 16]]</code><br><code>In: row_stack((a,b)) == vstack((a, b))</code><br><code>[[ True  True  True]</code><br> <code>[ True  True  True]</code><br> <code>[ True  True  True]</code><br> <code>[ True  True  True]</code><br> <code>[ True  True  True]</code><br><code>[ True  True  True]]</code></p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy</span><br><span class="line"></span><br><span class="line">a = numpy.arange(<span class="number">9</span>).reshape(<span class="number">3</span>, <span class="number">3</span>)</span><br><span class="line">b = <span class="number">2</span> * a</span><br><span class="line"></span><br><span class="line">print(<span class="string">'a:\n'</span>, a)</span><br><span class="line">print(<span class="string">'\nb\n'</span>,b)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 水平叠加  hstack</span></span><br><span class="line">print(<span class="string">'\nhstack((a, b)):\n'</span>, numpy.hstack((a, b)))</span><br><span class="line">print(<span class="string">'\nnumpy.concatenate((a, b), axis=1):\n'</span>, numpy.concatenate((a, b), axis=<span class="number">1</span>))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 垂直叠加  vstack</span></span><br><span class="line">print(<span class="string">'\nvstack((a, b)):\n'</span>, numpy.vstack((a, b)))</span><br><span class="line">print(<span class="string">'\nnumpy.concatenate((a, b), axis=0):\n'</span>, numpy.concatenate((a, b), axis=<span class="number">0</span>))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 深度叠加  dstack</span></span><br><span class="line">print(<span class="string">'\ndstack((a, b))\n:'</span>, numpy.dstack((a, b)))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 列式堆叠 column_stack</span></span><br><span class="line">oned = numpy.arange(<span class="number">2</span>)</span><br><span class="line">twice_oned = <span class="number">2</span> * oned</span><br><span class="line">print(<span class="string">'\noned:\n'</span>, oned)</span><br><span class="line">print(<span class="string">'\ntwice_oned:\n'</span>, twice_oned)</span><br><span class="line">print(<span class="string">'\nnumpy.column_stack((oned, twice_oned):\n'</span>, numpy.column_stack((oned, twice_oned)))</span><br><span class="line">print(<span class="string">'\nnumpy.column_stack((a, b):\n'</span>, numpy.column_stack((a, b)))</span><br><span class="line">print(<span class="string">'\nnumpy.column_stack((a, b))==numpy.hstack((a, b)):\n'</span>, numpy.column_stack((a, b))==numpy.hstack((a, b)))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 行式堆叠 row_stack</span></span><br><span class="line">oned = numpy.arange(<span class="number">2</span>)</span><br><span class="line">twice_oned = <span class="number">2</span> * oned</span><br><span class="line">print(<span class="string">'\noned:\n'</span>, oned)</span><br><span class="line">print(<span class="string">'\ntwice_oned:\n'</span>, twice_oned)</span><br><span class="line">print(<span class="string">'\nnumpy.row_stack((oned, twice_oned):\n'</span>, numpy.row_stack((oned, twice_oned)))</span><br><span class="line">print(<span class="string">'\nnumpy.row_stack((a, b):\n'</span>, numpy.row_stack((a, b)))</span><br><span class="line">print(<span class="string">'\nnumpy.row_stack((a, b))==numpy.vstack((a, b)):\n'</span>, numpy.row_stack((a, b))==numpy.vstack((a, b)))</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-6-2-拆分数组"><a href="#2-6-2-拆分数组" class="headerlink" title="2.6.2 拆分数组"></a>2.6.2 拆分数组</h4><p>可以从纵向、横向和深度方向来拆分数组。</p>
+<ul>
+<li><p><strong>横向拆分</strong></p>
+<ul>
+<li><p><strong>hspilt()</strong></p>
+<ul>
+<li>对于一个 $3 \times 3$ 数组，可以沿着横轴方向将其分解为3部分，并且各部分的大小和形状完全一致</li>
+</ul>
+<p><code>In: a = arange(9).reshape(3, 3)</code><br><code>In: a</code><br><code>[[0 1 2]</code><br> <code>[3 4 5]</code><br> <code>[6 7 8]]</code></p>
+<p><code>In: hsplit(a, 3)</code><br><code>[array([[0],</code></p>
+<pre><code>`[3],`
+`[6]]),` </code></pre><p><code>array([[1],</code></p>
+<pre><code>`[4],`
+`[7]]),` </code></pre><p><code>array([[2],</code></p>
+<pre><code>`[5],`
+`[8]])]`</code></pre></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>这相当于调用了参数 axis=1 的 <strong>split()</strong> 函数</p>
+<p><code>In: split(a, 3, axis=1)</code><br><code>[array([[0]</code>,</p>
+<pre><code>`[3],`
+`[6]]), `</code></pre><p><code>array([[1],</code></p>
+<pre><code>`[4],`
+`[7]]), `</code></pre><p><code>array([[2],</code></p>
+<pre><code>`[5],`
+`[8]])]`</code></pre></li>
+</ul>
+<ul>
+<li><p><strong>纵向拆分</strong></p>
+<ul>
+<li><p><strong>vsplit()</strong> 函数将沿着纵轴方向分解数组</p>
+<p><code>In: vsplit(a, 3)</code><br><code>[array([[0, 1, 2]]), array([[3, 4, 5]]), array([[6, 7, 8]])]</code></p>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>当参数 axis=0 时，<strong>split()</strong> 函数也会沿着纵轴方向分解数组</p>
+<p><code>In: split(a, 3, axis=0)</code><br><code>[array([[0, 1, 2]]), array([[3, 4, 5]]), array([[6, 7, 8]])]</code></p>
+</li>
+</ul>
+<ul>
+<li><p><strong>深向拆分</strong></p>
+<ul>
+<li><p><strong>dsplit()</strong></p>
+<ul>
+<li>dsplit() 函数会沿着深度方向分解数组</li>
+<li>dsplit() 函数只处理三位及以上的数组</li>
+</ul>
+<p><code>In: c = arange(27).reshape(3, 3, 3)</code><br><code>In: c</code><br><code>[[[ 0  1  2]</code><br>  <code>[ 3  4  5]</code><br>  <code>[ 6  7  8]]</code></p>
+<p> <code>[[ 9 10 11]</code><br>  <code>[12 13 14]</code><br>  <code>[15 16 17]]</code></p>
+<p> <code>[[18 19 20]</code><br>  <code>[21 22 23]</code><br>  <code>[24 25 26]]]</code></p>
+</li>
+</ul>
+</li>
+</ul>
+<pre><code>`In: dsplit(c, 3)`
+`[array([[[ 0],`
+                  `[ 3],`
+                  `[ 6]],`
+
+                  `[[ 9],`
+                    `[12],`
+                    `[15]],`
+
+​                  `[[18],`
+​                    `[21],`
+​                    `[24]]]),`
+
+ `array([[[ 1],`
+                 `[ 4],`
+                 `[ 7]],`
+
+​               `[[10],`
+                 `[13],`
+​                 `[16]],`
+
+​               `[[19],`
+                 `[22],`
+                 `[25]]]),` 
+
+`array([[[ 2],`
+                `[ 5],`
+                `[ 8]],`
+
+​              `[[11],`
+​                `[14],`
+​                `[17]],`
+
+​              `[[20],`
+​                `[23],`
+​                `[26]]])]`</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy</span><br><span class="line"></span><br><span class="line">a = numpy.arange(<span class="number">9</span>).reshape(<span class="number">3</span>, <span class="number">3</span>)</span><br><span class="line"></span><br><span class="line">print(<span class="string">'a:\n'</span>, a)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 横向拆分  hsplit()</span></span><br><span class="line">print(<span class="string">'\nnumpy.hsplit(a, 3):\n'</span>, numpy.hsplit(a, <span class="number">3</span>))</span><br><span class="line">print(<span class="string">'\nnumpy.split(a, 3, axis=1:\n'</span>, numpy.split(a, <span class="number">3</span>, axis=<span class="number">1</span>))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 纵向拆分  vsplit()</span></span><br><span class="line">print(<span class="string">'\nnumpy.vsplit(a, 3):\n'</span>, numpy.vsplit(a, <span class="number">3</span>))</span><br><span class="line">print(<span class="string">'\nnumpy.split(a, 3, axis=0:\n'</span>, numpy.split(a, <span class="number">3</span>, axis=<span class="number">0</span>))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 深向拆分  dsplit()    只适用于3维及以上的数组</span></span><br><span class="line">c = numpy.arange(<span class="number">27</span>).reshape(<span class="number">3</span>, <span class="number">3</span>, <span class="number">3</span>)</span><br><span class="line">print(<span class="string">'\nc:\n'</span>, c)</span><br><span class="line">print(<span class="string">'\nnumpy.dsplit(c, 3):\n'</span>, numpy.dsplit(c, <span class="number">3</span>))</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-6-3-NumPy数组的属性"><a href="#2-6-3-NumPy数组的属性" class="headerlink" title="2.6.3 NumPy数组的属性"></a>2.6.3 NumPy数组的属性</h4><ul>
+<li><p><strong>ndim</strong> 属性</p>
+<ul>
+<li>存储的是维度的数量</li>
+</ul>
+<p><code>In: b</code><br><code>[[ 0  1  2  3  4  5  6  7  8  9 10 11]</code><br> <code>[12 13 14 15 16 17 18 19 20 21 22 23]]</code><br><code>In: b.ndim</code><br><code>2</code></p>
+</li>
+</ul>
+<ul>
+<li><p><strong>size</strong>属性</p>
+<ul>
+<li>用来保存元素的数量</li>
+</ul>
+<p><code>In: b.size</code><br><code>24</code></p>
+</li>
+</ul>
+<ul>
+<li><p><strong>itemsize</strong>属性</p>
+<ul>
+<li>可以返回数组中各个元素所占用的字节数</li>
+</ul>
+<p><code>In: b.itemsize</code><br><code>8</code></p>
+</li>
+</ul>
+<ul>
+<li><p><strong>nbytes</strong> 属性</p>
+<ul>
+<li>返回存储整个数组所需的字节数 = itemsize * size</li>
+</ul>
+<p><code>In: b.nbytes</code><br><code>192</code></p>
+<p><code>In: b.size * b.itemsize</code><br><code>192</code></p>
+</li>
+</ul>
+<ul>
+<li><p><strong>T</strong> 属性 </p>
+<ul>
+<li>转置，与 transpose() 函数相同</li>
+</ul>
+<p><code>In: b.resize(6,4)</code><br><code>None</code></p>
+<p><code>In: b</code><br><code>[[ 0  1  2  3]</code><br> <code>[ 4  5  6  7]</code><br> <code>[ 8  9 10 11]</code><br> <code>[12 13 14 15]</code><br> <code>[16 17 18 19]</code><br> <code>[20 21 22 23]]</code></p>
+<p><code>In: b.T</code><br><code>[[ 0  4  8 12 16 20]</code><br> <code>[ 1  5  9 13 17 21]</code><br> <code>[ 2  6 10 14 18 22]</code><br><code>[ 3  7 11 15 19 23]]</code></p>
+</li>
+</ul>
+<ul>
+<li><p>使用复数生成一个数组</p>
+<p><code>In: b = array([1.j + 1, 2.j + 3])</code><br><code>In: b</code><br><code>[1.+1.j 3.+2.j]</code></p>
+</li>
+</ul>
+<ul>
+<li><p><strong>real</strong> 属性</p>
+<ul>
+<li>返回数组的实部，当数组元素全为实数时，就返回数组本身</li>
+</ul>
+<p><code>In: b.real</code><br><code>[1. 3.]</code></p>
+</li>
+</ul>
+<ul>
+<li><p><strong>imag</strong> 属性</p>
+<ul>
+<li>存放数组的虚部</li>
+</ul>
+<p><code>In: b.imag</code><br><code>[1. 2.]</code></p>
+</li>
+</ul>
+<ul>
+<li><p>如果数组含有复数，那么它的数据类型将自动变为复数型</p>
+<p><code>In: b.dtype</code><br><code>complex128</code><br><code>In: b.dtype.str</code><br><code>&lt;c16</code></p>
+</li>
+</ul>
+<ul>
+<li><p><strong>flat</strong> 属性</p>
+<ul>
+<li><p>可返回一个 <strong>numpy.flatiter</strong> 对象，这是获得 <strong>flatiter</strong> 对象的唯一方法，</p>
+</li>
+<li><p>但我们无法访问 <strong>flatiter</strong> 的构造函数。可以使用 <strong>flat的迭代器</strong> 来遍历数组。</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>  <code>In: b = arange(4).reshape(2,2)</code><br>  <code>In: b</code><br>  <code>[[0 1]</code><br>   <code>[2 3]]</code><br>  <code>In: f = b.flat</code><br>  <code>In: f</code><br>  <code>&lt;numpy.flatiter object at 0x10207a200&gt;</code><br>  <code>In: for it in f: print it</code><br>  <code>0</code><br>  <code>1</code><br>  <code>2</code><br>  <code>3</code></p>
+<ul>
+<li><p>获取元素</p>
+<p><code>In: b.flat[2]</code><br><code>2</code><br><code>In: b.flat[[1,3]]</code><br><code>[1 3]</code></p>
+</li>
+</ul>
+<ul>
+<li><p>给 flat 属性赋值。</p>
+<ul>
+<li>这个值将会覆盖整个数组内所有元素的值</li>
+</ul>
+<p><code>In: b.flat = 7</code><br><code>[[7 7]</code><br><code>[7 7]]</code></p>
+<p><code>In: e.flat[[1, 3]] = 1</code><br><code>[[7 1]</code><br><code>[7 1]]</code></p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span>  numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">b = np.arange(<span class="number">24</span>).reshape(<span class="number">2</span>, <span class="number">12</span>)</span><br><span class="line">print(<span class="string">'\n b: \n'</span>, b)</span><br><span class="line"></span><br><span class="line">print(<span class="string">'\b b.ndim: \n'</span>, b.ndim)      <span class="comment"># ndim属性存储的是维度的数量</span></span><br><span class="line"></span><br><span class="line">print(<span class="string">'\b b.size: \n'</span>, b.size)      <span class="comment"># size属性用来保存元素的数量</span></span><br><span class="line"></span><br><span class="line">print(<span class="string">'\b b.itemsize: \n'</span>, b.itemsize)      <span class="comment"># itemsize属性可以返回数组中各个元素所占用的字节数</span></span><br><span class="line"></span><br><span class="line">print(<span class="string">'\b b.nbytes: \n'</span>, b.nbytes)      <span class="comment"># nbytes属性返回存储整个数组所需的字节数 = itemsize * size</span></span><br><span class="line">print(<span class="string">'\b b.itemsize * b.size: \n'</span>, b.itemsize * b.size)</span><br><span class="line"></span><br><span class="line">b.resize(<span class="number">6</span>, <span class="number">4</span>)</span><br><span class="line">print(<span class="string">'\b b: \n'</span>, b)</span><br><span class="line">print(<span class="string">'\b b.T: \n'</span>, b.T)      <span class="comment"># T属性 转置</span></span><br><span class="line"></span><br><span class="line">c = np.arange(<span class="number">5</span>).reshape(<span class="number">5</span>, <span class="number">1</span>)</span><br><span class="line">print(<span class="string">'\b c.ndim: \n'</span>, c.ndim)      <span class="comment"># ndim属性</span></span><br><span class="line">print(<span class="string">'\b c.T: \n'</span>, c.T)      <span class="comment"># T属性 转置</span></span><br><span class="line"></span><br><span class="line">d = np.array([<span class="number">1.j</span> + <span class="number">1</span>, <span class="number">2.j</span> + <span class="number">3</span>])</span><br><span class="line">print(<span class="string">'\n d: \n'</span>, d)</span><br><span class="line"></span><br><span class="line">print(<span class="string">'\n d.real: \n'</span>, d.real)      <span class="comment"># real属性返回数组的实部，当数组元素全为实数时，就返回数组本身</span></span><br><span class="line"></span><br><span class="line">print(<span class="string">'\n d.imag: \n'</span>, d.imag)      <span class="comment"># imag属性存放数组的虚部</span></span><br><span class="line"></span><br><span class="line">print(<span class="string">'\n d.dtype: \n'</span>, d.dtype)</span><br><span class="line">print(<span class="string">'\n d.dtype.str: \n'</span>, d.dtype.str)</span><br><span class="line"></span><br><span class="line">e = np.arange(<span class="number">4</span>).reshape(<span class="number">2</span>, <span class="number">2</span>)</span><br><span class="line">print(<span class="string">'\n e: \n'</span>, e)</span><br><span class="line"></span><br><span class="line">print(<span class="string">'\n e.flat: \n'</span>, e.flat)</span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">flat属性可返回一个numpy.flatiter对象，这是获得flatiter对象的唯一方法，</span></span><br><span class="line"><span class="string">但我们无法访问flatiter的构造函数。可以使用flat的迭代器来遍历数组。</span></span><br><span class="line"><span class="string"> '''</span></span><br><span class="line">f = e.flat</span><br><span class="line">print(<span class="string">'\n e.flat_print: '</span>)</span><br><span class="line">[print(it) <span class="keyword">for</span> it <span class="keyword">in</span> f]</span><br><span class="line"></span><br><span class="line">print(<span class="string">'\n e.flat[2]: \n'</span>, e.flat[<span class="number">2</span>])</span><br><span class="line"></span><br><span class="line">print(<span class="string">'\n e.flat[[1, 3]]: \n'</span>, e.flat[[<span class="number">1</span>, <span class="number">3</span>]])</span><br><span class="line"></span><br><span class="line">e.flat = <span class="number">7</span></span><br><span class="line">print(<span class="string">'\n e.flat = 7, e: \n'</span>, e)</span><br><span class="line"></span><br><span class="line">e.flat[[<span class="number">1</span>, <span class="number">3</span>]] = <span class="number">1</span></span><br><span class="line">print(<span class="string">'\n e.flat[[1, 3]] = 1, e: \n'</span>, e)</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-6-4-数组的转换"><a href="#2-6-4-数组的转换" class="headerlink" title="2.6.4 数组的转换"></a>2.6.4 数组的转换</h4><p>可以把 NumPy 数组转换成 Python 列表，使用 <strong>tolist()</strong> 函数</p>
+<ul>
+<li><p><strong>转换成列表</strong></p>
+<p><code>In: b</code><br><code>[1.+1.j 3.+2.j]</code><br><code>In: b.tolist()</code><br><code>[(1+1j), (3+2j)]</code></p>
+</li>
+</ul>
+<ul>
+<li><p><strong>astype()</strong> 函数</p>
+<ul>
+<li>可以把数组元素转换成指定类型</li>
+</ul>
+<p><code>In: b.astype(int):</code> </p>
+<p><code>/Users/hhh/Desktop/python/python数据分析/第二章：NumPy数组/2-6-4 数组的转换.py:9: ComplexWarning: Casting complex values to real discards the imaginary part</code><br>  <code>print(b.astype(int))</code><br> <code>[1 3]</code></p>
+<p> <code>In: b.astype(&#39;comlex&#39;):</code><br> <code>[1.+1.j 3.+2.j]</code></p>
+</li>
+</ul>
+<ul>
+<li><strong>提示</strong><ul>
+<li>当complex类型转成int类型时，虚部将被丢弃，抛出警告</li>
+<li>需要将数据类型的名称以字符串的形式传递给 astype() 函数</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">b = np.array([<span class="number">1.j</span> + <span class="number">1</span>, <span class="number">2.j</span> + <span class="number">3</span>])</span><br><span class="line"></span><br><span class="line">print(<span class="string">'\n b: \n'</span>, b)</span><br><span class="line"></span><br><span class="line">print(<span class="string">'\n b.tolist(): \n'</span>, b.tolist())</span><br><span class="line"></span><br><span class="line">print(<span class="string">'\n b.astype(int): \n'</span>, b.astype(int))</span><br><span class="line"></span><br><span class="line">print(<span class="string">"\n b.astype('comlex'): \n"</span>, b.astype(<span class="string">'complex'</span>))</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-7-创建数组的视图和拷贝"><a href="#2-7-创建数组的视图和拷贝" class="headerlink" title="2.7 创建数组的视图和拷贝"></a>2.7 创建数组的视图和拷贝</h3><p>我们可以根据著名的 <strong>ascent</strong> 照片来创建数组，然后创建视图，随后修改它。</p>
+<p>这里，ascent肖像的数组是从 <strong>SciPy</strong> 函数获得的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">注：</span><br><span class="line">	此后的代码会将取得的图片命名为 lena，是为了防止与我使用的书（《Python数据分析》（第二版））中的代码相不同。</span><br><span class="line">	这本书所使用的lena图像在新版的 SciPy （我用的是1.3.0）中已经删除，但是我们可以换成 ascent 图像，不影响学习和使用。</span><br></pre></td></tr></table></figure>
+
+<p>代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> scipy.misc</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">lena = scipy.misc.ascent()</span><br><span class="line"></span><br><span class="line">acopy = lena.copy()</span><br><span class="line">aview = lena.view()</span><br><span class="line"></span><br><span class="line">plt.subplot(<span class="number">231</span>)</span><br><span class="line">plt.title(<span class="string">'lena(befor)'</span>)</span><br><span class="line">plt.imshow(lena)</span><br><span class="line"></span><br><span class="line">plt.subplot(<span class="number">232</span>)</span><br><span class="line">plt.title(<span class="string">'acopy(befor)'</span>)</span><br><span class="line">plt.imshow(acopy)</span><br><span class="line"></span><br><span class="line">plt.subplot(<span class="number">233</span>)</span><br><span class="line">plt.title(<span class="string">'aview(befor)'</span>)</span><br><span class="line">plt.imshow(aview)</span><br><span class="line"></span><br><span class="line">aview.flat = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">plt.subplot(<span class="number">234</span>)</span><br><span class="line">plt.title(<span class="string">'lena(after)'</span>)</span><br><span class="line">plt.imshow(lena)</span><br><span class="line"></span><br><span class="line">plt.subplot(<span class="number">235</span>)</span><br><span class="line">plt.title(<span class="string">'acopy(after)'</span>)</span><br><span class="line">plt.imshow(acopy)</span><br><span class="line"></span><br><span class="line">plt.subplot(<span class="number">236</span>)</span><br><span class="line">plt.title(<span class="string">'aview(after)'</span>)</span><br><span class="line">plt.imshow(aview)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><p>创建一份ascent数组的副本</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">acopy = lena.copy()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>为该数组创建一个视图</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aview = lena.view()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>通过 flat 迭代器将视图中的所有值全部设为0</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aview.flat = <span class="number">0</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>最后结果如图</p>
+</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/python%20Data%20Analysis/%E7%AC%AC%E4%BA%8C%E7%AB%A0%20NumPy%E6%95%B0%E7%BB%84/2.png" alt="2"></p>
+<p>可见，在程序部分修改视图，同时改变了原来的数组。</p>
+<p><strong><em>所以一定要记住：视图不是只读的</em></strong></p>
+<h3 id="2-8-花式索引"><a href="#2-8-花式索引" class="headerlink" title="2.8 花式索引"></a>2.8 花式索引</h3><p>花式索引是一种传统的索引方法，它不使用整数或者切片。</p>
+<p>这里，我们利用花式索引把图片对角线上的值全部置0，相当于沿着两条交叉的对角线画两条黑线。</p>
+<p>代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> scipy.misc</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">lena = scipy.misc.ascent()</span><br><span class="line"></span><br><span class="line">xmax = lena.shape[<span class="number">0</span>]</span><br><span class="line">ymax = lena.shape[<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">lena[range(xmax), range(ymax)] = <span class="number">0</span></span><br><span class="line">lena[range(xmax<span class="number">-1</span>, <span class="number">-1</span>, <span class="number">-1</span>), range(ymax)] = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">plt.imshow(lena)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><p>将第一条对角线上的值设为0</p>
+<p>为了给对角线上的值置0，需要给 x 和 y 值（直角坐标系中的坐标）规定两个不同的范围</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lena[range(xmax), range(ymax)] = <span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<ol start="2">
+<li><p>将另一条对角线上的值设为0</p>
+<p>要设置另一条对角线上的值，需要规定两个不同的取值范围，但是规则不变</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lena[range(xmax<span class="number">-1</span>, <span class="number">-1</span>, <span class="number">-1</span>), range(ymax)] = <span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<ol start="3">
+<li><p>效果</p>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/python%20Data%20Analysis/%E7%AC%AC%E4%BA%8C%E7%AB%A0%20NumPy%E6%95%B0%E7%BB%84/3.png" alt="3"></p>
+</li>
+</ol>
+<p>我们给 x 和 y 规定了不同的取值范围，这些范围用来索引图片数组。</p>
+<p>花式索引是在一个内部的NumPy迭代器对象的基础上实现的，分3部完成：</p>
+<ol>
+<li>创建迭代器对象</li>
+<li>将迭代器对象绑定到数组</li>
+<li>经由迭代器访问数组元素，利用位置列表进行索引</li>
+</ol>
+<h3 id="2-9-基于位置列表的索引方法"><a href="#2-9-基于位置列表的索引方法" class="headerlink" title="2.9 基于位置列表的索引方法"></a>2.9 基于位置列表的索引方法</h3><p>下面利用 <strong>ix_()</strong> 函数将照片中的像素完全打乱。</p>
+<p>代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> scipy.misc</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">lena = scipy.misc.ascent()</span><br><span class="line"></span><br><span class="line">xmax = lena.shape[<span class="number">0</span>]</span><br><span class="line">ymax = lena.shape[<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">shuffle_indices</span><span class="params">(size)</span>:</span></span><br><span class="line">    arr = np.arange(size)</span><br><span class="line">    np.random.shuffle(arr)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> arr</span><br><span class="line"></span><br><span class="line">xindices = shuffle_indices(xmax)</span><br><span class="line">np.testing.assert_equal(len(xindices), xmax)</span><br><span class="line"></span><br><span class="line">yindices = shuffle_indices(ymax)</span><br><span class="line">np.testing.assert_equal(len(yindices), ymax)</span><br><span class="line"></span><br><span class="line">plt.imshow(lena[np.ix_(xindices, yindices)])</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p> <strong>ix_()</strong> ：这个函数可以根据多个序列生成一个网格，它需要一个一维序列作为参数，并返回一个由NumPy数组构成的元组。</p>
+<p><code>In: ix_([0, 1], [2, 3])</code>                                                     </p>
+<p><code>Out:</code> </p>
+<p><code>(array([[0],</code></p>
+<p>​                <code>[1]]), array([[2, 3]]))</code></p>
+<p>利用位置列表索引NumPy数组的过程：</p>
+<ol>
+<li><p>打乱数组的索引</p>
+<p>利用 <strong>numpy.random</strong> 子程序包中的 <strong>shuffle()</strong> 函数把数组中的元素按随机的索引号重新排列，使得数组产生相应变化。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">shuffle_indices</span><span class="params">(size)</span>:</span></span><br><span class="line">    arr = np.arange(size)</span><br><span class="line">    np.random.shuffle(arr)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> arr</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<ol start="2">
+<li><p>使用下面的代码画出打乱后的索引</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plt.imshow(lena[np.ix_(xindices, yindices)])</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<ol start="3">
+<li>视图</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/python%20Data%20Analysis/%E7%AC%AC%E4%BA%8C%E7%AB%A0%20NumPy%E6%95%B0%E7%BB%84/4.png" alt="4"></p>
+<h3 id="2-10-用布尔型变量索引NumPy数组"><a href="#2-10-用布尔型变量索引NumPy数组" class="headerlink" title="2.10  用布尔型变量索引NumPy数组"></a>2.10  用布尔型变量索引NumPy数组</h3><p>布尔型索引是指根据布尔型数组来索引元素的方法，属于花式索引系列。</p>
+<p>因为布尔型索引是花式索引的一个分类，所以它们的使用方法基本相同。</p>
+<p>代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> scipy.misc</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">lena = scipy.misc.ascent()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_indices</span><span class="params">(size)</span>:</span></span><br><span class="line">    arr = np.arange(size)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> arr%<span class="number">4</span> == <span class="number">0</span></span><br><span class="line"></span><br><span class="line">lena1 = lena.copy()</span><br><span class="line"></span><br><span class="line">xindices = get_indices(lena.shape[<span class="number">0</span>])</span><br><span class="line">yindices = get_indices(lena.shape[<span class="number">1</span>])</span><br><span class="line"></span><br><span class="line">lena1[xindices, yindices] = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">plt.subplot(<span class="number">211</span>)</span><br><span class="line">plt.imshow(lena1)</span><br><span class="line"></span><br><span class="line">lena2 = lena.copy()</span><br><span class="line">lena2[(lena &gt; lena.max()/<span class="number">4</span>) &amp; (lena &lt; <span class="number">3</span> * lena.max()/<span class="number">4</span>)] = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">plt.subplot(<span class="number">212</span>)</span><br><span class="line">plt.imshow(lena2)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p>上述代码利用一种特殊的迭代器对象来索引元素，下面进行简单说明。</p>
+<ol>
+<li><p>在对角线上画点。</p>
+<p>这类似于花式索引，不过这里选择的是照片对照线上可以被 4 整除的那些位置上的点。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_indices</span><span class="params">(size)</span>:</span></span><br><span class="line">    arr = np.arange(size)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> arr%<span class="number">4</span> == <span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<p>   然后仅绘出选定的那些点</p>
+   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">lena1 = lena.copy()</span><br><span class="line"></span><br><span class="line">xindices = get_indices(lena.shape[0])</span><br><span class="line">yindices = get_indices(lena.shape[1])</span><br><span class="line"></span><br><span class="line">lena1[xindices, yindices] = 0</span><br><span class="line"></span><br><span class="line">plt.subplot(211)</span><br><span class="line">plt.imshow(lena1)</span><br></pre></td></tr></table></figure>
+
+
+
+<ol start="2">
+<li><p>根据元素值的情况置0</p>
+<p>选取数组之介于最大值的1/4 到 3/4 到那些元素，将其置0</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lena2[(lena &gt; lena.max()/<span class="number">4</span>) &amp; (lena &lt; <span class="number">3</span> * lena.max()/<span class="number">4</span>)] = <span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<ol start="3">
+<li>两幅新照片如图</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/suliangxu/MyHexoPicture/master/python%20Data%20Analysis/%E7%AC%AC%E4%BA%8C%E7%AB%A0%20NumPy%E6%95%B0%E7%BB%84/5.png" alt="5"></p>
+<h3 id="2-11-NumPy数组的广播"><a href="#2-11-NumPy数组的广播" class="headerlink" title="2.11  NumPy数组的广播"></a>2.11  NumPy数组的广播</h3><p>当操作对象的形状不一样，NumPy会尽力进行处理。</p>
+<p>例如，假设一个数组要跟一个标量相乘，这时标量需要根据数组的形状进行扩展。然后才可以执行乘法运算，这个扩展的过程叫做 <strong>广播(broadcasting)</strong>。</p>
+<p>下面用代码加以说明。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> scipy.io.wavfile</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> urllib <span class="keyword">import</span> request</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">response = request.urlopen(</span><br><span class="line">    <span class="string">'http://www.crt.com.cn/hsmx/images/hsgq.mp3'</span></span><br><span class="line">    <span class="comment"># 'http://www.thesoundarchive.com/austinpowers/smashingbaby.wav'</span></span><br><span class="line">)</span><br><span class="line">print(response.info())</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">WAV_FILE = <span class="string">'smashingbaby.wav'</span></span><br><span class="line"></span><br><span class="line">filehandle = open(WAV_FILE, <span class="string">'wb'</span>)</span><br><span class="line">filehandle.write(response.read())</span><br><span class="line">filehandle.close()</span><br><span class="line"></span><br><span class="line">sample_rate, data = scipy.io.wavfile.read(WAV_FILE)</span><br><span class="line">print(<span class="string">"Data type"</span>, data.dtype, <span class="string">"Shape"</span>, data.shape)</span><br><span class="line"></span><br><span class="line">plt.subplot(<span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">plt.title(<span class="string">"Original"</span>)</span><br><span class="line">plt.plot(data)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">newdata = data * <span class="number">0.2</span></span><br><span class="line">newdata = newdata.astype(np.uint8)</span><br><span class="line"></span><br><span class="line">print(<span class="string">"Data type"</span>, newdata.dtype, <span class="string">"Shape"</span>, newdata.shape)</span><br><span class="line"></span><br><span class="line">scipy.io.wavfile.write(<span class="string">"quiet.wav"</span>, sample_rate, newdata)</span><br><span class="line"></span><br><span class="line">plt.subplot(<span class="number">2</span>, <span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">plt.title(<span class="string">"Quiet"</span>)</span><br><span class="line">plt.plot(newdata)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/NumPy/" rel="tag"># NumPy</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/04/python_full_stack/第02部分：并发编程+数据库+前端/并发编程/线程（一）/" rel="next" title="线程（一）">
+                <i class="fa fa-chevron-left"></i> 线程（一）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/08/python_full_stack/第02部分：并发编程+数据库+前端/并发编程/线程（二）/" rel="prev" title="线程（二）">
+                线程（二） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="John Doe">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">100</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://suliangxu.github.io" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:1193135584@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-NumPy数组对象"><span class="nav-text">2.1 NumPy数组对象</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#NumPy数组的优势："><span class="nav-text">NumPy数组的优势：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-创建多维数组"><span class="nav-text">2.2 创建多维数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-选择NumPy数组元素"><span class="nav-text">2.3 选择NumPy数组元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-NumPy的数值类型"><span class="nav-text">2.4 NumPy的数值类型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-1-数据类型对象"><span class="nav-text">2.4.1 数据类型对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-2-字符码"><span class="nav-text">2.4.2 字符码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-3-Dtype-构造函数"><span class="nav-text">2.4.3 Dtype 构造函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-4-dtype属性"><span class="nav-text">2.4.4 dtype属性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-一维数组的切片与索引"><span class="nav-text">2.5 一维数组的切片与索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6-处理数组形状"><span class="nav-text">2.6 处理数组形状</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-6-1-堆叠数组"><span class="nav-text">2.6.1 堆叠数组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-6-2-拆分数组"><span class="nav-text">2.6.2 拆分数组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-6-3-NumPy数组的属性"><span class="nav-text">2.6.3 NumPy数组的属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-6-4-数组的转换"><span class="nav-text">2.6.4 数组的转换</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-7-创建数组的视图和拷贝"><span class="nav-text">2.7 创建数组的视图和拷贝</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-8-花式索引"><span class="nav-text">2.8 花式索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-9-基于位置列表的索引方法"><span class="nav-text">2.9 基于位置列表的索引方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-10-用布尔型变量索引NumPy数组"><span class="nav-text">2.10  用布尔型变量索引NumPy数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-11-NumPy数组的广播"><span class="nav-text">2.11  NumPy数组的广播</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
